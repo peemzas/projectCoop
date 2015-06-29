@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition name="login" extends="tempEmpty">
+        <put-attribute name="title" value="เข้าสู่ระบบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+    </definition>
+
+    <definition name="homeUser" extends="tempForUser">
+        <put-attribute name="title" value="หน้าแรก" />
+        <put-attribute name="body" value="/WEB-INF/pages/homeUser.jsp" />
+    </definition>
+
+    <definition name="addStudent" extends="tempForUser">
+        <put-attribute name="title" value="เพิ่มข้อมูลนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/addStudent.jsp" />
+    </definition>
+
+    <definition name="signup" extends="tempRegis">
+        <put-attribute name="title" value="สมัครสมาชิก" />
+        <put-attribute name="body" value="/WEB-INF/pages/addStudent.jsp" />
+    </definition>
+
+    <definition name="addStaff" extends="tempForUser">
+        <put-attribute name="title" value="เพิ่มข้อมูลพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/addStaff.jsp" />
+    </definition>
+
+    <definition name="searchStudent" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาข้อมูลนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/searchStudent.jsp" />
+    </definition>
+
+    <definition name="searchStaff" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาข้อมูลพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/searchStaff.jsp" />
+    </definition>
+
+    <definition name="evaluation" extends="tempForUser">
+        <put-attribute name="title" value=" การประเมินผล" />
+        <put-attribute name="body" value="/WEB-INF/pages/evaluation.jsp" />
+    </definition>
+
+    <definition name="viewEvaluate" extends="tempForUser">
+        <put-attribute name="title" value=" การประเมินผล" />
+        <put-attribute name="body" value="/WEB-INF/pages/viewEvaluation.jsp" />
+    </definition>
+
+    <definition name="validate" extends="tempForUser">
+        <put-attribute name="title" value="อนุมัตินักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/validate.jsp" />
+    </definition>
+
+    <definition name="detail" extends="tempEmpty">
+        <put-attribute name="title" value="รายละเอียดนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/detail.jsp" />
+    </definition>
+
+    <definition name="pacturePage" extends="tempEmpty">
+        <put-attribute name="title" value="รายละเอียดนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/picture.jsp" />
+    </definition>
+
+    <definition name="added" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/afterAddStudent.jsp" />
+    </definition>
+
+    <definition name="addedStaff" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/afterAddStaff.jsp" />
+    </definition>
+
+    <definition name="loginComplete" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/loginComplete.jsp" />
+    </definition>
+
+    <definition name="homeStaff" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/homeStaff.jsp" />
+    </definition>
+</tiles-definitions>

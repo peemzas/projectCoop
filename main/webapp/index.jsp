@@ -1,0 +1,1 @@
+<%response.sendRedirect(request.getContextPath() + "/TDCS/index.html");%>
