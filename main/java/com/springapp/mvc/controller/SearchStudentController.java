@@ -207,6 +207,7 @@ public class SearchStudentController {
                         }
                     }
                 }
+                System.out.println(users);
                 json = new Gson().toJson(users);
                 if (users.size() == 0)
                     json = "";

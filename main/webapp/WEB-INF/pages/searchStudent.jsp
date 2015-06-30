@@ -110,19 +110,21 @@
             </div>
 
             <!-- START PEEM'S EDIT-->
-            <div class="row form-group">
-                <div class="col-md-12" style="padding: 0;">
-                    <label for="sStaff" class="col-md-2 control-label"><small>พนักงานที่ปรึกษา</small></label>
-                    <div class="col-md-10">
-                        <select id="sStaff" class="form-control" data-width="100%">
-                            <option value="">โปรดเลือกพนักงานที่ปรึกษา</option>
-                            <c:forEach var="staff" items="${listUser}">
-                                <option value="${staff.userId}">${staff.thFname}</option>
-                            </c:forEach>
-                        </select>
+            <c:if test="${status == 'admin'}">
+                <div class="row form-group">
+                    <div class="col-md-12" style="padding: 0;">
+                        <label for="sStaff" class="col-md-2 control-label"><small>พนักงานที่ปรึกษา</small></label>
+                        <div class="col-md-10">
+                            <select id="sStaff" class="form-control" data-width="100%">
+                                <option value="">โปรดเลือกพนักงานที่ปรึกษา</option>
+                                <c:forEach var="staff" items="${listUser}">
+                                    <option value="${staff.userId}">${staff.thFname}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </c:if>
             <!-- END PEEM'S EDIT -->
 
             <div class="col-md-10 col-md-offset-1">
@@ -141,17 +143,37 @@
         <div class="col-md-2"></div>
     </div>
 
-    <div class="row">
-        <span id="forAddResultTable">
 
-        </span>
-        </div>
 
         <div class="row col-md-offset-1 col-md-10">
             <div id="alertMess" class="alert alert-danger text-center" style="display: none;">ไม่พบข้อมูลนักศักษา</div>
         </div>
 
-    </div>
+</div>
+
+<%--CREATE BY PEEM--%>
+<div class="row">
+            <table class="table" id="table">
+                <thead class="bg-primary">
+                    <tr>
+                        <th style="text-align: center ; border: 1px solid white">ดูข้อมูล</th>
+                        <th style="text-align: center ; border-left: 1px solid white">รหัสนักศึกษา</th>
+                        <th style="text-align: center ; border-left: 1px solid white">ชื่อ-นามสกุล</th>
+                        <th style="text-align: center ; border-left: 1px solid white">สถาบัน</th>
+                        <th style="text-align: center ; border-left: 1px solid white">สาขา</th>
+                        <th style="text-align: center ; border-left: 1px solid white">ประเภทการฝึก</th>
+                        <th style="text-align: center ; border: 1px solid white">ระยะเวลาฝึก</th>
+                        <c:if test="${status == 'staff'}">
+                            <th style="text-align: center ; border: 1px solid white">ผลการประเมิน</th>
+                        </c:if>
+                    </tr>
+                </thead>
+                <tbody id="resultSearch">
+
+                </tbody>
+            </table>
+</div>
+<%--CREATE BY PEEM--%>
 <script>
     var status = '${status}';
 </script>

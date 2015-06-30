@@ -239,11 +239,17 @@
                             </c:if>
                         </tr>
                         <tr>
-                            <th rowspan="1" colspan="1" class="text-center">ต่ำสุด</th>
-                            <th rowspan="1" colspan="1" class="text-center">สูงสุด</th>
-                            <th rowspan="1" colspan="1" class="text-center">คะแนน</th>
-                            <th rowspan="1" colspan="1" class="text-center">หมายเหตุ</th>
                             <c:if test="${status == 'staff'}">
+                                <th rowspan="1" colspan="1" class="text-center">ต่ำสุด</th>
+                                <th rowspan="1" colspan="1" class="text-center">สูงสุด</th>
+                                <th rowspan="1" colspan="1" class="text-center">กรอกคะแนน</th>
+                                <th rowspan="1" colspan="1" class="text-center">หมายเหตุ</th>
+                                <th rowspan="1" colspan="1" class="text-center">คะแนน</th>
+                                <th rowspan="1" colspan="1" class="text-center">หมายเหตุ</th>
+                            </c:if>
+                            <c:if test="${status == 'user'}">
+                                <th rowspan="1" colspan="1" class="text-center">ต่ำสุด</th>
+                                <th rowspan="1" colspan="1" class="text-center">สูงสุด</th>
                                 <th rowspan="1" colspan="1" class="text-center">กรอกคะแนน</th>
                                 <th rowspan="1" colspan="1" class="text-center">หมายเหตุ</th>
                             </c:if>

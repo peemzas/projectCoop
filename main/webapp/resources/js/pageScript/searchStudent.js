@@ -4,7 +4,10 @@
 
 var data2, chkData = 0 , checkTime;
 status = status.trim();
+var thName = [];
 $(document).ready(function () {
+    $("#table").hide();
+
     $("#addSearch").attr('class', 'dropdown active');
 
     $("#sStartTime").datepicker({
@@ -40,72 +43,105 @@ $(document).ready(function () {
         var e = $("#endTime").val().split("/")
         timediff(s[1] + "/" + s[0] + "/" + s[2] + " 00:00", e[1] + "/" + e[0] + "/" + e[2] + " 00:00");
         if (!checkTime) {
-            $("#forAddResultTable").hide();
-
-            if (status != 'staff') {
-                console.log("not staff");
-                $("#forAddResultTable").html(
-                        '<table id="table"' +
-//                    'data-query-params="queryParams"'+
-                        'data-pagination="true"' +
-                        'data-page-list="[10, 20, 50, 100, 200]"' +
-//                    'data-show-toggle="true"' +
-                        'data-sort-name="empId"' +
-                        'data-sort-order="desc">' +
-                        '<thead class="bg-primary">' +
-                        '<tr>' +
-                        '<th data-field="empId" data-align="center" data-sortable="true">รหัสนักศึกษา</th>' +
-                        '<th data-field="thFname" data-align="center" data-sortable="true">ชื่อ-นามสกุล</th>' +
-                        '<th data-field="university" data-align="center" data-sortable="true">สถาบัน</th>' +
-                        '<th data-field="major" data-align="center" data-sortable="true">สาขา</th>' +
-                        '<th data-field="apprentice" data-align="center" data-sortable="true">ประเภทการฝึก</th>' +
-                        '<th data-field="position" data-align="center" data-sortable="true">ตำแหน่ง</th>' +
-                        '<th data-field="startWork" data-align="center">ระยะเวลาฝึก</th>' +
-                        '</tr>' +
-                        '</thead>' +
-                        '</table>'
-                );
-            } else {
-                console.log("staff");
-                $("#forAddResultTable").html(
-                        '<table id="table"' +
-//                    'data-query-params="queryParams"'+
-                        'data-pagination="true"' +
-                        'data-page-list="[10, 20, 50, 100, 200]"' +
-//                    'data-show-toggle="true"' +
-                        'data-sort-name="empId"' +
-                        'data-sort-order="desc">' +
-                        '<thead class="bg-primary">' +
-                        '<tr>' +
-                        '<th data-field="empId" data-align="center" data-sortable="true">รหัสนักศึกษา</th>' +
-                        '<th data-field="thFname" data-align="center" data-sortable="true">ชื่อ-นามสกุล</th>' +
-                        '<th data-field="university" data-align="center" data-sortable="true">สถาบัน</th>' +
-                        '<th data-field="major" data-align="center" data-sortable="true">สาขา</th>' +
-                        '<th data-field="apprentice" data-align="center" data-sortable="true">ประเภทการฝึก</th>' +
-                        '<th data-field="position" data-align="center" data-sortable="true">ตำแหน่ง</th>' +
-                        '<th data-field="evaGrade" data-align="center">ผลการประเมิน</th>' +
-                        '</tr>' +
-                        '</thead>' +
-                        '</table>'
-                );
+            search();
+            if(status != 'staff'){
+                for(var i = 0 ; i < data2.length ; i++){
+                    $('#resultSearch').append('<tr align="center">' +
+                                                '<td><button class="btn btn-info" id="'+data2[i].userId+'">Info</button></td> '+
+                                                '<td>'+ data2[i].empId+'</td>'+
+                                                '<td>'+ data2[i].thFname +'</td>'+
+                                                '<td>'+ data2[i].university +'</td>'+
+                                                '<td>'+ data2[i].major +'</td>'+
+                                                '<td>'+ data2[i].apprentice +'</td>'+
+                                                '<td>'+ data2[i].startWork +'</td>'+
+                                              '</tr> ')
+                }
+            }else{
+                for(var i = 0 ; i < data2.length ; i++){
+                    $('#resultSearch').append('<tr align="center">' +
+                                                '<td><button class="btn btn-info" id="'+data2[i].userId+'">Info</button></td> '+
+                                                '<td>'+ data2[i].empId+'</td>'+
+                                                '<td>'+ data2[i].thFname +'</td>'+
+                                                '<td>'+ data2[i].university +'</td>'+
+                                                '<td>'+ data2[i].major +'</td>'+
+                                                '<td>'+ data2[i].apprentice +'</td>'+
+                                                '<td>'+ data2[i].startWork +'</td>'+
+                                                '<td>'+ data2[i].evaGrade +'</td>'+
+                                              '</tr> ')
+                }
             }
 
-            search();
 
-            $('#table').bootstrapTable({
-                data: data2
-            });
+
             if (chkData != 0) {
-                $("#forAddResultTable").show();
+                $("#table").show();
                 console.log("have data");
             }
             else {
-                $("#forAddResultTable").hide();
+                $("#table").hide();
                 console.log("don't have data");
             }
         } else {
             alert('คุณเลือกระยะฝึกงานไม่ถูกต้อง');
         }
+//      COMMENT BY PEEM
+//            if (status != 'staff') {
+//                console.log("not staff");
+//                $("#forAddResultTable").html(
+//                        '<table id="table"' +
+////                    'data-query-params="queryParams"'+
+//                        'data-pagination="true"' +
+//                        'data-page-list="[10, 20, 50, 100, 200]"' +
+////                    'data-show-toggle="true"' +
+//                        'data-sort-name="empId"' +
+//                        'data-sort-order="desc">' +
+//                        '<thead class="bg-primary">' +
+//                        '<tr>' +
+//                        '<th data-field="viewData" data-align="center">ดูข้อมูล</th>' +
+//                        '<th data-field="empId" data-align="center" data-sortable="true">รหัสนักศึกษา</th>' +
+//                        '<th data-field="thFname" data-align="center" data-sortable="true">ชื่อ-นามสกุล</th>' +
+//                        '<th data-field="university" data-align="center" data-sortable="true">สถาบัน</th>' +
+//                        '<th data-field="major" data-align="center" data-sortable="true">สาขา</th>' +
+//                        '<th data-field="apprentice" data-align="center" data-sortable="true">ประเภทการฝึก</th>' +
+//                        '<th data-field="position" data-align="center" data-sortable="true">ตำแหน่ง</th>' +
+//                        '<th data-field="startWork" data-align="center">ระยะเวลาฝึก</th>' +
+//                        '</tr>' +
+//                        '</thead>' +
+//                        '</table>'
+//                );
+//            } else {
+//                console.log("staff");
+//                $("#forAddResultTable").html(
+//                        '<table id="table"' +
+////                    'data-query-params="queryParams"'+
+//                        'data-pagination="true"' +
+//                        'data-page-list="[10, 20, 50, 100, 200]"' +
+////                    'data-show-toggle="true"' +
+//                        'data-sort-name="empId"' +
+//                        'data-sort-order="desc">' +
+//                        '<thead class="bg-primary">' +
+//                        '<tr>' +
+//                        '<th data-field="viewData" data-align="center">ดูข้อมูล</th>' +
+//                        '<th data-field="empId" data-align="center" data-sortable="true">รหัสนักศึกษา</th>' +
+//                        '<th data-field="thFname" data-align="center" data-sortable="true">ชื่อ-นามสกุล</th>' +
+//                        '<th data-field="university" data-align="center" data-sortable="true">สถาบัน</th>' +
+//                        '<th data-field="major" data-align="center" data-sortable="true">สาขา</th>' +
+//                        '<th data-field="apprentice" data-align="center" data-sortable="true">ประเภทการฝึก</th>' +
+//                        '<th data-field="position" data-align="center" data-sortable="true">ตำแหน่ง</th>' +
+//                        '<th data-field="evaGrade" data-align="center">ผลการประเมิน</th>' +
+//                        '</tr>' +
+//                        '</thead>' +
+//                            '<tbody id="resultSearch">' +
+//                            '</tbody>'+
+//                        '</table>'
+//                );
+//            }
+//      COMMENT BY PEEM
+
+
+            //$('#table').bootstrapTable({
+            //    data: data2
+            //});  COMMENT BY PEEM
     });
 
     function search() {
@@ -141,10 +177,8 @@ $(document).ready(function () {
             async: false
         }).responseText;
 
-        console.log(data);
-
         if (data != "") {
-            $('#sResult').empty();
+            $('#resultSearch').empty();
             data2 = JSON.parse(data);
             for (var j = 0; j < data2.length; j++) {
                 var stDate = data2[j].startWork.split('/');
@@ -171,6 +205,7 @@ $(document).ready(function () {
             $("#alertMess").hide();
             $("#alertMess").slideDown();
         }
+        console.log(data2);
     }
 
     $("#cancel").click(function () {

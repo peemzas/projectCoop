@@ -40,8 +40,8 @@ public class QueryUserDomain extends HibernateUtil {
             criteria.add(Restrictions.like("nickName", "%" + nickName + "%"));
         }
 
-        if (BeanUtils.isNotEmpty(nickName)) {
-            criteria.add(Restrictions.eq("userId", Integer.parseInt(staff))); //Edit by PEEM
+        if (BeanUtils.isNotEmpty(staff)) {
+            criteria.add(Restrictions.eq("staffId",Integer.parseInt(staff))); //Edit by PEEM
         }
 
         if (BeanUtils.isNotEmpty(position)) {

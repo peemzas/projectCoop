@@ -3,11 +3,13 @@
  */
 
 var subTopicId = [];
+var sumScoreS = 0;
+var checkHaveScoreS = true;
 var checkInputScore = [];
 var maxInputScore = [];
 var minInputScore = [];
 var countAdd = 0;
-
+var userId = "" // EDIT BY PEEM
 $(document).ready(function () {
     $("#evaluation").attr('class', 'active');
     if (status == 'user') {
@@ -127,6 +129,19 @@ $(document).ready(function () {
         }
     }
 
+    //EDIT BY PEEM
+    $("#selectStudentForEvaluation").change(function () {
+
+        if (status == 'user') {
+            userId = "";
+        } else {
+            userId = $("#selectStudentForEvaluation").val();
+        }
+        $(".dv-background").show();
+        setDataEvaluationForm();
+        $(".dv-background").hide();
+    });
+    //EDIT BY PEEM
 
     $("#disEvaluation").click(function () {
         for (var i = 0; i < subTopicId.length; i++) {
@@ -195,6 +210,7 @@ function setDataEvaluationForm() {
 
     var strBodyHeadLeft = ""; // column 1,2
     var strBodyHeadRight = "";// column 7,8
+    var strScoreStudent = "";// EDIT BY PEEM column 9,10
     var strBodyDetail; // column 3,4,5,6
     var strSummaryRow = "";
 
@@ -222,36 +238,36 @@ function setDataEvaluationForm() {
                 strSummaryRow += trOpen.concat(strBodyHeadLeft);
                 strBodyDetail = "";
 
-                //// EDIT BY PEEM
-                //var dataStudentScore = $.ajax({
-                //    type: 'POST',
-                //    data: {
-                //        userId: userId,
-                //        subId: valueSubtopic.subtopicId,
-                //        type: "s"
-                //    },
-                //    url: 'getResultEvaluation',
-                //    async: false
-                //}).responseText;
-                //
-                //var scoreS, noteS;
-                //if (dataStudentScore != "") {
-                //    var dataStudentScores = JSON.parse(dataStudentScore)
-                //    scoreS = dataStudentScores[0].score;
-                //    if (dataStudentScores[0].note != null) {
-                //        noteS = dataStudentScores[0].note;
-                //    } else {
-                //        noteS = "-"
-                //    }
-                //    sumScoreS += scoreS;
-                //    checkHaveScoreS = true;
-                //}
-                //else {
-                //    scoreS = "";
-                //    noteS = ""
-                //}
-                //
-                //// EDIT BY PEEM
+                // EDIT BY PEEM
+                var dataStudentScore = $.ajax({
+                    type: 'POST',
+                    data: {
+                        userId: userId,
+                        subId: valueSubtopic.subtopicId,
+                        type: "s"
+                    },
+                    url: 'getResultEvaluation',
+                    async: false
+                }).responseText;
+
+                var scoreS, noteS;
+                if (dataStudentScore != "") {
+                    var dataStudentScores = JSON.parse(dataStudentScore)
+                    scoreS = dataStudentScores[0].score;
+                    if (dataStudentScores[0].note != null) {
+                        noteS = dataStudentScores[0].note;
+                    } else {
+                        noteS = "-"
+                    }
+                    sumScoreS += scoreS;
+                    checkHaveScoreS = true;
+                }
+                else {
+                    scoreS = "";
+                    noteS = ""
+                }
+
+                // EDITBY PEEM
 
 
                 strBodyHeadRight = "<td rowspan='5' class='text-center'>" +
@@ -261,6 +277,11 @@ function setDataEvaluationForm() {
                     "</div>" +
                     "</td>" +
                     "<td rowspan='5' class='text-center'><textarea title='หมายเหตุ' id='textareaSubId" + valueSubtopic.subtopicId + "' class='form-control'></textarea></td>";
+
+                if (status == "staff"){
+                    strScoreStudent = "<td rowspan='5' class='text-center'>"+scoreS+"</td>" +
+                        "<td rowspan='5' class='text-center'>"+noteS+"</td>";
+                }
                 $(dataDescription).each(function (indexDescription, valueDescription) {
                     if (valueDescription.subtopicId == valueSubtopic.subtopicId) {
                         var min, max, desc;
@@ -284,7 +305,7 @@ function setDataEvaluationForm() {
                             "<td class='text-center'>" + desc + "</td>";
                         if (firstCount == 0) {
                             maxInputScore[indexSubtopic] = valueDescription.max;
-                            strSummaryRow = strSummaryRow.concat(strBodyDetail).concat(strBodyHeadRight).concat(trClose);
+                            strSummaryRow = strSummaryRow.concat(strBodyDetail).concat(strBodyHeadRight).concat(strScoreStudent).concat(trClose);
                             firstCount++;
                         } else {
                             strSummaryRow += trOpen.concat(strBodyDetail).concat(trClose);
