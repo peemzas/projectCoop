@@ -51,5 +51,18 @@
         <mapping class="com.springapp.mvc.pojo.Subtopic" />
         <mapping class="com.springapp.mvc.pojo.Description" />
         <mapping class="com.springapp.mvc.pojo.Evaluate" />
+		<!--Mapping Exam-->
+		<mapping class="com.springapp.mvc.pojo.exam.Boo" />
+		<mapping class="com.springapp.mvc.pojo.exam.Category" />
+		<mapping class="com.springapp.mvc.pojo.exam.Choice" />
+		<mapping class="com.springapp.mvc.pojo.exam.Difficulty" />
+		<mapping class="com.springapp.mvc.pojo.exam.ExamAnswerRecord" />
+		<mapping class="com.springapp.mvc.pojo.exam.ExamPaper" />
+		<mapping class="com.springapp.mvc.pojo.exam.Question" />
+		<mapping class="com.springapp.mvc.pojo.exam.QuestionType" />
+		<mapping class="com.springapp.mvc.pojo.exam.SubCategory" />
+		<mapping class="com.springapp.mvc.pojo.exam.ExamResult" />
+
+
 	</session-factory>
 </hibernate-configuration>
