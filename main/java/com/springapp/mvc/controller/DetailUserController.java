@@ -10,12 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sound.midi.Soundbank;
 import java.util.List;
 
 /**
@@ -27,15 +25,21 @@ public class DetailUserController {
     @Autowired
     QueryUserDomain queryUserDomain;
 
-    @RequestMapping(method = RequestMethod.POST, value = "detail")
-    public String detail(ModelMap model, @ModelAttribute("id") Integer id, HttpServletRequest request) {
-        User user = queryUserDomain.getUserDatas(id);
+    //EDIT BY PEEM
+
+    @RequestMapping(method = RequestMethod.GET, value = "/viewData")
+    public String viewData(ModelMap model,
+//                           @ModelAttribute("userId") Integer userId,
+                           @RequestParam( value = "userId", required = false) Integer userId ,
+                           HttpServletRequest request) {
+        User user = queryUserDomain.getUserDatas(userId);
         model.addAttribute("user", user);
         List<User> users = queryUserDomain.getStudentUserDataList(user.getUserId(), "user");
         model.addAttribute("users", users);
 
-        return "detail";
+        return "viewData";
     }
+    //EDIT BY PEEM
 
     @RequestMapping(value = "/findStaffName", method = RequestMethod.POST, produces = "text/html", headers = "Accept=application/json")
     @ResponseBody

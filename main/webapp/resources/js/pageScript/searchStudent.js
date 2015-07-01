@@ -5,6 +5,7 @@
 var data2, chkData = 0 , checkTime;
 status = status.trim();
 var thName = [];
+var checkId;
 $(document).ready(function () {
     $("#table").hide();
 
@@ -38,6 +39,7 @@ $(document).ready(function () {
 //        }
     });
 
+
     $("#search").click(function () {
         var s = $("#startTime").val().split("/")
         var e = $("#endTime").val().split("/")
@@ -47,7 +49,7 @@ $(document).ready(function () {
             if(status != 'staff'){
                 for(var i = 0 ; i < data2.length ; i++){
                     $('#resultSearch').append('<tr align="center">' +
-                                                '<td><button class="btn btn-info" id="'+data2[i].userId+'">Info</button></td> '+
+                                                '<td><a href="/TDCS/viewData?userId='+data2[i].userId+'"><button class="btn btn-info" id="' + data2[i].userId + '">Info</button></a></td> '+
                                                 '<td>'+ data2[i].empId+'</td>'+
                                                 '<td>'+ data2[i].thFname +'</td>'+
                                                 '<td>'+ data2[i].university +'</td>'+
@@ -59,7 +61,7 @@ $(document).ready(function () {
             }else{
                 for(var i = 0 ; i < data2.length ; i++){
                     $('#resultSearch').append('<tr align="center">' +
-                                                '<td><button class="btn btn-info" id="'+data2[i].userId+'">Info</button></td> '+
+                                                '<td><a href="/TDCS/viewData?userId='+data2[i].userId+'"><button class="btn btn-info" id="'+data2[i].userId+'">Info</button></a></td> '+
                                                 '<td>'+ data2[i].empId+'</td>'+
                                                 '<td>'+ data2[i].thFname +'</td>'+
                                                 '<td>'+ data2[i].university +'</td>'+
@@ -142,6 +144,7 @@ $(document).ready(function () {
             //$('#table').bootstrapTable({
             //    data: data2
             //});  COMMENT BY PEEM
+
     });
 
     function search() {

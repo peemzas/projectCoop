@@ -3,6 +3,8 @@
  */
 var data2 , checkTime,chkData=0;
 $(document).ready(function () {
+    $("#table").hide();
+
     $("#addSearch").attr('class', 'dropdown active');
     $("#sStartTime").datepicker({
         format: 'dd/mm/yyyy',
@@ -38,38 +40,55 @@ $(document).ready(function () {
         var e = $("#endTime").val().split("/")
         timediffInPage(s[1] + "/" + s[0] + "/" + s[2] + " 00:00", e[1] + "/" + e[0] + "/" + e[2] + " 00:00");
         if (!checkTime) {
-            $("#forAddResultTable").hide();
-
-            $("#forAddResultTable").html(
-                    '<table id="table"' +
-                    'data-pagination="true"' +
-                    'data-page-list="[10, 20, 50, 100, 200]"' +
-                    'data-sort-name="empId"' +
-                    'data-sort-order="asc">' +
-                    '<thead class="bg-primary">' +
-                    '<tr>' +
-                    '<th data-field="empId" data-align="center" data-sortable="true">รหัสพนักงาน</th>' +
-                    '<th data-field="thFname" data-align="center" data-sortable="true">ชื่อ-นามสกุล</th>' +
-                    '<th data-field="company" data-align="center" data-sortable="true">สังกัด</th>' +
-                    '<th data-field="team" data-align="center" data-sortable="true">ทีม</th>' +
-                    '<th data-field="position" data-align="center" data-sortable="true">ตำแหน่ง</th>' +
-                    '<th data-field="sectionPosition" data-align="center" data-sortable="true">แผนก</th>' +
-                    '<th data-field="startWork" data-align="center">ระยะเวลาการทำงาน</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '</table>'
-            );
             search();
-            $('#table').bootstrapTable({
-                data: data2
-            });
+            //CREATE BY PEEM
+            for(var i = 0 ; i < data2.length ; i++) {
+                $('#resultSearch').append('<tr align="center">' +
+                '<td><a href="/TDCS/viewData?userId='+data2[i].userId+'"><button class="btn btn-info" id="' + data2[i].userId + '">Info</button></a></td> ' +
+                '<td>' + data2[i].empId + '</td>' +
+                '<td>' + data2[i].thFname + '</td>' +
+                '<td>' + data2[i].company + '</td>' +
+                '<td>' + data2[i].team + '</td>' +
+                '<td>' + data2[i].position + '</td>' +
+                '<td>' + data2[i].sectionPosition + '</td>' +
+                '<td>' + data2[i].startWork + '</td>' +
+                '</tr> ')
+            }
+            //CREATE BY PEEM
+
+            //$('#table').bootstrapTable({
+            //    data: data2
+            //}); COMMENT BY PEEM
             if (chkData != 0)
-                $("#forAddResultTable").show();
+                $("#table").show();
             else
-                $("#forAddResultTable").hide();
-        } else {
+                $("#table").hide();
+        }else {
             alert('คุณเลือกระยะเวลาไม่ถูกต้อง');
         }
+            // COMMENT BY PEEM
+            //$("#forAddResultTable").hide();
+            //
+            //$("#forAddResultTable").html(
+            //        '<table id="table"' +
+            //        'data-pagination="true"' +
+            //        'data-page-list="[10, 20, 50, 100, 200]"' +
+            //        'data-sort-name="empId"' +
+            //        'data-sort-order="asc">' +
+            //        '<thead class="bg-primary">' +
+            //        '<tr>' +
+            //        '<th data-field="empId" data-align="center" data-sortable="true">รหัสพนักงาน</th>' +
+            //        '<th data-field="thFname" data-align="center" data-sortable="true">ชื่อ-นามสกุล</th>' +
+            //        '<th data-field="company" data-align="center" data-sortable="true">สังกัด</th>' +
+            //        '<th data-field="team" data-align="center" data-sortable="true">ทีม</th>' +
+            //        '<th data-field="position" data-align="center" data-sortable="true">ตำแหน่ง</th>' +
+            //        '<th data-field="sectionPosition" data-align="center" data-sortable="true">แผนก</th>' +
+            //        '<th data-field="startWork" data-align="center">ระยะเวลาการทำงาน</th>' +
+            //        '</tr>' +
+            //        '</thead>' +
+            //        '</table>'
+            //);
+            // COMMENT BY PEEM
     });
 
     function search() {
@@ -107,7 +126,7 @@ $(document).ready(function () {
         console.log(data2);
 
         if (data != "") {
-            $('#sResult').empty();
+            $('#resultSearch').empty();
             data2 = JSON.parse(data);
             for (var j = 0; j < data2.length; j++) {
                 data2[j].thFname = data2[j].thFname + " " + data2[j].thLname;
