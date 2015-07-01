@@ -120,12 +120,28 @@
 
     </div>
 
-    <div class="row">
-            <%--for result query--%>
-            <span id="forAddResultTable"></span>
-            <%--////////////////--%>
         <div class="row col-md-offset-1 col-md-10">
             <div id="alertMess" class="alert alert-danger text-center" style="display: none;">ไม่พบข้อมูลพนักงาน</div>
         </div>
-    </div>
 </div>
+<%--CREATE BY PEEM--%>
+<div class="row">
+    <table class="table" id="table">
+        <thead class="bg-primary">
+        <tr>
+            <th style="text-align: center ; border: 1px solid white">ดูข้อมูล</th>
+            <th style="text-align: center ; border-left: 1px solid white">รหัสพนักงาน</th>
+            <th style="text-align: center ; border-left: 1px solid white">ชื่อ-นามสกุล</th>
+            <th style="text-align: center ; border-left: 1px solid white">สังกัด</th>
+            <th style="text-align: center ; border-left: 1px solid white">ทีม</th>
+            <th style="text-align: center ; border-left: 1px solid white">ตำแหน่ง</th>
+            <th style="text-align: center ; border: 1px solid white">แผนก</th>
+            <th style="text-align: center ; border: 1px solid white">ระยะเวลาการทำงาน</th>
+        </tr>
+        </thead>
+        <tbody id="resultSearch">
+
+        </tbody>
+    </table>
+</div>
+<%--CREATE BY PEEM--%>
