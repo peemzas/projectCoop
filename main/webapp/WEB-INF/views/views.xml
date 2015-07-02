@@ -57,10 +57,17 @@
         <put-attribute name="body" value="/WEB-INF/pages/detail.jsp" />
     </definition>
 
-    <definition name="viewData" extends="tempEmpty">
+    <!--CREATE BY PEEM-->
+    <definition name="viewData" extends="tempForUser">
         <put-attribute name="title" value="รายละเอียดนักศึกษา" />
         <put-attribute name="body" value="/WEB-INF/pages/viewData.jsp" />
     </definition>
+
+    <definition name="viewStaffData" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/viewStaffData.jsp" />
+    </definition>
+    <!--CREATE BY PEEM-->
 
     <definition name="pacturePage" extends="tempEmpty">
         <put-attribute name="title" value="รายละเอียดนักศึกษา" />

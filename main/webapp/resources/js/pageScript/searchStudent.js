@@ -49,19 +49,23 @@ $(document).ready(function () {
             if(status != 'staff'){
                 for(var i = 0 ; i < data2.length ; i++){
                     $('#resultSearch').append('<tr align="center">' +
-                                                '<td><a href="/TDCS/viewData?userId='+data2[i].userId+'"><button class="btn btn-info" id="' + data2[i].userId + '">Info</button></a></td> '+
+                                                '<td>'+
+                                                '<form method="post" action="/TDCS/viewData.html"><input value="' + data2[i].userId + '" name="id" style="display: none;" /><button type="submit" class="btn btn-info" id="' + data2[i].userId + '">Info</button></form>'+
+                                                '</td>'+
                                                 '<td>'+ data2[i].empId+'</td>'+
                                                 '<td>'+ data2[i].thFname +'</td>'+
                                                 '<td>'+ data2[i].university +'</td>'+
                                                 '<td>'+ data2[i].major +'</td>'+
                                                 '<td>'+ data2[i].apprentice +'</td>'+
                                                 '<td>'+ data2[i].startWork +'</td>'+
-                                              '</tr> ')
+                                              '</tr>')
                 }
             }else{
                 for(var i = 0 ; i < data2.length ; i++){
                     $('#resultSearch').append('<tr align="center">' +
-                                                '<td><a href="/TDCS/viewData?userId='+data2[i].userId+'"><button class="btn btn-info" id="'+data2[i].userId+'">Info</button></a></td> '+
+                                                '<td>'+
+                                                '<form method="post" action="/TDCS/viewData.html"><input value="' + data2[i].userId + '" name="id" style="display: none;" /><button type="submit" class="btn btn-info" id="' + data2[i].userId + '">Info</button></form>'+
+                                                '</td>'+
                                                 '<td>'+ data2[i].empId+'</td>'+
                                                 '<td>'+ data2[i].thFname +'</td>'+
                                                 '<td>'+ data2[i].university +'</td>'+
