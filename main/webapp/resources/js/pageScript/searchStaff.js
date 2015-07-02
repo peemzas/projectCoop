@@ -44,7 +44,9 @@ $(document).ready(function () {
             //CREATE BY PEEM
             for(var i = 0 ; i < data2.length ; i++) {
                 $('#resultSearch').append('<tr align="center">' +
-                '<td><a href="/TDCS/viewData?userId='+data2[i].userId+'"><button class="btn btn-info" id="' + data2[i].userId + '">Info</button></a></td> ' +
+                '<td>'+
+                '<form method="post" action="/TDCS/viewStaffData.html"><input value="' + data2[i].userId + '" name="id" style="display: none;" /><button class="btn btn-info" id="' + data2[i].userId + '">Info</button></form>'+
+                '</td> ' +
                 '<td>' + data2[i].empId + '</td>' +
                 '<td>' + data2[i].thFname + '</td>' +
                 '<td>' + data2[i].company + '</td>' +
