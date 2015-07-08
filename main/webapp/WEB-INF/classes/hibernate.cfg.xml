@@ -52,6 +52,7 @@
         <mapping class="com.springapp.mvc.pojo.Description" />
         <mapping class="com.springapp.mvc.pojo.Evaluate" />
 		<!--Mapping Exam-->
+
 		<!--<mapping class="com.springapp.mvc.pojo.exam.Boo" />-->
 		<!--<mapping class="com.springapp.mvc.pojo.exam.Category" />-->
 		<!--<mapping class="com.springapp.mvc.pojo.exam.Choice" />-->
@@ -62,7 +63,7 @@
 		<!--<mapping class="com.springapp.mvc.pojo.exam.QuestionType" />-->
 		<!--<mapping class="com.springapp.mvc.pojo.exam.SubCategory" />-->
 		<!--<mapping class="com.springapp.mvc.pojo.exam.ExamResult" />-->
-
+	 <!-- -->
 
 	</session-factory>
 </hibernate-configuration>
