@@ -69,39 +69,7 @@ $(document).ready(function () {
                     }
                     $(".dv-background").hide();
 
-                    var evaGrade;
-                    var dataScore = $.ajax({
-                        type: "POST",
-                        url: '/TDCS/sumScore',
-                        data: {
-                            userId: $("#selectStudentForEvaluation").val()
-                        },
-                        success: function (xhr) {
-//                            alert(xhr);
-                            if (xhr >= 80)
-                                evaGrade = "A";
-                            else if (xhr >= 70)
-                                evaGrade = "B";
-                            else if (xhr >= 60)
-                                evaGrade = "C";
-                            else if (xhr >= 50)
-                                evaGrade = "D";
-                            else
-                                evaGrade = "F";
-
-                            var setEvaGrade = $.ajax({
-                                type: "POST",
-                                url: '/TDCS/setEvaGrade',
-                                data: {
-                                    userId: $("#selectStudentForEvaluation").val(),
-                                    evaGrade: evaGrade
-                                },
-                                complete: function () {
-                                    location.reload();
-                                }
-                            }).responseText;
-                        }
-                    }).responseText;
+                    insertScore();
 
 
                     alert('บึนทึกข้อมูลสำเร็จ');
@@ -151,6 +119,43 @@ $(document).ready(function () {
     });
 });
 
+function insertScore() {
+    var evaGrade;
+    var dataScore = $.ajax({
+        type: "POST",
+        url: '/TDCS/sumScore',
+        data: {
+            userId: $("#selectStudentForEvaluation").val()
+        },
+        success: function (xhr) {
+            if (xhr >= 80)
+                evaGrade = "A";
+            else if (xhr >= 70)
+                evaGrade = "B";
+            else if (xhr >= 60)
+                evaGrade = "C";
+            else if (xhr >= 50)
+                evaGrade = "D";
+            else
+                evaGrade = "F";
+
+            var setEvaGrade = $.ajax({
+                type: "POST",
+                url: '/TDCS/setEvaGrade',
+                data: {
+                    userId: $("#selectStudentForEvaluation").val(),
+                    evaGrade: evaGrade
+                },
+                complete: function () {
+                    location.reload();
+                },
+                async: false
+            }).responseText;
+        },
+        async: false
+    }).responseText;
+}
+
 function checkEvaluation() {
     var dataCheck = $.ajax({
         type: 'POST',
@@ -166,18 +171,18 @@ function saveEvaluate(subId, score, note, type, userId) {
         '&score=' + score +
         '&note=' + note +
         '&type=' + type +
-        '&userId=' + userId;
+        '&userId=' +     userId;
 
     var subId = [];
     var data = $.ajax({
         type: "POST",
         url: '/TDCS/addEvaluate',
         data: saveDate,
-        complete: function () {
+        success: function () {
 
-        }
+        },async: false
+
     }).responseText;
-
 //    countAdd++;
 }
 
