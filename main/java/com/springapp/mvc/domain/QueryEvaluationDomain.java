@@ -81,9 +81,10 @@ public class QueryEvaluationDomain extends HibernateUtil {
     public Float sumScore(Integer userId) {
         Criteria criteria = getSession().createCriteria(Evaluate.class);
         criteria.add(Restrictions.eq("type","e"));
-        criteria.add(Restrictions.eq("userId",userId));
+        criteria.add(Restrictions.eq("userId", userId));
         criteria.setProjection(Projections.sum("score"));
         Float sum = (Float) criteria.uniqueResult();
+        System.out.print("SUMMMMMMMMMMMMMMMMMMMMMMMMMMMMM   " + sum);
         return sum;
     }
 

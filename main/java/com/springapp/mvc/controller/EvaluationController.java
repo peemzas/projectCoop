@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -94,6 +95,7 @@ public class EvaluationController {
                 e.printStackTrace();
             }
         }
+
         queryEvaluationDomain.insertEvaluate(evaluate);
 
         return new ResponseEntity<String>(textReturn, headers, HttpStatus.OK);
