@@ -86,6 +86,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="/TDCS/exam">ข้อสอบ</a>
+                    </li>
                 </c:if>
                 <%--<c:if test="${status == 'staff'}">--%>
                 <%--<li id="evaluation">--%>
