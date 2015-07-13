@@ -67,6 +67,17 @@
         <put-attribute name="title" value="รายละเอียดพนักงาน" />
         <put-attribute name="body" value="/WEB-INF/pages/viewStaffData.jsp" />
     </definition>
+
+    <definition name="exam" extends="tempForUser">
+        <put-attribute name="title" value="ข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam.jsp" />
+    </definition>
+
+    <definition name="createPaper" extends="tempForUser">
+        <put-attribute name="title" value="สร้างข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/createPaper.jsp" />
+    </definition>
+
     <!--CREATE BY PEEM-->
 
     <definition name="pacturePage" extends="tempEmpty">

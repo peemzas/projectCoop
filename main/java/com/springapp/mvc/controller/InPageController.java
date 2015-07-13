@@ -195,10 +195,23 @@ public class InPageController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/logout")
-    public String logout(HttpServletRequest request) {
+     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("status");
         return "login";
     }
+
+    //CREATE BY PEEM
+    @RequestMapping(method = RequestMethod.GET, value = "/exam")
+    public String exam(HttpServletRequest request) {
+        return "exam";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/createPaper")
+    public String createPaper(HttpServletRequest request) {
+        return "createPaper";
+    }
+    //CREATE BY PEEM
+
 
     @RequestMapping(method = RequestMethod.GET, value = "viewevaluate")
     public String afterEvaluation(ModelMap model,HttpServletRequest request) {
