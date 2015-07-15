@@ -20,7 +20,7 @@ public class ExamMarkingRecord {
 
     @ManyToOne
     @JoinColumn(name = "RECORD_ID")
-    private  ExamAnswerRecord recordIdl;
+    private  ExamAnswerRecord recordId;
 
     @ManyToOne
     @JoinColumn(name = "MARKED_BY")
@@ -31,7 +31,7 @@ public class ExamMarkingRecord {
         return "ExamMarkingRecord{" +
                 "id=" + id +
                 ", markingScore=" + markingScore +
-                ", recordIdl=" + recordIdl +
+                ", recordId=" + recordId +
                 ", markedBy=" + markedBy +
                 '}';
     }
@@ -52,12 +52,12 @@ public class ExamMarkingRecord {
         this.markingScore = markingScore;
     }
 
-    public ExamAnswerRecord getRecordIdl() {
-        return recordIdl;
+    public ExamAnswerRecord getrecordId() {
+        return recordId;
     }
 
-    public void setRecordIdl(ExamAnswerRecord recordIdl) {
-        this.recordIdl = recordIdl;
+    public void setrecordId(ExamAnswerRecord recordId) {
+        this.recordId = recordId;
     }
 
     public User getMarkedBy() {

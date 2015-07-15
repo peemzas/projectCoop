@@ -1,5 +1,7 @@
 package com.springapp.mvc.pojo.exam;
 
+import com.springapp.mvc.pojo.User;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -20,11 +22,11 @@ public class Category implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_STATUS")
-    private Integer status;
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name="CATEGORY_CREATE_BY")
-    private Category createBy;
+    private User createBy;
 
     @OneToMany(mappedBy = "categoryId")
     private Set<SubCategory> subCategories;
@@ -54,11 +56,11 @@ public class Category implements Serializable{
         this.name = name;
     }
 
-    public Category getCreateBy() {
+    public User getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Category createBy) {
+    public void setCreateBy(User createBy) {
         this.createBy = createBy;
     }
 }

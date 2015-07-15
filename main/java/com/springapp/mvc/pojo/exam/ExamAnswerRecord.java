@@ -39,7 +39,6 @@ public class ExamAnswerRecord implements Serializable {
     @OneToMany(mappedBy = "recordId")
     private Set<ExamMarkingRecord> examMarkingRecords;
 
-
     public Integer getId() {
         return id;
     }
