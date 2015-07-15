@@ -19,7 +19,7 @@ public class Boo implements Serializable {
     private String description;
 
     @OneToMany(mappedBy = "correction")
-    private Set<Question> questions;
+    private Set<Choice> choices;
 
 
 
@@ -57,11 +57,11 @@ public class Boo implements Serializable {
         this.description = description;
     }
 
-    public Set<Question> getQuestions() {
-        return questions;
+    public Set<Choice> getChoices() {
+        return choices;
     }
 
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
+    public void setChoices(Set<Choice> choices) {
+        this.choices = choices;
     }
 }

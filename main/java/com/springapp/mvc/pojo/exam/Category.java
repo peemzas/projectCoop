@@ -19,21 +19,16 @@ public class Category implements Serializable{
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="CATEGORY_CREATEBY")
+    @JoinColumn(name = "CATEGORY_STATUS")
+    private Integer status;
+
+    @ManyToOne
+    @JoinColumn(name="CATEGORY_CREATE_BY")
     private Category createBy;
 
     @OneToMany(mappedBy = "categoryId")
     private Set<SubCategory> subCategories;
 
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", createBy='" + createBy + '\'' +
-                '}';
-    }
 
     public Set<SubCategory> getSubCategories() {
         return subCategories;

@@ -29,14 +29,14 @@ public class ExamPaper implements Serializable {
     private Integer maxScore;
 
     @ManyToOne
-    @JoinColumn(name = "PAPER_CREATEBY")
+    @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
 
 
     @OneToMany(mappedBy = "paperId")
     private Set<ExamAnswerRecord> examAnswerRecords;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "paperId")
     private Set<ExamResult> examResults;
 
     @ManyToMany
@@ -44,17 +44,6 @@ public class ExamPaper implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", referencedColumnName = "QUESTION_ID")})
     private Set<Question> questions;
 
-
-    @Override
-    public String toString() {
-        return "ExamPaper{" +
-                "createBy=" + createBy +
-                ", maxScore=" + maxScore +
-                ", createDate=" + createDate +
-                ", name='" + name + '\'' +
-                ", id=" + id +
-                '}';
-    }
 
     public Integer getId() {
         return id;

@@ -4,6 +4,7 @@ import com.springapp.mvc.pojo.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Phuthikorn_T on 7/1/2015.
@@ -35,18 +36,9 @@ public class ExamAnswerRecord implements Serializable {
     @Column(name="ANSWER_SUBJECTIVE")
     private String answerSubjective;
 
+    @OneToMany(mappedBy = "recordId")
+    private Set<ExamMarkingRecord> examMarkingRecords;
 
-    @Override
-    public String toString() {
-        return "ExamAnswerRecord{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", paperId=" + paperId +
-                ", questionId=" + questionId +
-                ", answerObjective=" + answerObjective +
-                ", answerSubjective='" + answerSubjective + '\'' +
-                '}';
-    }
 
     public Integer getId() {
         return id;

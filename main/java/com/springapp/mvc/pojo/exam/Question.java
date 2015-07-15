@@ -37,37 +37,25 @@ public class Question implements Serializable {
     private SubCategory subCategoryId;
 
     @ManyToOne
-    @JoinColumn(name="QUESTION_TYPE")
-    private QuestionType questionType;
+    @JoinColumn(name="QUESTION_TYPE_ID")
+    private QuestionType questionTypeId;
 
     @ManyToOne
-    @JoinColumn(name="QUESTION_CREATEBY")
+    @JoinColumn(name="QUESTION_CREATE_BY")
     private User createBy;
+
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_STATUS")
+    private Status status;
+
+    @OneToMany(mappedBy = "questionId")
+    private Set<ExamAnswerRecord> examAnswerRecords;
 
     @ManyToMany(mappedBy = "questions")
     private Set<ExamPaper> examPapers;
 
     @OneToMany(mappedBy = "questionId")
     private Set<Choice> choices;
-
-    @OneToMany(mappedBy ="questionId")
-    private Set<ExamAnswerRecord> examAnswerRecords;
-
-
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", score='" + score + '\'' +
-                ", createDate=" + createDate +
-                ", difficultyLevel=" + difficultyLevel +
-                ", subCategoryId=" + subCategoryId +
-                ", questionType=" + questionType +
-                ", createBy=" + createBy +
-                '}';
-    }
 
     public Integer getId() {
         return id;
@@ -117,12 +105,12 @@ public class Question implements Serializable {
         this.subCategoryId = subCategoryId;
     }
 
-    public QuestionType getQuestionType() {
-        return questionType;
+    public QuestionType getQuestionTypeId() {
+        return questionTypeId;
     }
 
-    public void setQuestionType(QuestionType questionType) {
-        this.questionType = questionType;
+    public void setQuestionTypeId(QuestionType questionTypeId) {
+        this.questionTypeId = questionTypeId;
     }
 
     public User getCreateBy() {
@@ -131,6 +119,22 @@ public class Question implements Serializable {
 
     public void setCreateBy(User createBy) {
         this.createBy = createBy;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<ExamAnswerRecord> getExamAnswerRecords() {
+        return examAnswerRecords;
+    }
+
+    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
+        this.examAnswerRecords = examAnswerRecords;
     }
 
     public Set<ExamPaper> getExamPapers() {
@@ -147,13 +151,5 @@ public class Question implements Serializable {
 
     public void setChoices(Set<Choice> choices) {
         this.choices = choices;
-    }
-
-    public Set<ExamAnswerRecord> getExamAnswerRecords() {
-        return examAnswerRecords;
-    }
-
-    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
-        this.examAnswerRecords = examAnswerRecords;
     }
 }
