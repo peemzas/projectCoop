@@ -211,7 +211,17 @@ public class InPageController {
         return "createPaper";
     }
     //CREATE BY PEEM
-
+    
+    // Create by Neng
+    @RequestMapping(method = RequestMethod.GET, value = "/editCategories")
+    public String editCategories(HttpServletRequest request){
+        return "editCategories";
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/editQuestions")
+    public String editQuestions(HttpServletRequest request){
+        return "editQuestions";
+    }
+    // Create by Neng
 
     @RequestMapping(method = RequestMethod.GET, value = "viewevaluate")
     public String afterEvaluation(ModelMap model,HttpServletRequest request) {

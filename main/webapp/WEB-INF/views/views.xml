@@ -95,6 +95,7 @@
         <put-attribute name="body" value="/WEB-INF/pages/afterAddStaff.jsp" />
     </definition>
 
+
     <definition name="loginComplete" extends="tempForUser">
         <put-attribute name="title" value="รายละเอียดพนักงาน" />
         <put-attribute name="body" value="/WEB-INF/pages/loginComplete.jsp" />
@@ -104,6 +105,7 @@
         <put-attribute name="title" value="รายละเอียดพนักงาน" />
         <put-attribute name="body" value="/WEB-INF/pages/homeStaff.jsp" />
     </definition>
+
 
     <!--CREATEBY NICK-->
     <definition name="examRecordSearch" extends="tempForUser">
@@ -115,4 +117,15 @@
         <put-attribute name="title" value="ข้อมูลชุดข้อสอบ"/>
         <put-attribute name="body" value="/WEB-INF/pages/exam/paperPreview.jsp"/>
     </definition>
+
+    <!-- Create by Neng -->
+    <definition name = "editCategories" extends="tempForUser">
+        <put-attribute name="title" value="แก้ไขหมวดหมู่" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/editCategories.jsp" />
+    </definition>
+    <definition name = "editQuestions" extends = "tempForUser">
+        <put-attribute name="title" value = "แก้ไขข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/editQuestions.jsp" />
+    </definition>
+
 </tiles-definitions>
