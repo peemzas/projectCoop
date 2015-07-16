@@ -10,7 +10,7 @@
 <div class="row">
   <div class=" col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading" style="background-color: lightgreen">Create</div>
+      <div class="panel-heading" style="background-color: #003366;border: 1px solid #003366;"><font color = "white">สร้าง</font></div>
       <div class="panel-body">
         <div class="btn-group-vertical col-md-6 col-md-offset-3" align="center">
           <button data-toggle="modal" data-target="#createCat" class="btn btn-default" style="background-color:lightgreen ;color: black">Category</button>
@@ -24,12 +24,11 @@
 
   <div class=" col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading" style="background-color: lightpink">Edit</div>
+      <div class="panel-heading" style="background-color: lightpink">แก้ไข</div>
       <div class="panel-body">
         <div class="btn-group-vertical col-md-6 col-md-offset-3" align="center">
-          <button class="btn btn-default" style="background-color:lightpink ;color: black">Category</button>
-          <button class="btn btn-default" style="background-color:lightpink ;color: black">Sub-category</button>
-          <button class="btn btn-default" style="background-color:lightpink ;color: black">Question</button>
+          <a href = "/TDCS/editCategories" class = "btn btn-primary">แก้ไขหมวดหมู่</a>
+          <a href = "/TDCS/editQuestions" class = "btn btn-primary">แก้ไขข้อสอบ</a>
           <button class="btn btn-default" style="background-color:lightpink ;color: black">Paper</button>
         </div>
       </div>
@@ -245,6 +244,7 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 
 <script>
   function select(){
