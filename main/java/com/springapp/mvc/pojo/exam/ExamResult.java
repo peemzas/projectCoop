@@ -26,7 +26,7 @@ public class ExamResult implements Serializable {
     private ExamAnswerRecord paperId;
 
     @ManyToOne
-    @JoinColumn(name = "MARKEDBY",referencedColumnName = "USER_ID")
+    @JoinColumn(name = "MARKED_BY",referencedColumnName = "USER_ID")
     private  User markedBy;
 
     @Column(name = "COMMENTING")
@@ -35,6 +35,51 @@ public class ExamResult implements Serializable {
     @Column(name = "RESULT_SCORE")
     private Integer resultScore;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public ExamAnswerRecord getPaperId() {
+        return paperId;
+    }
+
+    public void setPaperId(ExamAnswerRecord paperId) {
+        this.paperId = paperId;
+    }
+
+    public User getMarkedBy() {
+        return markedBy;
+    }
+
+    public void setMarkedBy(User markedBy) {
+        this.markedBy = markedBy;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Integer getResultScore() {
+        return resultScore;
+    }
+
+    public void setResultScore(Integer resultScore) {
+        this.resultScore = resultScore;
+    }
 }

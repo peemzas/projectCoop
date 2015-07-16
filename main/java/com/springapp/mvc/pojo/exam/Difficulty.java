@@ -20,7 +20,7 @@ public class Difficulty implements Serializable {
     @Column(name = "DIFFICULTY_DESCRIPTION")
     private String description;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "difficultyLevel")
     private Set<Question> questions;
 
 

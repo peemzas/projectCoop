@@ -32,15 +32,16 @@ public class SubCategory implements Serializable {
     @OneToMany
     private Set<Question> question;
 
+    @ManyToOne
+    @JoinColumn(name = "SUB_CATEGORY_STATUS")
+    private Status status;
 
-    @Override
-    public String toString() {
-        return "SubCategory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", categoryId=" + categoryId +
-                ", createBy=" + createBy +
-                '}';
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Integer getId() {

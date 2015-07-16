@@ -20,7 +20,7 @@ public class QuestionType implements Serializable {
     @Column(name="QUESTION_TYPE_DESCRIPTION")
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "questionTypeId")
     private Set<Question> questions;
 
 

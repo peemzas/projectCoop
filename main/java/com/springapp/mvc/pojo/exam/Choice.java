@@ -26,18 +26,27 @@ public class Choice  implements Serializable {
     @JoinColumn(name="QUESTION_ID")
     private Question questionId;
 
+    @ManyToOne
+    @JoinColumn(name = "CHOICE_STATUS")
+    private Status status;
+
     @OneToMany(mappedBy = "answerObjective")
     private Set<ExamAnswerRecord> examAnswerRecords;
 
+    public Status getStatus() {
+        return status;
+    }
 
-    @Override
-    public String toString() {
-        return "Choice{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", correction=" + correction +
-                ", questionId=" + questionId +
-                '}';
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<ExamAnswerRecord> getExamAnswerRecords() {
+        return examAnswerRecords;
+    }
+
+    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
+        this.examAnswerRecords = examAnswerRecords;
     }
 
     public Integer getId() {
