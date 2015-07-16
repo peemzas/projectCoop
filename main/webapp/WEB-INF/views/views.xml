@@ -104,4 +104,15 @@
         <put-attribute name="title" value="รายละเอียดพนักงาน" />
         <put-attribute name="body" value="/WEB-INF/pages/homeStaff.jsp" />
     </definition>
+
+    <!--CREATEBY NICK-->
+    <definition name="examRecordSearch" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาบันทึกการทำข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/examRecordSearch.jsp"/>
+    </definition>
+
+    <definition name="paperPreview" extends="tempForUser">
+        <put-attribute name="title" value="ข้อมูลชุดข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/paperPreview.jsp"/>
+    </definition>
 </tiles-definitions>
