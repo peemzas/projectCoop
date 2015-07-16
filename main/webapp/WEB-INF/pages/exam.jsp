@@ -41,7 +41,7 @@
       <div class="panel-heading" style="background-color: lightblue">Manage</div>
       <div class="panel-body">
         <div class="btn-group-vertical col-md-6 col-md-offset-3" align="center">
-          <button class="btn btn-default" style="background-color:lightblue ;color: black">Marking</button>
+          <a href="/TDCS/examrecordsearch"><button class="btn btn-default" style="background-color:lightblue ;color: black">Marking</button></a>
           <button class="btn btn-default" style="background-color:lightblue ;color: black">Open Exam</button>
           <button class="btn btn-default" style="background-color:lightblue ;color: black">Search</button>
         </div>

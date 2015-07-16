@@ -220,4 +220,12 @@ public class InPageController {
         return "viewEvaluate";
     }
 
+    //CREATE BY NICK
+    @RequestMapping(method = RequestMethod.GET, value = "/examrecordsearch")
+    public String examRecirdSearch(HttpServletRequest request){ return "examRecordSearch";}
+
+    //CREATE BY NICK
+    @RequestMapping(method = RequestMethod.GET,value = "/paperpreview")
+    public String paperPreview(HttpServletRequest request) {return "paperPreview";}
+
 }
