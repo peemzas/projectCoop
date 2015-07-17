@@ -70,7 +70,7 @@
 
     <definition name="exam" extends="tempForUser">
         <put-attribute name="title" value="ข้อสอบ" />
-        <put-attribute name="body" value="/WEB-INF/pages/exam.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/exam.jsp" />
     </definition>
 
     <definition name="createPaper" extends="tempForUser">
