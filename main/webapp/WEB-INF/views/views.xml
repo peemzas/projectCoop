@@ -74,8 +74,14 @@
     </definition>
 
     <definition name="createPaper" extends="tempForUser">
-        <put-attribute name="title" value="สร้างข้อสอบ" />
+        <put-attribute name="title" value="สร้างชุดข้อสอบ" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/createPaper.jsp" />
+    </definition>
+
+    <definition name="searchPaper" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาชุดข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/searchPaper.jsp" />
+
     </definition>
 
     <!--CREATE BY PEEM-->

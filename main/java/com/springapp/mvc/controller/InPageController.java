@@ -210,6 +210,11 @@ public class InPageController {
     public String createPaper(HttpServletRequest request) {
         return "createPaper";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/searchPaper")
+    public String searchPaper(HttpServletRequest request) {
+        return "searchPaper";
+    }
     //CREATE BY PEEM
     
     // Create by Neng
