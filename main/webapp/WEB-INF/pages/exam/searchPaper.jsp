@@ -8,10 +8,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div class="row">
-  <h2 align="center">Search Paper</h2>
+<div class="container row">
+  <h3>ค้นหาชุดข้อสอบ</h3>
+  <hr>
 </div>
-
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
