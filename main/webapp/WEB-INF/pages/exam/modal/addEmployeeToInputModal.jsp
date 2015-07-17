@@ -70,7 +70,7 @@
           <div class = "col-md-12" align="right">
             <div class = "form-group">
               <button class = "btn btn-success">เพิ่ม</button>
-              <button class = "btn btn-warning">ยกเลิก</button>
+              <button class = "btn btn-warning" data-dismiss="modal">ยกเลิก</button>
             </div>
           </div>
         </div>

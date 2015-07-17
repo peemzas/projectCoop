@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
-    <h3>ค้นหาคำถาม</h3>
+    <h4>ค้นหาคำถาม</h4>
     <hr>
 </div>
 <div class="row">
@@ -39,14 +39,12 @@
                         <div class="input-group">
                             <input id="empId" type="text" class="form-control" disabled="disabled"/>
                             <div class="input-group-btn">
-                                <button class="btn btn-default " id="addEmpIdBtn"> +</button>
+                                <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-default " id="addEmpIdBtn"> +</button>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-8" align="right">
+                    <div class="col-md-4 col-md-offset-2" align="right">
                         <button id="search" class="btn btn-gray">Search</button>
                         <button id="clear" class="btn btn-gray">Clear</button>
                     </div>
@@ -171,3 +169,4 @@
 
     $(".datepicker").datepicker();
 </script>
+<%@include file="modal/addEmployeeToInputModal.jsp" %>
