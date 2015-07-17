@@ -7,97 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="modal/addEmployeeToInputModal.jsp"%>
+<%@include file="modal/editQuestionModal.jsp"%>
 
 <div class = "container">
   <%@include file="searchQuesionTemplate.jsp"%>
   <br/>
   <br/>
-  <!-- Collapse for Advance search button -->
-  <div class = "collapse" id = "advanceSearch">
-    <div class = "container">
-      <div class = "row">
-        <div class = "col-md-12">
-          <div class = "panel panel-default">
-            <div class = "panel panel-body" align="center">
-              <div class = "row">
-                <div class = "col-md-2" align = "right">
-                  <label>หมายเลขข้อสอบ</label>
-                </div>
-                <div class = "col-md-6">
-                  <input class = "form-control" type = "text"/>
-                </div>
-              </div>
-              <br/>
-              <div class = "row">
-                <div class = "col-md-2" align = "right">
-                  <label>คำถาม</label>
-                </div>
-                <div class = "col-md-6">
-                  <textarea class="form-control" rows="2"></textarea>
-                </div>
-              </div>
-              <br/>
-              <div class = "row">
-                <div class = "col-md-2" align = "right">
-                  <label>วันที่สร้างข้อสอบ</label>
-                </div>
-                <div class = "col-md-4">
-                  <input class = "form-control" type = "text"/>
-                </div>
-              </div>
-              <br/>
-              <div class = "row">
-                <div class = "col-md-2" align = "right">
-                  <label>ชนิดข้อสอบ</label>
-                </div>
-                <div class = "col-md-4">
-                  <select class = "form-control">
-                    <option>ปรนัย</option>
-                    <option>อัตนัย</option>
-                  </select>
-                </div>
-                <div class = "col-md-2">
-                  <label>ระดับความยาก</label>
-                </div>
-                <div class = "col-md-4">
-                  <select class = "form-control">
-                    <option>ง่าย</option>
-                    <option>ปานกลาง</option>
-                    <option>ยาก</option>
-                  </select>
-                </div>
-              </div>
-              <br/>
-              <div class = "row">
-                <div class = "col-md-2" align = "right">
-                  <label>คะแนน</label>
-                </div>
-                <div class = "col-md-2">
-                  <input class = "form-control" type = "text"/>
-                </div>
-                <div class = "col-md-1">
-                  <label>-</label>
-                </div>
-                <div class = "col-md-2">
-                  <input class = "form-control" type = "text"/>
-                </div>
-              </div>
-              <br/>
-              <div class = "row">
-                <div class = "col-md-12" align = "center">
-                  <form class = "form-group">
-                    <button class = "btn btn-primary" type = "button">ค้นหา</button>
-                    <button class = "btn btn-default" type = "button">ล้างข้อมูล</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
 <!-- Example table information, it will remove soon ^^ -->
     <div class = "row">
@@ -129,7 +44,7 @@
               <td>หมวดหมู่ย่อย</td>
               <td>เคโรโระ</td>
               <td>19/01/2015</td>
-              <td><button class = "btn btn-warning" type = "button"><span class = "glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class = "btn btn-warning" type = "button" data-toggle = "modal" data-target = "#editQuestionModal"><span class = "glyphicon glyphicon-pencil"></span></button></td>
               <td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>
             </tr>
             <tr>
@@ -186,6 +101,20 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <br/><br/>
+    <div class = "row">
+      <div class = "col-md-12" align = "center">
+        <ul class = "pagination">
+          <li class = "disabled"><a href = "#">&laquo;</a></li>
+          <li class = "active"><a href = "#">1</a></li>
+          <li><a>2</a></li>
+          <li><a>3</a></li>
+          <li><a>4</a></li>
+          <li><a>5</a></li>
+          <li class = "disabled"><a href = "#">&raquo;</a></li>
+        </ul>
       </div>
     </div>
   </div>
