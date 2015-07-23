@@ -48,7 +48,7 @@
 
     <div class=" col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: lightpink">แก้ไข</div>
+            <div class="panel-heading" style="background-color: lightpink ;font-size: x-large">แก้ไข</div>
             <div class="panel-body">
                 <div class="col-md-6 col-md-offset-3" align="center">
                     <div class="row">
@@ -60,17 +60,17 @@
 
                     <div class="row">
                         <a href="/TDCS/editQuestions" class="btn btn-default"
-                                style="background-color:lightpink ;color: black ;width:85px;height:35px">หัวข้อเรื่อง
+                                style="background-color:lightpink ;color: black ;width:85px;height:35px">ข้อสอบ
                         </a>
                     </div>
                     <br>
 
-                    <div class="row">
+                    <%--<div class="row">
                         <button class="btn btn-default"
                                 style="background-color:lightpink ;color: black ;width:85px;height:35px">ข้อสอบ
                         </button>
                     </div>
-                    <br>
+                    <br>--%>
 
                     <div class="row">
                         <button class="btn btn-default"
@@ -84,7 +84,7 @@
 
     <div class=" col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: lightblue">จัดการ</div>
+            <div class="panel-heading" style="background-color: lightblue ; font-size: x-large">จัดการ</div>
             <div class="panel-body">
                 <div class="col-md-6 col-md-offset-3" align="center">
                     <div class="row">

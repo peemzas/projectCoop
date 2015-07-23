@@ -93,7 +93,7 @@
   <div class="col-md-5" align="right" style="padding: 0px">
     <button  data-toggle="modal" data-target="#createQuest" class="btn btn-gray">เพิ่มคำถามใหม่</button>
     <button data-toggle="modal" data-target="#selectQuest" class="btn btn-gray">เลือกคำถาม </button>
-    <button class="btn btn-gray">สุ่มข้อสอบ</button>
+    <button data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray">สุ่มข้อสอบ</button>
   </div>
 </div>
 
@@ -188,3 +188,4 @@
 </script>
 <%@include file="modal/creatQuestionModal.jsp"%>
 <%@include file="modal/selectQuestionModal.jsp"%>
+<%@include file="modal/RandomQuestionModal.jsp"%>
