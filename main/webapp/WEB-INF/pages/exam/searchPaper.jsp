@@ -17,32 +17,24 @@
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color: lightblue"><h4>Search</h4></div>
             <div class="panel-body">
-
-                <%@include file="template/selectCategoryInput.jsp" %>
-
+                <div class="row">
+                         <%@include file="template/selectCategoryInput.jsp" %>
+                </div>
                 <br>
 
                 <div class="row">
-                    <div class="col-md-2" align="right">
-                        <h5>Create By: </h5>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <input id="empId" type="text" class="form-control" disabled="disabled"/>
+                <%@include file="template/selectCeateByInput.jsp" %>
 
-                            <div class="input-group-btn">
-                                <button class="btn btn-default " id="addEmpIdBtn"> +</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-7" align="right">
+                    <div class="col-md-4 col-md-offset-1" align="right">
                         <button id="search" class="btn btn-gray">Search</button>
                         <button id="clear" class="btn btn-gray">Clear</button>
-                    </div>
+
                 </div>
+        </div>
+
+
+
 
             </div>
         </div>
@@ -67,13 +59,13 @@
             <div class="panel-body collapse" id="moreSearch">
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
-                        <h5>Paper ID: </h5>
+                        <h5>หมายเลขชุดข้อสอบ:</h5>
                     </div>
                     <div class="col-md-3">
                         <input type="text" class="form-control"/>
                     </div>
                     <div class="col-md-2" align="right">
-                        <h5>Paper Name: </h5>
+                        <h5>ชื่อชุดข้อสอบ: </h5>
                     </div>
                     <div class="col-md-3">
                         <input type="text" class="form-control"/>
@@ -84,7 +76,7 @@
 
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
-                        <h5>Create Date: </h5>
+                        <h5>วันที่สร้าง : </h5>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
@@ -93,7 +85,7 @@
                         </div>
                     </div>
                     <div class="col-md-2" align="right">
-                        <h5>Teung: </h5>
+                        <h5>ถึง : </h5>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
@@ -107,13 +99,13 @@
 
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
-                        <h5>Max Score: </h5>
+                        <h5>คะแนนเต็ม : </h5>
                     </div>
                     <div class="col-md-3">
                         <input type="text" class="form-control"/>
                     </div>
                     <div class="col-md-2" align="right">
-                        <h5>Teung: </h5>
+                        <h5>ถึง : </h5>
                     </div>
                     <div class="col-md-3">
                         <input type="text" class="form-control"/>
@@ -124,12 +116,12 @@
 
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
-                        <h5>Paper Status: </h5>
+                        <h5>สถานะ : </h5>
                     </div>
                     <div class="col-md-3">
                         <select class="form-control">
-                            <option>Checked</option>
-                            <option>UnChecked</option>
+                            <option>ตรวจแล้ว</option>
+                            <option>ยังไม่ตรวจ</option>
                         </select>
                     </div>
                 </div>
