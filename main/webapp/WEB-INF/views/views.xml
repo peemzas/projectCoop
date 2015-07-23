@@ -133,5 +133,13 @@
         <put-attribute name="title" value = "แก้ไขข้อสอบ" />
         <put-attribute name="body" value = "/WEB-INF/pages/exam/editQuestions.jsp" />
     </definition>
+    <definition name = "editPapers" extends = "tempForUser">
+        <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/editPapers.jsp" />
+    </definition>
+    <definition name = "editButtonOnPageEditPapers" extends = "tempForUser">
+        <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/editButtonOnPageEditPapers.jsp" />
+    </definition>
 
 </tiles-definitions>

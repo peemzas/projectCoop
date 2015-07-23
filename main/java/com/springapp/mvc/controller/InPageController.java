@@ -226,6 +226,14 @@ public class InPageController {
     public String editQuestions(HttpServletRequest request){
         return "editQuestions";
     }
+    @RequestMapping(method = RequestMethod.GET, value = "/editPapers")
+    public String editPapers(HttpServletRequest request){
+        return "editPapers";
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/editButtonOnPageEditPapers")
+    public String editButtonOnPageEditPapers(HttpServletRequest request){
+        return "editButtonOnPageEditPapers";
+    }
     // Create by Neng
 
     @RequestMapping(method = RequestMethod.GET, value = "viewevaluate")
