@@ -8,7 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="modal/addEmployeeToInputModal.jsp"%>
 <%@include file="modal/createQuestionModal.jsp"%>
-
+<div class="container row">
+  <h3 class="h3">แก้ไขข้อสอบ</h3>
+</div>
+<hr/>
 <div class = "container">
   <%@include file="template/searchQuesionTemplate.jsp"%>
   <br/>
@@ -29,8 +32,7 @@
               <th style = "text-align: center">หมวดหมู่ย่อย</th>
               <th style = "text-align: center">ผู้สร้าง</th>
               <th style = "text-align: center">วันที่สร้าง</th>
-              <th style = "text-align: center">แก้ไข</th>
-              <th style = "text-align: center">ดู</th>
+              <th style = "text-align: center">Action</th>
             </tr>
           </thead>
           <tbody align="center">
@@ -44,8 +46,20 @@
               <td>หมวดหมู่ย่อย</td>
               <td>เคโรโระ</td>
               <td>19/01/2015</td>
-              <td><button class = "btn btn-warning" type = "button" data-toggle = "modal" data-target = "#createQuest"><span class = "glyphicon glyphicon-pencil"></span></button></td>
-              <td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>
+              <%--<td><button class = "btn btn-warning" type = "button" data-toggle = "modal" data-target = "#createQuest"><span class = "glyphicon glyphicon-pencil"></span></button></td>--%>
+              <%--<td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>--%>
+              <td>
+                <div class="btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    เลือก<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">ดู</a></li>
+                    <li><a data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>
+                    <li><a href="#">ลบ</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>1111</td>
@@ -57,8 +71,18 @@
               <td>หมวดหมู่ย่อย</td>
               <td>เคโรโระ</td>
               <td>19/01/2015</td>
-              <td><button class = "btn btn-warning" type = "button"><span class = "glyphicon glyphicon-pencil"></span></button></td>
-              <td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    เลือก<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">ดู</a></li>
+                    <li><a data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>
+                    <li><a href="#">ลบ</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>1111</td>
@@ -70,8 +94,18 @@
               <td>หมวดหมู่ย่อย</td>
               <td>เคโรโระ</td>
               <td>19/01/2015</td>
-              <td><button class = "btn btn-warning" type = "button"><span class = "glyphicon glyphicon-pencil"></span></button></td>
-              <td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    เลือก<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">ดู</a></li>
+                    <li><a data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>
+                    <li><a href="#">ลบ</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>1111</td>
@@ -83,8 +117,18 @@
               <td>หมวดหมู่ย่อย</td>
               <td>เคโรโระ</td>
               <td>19/01/2015</td>
-              <td><button class = "btn btn-warning" type = "button"><span class = "glyphicon glyphicon-pencil"></span></button></td>
-              <td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    เลือก<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">ดู</a></li>
+                    <li><a data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>
+                    <li><a href="#">ลบ</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>1111</td>
@@ -96,8 +140,18 @@
               <td>หมวดหมู่ย่อย</td>
               <td>เคโรโระ</td>
               <td>19/01/2015</td>
-              <td><button class = "btn btn-warning" type = "button"><span class = "glyphicon glyphicon-pencil"></span></button></td>
-              <td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    เลือก<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a data-toggle = "modal" data-target = "#createQuest">ดู</a></li>
+                    <li><a data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>
+                    <li><a href="#">ลบ</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
