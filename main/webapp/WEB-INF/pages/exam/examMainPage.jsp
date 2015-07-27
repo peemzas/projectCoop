@@ -92,14 +92,14 @@
                     <br>
 
                     <div class="row">
-                        <a href="/TDCS/#" class="btn btn-default"
+                        <a href="/TDCS/editQuestions" class="btn btn-default"
                            style="background-color:lightblue ;color: black ;width:125px;height:35px">ข้อสอบ
                         </a>
                     </div>
                     <br>
 
                     <div class="row">
-                        <a href="/TDCS/managePapers" class="btn btn-default"
+                        <a href="/TDCS/editPapers" class="btn btn-default"
                            style="background-color:lightblue ;color: black ;width:125px;height:35px">ชุดข้อสอบ
                         </a>
                     </div>
