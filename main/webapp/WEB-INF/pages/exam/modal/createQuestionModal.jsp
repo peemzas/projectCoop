@@ -1,12 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JOKIZZ
-  Date: 16/7/2558
-  Time: 15:40
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Modal CreateQuestion-->
+
+<!--Create Question Modal-->
+
+
 <div class="modal fade" id="createQuest">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -14,7 +10,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h3 class="modal-title" align="center">สร้างคำถาม</h3>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="modalBody">
         <div class="row form-group">
           <div class="col-md-4" align="right">
             <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">หมวดหมู่ :</label></h4>
@@ -30,7 +26,7 @@
             <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ชื่อหัวข้อเรื่อง :</label></h4>
           </div>
           <div class="input-group col-md-5">
-            <input type="text" class="form-control" name="subcat" />
+            <input type="text" class="form-control" name="subcat" id="subcat"/>
             <span class="input-group-addon" id="selectSubCat"><i class="glyphicon glyphicon-search"></i></span>
           </div>
         </div>
@@ -39,7 +35,8 @@
             <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ประเภทข้อสอบ :</label></h4>
           </div>
           <div class="input-group col-md-5">
-            <select class="form-control" onclick="select()">
+            <select class="form-control" id="select-QuestionType">
+              <option disabled selected></option>
               <option id="obj" value="Objective">ปรนัย</option>
               <option id="sub" value="Subjective">อัตนัย</option>
             </select>
@@ -150,3 +147,27 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Modal Create Question -->
+
+
+<!-- End Create Question Modal -->
+
+
+<script>
+
+  $('#select-QuestionType').on('change',function(){
+
+    if(this.value == 'Objective'){
+      $('#objective').show();
+      $('#objective2').show();
+      $('#subjective').hide();
+      $('#subjective2').hide();
+    }
+    else if(this.value == 'Subjective'){
+      $('#subjective').show();
+      $('#subjective2').show();
+      $('#objective').hide();
+      $('#objective2').hide();
+    }
+  })
+
+</script>

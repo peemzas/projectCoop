@@ -16,12 +16,12 @@
             <div class="panel-heading" style="background-color: lightgreen"><h4>Search</h4></div>
             <div class="panel-body">
                 <div class="row">
-                    <%@include file="template/selectCategoryInput.jsp" %>
+                    <%@include file="selectCategoryInput.jsp" %>
                 </div>
                 <br>
 
                 <div class="row">
-                <%@include file="template/selectCeateByInput.jsp" %>
+                <%@include file="selectCeateByInput.jsp" %>
 
                     <div class="col-md-4 col-md-offset-1" align="right">
                         <button id="search" class="btn btn-gray">Search</button>
@@ -153,4 +153,4 @@
 
     $(".datepicker").datepicker();
 </script>
-<%@include file="modal/addEmployeeToInputModal.jsp" %>
+<%@include file="../modal/addEmployeeToInputModal.jsp" %>
