@@ -1,20 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JOKIZZ
-  Date: 16/7/2558
-  Time: 15:40
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Modal CreateQuestion-->
+
+<!--Create Question Modal-->
+
+
 <div class="modal fade" id="createQuest">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" align="center">สร้างคำถาม</h3>
+        <h3 class="modal-title" align="center" id="createQuestModalTitle">สร้างข้อสอบ</h3>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="modalBody">
         <div class="row form-group">
           <div class="col-md-4" align="right">
             <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">หมวดหมู่ :</label></h4>
@@ -30,7 +26,7 @@
             <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ชื่อหัวข้อเรื่อง :</label></h4>
           </div>
           <div class="input-group col-md-5">
-            <input type="text" class="form-control" name="subcat" />
+            <input type="text" class="form-control" name="subcat" id="subcat"/>
             <span class="input-group-addon" id="selectSubCat"><i class="glyphicon glyphicon-search"></i></span>
           </div>
         </div>
@@ -39,7 +35,8 @@
             <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ประเภทข้อสอบ :</label></h4>
           </div>
           <div class="input-group col-md-5">
-            <select class="form-control" onclick="select()">
+            <select class="form-control" id="select-QuestionType">
+              <option disabled selected></option>
               <option id="obj" value="Objective">ปรนัย</option>
               <option id="sub" value="Subjective">อัตนัย</option>
             </select>
@@ -84,10 +81,6 @@
                   <input type="radio" name="level"/>
                   <input class="form-control" type="text" id="choiceD"/>
                 </div>
-                <div class="btn col-md-offset-1">
-                  <button class="btn btn-primary">ตกลง</button>
-                  <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                </div>
               </div>
 
               <div class="col-md-1 col-md-offset-1">
@@ -127,10 +120,7 @@
                   <textarea class="form-control" style="resize: none"></textarea>
                 </div>
                 <br>
-                <div class="btn col-md-offset-1">
-                  <button class="btn btn-primary">ตกลง</button>
-                  <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                </div>
+
               </div>
               <div class="col-md-1 col-md-offset-1">
                 <div class="row form-group">
@@ -143,6 +133,12 @@
             </div>
             <%--End Subjective--%>
 
+              <div class="col-md-offset-1" id="submitBtnContainer" hidden>
+                <button class="btn btn-primary" id="submitCreateBtn" data-dismiss="modal">ตกลง</button>
+                <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+              </div>
+
+
           </div><!--Modal footer-->
         </div>
       </div>
@@ -150,3 +146,52 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Modal Create Question -->
+
+
+<!-- End Create Question Modal -->
+
+
+<script>
+
+  $('#select-QuestionType').on('change',function(){
+
+    $('#submitBtnContainer').show();
+
+    if(this.value == 'Objective'){
+      $('#objective').show();
+      $('#objective2').show();
+      $('#subjective').hide();
+      $('#subjective2').hide();
+
+      $('#submitBtnContainer').val('Objective');
+    }
+    else if(this.value == 'Subjective'){
+      $('#subjective').show();
+      $('#subjective2').show();
+      $('#objective').hide();
+      $('#objective2').hide();
+
+      $('#submitBtnContainer').val('Subjective');
+    }
+  })
+
+  $('#submitCreateBtn').on('click',function(){
+    alert('Hi');
+    if($('#createQuestModalTitle').text() == 'สร้างข้อสอบ'){
+      //
+      //DO CREATE QUESTION HERE
+      //
+      alert('case สร้างข้อสอบ');
+
+
+    }else if($('#createQuestModalTitle').text() == 'แก้ไขข้อสอบ'){
+      alert('case แก้ไขข้อสอบ');
+      editQuestion();
+    }else{alert('WTF!!!!')}
+  })
+
+  function editQuestion(){ // FOR EDIT FROM webapp/WEB-INF/page/exam/editQuestion.jso
+
+  }
+
+</script>

@@ -13,12 +13,12 @@
             <div class="modal-header">
 
                 <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
                             aria-hidden="true">&times;</span></button>
                     <h3 class="modal-title" align="center">เลือกคำถาม</h3>
 
 
-                    <%@include file="../searchQuesionTemplate.jsp" %>
+                    <%@include file="../template/searchQuesionTemplate.jsp" %>
                     <%--<div class="row form-group">--%>
                     <%--<div class="col-md-4" align="right">--%>
                     <%--<h4><label class="label label-success"--%>
@@ -78,9 +78,11 @@
                         </tr>
                     </table>
                     <br>
+                    <a class="btn btn-default">aaa</a>
                 </div>
             </div>
         </div>
+
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->

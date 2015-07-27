@@ -12,19 +12,24 @@
   <div class = "modal-dialog">
     <div class = "modal-content">
       <div class = "modal-header">
-        <button class = "close" type = "close" data-dismiss = "modal">&times;</button>
-        <h4 class = "modal-title">ค้นหาจากชื่อผู้สร้างข้อสอบ</h4>
+        <button class = "close modalSearchByEmployeeNameCloseBtn" type = "close">&times;</button>
+        <h4 class = "modal-title">ค้นหาพนักงาน</h4>
       </div>
       <div class = "modal-body" align = "center">
         <div class = "row">
           <div class = "col-md-8 col-md-offset-2">
-            <form class = "form-inline" role = "form">
-              <div class = "form-group">
-                <label>ชื่อ</label>
-                <input class = "form-control" type = "text"/>
-                <button class = "btn btn-info">ค้นหา</button>
+            <%--<form class = "form-inline" role = "form">--%>
+              <div class = "row">
+                <div class="col-md-offset-1 col-md-1" align="right"><h5>ชื่อ</h5></div>
+                <%--<label>ชื่อ</label>--%>
+                <div class="col-md-6">
+                  <input class = "form-control" type = "text"/>
+                </div>
+                <div class="col-md-1">
+                  <button class = "btn btn-gray">ค้นหา</button>
+                </div>
               </div>
-            </form>
+            <%--</form>--%>
           </div>
         </div>
         <br/>
@@ -69,8 +74,8 @@
         <div class = "row">
           <div class = "col-md-12" align="right">
             <div class = "form-group">
-              <button class = "btn btn-success">เพิ่ม</button>
-              <button class = "btn btn-warning" data-dismiss="modal">ยกเลิก</button>
+              <button class = "btn btn-default modalSearchByEmployeeNameSubmitBtn">เพิ่ม</button>
+              <button class = "btn btn-gray modalSearchByEmployeeNameCloseBtn ">ยกเลิก</button>
             </div>
           </div>
         </div>
@@ -78,3 +83,18 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  $('.modalSearchByEmployeeNameSubmitBtn').on('click',function(){
+    // DO SOMETHING//
+
+    // FINISH //
+    $("#modalSearchByEmployeeName").modal("hide");
+  })
+
+  $('.modalSearchByEmployeeNameCloseBtn').on('click',function(){
+    $("#modalSearchByEmployeeName").modal("hide");
+  })
+
+</script>

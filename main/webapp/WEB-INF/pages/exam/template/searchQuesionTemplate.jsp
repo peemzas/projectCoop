@@ -7,21 +7,21 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
-    <h4>ค้นหาคำถาม</h4>
+    <h3>ค้นหาข้อสอบ</h3>
     <hr>
 </div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: lightgreen"><h4>Search</h4></div>
+            <div class="panel-heading"><h4>Search</h4></div>
             <div class="panel-body">
                 <div class="row">
-                    <%@include file="template/selectCategoryInput.jsp" %>
+                    <%@include file="selectCategoryInput.jsp" %>
                 </div>
                 <br>
 
                 <div class="row">
-                <%@include file="template/selectCeateByInput.jsp" %>
+                    <%@include file="selectCeateByInput.jsp" %>
 
                     <div class="col-md-4 col-md-offset-1" align="right">
                         <button id="search" class="btn btn-gray">Search</button>
@@ -31,24 +31,24 @@
                 </div>
 
 
-
-                </div>
-
             </div>
+
         </div>
     </div>
+</div>
 </div>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: lightgreen">
+            <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-3">
                         <label><h4>More Search</h4></label>
                     </div>
                     <div class="col-md-1 col-md-offset-8">
-                        <button id="collapse" class="btn glyphicon glyphicon-arrow-down" data-toggle="collapse" data-target="#moreSearch"></button>
+                        <button id="collapse" class="btn glyphicon glyphicon-arrow-down" data-toggle="collapse"
+                                data-target="#moreSearch"></button>
                     </div>
                 </div>
             </div>
@@ -56,20 +56,24 @@
             <div class="panel-body collapse" id="moreSearch">
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
-                        <h5>หมายเลขชุดข้อสอบ : </h5>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control"/>
-                    </div>
-                    <div class="col-md-2" align="right">
-                        <h5>ชื่อชุดข้อสอบ : </h5>
+                        <h5>หมายเลขข้อสอบ : </h5>
                     </div>
                     <div class="col-md-3">
                         <input type="text" class="form-control"/>
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1" align="right">
+                        <h5>คำถาม : </h5>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
 
                 <br>
+
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
                         <h5>วันที่สร้าง : </h5>
@@ -92,9 +96,10 @@
                 </div>
 
                 <br>
+
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
-                        <h5>คะแนนเต็ม : </h5>
+                        <h5>คะแนน : </h5>
                     </div>
                     <div class="col-md-3">
                         <input type="text" class="form-control"/>
@@ -108,12 +113,14 @@
                 </div>
 
                 <br>
+
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1" align="right">
                         <h5>สถานะ : </h5>
                     </div>
                     <div class="col-md-3">
                         <select class="form-control">
+                            <option selected value="none"></option>
                             <option>ตรวจแล้ว</option>
                             <option>ยังไม่ตรวจ</option>
                         </select>
@@ -133,16 +140,16 @@
 
 
 <script>
-    $("#collapse").click(function(){
-        var str = $("#search").prop('outerHTML') +"&nbsp"+ $("#clear").prop('outerHTML');
+    $("#collapse").click(function () {
+        var str = $("#search").prop('outerHTML') + "&nbsp" + $("#clear").prop('outerHTML');
 
-        if($("#collapse").hasClass("glyphicon-arrow-down")){
+        if ($("#collapse").hasClass("glyphicon-arrow-down")) {
             $("#collapse").removeClass("glyphicon-arrow-down").addClass("glyphicon-arrow-up");
             $("#btn").html(str);
 
             $("#search").hide();
             $("#clear").hide();
-        }else{
+        } else {
             $("#collapse").removeClass("glyphicon-arrow-up").addClass("glyphicon-arrow-down");
             $("#search").show();
             $("#clear").show();
@@ -153,4 +160,4 @@
 
     $(".datepicker").datepicker();
 </script>
-<%@include file="modal/addEmployeeToInputModal.jsp" %>
+<%@include file="../modal/addEmployeeToInputModal.jsp" %>
