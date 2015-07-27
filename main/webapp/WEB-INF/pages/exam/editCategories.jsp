@@ -8,16 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <script>
-    function hiddenOrShow(){
-        $("#selectCategory").click(function(){
-           $("#tblCategory").show();
+
+    $('#viewControlSelector').on('change',function(){
+
+        alert('its WORKING !!!');
+
+        if(this.value == 'Category'){
+
+            $("#tblCategory").show();
             $("#tblSubCategory").hide();
-        });
-        $("#selectSubCategory").click(function(){
+        }else if(this.value == 'SubCategory'){
             $("#tblCategory").hide();
             $("#tblSubCategory").show();
-        });
-    }
+        }else{alert('No God Please No');}
+    })
 </script>
 
 <div class="container row">
@@ -26,12 +30,12 @@
 </div>
 <div class="row">
     <div class="col-md-5" align="right" style="margin-top: 20px;">
-        <label><h4>จัดเรียงตาม</h4></label>
+        <label><h4>แสดง</h4></label>
     </div>
     <div class="col-md-4" align="left" style="margin-top: 20px;">
-        <select class="form-control" onclick = "hiddenOrShow()">
-            <option id = "selectCategory" value="Category">หมวดหมู่หลัก</option>
-            <option id = "selectSubCategory" value="SubCategory">หมวดหมู่ย่อย</option>
+        <select class="form-control" id="viewControlSelector">
+            <option id = "selectSubCategory" value="SubCategory" selected>ทั้งหมด</option>
+            <option id = "selectCategory" value="Category">เฉพาะหมวดหมู่</option>
         </select>
     </div>
 </div>
@@ -108,3 +112,17 @@
     </div>
 </div>
 
+<script>
+
+    $("#tblCategory").hide();
+
+    $('#viewControlSelector').on('change',function(){
+        if(this.value == 'Category'){
+            $("#tblCategory").show();
+            $("#tblSubCategory").hide();
+        }else if(this.value == 'SubCategory'){
+            $("#tblCategory").hide();
+            $("#tblSubCategory").show();
+        }else{alert('No God Please No');}
+    })
+</script>

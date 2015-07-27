@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="modal/addEmployeeToInputModal.jsp"%>
-<%@include file="modal/editQuestionModal.jsp"%>
+<%@include file="modal/createQuestionModal.jsp"%>
 
 <div class = "container">
-  <%@include file="searchQuesionTemplate.jsp"%>
+  <%@include file="template/searchQuesionTemplate.jsp"%>
   <br/>
   <br/>
 
@@ -44,7 +44,7 @@
               <td>หมวดหมู่ย่อย</td>
               <td>เคโรโระ</td>
               <td>19/01/2015</td>
-              <td><button class = "btn btn-warning" type = "button" data-toggle = "modal" data-target = "#editQuestionModal"><span class = "glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class = "btn btn-warning" type = "button" data-toggle = "modal" data-target = "#createQuest"><span class = "glyphicon glyphicon-pencil"></span></button></td>
               <td><button class = "btn btn-info" type = "button"><span class = "glyphicon glyphicon-book"></span></button></td>
             </tr>
             <tr>
@@ -119,5 +119,28 @@
     </div>
   </div>
 </div>
+
+<style>
+  th{
+    border:1px solid white;
+    background-color:pink;
+  }
+</style>
+
+<script>
+  $('#submitCreateBtn').text('ยืนยัน');
+  $('#createQuestModalTitle').text('แก้ไขข้อสอบ');
+
+  function editQuestions(){ // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp
+    // IF THIS ISN'T WORKING TRY PUT THE CODE IN editQuestion() in createQuestionModal.jsp instead
+    //
+    // DO EDIT QUESTION HERE
+    //
+    alert('Working');
+  }
+
+  //function editQuestion()  IS IN THE webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp DEFINE IT THERE (DEFINE HERE WON'T WORK)
+
+</script>
 
 

@@ -8,7 +8,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" align="center">สร้างคำถาม</h3>
+        <h3 class="modal-title" align="center" id="createQuestModalTitle">สร้างข้อสอบ</h3>
       </div>
       <div class="modal-body" id="modalBody">
         <div class="row form-group">
@@ -81,10 +81,6 @@
                   <input type="radio" name="level"/>
                   <input class="form-control" type="text" id="choiceD"/>
                 </div>
-                <div class="btn col-md-offset-1">
-                  <button class="btn btn-primary">ตกลง</button>
-                  <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                </div>
               </div>
 
               <div class="col-md-1 col-md-offset-1">
@@ -124,10 +120,7 @@
                   <textarea class="form-control" style="resize: none"></textarea>
                 </div>
                 <br>
-                <div class="btn col-md-offset-1">
-                  <button class="btn btn-primary">ตกลง</button>
-                  <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                </div>
+
               </div>
               <div class="col-md-1 col-md-offset-1">
                 <div class="row form-group">
@@ -139,6 +132,12 @@
               </div>
             </div>
             <%--End Subjective--%>
+
+              <div class="col-md-offset-1" id="submitBtnContainer" hidden>
+                <button class="btn btn-primary" id="submitCreateBtn" data-dismiss="modal">ตกลง</button>
+                <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+              </div>
+
 
           </div><!--Modal footer-->
         </div>
@@ -156,18 +155,43 @@
 
   $('#select-QuestionType').on('change',function(){
 
+    $('#submitBtnContainer').show();
+
     if(this.value == 'Objective'){
       $('#objective').show();
       $('#objective2').show();
       $('#subjective').hide();
       $('#subjective2').hide();
+
+      $('#submitBtnContainer').val('Objective');
     }
     else if(this.value == 'Subjective'){
       $('#subjective').show();
       $('#subjective2').show();
       $('#objective').hide();
       $('#objective2').hide();
+
+      $('#submitBtnContainer').val('Subjective');
     }
   })
+
+  $('#submitCreateBtn').on('click',function(){
+    alert('Hi');
+    if($('#createQuestModalTitle').text() == 'สร้างข้อสอบ'){
+      //
+      //DO CREATE QUESTION HERE
+      //
+      alert('case สร้างข้อสอบ');
+
+
+    }else if($('#createQuestModalTitle').text() == 'แก้ไขข้อสอบ'){
+      alert('case แก้ไขข้อสอบ');
+      editQuestion();
+    }else{alert('WTF!!!!')}
+  })
+
+  function editQuestion(){ // FOR EDIT FROM webapp/WEB-INF/page/exam/editQuestion.jso
+
+  }
 
 </script>
