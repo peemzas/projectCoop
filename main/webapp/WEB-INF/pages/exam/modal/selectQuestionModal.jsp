@@ -19,6 +19,9 @@
 
 
                     <%@include file="../template/searchQuesionTemplate.jsp" %>
+
+
+
                     <%--<div class="row form-group">--%>
                     <%--<div class="col-md-4" align="right">--%>
                     <%--<h4><label class="label label-success"--%>
