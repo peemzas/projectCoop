@@ -10,15 +10,15 @@
     <h3>ค้นหาข้อสอบ</h3>
     <hr>
 </div>
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h4>Search</h4></div>
-            <div class="panel-body">
-                <div class="row">
-                    <%@include file="selectCategoryInput.jsp" %>
-                </div>
-                <br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4>Search</h4></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <%@include file="selectCategoryInput.jsp" %>
+                    </div>
+                    <br>
 
                 <div class="row">
                     <%@include file="selectCeateByInput.jsp" %>

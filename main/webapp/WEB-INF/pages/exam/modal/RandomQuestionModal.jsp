@@ -7,69 +7,62 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <!-- Modal SelectQuestion-->
-
-<style>
-    tr, th {
-        text-align: center;
-        align-content: center;
-    }
-    th {
-        border:1px solid white;
-    }
-</style>
-
-
 <div class="modal fade" id="randomQuestionModal">
     <div class="modal-dialog modal-lg" style="width: 80%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
                         aria-hidden="true">&times;</span></button>
-                <h2>ตั้งค่าการสุ่ม</h2>
+                <h3 class="modal-title" align="center">สุ่มข้อสอบ</h3>
+
 
                 <div class="modal-body">
 
+                    <h3>ตั้งค่าการสุ่ม</h3>
+                    <hr>
 
                     <%--<%@include file="../template/selectCategoryInput.jsp" %>--%>
                     <%--<br>--%>
+                    <%--<div class="row">--%>
+                        <%--<div class="col-md-12"  align="right">--%>
+                            <%--<%@include file="../template/selectCategoryInput.jsp" %>--%>
+
+                        <%--</div>--%>
+
+                    <%--</div>--%>
+                    <%--<br>--%>
                     <div class="row">
-                        <div class="col-md-2" align="right">
-                            <h5>หมวดหมู่ : </h5>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control"/>
-                        </div>
-                        <div class="col-md-2 col-md-offset-1" align="right">
-                            <h5>ชื่อหัวข้อเรื่อง : </h5>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control"/>
-                        </div>
-                    </div>
-                    <br>
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h4>Search</h4></div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <%@include file="../template/selectCategoryInput.jsp" %>
+                                    </div>
+
+                                    <br>
 
                     <div class="row">
-                        <div class="col-md-3" align="right"><h5>จำนวนข้อต่อระดับความยาก : </h5></div>
+                        <div class="col-md-2" align="right"><h5>จำนวนข้อต่อระดับความยาก : </h5></div>
                         <div class="col-md-1">
                             <h5 align="right">ยาก</h5>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2 "style="width: 10%" >
                             <input class="form-control" type="number" id="numberOfHard">
                         </div>
 
-                        <div class="col-md-1 col-md-offset-1" align="right">
+                        <div class="col-md-1 " align="right">
                             <h5>ปานกลาง</h5>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2"style="width: 10%">
                             <input class="form-control" type="number" id="numberOfNormal">
                         </div>
 
-                        <div class="col-md-1 col-md-offset-1" align="right">
+                        <div class="col-md-1 " align="right">
                             <h5>ง่าย</h5>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2"style="width: 10%">
                             <input class="form-control" type="number" id="numberOfEasy">
                         </div>
                     </div>
@@ -78,27 +71,42 @@
 
                     <div class="row">
                         <div class="col-md-2" align="right">
-                            <h5>คะแนนรวม</h5>
+                            <h5>คะแนนรวม : </h5>
                         </div>
                         <div class="col-md-2">
                             <input class="form-control" type="number" id="randomSummaryScore">
                         </div>
+                        <div class="col-md-4 col-md-offset-3" align="right">
+                            <button id="search" class="btn btn-gray">Search</button>
+                            <button id="clear" class="btn btn-gray">Clear</button>
+                        </div>
                     </div>
+
+                                    </div>
+                                </div></div></div>
 
 
                     <%--<br>--%>
 
-                    <div class="row ">
-                        <div class="col-md-1 col-md-offset-11">
-                            <button class="btn btn-gray" id="randomStartBtn">สุ่มผลลัพธ์</button>
-                        </div>
+
 
                     </div>
 
-                    <br>
+
                     <hr>
 
-                    <h2 align="center">ผลลัพธ์การสุ่ม</h2>
+
+                <div class="row ">
+                    <div class="col-md-3 col-md-offset-4">
+                        <h2 align="center">ผลลัพธ์การสุ่ม</h2>
+
+                    </div>
+                    <div class="col-md-2 col-md-offset-3">
+
+                        <button class="btn btn-gray" id="randomStartBtn">สุ่มผลลัพธ์</button>
+                    </div>
+                    </div>
+
 
                     <table class="table">
                         <thead style="background-color:lightgreen;">
@@ -173,5 +181,14 @@
 </div>
 <!-- /.modal -->
 <!-- End Modal Select Question -->
+<style>
+    tr, th {
+        text-align: center;
+        align-content: center;
+    }
+    th {
+        border:1px solid white;
+    }
+</style>
 
 

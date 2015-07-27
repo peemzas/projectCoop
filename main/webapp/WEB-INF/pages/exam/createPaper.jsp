@@ -345,6 +345,8 @@
 
 
 <%--<!--End Create Question Modal-->--%>
+
+<%@include file="modal/createQuestionModal.jsp"%>
 <%@include file="modal/selectQuestionModal.jsp"%>
 <%@include file="modal/RandomQuestionModal.jsp"%>
 
