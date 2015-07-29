@@ -14,12 +14,12 @@
             <div class="modal-header">
                 <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
                         aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" align="center">สุ่มข้อสอบ</h3>
+                <%--<h3 class="modal-title" align="center">สุ่มข้อสอบ</h3>--%>
 
 
                 <div class="modal-body">
 
-                    <h3>ตั้งค่าการสุ่ม</h3>
+                    <h3>สุ่มข้อสอบ</h3>
                     <hr>
 
                     <%--<%@include file="../template/selectCategoryInput.jsp" %>--%>
@@ -98,7 +98,7 @@
 
                 <div class="row ">
                     <div class="col-md-3 col-md-offset-4">
-                        <h2 align="center">ผลลัพธ์การสุ่ม</h2>
+                        <h3 align="center">ผลลัพธ์การสุ่ม</h3>
 
                     </div>
                     <div class="col-md-2 col-md-offset-3">
@@ -154,6 +154,21 @@
                         </div>
 
                     </div>
+
+                <div class = "row">
+                    <div class = "col-md-12" align = "center">
+                        <ul class = "pagination">
+                            <li class = "disabled"><a href = "#">&laquo;</a></li>
+                            <li class = "active"><a href = "#">1</a></li>
+                            <li><a>2</a></li>
+                            <li><a>3</a></li>
+                            <li><a>4</a></li>
+                            <li><a>5</a></li>
+                            <li class = "disabled"><a href = "#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+
                     <br>
 
                     <div class="row">

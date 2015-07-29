@@ -94,7 +94,7 @@
 
 <div class="row">
   <div class="col-md-2 col-md-offset-5">
-    <h4 align="center">ข้อสอบ</h4>
+    <h3 align="center">ข้อสอบ</h3>
   </div>
   <div class="col-md-5" align="right" style="padding: 0px">
     <button  data-toggle="modal" data-target="#createQuest" class="btn btn-gray">เพิ่มคำถามใหม่</button>
@@ -159,6 +159,20 @@
   <div class="col-md-1">
     <input class="form-control" readonly="true" name="score" id="score" value="5"
            style="text-align: center">
+  </div>
+</div>
+
+<div class = "row">
+  <div class = "col-md-12" align = "center">
+    <ul class = "pagination">
+      <li class = "disabled"><a href = "#">&laquo;</a></li>
+      <li class = "active"><a href = "#">1</a></li>
+      <li><a>2</a></li>
+      <li><a>3</a></li>
+      <li><a>4</a></li>
+      <li><a>5</a></li>
+      <li class = "disabled"><a href = "#">&raquo;</a></li>
+    </ul>
   </div>
 </div>
 
