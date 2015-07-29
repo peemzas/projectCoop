@@ -17,7 +17,7 @@
                 <div class=" col-md-6 col-md-offset-3" align="center">
                     <div class="row">
                         <button data-toggle="modal" data-target="#createCat" class="btn btn-default" align="center"
-                                style="background-color:lightgreen ;color: black ;width:125px;height:35px">หมวดหมู่
+                                style="background-color:lightgreen ;color: black ;width:125px;height:35px">วิชา
                         </button>
                     </div>
                     <br>
@@ -86,7 +86,7 @@
 
                     <div class="row">
                         <a href="/TDCS/editCategories" class="btn btn-default"
-                           style="background-color:lightblue ;color: black ;width:125px;height:35px">หมวดหมู่
+                           style="background-color:lightblue ;color: black ;width:125px;height:35px">วิชา
                         </a>
                     </div>
                     <br>
@@ -125,13 +125,13 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" align="center">สร้างหมวดหมู่</h3>
+                <h3 class="modal-title" align="center">เพิ่มวิชา</h3>
             </div>
             <div class="modal-body" style="height: 80px">
                 <div class="row">
                     <div class="col-md-3">
                         <h4><label class="label label-success"
-                                   style="background-color: lightgreen ; color: black ; font-weight: 100">ชื่อหมวดหมู่
+                                   style="background-color: lightgreen ; color: black ; font-weight: 100">วิชา
                             :</label></h4>
                     </div>
                     <div class="col-md-6">
@@ -153,13 +153,13 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" align="center">สร้างหัวข้อเรื่อง</h3>
+                <h3 class="modal-title" align="center">เพิ่มวิชา</h3>
             </div>
             <div class="modal-body">
                 <div class="row form-group">
                     <div class="col-md-4">
                         <h4><label class="label label-success"
-                                   style="background-color: lightgreen ; color: black ; font-weight: 100">เลือก หมวดหมู่
+                                   style="background-color: lightgreen ; color: black ; font-weight: 100">เลือก วิชา
                             :</label></h4>
                     </div>
                     <div class="input-group col-md-5">
@@ -170,7 +170,7 @@
                 <div class="row form-group">
                     <div class="col-md-4">
                         <h4><label class="label label-success"
-                                   style="background-color: lightgreen ; color: black ; font-weight: 100">ชื่อหัวข้อเรื่อง
+                                   style="background-color: lightgreen ; color: black ; font-weight: 100">หัวข้อเรื่อง
                             :</label></h4>
                     </div>
                     <div class="col-md-6" style="padding-left: 0px">

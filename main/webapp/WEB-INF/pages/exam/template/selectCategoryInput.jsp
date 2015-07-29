@@ -10,13 +10,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="col-md-2" align="right">
-    <h5>หมวดหมู่ : </h5>
+    <h5>วิชา : </h5>
 </div>
 <div class="col-md-3">
     <input type="text" class="form-control"/>
 </div>
 <div class="col-md-2 col-md-offset-1" align="right">
-    <h5>ชื่อหัวข้อเรื่อง : </h5>
+    <h5>หัวข้อเรื่อง : </h5>
 </div>
 <div class="col-md-3">
     <input type="text" class="form-control"/>
