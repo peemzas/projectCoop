@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@include file="../modal/addEmployeeToInputModal.jsp" %>
 <div class = "container">
   <div class = "row">
     <div class = "panel-collapse" id = "searchCollapse">
@@ -34,11 +34,11 @@
             <div class = "col-md-2 text-right">
               <label>ผู้สร้าง</label>
             </div>
-            <div class = "col-md-3">
+            <div class = "col-md-6">
               <div class = "input-group">
                 <input class = "form-control" type = "text"/>
                 <div class = "input-group-btn">
-                  <button class = "btn btn-primary" type = "button">+</button>
+                  <button class = "btn btn-primary" type = "button" data-toggle = "modal" data-target = "#modalSearchByEmployeeName">+</button>
                 </div>
               </div>
             </div>

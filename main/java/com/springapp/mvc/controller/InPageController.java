@@ -234,6 +234,10 @@ public class InPageController {
     public String editButtonOnPageEditPapers(HttpServletRequest request){
         return "editButtonOnPageEditPapers";
     }
+    @RequestMapping(method = RequestMethod.GET, value = "/doExam")
+    public String doExam(HttpServletRequest request){
+        return "doExam";
+    }
     // Create by Neng
 
     @RequestMapping(method = RequestMethod.GET, value = "viewevaluate")
