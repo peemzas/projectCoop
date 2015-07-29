@@ -113,7 +113,7 @@
     </definition>
 
 
-    <!--CREATEBY NICK-->
+    <!--CREATE BY NICK-->
     <definition name="examRecordSearch" extends="tempForUser">
         <put-attribute name="title" value="ค้นหาบันทึกการทำข้อสอบ"/>
         <put-attribute name="body" value="/WEB-INF/pages/exam/examRecordSearch.jsp"/>
@@ -140,6 +140,11 @@
     <definition name = "editButtonOnPageEditPapers" extends = "tempForUser">
         <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
         <put-attribute name="body" value = "/WEB-INF/pages/exam/editButtonOnPageEditPapers.jsp" />
+    </definition>
+
+    <definition name="paperExamRecord" extends="tempForUser">
+        <put-attribute name="title" value="ผลการทำข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/paperExamRecord.jsp"/>
     </definition>
 
 </tiles-definitions>

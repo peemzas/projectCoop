@@ -62,7 +62,8 @@
                       </button>
                       <ul class="dropdown-menu">
                         <li><a href="/TDCS/paperPreview">ดู</a></li>
-                        <li><a href="/TDCS/editButtonOnPageEditPapers">แก้ไข</a></li>
+                          <li><a href="#">ตรวจ</a> </li>
+                          <li><a href="/TDCS/editButtonOnPageEditPapers">แก้ไข</a></li>
                         <li><a href="#">ลบ</a></li>
                       </ul>
                     </div>
@@ -84,6 +85,7 @@
                         </button>
                         <ul class="dropdown-menu">
                           <li><a href="#">ดู</a></li>
+                            <li><a href="#">ตรวจ</a> </li>
                           <li><a href="/TDCS/editButtonOnPageEditPapers">แก้ไข</a></li>
                           <li><a href="#">ลบ</a></li>
                         </ul>
@@ -122,7 +124,4 @@
         border: 1px solid white;
     }
 
-    .btn-warning {
-        /*background-color:pink;*/
-    }
 </style>

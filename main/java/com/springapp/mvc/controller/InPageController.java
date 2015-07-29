@@ -245,10 +245,14 @@ public class InPageController {
 
     //CREATE BY NICK
     @RequestMapping(method = RequestMethod.GET, value = "/examRecordSearch")
-    public String examRecirdSearch(HttpServletRequest request){ return "examRecordSearch";}
+    public String examRecordSearch(HttpServletRequest request){ return "examRecordSearch";}
 
     //CREATE BY NICK
     @RequestMapping(method = RequestMethod.GET,value = "/paperPreview")
     public String paperPreview(HttpServletRequest request) {return "paperPreview";}
+
+    //CREATE BY NICK
+    @RequestMapping(method = RequestMethod.GET,value = "/paperExamRecord")
+    public String paperExamRecord(HttpServletRequest request) {return "paperExamRecord";}
 
 }
