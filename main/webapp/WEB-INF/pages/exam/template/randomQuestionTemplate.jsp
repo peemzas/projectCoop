@@ -7,27 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../modal/addEmployeeToInputModal.jsp" %>
+
 <div class = "container">
   <div class = "row">
     <div class = "panel-collapse" id = "searchCollapse">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h4>ค้นหา...</h4>
+          <h4>สุ่มข้อสอบ...</h4>
         </div>
         <div class="panel-body">
           <div class = "row">
             <div class = "col-md-2 text-right">
-              <label>วิชา</label>
+              <label>ชื่อชุดข้อสอบ</label>
             </div>
-            <div class = "col-md-3">
+            <div class = "col-md-6">
               <input class = "form-control" type = "text"/>
             </div>
-            <div class = "col-md-2 text-right">
-              <label>เรื่อง</label>
-            </div>
-            <div class = "col-md-3">
-              <input class = "form-control" type = "text"/>
-            </div>
+            <%--<div class = "col-md-2 text-right">--%>
+              <%--<label>หมวดหมู่หลัก</label>--%>
+            <%--</div>--%>
+            <%--<div class = "col-md-3">--%>
+              <%--<input class = "form-control" type = "text"/>--%>
+            <%--</div>--%>
           </div>
           <br/>
           <div class = "row">
@@ -65,22 +66,22 @@
             <div class  = "row">
               <br/><br/>
               <div class = "col-md-2 text-right">
-                <label>หมายเลขข้อสอบ</label>
+                <label>หมายเลขชุดข้อสอบ</label>
               </div>
               <div class = "col-md-3">
                 <input class = "form-control" type = "text"/>
               </div>
             </div>
             <br/>
-            <div class="row">
-              <div class="col-md-2 text-right">
-                <label>คำถาม</label>
-              </div>
-              <div class="col-md-8">
-                <input type="text" class="form-control"/>
-              </div>
-            </div>
-            <br/>
+            <%--<div class="row">--%>
+              <%--<div class="col-md-2 text-right">--%>
+                <%--<label>คำถาม</label>--%>
+              <%--</div>--%>
+              <%--<div class="col-md-8">--%>
+                <%--<input type="text" class="form-control"/>--%>
+              <%--</div>--%>
+            <%--</div>--%>
+            <%--<br/>--%>
             <div class="row">
               <div class="col-md-2 text-right">
                 <h5>วันที่สร้าง : </h5>
