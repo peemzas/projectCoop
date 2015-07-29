@@ -24,15 +24,10 @@
                         <button id="search" class="btn btn-gray">Search</button>
                         <button id="clear" class="btn btn-gray">Clear</button>
                     </div>
-
                 </div>
-
-
             </div>
-
         </div>
     </div>
-</div>
 </div>
 
 <div class="row">
