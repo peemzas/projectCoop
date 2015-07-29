@@ -58,43 +58,66 @@
                     <li id="evaluation"><a href="/TDCS/evaluation.html">เพิ่มแบบประเมิน</a></li>
                 </c:if>
                 <c:if test="${status == 'user' || status == 'staff'}">
-                    <li id="evaluation" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            การประเมิน
-                            <c:if test="${viewEva != 0 && status == 'user'}">
+                <li id="evaluation" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        การประเมิน
+                        <c:if test="${viewEva != 0 && status == 'user'}">
                                     <span class="badge">
                                             ${viewEva}
                                     </span>
-                            </c:if>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="/TDCS/evaluation.html">
-                                    <c:if test="${status == 'staff'}">ประเมินนักศึกษา</c:if>
-                                    <c:if test="${status == 'user'}">ประเมินผล</c:if>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/TDCS/viewevaluate.html">
-                                    ดูผลการประเมิน
-                                    <c:if test="${viewEva != 0 && status == 'user'}">
+                        </c:if>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="/TDCS/evaluation.html">
+                                <c:if test="${status == 'staff'}">ประเมินนักศึกษา</c:if>
+                                <c:if test="${status == 'user'}">ประเมินผล</c:if>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/TDCS/viewevaluate.html">
+                                ดูผลการประเมิน
+                                <c:if test="${viewEva != 0 && status == 'user'}">
                                     <span class="badge">
                                             ${viewEva}
                                     </span>
-                                    </c:if>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
+                                </c:if>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                    <%--Exam Student main page BY JOKIZZ--%>
+
+                <li>
+
+
+                    <c:if test="${status == 'staff'}">
                         <a href="/TDCS/exam">ข้อสอบ</a>
-                    </li>
-                </c:if>
-                <%--<c:if test="${status == 'staff'}">--%>
-                <%--<li id="evaluation">--%>
-                <%--<a href="/TDCS/evaluation.html">ประเมินนักศึกษา</a>--%>
-                <%--</li>--%>
-                <%--</c:if>--%>
+                    </c:if>
+                    <c:if test="${status == 'user'}">
+                        <a href="/TDCS/examStudent">ข้อสอบ</a>
+                    </c:if>
+
+                </li>
+                <li>
+                    <c:if test="${status == 'user'}">
+                        <a href="/TDCS/checkScore">ตรวจคะแนน</a>
+                    </c:if>
+
+                </li>
+
+            </ul>
+
+
+                <%--end exam student--%>
+
+            </c:if>
+            <%--<c:if test="${status == 'staff'}">--%>
+            <%--<li id="evaluation">--%>
+            <%--<a href="/TDCS/evaluation.html">ประเมินนักศึกษา</a>--%>
+            <%--</li>--%>
+            <%--</c:if>--%>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
