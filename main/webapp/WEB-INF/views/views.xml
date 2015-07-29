@@ -73,6 +73,17 @@
         <put-attribute name="body" value="/WEB-INF/pages/exam/examMainPage.jsp" />
     </definition>
 
+    <!--CREATE BY JOKIZZ-->
+    <definition name="examStudent" extends="tempForUser">
+        <put-attribute name="title" value="ทำข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/examStudentMainPage.jsp" />
+    </definition>
+
+    <definition name="checkScore" extends="tempForUser">
+        <put-attribute name="title" value="ตรวจคะแนน" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/checkScorePage.jsp" />
+    </definition>
+
     <definition name="createPaper" extends="tempForUser">
         <put-attribute name="title" value="สร้างชุดข้อสอบ" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/createPaper.jsp" />
@@ -83,6 +94,8 @@
         <put-attribute name="body" value="/WEB-INF/pages/exam/searchPaper.jsp" />
 
     </definition>
+
+
 
     <!--CREATE BY PEEM-->
 

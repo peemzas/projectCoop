@@ -206,6 +206,18 @@ public class InPageController {
         return "exam";
     }
 
+    //CREATE BY JOKIZZ
+    @RequestMapping(method = RequestMethod.GET, value = "/examStudent")
+    public String examStudent(HttpServletRequest request){
+        return "examStudent";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/checkScore")
+    public String checkScore(HttpServletRequest request){
+        return "checkScore";
+    }
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/createPaper")
     public String createPaper(HttpServletRequest request) {
         return "createPaper";
