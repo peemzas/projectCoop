@@ -10,7 +10,7 @@
 
 
 <div class="container">
-    <%@include file="template/searchPaperTemplate.jsp" %>
+    <%@include file="template/searchPaperTemplateNew.jsp" %>
     <br/>
     <br/>
 

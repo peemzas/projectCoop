@@ -141,6 +141,10 @@
         <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
         <put-attribute name="body" value = "/WEB-INF/pages/exam/editButtonOnPageEditPapers.jsp" />
     </definition>
+    <definition name = "doExam" extends = "tempForUser">
+        <put-attribute name="title" value = "ทำข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/doExam.jsp" />
+    </definition>
 
     <definition name="paperExamRecord" extends="tempForUser">
         <put-attribute name="title" value="ผลการทำข้อสอบ"/>

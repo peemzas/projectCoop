@@ -13,7 +13,7 @@
 </div>
 <hr/>
 <div class = "container">
-  <%@include file="template/searchQuesionTemplate.jsp"%>
+  <%@include file="template/searchQuestionTemplateNew.jsp"%>
   <br/>
   <br/>
 
