@@ -13,7 +13,7 @@
       <div class="modal-body" id="modalBody">
         <div class="row form-group">
           <div class="col-md-4" align="right">
-            <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">หมวดหมู่ :</label></h4>
+            <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">วิชา :</label></h4>
           </div>
           <div class="input-group col-md-5">
             <input type="text" class="form-control" name="cat"/>
@@ -23,7 +23,7 @@
 
         <div class="row form-group">
           <div class="col-md-4" align="right">
-            <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ชื่อหัวข้อเรื่อง :</label></h4>
+            <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">หัวข้อเรื่อง :</label></h4>
           </div>
           <div class="input-group col-md-5">
             <input type="text" class="form-control" name="subcat" id="subcat"/>

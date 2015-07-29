@@ -36,7 +36,7 @@
                 <td align="center">50</td>
                 <td align="center">25</td>
                 <td style="text-align: center; width: 7%">
-                    <button class="btn btn-default" data-toggle="modal" data-target="#selectQuest" id="">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#showScore" id="">
                         <a class="glyphicon glyphicon-search" href="#"></a>
                     </button>
                 </td>
@@ -102,54 +102,4 @@
     </div>
 </div>
 
-
-<div class="modal fade" id="selectQuest">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                            <h3 style="text-align: center">Youre score is 46/50</h3>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-3 col-md-offset-2">
-                            <label><h4>Objective</h4></label>
-                        </div>
-
-                        <div class="col-md-3 col-md-offset-3">
-                            <label><h4>20/22</h4></label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-md-offset-2">
-                            <label><h4>Subjective</h4></label>
-                        </div>
-
-                        <div class="col-md-3 col-md-offset-3">
-                            <label><h4>26/28</h4></label>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-2">
-                        <h5>Comment :</h5>
-                        <textarea></textarea>
-                    </div>
-                </div>>
-            </div>
-        </div>
-
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- End Modal Select Question -->
+<%@include file="modal/showScoreModal.jsp"%>

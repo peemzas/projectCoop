@@ -11,10 +11,13 @@
                     <%--<h3 class="modal-title" align="center">เลือกคำถาม</h3>--%>
 
                     <div class="container row">
-                        <h3>ค้นหาข้อสอบ</h3>
+                        <h3>เลือกข้อสอบ</h3>
                         <hr>
                     </div>
-                    <%@include file="../template/searchQuestionTemplateNew.jsp" %>
+
+                    <%@include file="../template/searchQuestionTemplateNew.jsp"%>
+
+>>>>>>> edit color and SearchTemplate
 
 
 
@@ -50,7 +53,7 @@
                             <th>ประเภท</th>
                             <th>ความยาก</th>
                             <th>คะแนน</th>
-                            <th>หมวดหมู่หลัก</th>
+                            <th>วิชา</th>
                             <th>หัวข้อเรื่อง</th>
                             <th>สร้างโดย</th>
                             <th>วันที่สร้าง</th>

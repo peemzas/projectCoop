@@ -12,12 +12,13 @@
     <div class="modal-dialog modal-lg" style="width: 80%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
-                        aria-hidden="true">&times;</span></button>
+
                 <%--<h3 class="modal-title" align="center">สุ่มข้อสอบ</h3>--%>
 
 
                 <div class="modal-body">
+                    <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span></button>
 
                     <h3>สุ่มข้อสอบ</h3>
                     <hr>
@@ -35,7 +36,7 @@
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><h4>Search</h4></div>
+                                <div class="panel-heading" ><h4>ค้นหา...</h4></div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <%@include file="../template/selectCategoryInput.jsp" %>
@@ -76,9 +77,11 @@
                         <div class="col-md-2">
                             <input class="form-control" type="number" id="randomSummaryScore">
                         </div>
-                        <div class="col-md-4 col-md-offset-3" align="right">
-                            <button id="search" class="btn btn-gray">Search</button>
-                            <button id="clear" class="btn btn-gray">Clear</button>
+                        <div class = "row" id = "btnSearch">
+                            <div class = "col-md-12 text-center">
+                                <button class = "btn btn-default" type = "button">ค้นหา</button>
+                                <button class = "btn btn-default" type = "button">ล้างข้อมูล</button>
+                            </div>
                         </div>
                     </div>
 
@@ -204,6 +207,12 @@
     th {
         border:1px solid white;
     }
+
+    .panel-heading{
+        background-color: lightgreen !important;
+    }
+
+
 </style>
 
 

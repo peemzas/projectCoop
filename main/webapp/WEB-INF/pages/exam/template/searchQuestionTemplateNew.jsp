@@ -10,38 +10,20 @@
 <div class = "container">
   <div class = "row">
     <div class = "panel-collapse" id = "searchCollapse">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <h4>ค้นหา...</h4>
         </div>
         <div class="panel-body">
           <div class = "row">
-            <div class = "col-md-2 text-right">
-              <label>วิชา</label>
-            </div>
-            <div class = "col-md-3">
-              <input class = "form-control" type = "text"/>
-            </div>
-            <div class = "col-md-2 text-right">
-              <label>เรื่อง</label>
-            </div>
-            <div class = "col-md-3">
-              <input class = "form-control" type = "text"/>
-            </div>
+
+            <%@include file="selectCategoryInput.jsp" %>
+>>>>>>> edit color and SearchTemplate
           </div>
           <br/>
+
           <div class = "row">
-            <div class = "col-md-2 text-right">
-              <label>ผู้สร้าง</label>
-            </div>
-            <div class = "col-md-6">
-              <div class = "input-group">
-                <input class = "form-control" type = "text"/>
-                <div class = "input-group-btn">
-                  <button class = "btn btn-primary" type = "button" data-toggle = "modal" data-target = "#modalSearchByEmployeeName">+</button>
-                </div>
-              </div>
-            </div>
+            <%@include file="selectCeateByInput.jsp" %>
           </div>
           <hr/>
           <%--<div class="row">--%>

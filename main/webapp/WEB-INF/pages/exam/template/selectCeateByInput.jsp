@@ -9,12 +9,12 @@
 <div class="col-md-2" align="right">
     <h5>สร้างโดย : </h5>
 </div>
-<div class="col-md-4">
+<div class="col-md-6">
     <div class="input-group">
         <input id="empId" type="text" class="form-control" disabled="disabled"/>
 
         <div class="input-group-btn">
-            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-default "
+            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary "
                     id="addEmpIdBtn"> +
             </button>
         </div>
