@@ -15,9 +15,12 @@
                 <div class="modal-body">
                     <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
                             aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" align="center">เลือกคำถาม</h3>
+                    <%--<h3 class="modal-title" align="center">เลือกคำถาม</h3>--%>
 
-
+                    <div class="container row">
+                        <h3>ค้นหาข้อสอบ</h3>
+                        <hr>
+                    </div>
                     <%@include file="../template/searchQuesionTemplate.jsp" %>
 
 
@@ -80,8 +83,38 @@
                             </td>
                         </tr>
                     </table>
+                    <div class="row">
+                        <div class="col-md-offset-8 col-md-2" align="right"><h5>คะแนนรวม =</h5></div>
+                        <div class="col-md-1"><input class="form-control" align="center" disabled id="totalRandomQuestionScore" value="5/60"  >
+                        </div>
+
+                    </div>
+
+
+                    <div class = "row">
+                        <div class = "col-md-12" align = "center">
+                            <ul class = "pagination">
+                                <li class = "disabled"><a href = "#">&laquo;</a></li>
+                                <li class = "active"><a href = "#">1</a></li>
+                                <li><a>2</a></li>
+                                <li><a>3</a></li>
+                                <li><a>4</a></li>
+                                <li><a>5</a></li>
+                                <li class = "disabled"><a href = "#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <br>
-                    <a class="btn btn-default">aaa</a>
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-2">
+                            <button class="btn btn-gray" id="addToPaperBtn" style="width: 80%;">เพิ่มคำถาม</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-gray" id="clearRandomResultBtn" style="width: 80%;">แสดงข้อมูล</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
