@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JOKIZZ
-  Date: 16/7/2558
-  Time: 17:08
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Modal SelectQuestion-->
 <div class="modal fade" id="selectQuest">
@@ -21,7 +14,7 @@
                         <h3>ค้นหาข้อสอบ</h3>
                         <hr>
                     </div>
-                    <%@include file="../template/searchQuesionTemplate.jsp" %>
+                    <%@include file="../template/searchQuestionTemplateNew.jsp" %>
 
 
 
@@ -82,15 +75,48 @@
                                 </button>
                             </td>
                         </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>AAAA</td>
+                            <td>AAAAAAAAAAAAAAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+
+                            <td>
+                                <button class="btn btn-info">
+                                    <div class="glyphicon glyphicon-search"></div>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>AAAA</td>
+                            <td>AAAAAAAAAAAAAAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+                            <td>AAAA</td>
+
+                            <td>
+                                <button class="btn btn-info">
+                                    <div class="glyphicon glyphicon-search"></div>
+                                </button>
+                            </td>
+                        </tr>
                     </table>
                     <div class="row">
                         <div class="col-md-offset-8 col-md-2" align="right"><h5>คะแนนรวม =</h5></div>
                         <div class="col-md-1"><input class="form-control" align="center" disabled id="totalRandomQuestionScore" value="5/60"  >
                         </div>
-
                     </div>
-
-
                     <div class = "row">
                         <div class = "col-md-12" align = "center">
                             <ul class = "pagination">
@@ -106,14 +132,11 @@
                     </div>
 
                     <br>
-                    <div class="row">
-                        <div class="col-md-offset-4 col-md-2">
-                            <button class="btn btn-gray" id="addToPaperBtn" style="width: 80%;">เพิ่มคำถาม</button>
+                    <div class = "row" >
+                        <div class = "col-md-12 text-center">
+                            <button class = "btn btn-default" type = "button">เพิ่มคำถาม</button>
+                            <button class = "btn btn-default" type = "button">แสดงข้อมูล</button>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-gray" id="clearRandomResultBtn" style="width: 80%;">แสดงข้อมูล</button>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -125,5 +148,3 @@
 </div>
 <!-- /.modal -->
 <!-- End Modal Select Question -->
-
-

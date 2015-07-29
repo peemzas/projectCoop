@@ -25,7 +25,7 @@
 </script>
 
 <div class="container row">
-    <h3>แก้ไขหมวดหมู่</h3>
+    <h3>แก้ไขวิชา</h3>
     <hr>
 </div>
 <div class="row">
@@ -35,7 +35,7 @@
     <div class="col-md-4" align="left" style="margin-top: 20px;">
         <select class="form-control" id="viewControlSelector">
             <option id = "selectSubCategory" value="SubCategory" selected>ทั้งหมด</option>
-            <option id = "selectCategory" value="Category">เฉพาะหมวดหมู่</option>
+            <option id = "selectCategory" value="Category">เฉพาะวิชา</option>
         </select>
     </div>
 </div>
@@ -49,13 +49,13 @@
             <col width="20%"/>
             <thead style="background-color: slategray">
                 <tr>
-                    <th style="text-align: center; color: white;">ชื่อหมวดหมู่หลัก</th>
+                    <th style="text-align: center; color: white;">วิชา</th>
                     <th style="text-align: center; color: white">แก้ไข</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>ทดสอบหมวดหมู่หลัก</td>
+                    <td>JAVA</td>
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
@@ -64,7 +64,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>ทดสอบหมวดหมู่หลัก</td>
+                    <td>English</td>
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
@@ -81,15 +81,15 @@
             <col width="20%"/>
             <thead style="background-color: slategray">
                 <tr>
-                    <th style="text-align: center; color: white;">ชื่อหมวดหมู่หลัก</th>
-                    <th style="text-align: center; color: white;">ชื่อหมวดหมู่ย่อย</th>
+                    <th style="text-align: center; color: white;">วิชา</th>
+                    <th style="text-align: center; color: white;">หัวข้อเริ่อง</th>
                     <th style="text-align: center; color: white">แก้ไข</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>JAVA</td>
-                    <td>ทดสอบหมวดหมู่ย่อย1</td>
+                    <td>OOP</td>
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
@@ -99,7 +99,7 @@
                 </tr>
                 <tr>
                     <td>JAVA</td>
-                    <td>ทดสอบหมวดหมู่ย่อย2</td>
+                    <td>OOP</td>
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
