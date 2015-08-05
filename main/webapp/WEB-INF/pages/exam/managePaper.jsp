@@ -43,7 +43,7 @@
                     <td>50</td>
                     <td>EmployeeA</td>
                     <td>เปิด</td>
-                    <%--<td><a href="/TDCS/editButtonOnPageEditPapers">--%>
+                    <%--<td><a href="/TDCS/editButtonOnPageManagePapers">--%>
                         <%--<button class="btn btn-warning" type="button" data-toggle="modal"--%>
                                 <%--data-target="#editQuestionModal"><span class="glyphicon glyphicon-pencil"></span>--%>
                         <%--</button>--%>
@@ -56,7 +56,7 @@
                     <%--<select class="form-control">--%>
                       <%--<option selected></option>--%>
                       <%--<option value="view">ดู</option>--%>
-                      <%--<option value="edit"><a href="/TDCS/editButtonOnPageEditPapers">แก้ไข</a></option>--%>
+                      <%--<option value="edit"><a href="/TDCS/editButtonOnPageManagePapers">แก้ไข</a></option>--%>
                       <%--<option value="delete">ลบ</option>--%>
                     <%--</select>--%>
                     <div class="btn-group">
@@ -64,9 +64,9 @@
                         เลือก<span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu">
-                        <li><a href="/TDCS/paperPreview">ดู</a></li>
+                        <li><a href="/TDCS/exam/paperPreview">ดู</a></li>
                           <li><a href="#">ตรวจ</a> </li>
-                          <li><a href="/TDCS/editButtonOnPageEditPapers">แก้ไข</a></li>
+                          <li><a href="/TDCS/exam/editButtonOnPageManagePapers">แก้ไข</a></li>
                         <li><a href="#">ลบ</a></li>
                       </ul>
                     </div>
@@ -89,7 +89,7 @@
                         <ul class="dropdown-menu">
                           <li><a href="#">ดู</a></li>
                             <li><a href="#">ตรวจ</a> </li>
-                          <li><a href="/TDCS/editButtonOnPageEditPapers">แก้ไข</a></li>
+                          <li><a href="/TDCS/exam/editButtonOnPageManagePapers">แก้ไข</a></li>
                           <li><a href="#">ลบ</a></li>
                         </ul>
                       </div>

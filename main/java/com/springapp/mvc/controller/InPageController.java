@@ -203,50 +203,50 @@ public class InPageController {
     //CREATE BY PEEM
     @RequestMapping(method = RequestMethod.GET, value = "/exam")
     public String exam(HttpServletRequest request) {
-        return "exam";
+        return "mainPageEmp";
     }
 
     //CREATE BY JOKIZZ
-    @RequestMapping(method = RequestMethod.GET, value = "/examStudent")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/mainStudent")
     public String examStudent(HttpServletRequest request){
-        return "examStudent";
+        return "mainPageStudent";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/checkScore")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/checkScore")
     public String checkScore(HttpServletRequest request){
         return "checkScore";
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/createPaper")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/createPaper")
     public String createPaper(HttpServletRequest request) {
         return "createPaper";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/searchPaper")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/searchPaper")
     public String searchPaper(HttpServletRequest request) {
         return "searchPaper";
     }
     //CREATE BY PEEM
     
     // Create by Neng
-    @RequestMapping(method = RequestMethod.GET, value = "/editCategories")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
     public String editCategories(HttpServletRequest request){
-        return "editCategories";
+        return "manageCategory";
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/editQuestions")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/manageQuestion")
     public String editQuestions(HttpServletRequest request){
-        return "editQuestions";
+        return "manageQuestion";
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/editPapers")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/managePapers")
     public String editPapers(HttpServletRequest request){
-        return "editPapers";
+        return "managePapers";
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/editButtonOnPageEditPapers")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/editButtonOnPageManagePapers")
     public String editButtonOnPageEditPapers(HttpServletRequest request){
-        return "editButtonOnPageEditPapers";
+        return "editButtonOnPageManagePapers";
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/doExam")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
     public String doExam(HttpServletRequest request){
         return "doExam";
     }
@@ -260,15 +260,15 @@ public class InPageController {
     }
 
     //CREATE BY NICK
-    @RequestMapping(method = RequestMethod.GET, value = "/examRecordSearch")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/examRecordSearch")
     public String examRecordSearch(HttpServletRequest request){ return "examRecordSearch";}
 
     //CREATE BY NICK
-    @RequestMapping(method = RequestMethod.GET,value = "/paperPreview")
+    @RequestMapping(method = RequestMethod.GET,value = "/exam/paperPreview")
     public String paperPreview(HttpServletRequest request) {return "paperPreview";}
 
     //CREATE BY NICK
-    @RequestMapping(method = RequestMethod.GET,value = "/paperExamRecord")
+    @RequestMapping(method = RequestMethod.GET,value = "/exam/paperExamRecord")
     public String paperExamRecord(HttpServletRequest request) {return "paperExamRecord";}
 
 }

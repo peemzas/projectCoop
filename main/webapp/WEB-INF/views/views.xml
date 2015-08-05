@@ -68,20 +68,20 @@
         <put-attribute name="body" value="/WEB-INF/pages/viewStaffData.jsp" />
     </definition>
 
-    <definition name="exam" extends="tempForUser">
+    <definition name="mainPageEmp" extends="tempForUser">
         <put-attribute name="title" value="ข้อสอบ" />
-        <put-attribute name="body" value="/WEB-INF/pages/exam/examMainPage.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/mainPageEmp.jsp" />
     </definition>
 
     <!--CREATE BY JOKIZZ-->
     <definition name="examStudent" extends="tempForUser">
         <put-attribute name="title" value="ทำข้อสอบ" />
-        <put-attribute name="body" value="/WEB-INF/pages/exam/examStudentMainPage.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/mainPageStudent.jsp" />
     </definition>
 
     <definition name="checkScore" extends="tempForUser">
         <put-attribute name="title" value="ตรวจคะแนน" />
-        <put-attribute name="body" value="/WEB-INF/pages/exam/checkScorePage.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/checkScore.jsp" />
     </definition>
 
     <definition name="createPaper" extends="tempForUser">
@@ -138,21 +138,21 @@
     </definition>
 
     <!-- Create by Neng -->
-    <definition name = "editCategories" extends="tempForUser">
+    <definition name = "manageCategory" extends="tempForUser">
         <put-attribute name="title" value="แก้ไขหมวดหมู่" />
-        <put-attribute name="body" value="/WEB-INF/pages/exam/editCategories.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/manageCategory.jsp" />
     </definition>
-    <definition name = "editQuestions" extends = "tempForUser">
+    <definition name = "manageQuestion" extends = "tempForUser">
         <put-attribute name="title" value = "แก้ไขข้อสอบ" />
-        <put-attribute name="body" value = "/WEB-INF/pages/exam/editQuestions.jsp" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/manageQuestion.jsp" />
     </definition>
-    <definition name = "editPapers" extends = "tempForUser">
+    <definition name = "managePapers" extends = "tempForUser">
         <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
-        <put-attribute name="body" value = "/WEB-INF/pages/exam/editPapers.jsp" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/managePaper.jsp" />
     </definition>
-    <definition name = "editButtonOnPageEditPapers" extends = "tempForUser">
+    <definition name = "editButtonOnPageManagePapers" extends = "tempForUser">
         <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
-        <put-attribute name="body" value = "/WEB-INF/pages/exam/editButtonOnPageEditPapers.jsp" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/editButtonOnPageManagePapers.jsp" />
     </definition>
     <definition name = "doExam" extends = "tempForUser">
         <put-attribute name="title" value = "ทำข้อสอบ" />

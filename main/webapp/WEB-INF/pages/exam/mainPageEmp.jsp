@@ -38,7 +38,7 @@
                     <br>
 
                     <div class="row">
-                        <a href="/TDCS/createPaper" class="btn btn-default"
+                        <a href="/TDCS/exam/createPaper" class="btn btn-default"
                            style="background-color:lightgreen  ;color:black ;width:125px;height:35px">ชุดข้อสอบ</a>
                     </div>
                 </div>
@@ -85,28 +85,28 @@
 
 
                     <div class="row">
-                        <a href="/TDCS/editCategories" class="btn btn-default"
+                        <a href="/TDCS/exam/manageCategory" class="btn btn-default"
                            style="background-color:lightblue ;color: black ;width:125px;height:35px">วิชา
                         </a>
                     </div>
                     <br>
 
                     <div class="row">
-                        <a href="/TDCS/editQuestions" class="btn btn-default"
+                        <a href="/TDCS/exam/manageQuestion" class="btn btn-default"
                            style="background-color:lightblue ;color: black ;width:125px;height:35px">ข้อสอบ
                         </a>
                     </div>
                     <br>
 
                     <div class="row">
-                        <a href="/TDCS/editPapers" class="btn btn-default"
+                        <a href="/TDCS/exam/managePapers" class="btn btn-default"
                            style="background-color:lightblue ;color: black ;width:125px;height:35px">ชุดข้อสอบ
                         </a>
                     </div>
                     <br>
 
                     <div class="row">
-                        <a href="/TDCS/examRecordSearch" class="btn btn-default"
+                        <a href="/TDCS/exam/examRecordSearch" class="btn btn-default"
                            style="background-color:lightblue ;color: black ;width:125px;height:35px">ตรวจข้อสอบ
                         </a>
                     </div>
