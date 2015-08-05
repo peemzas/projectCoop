@@ -14,7 +14,7 @@ import java.util.Set;
 public class ExamAnswerRecord implements Serializable {
 
     @Id
-    @Column(name="RECORD_ID")
+    @Column(name="ANSWER_RECORD_ID")
     private Integer id;
 
     @ManyToOne

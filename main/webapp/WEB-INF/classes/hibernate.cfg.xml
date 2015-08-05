@@ -64,6 +64,6 @@
 		<mapping class="com.springapp.mvc.pojo.exam.ExamResult" />
 	  	<mapping class="com.springapp.mvc.pojo.exam.ExamMarkingRecord"/>
 		<mapping class="com.springapp.mvc.pojo.exam.Status"/>
-
+		<mapping class="com.springapp.mvc.pojo.exam.ExamRecord"/>
 	</session-factory>
 </hibernate-configuration>

@@ -19,21 +19,31 @@ public class ExamMarkingRecord {
     private Integer markingScore;
 
     @ManyToOne
-    @JoinColumn(name = "RECORD_ID")
+    @JoinColumn(name = "ANSWER_RECORD_ID")
     private  ExamAnswerRecord recordId;
 
     @ManyToOne
     @JoinColumn(name = "MARKED_BY")
     private User markedBy;
 
-    @Override
-    public String toString() {
-        return "ExamMarkingRecord{" +
-                "id=" + id +
-                ", markingScore=" + markingScore +
-                ", recordId=" + recordId +
-                ", markedBy=" + markedBy +
-                '}';
+    @ManyToOne
+    @JoinColumn(name = "RESULT_ID")
+    private ExamResult resultId;
+
+    public ExamAnswerRecord getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(ExamAnswerRecord recordId) {
+        this.recordId = recordId;
+    }
+
+    public ExamResult getResultId() {
+        return resultId;
+    }
+
+    public void setResultId(ExamResult resultId) {
+        this.resultId = resultId;
     }
 
     public Integer getId() {

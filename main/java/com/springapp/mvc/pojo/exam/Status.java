@@ -20,11 +20,8 @@ public class Status {
     @Column(name = "STATUS_DESCRIPTION")
     private String description;
 
-    @OneToMany(mappedBy = "status")
-    private Set<Category> categories;
-
-    @OneToMany(mappedBy = "status")
-    private Set<SubCategory> subCategories;
+//    @OneToMany(mappedBy = "status")
+//    private Set<SubCategory> subCategories;
 
     @OneToMany(mappedBy = "status")
     private Set<Question> questions;
@@ -56,21 +53,6 @@ public class Status {
         this.description = description;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
-
-    public Set<SubCategory> getSubCategories() {
-        return subCategories;
-    }
-
-    public void setSubCategories(Set<SubCategory> subCategories) {
-        this.subCategories = subCategories;
-    }
 
     public Set<Question> getQuestions() {
         return questions;
