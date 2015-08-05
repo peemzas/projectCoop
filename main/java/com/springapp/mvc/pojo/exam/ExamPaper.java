@@ -32,13 +32,6 @@ public class ExamPaper implements Serializable {
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
 
-
-    @OneToMany(mappedBy = "paperId")
-    private Set<ExamAnswerRecord> examAnswerRecords;
-
-    @OneToMany(mappedBy = "paperId")
-    private Set<ExamResult> examResults;
-
     @ManyToMany
     @JoinTable(joinColumns = {@JoinColumn(name = "PAPER_ID", referencedColumnName = "PAPER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", referencedColumnName = "QUESTION_ID")})
@@ -85,21 +78,6 @@ public class ExamPaper implements Serializable {
         this.createBy = createBy;
     }
 
-    public Set<ExamAnswerRecord> getExamAnswerRecords() {
-        return examAnswerRecords;
-    }
-
-    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
-        this.examAnswerRecords = examAnswerRecords;
-    }
-
-    public Set<ExamResult> getExamResults() {
-        return examResults;
-    }
-
-    public void setExamResults(Set<ExamResult> examResults) {
-        this.examResults = examResults;
-    }
 
     public Set<Question> getQuestions() {
         return questions;

@@ -20,9 +20,9 @@ public class Category implements Serializable{
     @Column(name="CATEGORY_NAME")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "CATEGORY_STATUS")
-    private Status status;
+//    @ManyToOne
+//    @JoinColumn(name = "CATEGORY_STATUS")
+//    private Status status;
 
     @ManyToOne
     @JoinColumn(name="CATEGORY_CREATE_BY")
@@ -30,15 +30,6 @@ public class Category implements Serializable{
 
     @OneToMany(mappedBy = "categoryId")
     private Set<SubCategory> subCategories;
-
-
-    public Set<SubCategory> getSubCategories() {
-        return subCategories;
-    }
-
-    public void setSubCategories(Set<SubCategory> subCategories) {
-        this.subCategories = subCategories;
-    }
 
     public Integer getId() {
         return id;
@@ -62,5 +53,13 @@ public class Category implements Serializable{
 
     public void setCreateBy(User createBy) {
         this.createBy = createBy;
+    }
+
+    public Set<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(Set<SubCategory> subCategories) {
+        this.subCategories = subCategories;
     }
 }

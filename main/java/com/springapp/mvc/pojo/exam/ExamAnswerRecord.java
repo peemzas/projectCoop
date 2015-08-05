@@ -14,16 +14,8 @@ import java.util.Set;
 public class ExamAnswerRecord implements Serializable {
 
     @Id
-    @Column(name="RECORD_ID")
+    @Column(name="ANSWER_RECORD_ID")
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name="USER_ID")
-    private User userId;
-
-    @ManyToOne
-    @JoinColumn(name="PAPER_ID")
-    private ExamPaper paperId;
 
     @ManyToOne
     @JoinColumn(name="QUESTION_ID")
@@ -39,28 +31,32 @@ public class ExamAnswerRecord implements Serializable {
     @OneToMany(mappedBy = "recordId")
     private Set<ExamMarkingRecord> examMarkingRecords;
 
+    @ManyToOne
+    @JoinColumn(name = "EXAM_RECORD_ID")
+    private ExamRecord examRecordId;
+
+    public Set<ExamMarkingRecord> getExamMarkingRecords() {
+        return examMarkingRecords;
+    }
+
+    public void setExamMarkingRecords(Set<ExamMarkingRecord> examMarkingRecords) {
+        this.examMarkingRecords = examMarkingRecords;
+    }
+
+    public ExamRecord getExamRecordId() {
+        return examRecordId;
+    }
+
+    public void setExamRecordId(ExamRecord examRecordId) {
+        this.examRecordId = examRecordId;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public ExamPaper getPaperId() {
-        return paperId;
-    }
-
-    public void setPaperId(ExamPaper paperId) {
-        this.paperId = paperId;
     }
 
     public Question getQuestionId() {
