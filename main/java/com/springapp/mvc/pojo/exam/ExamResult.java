@@ -18,14 +18,6 @@ public class ExamResult implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private User userId;
-
-    @ManyToOne
-    @JoinColumn(name = "PAPER_ID")
-    private ExamAnswerRecord paperId;
-
-    @ManyToOne
     @JoinColumn(name = "MARKED_BY",referencedColumnName = "USER_ID")
     private  User markedBy;
 
@@ -35,28 +27,24 @@ public class ExamResult implements Serializable {
     @Column(name = "RESULT_SCORE")
     private Integer resultScore;
 
+    @ManyToOne
+    @JoinColumn(name = "EXAM_RECORD_ID")
+    private ExamRecord examRecordId;
+
+    public ExamRecord getExamRecordId() {
+        return examRecordId;
+    }
+
+    public void setExamRecordId(ExamRecord examRecordId) {
+        this.examRecordId = examRecordId;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public ExamAnswerRecord getPaperId() {
-        return paperId;
-    }
-
-    public void setPaperId(ExamAnswerRecord paperId) {
-        this.paperId = paperId;
     }
 
     public User getMarkedBy() {
