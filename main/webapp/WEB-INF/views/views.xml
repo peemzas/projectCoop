@@ -74,7 +74,7 @@
     </definition>
 
     <!--CREATE BY JOKIZZ-->
-    <definition name="examStudent" extends="tempForUser">
+    <definition name="mainPageStudent" extends="tempForUser">
         <put-attribute name="title" value="ทำข้อสอบ" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/mainPageStudent.jsp" />
     </definition>

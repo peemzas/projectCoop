@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
   <div class="row">
-    <h3 class="h3">เลือกข้อสอบ</h3>
+    <h3 class="h3">เลือกชุดข้อสอบ</h3>
   </div>
 </div>
 <hr/>
@@ -34,7 +34,9 @@
         <td align="center">50</td>
         <td>60 นาที</td>
         <td style="text-align: center;">
-          <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button>
+         <a href="/TDCS/exam/doExam"> <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button></a>
+
+
         </td>
       </tr>
       <tr>

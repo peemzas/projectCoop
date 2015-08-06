@@ -93,16 +93,16 @@
 
 
                     <c:if test="${status == 'staff'}">
-                        <a href="/TDCS/exam">ข้อสอบ</a>
+                        <a href="/TDCS/exam/mainPageEmp">ข้อสอบ</a>
                     </c:if>
                     <c:if test="${status == 'user'}">
-                        <a href="/TDCS/examStudent">ข้อสอบ</a>
+                        <a href="/TDCS/exam/mainPageStudent">ข้อสอบ</a>
                     </c:if>
 
                 </li>
                 <li>
                     <c:if test="${status == 'user'}">
-                        <a href="/TDCS/checkScore">ตรวจคะแนน</a>
+                        <a href="/TDCS/exam/checkScore">ตรวจคะแนน</a>
                     </c:if>
 
                 </li>
