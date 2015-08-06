@@ -44,7 +44,7 @@
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <table class="table table-bordered" id = "tblCategory">
+        <table class="table table-bordered"  id = "tblCategory">
             <col width="80%"/>
             <col width="20%"/>
             <thead style="background-color: slategray">

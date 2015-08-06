@@ -201,13 +201,13 @@ public class InPageController {
     }
 
     //CREATE BY PEEM
-    @RequestMapping(method = RequestMethod.GET, value = "/exam")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/mainPageEmp")
     public String exam(HttpServletRequest request) {
         return "mainPageEmp";
     }
 
     //CREATE BY JOKIZZ
-    @RequestMapping(method = RequestMethod.GET, value = "/exam/mainStudent")
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/mainPageStudent")
     public String examStudent(HttpServletRequest request){
         return "mainPageStudent";
     }
