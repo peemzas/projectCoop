@@ -271,4 +271,8 @@ public class InPageController {
     @RequestMapping(method = RequestMethod.GET,value = "/exam/paperExamRecord")
     public String paperExamRecord(HttpServletRequest request) {return "paperExamRecord";}
 
+    //CREATE BY NICK
+    @RequestMapping(method = RequestMethod.GET,value = "/exam/marking")
+    public String marking(HttpServletRequest request){return "marking";}
+
 }

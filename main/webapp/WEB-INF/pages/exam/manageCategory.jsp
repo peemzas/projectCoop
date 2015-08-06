@@ -34,8 +34,8 @@
     </div>
     <div class="col-md-4" align="left" style="margin-top: 20px;">
         <select class="form-control" id="viewControlSelector">
-            <option id = "selectSubCategory" value="SubCategory" selected>ทั้งหมด</option>
-            <option id = "selectCategory" value="Category">เฉพาะวิชา</option>
+            <option id = "selectCategory" value="Category" selected>วิชา</option>
+            <option id = "selectSubCategory" value="SubCategory" >หัวข้อเรื่อง</option>
         </select>
     </div>
 </div>
@@ -50,13 +50,15 @@
             <thead class="bg-primary">
                 <tr>
                     <th style="text-align: center; color: white;">วิชา</th>
-                    <th style="text-align: center; color: white">แก้ไข</th>
+                    <th style="text-align: center; color: white">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>JAVA</td>
                     <td style="text-align: center;">
+                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>
+                        </button>
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
@@ -66,6 +68,8 @@
                 <tr>
                     <td>English</td>
                     <td style="text-align: center;">
+                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>
+                        </button>
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
@@ -83,7 +87,7 @@
                 <tr>
                     <th style="text-align: center; color: white;">วิชา</th>
                     <th style="text-align: center; color: white;">หัวข้อเริ่อง</th>
-                    <th style="text-align: center; color: white">แก้ไข</th>
+                    <th style="text-align: center; color: white">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -115,7 +119,7 @@
 
 <script>
 
-    $("#tblCategory").hide();
+    $("#tblSubCategory").hide();
 
     $('#viewControlSelector').on('change',function(){
         if(this.value == 'Category'){

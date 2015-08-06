@@ -10,7 +10,7 @@
 <div class = "container">
   <div class = "row">
     <div class = "panel-collapse" id = "searchCollapse">
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
         <div class="panel-heading">
           <h4>ค้นหา...</h4>
         </div>
@@ -105,8 +105,8 @@
               <div class="col-md-3">
                 <select class="form-control">
                   <option selected value="none"></option>
-                  <option>ตรวจแล้ว</option>
-                  <option>ยังไม่ตรวจ</option>
+                  <option>ถูกลบ --เท่านั้น</option>
+                  <option>ถูกลบ --และยังไม่ถูกลบ</option>
                 </select>
               </div>
             </div>

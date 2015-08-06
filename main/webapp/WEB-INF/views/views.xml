@@ -164,4 +164,10 @@
         <put-attribute name="body" value="/WEB-INF/pages/exam/paperExamRecord.jsp"/>
     </definition>
 
+    <definition name="marking" extends="tempForUser">
+        <put-attribute name="title" value="ผลการทำข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/marking.jsp"/>
+    </definition>
+
+
 </tiles-definitions>

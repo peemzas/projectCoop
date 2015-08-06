@@ -65,7 +65,7 @@
                       </button>
                       <ul class="dropdown-menu">
                         <li><a href="/TDCS/exam/paperPreview">ดู</a></li>
-                          <li><a href="#">ตรวจ</a> </li>
+                          <li><a href="/TDCS/exam/marking">ตรวจ</a> </li>
                           <li><a href="/TDCS/exam/editButtonOnPageManagePapers">แก้ไข</a></li>
                         <li><a href="#">ลบ</a></li>
                       </ul>
