@@ -123,12 +123,12 @@ function selectFacAndgetDepartment(fac){
     $("#facid").val(fac.id);
     var facid = fac.id;
     if(facid!=""){
-        var data = $.ajax({
-            type: "POST",
-            url: '/TDCS/getDep',
-            data : {
-                facutyid : facid
-            },
+            var data = $.ajax({
+                type: "POST",
+                url: '/TDCS/getDep',
+                data : {
+                    facutyid : facid
+                },
             async: false
         }).responseText;
         $('#trDepartment').empty();
@@ -336,15 +336,15 @@ $(document).ready(function(){
     });
 //        ////////////////////////////////////////////
 
-//        genarate username & email ssg //////////////
-//    $("#engfname").keyup(function(){
-//        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-//        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-//    });
-//    $("#englname").keyup(function(){
-//        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-//        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-//    });
+        //genarate username & email ssg //////////////
+    $("#engfname").keyup(function(){
+        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+    });
+    $("#englname").keyup(function(){
+        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+    });
 
 //        ////////////////////////////////////////////
     $("#birthday").change(function(){
@@ -501,7 +501,11 @@ function checkEmpty(){
         setTimeout(function(){$("#telMoblie").focus()}, 1);
         return false;
     }
-    saveData();
+
+    if (confirm('====== ยืนยันการเพิ่มข้อมูล ? ======')) {
+        saveData();
+        alert("บันทึกข้อมูลสำเร็จ");
+    }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////vilidate
 

@@ -41,7 +41,9 @@ public class AddStudentController {
         }else {
             userCreate = request.getSession().getAttribute("username").toString();
         }
-        List<User> users = queryUserDomain.insertUser(user,user1.getPiority(),userCreate);
+
+        boolean isPM = false;
+        List<User> users = queryUserDomain.insertUser(user,user1.getPiority(),userCreate ,isPM);
         request.getSession().setAttribute("picusername",users.get(0).getUserName());
 //        try{
 //            SimpleMailMessage semail = new SimpleMailMessage();

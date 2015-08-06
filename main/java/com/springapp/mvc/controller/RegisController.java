@@ -40,7 +40,8 @@ public class RegisController {
         }else {
             userCreate = user1.getUserName();
         }
-        List<User> list = queryUserDomain.insertUser(user,user1.getPiority(),userCreate);
+        boolean isPM = false;
+        List<User> list = queryUserDomain.insertUser(user,user1.getPiority(),userCreate ,isPM);
         request.getSession().setAttribute("picusername",list.get(0).getUserName());
         try {
             if (request.getSession().getAttribute("status").toString().equals("admin")) {

@@ -118,7 +118,7 @@
                             <select id="sStaff" class="form-control" data-width="100%">
                                 <option value="">โปรดเลือกพนักงานที่ปรึกษา</option>
                                 <c:forEach var="staff" items="${listUser}">
-                                    <option value="${staff.userId}">${staff.thFname}</option>
+                                    <option value="${staff.userId}">${staff.thFname} ${staff.thLname} (${staff.nickName})</option>
                                 </c:forEach>
                             </select>
                         </div>

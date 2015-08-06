@@ -275,7 +275,7 @@
         <%--<div class="col-md-9">--%>
             <div class="col-md-4">
                 <form:input path="eMail1" id="ssgMail" class="form-control" onkeypress="return numberEnglishEmegency(event)"
-                           autocomplete="off" required="true"/>
+                            required="true" readonly="true"/>
             </div>
             <label class="col-md-2 control-label" style="text-align: left;"><small>@internal.ssg</small></label>
         </div>
