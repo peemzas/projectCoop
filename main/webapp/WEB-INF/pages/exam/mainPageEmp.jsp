@@ -156,7 +156,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" align="center">เพิ่มวิชา</h3>
+                <h3 class="modal-title" align="center">เพิ่มหัวข้อเรื่อง</h3>
             </div>
             <div class="modal-body">
                 <div class="row form-group">

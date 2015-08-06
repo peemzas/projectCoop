@@ -13,94 +13,98 @@
 <script src="<c:url value="/resources/js/checkKeybord.js" />"></script>
 <script src="<c:url value="/resources/js/setInputUserdata.js" />"></script>
 
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
 
-<h1 align="center">ค้นหาบันทึกการทำข้อสอบ</h1>
+<h1>
+    UnAvailable
+</h1>
+<%--<script>--%>
+    <%--$(document).ready(function(){--%>
+        <%--$('[data-toggle="tooltip"]').tooltip();--%>
+    <%--});--%>
+<%--</script>--%>
 
-<div>
-    <div class="panel panel-default">
-        <div class="panel-heading">ค้นหา</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-2" align="right"><h5>ชื่อชุดข้อสอบ :</h5></div>
-                <div class="col-md-6 input-group" >
-                    <input class="form-control" id="paperName" data-toggle="tooltip" title="SQL LIKE FORMAT เช่น %example%" data-placement="right">
-                </div>
-            </div>
-            <br>
+<%--<h1 align="center">ค้นหาบันทึกการทำข้อสอบ</h1>--%>
 
-            <div class="row">
-                <div class="col-md-2" align="right"><h5>ตำแหน่ง :</h5></div>
-                <div class="col-md-2 input-group ">
-                    <select id="forPosition" class="form-control">
-                        <option value="" selected="selected" >All</option>
-                        <option value="dev">Dev</option>
-                        <option value="ba">BA</option>
-                    </select>
-                </div>
-            </div>
-            <br>
+<%--<div>--%>
+    <%--<div class="panel panel-default">--%>
+        <%--<div class="panel-heading">ค้นหา</div>--%>
+        <%--<div class="panel-body">--%>
+            <%--<div class="row">--%>
+                <%--<div class="col-md-2" align="right"><h5>ชื่อชุดข้อสอบ :</h5></div>--%>
+                <%--<div class="col-md-6 input-group" >--%>
+                    <%--<input class="form-control" id="paperName" data-toggle="tooltip" title="SQL LIKE FORMAT เช่น %example%" data-placement="right">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<br>--%>
 
-            <div class="row">
-                <div class="col-md-2" align="right"><h5>รหัสพนักงาน :</h5></div>
-                <div class="col-md-6 input-group">
-                    <input class="form-control" name="empId" disabled="disabled">
+            <%--<div class="row">--%>
+                <%--<div class="col-md-2" align="right"><h5>ตำแหน่ง :</h5></div>--%>
+                <%--<div class="col-md-2 input-group ">--%>
+                    <%--<select id="forPosition" class="form-control">--%>
+                        <%--<option value="" selected="selected" >All</option>--%>
+                        <%--<option value="dev">Dev</option>--%>
+                        <%--<option value="ba">BA</option>--%>
+                    <%--</select>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<br>--%>
 
-                    <div class="input-group-btn">
-                        <button class="btn btn-default " id="addEmpIdBtn"> +</button>
-                    </div>
-                </div>
+            <%--<div class="row">--%>
+                <%--<div class="col-md-2" align="right"><h5>รหัสพนักงาน :</h5></div>--%>
+                <%--<div class="col-md-6 input-group">--%>
+                    <%--<input class="form-control" name="empId" disabled="disabled">--%>
 
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-2" align="right"><h5>ตรวจโดย :</h5></div>
-                <div class="col-md-6 input-group">
-                    <input class="form-control" name="empId" disabled="disabled">
+                    <%--<div class="input-group-btn">--%>
+                        <%--<button class="btn btn-default " id="addEmpIdBtn"> +</button>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
-                    <div class="input-group-btn">
-                        <button class="btn btn-default " id="addMarkerEmpIdBtn"> +</button>
-                    </div>
-                </div>
+            <%--</div>--%>
+            <%--<br>--%>
+            <%--<div class="row">--%>
+                <%--<div class="col-md-2" align="right"><h5>ตรวจโดย :</h5></div>--%>
+                <%--<div class="col-md-6 input-group">--%>
+                    <%--<input class="form-control" name="empId" disabled="disabled">--%>
 
-            </div>
-            <br>
+                    <%--<div class="input-group-btn">--%>
+                        <%--<button class="btn btn-default " id="addMarkerEmpIdBtn"> +</button>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
-            <div class=""><button class="btn btn-primary">Search</button> </div>
-        </div>
-    </div>
-    <div>
-        <h2>Search Result</h2>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th align="center">รหัสพนักงาน</th>
-                <th align="center">ชื่อ</th>
-                <th align="center">ตำแหน่ง</th>
-                <th align="center">ชื่อชุดข้อสอบ</th>
-                <th align="center">ตรวจโดย</th>
-                <th align="center">คะแนนปรนัย</th>
-                <th align="center">คะแนนอัตนัย</th>
-                <th align="center">รายละเอียดและควาคิดเห็น</th>
-            </tr>
-            </thead>
+            <%--</div>--%>
+            <%--<br>--%>
 
-            <!---------------------------------------------------- Generate Table --------------------------------------------------------------------------------->
-            <tr class="btn-default">
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-            </tr>
-        </table>
-    </div>
+            <%--<div class=""><button class="btn btn-primary">Search</button> </div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <%--<div>--%>
+        <%--<h2>Search Result</h2>--%>
+        <%--<table class="table table-bordered">--%>
+            <%--<thead>--%>
+            <%--<tr>--%>
+                <%--<th align="center">รหัสพนักงาน</th>--%>
+                <%--<th align="center">ชื่อ</th>--%>
+                <%--<th align="center">ตำแหน่ง</th>--%>
+                <%--<th align="center">ชื่อชุดข้อสอบ</th>--%>
+                <%--<th align="center">ตรวจโดย</th>--%>
+                <%--<th align="center">คะแนนปรนัย</th>--%>
+                <%--<th align="center">คะแนนอัตนัย</th>--%>
+                <%--<th align="center">รายละเอียดและควาคิดเห็น</th>--%>
+            <%--</tr>--%>
+            <%--</thead>--%>
 
-</div>
+            <%--<!---------------------------------------------------- Generate Table --------------------------------------------------------------------------------->--%>
+            <%--<tr class="btn-default">--%>
+                <%--<td>aaa</td>--%>
+                <%--<td>aaa</td>--%>
+                <%--<td>aaa</td>--%>
+                <%--<td>aaa</td>--%>
+                <%--<td>aaa</td>--%>
+                <%--<td>aaa</td>--%>
+                <%--<td>aaa</td>--%>
+                <%--<td>aaa</td>--%>
+            <%--</tr>--%>
+        <%--</table>--%>
+    <%--</div>--%>
+
+<%--</div>--%>

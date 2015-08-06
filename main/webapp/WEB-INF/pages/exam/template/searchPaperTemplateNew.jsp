@@ -125,8 +125,10 @@
               <div class="col-md-3">
                 <select class="form-control">
                   <option selected value="none"></option>
-                  <option>ตรวจแล้ว</option>
-                  <option>ยังไม่ตรวจ</option>
+                  <option>เปิด</option>
+                  <option>ปิด</option>
+                  <option>ถูกลบ</option>
+
                 </select>
               </div>
             </div>
