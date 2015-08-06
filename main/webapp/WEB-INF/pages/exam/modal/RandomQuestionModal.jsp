@@ -112,7 +112,7 @@
 
 
                     <table class="table">
-                        <thead style="background-color:lightgreen;">
+                        <thead class="bg-primary">
                         <tr>
                             <th>เลือก</th>
                             <th>หัวข้อเรื่อง</th>
@@ -207,11 +207,6 @@
     th {
         border:1px solid white;
     }
-
-    .panel-heading{
-        background-color: lightgreen !important;
-    }
-
 
 </style>
 

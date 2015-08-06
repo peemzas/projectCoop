@@ -17,9 +17,6 @@
 
                     <%@include file="../template/searchQuestionTemplateNew.jsp"%>
 
->>>>>>> edit color and SearchTemplate
-
-
 
                     <%--<div class="row form-group">--%>
                     <%--<div class="col-md-4" align="right">--%>
@@ -44,8 +41,8 @@
                     <%--</div>--%>
                     <%--</div>--%>
 
-                    <table class="table table-bordered" id="">
-                        <thead>
+                    <table class="table">
+                        <thead class="bg-primary">
                         <tr>
                             <th>เลือก</th>
                             <th>หมายเลขคำถาม</th>

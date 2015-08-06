@@ -10,14 +10,14 @@
 
 <div class="row">
     <div class=" col-md-offset-2 col-md-4">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <%--edit change language ENG to THAI--%>
-            <div class="panel-heading" style="background-color: lightgreen; font-size: x-large" id="create">สร้าง</div>
+            <div class="panel-heading" style=" font-size: x-large" id="create">สร้าง</div>
             <div class="panel-body ">
                 <div class=" col-md-6 col-md-offset-3" align="center">
                     <div class="row">
                         <button data-toggle="modal" data-target="#createCat" class="btn btn-default" align="center"
-                                style="background-color:lightgreen ;color: black ;width:125px;height:35px">วิชา
+                                style="width:125px;height:35px">วิชา
                         </button>
                     </div>
                     <br>
@@ -25,21 +25,21 @@
                     <div class="row">
                         <button data-toggle="modal" data-target="#createSub" class="btn btn-default"
                                 class="btn btn-default" align="center"
-                                style="background-color:lightgreen ;color: black;width:125px;height:35px">หัวข้อเรื่อง
+                                style="width:125px;height:35px">หัวข้อเรื่อง
                         </button>
                     </div>
                     <br>
 
                     <div class="row">
                         <button data-toggle="modal" data-target="#createQuest" class="btn btn-default"
-                                style="background-color:lightgreen ;color: black ;width:125px;height:35px">ข้อสอบ
+                                style="width:125px;height:35px">ข้อสอบ
                         </button>
                     </div>
                     <br>
 
                     <div class="row">
                         <a href="/TDCS/exam/createPaper" class="btn btn-default"
-                           style="background-color:lightgreen  ;color:black ;width:125px;height:35px">ชุดข้อสอบ</a>
+                           style="width:125px;height:35px">ชุดข้อสอบ</a>
                     </div>
                 </div>
             </div>
@@ -78,42 +78,43 @@
     <%--</div>--%>
 
     <div class=" col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: lightblue ; font-size: x-large">จัดการ</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="font-size: x-large">จัดการ</div>
             <div class="panel-body">
                 <div class="col-md-6 col-md-offset-3" align="center">
 
 
                     <div class="row">
                         <a href="/TDCS/exam/manageCategory" class="btn btn-default"
-                           style="background-color:lightblue ;color: black ;width:125px;height:35px">วิชา
+                           style="width:125px;height:35px">วิชาและหัวข้อเรื่อง
                         </a>
                     </div>
                     <br>
 
                     <div class="row">
+
                         <a href="/TDCS/exam/examRecordSearch" class="btn btn-default"
-                           style="background-color:lightblue ;color: black ;width:125px;height:35px">ตรวจข้อสอบ
+                           style="width:125px;height:35px">ตรวจข้อสอบ
                         </a>
+
                     </div>
                     <br>
 
                     <div class="row">
                         <a href="/TDCS/exam/manageQuestion" class="btn btn-default"
-                           style="background-color:lightblue ;color: black ;width:125px;height:35px">ข้อสอบ
+                           style="width:125px;height:35px">ข้อสอบ
                         </a>
+
                     </div>
                     <br>
 
                     <div class="row">
+
                         <a href="/TDCS/exam/managePapers" class="btn btn-default"
-                           style="background-color:lightblue ;color: black ;width:125px;height:35px">ชุดข้อสอบ
+                           style="width:125px;height:35px">ชุดข้อสอบ
                         </a>
+
                     </div>
-
-
-
-
                 </div>
             </div>
         </div>
@@ -131,13 +132,13 @@
             </div>
             <div class="modal-body" style="height: 80px">
                 <div class="row">
-                    <div class="col-md-3">
-                        <h4><label class="label label-success"
-                                   style="background-color: lightgreen ; color: black ; font-weight: 100">วิชา
+                    <div class="col-md-3" align="right">
+                        <h4><label class="label"
+                                   style="color: black ; font-weight: 100">วิชา
                             :</label></h4>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="cat"/>
+                        <input type="text" class="form-control" name="cat" id="categoryName"/>
                     </div>
                     <button class="btn btn-primary" type="submit" data-dismiss="modal">ตกลง</button>
                 </div>
@@ -159,9 +160,9 @@
             </div>
             <div class="modal-body">
                 <div class="row form-group">
-                    <div class="col-md-4">
-                        <h4><label class="label label-success"
-                                   style="background-color: lightgreen ; color: black ; font-weight: 100">เลือก วิชา
+                    <div class="col-md-4" align="right">
+                        <h4><label class="label"
+                                   style="color: black ; font-weight: 100">เลือกวิชา
                             :</label></h4>
                     </div>
                     <div class="input-group col-md-5">
@@ -170,9 +171,9 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-4">
-                        <h4><label class="label label-success"
-                                   style="background-color: lightgreen ; color: black ; font-weight: 100">หัวข้อเรื่อง
+                    <div class="col-md-4" align="right">
+                        <h4><label class="label"
+                                   style="color:black;font-weight: 100">หัวข้อเรื่อง
                             :</label></h4>
                     </div>
                     <div class="col-md-6" style="padding-left: 0px">

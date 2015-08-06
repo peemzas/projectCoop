@@ -18,7 +18,6 @@
           <div class = "row">
 
             <%@include file="selectCategoryInput.jsp" %>
->>>>>>> edit color and SearchTemplate
           </div>
           <br/>
 

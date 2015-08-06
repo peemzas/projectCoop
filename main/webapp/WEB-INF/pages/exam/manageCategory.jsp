@@ -25,7 +25,7 @@
 </script>
 
 <div class="container row">
-    <h3>แก้ไขวิชา</h3>
+    <h3>วิชาและหัวข้อเรื่อง</h3>
     <hr>
 </div>
 <div class="row">
@@ -47,7 +47,7 @@
         <table class="table table-bordered"  id = "tblCategory">
             <col width="80%"/>
             <col width="20%"/>
-            <thead style="background-color: slategray">
+            <thead class="bg-primary">
                 <tr>
                     <th style="text-align: center; color: white;">วิชา</th>
                     <th style="text-align: center; color: white">แก้ไข</th>
@@ -79,7 +79,7 @@
             <col width="40%"/>
             <col width="40%"/>
             <col width="20%"/>
-            <thead style="background-color: slategray">
+            <thead class="bg-primary">
                 <tr>
                     <th style="text-align: center; color: white;">วิชา</th>
                     <th style="text-align: center; color: white;">หัวข้อเริ่อง</th>

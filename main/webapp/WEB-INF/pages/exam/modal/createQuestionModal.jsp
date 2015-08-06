@@ -13,7 +13,7 @@
       <div class="modal-body" id="modalBody">
         <div class="row form-group">
           <div class="col-md-4" align="right">
-            <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">วิชา :</label></h4>
+            <h4><label style=" font-weight: 100">วิชา :</label></h4>
           </div>
           <div class="input-group col-md-5">
             <input type="text" class="form-control" name="cat"/>
@@ -23,7 +23,7 @@
 
         <div class="row form-group">
           <div class="col-md-4" align="right">
-            <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">หัวข้อเรื่อง :</label></h4>
+            <h4><label style="font-weight: 100">หัวข้อเรื่อง :</label></h4>
           </div>
           <div class="input-group col-md-5">
             <input type="text" class="form-control" name="subcat" id="subcat"/>
@@ -32,7 +32,7 @@
         </div>
         <div class="row form-group">
           <div class="col-md-4" align="right">
-            <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ประเภทข้อสอบ :</label></h4>
+            <h4><label style="font-weight: 100">ประเภทข้อสอบ :</label></h4>
           </div>
           <div class="input-group col-md-5">
             <select class="form-control" id="select-QuestionType">
@@ -46,7 +46,7 @@
             <%-- Start Objective--%>
             <div class="row form-group" id="objective" style="display: none">
               <div class="col-md-4">
-                <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ข้อสอบ :</label></h4>
+                <h4><label style="font-weight: 100">ข้อสอบ :</label></h4>
               </div>
               <div class="col-md-5" style="padding: 0px">
                 <textarea class="form-control" style="resize: none"></textarea>
@@ -63,7 +63,7 @@
                 </div>
               </div>
             </div>
-            <div class="row form-group" id="objective2" style="display: none">
+            <div class="row form-group" id="answerInput" style="display: none">
               <div class="col-md-5 col-md-offset-4" style="padding: 0px" align="left">
                 <div class="radio">
                   <input type="radio" name="level"/>
@@ -86,7 +86,7 @@
               <div class="col-md-1 col-md-offset-1">
                 <div class="row form-group">
                   <div>
-                    <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">คะแนน</label></h4>
+                    <h4><label style="font-weight: 100">คะแนน</label></h4>
                     <input type="text" class="form-control" name="score"/>
                   </div>
                 </div>
@@ -97,7 +97,7 @@
             <%--Start Subjective--%>
             <div class="row form-group" id="subjective" style="display: none">
               <div class="col-md-4">
-                <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">ข้อสอบ :</label></h4>
+                <h4><label style="font-weight: 100">ข้อสอบ :</label></h4>
               </div>
               <div class="col-md-5" style="padding: 0px">
                 <textarea class="form-control" style="resize: none"></textarea>
@@ -125,7 +125,7 @@
               <div class="col-md-1 col-md-offset-1">
                 <div class="row form-group">
                   <div>
-                    <h4><label class="label label-success" style="background-color: lightgreen ; color: black ; font-weight: 100">คะแนน</label></h4>
+                    <h4><label style="font-weight: 100">คะแนน</label></h4>
                     <input type="text" class="form-control" name="score"/>
                   </div>
                 </div>
@@ -135,7 +135,7 @@
 
               <div class="col-md-offset-1" id="submitBtnContainer" hidden>
                 <button class="btn btn-primary" id="submitCreateBtn" data-dismiss="modal">ตกลง</button>
-                <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                <button class="btn btn-warning" data-dismiss="modal">ยกเลิก</button>
               </div>
 
 
@@ -159,7 +159,7 @@
 
     if(this.value == 'Objective'){
       $('#objective').show();
-      $('#objective2').show();
+      $('#answerInput').show();
       $('#subjective').hide();
       $('#subjective2').hide();
 
@@ -169,7 +169,7 @@
       $('#subjective').show();
       $('#subjective2').show();
       $('#objective').hide();
-      $('#objective2').hide();
+      $('#answerInput').hide();
 
       $('#submitBtnContainer').val('Subjective');
     }
