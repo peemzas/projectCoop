@@ -680,10 +680,8 @@ function saveData() {
             type: "POST",
             url: "/TDCS/insertTeam",
             data: datasendTeam,
-            success: function (data) {
-                datasend += ('&teamId=' + data);
-//                $("#ID").val(data);
-//                $("#formAfterAdd").submit();
+            success:function(data){
+                datasend += ('&teamId='+data);
 //            location.href = "/TDCS/openLoginAfterRegis";
                 var dat = $.ajax({
                     type: "POST",
@@ -693,6 +691,8 @@ function saveData() {
                         if ($("#image").val() != "") {
                             prepareLoad(data);
                         }
+                        $("#ID").val(data);
+                        $("#formAfterAdd").submit();
 //            location.href = "/TDCS/openLoginAfterRegis";
 
                     }
@@ -711,8 +711,8 @@ function saveData() {
                     alert(data);
                     prepareLoad(data);
                 }
-//                $("#ID").val(data);
-//                $("#formAfterAdd").submit();
+               $("#ID").val(data);
+               $("#formAfterAdd").submit();
 //            location.href = "/TDCS/openLoginAfterRegis";
 
             }
@@ -789,7 +789,10 @@ function checkEmpty() {
         return false;
     }
 
-    saveData();
+    if (confirm('====== ยืนยันการเพิ่มข้อมูล ? ======')) {
+        saveData();
+        alert("บันทึกข้อมูลสำเร็จ");
+    }
 //    $("#btnSubmit").click();
 }
 

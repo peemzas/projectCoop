@@ -272,6 +272,8 @@ function setDataEvaluationForm() {
                     noteS = ""
                 }
 
+                console.log(scoreS);
+
                 // EDITBY PEEM
 
 

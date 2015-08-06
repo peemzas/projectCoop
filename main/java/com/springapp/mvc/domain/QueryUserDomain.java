@@ -41,7 +41,7 @@ public class QueryUserDomain extends HibernateUtil {
         }
 
         if (BeanUtils.isNotEmpty(staff)) {
-            criteria.add(Restrictions.eq("staffId",Integer.parseInt(staff))); //Edit by PEEM
+            criteria.add(Restrictions.eq("staffId", Integer.parseInt(staff))); //Edit by PEEM
         }
 
         if (BeanUtils.isNotEmpty(position)) {
@@ -104,7 +104,7 @@ public class QueryUserDomain extends HibernateUtil {
         return list;
     }
 
-    public List insertUser(User user, String piority, String usernameInsert) {
+    public List insertUser(User user, String piority, String usernameInsert , boolean isPM) {
 //        user.setId(1);
         Integer countPiority = 0;
         StringBuffer newPiority = new StringBuffer();
@@ -121,7 +121,13 @@ public class QueryUserDomain extends HibernateUtil {
         }
         user.setUserCreate(usernameInsert);
         user.setDateCreate(dateStr);
-        countPiority = findPiority(piority,user.getStatus());
+
+        if(isPM){
+            countPiority = 0;
+        }else{
+            countPiority = findPiority(piority,user.getStatus());
+        }
+
         if(countPiority > 0) {
             if (countPiority < 10) {
                 newPiority.append("00" + countPiority);
@@ -155,11 +161,14 @@ public class QueryUserDomain extends HibernateUtil {
         criteria.addOrder(Order.asc("piority"));
         List<User> list = (List<User>)criteria.list();
         sizePioruty = list.size();
-        if((list.size()>0 && status == 3) || (status == 2 && list.size() > 1)){
+        if((list.size()>0 && status == 3) || (status == 2 && list.size() >0)){
             piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-3)+"");
             piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-2)+"");
             piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-1)+"");
             sizePioruty = Integer.parseInt(piorityBuffer.toString())+1;
+        }
+        if(list.size() <= 0 && status == 2){
+            sizePioruty++;
         }
         if(list.size() <= 0 && status == 3){
             sizePioruty++;

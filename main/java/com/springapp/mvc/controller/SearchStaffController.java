@@ -49,6 +49,8 @@ public class SearchStaffController {
                     i = -1;
                 }
             }
+        }
+        for (int i = 0; i < list.size(); i++) {
             if (BeanUtils.isNotEmpty(section)) {
                 if (list.get(i).getSectionPosition().getSectionId() != Integer.parseInt(section)) {
                     list.remove(i);

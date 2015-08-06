@@ -96,7 +96,7 @@ public class AddStaffController {
             piority = user.getPiority();
             isPM = true;
         }
-        List<User> list = queryUserDomain.insertUser(user, piority, userName);
+        List<User> list = queryUserDomain.insertUser(user, piority, userName ,isPM);
         if(isPM) {
             queryTeamDomain.updateUserTeam(list.get(0).getUserId(),user.getTeamId(),list.get(0).getSectionPosition().getSectionId());
             querySectionDomain.updateUserSection(list.get(0).getUserId(),list.get(0).getSectionPosition().getSectionId());

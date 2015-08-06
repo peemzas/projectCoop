@@ -213,6 +213,7 @@ $(document).ready(function () {
             $("#alertMess").slideDown();
         }
         console.log(data2);
+        console.log(data);
     }
 
     $("#cancel").click(function () {

@@ -162,6 +162,8 @@ function setDataEvaluationForm() {
                     noteE = ""
                 }
 
+                console.log(scoreE);
+                console.log(scoreS);
                 if (scoreE == "" && scoreS == "") {
                     $("#checkEvaluate").html('(ยังไม่มีการประเมินผล)');
                 } else if (scoreE == "") {

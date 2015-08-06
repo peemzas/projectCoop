@@ -50,7 +50,7 @@ $(document).ready(function () {
                 '<td>' + data2[i].empId + '</td>' +
                 '<td>' + data2[i].thFname + '</td>' +
                 '<td>' + data2[i].company + '</td>' +
-                '<td>' + data2[i].team + '</td>' +
+                '<td>' + data2[i].sectionPosition + '</td>' +
                 '<td>' + data2[i].position + '</td>' +
                 '<td>' + data2[i].sectionPosition + '</td>' +
                 '<td>' + data2[i].startWork + '</td>' +
@@ -125,15 +125,15 @@ $(document).ready(function () {
             async: false
         }).responseText;
 
-        console.log(data2);
+
 
         if (data != "") {
             $('#resultSearch').empty();
             data2 = JSON.parse(data);
             for (var j = 0; j < data2.length; j++) {
                 data2[j].thFname = data2[j].thFname + " " + data2[j].thLname;
+                //data2[j].team = data2[j].team.teamName;
                 data2[j].company = data2[j].company.compName;
-                data2[j].team = data2[j].team.teamName;
                 data2[j].position = data2[j].sectionPosition.position.posiName;
                 data2[j].sectionPosition = data2[j].sectionPosition.section.sectionName;
                 var stDate = data2[j].startWork.split('/');
@@ -143,6 +143,7 @@ $(document).ready(function () {
 
                 data2[j].startWork = DateDiff.inYears(d1, d2) + " ปี "+Math.floor(DateDiff.inMonths(d1, d2)/12)+" เดือน";
             }
+            console.log(data2);
             $("#alertMess").hide();
             chkData = 1;
         } else {
