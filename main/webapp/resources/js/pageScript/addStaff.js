@@ -2,11 +2,10 @@
  * Created by Pongpipat on 13/3/2558.
  */
 
-function prepareLoad(data)
-{
+function prepareLoad(data) {
     var fileName = $("#image").val().split('.');
 //    alert(fileName[fileName.length-1]);
-    if(fileName[fileName.length-1]=="jpg"||fileName[fileName.length-1]=="png") {
+    if (fileName[fileName.length - 1] == "jpg" || fileName[fileName.length - 1] == "png") {
         var oMyForm = new FormData();
         oMyForm.append("file", image.files[0]);
 //        oMyForm.append("name", $("#fileUpload").val());
@@ -18,13 +17,13 @@ function prepareLoad(data)
             processData: false,
             contentType: false,
             type: 'POST',
-            success: function(data2){
+            success: function (data2) {
                 $("#ID").val(data);
                 $("#formAfterAdd").submit();
 //                location.href = "/TDCS/openLoginAfterRegis";
             }
         }).responseText;
-    }else{
+    } else {
         alert("ชนิดไฟล์รูปไม่ถูกต้อง");
     }
 }
@@ -58,33 +57,33 @@ function imageIsLoaded(e) {
 //    });
 //})(jQuery);
 
-(function($) {
-    $('#telMoblie').bind('blur', function(e) {
+(function ($) {
+    $('#telMoblie').bind('blur', function (e) {
         var $this = $(this)
         if ($this.val().length < 10) {
             alert('คุณกรอกเบอร์มือถือไม่ครบ');
 //                $("#Amount").focus();
-            $this.attr('style','border:solid 1px red');
+            $this.attr('style', 'border:solid 1px red');
 //            setTimeout(function(){$this.focus()}, 1);
             return false;
-        }else{
-            $this.attr('style','');
+        } else {
+            $this.attr('style', '');
         }
     });
 })(jQuery);
 
-(function($) {
-    $('#password').bind('blur', function(e) {
+(function ($) {
+    $('#password').bind('blur', function (e) {
         var $this = $(this)
         if ($this.val().length < 6 && $this.val().length != 0) {
             alert('คุณกรอกรหัสผ่านไม่ครบ');
 //                $("#Amount").focus();
-            $this.attr('style','border:solid 1px red');
+            $this.attr('style', 'border:solid 1px red');
 //            setTimeout(function(){$this.focus()}, 1);
             return false;
-        }else{
-            $this.attr('style','');
-            $('#cpassword').attr('style','');
+        } else {
+            $this.attr('style', '');
+            $('#cpassword').attr('style', '');
         }
     });
 })(jQuery);
@@ -105,32 +104,29 @@ function imageIsLoaded(e) {
 //})(jQuery);
 
 
-
-
-$("#addData").attr('class','dropdown active');
+$("#addData").attr('class', 'dropdown active');
 var picture = "";
 var section_none_pm = [];
 
-$("#startWork").change(function(){
+$("#startWork").change(function () {
     var stDate = $("#startWork").val().split('/');
-    var dString = stDate[2]+","+ stDate[1] +","+ stDate[0];
+    var dString = stDate[2] + "," + stDate[1] + "," + stDate[0];
     var d1 = new Date(dString);
     var d2 = new Date();
-    var y = DateDiff.inYears(d1, d2),m = DateDiff.inMonths(d1,d2),d = DateDiff.inDays(d1,d2);
+    var y = DateDiff.inYears(d1, d2), m = DateDiff.inMonths(d1, d2), d = DateDiff.inDays(d1, d2);
     var rerultShow = "";
 
-    if(m>=12){
-        y=m/12;
-        rerultShow += parseInt(y+"")+" ปี";
-        if(m%12>0){
-            m%=12;
-            m+" เดือน"
+    if (m >= 12) {
+        y = m / 12;
+        rerultShow += parseInt(y + "") + " ปี";
+        if (m % 12 > 0) {
+            m %= 12;
+            m + " เดือน"
         }
 
 
-
-    }else{
-        rerultShow += m+" เดือน";
+    } else {
+        rerultShow += m + " เดือน";
     }
 
 //    if(y > 0){
@@ -149,51 +145,51 @@ $("#startWork").change(function(){
     $("#workeLoad").val(rerultShow);
 });
 
-$("#section").change(function(){
+$("#section").change(function () {
     var section_Id = $("#section").val();
     var getJobJson;
-    if(section_Id!=""){
+    if (section_Id != "") {
         var data = $.ajax({
             type: "POST",
             url: '/TDCS/getJob',
-            data : {
-                sec_id : section_Id
+            data: {
+                sec_id: section_Id
             },
             async: false
         }).responseText;
         $('#job').empty();
         $('#job').append('<option value="">เลือกตำแหน่ง</option>');
-        if(data != "") {
+        if (data != "") {
             getJobJson = JSON.parse(data);
             for (var j = 0; j < getJobJson.length; j++) {
-                var job_option = '<option value="'+getJobJson[j].spId+'"';
-                if(in_array(section_none_pm,getJobJson[j].section.sectionId)&&getJobJson[j].position.posiName!='Project Manager'){
+                var job_option = '<option value="' + getJobJson[j].spId + '"';
+                if (in_array(section_none_pm, getJobJson[j].section.sectionId) && getJobJson[j].position.posiName != 'Project Manager') {
                     job_option += ' disabled="disabled" style="cursor: no-drop;"';
 
                 }
-                $('#job').append(job_option+'>'+getJobJson[j].position.posiName+'</option>');
+                $('#job').append(job_option + '>' + getJobJson[j].position.posiName + '</option>');
             }
 
-            if(in_array(section_none_pm,getJobJson[0].section.sectionId)){
+            if (in_array(section_none_pm, getJobJson[0].section.sectionId)) {
                 $("#txbTeam").show();
                 $("#team").hide();
-                $("#team").attr("required",false);
+                $("#team").attr("required", false);
                 $("#formGroupPiority").show();
-                $("#piority").attr("required",true);
-                $("#txbTeam").attr("required",true);
+                $("#piority").attr("required", true);
+                $("#txbTeam").attr("required", true);
 
-            }else{
+            } else {
 
                 $("#team").show();
                 $("#formGroupPiority").hide();
-                $("#team").attr("required",true);
-                $("#piority").attr("required",false);
+                $("#team").attr("required", true);
+                $("#piority").attr("required", false);
                 $("#txbTeam").val("");
                 $("#txbTeam").hide();
-                $("#txbTeam").attr("required",false);
+                $("#txbTeam").attr("required", false);
             }
         }
-    }else{
+    } else {
         $("#job").empty();
         $("#txbTeam").hide();
         $("#formGroupPiority").hide();
@@ -201,68 +197,68 @@ $("#section").change(function(){
     }
 
     var getTeamJson;
-    if(section_Id!=""){
+    if (section_Id != "") {
         var data = $.ajax({
             type: "POST",
             url: '/TDCS/getTeam',
-            data : {
-                section_Id : section_Id
+            data: {
+                section_Id: section_Id
             },
             async: false
         }).responseText;
         $('#team').empty();
 //            $('#team').append('<option value="">ทีม</option>')
-        if(data != "") {
+        if (data != "") {
             getTeamJson = JSON.parse(data);
             for (var j = 0; j < getTeamJson.length; j++) {
-                $('#team').append('<option value="'+getTeamJson[j].teamId+'">'+getTeamJson[j].teamName+'</option>');
+                $('#team').append('<option value="' + getTeamJson[j].teamId + '">' + getTeamJson[j].teamName + '</option>');
             }
         }
     }
 });
 
-$("#job").change(function(){
+$("#job").change(function () {
 //        var jobId = $("#job").val();
 
 
 });
 function in_array(array, id) {
 //            alert(array[0]+"jjjj"+id);
-    for(var i=0;i<array.length;i++) {
-        if(array[i] == id){
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == id) {
             return true;
         }
     }
     return false;
 }
-$( "#ddlCom" ).change(function() {
+$("#ddlCom").change(function () {
 
     var compId = $("#ddlCom").val();
     var getSectionJson;
-    if(compId!=""){
+    if (compId != "") {
         var data = $.ajax({
             type: "POST",
             url: '/TDCS/getSection',
-            data : {
-                comId : compId
+            data: {
+                comId: compId
             },
             async: false
         }).responseText;
         $('#section').empty();
         $('#section').append('<option value="">เลือกแผนก</option>');
-        if(data != "") {
+        if (data != "") {
             getSectionJson = JSON.parse(data);
             for (var j = 0; j < getSectionJson.length; j++) {
-                var option = '<option value="'+getSectionJson[j].sectionId+'">'+getSectionJson[j].sectionName;
+                var option = '<option value="' + getSectionJson[j].sectionId + '">' + getSectionJson[j].sectionName;
 //                    alert(getSectionJson[j].userId);
-                if(getSectionJson[j].userId==undefined){
+                if (getSectionJson[j].userId == undefined) {
                     section_none_pm[section_none_pm.length] = getSectionJson[j].sectionId;
                     option += '(ยังไม่มี PM)';
                 }
-                $('#section').append(option+'</option>');
+                $('#section').append(option + '</option>');
             }
         }
-    }else{
+    } else {
         $("#section").empty();
         $("#job").empty();
         $("#txbTeam").hide();
@@ -273,42 +269,42 @@ $( "#ddlCom" ).change(function() {
 
 //$("#fileUpload").on('change',prepareLoad);
 
-function selectDepartment(department){
+function selectDepartment(department) {
     $("#comboDep").val(department.id);
     $('#listDep').modal('hide');
 }
 
-function shoeDepartMent(){
+function shoeDepartMent() {
     $("#filterDep").val($("#comboDep").val());
     $("#comboDep").val("");
     $('#listDep').modal('show');
     $("#filterDep").keyup();
 }
 
-function showFacuty(){
+function showFacuty() {
     $("#filterFac").val($("#comboFac").val());
     $("#comboFac").val("");
     $('#listFac').modal('show');
     $("#filterFac").keyup();
 }
 
-function selectFacAndgetDepartment(fac){
+function selectFacAndgetDepartment(fac) {
     $("#comboFac").val(fac.id);
     var facName = $("#comboFac").val();
-    if(facName!=""){
+    if (facName != "") {
         var data = $.ajax({
             type: "POST",
             url: '/TDCS/getDep',
-            data : {
-                facutyname : $("#comboFac").val()
+            data: {
+                facutyname: $("#comboFac").val()
             },
             async: false
         }).responseText;
         $('#trDepartment').empty();
-        if(data != "") {
+        if (data != "") {
             departmentData = JSON.parse(data);
             for (var j = 0; j < departmentData.length; j++) {
-                $('#trDepartment').append('<tr><td onclick="selectDepartment(this)" id="'+departmentData[j].majName+'" style="cursor: pointer">' + departmentData[j].majName + '</td></tr>');
+                $('#trDepartment').append('<tr><td onclick="selectDepartment(this)" id="' + departmentData[j].majName + '" style="cursor: pointer">' + departmentData[j].majName + '</td></tr>');
             }
         }
     }
@@ -316,37 +312,37 @@ function selectFacAndgetDepartment(fac){
 }
 
 $(document).ready(function () {
-    $("#profile").click(function(){
-        $("#profile").attr('src','../../resources/pictureUpload/25580217171720.jpg');
+    $("#profile").click(function () {
+        $("#profile").attr('src', '../../resources/pictureUpload/25580217171720.jpg');
     });
 
 });
 
-function listuni(){
+function listuni() {
     var uniName = $("#univerName").val();
     $("#univerName").val("");
     var uniNameTr;
     var data = $.ajax({
         type: "POST",
         url: '/TDCS/getUniver',
-        data : {
-            UniversityName : uniName
+        data: {
+            UniversityName: uniName
         },
         async: false
     }).responseText;
     $('#trUniversity').empty();
-    if(data != "") {
+    if (data != "") {
         uniNameTr = JSON.parse(data);
         for (var j = 0; j < uniNameTr.length; j++) {
-            $('#trUniversity').append("<tr><td id='"+uniNameTr[j].university_name+"' style='cursor: pointer' onclick='selectUniversity(this)'>" + uniNameTr[j].university_name + "</td></tr>");
+            $('#trUniversity').append("<tr><td id='" + uniNameTr[j].university_name + "' style='cursor: pointer' onclick='selectUniversity(this)'>" + uniNameTr[j].university_name + "</td></tr>");
         }
-    }else {
+    } else {
         $("#univerName").val("");
     }
-    if(uniNameTr.length>1) {
+    if (uniNameTr.length > 1) {
         $("#filter").val(uniName);
         $('#listUniver').modal('show');
-    }else if(uniNameTr.length==1){
+    } else if (uniNameTr.length == 1) {
         $("#univerName").val(uniNameTr[0].university_name);
         facutyQuery();
     }
@@ -389,29 +385,29 @@ function listuni(){
 //}
 
 
-var facutyData,departmentData;
+var facutyData, departmentData;
 
-function getTimeWork(){
-    if($("#startTime").val()!=""&&$("#endTime").val()!=""){
-        var resulttime = timediff($("#startTime").val(),$("#endTime").val());
-        var week = parseInt((parseFloat(resulttime)/24.0)/7);
-        var day = (parseFloat(resulttime)/24.0)%7;
-        $("#sumDate").val(week+" สัปดาห์ "+day + "วัน");
-    }else{
+function getTimeWork() {
+    if ($("#startTime").val() != "" && $("#endTime").val() != "") {
+        var resulttime = timediff($("#startTime").val(), $("#endTime").val());
+        var week = parseInt((parseFloat(resulttime) / 24.0) / 7);
+        var day = (parseFloat(resulttime) / 24.0) % 7;
+        $("#sumDate").val(week + " สัปดาห์ " + day + "วัน");
+    } else {
         $("#sumDate").val("");
     }
 }
 
-$(document).ready(function(){
-    $("#inputGrade").keyup(function(){
+$(document).ready(function () {
+    $("#inputGrade").keyup(function () {
         var textValue = $("#inputGrade").val();
 
-        if(parseFloat(textValue)>4.0){
+        if (parseFloat(textValue) > 4.0) {
             $("#inputGrade").val("");
             return false;
         }
-        if(textValue.length==1){
-            $("#inputGrade").val(textValue+".");
+        if (textValue.length == 1) {
+            $("#inputGrade").val(textValue + ".");
         }
     });
 
@@ -436,7 +432,7 @@ $(document).ready(function(){
     //            }
     //        });
 
-    $("#comboFac").change(function(){
+    $("#comboFac").change(function () {
         //            for(var i=0;i<facutyData.length;i++){
         //                if($("#comboFac").val()==facutyData[i].facName){
         //                    $("#facData").val(facutyData[i].facId);
@@ -491,26 +487,26 @@ $(document).ready(function(){
         endDate: 'd'
     });
 
-    $("#birthday").change(function(){
+    $("#birthday").change(function () {
         var splitDate = $("#birthday").val().split('/');
-        $("#age").val(_calculateAge(splitDate[2]+"/"+splitDate[1]+"/"+splitDate[0]));
+        $("#age").val(_calculateAge(splitDate[2] + "/" + splitDate[1] + "/" + splitDate[0]));
     });
 
     //        ////////////////////////////////////////////
 
-           // genarate username & email ssg //////////////
-    $("#engfname").keyup(function(){
-        $("#username").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+    // genarate username & email ssg //////////////
+    $("#engfname").keyup(function () {
+        $("#username").val($("#engfname").val().toLowerCase() + '_' + $("#englname").val().toLowerCase().charAt(0));
+        $("#ssgMail").val($("#engfname").val().toLowerCase() + '_' + $("#englname").val().toLowerCase().charAt(0));
     });
-    $("#englname").keyup(function(){
-        $("#username").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+    $("#englname").keyup(function () {
+        $("#username").val($("#engfname").val().toLowerCase() + '_' + $("#englname").val().toLowerCase().charAt(0));
+        $("#ssgMail").val($("#engfname").val().toLowerCase() + '_' + $("#englname").val().toLowerCase().charAt(0));
     });
-            //check compare password /////////////////////
+    //check compare password /////////////////////
 
-    $("#password").change(function() {
-        if($("#password").val().length>=6) {
+    $("#password").change(function () {
+        if ($("#password").val().length >= 6) {
             if ($("#password").val() != "") {
                 $("#passdiv").attr('class', 'col-md-12 has-success has-feedback');
                 $("#passspan").attr('class', 'glyphicon glyphicon-ok form-control-feedback');
@@ -531,8 +527,8 @@ $(document).ready(function(){
         }
     });
 
-    $("#cpassword").change(function(){
-        if($("#cpassword").val().length>=6) {
+    $("#cpassword").change(function () {
+        if ($("#cpassword").val().length >= 6) {
             if ($("#cpassword").val() != "" && $("#password").val() != "") {
                 if ($("#cpassword").val() == $("#password").val()) {
                     $("#cpassdiv").attr('class', 'col-md-12 has-success has-feedback');
@@ -585,45 +581,45 @@ $(document).ready(function(){
 //            }
 //        });
 //    })(jQuery);
-    $("#stuid").change(function(){
+    $("#stuid").change(function () {
         var $this = $(this);
         if ($this.val().length < 5 && $this.val().length != 0) {
             alert('คุณกรอกรหัสพนักงานไม่ครบ');
 //                $("#Amount").focus();
 //            setTimeout(function(){$this.focus()}, 1);
-            $this.attr('style','border:solid 1px red');
+            $this.attr('style', 'border:solid 1px red');
             return false;
-        }else{
-            $this.attr('style','');
+        } else {
+            $this.attr('style', '');
         }
         var student_id = $("#stuid");
-        if(student_id.val()!=""){
+        if (student_id.val() != "") {
             var data = $.ajax({
                 type: "POST",
                 url: '/TDCS/checkStudentOrEmployeeId',
-                data : {
-                    stduOrEmpId : student_id.val()
+                data: {
+                    stduOrEmpId: student_id.val()
                 },
                 async: false
             }).responseText;
-            if(data>0){
+            if (data > 0) {
                 var url = window.location.href;
                 alert("รหัสพนักงานนี้มีอยู่แล้ว");
                 student_id.val("");
             }
         }
     });
-    $("#txbTeam").blur(function(){
+    $("#txbTeam").blur(function () {
         var teamName = $("#txbTeam");
-        if(teamName.val()!=""){
+        if (teamName.val() != "") {
             var data = $.ajax({
                 type: "POST",
                 url: '/TDCS/checkTeamName',
-                data : {
-                    teamName : teamName.val()
+                data: {
+                    teamName: teamName.val()
                 },
-                success:function(respond){
-                    if(respond>0){
+                success: function (respond) {
+                    if (respond > 0) {
                         alert("ชื่อทีมนี้มีอยู่แล้ว");
                         teamName.val("");
                     }
@@ -633,17 +629,17 @@ $(document).ready(function(){
         }
     });
 
-    $("#piority").blur(function(){
+    $("#piority").blur(function () {
         var piority = $("#piority");
-        if(piority.val()!=""){
+        if (piority.val() != "") {
             var data = $.ajax({
                 type: "POST",
                 url: '/TDCS/checkPiority',
-                data : {
-                    piority : piority.val()
+                data: {
+                    piority: piority.val()
                 },
-                success:function(respond){
-                    if(respond>0){
+                success: function (respond) {
+                    if (respond > 0) {
                         alert("ชื่อทีมนี้มีอยู่แล้ว");
                         piority.val("");
                     }
@@ -653,48 +649,48 @@ $(document).ready(function(){
         }
     });
 });
-function saveData(){
-    var datasend = 'empId='+$("#stuid").val()+
-        '&userName='+$("#username").val()+
-        '&password='+$("#password").val()+
-        '&thFname='+$("#fname").val()+
-        '&thLname='+$("#lname").val()+
-        '&enFname='+$("#engfname").val()+
-        '&enLname='+$("#englname").val()+
-        '&nickName='+$("#nickname").val()+
-        '&birthDate='+$("#birthday").val()+
-        '&compId='+$("#ddlCom").val()+
-        '&spId='+$("#job").val()+
-        '&startWork='+$("#startWork").val()+
-        '&address='+$("#address").val()+
-        '&tell1='+$("#telHome").val()+
-        '&tell2='+$("#telMoblie").val()+
-        '&eMail1='+$("#ssgMail").val()+
-        '&eMail2='+$("#othEmail").val()+
-        '&skype='+$("#skypeAcc").val()+
+function saveData() {
+    var datasend = 'empId=' + $("#stuid").val() +
+        '&userName=' + $("#username").val() +
+        '&password=' + $("#password").val() +
+        '&thFname=' + $("#fname").val() +
+        '&thLname=' + $("#lname").val() +
+        '&enFname=' + $("#engfname").val() +
+        '&enLname=' + $("#englname").val() +
+        '&nickName=' + $("#nickname").val() +
+        '&birthDate=' + $("#birthday").val() +
+        '&compId=' + $("#ddlCom").val() +
+        '&spId=' + $("#job").val() +
+        '&startWork=' + $("#startWork").val() +
+        '&address=' + $("#address").val() +
+        '&tell1=' + $("#telHome").val() +
+        '&tell2=' + $("#telMoblie").val() +
+        '&eMail1=' + $("#ssgMail").val() +
+        '&eMail2=' + $("#othEmail").val() +
+        '&skype=' + $("#skypeAcc").val() +
 
         '&status=2';
-    if($("#piority").val()!=""){
-        datasend += ('&piority='+$("#piority").val());
+    if ($("#piority").val() != "") {
+        datasend += ('&piority=' + $("#piority").val());
     }
 
-    if($("#txbTeam").val()!=""){
-        var datasendTeam = 'teamName='+$("#txbTeam").val();
+    if ($("#txbTeam").val() != "") {
+        var datasendTeam = 'teamName=' + $("#txbTeam").val();
         var dat = $.ajax({
             type: "POST",
-            url:"/TDCS/insertTeam",
+            url: "/TDCS/insertTeam",
             data: datasendTeam,
-            success:function(data){
-                datasend += ('&teamId='+data);
+            success: function (data) {
+                datasend += ('&teamId=' + data);
 //                $("#ID").val(data);
 //                $("#formAfterAdd").submit();
 //            location.href = "/TDCS/openLoginAfterRegis";
                 var dat = $.ajax({
                     type: "POST",
-                    url:"/TDCS/insertStaff",
+                    url: "/TDCS/insertStaff",
                     data: datasend,
-                    success:function(data){
-                        if($("#image").val()!=""){
+                    success: function (data) {
+                        if ($("#image").val() != "") {
                             prepareLoad(data);
                         }
 //            location.href = "/TDCS/openLoginAfterRegis";
@@ -704,14 +700,14 @@ function saveData(){
 
             }
         }).responseText;
-    }else{
-        datasend +=  '&teamId='+$("#team").val();
+    } else {
+        datasend += '&teamId=' + $("#team").val();
         var dat = $.ajax({
             type: "POST",
-            url:"/TDCS/insertStaff",
+            url: "/TDCS/insertStaff",
             data: datasend,
-            success:function(data){
-                if($("#image").val()!=""){
+            success: function (data) {
+                if ($("#image").val() != "") {
                     alert(data);
                     prepareLoad(data);
                 }
@@ -724,64 +720,72 @@ function saveData(){
     }
 
 }
-function checkEmpty(){
-    var element = [ $("#stuid"), $("#username"), $("#password"),$("#cpassword"), $("#fname"), $("#lname"), $("#engfname"), $("#englname"),
-        $("#nickname"),  $("#birthday"),$("#university"), $("#comboFac"),$("#comboDep")/*,$("#level")*/,$("#inputGrade"), $("#address"),
+function checkEmpty() {
+    var element = [$("#stuid"), $("#username"), $("#password"), $("#cpassword"), $("#fname"), $("#lname"), $("#engfname"), $("#englname"),
+        $("#nickname"), $("#birthday"), $("#university"), $("#comboFac"), $("#comboDep")/*,$("#level")*/, $("#inputGrade"), $("#address"),
 //        $("#telHome"),
-        $("#telMoblie"),$("#ssgMail"),$("#email"), $("#startTime"),$("#skypeAcc"),$("#othEmail"),$("#ddlCom"),
-        $("#section"),$("#job"),$("#startWork")/*, $("#type"),$("#job"), $("#advisor")*/];
+        $("#telMoblie"), $("#ssgMail"), $("#email"), $("#startTime"), $("#skypeAcc"), $("#othEmail"), $("#ddlCom"),
+        $("#section"), $("#job"), $("#startWork")/*, $("#type"),$("#job"), $("#advisor")*/];
 
     var countError = 0;
     $('#team').removeAttr('disabled');
 
-    if($("#txbTeam").css('display')=='none'){
+    if ($("#txbTeam").css('display') == 'none') {
 //            $('#team').attr('disabled', 'disabled');
 //            $("#txbTeam").val("~~~");
 //            $("#piority").val("~~~");
     }
 
-    if($("#password").val()!=$("#cpassword").val()){
+    if ($("#password").val() != $("#cpassword").val()) {
         countError++;
         $("#password").val("");
         $("#cpassword").val("");
         $("#piority").val("");
         $('#team').attr('disabled', 'disabled');
     }
-    for(var i=0;i<element.length;i++){
-        if(element[i].val()==""){
+    for (var i = 0; i < element.length; i++) {
+        if (element[i].val() == "") {
             countError++;
-            element[i].attr('style','border:solid 1px red');
+            element[i].attr('style', 'border:solid 1px red');
             $('#team').attr('disabled', 'disabled');
-        }else{
-            element[i].attr('style','');
+        } else {
+            element[i].attr('style', '');
         }
     }
-    if(countError>0){
+    if (countError > 0) {
         alert("คุณกรอกข้อมูลไม่ครบ");
 //        $("#btnSubmit").click();
         return false;
     }
-    if($("#stuid").val().length<5){
+    if ($("#stuid").val().length < 5) {
         $("#stuid").change();
-        setTimeout(function(){$("#stuid").focus()}, 1);
+        setTimeout(function () {
+            $("#stuid").focus()
+        }, 1);
         return false;
     }
 
-    if($("#password").val().length<6){
+    if ($("#password").val().length < 6) {
         $("#password").blur();
-        setTimeout(function(){$("#password").focus()}, 1);
+        setTimeout(function () {
+            $("#password").focus()
+        }, 1);
         return false;
     }
 
-    if($("#telHome").val().length<10&&$("#telHome").val().length>0){
+    if ($("#telHome").val().length < 10 && $("#telHome").val().length > 0) {
         $("#telHome").blur();
-        setTimeout(function(){$("#telHome").focus()}, 1);
+        setTimeout(function () {
+            $("#telHome").focus()
+        }, 1);
         return false;
     }
 
-    if($("#telMoblie").val().length<10){
+    if ($("#telMoblie").val().length < 10) {
         $("#telMoblie").blur();
-        setTimeout(function(){$("#telMoblie").focus()}, 1);
+        setTimeout(function () {
+            $("#telMoblie").focus()
+        }, 1);
         return false;
     }
 
@@ -790,7 +794,7 @@ function checkEmpty(){
 }
 
 //var i=1;
-$("#ssgMail").blur(function(){
+$("#ssgMail").blur(function () {
     checkUserName();
 });
 //$("#englname").blur(function(){
@@ -798,24 +802,24 @@ $("#ssgMail").blur(function(){
 //});
 
 //var currentUser = "";
-function checkUserName(){
-    if($("#ssgMail").val().length>0){
+function checkUserName() {
+    if ($("#ssgMail").val().length > 0) {
         var userName = $("#username");
         var data = $.ajax({
             type: "POST",
             url: '/TDCS/checkUserName',
-            data : {
-                userName : $("#ssgMail").val()
+            data: {
+                userName: $("#ssgMail").val()
             },
             async: false
         }).responseText;
-        if(data>0){
+        if (data > 0) {
             alert("อีเมลนี้ผู้ใช้อยู่แล้ว");
             $("#ssgMail").val("");
-        }else{
+        } else {
             $("#username").val($("#ssgMail").val());
         }
-    }else{
+    } else {
         $("#username").val("");
     }
 }

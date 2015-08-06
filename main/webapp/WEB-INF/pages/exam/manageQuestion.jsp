@@ -9,7 +9,7 @@
 <%@include file="modal/addEmployeeToInputModal.jsp"%>
 <%@include file="modal/createQuestionModal.jsp"%>
 <div class="container row">
-  <h3 class="h3">แก้ไขข้อสอบ</h3>
+  <h3 class="h3">จัดการข้อสอบ</h3>
 </div>
 <hr/>
 <div class = "container">
@@ -20,8 +20,8 @@
 <!-- Example table information, it will remove soon ^^ -->
     <div class = "row">
       <div class = "col-md-12" align = "center">
-        <table class = "table table-striped">
-          <thead>
+        <table class = "table">
+          <thead class="bg-primary">
             <tr>
               <th style = "text-align: center">หมายเลขข้อสอบ</th>
               <th style = "text-align: center">ข้อสอบ</th>
@@ -174,13 +174,6 @@
   </div>
 </div>
 
-<style>
-  th{
-    border:1px solid white;
-    background-color:pink;
-  }
-</style>
-
 <script>
   $('#submitCreateBtn').text('ยืนยัน');
   $('#createQuestModalTitle').text('แก้ไขข้อสอบ');
@@ -197,4 +190,9 @@
 
 </script>
 
+<style>
+  th{
+    border : solid 1px white;
+  }
+</style>
 

@@ -9,7 +9,7 @@
 <%@include file="modal/addEmployeeToInputModal.jsp" %>
 
 <div class="container row">
-    <h3 class="h3">แก้ไขชุดข้อสอบ</h3>
+    <h3 class="h3">จัดการชุดข้อสอบ</h3>
 </div>
 <hr/>
 <div class="container">
@@ -20,8 +20,8 @@
     <!-- Example table information, it will remove soon ^^ -->
     <div class="row">
         <div class="col-md-12" align="center">
-            <table class="table table-striped">
-                <thead>
+            <table class="table">
+                <thead class="bg-primary">
                 <tr>
                     <th style="text-align: center">หมายเลขชุดข้อสอบ</th>
                     <th style="text-align: center">ชื่อชุดข้อสอบ</th>
@@ -120,11 +120,9 @@
     </div>
 </div>
 
-
 <style>
     th {
-        background-color: pink;
-        border: 1px solid white;
+        border:solid 1px white;
     }
-
 </style>
+
