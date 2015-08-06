@@ -14,7 +14,9 @@
 
         <div class="modal-body">
           <div class="row">
+            <button class = "close showScoreCloseBtn" type = "close">&times;</button>
             <div class="col-md-6 col-md-offset-3">
+
               <h3 style="text-align: center">คะแนนที่ได้ = 25/50</h3>
             </div>
           </div>
@@ -70,3 +72,13 @@
 </div>
 <!-- /.modal -->
 <!-- End Modal Check Score -->
+
+<script>
+
+
+
+  $('.showScoreCloseBtn').on('click',function(){
+    $("#showScore").modal("hide");
+  })
+
+</script>
