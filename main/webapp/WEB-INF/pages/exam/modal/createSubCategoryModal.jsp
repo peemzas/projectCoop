@@ -19,25 +19,25 @@
       <div class="modal-body">
         <div class="row form-group">
           <div class="col-md-4" align="right">
-            <h4><label class="label"
-                       style="color: black ; font-weight: 100">เลือกวิชา
-              :</label></h4>
+            <h4><label class="label" style="color: black ; font-weight: 100">
+                เลือกวิชา :
+            </label></h4>
           </div>
           <div class="input-group col-md-5">
-            <input type="text" class="form-control" name="cat" style="width: 245px"/>
+            <input type="text" class="form-control" name="cat" id="categoryName-forAddSubCat" style="width: 245px"/>
             <span class="input-group-addon" id="search"><a class="glyphicon glyphicon-search" href="#"></a></span>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-4" align="right">
-            <h4><label class="label"
-                       style="color:black;font-weight: 100">หัวข้อเรื่อง
-              :</label></h4>
+            <h4><label class="label" style="color:black;font-weight: 100">
+              หัวข้อเรื่อง :
+            </label></h4>
           </div>
           <div class="col-md-6" style="padding-left: 0px">
-            <input type="text" class="form-control" name="subcat"/>
+            <input type="text" class="form-control" name="subcat" id="subCategoryName-forAddSubCat"/>
           </div>
-          <button class="btn btn-primary" type="submit" data-dismiss="modal">ตกลง</button>
+          <button class="btn btn-primary" type="submit" data-dismiss="modal" id="addSubCatSubmit-Btn">ตกลง</button>
         </div>
       </div>
     </div>
@@ -46,3 +46,31 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<script>
+
+  $('#addSubCatSubmit-Btn').on('click',function(){
+    saveSubCategory();
+  })
+  function saveSubCategory(){
+
+    var subCatName = $('#subCategoryName-forAdd').val();
+    var catName = $('#categoryName-forAddSubCat').val();
+
+    var dat = $.ajax({
+      type:"POST",
+      url: "addSubCategory",
+      data: 'name='+subCatName
+            +'categoryName='+catName,
+      success:function(){
+        alert('เพิ่มหัวข้อเรื่องสำเร็จ ' +catName+' : '+subCatName)
+      },
+      error:function(){
+        alert('การเพิ่มหัวข้อเรื่องล้มเหลว');
+      }
+    }).responseText;
+
+  }
+
+
+</script>
