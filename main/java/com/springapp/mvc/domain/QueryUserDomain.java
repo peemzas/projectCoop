@@ -123,7 +123,6 @@ public class QueryUserDomain extends HibernateUtil {
         }
         user.setUserCreate(usernameInsert);
         user.setDateCreate(dateStr);
-<<<<<<< HEAD
 
         if(isPM){
             countPiority = 0;
@@ -132,10 +131,7 @@ public class QueryUserDomain extends HibernateUtil {
         }
 
         if(countPiority > 0) {
-=======
-        countPiority = findPiority(piority, user.getStatus());
-        if (countPiority > 0) {
->>>>>>> Create Category Complete Insert only no Case scenario
+
             if (countPiority < 10) {
                 newPiority.append("00" + countPiority);
             } else if (countPiority < 100) {
