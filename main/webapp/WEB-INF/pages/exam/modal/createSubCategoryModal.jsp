@@ -54,14 +54,16 @@
   })
   function saveSubCategory(){
 
-    var subCatName = $('#subCategoryName-forAdd').val();
+    var subCatName = $('#subCategoryName-forAddSubCat').val();
     var catName = $('#categoryName-forAddSubCat').val();
+
+    alert('CategoryName : '+catName+' - SubCategoryName : '+subCatName);
 
     var dat = $.ajax({
       type:"POST",
       url: "addSubCategory",
       data: 'name='+subCatName
-            +'categoryName='+catName,
+            +'&categoryName='+catName,
       success:function(){
         alert('เพิ่มหัวข้อเรื่องสำเร็จ ' +catName+' : '+subCatName)
       },

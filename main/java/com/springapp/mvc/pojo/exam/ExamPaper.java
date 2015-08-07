@@ -17,7 +17,7 @@ public class ExamPaper implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_PAPER_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_PAPER_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_PAPER_SEQ")
+    @SequenceGenerator(name = "TDCS_EXAM_PAPER_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_PAPER_SEQ")
     @Column(name = "PAPER_ID")
     private Integer id;
 

@@ -31,5 +31,13 @@ public class QueryCategoryDomain extends HibernateUtil {
 //        return result;
 //    }
 
+    public Category getCategoryByName(String name){
+        Criteria criteria = getSession().createCriteria(Category.class);
+        criteria.add(Restrictions.eq("name",name));
+        Category resultCategory = (Category)criteria.list().get(0);
+
+        return resultCategory;
+    }
+
 }
 

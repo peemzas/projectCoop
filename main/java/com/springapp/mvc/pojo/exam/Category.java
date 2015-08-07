@@ -28,7 +28,7 @@ public class Category implements Serializable{
     @JoinColumn(name="CATEGORY_CREATE_BY")
     private User createBy;
 
-    @OneToMany(mappedBy = "categoryId")
+    @OneToMany(mappedBy = "category")
     private Set<SubCategory> subCategories;
 
 

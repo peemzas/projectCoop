@@ -14,6 +14,12 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
     public void insertSubCategory(SubCategory subCategory){
 
+
+        System.out.println(subCategory.getName());
+        System.out.println(subCategory.getCategory());
+        System.out.println(subCategory.getCreateBy());
+        System.out.println(subCategory.getId());
+
         beginTransaction();
         getSession().save(subCategory);
         commitTransaction();
@@ -23,7 +29,7 @@ public class QuerySubCategoryDomain extends HibernateUtil {
     public boolean checkSubCategoryDuplication(SubCategory subCategory){
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         criteria.add(Restrictions.eq("name",subCategory.getName()));
-        criteria.add(Restrictions.eq("categoryId",subCategory.getCategoryId()));
+        criteria.add(Restrictions.eq("category",subCategory.getCategory()));
 
         boolean result = criteria.list().isEmpty();
         closeSession();
