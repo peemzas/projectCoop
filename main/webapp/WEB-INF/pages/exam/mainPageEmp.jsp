@@ -124,3 +124,5 @@
 <%@include file="modal/createCategoryModal.jsp"%>
 
 <%@include file="modal/createSubCategoryModal.jsp" %>
+
+<%@include file="modal/createQuestionModal.jsp" %>
