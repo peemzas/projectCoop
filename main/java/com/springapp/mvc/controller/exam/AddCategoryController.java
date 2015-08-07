@@ -5,6 +5,7 @@ import com.springapp.mvc.domain.exam.QueryCategoryDomain;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,8 +34,9 @@ public  class AddCategoryController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addCategory")
     @ResponseBody
-    public ResponseEntity addCategory(ModelMap model, @Valid Category category
+    public void  addCategory(ModelMap model, @Valid Category category
             ,HttpServletRequest request, HttpServletResponse response){
+
 
         User createBy = queryUserDomain.getCurrentUser(request);
         category.setCreateBy(createBy);
@@ -42,6 +44,6 @@ public  class AddCategoryController {
         queryCategoryDomain.insertCategory(category);
 
 
-        return null;
+//        return null;
     }
 }
