@@ -14,6 +14,8 @@ import java.util.Set;
 public class ExamAnswerRecord implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_ANSWER_RECORD_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_EXAM_ANSWER_RECORD_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_ANSWER_RECORD_SEQ")
     @Column(name="ANSWER_RECORD_ID")
     private Integer id;
 

@@ -15,6 +15,8 @@ import java.util.Set;
 public class SubCategory implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_SUB_CATEGORY_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_SUB_CATEGORY_ID_SEQ_GEN", sequenceName = "TDCS_SUB_CATEGORY_SEQ")
     @Column(name="SUB_CATEGORY_ID")
     private Integer id;
 
@@ -23,10 +25,10 @@ public class SubCategory implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="CATEGORY_ID")
-    private Category categoryId;
+    private Category category;
 
     @ManyToOne
-    @JoinColumn(name="SUB_CATEGORY_CREATEBY")
+    @JoinColumn(name="SUB_CATEGORY_CREATE_BY",referencedColumnName = "USER_ID")
     private User createBy;
 
     @OneToMany
@@ -60,12 +62,12 @@ public class SubCategory implements Serializable {
         this.name = name;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category categoryId) {
+        this.category = categoryId;
     }
 
     public User getCreateBy() {

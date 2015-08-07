@@ -14,6 +14,8 @@ import java.io.Serializable;
 public class ExamResult implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_RESULT_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_EXAM_RESULT_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_RESULT_SEQ")
     @Column(name = "RESULT_ID")
     private Integer id;
 

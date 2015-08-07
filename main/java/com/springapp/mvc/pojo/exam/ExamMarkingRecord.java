@@ -12,6 +12,8 @@ import javax.persistence.*;
 public class ExamMarkingRecord {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_MARKING_RECORD_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_EXAM_MARKING_RECORD_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_MARKING_RECORD_SEQ")
     @Column(name="MARKING_RECORD_ID")
     private Integer id;
 

@@ -14,6 +14,8 @@ import java.util.Date;
 public class ExamRecord {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_RECORD_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_EXAM_RECORD_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_RECORD_SEQ")
     @Column(name = "RECORD_ID")
     private Integer recordId;
 

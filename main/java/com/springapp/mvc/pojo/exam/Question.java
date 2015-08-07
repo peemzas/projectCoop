@@ -16,6 +16,8 @@ import java.util.Set;
 public class Question implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_QUESTION_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_QUESTION_ID_SEQ_GEN", sequenceName = "TDCS_QUESTION_SEQ")
     @Column(name="QUESTION_ID")
     private Integer id;
 
