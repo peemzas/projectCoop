@@ -7,6 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
+
+
+
 <%--Modal--%>
 <div class="modal fade" id="createCat">
   <div class="modal-dialog">
@@ -26,7 +30,8 @@
           <div class="col-md-6">
             <input type="text" class="form-control" name="cat" id="categoryName"/>
           </div>
-          <button class="btn btn-primary" type="submit" data-dismiss="modal">ตกลง</button>
+          <button id="submitCreateCategoryBtn" class="btn btn-primary" type="submit" data-dismiss="modal">ตกลง</button>
+          <button id="hiddenBtn" data-dismiss="modal" class="hidden">hidden</button>
         </div>
       </div>
     </div>
@@ -35,3 +40,11 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<script src="../../../resources/js/pageScript/exam/addCategory.js" charset="utf-8"></script>
+<script>
+  $('#submitCreateCategoryBtn').on('click',function(){
+    saveCategory();
+  })
+
+</script>

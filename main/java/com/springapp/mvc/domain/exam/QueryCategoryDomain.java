@@ -2,6 +2,7 @@ package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,10 +14,14 @@ import java.util.List;
 @Service
 public class QueryCategoryDomain extends HibernateUtil{
 
-//    public List insertCategory(){
-//        Category category = new Category();
-//        category.setName(createName);
-//
-//        return new ArrayList();
-//    }
+    public List insertCategory(Category category){
+
+        beginTransaction();
+        getSession().save(category);
+        commitTransaction();
+
+        closeSession();
+
+        return new ArrayList();
+    }
 }

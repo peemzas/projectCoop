@@ -2,17 +2,20 @@
  * Created by PTang_000 on 8/5/2015.
  */
 
-function saveData(){
-    var datasend = 'categoryName='+$("#categoryName").val()
-                    +'createBy='+'Mr.Testy';
+function saveCategory(){
+
+    var categoryName = $("#categoryName").val()
 
     var dat = $.ajax({
         type:"POST",
-        url: "TDCS/exam/addCategory",
-        data: datasend,
+        url: "addCategory",
+        data: 'name='+categoryName,
         success:function(){
-            alert('การเพิ่มวิชาประสบผลสำเร็จ');
+            alert('เพิ่มวิชาสำเร็จ ชื่อวิชา : '+ categoryName);
+        },
+        fail:function(){
+            alert('Fail to add Category');
         }
     }).responseText;
-
+    alert('Finish!!!'+dat);
 }
