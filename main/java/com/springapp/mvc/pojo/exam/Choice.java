@@ -12,6 +12,8 @@ import java.util.Set;
 public class Choice  implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CHOICE_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_CHOICE_ID_SEQ_GEN", sequenceName = "TDCS_CHOICE_SEQ")
     @Column(name="CHOICE_ID")
     private Integer id;
 

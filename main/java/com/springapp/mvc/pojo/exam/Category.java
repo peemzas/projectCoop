@@ -15,16 +15,14 @@ import java.util.Set;
 public class Category implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CATEGORY_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_CATEGORY_ID_SEQ_GEN", sequenceName = "CATEGORY_SEQ")
+    @SequenceGenerator(name = "TDCS_CATEGORY_ID_SEQ_GEN", sequenceName = "TDCS_CATEGORY_SEQ")
     @Column(name="CATEGORY_ID")
     private  Integer id;
 
-    @Column(name="CATEGORY_NAME")
+    @Column(name="CATEGORY_NAME",unique = true)
     private String name;
 
-//    @ManyToOne
-//    @JoinColumn(name = "CATEGORY_STATUS")
-//    private Status status;
+
 
     @ManyToOne
     @JoinColumn(name="CATEGORY_CREATE_BY")

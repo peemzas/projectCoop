@@ -32,17 +32,16 @@ public  class AddCategoryController {
     @Autowired
     QueryUserDomain queryUserDomain;
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addCategory")
     @ResponseBody
     public void  addCategory(ModelMap model, @Valid Category category
             ,HttpServletRequest request, HttpServletResponse response){
 
-
         User createBy = queryUserDomain.getCurrentUser(request);
         category.setCreateBy(createBy);
 
-        queryCategoryDomain.insertCategory(category);
-
+            queryCategoryDomain.insertCategory(category);
 
 //        return null;
     }
