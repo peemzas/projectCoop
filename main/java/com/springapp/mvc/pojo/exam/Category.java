@@ -14,6 +14,8 @@ import java.util.Set;
 @Table(name="TDCS_CATEGORIES")
 public class Category implements Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CATEGORY_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_CATEGORY_ID_SEQ_GEN", sequenceName = "CATEGORY_SEQ")
     @Column(name="CATEGORY_ID")
     private  Integer id;
 
@@ -30,6 +32,16 @@ public class Category implements Serializable{
 
     @OneToMany(mappedBy = "categoryId")
     private Set<SubCategory> subCategories;
+
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "createBy=" + createBy +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 
     public Integer getId() {
         return id;

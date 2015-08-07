@@ -12,6 +12,8 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +25,7 @@ import java.util.Locale;
  */
 @Service
 public class QueryUserDomain extends HibernateUtil {
-    public List<User> getStudentData(String fName, String lName, String nickName,String staff, String position, String piority,Integer status) {
+    public List<User> getStudentData(String fName, String lName, String nickName, String staff, String position, String piority, Integer status) {
         Criteria criteria = getSession().createCriteria(User.class);
         if (BeanUtils.isNotEmpty(fName) && BeanUtils.isNotEmpty(lName)) {
             if (BeanUtils.isNotEmpty(fName)) {
@@ -50,7 +52,7 @@ public class QueryUserDomain extends HibernateUtil {
 
         criteria.add(Restrictions.eq("status", 3));
         criteria.add(Restrictions.eq("validateStu", 1));
-        if(status == 2) {
+        if (status == 2) {
             criteria.add(Restrictions.like("piority", "%" + piority + "%"));
             criteria.add(Restrictions.ne("piority", piority));
         }
@@ -62,7 +64,7 @@ public class QueryUserDomain extends HibernateUtil {
         return list;
     }
 
-    public List<User> getStaffData(String fName, String lName, String nickName, String company, String employeeId){
+    public List<User> getStaffData(String fName, String lName, String nickName, String company, String employeeId) {
         Criteria criteria = getSession().createCriteria(User.class);
         if (BeanUtils.isNotEmpty(fName) && BeanUtils.isNotEmpty(lName)) {
             if (BeanUtils.isNotEmpty(fName)) {
@@ -91,12 +93,12 @@ public class QueryUserDomain extends HibernateUtil {
         return list;
     }
 
-    public List<User> getUserValidate(String piority,Integer page) {
+    public List<User> getUserValidate(String piority, Integer page) {
         Criteria criteria = getSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("validateStu", 0));
         criteria.add(Restrictions.like("piority", "%" + piority + "%"));
         criteria.addOrder(Order.asc("dateCreate"));
-        page = (page-1)*10;
+        page = (page - 1) * 10;
         criteria.setFirstResult(page);
         criteria.setMaxResults(10);
         List<User> list = (List<User>) criteria.list();
@@ -113,14 +115,15 @@ public class QueryUserDomain extends HibernateUtil {
         Date date = new Date();
         String dateStr = dateFormat.format(date);
         HibernateUtil.beginTransaction();
-        if(user.getStatus() == 3){
+        if (user.getStatus() == 3) {
             user.setValidateStu(0);
             user.setViewEav(0);
-        }else {
+        } else {
             user.setValidateStu(1);
         }
         user.setUserCreate(usernameInsert);
         user.setDateCreate(dateStr);
+<<<<<<< HEAD
 
         if(isPM){
             countPiority = 0;
@@ -129,6 +132,10 @@ public class QueryUserDomain extends HibernateUtil {
         }
 
         if(countPiority > 0) {
+=======
+        countPiority = findPiority(piority, user.getStatus());
+        if (countPiority > 0) {
+>>>>>>> Create Category Complete Insert only no Case scenario
             if (countPiority < 10) {
                 newPiority.append("00" + countPiority);
             } else if (countPiority < 100) {
@@ -136,7 +143,7 @@ public class QueryUserDomain extends HibernateUtil {
             } else {
                 newPiority.append(countPiority);
             }
-        }else {
+        } else {
             newPiority.append("");
         }
         user.setPiority(piority + newPiority.toString());
@@ -145,22 +152,23 @@ public class QueryUserDomain extends HibernateUtil {
         closeSession();
 
         Criteria criteria = getSession().createCriteria(User.class);
-        criteria.add(Restrictions.eq("userName",user.getUserName()));
+        criteria.add(Restrictions.eq("userName", user.getUserName()));
         List<User> list = criteria.list();
         closeSession();
         return list;
     }
 
-    public static Integer findPiority(String pior,Integer status) {
+    public static Integer findPiority(String pior, Integer status) {
         Integer sizePioruty = 0;
         StringBuffer piorityBuffer = new StringBuffer();
         Criteria criteria = getSession().createCriteria(User.class);
         criteria.add(Restrictions.like("piority", pior + "%"));
         criteria.add(Restrictions.eq("status", status));
-        criteria.add(new LengthExpression("piority",pior.length()+3));
+        criteria.add(new LengthExpression("piority", pior.length() + 3));
         criteria.addOrder(Order.asc("piority"));
-        List<User> list = (List<User>)criteria.list();
+        List<User> list = (List<User>) criteria.list();
         sizePioruty = list.size();
+
         if((list.size()>0 && status == 3) || (status == 2 && list.size() >0)){
             piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-3)+"");
             piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-2)+"");
@@ -171,6 +179,7 @@ public class QueryUserDomain extends HibernateUtil {
             sizePioruty++;
         }
         if(list.size() <= 0 && status == 3){
+
             sizePioruty++;
         }
         return sizePioruty;
@@ -221,7 +230,7 @@ public class QueryUserDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-    public void setUserEvaGrade(Integer id,String evaGrade) {
+    public void setUserEvaGrade(Integer id, String evaGrade) {
         User user = getUserDatas(id);
         user.setEvaGrade(evaGrade);
         HibernateUtil.beginTransaction();
@@ -237,7 +246,7 @@ public class QueryUserDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-    public void resetPassword(Integer id,String newPass) {
+    public void resetPassword(Integer id, String newPass) {
         User user = getUserDatas(id);
         user.setPassword(newPass);
         HibernateUtil.beginTransaction();
@@ -290,14 +299,15 @@ public class QueryUserDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-    public List<User> searchUserOneStringColum(String colum,String value){
+    public List<User> searchUserOneStringColum(String colum, String value) {
         Criteria criteria = getSession().createCriteria(User.class);
-        criteria.add(Restrictions.eq(colum,value));
+        criteria.add(Restrictions.eq(colum, value));
         List<User> list = criteria.list();
         closeSession();
         return list;
     }
-    public void Updateimage(String value,Integer id){
+
+    public void Updateimage(String value, Integer id) {
         User user = getUserDatas(id);
         user.setImange(value);
         HibernateUtil.beginTransaction();
@@ -306,7 +316,8 @@ public class QueryUserDomain extends HibernateUtil {
 //        getSession().clear();
         HibernateUtil.commitTransaction();
     }
-    public void EditProfile(User user){
+
+    public void EditProfile(User user) {
         User user1 = getUserDatas(user.getUserId());
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
@@ -323,11 +334,11 @@ public class QueryUserDomain extends HibernateUtil {
         user.setDateCreate(user1.getDateCreate());
         user.setPiority(user1.getPiority());
         user.setImange(user1.getImange());
-        if(!user.getStaffId().equals(user1.getStaffId())){
+        if (!user.getStaffId().equals(user1.getStaffId())) {
             StringBuffer newPiority = new StringBuffer();
             User userBuffer = getUserDatas(user.getStaffId());
-            Integer countPiority = findPiority(userBuffer.getPiority(),3);
-            if(countPiority > 0) {
+            Integer countPiority = findPiority(userBuffer.getPiority(), 3);
+            if (countPiority > 0) {
                 if (countPiority < 10) {
                     newPiority.append("00" + countPiority);
                 } else if (countPiority < 100) {
@@ -335,7 +346,7 @@ public class QueryUserDomain extends HibernateUtil {
                 } else {
                     newPiority.append(countPiority);
                 }
-            }else {
+            } else {
                 newPiority.append("");
             }
             user.setPiority(userBuffer.getPiority() + newPiority.toString());
@@ -346,7 +357,7 @@ public class QueryUserDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-    public void editProfileStaff(User user,String pioruty){
+    public void editProfileStaff(User user, String pioruty) {
         User user1 = getUserDatas(user.getUserId());
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
@@ -362,10 +373,10 @@ public class QueryUserDomain extends HibernateUtil {
         user.setDateCreate(user1.getDateCreate());
         user.setImange(user1.getImange());
 
-        if(user.getTeamId().toString().equals(user1.getTeamId().toString())){//No change team
+        if (user.getTeamId().toString().equals(user1.getTeamId().toString())) {//No change team
             user.setPiority(user1.getPiority());
-        }else { //Chang teame
-            if(pioruty.length()<=0) {//Not PM
+        } else { //Chang teame
+            if (pioruty.length() <= 0) {//Not PM
                 StringBuffer newPiority = new StringBuffer();
                 Integer countPiority = findPiority(user.getPiority(), 2);
                 if (countPiority > 0) {
@@ -380,7 +391,7 @@ public class QueryUserDomain extends HibernateUtil {
                     newPiority.append("");
                 }
                 user.setPiority(user.getPiority() + newPiority.toString());
-            }else {//PM of new team
+            } else {//PM of new team
                 user.setPiority(pioruty);
                 // edit team and section
             }
@@ -393,12 +404,12 @@ public class QueryUserDomain extends HibernateUtil {
     }
 
 
-    public List<User> getStudentUserDataList(Integer userID,String status){
+    public List<User> getStudentUserDataList(Integer userID, String status) {
         Criteria criteria = getSession().createCriteria(User.class);
-        criteria.add(Restrictions.eq("userId",userID));
+        criteria.add(Restrictions.eq("userId", userID));
         List<User> list = criteria.list();
         closeSession();
-        if(status.equals("user")) {
+        if (status.equals("user")) {
             Criteria criteria1 = getSession().createCriteria(UniversityFacultyMajor.class);
             criteria1.add(Restrictions.eq("uniFacMajId", list.get(0).getUniFacMajId()));
             List<UniversityFacultyMajor> list1 = criteria1.list();
@@ -406,5 +417,30 @@ public class QueryUserDomain extends HibernateUtil {
             list.get(0).setUniversityFacultyMajor(list1.get(0));
         }
         return list;
+    }
+
+
+    public User getUserByUsernameAndId(String username, Integer id) {
+        Criteria criteria = getSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("userName", username));
+        criteria.add(Restrictions.eq("userId", id));
+        List<User> list = criteria.list();
+        return list.get(0);
+    }
+
+    public User getCurrentUser(HttpServletRequest request){
+
+        User currentUser = getUserByUsernameAndId(request.getSession().getAttribute("username").toString()
+                ,Integer.parseInt(request.getSession().getAttribute("userid").toString()));
+
+        return currentUser;
+    }
+
+    public String getUsernameByUserId(Integer userId) {
+        Criteria criteria = getSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("userId", userId));
+        List<User> list = criteria.list();
+        closeSession();
+        return list.get(0).getUserName();
     }
 }
