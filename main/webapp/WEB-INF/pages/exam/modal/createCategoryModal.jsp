@@ -43,11 +43,13 @@
 <!-- /.modal -->
 
 <%--<script src="../../../resources/js/pageScript/exam/addCategory.js" charset="UTF-8"></script>--%>
-<spring:url value="../../../resources/js/pageScript/exam/addCategory.js" var="addCategory"/>
+<spring:url value="../../../resources/js/pageScript/exam/addCategory.js" var="addCategory"></spring:url>
 <script src="${addCategory}" type="text/javascript"><!--Not Empty --></script>
 <script>
+
   $('#submitCreateCategoryBtn').on('click',function(){
     saveCategory();
   })
+
 
 </script>

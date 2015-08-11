@@ -128,7 +128,7 @@
 
     <!--CREATE BY NICK-->
     <definition name="examRecordSearch" extends="tempForUser">
-        <put-attribute name="title" value="ค้นหาบันทึกการทำข้อสอบ"/>
+        <put-attribute name="title" value="ตรวจข้อสอบ"/>
         <put-attribute name="body" value="/WEB-INF/pages/exam/examRecordSearch.jsp"/>
     </definition>
 

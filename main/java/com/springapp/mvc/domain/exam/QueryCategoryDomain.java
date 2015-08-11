@@ -17,10 +17,9 @@ public class QueryCategoryDomain extends HibernateUtil {
 
     public void insertCategory(Category category){
 
-        beginTransaction();
+        HibernateUtil.beginTransaction();
         getSession().save(category);
-        commitTransaction();
-
+        HibernateUtil.commitTransaction();
         closeSession();
     }
 
