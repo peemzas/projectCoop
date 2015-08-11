@@ -45,17 +45,9 @@ public class manageSubCategoryController {
         subCategory.setName(name);
         subCategory.setCategory(queryCategoryDomain.getCategoryByName(categoryName));
 
-        System.out.println(subCategory.getName());
-
         User currentUser = queryUserDomain.getCurrentUser(request);
 
-        System.out.println(currentUser);
-
         subCategory.setCreateBy(currentUser);
-
-        System.out.println(subCategory.getCategory());
-
-        System.out.println("Prepare to Insert");
 
         if (querySubCategoryDomain.checkSubCategoryDuplication(subCategory)) {
 
