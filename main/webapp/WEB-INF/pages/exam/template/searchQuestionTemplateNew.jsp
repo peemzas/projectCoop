@@ -9,7 +9,7 @@
 <%@include file="../modal/addEmployeeToInputModal.jsp" %>
 <div class = "container">
   <div class = "row">
-    <div class = "panel-collapse" id = "searchCollapse">
+      <div class = "panel-collapse" id = "searchCollapse">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h4>ค้นหา...</h4>

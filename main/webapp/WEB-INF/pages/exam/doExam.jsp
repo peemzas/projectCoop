@@ -132,7 +132,7 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-right">
-      <button class="btn btn-file">ส่งชุดข้อสอบ</button>
+      <button class="btn btn-file" id="SendPaper" >ส่งชุดข้อสอบ</button>
     </div>
   </div>
   <br/><br/>
@@ -150,4 +150,11 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('#SendPaper').on('click',function(){
+    alert('ส่งชุดข้อสอบเรียบร้อบแล้ว')
+  })
+
+</script>
 

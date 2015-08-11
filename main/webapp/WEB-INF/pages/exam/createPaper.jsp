@@ -98,7 +98,7 @@
   </div>
   <div class="col-md-5" align="right" style="padding: 0px">
     <button  data-toggle="modal" data-target="#createQuest" class="btn btn-gray">สร้างข้อสอบ</button>
-    <button data-toggle="modal" data-target="#selectQuest" class="btn btn-gray">เลือกข้อสอบ</button>
+    <button data-toggle="modal" data-target="#selectQuest" class="btn btn-gray">เลือกข้อสอบฟ</button>
     <button data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray">สุ่มข้อสอบ</button>
   </div>
 </div>

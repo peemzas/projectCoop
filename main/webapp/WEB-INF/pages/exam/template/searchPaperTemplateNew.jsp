@@ -39,7 +39,7 @@
               <div class = "input-group">
                 <input class = "form-control" type = "text"/>
                 <div class = "input-group-btn">
-                  <button class = "btn btn-default" type = "button" data-toggle = "modal" data-target = "#modalSearchByEmployeeName">+</button>
+                  <button class = "btn btn-primary" type = "button" data-toggle = "modal" data-target = "#modalSearchByEmployeeName">+</button>
                 </div>
               </div>
             </div>
