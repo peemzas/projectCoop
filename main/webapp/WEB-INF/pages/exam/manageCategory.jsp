@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: wanchana
@@ -54,28 +55,36 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>JAVA</td>
-                    <td style="text-align: center;">
-                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>English</td>
-                    <td style="text-align: center;">
-                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
-                </tr>
+                <%--<tr>--%>
+                    <%--<td>JAVA</td>--%>
+                    <%--<td style="text-align: center;">--%>
+                        <%--<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>--%>
+                        <%--</button>--%>
+                        <%--<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>--%>
+                        <%--</button>--%>
+                        <%--<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>--%>
+                        <%--</button>--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
+                <%--<tr>--%>
+                    <%--<td>English</td>--%>
+                    <%--<td style="text-align: center;">--%>
+                        <%--<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>--%>
+                        <%--</button>--%>
+                        <%--<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>--%>
+                        <%--</button>--%>
+                        <%--<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>--%>
+                        <%--</button>--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
+
+                <c:forEach var="category" items="${LIST_OF_CATEOGRIES}">
+                    <tr>
+                        <td>${category.name}</td>
+                        <td></td>
+                    </tr>
+                </c:forEach>
+
             </tbody>
         </table>
 

@@ -1,15 +1,23 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.*;
+import com.springapp.mvc.domain.exam.QueryCategoryDomain;
 import com.springapp.mvc.pojo.*;
+import com.springapp.mvc.pojo.exam.Category;
+import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/TDCS")
@@ -41,6 +49,10 @@ public class InPageController {
     private QueryTeamDomain queryTeamDomain;
     @Autowired
     private QueryTopicDomain queryTopicDomain;
+    
+//    Add by Neng
+    @Autowired
+    private QueryCategoryDomain queryCategoryDomain;
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/picture")
@@ -228,10 +240,19 @@ public class InPageController {
         return "searchPaper";
     }
     //CREATE BY PEEM
-    
+
     // Create by Neng
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
-    public String editCategories(HttpServletRequest request){
+    public String editCategories(HttpServletRequest request , Model model){
+
+//        Criteria criteria = HibernateUtil.getSession().createCriteria(Category.class);
+//
+//        criteria.setProjection(Projections.projectionList().add(Projections.property("name") , "name"));
+//        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//        List<Map> categories = criteria.list();
+
+        model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
+
         return "manageCategory";
     }
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageQuestion")

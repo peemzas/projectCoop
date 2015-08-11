@@ -3,11 +3,14 @@ package com.springapp.mvc.domain.exam;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Phuthikorn_T on 8/5/2015.
@@ -38,5 +41,13 @@ public class QueryCategoryDomain extends HibernateUtil {
         return resultCategory;
     }
 
+    public List<Map> getListCategories(){
+
+        Criteria criteria = getSession().createCriteria(Category.class);
+        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Map> categories = criteria.list();
+        return categories;
+    }
 }
 
