@@ -14,8 +14,8 @@ import java.util.Set;
 @Table(name="TDCS_CATEGORIES")
 public class Category implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CATEGORY_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_CATEGORY_ID_SEQ_GEN", sequenceName = "TDCS_CATEGORY_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CATEGORY_TRIG")
+    @SequenceGenerator(name = "TDCS_CATEGORY_TRIG", sequenceName = "TDCS_CATEGORY_SEQ")
     @Column(name="CATEGORY_ID")
     private  Integer id;
 

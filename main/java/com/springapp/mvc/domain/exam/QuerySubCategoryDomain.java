@@ -14,12 +14,6 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
     public void insertSubCategory(SubCategory subCategory){
 
-
-        System.out.println(subCategory.getName());
-        System.out.println(subCategory.getCategory());
-        System.out.println(subCategory.getCreateBy());
-        System.out.println(subCategory.getId());
-
         beginTransaction();
         getSession().save(subCategory);
         commitTransaction();
