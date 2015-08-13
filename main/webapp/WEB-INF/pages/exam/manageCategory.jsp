@@ -26,19 +26,19 @@
 </script>
 
 <div class="container row">
-    <h3>วิชาและหัวข้อเรื่อง</h3>
+    <h3>วิชา</h3>
     <hr>
 </div>
 <div class="row">
     <div class="col-md-5" align="right" style="margin-top: 20px;">
-        <label><h4>แสดง</h4></label>
+        <label><h4>แสดง : วิชา</h4></label>
     </div>
-    <div class="col-md-4" align="left" style="margin-top: 20px;">
-        <select class="form-control" id="viewControlSelector">
-            <option id = "selectCategory" value="Category" selected>วิชา</option>
-            <option id = "selectSubCategory" value="SubCategory" >หัวข้อเรื่อง</option>
-        </select>
-    </div>
+    <%--<div class="col-md-4" align="left" style="margin-top: 20px;">--%>
+        <%--<select class="form-control" id="viewControlSelector">--%>
+            <%--<option id = "selectCategory" value="Category" selected>วิชา</option>--%>
+            <%--<option id = "selectSubCategory" value="SubCategory" >หัวข้อเรื่อง</option>--%>
+        <%--</select>--%>
+    <%--</div>--%>
 </div>
 <br/>
 <br/>

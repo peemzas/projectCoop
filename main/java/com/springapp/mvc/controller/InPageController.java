@@ -245,6 +245,8 @@ public class InPageController {
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
     public String editCategories(HttpServletRequest request , Model model){
 
+
+
 //        Criteria criteria = HibernateUtil.getSession().createCriteria(Category.class);
 //
 //        criteria.setProjection(Projections.projectionList().add(Projections.property("name") , "name"));
@@ -255,6 +257,12 @@ public class InPageController {
 
         return "manageCategory";
     }
+    //Create Jokizz
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/manageSubCategory")
+    public String editSubCategory(HttpServletRequest request){
+        return "manageSubCategory";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageQuestion")
     public String editQuestions(HttpServletRequest request){
         return "manageQuestion";
