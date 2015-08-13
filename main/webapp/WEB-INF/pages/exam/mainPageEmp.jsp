@@ -86,7 +86,14 @@
 
                     <div class="row">
                         <a href="/TDCS/exam/manageCategory" class="btn btn-default"
-                           style="width:125px;height:35px">วิชาและหัวข้อเรื่อง
+                           style="width:125px;height:35px">วิชา
+                        </a>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <a href="/TDCS/exam/manageSubCategory" class="btn btn-default"
+                           style="width:125px;height:35px">หัวข้อเรื่อง
                         </a>
                     </div>
                     <br>

@@ -142,6 +142,11 @@
         <put-attribute name="title" value="แก้ไขหมวดหมู่" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/manageCategory.jsp" />
     </definition>
+    <definition name = "manageSubCategory" extends="tempForUser">
+        <put-attribute name="title" value="แก้ไขหมวดหมู่" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/manageSubCategory.jsp" />
+    </definition>
+
     <definition name = "manageQuestion" extends = "tempForUser">
         <put-attribute name="title" value = "แก้ไขข้อสอบ" />
         <put-attribute name="body" value = "/WEB-INF/pages/exam/manageQuestion.jsp" />

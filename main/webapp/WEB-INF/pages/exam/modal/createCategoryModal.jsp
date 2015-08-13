@@ -9,47 +9,58 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-
-
-
 <%--Modal--%>
 <div class="modal fade" id="createCat">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" align="center">เพิ่มวิชา</h3>
-      </div>
-      <div class="modal-body" style="height: 80px">
-        <div class="row">
-          <div class="col-md-3" align="right">
-            <h4><label class="label"
-                       style="color: black ; font-weight: 100">วิชา
-              :</label></h4>
-          </div>
-          <div class="col-md-6">
-            <input type="text" class="form-control" name="cat" id="categoryName"/>
-          </div>
-          <button id="submitCreateCategoryBtn" class="btn btn-primary" type="submit" data-dismiss="modal">ตกลง</button>
-          <button id="hiddenBtn" data-dismiss="modal" class="hidden">hidden</button>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" align="center">เพิ่มวิชา</h3>
+            </div>
+            <div class="modal-body" style="height: 120px">
+                <div class="row">
+                    <div class="col-md-3" align="right">
+                        <h4><label class="label"
+                                   style="color: black ; font-weight: 100">วิชา
+                            :</label></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="cat" id="categoryName"/>
+                    </div>
+
+
+                    <button id="hiddenBtn" data-dismiss="modal" class="hidden">hidden</button>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button id="submitCreateCategoryBtn" class="btn btn-primary" type="submit" data-dismiss="modal">
+                        บันทึก
+                    </button>
+
+                        <button id="hiddenBtn2" class="btn btn-warning"  class="hidden" data-dismiss="modal">
+                            ยกเลิก
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
         </div>
-      </div>
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+    <!-- /.modal -->
 
-<%--<script src="../../../resources/js/pageScript/exam/addCategory.js" charset="UTF-8"></script>--%>
-<spring:url value="../../../resources/js/pageScript/exam/addCategory.js" var="addCategory"></spring:url>
-<script src="${addCategory}" type="text/javascript"><!--Not Empty --></script>
-<script>
+    <%--<script src="../../../resources/js/pageScript/exam/addCategory.js" charset="UTF-8"></script>--%>
+    <spring:url value="../../../resources/js/pageScript/exam/addCategory.js" var="addCategory"></spring:url>
+    <script src="${addCategory}" type="text/javascript"><!--Not Empty --></script>
+    <script>
 
-  $('#submitCreateCategoryBtn').on('click',function(){
-    saveCategory();
-  })
+        $('#submitCreateCategoryBtn').on('click', function () {
+            saveCategory();
+        })
 
 
-</script>
+    </script>
