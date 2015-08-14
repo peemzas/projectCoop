@@ -1,5 +1,5 @@
 $("document").ready(function(){
-    alert('hey');
+    //alert('hey');
     viewCategory();
 
 });
@@ -20,6 +20,7 @@ function viewCategory(){
                     '<td><label id="labelFor'+value.id+'">'+value.name+'</label>'+
                     '<input id="dataFor'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
+                    '<td><button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')">Delete</button>'+
                     '</tr>'
                 )
             });
@@ -27,5 +28,24 @@ function viewCategory(){
         error: function(data){
             alert('error while request...');
         }
+    });
+}
+
+function deleteCategory(categoryId){
+
+    if(!confirm("แน่ใจนะว่าคุณจะลบ")){
+        return false;
+    }
+    $.ajax({
+       type: "POST",
+       url: "/TDCS/exam/deleteCategory",
+       data:{
+           id: categoryId
+       },
+       async: false,
+       success:function(){
+           //alert("refresh");
+           window.location.reload();
+       }
     });
 }
