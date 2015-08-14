@@ -3,6 +3,7 @@ package com.springapp.mvc.domain.exam;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
@@ -26,6 +27,8 @@ public class QueryCategoryDomain extends HibernateUtil {
         closeSession();
     }
 
+
+
 //    public boolean checkDuplicateName(String name) {
 //        Criteria criteria = getSession().createCriteria(Category.class);
 //        criteria.add(Restrictions.eq("name", name));
@@ -35,7 +38,7 @@ public class QueryCategoryDomain extends HibernateUtil {
 
     public Category getCategoryByName(String name){
         Criteria criteria = getSession().createCriteria(Category.class);
-        criteria.add(Restrictions.eq("name",name));
+        criteria.add(Restrictions.eq("name", name));
         Category resultCategory = (Category)criteria.list().get(0);
 
         return resultCategory;
@@ -44,10 +47,18 @@ public class QueryCategoryDomain extends HibernateUtil {
     public List<Map> getListCategories(){
 
         Criteria criteria = getSession().createCriteria(Category.class);
-        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name"));
+        criteria.addOrder(Order.asc("id"));
+        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"),"id"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Map> categories = criteria.list();
         return categories;
     }
+
+//    public Category getCategoryById(Integer id){
+//        Criteria criteria = getSession().createCriteria(Category.class);
+//        criteria.add(Restrictions.eq("id",id));
+//
+//        return (Category)criteria.list().get(0);
+//    }
 }
 

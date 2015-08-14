@@ -10,13 +10,14 @@
 function saveCategory(){
 
     var categoryName = $("#categoryName").val()
+    var categoryId = $("#categoryId").val()
 
     var dat = $.ajax({
         type:"POST",
         url: "/TDCS/exam/addCategory",
-        data: 'name='+categoryName,
+        data: 'id='+categoryId +'&name='+categoryName,
         success:function(){
-            alert('เพิ่มวิชา ' +categoryName+' สำเร็จ ');
+            alert('เพิ่มวิชา ' +categoryId+'  '+categoryName+' สำเร็จ ');
         },
         error:function(){
             alert('เพิ่มวิชาไม่สำเร็จ');
