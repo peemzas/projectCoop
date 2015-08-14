@@ -6,11 +6,8 @@ import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-<<<<<<< HEAD
 import org.hibernate.transform.Transformers;
-=======
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> CreateQuestionModal Controller Complete!!!!
 import org.springframework.stereotype.Service;
 
 import java.util.List;
