@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/TDCS")
-public  class AddCategoryController {
+public  class CategoryController {
 
     @Autowired
     QueryCategoryDomain queryCategoryDomain;
@@ -50,7 +51,7 @@ public  class AddCategoryController {
 // return null;
     }
 
-    @RequestMapping(value ="/exam/getAllCategory",method = RequestMethod.POST)
+    @RequestMapping(value = "/exam/getAllCategory",method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getAllCategory() {
 
@@ -61,5 +62,14 @@ public  class AddCategoryController {
         String json = new Gson().toJson(categories);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/deleteCategory", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity deleteCategory(@ModelAttribute("id") Integer categoryId){
+
+        queryCategoryDomain.deleteCategory(categoryId);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

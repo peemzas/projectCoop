@@ -44,12 +44,8 @@ public class QueryCategoryDomain extends HibernateUtil {
         return resultCategory;
     }
 
+    //------------Add by neng
     public List<Category> getListCategories(){
-
-//        Criteria criteria = getSession().createCriteria(Category.class);
-//        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name"));
-//        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-//        List<Category> categories = criteria.list();
 
         Criteria criteria = getSession().createCriteria(Category.class);
         criteria.addOrder(Order.asc("id"));
@@ -58,6 +54,17 @@ public class QueryCategoryDomain extends HibernateUtil {
         List<Category> categories = criteria.list();
 
         return categories;
+    }
+
+    public void deleteCategory(Integer categoryId){
+
+        Criteria criteria = getSession().createCriteria(Category.class);
+        criteria.add(Restrictions.eq("id", categoryId));
+        Category category = (Category) criteria.uniqueResult();
+
+        HibernateUtil.beginTransaction();
+        getSession().delete(category);
+        HibernateUtil.commitTransaction();
     }
 }
 
