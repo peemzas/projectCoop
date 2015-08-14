@@ -78,8 +78,8 @@
 
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
-                            <button class="btn btn-default" type="button">ค้นหา</button>
-                            <button class="btn btn-default" type="button">ล้างข้อมูล</button>
+                            <button class="btn btn-primary" type="button">ค้นหา</button>
+                            <button type="button" class="btn" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล</button>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
             <%--</div>--%>
         </div>
         <br/>
-        <br/>
+
 
 
 
