@@ -21,10 +21,11 @@ function viewCategory(){
                     '</td>'+
 
                     '<td style="text-align: center">'+
-                                '<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" onclick="deleteCategory('+ "'" +value.id+ "'"+')"></button>'+' '+
-                                '<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button>'+
-                                '</td>'+
+                                '<button type="button" class="btn btn-gray"><span class="glyphicon glyphicon-pencil"></span></button>'+' '+
 
+
+                    '<button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
+                    '</td>'+
                     '</tr>'
                 )
             });
@@ -49,7 +50,7 @@ function deleteCategory(categoryId){
        },
        async: false,
        success:function(){
-           //alert("refresh");
+           alert(' ลบวิชา ' +categoryId +' สำเร็จ ');
            window.location.reload();
        }
     });
