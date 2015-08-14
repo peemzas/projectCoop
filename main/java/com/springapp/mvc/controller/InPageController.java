@@ -2,6 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.*;
 import com.springapp.mvc.domain.exam.QueryCategoryDomain;
+import com.springapp.mvc.domain.exam.QuerySubCategoryDomain;
 import com.springapp.mvc.pojo.*;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.util.HibernateUtil;
@@ -53,6 +54,9 @@ public class InPageController {
 //    Add by Neng
     @Autowired
     private QueryCategoryDomain queryCategoryDomain;
+    //add jokizz
+    @Autowired
+    private QuerySubCategoryDomain querySubCategoryDomain;
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/picture")
@@ -259,7 +263,8 @@ public class InPageController {
     }
     //Create Jokizz
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageSubCategory")
-    public String editSubCategory(HttpServletRequest request){
+    public String editSubCategory(HttpServletRequest request, Model model){
+        model.addAttribute("LIST_OF_SUBCATEOGRIES", querySubCategoryDomain.getListSubCategories());
         return "manageSubCategory";
     }
 

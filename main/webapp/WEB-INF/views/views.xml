@@ -139,11 +139,11 @@
 
     <!-- Create by Neng -->
     <definition name = "manageCategory" extends="tempForUser">
-        <put-attribute name="title" value="แก้ไขหมวดหมู่" />
+        <put-attribute name="title" value="แก้ไขรายวิชา" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/manageCategory.jsp" />
     </definition>
     <definition name = "manageSubCategory" extends="tempForUser">
-        <put-attribute name="title" value="แก้ไขหมวดหมู่" />
+        <put-attribute name="title" value="แก้ไขหัวข้อเรื่อง" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/manageSubCategory.jsp" />
     </definition>
 
