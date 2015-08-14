@@ -6,7 +6,11 @@ import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+<<<<<<< HEAD
 import org.hibernate.transform.Transformers;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> CreateQuestionModal Controller Complete!!!!
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,7 +49,14 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         List<Map> subcategories = criteria.list();
         return subcategories;
     }
+    
+    public SubCategory getSubCategoryByNameAndCategory(String name,Category category){
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
+        criteria.add(Restrictions.eq("name",name));
+        criteria.add(Restrictions.eq("category", category));
 
+        return (SubCategory)criteria.list().get(0);
+    }
 
 
 }

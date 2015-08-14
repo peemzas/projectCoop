@@ -2,7 +2,6 @@ package com.springapp.mvc.pojo.exam;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -20,7 +19,7 @@ public class QuestionType implements Serializable {
     @Column(name="QUESTION_TYPE_DESCRIPTION")
     private String description;
 
-    @OneToMany(mappedBy = "questionTypeId")
+    @OneToMany(mappedBy = "questionType")
     private Set<Question> questions;
 
 

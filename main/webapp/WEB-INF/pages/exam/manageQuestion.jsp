@@ -180,13 +180,10 @@
 
   function editQuestions(){ // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp
     // IF THIS ISN'T WORKING TRY PUT THE CODE IN editQuestion() in createQuestionModal.jsp instead
-    //
-    // DO EDIT QUESTION HERE
-    //
-    alert('Working');
+    //function editQuestion()  IS IN THE webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp DEFINE IT THERE (DEFINE HERE WILL NOT WORK)
   }
 
-  //function editQuestion()  IS IN THE webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp DEFINE IT THERE (DEFINE HERE WON'T WORK)
+
 
 </script>
 
