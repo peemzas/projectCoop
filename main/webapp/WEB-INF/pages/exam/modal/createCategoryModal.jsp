@@ -23,7 +23,7 @@
 
 
                     <div class="col-md-3" align="right">
-                        <h4><label class="label"
+                        <h4><label for="categoryId" class="label"
                                    style="color: black ; font-weight: 100">รหัสวิชา :
                         </label></h4>
                     </div>
@@ -33,7 +33,7 @@
 
 
                     <div class="col-md-1" align="right">
-                        <h4><label class="label"
+                        <h4><label for="categoryName" class="label"
                                    style="color: black ; font-weight: 100">วิชา :
                         </label></h4>
                     </div>

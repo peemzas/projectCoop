@@ -130,23 +130,23 @@
                         <th style="text-align: center; color: white">แอคชั่น</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbodyCategory">
 
 
-                    <c:forEach var="category" items="${LIST_OF_CATEOGRIES}">
-                        <tr>
-                            <td>${category.id}</td>
-                            <td>${category.name}</td>
-                            <td style="text-align: center">
-                                <button type="button" class="btn btn-warning"><span
-                                        class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button type="button" class="btn btn-danger"><span
-                                        class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                    <%--<c:forEach var="category" items="${LIST_OF_CATEOGRIES}">--%>
+                        <%--<tr>--%>
+                            <%--<td>${category.id}</td>--%>
+                            <%--<td>${category.name}</td>--%>
+                            <%--<td style="text-align: center">--%>
+                                <%--<button type="button" class="btn btn-warning"><span--%>
+                                        <%--class="glyphicon glyphicon-pencil"></span>--%>
+                                <%--</button>--%>
+                                <%--<button type="button" class="btn btn-danger"><span--%>
+                                        <%--class="glyphicon glyphicon-trash"></span>--%>
+                                <%--</button>--%>
+                            <%--</td>--%>
+                        <%--</tr>--%>
+                    <%--</c:forEach>--%>
 
                     </tbody>
                 </table>
@@ -174,3 +174,4 @@
         <%--</script>--%>
 
 <%@include file="modal/createCategoryModal.jsp"%>
+<spring:url value="../../../resources/js/pageScript/exam/manageCategory.js" ></spring:url>

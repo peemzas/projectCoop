@@ -256,8 +256,8 @@ public class InPageController {
 //        criteria.setProjection(Projections.projectionList().add(Projections.property("name") , "name"));
 //        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 //        List<Map> categories = criteria.list();
-
-        model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
+//
+//        model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
 
         return "manageCategory";
     }
