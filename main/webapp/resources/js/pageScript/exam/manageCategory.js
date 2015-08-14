@@ -15,7 +15,7 @@ function viewCategory(){
             data.forEach(function(value){
                 $("#tbodyCategory").append(
                     '<tr>'+
-                    '<td><label id="id'+value.id+'">'+value.id+'</label>'+
+                    '<td style="text-align: center;"><label id="id'+value.id+'"><b>'+value.id+'</b></label>'+
                     '<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
                     '<td><label id="labelFor'+value.id+'">'+value.name+'</label>'+
                     '<input id="dataFor'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+

@@ -44,21 +44,20 @@ public class QueryCategoryDomain extends HibernateUtil {
         return resultCategory;
     }
 
-    public List<Map> getListCategories(){
+    public List<Category> getListCategories(){
+
+//        Criteria criteria = getSession().createCriteria(Category.class);
+//        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name"));
+//        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//        List<Category> categories = criteria.list();
 
         Criteria criteria = getSession().createCriteria(Category.class);
         criteria.addOrder(Order.asc("id"));
-        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"),"id"));
+        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        List<Map> categories = criteria.list();
+        List<Category> categories = criteria.list();
+
         return categories;
     }
-
-//    public Category getCategoryById(Integer id){
-//        Criteria criteria = getSession().createCriteria(Category.class);
-//        criteria.add(Restrictions.eq("id",id));
-//
-//        return (Category)criteria.list().get(0);
-//    }
 }
 

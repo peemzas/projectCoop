@@ -61,14 +61,8 @@
                         <div class="col-md-4" >
                             <input class="form-control" type="text"/>
                         </div>
-
-
-
-
-
                     </div>
                     <br/>
-
                     <div class="row">
                         <%--<div class="col-md-2 text-right">--%>
                             <%--<label>ชื่อวิชา</label>--%>
@@ -127,31 +121,26 @@
                     <tr>
                         <th style="text-align: center; color: white;">รหัสวิชา</th>
                         <th style="text-align: center; color: white;">วิชา</th>
-                        <th style="text-align: center; color: white">แอคชั่น</th>
+                        <th style="text-align: center; color: white"></th>
                     </tr>
                     </thead>
                     <tbody id="tbodyCategory">
-
-
-                    <%--<c:forEach var="category" items="${LIST_OF_CATEOGRIES}">--%>
-                        <%--<tr>--%>
-                            <%--<td>${category.id}</td>--%>
-                            <%--<td>${category.name}</td>--%>
-                            <%--<td style="text-align: center">--%>
-                                <%--<button type="button" class="btn btn-warning"><span--%>
-                                        <%--class="glyphicon glyphicon-pencil"></span>--%>
-                                <%--</button>--%>
-                                <%--<button type="button" class="btn btn-danger"><span--%>
-                                        <%--class="glyphicon glyphicon-trash"></span>--%>
-                                <%--</button>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                    <%--</c:forEach>--%>
-
+                        <%--<c:forEach var="category" items="${LIST_OF_CATEOGRIES}">--%>
+                            <%--<tr>--%>
+                                <%--<td>${category.id}</td>--%>
+                                <%--<td>${category.name}</td>--%>
+                                <%--<td style="text-align: center">--%>
+                                    <%--<button type="button" class="btn btn-warning"><span--%>
+                                            <%--class="glyphicon glyphicon-pencil"></span>--%>
+                                    <%--</button>--%>
+                                    <%--<button type="button" class="btn btn-danger"><span--%>
+                                            <%--class="glyphicon glyphicon-trash"></span>--%>
+                                    <%--</button>--%>
+                                <%--</td>--%>
+                            <%--</tr>--%>
+                        <%--</c:forEach>--%>
                     </tbody>
                 </table>
-
-
             </div>
         </div>
 
@@ -174,4 +163,4 @@
         <%--</script>--%>
 
 <%@include file="modal/createCategoryModal.jsp"%>
-<spring:url value="../../../resources/js/pageScript/exam/manageCategory.js" ></spring:url>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
