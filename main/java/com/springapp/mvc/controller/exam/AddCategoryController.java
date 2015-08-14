@@ -1,11 +1,13 @@
 package com.springapp.mvc.controller.exam;
 
+import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.QueryCategoryDomain;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -46,5 +48,18 @@ public  class AddCategoryController {
 
 
 // return null;
+    }
+
+    @RequestMapping(value ="/exam/getAllCategory",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> getAllCategory() {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Category> categories = queryCategoryDomain.getListCategories();
+        String json = new Gson().toJson(categories);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 }
