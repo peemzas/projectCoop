@@ -14,10 +14,9 @@ import java.util.Set;
 @Entity
 @Table(name="TDCS_QUESTIONS")
 public class Question implements Serializable {
-
+//    @SequenceGenerator(name = "TDCS_QUESTION_TRIG", sequenceName = "TDCS_QUESTION_SEQ")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_QUESTION_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_QUESTION_ID_SEQ_GEN", sequenceName = "TDCS_QUESTION_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="QUESTION_ID")
     private Integer id;
 
@@ -25,7 +24,7 @@ public class Question implements Serializable {
     private String description;
 
     @Column(name="QUESTION_SCORE")
-    private String score;
+    private Float score;
 
     @Column(name="QUESTION_CREATE_DATE")
     private Date createDate;
@@ -40,7 +39,7 @@ public class Question implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="QUESTION_TYPE_ID")
-    private QuestionType questionTypeId;
+    private QuestionType questionType;
 
     @ManyToOne
     @JoinColumn(name="QUESTION_CREATE_BY")
@@ -56,7 +55,7 @@ public class Question implements Serializable {
     @ManyToMany(mappedBy = "questions")
     private Set<ExamPaper> examPapers;
 
-    @OneToMany(mappedBy = "questionId")
+    @OneToMany(mappedBy = "question")
     private Set<Choice> choices;
 
     public Integer getId() {
@@ -75,11 +74,11 @@ public class Question implements Serializable {
         this.description = description;
     }
 
-    public String getScore() {
+    public Float getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Float score) {
         this.score = score;
     }
 
@@ -107,12 +106,12 @@ public class Question implements Serializable {
         this.subCategoryId = subCategoryId;
     }
 
-    public QuestionType getQuestionTypeId() {
-        return questionTypeId;
+    public QuestionType getQuestionType() {
+        return questionType;
     }
 
-    public void setQuestionTypeId(QuestionType questionTypeId) {
-        this.questionTypeId = questionTypeId;
+    public void setQuestionType(QuestionType questionTypeId) {
+        this.questionType = questionTypeId;
     }
 
     public User getCreateBy() {

@@ -15,7 +15,7 @@ public class Boo implements Serializable {
     @Column(name="BOOLEAN_VALUE")
     private Integer value;
 
-    @Column
+    @Column(name="BOOLEAN_DESCRIPTION")
     private String description;
 
     @OneToMany(mappedBy = "correction")
