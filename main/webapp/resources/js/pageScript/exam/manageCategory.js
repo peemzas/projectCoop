@@ -1,7 +1,6 @@
 $("document").ready(function(){
-    //alert('hey');
-    viewCategory();
 
+    viewCategory();
 });
 function viewCategory(){
     $("#tbodyCategory").empty();
@@ -20,7 +19,12 @@ function viewCategory(){
                     '<td><label id="labelFor'+value.id+'">'+value.name+'</label>'+
                     '<input id="dataFor'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
-                    '<td><button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')">Delete</button>'+
+
+                    '<td style="text-align: center">'+
+                                '<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" onclick="deleteCategory('+ "'" +value.id+ "'"+')"></button>'+' '+
+                                '<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button>'+
+                                '</td>'+
+
                     '</tr>'
                 )
             });
@@ -30,6 +34,7 @@ function viewCategory(){
         }
     });
 }
+
 
 function deleteCategory(categoryId){
 
@@ -49,3 +54,5 @@ function deleteCategory(categoryId){
        }
     });
 }
+
+

@@ -18,11 +18,11 @@ function saveCategory(){
         data: 'id='+categoryId +'&name='+categoryName,
         success:function(){
             alert('เพิ่มวิชา ' +categoryId+'  '+categoryName+' สำเร็จ ');
+            window.location.reload();
         },
         error:function(){
             alert('เพิ่มวิชาไม่สำเร็จ');
         }
     }).responseText;
-
 }
 

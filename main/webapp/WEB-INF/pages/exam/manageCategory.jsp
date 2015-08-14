@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
 <%--<script>--%>
 
     <%--$('#viewControlSelector').on('change', function () {--%>
@@ -121,7 +121,7 @@
                     <tr>
                         <th style="text-align: center; color: white;">รหัสวิชา</th>
                         <th style="text-align: center; color: white;">วิชา</th>
-                        <th style="text-align: center; color: white"></th>
+                        <th style="text-align: center; color: white">แอคชั่น</th>
                     </tr>
                     </thead>
                     <tbody id="tbodyCategory">
@@ -163,4 +163,4 @@
         <%--</script>--%>
 
 <%@include file="modal/createCategoryModal.jsp"%>
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
+
