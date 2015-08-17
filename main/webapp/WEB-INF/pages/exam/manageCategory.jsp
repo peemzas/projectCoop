@@ -8,34 +8,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
-<%--<script>--%>
-
-    <%--$('#viewControlSelector').on('change', function () {--%>
-
-        <%--alert('its WORKING !!!');--%>
-
-        <%--if (this.value == 'Category') {--%>
-
-            <%--$("#tblCategory").show();--%>
-            <%--$("#tblSubCategory").hide();--%>
-        <%--} else if (this.value == 'SubCategory') {--%>
-            <%--$("#tblCategory").hide();--%>
-            <%--$("#tblSubCategory").show();--%>
-        <%--} else {--%>
-            <%--alert('No God Please No');--%>
-        <%--}--%>
-    <%--})--%>
-<%--</script>--%>
 
 <div class="container row">
     <h3>รายวิชา</h3>
     <hr>
 
 
-    <%--<div class="row">--%>
-    <%--<div class="col-md-3 col-lg-offset-4" align="center" style="margin-top: 20px;">--%>
-    <%--<label><h4>แสดง : วิชา</h4></label>--%>
-    <%--</div>--%>
 </div>
 
 
@@ -46,34 +24,27 @@
                 <div class="panel-heading">
                     <h4>ค้นหา...</h4>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body ">
                     <div class="row">
-                        <div class="col-md-2 col-lg-offset-2 text-right">
+                        <div class="col-md-2 col-lg-offset-3 text-right">
                             <label>รหัสวิชา :</label>
                         </div>
-                        <div class="col-md-1" style="width: 10%">
-                            <input class="form-control" type="text"/>
+                        <div class="col-md-1" style="width: 15%">
+                            <input class="form-control" type="text" maxlength="5"/>
                         </div>
 
-                        <div class="col-md-1 text-right">
+
+                    </div>
+                    <div style="margin-bottom: 5px"></div>
+                    <div class="row">
+                        <div class="col-md-1 col-lg-offset-3 text-right">
                             <label>วิชา :</label>
                         </div>
                         <div class="col-md-4" >
                             <input class="form-control" type="text"/>
                         </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <%--<div class="col-md-2 text-right">--%>
-                            <%--<label>ชื่อวิชา</label>--%>
-                        <%--</div>--%>
-                        <%--<div class="col-md-6">--%>
-                            <%--<div class="input-group">--%>
-                                <%--<input class="form-control" type="text"/>--%>
+                        </div>
 
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    </div>
                     <hr/>
 
                     <div class="row" id="btnSearch">
@@ -93,7 +64,7 @@
             <%--</select>--%>
             <%--</div>--%>
         </div>
-        <br/>
+
 
 
 

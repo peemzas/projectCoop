@@ -24,32 +24,48 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-2 col-lg-offset-2 text-right">
+                        <div class="col-md-2 col-lg-offset-3 text-right">
                             <label>รหัสวิชา :</label>
                         </div>
                         <div class="col-md-1" style="width: 10%">
-                            <input class="form-control" type="text"/>
+                            <input class="form-control" type="text" maxlength="5"/>
+                        </div>
                         </div>
 
-                        <div class="col-md-1 text-right">
-                            <label>วิชา :</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input class="form-control" type="text"/>
-                        </div>
-                    </div>
-                    <br>
+                    <div style="margin-bottom: 5px"></div>
+                        <div class="row">
+                                <div class="col-md-1 col-lg-offset-3 text-right">
+                                    <label>วิชา :</label>
+                                </div>
+                                <div class="col-md-4">
+
+                                        <select id="sCat" class="form-control" data-width="100%">
+                                            <option value="">โปรดเลือกวิชา</option>
+                                            <%--<c:forEach var="faculty" items="${listFac}">--%>
+                                                <%--<option value="${faculty.facId}">${faculty.facName}</option>--%>
+                                            <%--</c:forEach>--%>
+                                        </select>
+
+                                </div>
+                            </div>
+
+                    <div style="margin-bottom: 5px"></div>
 
                     <div class="row">
                         <div class="col-md-2 col-lg-offset-2 text-right">
                             <label>หัวข้อเรื่อง :</label>
                         </div>
-                        <div class="col-md-2" style="width:21%">
-                            <input class="form-control" type="text"/>
+                        <div class="col-md-4" >
+                            <select id="sSubCat" class="form-control" data-width="100%">
+                                <option value="">โปรดเลือกหัวข้อเรื่อง</option>
+                                <%--<c:forEach var="faculty" items="${listFac}">--%>
+                                    <%--<option value="${faculty.facId}">${faculty.facName}</option>--%>
+                                <%--</c:forEach>--%>
+                            </select>
                         </div>
                     </div>
 
-                    <br/>
+                    <div style="margin-bottom: 5px"></div>
 
                     <div class="row">
                         <%--<div class="col-md-2 text-right">--%>
@@ -64,25 +80,18 @@
                     </div>
                     <hr/>
 
+
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
-                            <button class="btn btn-default" type="button">ค้นหา</button>
-                            <button class="btn btn-default" type="button">ล้างข้อมูล</button>
+                            <button class="btn btn-primary" type="button">ค้นหา</button>
+                            <button class="btn" type="button" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <%--<div class="col-md-4" align="left" style="margin-top: 20px;">--%>
-            <%--<select class="form-control" id="viewControlSelector">--%>
-            <%--<option id = "selectCategory" value="Category" selected>วิชา</option>--%>
-            <%--<option id = "selectSubCategory" value="SubCategory" >หัวข้อเรื่อง</option>--%>
-            <%--</select>--%>
-            <%--</div>--%>
         </div>
-        <br/>
-        <br/>
+
+
 
         <%--<tr>--%>
         <%--<td>JAVA</td>--%>
@@ -135,7 +144,7 @@
                     <td>${subcategory.id}</td>
                     <td>${subcategory.name}</td>
                     <td style="text-align: center">
-                        <button type="button" class="btn btn-warning"><span
+                        <button type="button" class="btn btn-gray"><span
                                 class="glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="button" class="btn btn-danger"><span

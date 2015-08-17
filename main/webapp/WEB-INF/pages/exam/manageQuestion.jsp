@@ -14,8 +14,6 @@
 <hr/>
 <div class = "container">
   <%@include file="template/searchQuestionTemplateNew.jsp"%>
-  <br/>
-  <br/>
 
 <!-- Example table information, it will remove soon ^^ -->
     <div class = "row">

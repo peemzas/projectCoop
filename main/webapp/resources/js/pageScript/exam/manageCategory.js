@@ -16,7 +16,7 @@ function viewCategory(){
                     '<tr>'+
                     '<td style="text-align: center;"><label id="id'+value.id+'"><b>'+value.id+'</b></label>'+
                     '<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
-                    '<td><label id="labelFor'+value.id+'">'+value.name+'</label>'+
+                    '<td style="text-align: center;"><label id="labelFor'+value.id+'">'+value.name+'</label>'+
                     '<input id="dataFor'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
 
@@ -50,7 +50,7 @@ function deleteCategory(categoryId){
        },
        async: false,
        success:function(){
-           alert(' ลบวิชา ' +categoryId +' สำเร็จ ');
+           alert(' ลบวิชาสำเร็จ ');
            window.location.reload();
        }
     });

@@ -19,7 +19,7 @@
 
             <%@include file="selectCategoryInput.jsp" %>
           </div>
-          <br/>
+          <div style="margin-bottom: 5px"></div>
 
           <div class = "row">
             <%@include file="selectCeateByInput.jsp" %>
