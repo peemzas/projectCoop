@@ -2,7 +2,6 @@
  * Created by Phuthikorn_T on 13/8/2558.
  */
 
-
 $(".choiceRadioAddon").on('click',function(){
     $(this).children().prop("checked",true);
     //$('.correctRadio:checked').hasClass();
@@ -46,13 +45,10 @@ $('#submitCreateBtn').on('click',function(){
     }else if($('#createQuestModalTitle').text() == 'แก้ไขข้อสอบ'){
         alert('case แก้ไขข้อสอบ');
         editQuestion();
-    }else{alert('WTF!!!!')}
+    }else{alert('Fail to determine function please Check createQuestionModal.js')}
 })
 
-function editQuestion(){ // FOR EDIT FROM webapp/WEB-INF/page/exam/editQuestion.jso
-
-}
-
+var editQuestion = function (){} // FOR EDIT FROM webapp/WEB-INF/page/exam/manageQuestion.jsp
 
 function saveQuestion(){
 
