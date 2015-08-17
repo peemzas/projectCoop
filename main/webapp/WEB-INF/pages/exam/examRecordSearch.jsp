@@ -35,7 +35,7 @@
                            title="SQL LIKE FORMAT เช่น %example%" data-placement="right">
                 </div>
             </div>
-            <br>
+            <div style="margin-bottom: 5px"></div>
 
             <div class="row">
                 <div class="col-md-2" align="right"><h5>ตำแหน่ง :</h5></div>
@@ -47,8 +47,7 @@
                     </select>
                 </div>
             </div>
-            <br>
-
+            <div style="margin-bottom: 5px"></div>
             <div class="row">
                 <div class="col-md-2" align="right"><h5>รหัสพนักงาน :</h5></div>
                 <div class="col-md-6 input-group">
@@ -60,7 +59,7 @@
                 </div>
 
             </div>
-            <br>
+            <div style="margin-bottom: 5px"></div>
 
             <div class="row">
                 <div class="col-md-2" align="right"><h5>ตรวจโดย :</h5></div>
@@ -73,7 +72,7 @@
                 </div>
 
             </div>
-            <br>
+            <div style="margin-bottom: 5px"></div>
 
             <div class="row">
                 <%--<div class="col-md-1 col-lg-offset-5">--%>
@@ -97,11 +96,11 @@
         </div>
     </div>
     <div>
-<br>
-<hr>
+
+
         <div class="row">
             <div class="col-md-3 col-md-offset-4">
-                <h3 align="center">ผลลัพธ์</h3>
+                <%--<h3 align="center">ผลลัพธ์</h3>--%>
 
             </div>
 

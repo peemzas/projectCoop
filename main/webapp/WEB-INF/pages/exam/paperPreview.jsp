@@ -13,7 +13,7 @@
 <script src="<c:url value="/resources/js/checkKeybord.js" />"></script>
 <script src="<c:url value="/resources/js/setInputUserdata.js" />"></script>
 
-<h1 align="center">รายละเอียดชุดข้อสอบ</h1>
+<h2 align="center">รายละเอียดชุดข้อสอบ</h2>
 <br>
 
 <div class="row">
@@ -81,7 +81,7 @@
         <button class="btn btn-warning" style="width: 100px;">แก้ไข</button>
     </div>
     <div class="col-md-2">
-        <button class="btn btn-info" style="width: 100px;">เปิดสอบ</button>
+        <button class="btn btn-info" style="width: 125px">เผยแพร่ข้อสอบ</button>
     </div>
     <div class="col-md-2">
         <button class="btn btn-gray" style="width: 100px;">ย้อนกลับ</button>
