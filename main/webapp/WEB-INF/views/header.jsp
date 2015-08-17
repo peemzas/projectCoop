@@ -58,48 +58,48 @@
                     <li id="evaluation"><a href="/TDCS/evaluation.html">เพิ่มแบบประเมิน</a></li>
                 </c:if>
                 <c:if test="${status == 'user' || status == 'staff'}">
-                <li id="evaluation" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        การประเมิน
-                        <c:if test="${viewEva != 0 && status == 'user'}">
+                    <li id="evaluation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            การประเมิน
+                            <c:if test="${viewEva != 0 && status == 'user'}">
                                     <span class="badge">
                                             ${viewEva}
                                     </span>
-                        </c:if>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="/TDCS/evaluation.html">
-                                <c:if test="${status == 'staff'}">ประเมินนักศึกษา</c:if>
-                                <c:if test="${status == 'user'}">ประเมินผล</c:if>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/TDCS/viewevaluate.html">
-                                ดูผลการประเมิน
-                                <c:if test="${viewEva != 0 && status == 'user'}">
+                            </c:if>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="/TDCS/evaluation.html">
+                                    <c:if test="${status == 'staff'}">ประเมินนักศึกษา</c:if>
+                                    <c:if test="${status == 'user'}">ประเมินผล</c:if>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/TDCS/viewevaluate.html">
+                                    ดูผลการประเมิน
+                                    <c:if test="${viewEva != 0 && status == 'user'}">
                                     <span class="badge">
                                             ${viewEva}
                                     </span>
-                                </c:if>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
+                                    </c:if>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </c:if>
 
 
                 <%---------------------------------------------------------------%>
 
-                    <c:if test="${status == 'user' || status == 'staff'}">
+                <c:if test="${status == 'user' || status == 'staff'}">
                 <li id="exam2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         การประเมิน
-                        <%--<c:if test="${viewEva != 0 && status == 'user'}">--%>
-                                    <%--<span class="badge">--%>
-                                            <%--${viewEva}--%>
-                                    <%--</span>--%>
-                        <%--</c:if>--%>
+                            <%--<c:if test="${viewEva != 0 && status == 'user'}">--%>
+                            <%--<span class="badge">--%>
+                            <%--${viewEva}--%>
+                            <%--</span>--%>
+                            <%--</c:if>--%>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
@@ -122,10 +122,7 @@
                 </li>
 
 
-
-
-
-                <%-----------------------------------------------------------------------%>
+                    <%-----------------------------------------------------------------------%>
                     <%--Exam Student main page BY JOKIZZ--%>
 
                 <li>
@@ -171,3 +168,4 @@
         });
     });
 </script>
+

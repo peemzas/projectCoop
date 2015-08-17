@@ -9,7 +9,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" align="center" id="createQuestModalTitle">สร้างข้อสอบ</h3>
+                <h3 class="modal-title" align="left" id="createQuestModalTitle">สร้างข้อสอบ</h3>
             </div>
             <div class="modal-body" id="modalBody">
                 <div class="row form-group">
@@ -136,9 +136,13 @@
                         </div>
                         <%--End Objective--%>
 
-                        <div class="col-md-offset-1" id="submitBtnContainer" hidden align="center">
-                            <button class="btn btn-primary" id="submitCreateBtn" data-dismiss="modal">ตกลง</button>
-                            <button class="btn btn-warning" data-dismiss="modal">ยกเลิก</button>
+                        <div class="col-md-12" id="submitBtnContainer" hidden align="center">
+                            <div class="col-md-1 col-md-offset-5">
+                                <button class="btn btn-primary" id="submitCreateBtn" data-dismiss="modal">ตกลง</button>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-warning" data-dismiss="modal">ยกเลิก</button>
+                            </div>
                         </div>
 
 
