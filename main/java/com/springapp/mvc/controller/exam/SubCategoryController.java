@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/TDCS")
-public class manageSubCategoryController {
+public class SubCategoryController {
 
     @Autowired
     QueryUserDomain queryUserDomain;
