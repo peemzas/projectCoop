@@ -70,6 +70,7 @@ public  class CategoryController {
 
         queryCategoryDomain.deleteCategory(categoryId);
 
+
         return new ResponseEntity(HttpStatus.OK);
     }
 }

@@ -4,8 +4,7 @@ import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.pojo.exam.SubCategory;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,28 +31,67 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         criteria.add(Restrictions.eq("name", subCategory.getName()));
         criteria.add(Restrictions.eq("category", subCategory.getCategory()));
-
         boolean result = criteria.list().isEmpty();
         closeSession();
 
         return result;
     }
 
-    public List<Map> getListSubCategories(){
-        Criteria criteria = getSession().createCriteria(SubCategory.class);
-        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"),"id"));
+    public List<SubCategory> getListSubCategories(){
+        Criteria criteria = getSession().createCriteria(SubCategory.class, "subCategory");
+        criteria.createAlias("subCategory.category", "category");
+        criteria.addOrder(Order.asc("id"));
+        ProjectionList projection = Projections.projectionList();
+
+        projection.add(Projections.property("category.id"),"id");
+        projection.add(Projections.property("category.name"), "name");
+        projection.add(Projections.property("subCategory.id"), "subId");
+        projection.add(Projections.property("subCategory.name"), "subName");
+
+        criteria.setProjection(projection);
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        List<Map> subcategories = criteria.list();
-        return subcategories;
+
+
+        List<SubCategory> subCategories = criteria.list();
+        return subCategories;
     }
     
-    public SubCategory getSubCategoryByNameAndCategory(String name,Category category){
-        Criteria criteria = getSession().createCriteria(SubCategory.class);
-        criteria.add(Restrictions.eq("name",name));
-        criteria.add(Restrictions.eq("category", category));
+//    public List<SubCategory> getSubCategoryByNameAndCategory(String name,SubCategory subcategory){
+//        Criteria criteria = getSession().createCriteria(SubCategory.class, "subCategory");
+//        criteria.createAlias("subCategory.category", "category");
+//
+//        ProjectionList projection = Projections.projectionList();
+//        projection.add(Projections.property("subCategory.name"));
+//        projection.add(Projections.property("category.id"));
+//        projection.add(Projections.property("category.name"));
+//
+//        criteria.setProjection(projection);
+//        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//
+//        criteria.add(Restrictions.eq("name",name));
+//        criteria.add(Restrictions.eq("subcategory", subcategory));
+//
+//        List<SubCategory> subCategories = criteria.list();
+//        return subCategories;
+//    }
 
-        return (SubCategory)criteria.list().get(0);
+
+    public void deleteSubCategory(Integer subCategoryId){
+
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
+        criteria.add(Restrictions.eq("id", subCategoryId));
+//        SubCategory subCategory = (SubCategory) criteria;
+
+//        SubCategory sc = new SubCategory();
+//        sc.setId(subCategoryId);
+//        getSession().delete(sc);
+
+        HibernateUtil.beginTransaction();
+        SubCategory sc = new SubCategory();
+        sc.setId(subCategoryId);
+        getSession().delete(sc);
+        HibernateUtil.commitTransaction();
     }
 
-
 }
+

@@ -49,7 +49,11 @@ public class QueryCategoryDomain extends HibernateUtil {
 
         Criteria criteria = getSession().createCriteria(Category.class);
         criteria.addOrder(Order.asc("id"));
-        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("name"), "name")
+                .add(Projections.property("id"), "id"));
+
+
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Category> categories = criteria.list();
 
