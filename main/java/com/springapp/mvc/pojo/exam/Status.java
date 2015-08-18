@@ -1,6 +1,7 @@
 package com.springapp.mvc.pojo.exam;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "TDCS_STATUS")
-public class Status {
+public class Status implements Serializable {
 
     @Id
     @Column(name = "STATUS_ID")
@@ -21,13 +22,12 @@ public class Status {
     private String description;
 
 //    @OneToMany(mappedBy = "status")
-//    private Set<SubCategory> subCategories;
+//    private Set<Question> questions;
+//
+//    @OneToMany(mappedBy = "status")
+//    private Set<Choice> choices;
 
-    @OneToMany(mappedBy = "status")
-    private Set<Question> questions;
 
-    @OneToMany(mappedBy = "status")
-    private Set<Choice> choices;
 
     public Integer getId() {
         return id;
@@ -54,19 +54,19 @@ public class Status {
     }
 
 
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
-    }
-
-    public Set<Choice> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(Set<Choice> choices) {
-        this.choices = choices;
-    }
+//    public Set<Question> getQuestions() {
+//        return questions;
+//    }
+//
+//    public void setQuestions(Set<Question> questions) {
+//        this.questions = questions;
+//    }
+//
+//    public Set<Choice> getChoices() {
+//        return choices;
+//    }
+//
+//    public void setChoices(Set<Choice> choices) {
+//        this.choices = choices;
+//    }
 }

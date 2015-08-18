@@ -3,13 +3,14 @@ package com.springapp.mvc.pojo.exam;
 import com.springapp.mvc.pojo.User;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Phuthikorn_T on 7/15/2015.
  */
 @Entity
 @Table(name="TDCS_EXAM_MARKING_RECORDS")
-public class ExamMarkingRecord {
+public class ExamMarkingRecord implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_MARKING_RECORD_ID_SEQ_GEN")
@@ -31,6 +32,9 @@ public class ExamMarkingRecord {
     @ManyToOne
     @JoinColumn(name = "RESULT_ID")
     private ExamResult resultId;
+
+
+
 
     public ExamAnswerRecord getRecordId() {
         return recordId;

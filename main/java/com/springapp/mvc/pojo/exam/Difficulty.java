@@ -19,18 +19,11 @@ public class Difficulty implements Serializable {
 
     @Column(name = "DIFFICULTY_DESCRIPTION")
     private String description;
+//
+//    @OneToMany(mappedBy = "difficultyLevel")
+//    private Set<Question> questions;
 
-    @OneToMany(mappedBy = "difficultyLevel")
-    private Set<Question> questions;
 
-
-    @Override
-    public String toString() {
-        return "Difficulty{" +
-                "description='" + description + '\'' +
-                ", level=" + level +
-                '}';
-    }
 
     public Integer getLevel() {
         return level;
@@ -48,11 +41,11 @@ public class Difficulty implements Serializable {
         this.description = description;
     }
 
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
-    }
+//    public Set<Question> getQuestions() {
+//        return questions;
+//    }
+//
+//    public void setQuestions(Set<Question> questions) {
+//        this.questions = questions;
+//    }
 }

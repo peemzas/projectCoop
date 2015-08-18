@@ -28,18 +28,8 @@ public class Category implements Serializable{
     @JoinColumn(name="CATEGORY_CREATE_BY")
     private User createBy;
 
-    @OneToMany(mappedBy = "category")
-    private Set<SubCategory> subCategories;
-
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "createBy=" + createBy +
-                ", name='" + name + '\'' +
-                ", id=" + id +
-                '}';
-    }
+//    @OneToMany(mappedBy = "category")
+//    private Set<SubCategory> subCategories;
 
     public Integer getId() {
         return id;
@@ -65,11 +55,11 @@ public class Category implements Serializable{
         this.createBy = createBy;
     }
 
-    public Set<SubCategory> getSubCategories() {
-        return subCategories;
-    }
-
-    public void setSubCategories(Set<SubCategory> subCategories) {
-        this.subCategories = subCategories;
-    }
+//    public Set<SubCategory> getSubCategories() {
+//        return subCategories;
+//    }
+//
+//    public void setSubCategories(Set<SubCategory> subCategories) {
+//        this.subCategories = subCategories;
+//    }
 }

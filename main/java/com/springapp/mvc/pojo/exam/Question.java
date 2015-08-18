@@ -35,7 +35,7 @@ public class Question implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="SUB_CATEGORY_ID")
-    private SubCategory subCategoryId;
+    private SubCategory subCategory;
 
     @ManyToOne
     @JoinColumn(name="QUESTION_TYPE_ID")
@@ -49,14 +49,17 @@ public class Question implements Serializable {
     @JoinColumn(name = "QUESTION_STATUS")
     private Status status;
 
-    @OneToMany(mappedBy = "questionId")
-    private Set<ExamAnswerRecord> examAnswerRecords;
+//    @OneToMany(mappedBy = "questionId")
+//    private Set<ExamAnswerRecord> examAnswerRecords;
 
     @ManyToMany(mappedBy = "questions")
     private Set<ExamPaper> examPapers;
 
-    @OneToMany(mappedBy = "question")
-    private Set<Choice> choices;
+//    @OneToMany(mappedBy = "question")
+//    private Set<Choice> choices;
+
+
+
 
     public Integer getId() {
         return id;
@@ -98,12 +101,12 @@ public class Question implements Serializable {
         this.difficultyLevel = difficultyLevel;
     }
 
-    public SubCategory getSubCategoryId() {
-        return subCategoryId;
+    public SubCategory getSubCategory() {
+        return subCategory;
     }
 
-    public void setSubCategoryId(SubCategory subCategoryId) {
-        this.subCategoryId = subCategoryId;
+    public void setSubCategory(SubCategory subCategoryId) {
+        this.subCategory = subCategoryId;
     }
 
     public QuestionType getQuestionType() {
@@ -130,13 +133,13 @@ public class Question implements Serializable {
         this.status = status;
     }
 
-    public Set<ExamAnswerRecord> getExamAnswerRecords() {
-        return examAnswerRecords;
-    }
-
-    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
-        this.examAnswerRecords = examAnswerRecords;
-    }
+//    public Set<ExamAnswerRecord> getExamAnswerRecords() {
+//        return examAnswerRecords;
+//    }
+//
+//    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
+//        this.examAnswerRecords = examAnswerRecords;
+//    }
 
     public Set<ExamPaper> getExamPapers() {
         return examPapers;
@@ -146,11 +149,11 @@ public class Question implements Serializable {
         this.examPapers = examPapers;
     }
 
-    public Set<Choice> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(Set<Choice> choices) {
-        this.choices = choices;
-    }
+//    public Set<Choice> getChoices() {
+//        return choices;
+//    }
+//
+//    public void setChoices(Set<Choice> choices) {
+//        this.choices = choices;
+//    }
 }
