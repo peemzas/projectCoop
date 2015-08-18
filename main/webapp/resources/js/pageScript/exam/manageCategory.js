@@ -15,17 +15,14 @@ function viewCategory(){
                 $("#tbodyCategory").append(
                     '<tr>'+
                     '<td style="text-align: center;"><label id="id'+value.id+'"><b>'+value.id+'</b></label>'+
-                    '<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
-                    '<td style="text-align: center;"><label id="labelFor'+value.id+'">'+value.name+'</label>'+
-                    '<input id="dataFor'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
+                    '<input id="editId'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
+                    '<td><label id="data'+value.id+'">'+value.name+'</label>'+
+                    '<input id="editData'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
-
-                    '<td style="text-align: center">'+
-                                '<button type="button" class="btn btn-gray"><span class="glyphicon glyphicon-pencil"></span></button>'+' '+
-
-
-                    '<button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
-                    '</td>'+
+                    '<td>'+
+                        '<button id="editBtn'+value.id+'" class="btn btn-gray" onclick="editCategory(' + "'" + value.id + "'" + ')">แก้ไข</button>'+
+                        '<button id="updateBtn'+value.id+'" class="btn btn-default" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')">update</button>'+
+                        '<button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')">Delete</button>'+
                     '</tr>'
                 )
             });
@@ -55,5 +52,47 @@ function deleteCategory(categoryId){
        }
     });
 }
+function editCategory(categoryId){
+    $("#editBtn"+categoryId).hide();
 
+    $("#id"+categoryId).hide();
+    $("#data"+categoryId).hide();
 
+    $("#editId"+categoryId).show();
+    $("#editData"+categoryId).show();
+    $("#updateBtn"+categoryId).show();
+}
+
+function updateCategory(categoryId){
+
+    if(!$.isNumeric($("#editId"+categoryId).val()) || $("#editId"+categoryId).length > 5){
+        alert("คุณกรอกรหัสวิชาไม่ถูกต้อง");
+    }
+    else if($("#editData"+categoryId).val() == ""){
+        alert("ชื่อวิชาต้องไม่เป็นค่าว่าง")
+    }
+    else{
+        var id = $("#editId"+categoryId).val();
+        var name = $("#editData"+categoryId).val();
+
+        //alert(id+" "+name);
+
+        var dataResponse = $.ajax({
+            type: "POST",
+            url: "/TDCS/exam/editCategory",
+            data: "id="+id+"&name="+name,
+            complete: function (xhr) {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        viewCategory();
+                    }
+                    else {
+                        alert("fail");
+                    }
+                } else {
+                    alert("fail");
+                }
+            }
+        });
+    }
+}

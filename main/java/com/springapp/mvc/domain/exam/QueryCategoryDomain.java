@@ -3,6 +3,8 @@ package com.springapp.mvc.domain.exam;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -68,6 +70,13 @@ public class QueryCategoryDomain extends HibernateUtil {
 
         HibernateUtil.beginTransaction();
         getSession().delete(category);
+        HibernateUtil.commitTransaction();
+    }
+
+    public void editCategory(Category category){
+
+        HibernateUtil.beginTransaction();
+        getSession().merge(category);
         HibernateUtil.commitTransaction();
     }
 }

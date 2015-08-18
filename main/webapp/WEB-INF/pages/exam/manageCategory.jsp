@@ -134,4 +134,6 @@
         <%--</script>--%>
         <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
 <%@include file="modal/createCategoryModal.jsp"%>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
+
 
