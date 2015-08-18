@@ -4,6 +4,7 @@ import com.springapp.mvc.pojo.User;
 
 import javax.persistence.*;
 import java.awt.print.Paper;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "TDCS_EXAM_RECORDS")
-public class ExamRecord {
+public class ExamRecord implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_RECORD_ID_SEQ_GEN")
@@ -31,4 +32,36 @@ public class ExamRecord {
     private Date examDate;
 
 
+
+    public Integer getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(Integer recordId) {
+        this.recordId = recordId;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public ExamPaper getPaperId() {
+        return paperId;
+    }
+
+    public void setPaperId(ExamPaper paperId) {
+        this.paperId = paperId;
+    }
+
+    public Date getExamDate() {
+        return examDate;
+    }
+
+    public void setExamDate(Date examDate) {
+        this.examDate = examDate;
+    }
 }

@@ -30,20 +30,22 @@ public class ExamAnswerRecord implements Serializable {
     @Column(name="ANSWER_SUBJECTIVE")
     private String answerSubjective;
 
-    @OneToMany(mappedBy = "recordId")
-    private Set<ExamMarkingRecord> examMarkingRecords;
+//    @OneToMany(mappedBy = "recordId")
+//    private Set<ExamMarkingRecord> examMarkingRecords;
 
     @ManyToOne
     @JoinColumn(name = "EXAM_RECORD_ID")
     private ExamRecord examRecordId;
 
-    public Set<ExamMarkingRecord> getExamMarkingRecords() {
-        return examMarkingRecords;
-    }
 
-    public void setExamMarkingRecords(Set<ExamMarkingRecord> examMarkingRecords) {
-        this.examMarkingRecords = examMarkingRecords;
-    }
+
+//    public Set<ExamMarkingRecord> getExamMarkingRecords() {
+//        return examMarkingRecords;
+//    }
+//
+//    public void setExamMarkingRecords(Set<ExamMarkingRecord> examMarkingRecords) {
+//        this.examMarkingRecords = examMarkingRecords;
+//    }
 
     public ExamRecord getExamRecordId() {
         return examRecordId;

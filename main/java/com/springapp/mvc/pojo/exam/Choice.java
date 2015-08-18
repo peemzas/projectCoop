@@ -32,19 +32,10 @@ public class Choice  implements Serializable {
     @JoinColumn(name = "CHOICE_STATUS")
     private Status status;
 
-    @OneToMany(mappedBy = "answerObjective")
-    private Set<ExamAnswerRecord> examAnswerRecords;
+//    @OneToMany(mappedBy = "answerObjective")
+//    private Set<ExamAnswerRecord> examAnswerRecords;
 
-    @Override
-    public String toString() {
-        return "Choice{" +
-                "status=" + status +
-                ", id=" + id +
-                ", description='" + description + '\'' +
-                ", correction=" + correction +
-                ", question=" + question +
-                '}';
-    }
+
 
     public Status getStatus() {
         return status;
@@ -54,13 +45,13 @@ public class Choice  implements Serializable {
         this.status = status;
     }
 
-    public Set<ExamAnswerRecord> getExamAnswerRecords() {
-        return examAnswerRecords;
-    }
-
-    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
-        this.examAnswerRecords = examAnswerRecords;
-    }
+//    public Set<ExamAnswerRecord> getExamAnswerRecords() {
+//        return examAnswerRecords;
+//    }
+//
+//    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
+//        this.examAnswerRecords = examAnswerRecords;
+//    }
 
     public Integer getId() {
         return id;

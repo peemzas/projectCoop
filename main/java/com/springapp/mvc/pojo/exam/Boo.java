@@ -18,8 +18,8 @@ public class Boo implements Serializable {
     @Column(name="BOOLEAN_DESCRIPTION")
     private String description;
 
-    @OneToMany(mappedBy = "correction")
-    private Set<Choice> choices;
+//    @OneToMany(mappedBy = "correction")
+//    private Set<Choice> choices;
 
 
 
@@ -31,14 +31,6 @@ public class Boo implements Serializable {
         }else{
             return false;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Boo{" +
-                "value=" + value +
-                ", description='" + description + '\'' +
-                '}';
     }
 
     public Integer getValue() {
@@ -57,11 +49,11 @@ public class Boo implements Serializable {
         this.description = description;
     }
 
-    public Set<Choice> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(Set<Choice> choices) {
-        this.choices = choices;
-    }
+//    public Set<Choice> getChoices() {
+//        return choices;
+//    }
+//
+//    public void setChoices(Set<Choice> choices) {
+//        this.choices = choices;
+//    }
 }

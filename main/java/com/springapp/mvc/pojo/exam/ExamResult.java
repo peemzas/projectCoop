@@ -33,6 +33,9 @@ public class ExamResult implements Serializable {
     @JoinColumn(name = "EXAM_RECORD_ID")
     private ExamRecord examRecordId;
 
+
+
+
     public ExamRecord getExamRecordId() {
         return examRecordId;
     }
