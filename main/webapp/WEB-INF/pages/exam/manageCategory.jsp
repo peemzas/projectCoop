@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
+
 
 <div class="container row">
     <h3>รายวิชา</h3>
@@ -132,6 +132,6 @@
                 <%--}--%>
             <%--})--%>
         <%--</script>--%>
-
+        <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
 <%@include file="modal/createCategoryModal.jsp"%>
 

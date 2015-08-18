@@ -78,7 +78,13 @@ public class QuestionController {
         question.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
         question.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
         question.setScore(score);
+
         question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
+
+        System.out.println("===============================================================6=====================================================================");
+        question.setSubCategoryId(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
+        System.out.println("===============================================================7=====================================================================");
+
         question.setStatus(queryStatusDomain.getReadyStatus());
 
         queryQuestionDomain.insertQuestion(question, cDescList, correctChoice);

@@ -30,24 +30,27 @@
                         <div class="col-md-1" style="width: 10%">
                             <input class="form-control" type="text" maxlength="5"/>
                         </div>
-                        </div>
+                    </div>
 
                     <div style="margin-bottom: 5px"></div>
-                        <div class="row">
-                                <div class="col-md-1 col-lg-offset-3 text-right">
-                                    <label>วิชา :</label>
-                                </div>
-                                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-1 col-lg-offset-3 text-right">
+                            <label>วิชา :</label>
+                        </div>
+                        <%--<div class="col-md-4">--%>
+                        <%--<select id="sCat" class="form-control" data-width="100%">--%>
+                        <%--<option value="">โปรดเลือกวิชา</option>--%>
+                        <%--<c:forEach var="category" items="${listCat}">--%>
+                        <%--<option value="${category.id}">${category.id}  ${category.name}</option>--%>
+                        <%--</c:forEach>--%>
+                        <%--</select>--%>
+                        <%--</div>--%>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text"/>
+                        </div>
 
-                                        <select id="sCat" class="form-control" data-width="100%">
-                                            <option value="">โปรดเลือกวิชา</option>
-                                            <%--<c:forEach var="faculty" items="${listFac}">--%>
-                                                <%--<option value="${faculty.facId}">${faculty.facName}</option>--%>
-                                            <%--</c:forEach>--%>
-                                        </select>
 
-                                </div>
-                            </div>
+                    </div>
 
                     <div style="margin-bottom: 5px"></div>
 
@@ -55,13 +58,16 @@
                         <div class="col-md-2 col-lg-offset-2 text-right">
                             <label>หัวข้อเรื่อง :</label>
                         </div>
-                        <div class="col-md-4" >
-                            <select id="sSubCat" class="form-control" data-width="100%">
-                                <option value="">โปรดเลือกหัวข้อเรื่อง</option>
-                                <%--<c:forEach var="faculty" items="${listFac}">--%>
-                                    <%--<option value="${faculty.facId}">${faculty.facName}</option>--%>
-                                <%--</c:forEach>--%>
-                            </select>
+                        <%--<div class="col-md-4" >--%>
+                        <%--<select id="sSubCat" class="form-control" data-width="100%">--%>
+                        <%--<option value="">โปรดเลือกหัวข้อเรื่อง</option>--%>
+                        <%--<c:forEach var="category" items="${listCat}">--%>
+                        <%--<option value="${category.id}">${category.name}</option>--%>
+                        <%--</c:forEach>--%>
+                        <%--</select>--%>
+                        <%--</div>--%>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text"/>
                         </div>
                     </div>
 
@@ -84,13 +90,14 @@
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
                             <button class="btn btn-primary" type="button">ค้นหา</button>
-                            <button class="btn" type="button" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล</button>
+                            <button class="btn" type="button"
+                                    style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
 
 
         <%--<tr>--%>
@@ -126,34 +133,35 @@
         </table>
 
         <table class="table table-bordered" id="tblSubCategory">
-            <col width="40%"/>
-            <col width="40%"/>
+            <col width="10%"/>
+            <col width="20%"/>
+            <col width="50%"/>
             <col width="20%"/>
             <thead class="bg-primary">
             <tr>
+                <th style="text-align: center; color: white;">รหัสวิชา</th>
                 <th style="text-align: center; color: white;">วิชา</th>
+                <th style="text-align: center; color: white;">รหัสหัวข้อเริ่อง</th>
                 <th style="text-align: center; color: white;">หัวข้อเริ่อง</th>
                 <th style="text-align: center; color: white">แอคชั่น</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tbodySubCategory">
 
-            <c:forEach var="subcategory" items="${LIST_OF_SUBCATEOGRIES}">
-
-                <tr>
-                    <td>${subcategory.id}</td>
-                    <td>${subcategory.name}</td>
-                    <td style="text-align: center">
-                        <button type="button" class="btn btn-gray"><span
-                                class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button type="button" class="btn btn-danger"><span
-                                class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
-                </tr>
-
-            </c:forEach>
+            <%--<c:forEach var="subcategory" items="${LIST_OF_SUBCATEOGRIES}">--%>
+            <%--&lt;%&ndash;<tr>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<td>${subcategory.id}</td>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<td>${subcategory.name}</td>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<td style="text-align: center">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<button type="button" class="btn btn-gray"><span&ndash;%&gt;--%>
+            <%--&lt;%&ndash;class="glyphicon glyphicon-pencil"></span>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</button>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<button type="button" class="btn btn-danger"><span&ndash;%&gt;--%>
+            <%--&lt;%&ndash;class="glyphicon glyphicon-trash"></span>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</button>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</td>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</tr>&ndash;%&gt;--%>
+            <%--</c:forEach>--%>
 
             </tbody>
         </table>
@@ -175,5 +183,5 @@
 <%--}else{alert('No God Please No');}--%>
 <%--})--%>
 <%--</script>--%>
-
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageSubCategory.js" />"></script>
 <%@include file="modal/createSubCategoryModal.jsp" %>

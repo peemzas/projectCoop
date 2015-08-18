@@ -19,16 +19,16 @@
             <div class="modal-body">
 
 
-                <div class="row">
-                    <div class="col-md-2 col-lg-offset-3 text-right">
-                        <label>รหัสวิชา :</label>
-                    </div>
-                    <div class="col-md-1" style="width: 16%">
-                        <input class="form-control" type="text" maxlength="5"/>
-                    </div>
-                </div>
+                <%--<div class="row">--%>
+                    <%--<div class="col-md-2 col-lg-offset-3 text-right">--%>
+                        <%--<label>รหัสวิชา :</label>--%>
+                    <%--</div>--%>
+                    <%--<div class="col-md-1" style="width: 16%">--%>
+                        <%--<input class="form-control" type="text" maxlength="5"/>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
-                <div style="margin-bottom: 5px"></div>
+                <%--<div style="margin-bottom: 5px"></div>--%>
 
 
                 <div class="row form-group">
@@ -43,9 +43,9 @@
                         <%--<input type="text" class="form-control" name="cat" id="categoryName-forAddSubCat" style="width: 245px"/>--%>
                         <select id="sCat" class="form-control" data-width="100%">
                             <option value="">โปรดเลือกวิชา</option>
-                            <%--<c:forEach var="faculty" items="${listFac}">--%>
-                            <%--<option value="${faculty.facId}">${faculty.facName}</option>--%>
-                            <%--</c:forEach>--%>
+                            <c:forEach var="category" items="${listCat}">
+                                <option value="${category.id}">${category.id} : ${category.name}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>

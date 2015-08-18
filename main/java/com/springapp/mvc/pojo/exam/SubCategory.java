@@ -15,15 +15,15 @@ import java.util.Set;
 public class SubCategory implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_SUB_CATEGORY_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_SUB_CATEGORY_ID_SEQ_GEN", sequenceName = "TDCS_SUB_CATEGORY_SEQ")
+//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_SUB_CATEGORY_ID_SEQ_GEN")
+//    @SequenceGenerator(name = "TDCS_SUB_CATEGORY_ID_SEQ_GEN", sequenceName = "TDCS_SUB_CATEGORY_SEQ")
     @Column(name="SUB_CATEGORY_ID")
     private Integer id;
 
     @Column(name="SUB_CATEGORY_NAME")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="CATEGORY_ID")
     private Category category;
 
