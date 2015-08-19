@@ -31,10 +31,6 @@ public class QueryQuestionDomain extends HibernateUtil {
         commitTransaction();
 //        getSession().flush();
 
-        System.out.println(question.getDescription());
-        System.out.println(question.getId());
-
-
         if (question.getQuestionType().getId() == 1) {
             queryChoiceDomain.insertAllChoice(question, cDesc, correctChoice);
         }

@@ -3,6 +3,11 @@ package com.springapp.mvc.domain.exam;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +54,22 @@ public class QueryChoiceDomain extends HibernateUtil {
         commitTransaction();
 
 
+    }
+
+    public List<Choice> getChoiceListByQuestionId(Integer questionId){
+        Criteria criteria = getSession().createCriteria(Choice.class,"c");
+
+        criteria.createAlias("question","quest");
+//        criteria.createAlias("correction", "correct");
+
+//        ProjectionList projectionList = Projections.projectionList();
+//        projectionList.add(Projections.property("correct.value"),"correctness");
+//        projectionList.add(Projections.property("c.description"),"description");
+
+        criteria.addOrder(Order.asc("c.id"));
+        criteria.add(Restrictions.eq("quest.id", questionId));
+        criteria.add(Restrictions.eq("status",queryStatusDomain.getReadyStatus()));
+
+        return (List<Choice>) criteria.list();
     }
 }

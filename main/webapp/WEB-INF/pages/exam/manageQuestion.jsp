@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="modal/addEmployeeToInputModal.jsp" %>
 <%@include file="modal/createQuestionModal.jsp" %>
+<%@include file="modal/questionDetailModal.jsp" %>
 <div class="container row">
     <h3 class="h3">จัดการข้อสอบ</h3>
 </div>
