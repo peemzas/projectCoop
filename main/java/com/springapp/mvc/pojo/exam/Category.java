@@ -17,7 +17,7 @@ public class Category implements Serializable{
 //    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CATEGORY_TRIG")
 //    @SequenceGenerator(name = "TDCS_CATEGORY_TRIG", sequenceName = "TDCS_CATEGORY_SEQ")
     @Column(name="CATEGORY_ID")
-    private  Integer id;
+    private  String id;
 
     @Column(name="CATEGORY_NAME",unique = true)
     private String name;
@@ -31,11 +31,11 @@ public class Category implements Serializable{
 //    @OneToMany(mappedBy = "category")
 //    private Set<SubCategory> subCategories;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -66,7 +66,7 @@ public class QueryCategoryDomain extends HibernateUtil {
         return categories;
     }
 
-    public void deleteCategory(Integer categoryId){
+    public void deleteCategory(String categoryId){
 
         Criteria criteria = getSession().createCriteria(Category.class);
         criteria.add(Restrictions.eq("id", categoryId));
@@ -91,10 +91,10 @@ public class QueryCategoryDomain extends HibernateUtil {
         if(categoryName != ""){
             criteria.add(Restrictions.like("name", "%"+categoryName+"%"));
         }
-        else{
-            criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
-        }
-        //criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
+//        else{
+//            criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
+//        }
+        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Category> categories = criteria.list();
         logger.info("From QueryCategoryDomain");

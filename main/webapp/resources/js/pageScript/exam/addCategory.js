@@ -1,11 +1,7 @@
-/**
- * Created by JOKIZZ on 7/8/2558.
- */
-
 function saveCategory(){
 
-    var categoryName = $("#categoryName").val();
-    var categoryId = $("#categoryId").val();
+    var categoryName = $("#categoryNameText").val();
+    var categoryId = $("#categoryIdText").val();
 
     var data = $.ajax({
         type: "POST",
@@ -14,24 +10,30 @@ function saveCategory(){
         async: false,
         success: function (data) {
             data.forEach(function (value) {
-                if (Number($("#categoryId").val()) == Number(value.id) && $("#categoryName").val() == value.name) {
-                    alert("รหัสวิชา " + $("#categoryId").val() + ", รายวิชา " + $("#categoryName").val() + " มีอยู่แล้วในระบบ");
+                if (Number($("#categoryIdText").val()) == Number(value.id) && $("#categoryNameText").val() == value.name) {
+                    alert("รหัสวิชา " + $("#categoryId").val() + ", รายวิชา " + $("#categoryNameText").val() + " มีอยู่แล้วในระบบ");
                 }
-                if (Number($("#categoryId").val()) == Number(value.id)) {
+                if (Number($("#categoryIdText").val()) == Number(value.id)) {
                     //alert("รหัสวิชา "+$("#categoryId").val()+" ซ่ำ");
                     alert("รหัสวิชา " + $("#categoryId").val() + " มีอยู่แล้วในระบบ");
                 }
-                if ($("#categoryName").val() == value.name) {
+                if ($("#categoryNameText").val() == value.name) {
                     alert("รายวิชา " + $("#categoryName").val() + " มีอยู่แล้วในระบบ");
                 }
             });
+
+            if($("#categoryIdText").val() == "" || $("#categoryNameText").val() == ""){
+
+                alert("hi there..");
+            }
 
             var dat = $.ajax({
                 type: "POST",
                 url: "/TDCS/exam/addCategory",
                 data: 'id=' + categoryId + '&name=' + categoryName,
                 success: function () {
-                    alert('เพิ่มวิชา ' + categoryId + '  ' + categoryName + ' สำเร็จ ');
+                    alert('เพิ่มวิชา ' + categoryName + ' สำเร็จ ');
+                    window.location.reload();
                 },
                 error: function () {
                     alert('เพิ่มวิชาไม่สำเร็จ');

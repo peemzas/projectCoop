@@ -23,22 +23,22 @@
 
 
                     <div class="col-md-3" align="right">
-                        <h4><label for="categoryId" class="label"
+                        <h4><label for="categoryIdText" class="label"
                                    style="color: black ; font-weight: 100">รหัสวิชา :
                         </label></h4>
                     </div>
                     <div class="col-md-2">
-                        <input  type="text" class="form-control" name="cat" id="categoryId"/>
+                        <input  type="text" class="form-control" name="cat" id="categoryIdText"/>
                     </div>
 
 
                     <div class="col-md-1" align="right">
-                        <h4><label for="categoryName" class="label"
+                        <h4><label for="categoryNameText" class="label"
                                    style="color: black ; font-weight: 100">วิชา :
                         </label></h4>
                     </div>
                     <div class="col-md-6">
-                        <input style="width: 80%" type="text" class="form-control" name="cat" id="categoryName"/>
+                        <input style="width: 80%" type="text" class="form-control" name="cat" id="categoryNameText"/>
                     </div>
 
 

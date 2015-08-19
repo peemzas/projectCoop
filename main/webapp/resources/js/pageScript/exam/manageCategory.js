@@ -20,9 +20,9 @@ function viewCategory(){
                     '<input id="editData'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
                     '<td style="text-align: center"">'+
-                        '<button id="editBtn'+value.id+'" class="btn btn-gray" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                        '&nbsp;<button id="updateBtn'+value.id+'" class="btn btn-primary" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                        '&nbsp;<button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"><span class="glyphicon glyphicon-trash"></span></button>'+
+                    '<button id="editBtn'+value.id+'" class="btn btn-gray" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+                    '&nbsp;<button id="updateBtn'+value.id+'" class="btn btn-primary" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+                    '&nbsp;<button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"><span class="glyphicon glyphicon-trash"></span></button>'+
                     '</tr>'
                 )
             });
@@ -40,16 +40,16 @@ function deleteCategory(categoryId){
         return false;
     }
     $.ajax({
-       type: "POST",
-       url: "/TDCS/exam/deleteCategory",
-       data:{
-           id: categoryId
-       },
-       async: false,
-       success:function(){
-           alert(' ลบวิชาสำเร็จ ');
-           window.location.reload();
-       }
+        type: "POST",
+        url: "/TDCS/exam/deleteCategory",
+        data:{
+            id: categoryId
+        },
+        async: false,
+        success:function(){
+            alert(' ลบวิชาสำเร็จ ');
+            window.location.reload();
+        }
     });
 }
 function editCategory(categoryId){

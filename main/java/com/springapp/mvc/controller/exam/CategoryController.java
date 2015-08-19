@@ -50,7 +50,7 @@ public  class CategoryController {
 
 // return null;
     }
-//    Add by neng
+//    Add by Mr. Wanchana Himself
     @RequestMapping(value = "/exam/getAllCategory",method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getAllCategory() {
@@ -66,7 +66,7 @@ public  class CategoryController {
 
     @RequestMapping(value = "/exam/deleteCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity deleteCategory(@ModelAttribute("id") Integer categoryId){
+    public ResponseEntity deleteCategory(@ModelAttribute("id") String categoryId){
 
         queryCategoryDomain.deleteCategory(categoryId);
 
