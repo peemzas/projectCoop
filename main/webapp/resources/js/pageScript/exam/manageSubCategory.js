@@ -25,7 +25,7 @@ function viewSubCategory(){
                     '<input id="dataFor'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
 
-                    '<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
+                    //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
 
                     '<td style="text-align: center;"><label id="labelFor'+value.id+'">'+value.subName+'</label>'+
                     '<input subId="dataFor'+value.subId+'" class="form-control" type="text" value="'+value.subName+'" style="display: none;">'+
@@ -50,7 +50,7 @@ function viewSubCategory(){
 
 function deleteSubCategory(subCategoryId){
 
-    if(!confirm("แน่ใจนะว่าคุณจะลบ " +subCategoryId)){
+    if(!confirm(" แน่ใจนะว่าคุณจะลบ ")){
 
         return false;
     }
