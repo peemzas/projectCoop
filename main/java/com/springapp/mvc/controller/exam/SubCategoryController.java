@@ -13,10 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -38,30 +40,47 @@ public class SubCategoryController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addSubCategory")
     @ResponseBody
-    public void addSubCategory(Model model, @RequestParam(value = "categoryName",required = true)String categoryName,
-                               @RequestParam(value = "name",required = true)String name,
-                               HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    public void  addSubCategory(ModelMap model, @Valid SubCategory subCategory
+            ,HttpServletRequest request, HttpServletResponse response){
 
-        SubCategory subCategory = new SubCategory();
+        User createBy = queryUserDomain.getCurrentUser(request);
+        subCategory.setCreateBy(createBy);
 
-        subCategory.setName(name);
-        subCategory.setCategory(queryCategoryDomain.getCategoryByName(categoryName));
+        querySubCategoryDomain.insertSubCategory(subCategory);
 
-        User currentUser = queryUserDomain.getCurrentUser(request);
-
-        subCategory.setCreateBy(currentUser);
-
-        if (querySubCategoryDomain.checkSubCategoryDuplication(subCategory)) {
-
-            querySubCategoryDomain.insertSubCategory(subCategory);
-
-        } else {
-            throw new Exception("Duplicate SubCategory");
-        }
+   //  ----------------------------------------
+//    public void addSubCategory(Model model,
+//                               @RequestParam(value = "categoryId",required = true)String categoryId,
+//                               @RequestParam(value = "categoryName",required = true)String categoryName,
+//                               @RequestParam(value = "subcategoryName",required = true)String subcategoryName,
+//                               HttpServletRequest request, HttpServletResponse response){
+////            throws Exception {
+//
+//        Category category = queryCategoryDomain.getCategoryById(categoryId);
+//
+//        SubCategory subCategory = new SubCategory();
+//
+//        subCategory.setName(subcategoryName);
+//        subCategory.setCategory(queryCategoryDomain.getCategoryByName(categoryName));
+//
+//        User currentUser = queryUserDomain.getCurrentUser(request);
+//
+//        subCategory.setCreateBy(currentUser);
+//
+//
+//        subCategory.setCategory( queryCategoryDomain.getCategoryByName(categoryName));
+//        System.out.println("===============================================================7=====================================================================");
+//
+////        if (querySubCategoryDomain.checkSubCategoryDuplication(subCategory)) {
+////
+//            querySubCategoryDomain.insertSubCategory(subCategory);
+////
+////        } else {
+////            throw new Exception("Duplicate SubCategory");
+////        }
     }
 
-
+//end add
     @RequestMapping(value = "/exam/getAllSubCategory",method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getAllSubCategory() {
@@ -84,8 +103,6 @@ public class SubCategoryController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
-
-
 
 
 }

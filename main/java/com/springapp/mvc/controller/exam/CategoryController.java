@@ -66,7 +66,7 @@ public  class CategoryController {
 
     @RequestMapping(value = "/exam/deleteCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity deleteCategory(@ModelAttribute("id") Integer categoryId){
+    public ResponseEntity deleteCategory(@ModelAttribute("id") String categoryId){
 
         queryCategoryDomain.deleteCategory(categoryId);
 
