@@ -85,4 +85,20 @@ public  class CategoryController {
 
         return new ResponseEntity(headers, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/exam/searchCategory", method = RequestMethod.POST)
+    @ResponseBody
+//    public ResponseEntity<String> searchCategory(@ModelAttribute("id") String categoryId,
+//                                                 @ModelAttribute("name") String categoryName,
+//                                                 HttpServletRequest request){
+    public ResponseEntity<String> searchCategory(@ModelAttribute("name") String categoryName){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Category> categories = queryCategoryDomain.searchCategory(categoryName);
+        String json = new Gson().toJson(categories);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
 }
