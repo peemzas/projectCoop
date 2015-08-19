@@ -1,8 +1,11 @@
 package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.pojo.exam.Category;
+import com.springapp.mvc.util.BeanUtils;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -12,12 +15,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by Phuthikorn_T on 8/5/2015.
  */
 @Service
 public class QueryCategoryDomain extends HibernateUtil {
+
+    public static final Logger logger = Logger.getLogger(Category.class.getName());
 
     public void insertCategory(Category category){
 
@@ -69,6 +75,32 @@ public class QueryCategoryDomain extends HibernateUtil {
         HibernateUtil.beginTransaction();
         getSession().delete(category);
         HibernateUtil.commitTransaction();
+    }
+
+    public void editCategory(Category category){
+
+        HibernateUtil.beginTransaction();
+        getSession().merge(category);
+        HibernateUtil.commitTransaction();
+    }
+
+//    public List<Category> searchCategory(String categoryId, String categoryName){
+    public List<Category> searchCategory(String categoryName){
+
+        Criteria criteria = getSession().createCriteria(Category.class);
+        if(categoryName != ""){
+            criteria.add(Restrictions.like("name", "%"+categoryName+"%"));
+        }
+        else{
+            criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
+        }
+        //criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Category> categories = criteria.list();
+        logger.info("From QueryCategoryDomain");
+        logger.info("===================" + categories);
+
+        return categories;
     }
 }
 

@@ -50,7 +50,7 @@ public  class CategoryController {
 
 // return null;
     }
-
+//    Add by neng
     @RequestMapping(value = "/exam/getAllCategory",method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getAllCategory() {
@@ -72,5 +72,33 @@ public  class CategoryController {
 
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/editCategory", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity editCategory(@Valid Category category){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        queryCategoryDomain.editCategory(category);
+
+        return new ResponseEntity(headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/searchCategory", method = RequestMethod.POST)
+    @ResponseBody
+//    public ResponseEntity<String> searchCategory(@ModelAttribute("id") String categoryId,
+//                                                 @ModelAttribute("name") String categoryName,
+//                                                 HttpServletRequest request){
+    public ResponseEntity<String> searchCategory(@ModelAttribute("name") String categoryName){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Category> categories = queryCategoryDomain.searchCategory(categoryName);
+        String json = new Gson().toJson(categories);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 }

@@ -872,7 +872,7 @@ function saveEditToppicdata(valueId){
 
                 var data = $.ajax({
                     type: 'POST',
-                    url: '/TDCS/editTopic',
+                    url: '/TDCS/exam/editTopic',
                     data:topicSend,
                     complete: function(xhr) {
                         if (xhr.readyState == 4) {

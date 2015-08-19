@@ -30,7 +30,7 @@
                             <label>รหัสวิชา :</label>
                         </div>
                         <div class="col-md-1" style="width: 15%">
-                            <input class="form-control" type="text" maxlength="5"/>
+                            <input id="categoryId" class="form-control" type="text" maxlength="5"/>
                         </div>
 
 
@@ -41,7 +41,7 @@
                             <label>วิชา :</label>
                         </div>
                         <div class="col-md-4" >
-                            <input class="form-control" type="text"/>
+                            <input id="categoryName" class="form-control" type="text"/>
                         </div>
                         </div>
 
@@ -49,7 +49,7 @@
 
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
-                            <button class="btn btn-primary" type="button">ค้นหา</button>
+                            <button id="searchCategory" class="btn btn-primary" type="button">ค้นหา</button>
                             <button type="button" class="btn" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล</button>
                         </div>
                     </div>
@@ -134,4 +134,6 @@
         <%--</script>--%>
         <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
 <%@include file="modal/createCategoryModal.jsp"%>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchCategory.js" />"></script>
 
