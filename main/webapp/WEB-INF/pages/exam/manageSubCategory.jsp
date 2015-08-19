@@ -141,7 +141,7 @@
             <tr>
                 <th style="text-align: center; color: white;">รหัสวิชา</th>
                 <th style="text-align: center; color: white;">วิชา</th>
-                <th style="text-align: center; color: white;">รหัสหัวข้อเริ่อง</th>
+                <%--<th style="text-align: center; color: white;">รหัสหัวข้อเริ่อง</th>--%>
                 <th style="text-align: center; color: white;">หัวข้อเริ่อง</th>
                 <th style="text-align: center; color: white">แอคชั่น</th>
             </tr>
