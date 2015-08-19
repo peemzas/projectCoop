@@ -22,6 +22,10 @@ $(document).ready(function () {
         $('#createQuestModalTitle').text('สร้างข้อสอบ');
         $('#submitCreateBtn').text('ตกลง');
     })
+    $('.actionViewBtn').on('click',function(){
+        var tr = $(this).parents('tr');
+        updateDetailModal(tr);
+    })
 
 })
 
@@ -101,7 +105,7 @@ var listAllQuestion = function () {
                     'เลือก<span class="caret"></span>' +
                     '</button>' +
                     '<ul class="dropdown-menu">' +
-                    '<li><a href="#">ดู</a></li>' +
+                    '<li><a class="actionViewBtn" data-toggle="modal" data-target="#questionDetailModal">ดู</a></li>' +
                     '<li><a class="actionEditBtn" data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>' +
                     '<li><a class="actionDeleteBtn">ลบ</a></li>' +
                     '</ul>' +

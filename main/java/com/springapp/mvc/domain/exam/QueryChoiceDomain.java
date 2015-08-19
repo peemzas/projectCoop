@@ -3,6 +3,8 @@ package com.springapp.mvc.domain.exam;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +51,16 @@ public class QueryChoiceDomain extends HibernateUtil {
         commitTransaction();
 
 
+    }
+
+    public List<Choice> getChoiceListByQuestionId(Integer questionId){
+        Criteria criteria = getSession().createCriteria(Choice.class);
+
+        criteria.createAlias("question","quest");
+
+        criteria.add(Restrictions.eq("quest.id", questionId));
+
+
+        return (List<Choice>) criteria.list();
     }
 }

@@ -3,6 +3,7 @@ package com.springapp.mvc.controller.exam;
 import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
+import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -54,6 +55,7 @@ public class QuestionController {
 
     @Autowired
     QueryStatusDomain queryStatusDomain;
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody
@@ -131,6 +133,23 @@ public class QuestionController {
 
         queryQuestionDomain.deleteQuestion(questionId);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/getChoiceDetail")
+    @ResponseBody
+    public ResponseEntity<String> getChoiceDetail(ModelMap model
+            , @RequestParam(value = "questionId", required = true) Integer questionId
+            , HttpServletRequest request, HttpServletResponse respons){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+//        Question question = queryQuestionDomain.getQuestionById(questionId);
+        List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(questionId);
+        String json = new Gson().toJson(choices);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
 
 }
 
