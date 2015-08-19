@@ -57,28 +57,28 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-md-1 col-md-offset-1">A : </div>
-                    <div class="col-md-8" id="choiceDetail1"></div>
+                    <div class="col-md-8 text-left" id="choiceDetail1"></div>
                     <div class="col-md-1 " id="correctDetail1"><span class="glyphicon glyphicon-ok " style="color:rgb(92, 184, 92)"></span> </div>
                 </div>
                 <br>
 
                 <div class="row">
                     <div class="col-md-1 col-md-offset-1">B : </div>
-                    <div class="col-md-8" id="choiceDetail2"></div>
+                    <div class="col-md-8 text-left" id="choiceDetail2"></div>
                     <div class="col-md-1 " id="correctDetail2"><span class="glyphicon glyphicon-ok " style="color:rgb(92, 184, 92)"></span></div>
                 </div>
                 <br>
 
                 <div class="row">
                     <div class="col-md-1 col-md-offset-1">C : </div>
-                    <div class="col-md-8" id="choiceDetail3"></div>
+                    <div class="col-md-8 text-left" id="choiceDetail3"></div>
                     <div class="col-md-1 " id="correctDetail3"><span class="glyphicon glyphicon-ok " style="color:rgb(92, 184, 92)"></span></div>
                 </div>
                 <br>
 
                 <div class="row">
                     <div class="col-md-1 col-md-offset-1">D : </div>
-                    <div class="col-md-8" id="choiceDetail4"></div>
+                    <div class="col-md-8 text-left" id="choiceDetail4"></div>
                     <div class="col-md-1 " id="correctDetail4"><span class="glyphicon glyphicon-ok " style="color:rgb(92, 184, 92)"></span></div>
                 </div>
             </div>

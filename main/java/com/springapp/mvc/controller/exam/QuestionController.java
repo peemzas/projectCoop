@@ -59,7 +59,7 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody
-    public void addQuestion(ModelMap model,
+    public ResponseEntity<String> addQuestion(ModelMap model,
                             @RequestParam(value = "categoryName", required = true) String cat,
                             @RequestParam(value = "subCategoryName", required = true) String subCat,
                             @RequestParam(value = "questionDesc", required = true) String qDesc,
@@ -69,6 +69,10 @@ public class QuestionController {
                             @RequestParam(value = "difficulty", required = true) Integer difficultyLevel,
                             @RequestParam(value = "score", required = true) Float score
             , HttpServletRequest request, HttpServletResponse response) {
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
 
         Question question = new Question();
 
@@ -83,13 +87,13 @@ public class QuestionController {
 
         question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
 
-        System.out.println("===============================================================6=====================================================================");
-        question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
-        System.out.println("===============================================================7=====================================================================");
-
         question.setStatus(queryStatusDomain.getReadyStatus());
 
         queryQuestionDomain.insertQuestion(question, cDescList, correctChoice);
+
+        String json = new Gson().toJson(question);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
 

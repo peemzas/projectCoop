@@ -13,7 +13,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "TDCS_EXAM_PAPER")
+@Table(name = "TDCS_EXAM_PAPERS")
 public class ExamPaper implements Serializable {
 
     @Id

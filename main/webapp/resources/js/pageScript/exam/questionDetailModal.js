@@ -11,7 +11,12 @@
 
 var updateDetailModal = function (tr) {
     //$(".actionViewBtn").on('click,function(){ -------------------------
-    var id = tr.attr('questionId')
+
+    for(var i=1;i<=4;i++){
+        $('#correctDetail'+i).hide();
+    }
+
+    var id = tr.attr('questionId');
     $('#idDetail').text(id);
     $('#scoreDetail').text(tr.children('td.questionScore').text());
     $('#categoryDetail').text(tr.children('td.questionCategory').text());
@@ -27,24 +32,16 @@ var updateDetailModal = function (tr) {
         data: {
             questionId: id
         },success:function(choices){
-            alert('Success');
             var i = 1;
             choices.forEach(function(choice){
 
-
-                $('#choiceDetail'+i).text()
-                if(choice.correctChoice == i)
+                $('#choiceDetail'+i).text(choice.description);
+                if(choice.correction.value == 1)
                 {
                     $('#correctDetail'+i).show();
                 }
-                $('#choiceDetail').text()
                 i++;
-
             })
-
-
-
-
         },error:function(){
             alert("Failed");
         }
