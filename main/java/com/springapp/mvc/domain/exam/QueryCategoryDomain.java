@@ -66,7 +66,7 @@ public class QueryCategoryDomain extends HibernateUtil {
         return categories;
     }
 
-    public void deleteCategory(Integer categoryId){
+    public void deleteCategory(String categoryId){
 
         Criteria criteria = getSession().createCriteria(Category.class);
         criteria.add(Restrictions.eq("id", categoryId));
