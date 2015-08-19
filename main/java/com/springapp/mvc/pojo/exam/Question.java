@@ -5,6 +5,7 @@ import com.springapp.mvc.pojo.User;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -52,8 +53,8 @@ public class Question implements Serializable {
 //    @OneToMany(mappedBy = "questionId")
 //    private Set<ExamAnswerRecord> examAnswerRecords;
 
-    @ManyToMany(mappedBy = "questions")
-    private Set<ExamPaper> examPapers;
+    @ManyToMany(mappedBy = "questions" ,fetch = FetchType.LAZY)
+    private Set<ExamPaper> examPapers = new HashSet<ExamPaper>();
 
 //    @OneToMany(mappedBy = "question")
 //    private Set<Choice> choices;
