@@ -82,7 +82,7 @@ public class QuestionController {
         question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
 
         System.out.println("===============================================================6=====================================================================");
-        question.setSubCategoryId(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
+        question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
         System.out.println("===============================================================7=====================================================================");
 
         question.setStatus(queryStatusDomain.getReadyStatus());
