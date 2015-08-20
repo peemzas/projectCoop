@@ -5,6 +5,7 @@ import com.springapp.mvc.util.BeanUtils;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -92,23 +93,36 @@ public class QueryCategoryDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-//    public List<Category> searchCategory(String categoryId, String categoryName){
-    public List<Category> searchCategory(String categoryName){
+    public List<Category> searchCategory(String  categoryId, String categoryName){
 
-        Criteria criteria = getSession().createCriteria(Category.class);
-        if(categoryName != null){
-            criteria.add(Restrictions.like("name", "%"+categoryName+"%"));
-        }
-        else{
-            criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
-        }
+        if(categoryId == null){
 
+            String queryStatement = "from Category where name like :categoryName";
+            Query query = getSession().createQuery(queryStatement);
+            query.setParameter("categoryName", "%" + categoryName + "%");
+            List<Category> categories = query.list();
+
+            return categories;
+        }
+        else if(categoryName == null){
+
+            String queryStatement = "from Category where id like :categoryId";
+            Query query = getSession().createQuery(queryStatement);
+            query.setParameter("categoryId", "%" + categoryName + "%");
+            List<Category> categories = query.list();
+
+            return categories;
+        }
+        else {
+            String queryStatement = "from Category where id like :categoryId and name like :categoryName";
+            Query query = getSession().createQuery(queryStatement);
+            query.setParameter("categoryId", "%" + categoryId + "%");
+            query.setParameter("categoryName", "%" + categoryName + "%");
+            List<Category> categories = query.list();
+
+            return categories;
+        }
         //criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        List<Category> categories = criteria.list();
-        logger.info("From QueryCategoryDomain");
-        logger.info("===================" + categories);
-
-        return categories;
     }
 }
 

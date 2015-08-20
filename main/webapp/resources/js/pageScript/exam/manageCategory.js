@@ -48,6 +48,9 @@ function deleteCategory(categoryId){
         success:function(){
             alert(' ลบวิชาสำเร็จ ');
             window.location.reload();
+        },
+        error:function(){
+            alert(' ลบวิชาไม่สำเร็จ เนื่องจาก')
         }
     });
 }
