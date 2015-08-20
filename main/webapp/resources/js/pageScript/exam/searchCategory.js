@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
    $("#searchCategory").click(function(){
-       alert("hi");
+       //alert("hi");
        search();
    });
 });
@@ -13,7 +13,8 @@ function search(){
 
     //var categoryId = $("#categoryId").val();
     var categoryName = $("#categoryName").val();
-    var dataResonse = $.ajax({
+
+    var dataResponse = $.ajax({
         type: "POST",
         url: "/TDCS/exam/searchCategory",
         data: {
@@ -22,7 +23,7 @@ function search(){
         },
         async: false,
         success: function(data){
-            alert(data.id + " "+ data.name);
+            //alert(data.id + " "+ data.name);
             //$("#tbodyCategory").hide();
             data.forEach(function(value){
                 $("#tbodyCategory").empty();
@@ -33,10 +34,9 @@ function search(){
                     '<td><label id="data'+value.id+'">'+value.name+'</label>'+
                     '<input id="editData'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
-                    '<td style="text-align: center"">'+
-                    '<button id="editBtn'+value.id+'" class="btn btn-gray" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button id="updateBtn'+value.id+'" class="btn btn-primary" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"><span class="glyphicon glyphicon-trash"></span></button>'+
+                    '<td style="text-align: center;"><button id="editBtn'+value.id+'" class="btn btn-gray" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+                    '&nbsp;<button id="updateBtn'+value.id+'" class="btn btn-primary" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '<td style="text-align: center;"><button class="btn btn-danger" id="deleteBtn'+value.id+'" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"><span class="glyphicon glyphicon-trash"></span></button></td>'+
                     '</tr>'
                 )
             });

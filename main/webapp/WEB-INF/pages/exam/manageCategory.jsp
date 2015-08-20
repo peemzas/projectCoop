@@ -12,8 +12,6 @@
 <div class="container row">
     <h3>รายวิชา</h3>
     <hr>
-
-
 </div>
 
 
@@ -32,21 +30,18 @@
                         <div class="col-md-1" style="width: 15%">
                             <input id="categoryId" class="form-control" type="text" maxlength="5"/>
                         </div>
-
-
                     </div>
                     <div style="margin-bottom: 5px"></div>
-                    <div class="row">
-                        <div class="col-md-1 col-lg-offset-3 text-right">
-                            <label>วิชา :</label>
+                        <div class="row">
+                            <div class="col-md-1 col-lg-offset-3 text-right">
+                                <label>วิชา :</label>
+                            </div>
+                            <div class="col-md-4" >
+                                <input id="categoryName" class="form-control" type="text"/>
+                            </div>
                         </div>
-                        <div class="col-md-4" >
-                            <input id="categoryName" class="form-control" type="text"/>
-                        </div>
-                        </div>
-
+                    </div>
                     <hr/>
-
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
                             <button id="searchCategory" class="btn btn-primary" type="button">ค้นหา</button>
@@ -55,45 +50,22 @@
                     </div>
                 </div>
             </div>
-
-
-            <%--<div class="col-md-4" align="left" style="margin-top: 20px;">--%>
-            <%--<select class="form-control" id="viewControlSelector">--%>
-            <%--<option id = "selectCategory" value="Category" selected>วิชา</option>--%>
-            <%--<option id = "selectSubCategory" value="SubCategory" >หัวข้อเรื่อง</option>--%>
-            <%--</select>--%>
-            <%--</div>--%>
         </div>
 
-
-
-
-
-
-            <button data-toggle="modal" data-target="#createCat" class="btn btn-success" align="center"
-                    style="width:50px;height:35px"> +
-            </button>
-
-
-
-        <%--<div class="input-group-btn">--%>
-            <%--<button class="btn btn-success" data-toggle="modal" data-target=#createCat">--%>
-                <%----%>
-            <%--</button>--%>
-        <%--</div>--%>
-
+        <button data-toggle="modal" data-target="#createCat" class="btn btn-success" align="center" style="width:50px;height:35px"><span class="glyphicon glyphicon-plus"></span></button>
+        <br/>
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered" id="tblCategory">
                     <col width="20%"/>
                     <col width="60%"/>
-                    <col width="20%"/>
                     <thead class="bg-primary">
-                    <tr>
-                        <th style="text-align: center; color: white;">รหัสวิชา</th>
-                        <th style="text-align: center; color: white;">วิชา</th>
-                        <th style="text-align: center; color: white">แอคชั่น</th>
-                    </tr>
+                        <tr>
+                            <th style="text-align: center; color: white;">รหัสวิชา</th>
+                            <th style="text-align: center; color: white;">วิชา</th>
+                            <th id="thEdit" style="text-align: center; color: white;">แก้ไข</th>
+                            <th id="thDelete" style="text-align: center; color: white;">ลบ</th>
+                        </tr>
                     </thead>
                     <tbody id="tbodyCategory">
                         <%--<c:forEach var="category" items="${LIST_OF_CATEOGRIES}">--%>
@@ -114,26 +86,9 @@
                 </table>
             </div>
         </div>
+    </div>
 
-
-        <%--<script>--%>
-
-            <%--$("#tblSubCategory").hide();--%>
-
-            <%--$('#viewControlSelector').on('change', function () {--%>
-                <%--if (this.value == 'Category') {--%>
-                    <%--$("#tblCategory").show();--%>
-                    <%--$("#tblSubCategory").hide();--%>
-                <%--} else if (this.value == 'SubCategory') {--%>
-                    <%--$("#tblCategory").hide();--%>
-                    <%--$("#tblSubCategory").show();--%>
-                <%--} else {--%>
-                    <%--alert('No God Please No');--%>
-                <%--}--%>
-            <%--})--%>
-        <%--</script>--%>
-        <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
 <%@include file="modal/createCategoryModal.jsp"%>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchCategory.js" />"></script>
-

@@ -38,12 +38,14 @@ function saveCategory(){
                 error: function () {
                     alert('เพิ่มวิชาไม่สำเร็จ');
                 }
-            }).responseText;
-
+                //}).responseText;
+            });
         },
         error: function (data) {
             alert('error while request...');
         }
     });
+    $("#categoryNameText").val("");
+    $("#categoryIdText").val("");
 }
 
