@@ -263,7 +263,7 @@ public class InPageController {
     }
     //Create Jokizz
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageSubCategory")
-    public String editSubCategory(HttpServletRequest request, Model model){
+    public String editSubCategories(HttpServletRequest request, Model model){
         
 //        model.addAttribute("LIST_OF_SUBCATEOGRIES", querySubCategoryDomain.getListSubCategories());
 

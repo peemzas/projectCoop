@@ -136,14 +136,16 @@
             <col width="10%"/>
             <col width="20%"/>
             <col width="50%"/>
-            <col width="20%"/>
+            <col width="10%"/>
+            <col width="10%"/>
             <thead class="bg-primary">
             <tr>
                 <th style="text-align: center; color: white;">รหัสวิชา</th>
                 <th style="text-align: center; color: white;">วิชา</th>
                 <%--<th style="text-align: center; color: white;">รหัสหัวข้อเริ่อง</th>--%>
                 <th style="text-align: center; color: white;">หัวข้อเริ่อง</th>
-                <th style="text-align: center; color: white">แอคชั่น</th>
+                <th style="text-align: center; color: white">แก้ไข</th>
+                <th style="text-align: center; color: white">ลบ</th>
             </tr>
             </thead>
             <tbody id="tbodySubCategory">

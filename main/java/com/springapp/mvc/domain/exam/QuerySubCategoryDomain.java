@@ -61,7 +61,7 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         
 
-        criteria.add(Restrictions.eq("name",name));
+        criteria.add(Restrictions.eq("name", name));
         criteria.add(Restrictions.eq("category", category));
 
         List<SubCategory> subCategories = criteria.list();
@@ -83,6 +83,13 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         SubCategory sc = new SubCategory();
         sc.setId(subCategoryId);
         getSession().delete(sc);
+        HibernateUtil.commitTransaction();
+    }
+
+    public void editSubCategory(SubCategory subCategory){
+
+        HibernateUtil.beginTransaction();
+        getSession().merge(subCategory);
         HibernateUtil.commitTransaction();
     }
 
