@@ -45,7 +45,9 @@ function saveCategory(){
             alert('error while request...');
         }
     });
+
     $("#categoryNameText").val("");
     $("#categoryIdText").val("");
 }
+
 

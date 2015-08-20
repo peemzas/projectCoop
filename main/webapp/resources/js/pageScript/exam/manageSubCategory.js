@@ -50,7 +50,7 @@ function viewSubCategory(){
 
 function deleteSubCategory(subCategoryId){
 
-    if(!confirm(" แน่ใจนะว่าคุณจะลบ ")){
+    if(!confirm(" แน่ใจนะว่าคุณจะลบ ")){ 
 
         return false;
     }
@@ -63,6 +63,8 @@ function deleteSubCategory(subCategoryId){
         async: false,
         success:function(){
             alert(' ลบวิชาสำเร็จ ');
+            //$("#tbodySubCategory").empty();
+            //viewSubCategory();
             window.location.reload();
         },
         error: function(deleteSubCategory){

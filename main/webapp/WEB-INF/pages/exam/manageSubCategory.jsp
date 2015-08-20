@@ -125,7 +125,7 @@
 
 
         <button data-toggle="modal" data-target="#createSub" class="btn btn-success" align="center"
-                style="width:50px;height:35px"> +
+                style="width:50px;height:35px"><span class="glyphicon glyphicon-plus"></span>
         </button>
 
 
