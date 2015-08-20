@@ -9,7 +9,7 @@ function saveSubCategory(){
     var categoryId = $("#sCat").val();
     var categoryName = $("#sCat").children(":selected").attr("categoryName");
     var subcategoryName = $("#subcategoryName").val();
-    alert(categoryId+' '+categoryName+' '+subcategoryName);
+    //alert(categoryId+' '+categoryName+' '+subcategoryName);
 
     var data = $.ajax({
         type: "POST",
@@ -34,9 +34,16 @@ function saveSubCategory(){
             var dat = $.ajax({
                 type: "POST",
                 url: "/TDCS/exam/addSubCategory",
-                data: 'id=' + categoryId + '&name=' + subcategoryName,
+                data: {
+                    categoryId:categoryId,
+                    subcategoryName:subcategoryName
+                },
                 success: function () {
                     alert('เพิ่มหัวข้อเรื่อง ' + subcategoryName);
+                    //$("#tbodySubCategory").empty();
+                    //viewSubCategory();
+                    window.location.reload();
+
                 },
                 error: function () {
                     alert('เพิ่มหัวข้อเรื่องไม่สำเร็จ');

@@ -40,48 +40,36 @@ public class SubCategoryController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addSubCategory")
     @ResponseBody
-    public void  addSubCategory(ModelMap model, @Valid SubCategory subCategory
-            ,HttpServletRequest request, HttpServletResponse response){
+//
+//    public void  addSubCategory(ModelMap model, @Valid SubCategory subCategory
+//            ,HttpServletRequest request, HttpServletResponse response){
+//
+//        User createBy = queryUserDomain.getCurrentUser(request);
+//        subCategory.setCreateBy(createBy);
+//
+//        querySubCategoryDomain.insertSubCategory(subCategory);
 
-        User createBy = queryUserDomain.getCurrentUser(request);
-        subCategory.setCreateBy(createBy);
+    //  ----------------------------------------
+    public void addSubCategory(Model model,
+                               @RequestParam(value = "categoryId", required = true) String categoryId,
+                               @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
+                               HttpServletRequest request, HttpServletResponse response) {
+//            throws Exception {
+
+        SubCategory subCategory = new SubCategory();
+
+        subCategory.setName(subcategoryName);
+        subCategory.setCategory(queryCategoryDomain.getCategoryById(categoryId));
+
+        User currentUser = queryUserDomain.getCurrentUser(request);
+
+        subCategory.setCreateBy(currentUser);
 
         querySubCategoryDomain.insertSubCategory(subCategory);
-
-   //  ----------------------------------------
-//    public void addSubCategory(Model model,
-//                               @RequestParam(value = "categoryId",required = true)String categoryId,
-//                               @RequestParam(value = "categoryName",required = true)String categoryName,
-//                               @RequestParam(value = "subcategoryName",required = true)String subcategoryName,
-//                               HttpServletRequest request, HttpServletResponse response){
-////            throws Exception {
-//
-//        Category category = queryCategoryDomain.getCategoryById(categoryId);
-//
-//        SubCategory subCategory = new SubCategory();
-//
-//        subCategory.setName(subcategoryName);
-//        subCategory.setCategory(queryCategoryDomain.getCategoryByName(categoryName));
-//
-//        User currentUser = queryUserDomain.getCurrentUser(request);
-//
-//        subCategory.setCreateBy(currentUser);
-//
-//
-//        subCategory.setCategory( queryCategoryDomain.getCategoryByName(categoryName));
-//        System.out.println("===============================================================7=====================================================================");
-//
-////        if (querySubCategoryDomain.checkSubCategoryDuplication(subCategory)) {
-////
-//            querySubCategoryDomain.insertSubCategory(subCategory);
-////
-////        } else {
-////            throw new Exception("Duplicate SubCategory");
-////        }
     }
 
-//end add
-    @RequestMapping(value = "/exam/getAllSubCategory",method = RequestMethod.POST)
+    //end add
+    @RequestMapping(value = "/exam/getAllSubCategory", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getAllSubCategory() {
 
@@ -96,7 +84,7 @@ public class SubCategoryController {
 
     @RequestMapping(value = "/exam/deleteSubCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity deleteSubCategory(@ModelAttribute("id") Integer subCategoryId){
+    public ResponseEntity deleteSubCategory(@ModelAttribute("id") Integer subCategoryId) {
 
         querySubCategoryDomain.deleteSubCategory(subCategoryId);
 
