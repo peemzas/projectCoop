@@ -96,14 +96,14 @@ public class QueryCategoryDomain extends HibernateUtil {
     public List<Category> searchCategory(String categoryName){
 
         Criteria criteria = getSession().createCriteria(Category.class);
-        if(categoryName != ""){
+        if(categoryName != null){
             criteria.add(Restrictions.like("name", "%"+categoryName+"%"));
         }
-//        else{
-//            criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
-//        }
-        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        else{
+            criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("id"), "id"));
+        }
+
+        //criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Category> categories = criteria.list();
         logger.info("From QueryCategoryDomain");
         logger.info("===================" + categories);

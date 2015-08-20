@@ -18,51 +18,19 @@
                         aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title" align="center">เพิ่มวิชา</h3>
             </div>
-            <div class="modal-body" style="height: 120px">
+            <div class="modal-body">
                 <div class="row">
-
-
-                    <div class="col-md-3" align="right">
-                        <h4><label for="categoryIdText" class="label"
-                                   style="color: black ; font-weight: 100">รหัสวิชา :
-                        </label></h4>
-                    </div>
-                    <div class="col-md-2">
-                        <input  type="text" class="form-control" name="cat" id="categoryIdText"/>
-                    </div>
-
-
-                    <div class="col-md-1" align="right">
-                        <h4><label for="categoryNameText" class="label"
-                                   style="color: black ; font-weight: 100">วิชา :
-                        </label></h4>
-                    </div>
-                    <div class="col-md-6">
-                        <input style="width: 80%" type="text" class="form-control" name="cat" id="categoryNameText"/>
-                    </div>
-
-
-
-
-
-
-
-                    <button id="hiddenBtn" data-dismiss="modal" class="hidden">hidden</button>
+                    <form data-toggle="validator" role="form">
+                        <div class="form-group">
+                            <label for="categoryNameText" class="control-label">Name</label>
+                            <input type="text" class="form-control" id="categoryNameText" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryNameText" class="control-label">Name</label>
+                            <input type="text" class="form-control" id="categoryNameText" required>
+                        </div>
+                    </form>
                 </div>
-                <br>
-
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <button id="submitCreateCategoryBtn" class="btn btn-primary" type="submit" data-dismiss="modal">
-                        บันทึก
-                    </button>
-
-                        <button id="hiddenBtn2" class="btn btn-warning"  class="hidden" data-dismiss="modal">
-                            ยกเลิก
-                        </button>
-                    </div>
-                </div>
-
             </div>
             <!-- /.modal-content -->
         </div>
@@ -77,7 +45,5 @@
 
         $('#submitCreateCategoryBtn').on('click', function () {
             saveCategory();
-        })
-
-
+        });
     </script>

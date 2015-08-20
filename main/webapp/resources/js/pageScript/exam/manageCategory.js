@@ -19,10 +19,9 @@ function viewCategory(){
                     '<td><label id="data'+value.id+'">'+value.name+'</label>'+
                     '<input id="editData'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
-                    '<td style="text-align: center"">'+
-                    '<button id="editBtn'+value.id+'" class="btn btn-gray" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button id="updateBtn'+value.id+'" class="btn btn-primary" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button class="btn btn-danger" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"><span class="glyphicon glyphicon-trash"></span></button>'+
+                    '<td style="text-align: center;"><button id="editBtn'+value.id+'" class="btn btn-gray" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+                    '&nbsp;<button id="updateBtn'+value.id+'" class="btn btn-primary" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '<td style="text-align: center;"><button class="btn btn-danger" id="deleteBtn'+value.id+'" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"><span class="glyphicon glyphicon-trash"></span></button></td>'+
                     '</tr>'
                 )
             });
@@ -53,11 +52,14 @@ function deleteCategory(categoryId){
     });
 }
 function editCategory(categoryId){
-    $("#editBtn"+categoryId).hide();
 
+    $("#editBtn"+categoryId).hide();
     $("#id"+categoryId).hide();
     $("#data"+categoryId).hide();
 
+    //alert($("#thEdit").text("บันทึก"));
+    //$("#thEdit").text("บันทึก");
+    //$("#deleteBtn"+categoryId).attr("disabled", "disabled");
     $("#editId"+categoryId).show();
     $("#editData"+categoryId).show();
     $("#updateBtn"+categoryId).show();
@@ -65,7 +67,7 @@ function editCategory(categoryId){
 
 function updateCategory(categoryId){
 
-    if(!$.isNumeric($("#editId"+categoryId).val()) || $("#editId"+categoryId).length > 5){
+    if($("#editId"+categoryId).length > 5){
         alert("คุณกรอกรหัสวิชาไม่ถูกต้อง");
     }
     else if($("#editData"+categoryId).val() == ""){
