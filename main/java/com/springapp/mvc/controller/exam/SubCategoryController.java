@@ -92,5 +92,38 @@ public class SubCategoryController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/editSubCategory", method = RequestMethod.POST)
+    @ResponseBody
+//    public ResponseEntity editSubCategory(@Valid SubCategory subCategory,HttpServletRequest request){
+//
+//        HttpHeaders headers = new HttpHeaders();
+//
+//        headers.add("Content-Type", "application/json;charset=UTF-8");
+//        User createBy = queryUserDomain.getCurrentUser(request);
+//        subCategory.setCreateBy(createBy);
+//        querySubCategoryDomain.editSubCategory(subCategory);
+//
+//
+//        return new ResponseEntity(headers, HttpStatus.OK);
+//    }
 
+
+    public void editSubCategory(Model model,
+                                @RequestParam(value = "categoryId", required = true) String categoryId,
+                                @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
+                                HttpServletRequest request, HttpServletResponse response) {
+
+        SubCategory subCategory = new SubCategory();
+
+        subCategory.setName(subcategoryName);
+        subCategory.setCategory(queryCategoryDomain.getCategoryById(categoryId));
+
+        User currentUser = queryUserDomain.getCurrentUser(request);
+
+        subCategory.setCreateBy(currentUser);
+
+        querySubCategoryDomain.editSubCategory(subCategory);
+
+
+    }
 }
