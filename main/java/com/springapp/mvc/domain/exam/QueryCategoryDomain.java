@@ -50,6 +50,14 @@ public class QueryCategoryDomain extends HibernateUtil {
         return resultCategory;
     }
 
+    public Category getCategoryById(String id){
+        Criteria criteria = getSession().createCriteria(Category.class);
+        criteria.add(Restrictions.eq("id", id));
+        Category resultCategory = (Category)criteria.list().get(0);
+
+        return resultCategory;
+    }
+
     //------------Add by neng
     public List<Category> getListCategories(){
 

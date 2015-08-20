@@ -5,6 +5,7 @@ import com.springapp.mvc.pojo.User;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "TDCS_EXAM_PAPER")
+@Table(name = "TDCS_EXAM_PAPERS")
 public class ExamPaper implements Serializable {
 
     @Id
@@ -34,10 +35,11 @@ public class ExamPaper implements Serializable {
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
 
-    @ManyToMany
-    @JoinTable(joinColumns = {@JoinColumn(name = "PAPER_ID", referencedColumnName = "PAPER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", referencedColumnName = "QUESTION_ID")})
-    private Set<Question> questions;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "TDCS_PAPER_CONTAINING",
+            joinColumns = {@JoinColumn(name = "PAPER_ID",nullable = false , updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",nullable = false , updatable = false)})
+    private Set<Question> questions = new HashSet<Question>();
 
 
 

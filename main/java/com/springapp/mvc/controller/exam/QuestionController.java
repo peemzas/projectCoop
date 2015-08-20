@@ -3,6 +3,7 @@ package com.springapp.mvc.controller.exam;
 import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
+import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -55,9 +56,10 @@ public class QuestionController {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody
-    public void addQuestion(ModelMap model,
+    public ResponseEntity<String> addQuestion(ModelMap model,
                             @RequestParam(value = "categoryName", required = true) String cat,
                             @RequestParam(value = "subCategoryName", required = true) String subCat,
                             @RequestParam(value = "questionDesc", required = true) String qDesc,
@@ -67,6 +69,10 @@ public class QuestionController {
                             @RequestParam(value = "difficulty", required = true) Integer difficultyLevel,
                             @RequestParam(value = "score", required = true) Float score
             , HttpServletRequest request, HttpServletResponse response) {
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
 
         Question question = new Question();
 
@@ -81,13 +87,13 @@ public class QuestionController {
 
         question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
 
-        System.out.println("===============================================================6=====================================================================");
-        question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
-        System.out.println("===============================================================7=====================================================================");
-
         question.setStatus(queryStatusDomain.getReadyStatus());
 
         queryQuestionDomain.insertQuestion(question, cDescList, correctChoice);
+
+        String json = new Gson().toJson(question);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
 
@@ -131,6 +137,23 @@ public class QuestionController {
 
         queryQuestionDomain.deleteQuestion(questionId);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/getChoiceDetail")
+    @ResponseBody
+    public ResponseEntity<String> getChoiceDetail(ModelMap model
+            , @RequestParam(value = "questionId", required = true) Integer questionId
+            , HttpServletRequest request, HttpServletResponse respons){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+//        Question question = queryQuestionDomain.getQuestionById(questionId);
+        List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(questionId);
+        String json = new Gson().toJson(choices);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
 
 }
 
