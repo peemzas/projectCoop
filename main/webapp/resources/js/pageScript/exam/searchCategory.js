@@ -11,22 +11,25 @@ $(document).ready(function(){
 
 function search(){
 
-    //var categoryId = $("#categoryId").val();
-    var categoryName = $("#categoryName").val();
+    var categoryIdRequest = $("#categoryId").val();
+    var categoryNameRequest = $("#categoryName").val();
 
     var dataResponse = $.ajax({
         type: "POST",
         url: "/TDCS/exam/searchCategory",
         data: {
             //id: categoryId,
-            name: categoryName
+            id: categoryIdRequest,
+            name: categoryNameRequest
         },
         async: false,
         success: function(data){
             //alert(data.id + " "+ data.name);
             //$("#tbodyCategory").hide();
+            $("#tbodyCategory").empty();
             data.forEach(function(value){
-                $("#tbodyCategory").empty();
+                //$("#tbodyCategory").empty();
+
                 $("#tbodyCategory").append(
                     '<tr>'+
                     '<td style="text-align: center;"><label id="id'+value.id+'">'+value.id+'</label>'+

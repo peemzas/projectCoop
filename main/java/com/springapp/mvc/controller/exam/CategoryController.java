@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Phuthikorn_T on 8/5/2015.
@@ -35,6 +36,7 @@ public  class CategoryController {
     @Autowired
     QueryUserDomain queryUserDomain;
 
+    private static final Logger logger = Logger.getLogger(Category.class.getName());
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addCategory")
     @ResponseBody
@@ -76,11 +78,13 @@ public  class CategoryController {
 
     @RequestMapping(value = "/exam/editCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity editCategory(@Valid Category category){
+    public ResponseEntity editCategory(@Valid Category category, HttpServletRequest request){
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
+        User createBy = queryUserDomain.getCurrentUser(request);
+        category.setCreateBy(createBy);
         queryCategoryDomain.editCategory(category);
 
         return new ResponseEntity(headers, HttpStatus.OK);
@@ -88,15 +92,15 @@ public  class CategoryController {
 
     @RequestMapping(value = "/exam/searchCategory", method = RequestMethod.POST)
     @ResponseBody
-//    public ResponseEntity<String> searchCategory(@ModelAttribute("id") String categoryId,
-//                                                 @ModelAttribute("name") String categoryName,
-//                                                 HttpServletRequest request){
-    public ResponseEntity<String> searchCategory(@ModelAttribute("name") String categoryName){
+    public ResponseEntity<String> searchCategory(@ModelAttribute("id") String categoryId,
+                                                 @ModelAttribute("name") String categoryName,
+                                                 HttpServletRequest request){
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-        List<Category> categories = queryCategoryDomain.searchCategory(categoryName);
+        List<Category> categories = queryCategoryDomain.searchCategory(categoryId, categoryName);
+        logger.info(String.valueOf(categories));
         String json = new Gson().toJson(categories);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
