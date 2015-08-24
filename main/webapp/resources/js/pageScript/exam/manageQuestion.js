@@ -10,29 +10,40 @@ $(document).ready(function () {
 
     $(".actionDeleteBtn").on('click', function () {
         var questionId = parseInt($(".actionDeleteBtn").parents('tr').attr('questionId'));
-        deleteQuestion(questionId);
+        var r = confirm("ลบข้อสอบที่ " + questionId);
+        if (r == true) {
+            console.log(questionId);
+            deleteQuestion(questionId);
+        }
     })
 
-    $(".actionEditBtn").on('click',function(){
+    $(".actionEditBtn").on('click', function () {
         $('#submitCreateBtn').text('ยืนยัน');
         $('#createQuestModalTitle').text('แก้ไขข้อสอบ');
+        setQuestionObj($(this).parents('tr'));
+        setEditModalParameter();
     })
-
-    $('.createQuestionBtn').on('click',function(){
+    $('.createQuestionBtn').on('click', function () {
         $('#createQuestModalTitle').text('สร้างข้อสอบ');
         $('#submitCreateBtn').text('ตกลง');
     })
-    $('.actionViewBtn').on('click',function(){
+    $('.actionViewBtn').on('click', function () {
         var tr = $(this).parents('tr');
         updateDetailModal(tr);
     })
 
 })
 
+var questionObj;
+var setQuestionObj = function (tr) {
+    questionObj = tr;
+}
+
 editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp
     // IF THIS ISN'T WORKING TRY PUT THE CODE IN editQuestion() in createQuestionModal.jsp instead
     alert("manageQuestion.js Yeaahhh");
 
+    var questionId = questionObj.attr('questionId');
     var categoryName = $("#categoryInputForCreateQuestion").val();
     var subCategoryName = $("#subCategoryInputForCreateQuestion").val();
     var questionTypeString = $("#select-QuestionType").val();
@@ -57,6 +68,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
         type: 'POST',
         url: '/TDCS/exam/editQuestion',
         data: {
+            questionId: questionId,
             categoryName: categoryName,
             subCategoryName: subCategoryName,
             questionDesc: questionDesc,
@@ -76,6 +88,53 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
     })
 }
 
+var setEditModalParameter = function () {
+
+    var tr = questionObj;
+    var ajaxDat1 = $.ajax({ //quesotion
+        type: "POST",
+        url: "/TDCS/exam/getQuestionDetail",
+        data: {
+            questionId: tr.attr('questionId')
+        },
+        success: function (question) {
+
+            setCreateModalCategory(question.subCategory.category.name)
+            setCreateModalSubCategory(question.subCategory.name)
+            setCreateModalQuestionType(question.questionType.description)
+            setCreateModalDufficulty(question.difficultyLevel.level)
+            setCreateModalScore(question.score)
+            setCreateModalQuestionDesc(question.description)
+
+            updateCreateModalLayout()
+        },
+        error:function(){
+            console.log("fail in ajaxDat1");
+        }
+    })
+
+    var ith = 1;
+    var ajaxDat2 = $.ajax({ //choices
+        type:"POST",
+        url:"/TDCS/exam/getChoiceDetail",
+        data: {
+            questionId: tr.attr('questionId')
+        },
+        success: function (choices){
+            choices.forEach(function(choice){
+                setCreateModalIthChoice(choice.description,ith);
+                if(choice.correction.value == 1){
+                    setCreateModalCorrectQuestion(ith);
+                }
+                ith = ith+1;
+            })
+        },
+        error: function(){
+            console.log("fail in ajaxDat2")
+        }
+    })
+}
+
 var listAllQuestion = function () {
     var questionList = $.ajax({
             type: "POST",
@@ -83,11 +142,10 @@ var listAllQuestion = function () {
             url: "/TDCS/exam/getAllQuestion",
             async: false,
             success: function (questionList) {
+                console.log("hello")
                 questionList.forEach(function (quest) {
-                    console.log(quest.id);
-                    console.log(quest);
                     var createDate = new Date(quest.createDate);
-                    var formattedDate = createDate.getDate()+"/"+createDate.getMonth()+"/"+createDate.getFullYear();
+                    var formattedDate = createDate.getDate() + "/" + createDate.getMonth() + "/" + createDate.getFullYear();
 
                     $("#tableBody").append('<tr questionId=' + quest.id + '>' +
                     '<td class="questionId">' + quest.id + '</td>' +
@@ -98,7 +156,7 @@ var listAllQuestion = function () {
                     '<td class="questionCategory">' + quest.categoryName + '</td>' +
                     '<td class="questionSubCategory">' + quest.subCategoryName + '</td>' +
                     '<td class="questionCreateBy">' + quest.createByEmpId + '</td>' +
-                    '<td class="questionCreateDate">' + formattedDate+ '</td>' +
+                    '<td class="questionCreateDate">' + formattedDate + '</td>' +
                     '<td>' +
                     '<div class="btn-group">' +
                     '<button class="btn dropdown-toggle" data-toggle="dropdown">' +

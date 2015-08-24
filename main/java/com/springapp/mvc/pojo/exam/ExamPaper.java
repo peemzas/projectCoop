@@ -31,6 +31,9 @@ public class ExamPaper implements Serializable {
     @Column(name = "PAPER_MAX_SCORE")
     private Integer maxScore;
 
+    @Column(name = "PAPER_EXAM_TIME_MINUTE")
+    private Integer examTime;
+
     @ManyToOne
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
@@ -42,8 +45,13 @@ public class ExamPaper implements Serializable {
     private Set<Question> questions = new HashSet<Question>();
 
 
+    public Integer getExamTime() {
+        return examTime;
+    }
 
-
+    public void setExamTime(Integer examTime) {
+        this.examTime = examTime;
+    }
 
     public Integer getId() {
         return id;

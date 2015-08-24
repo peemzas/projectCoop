@@ -12,6 +12,7 @@ import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public class QueryQuestionDomain extends HibernateUtil {
 
     @Autowired
     QueryChoiceDomain queryChoiceDomain;
+    @Autowired
+    QuerySubCategoryDomain querySubCategoryDomain;
 
     public void insertQuestion(Question question, List<String> cDesc, Integer correctChoice) {
 
@@ -83,6 +86,25 @@ public class QueryQuestionDomain extends HibernateUtil {
         beginTransaction();
         getSession().delete(question);
         commitTransaction();
+    }
+
+    public List<Question> searchQuestionQuery(Integer categoryId, Integer subCategoryId,
+                                              String createByUsername, Integer questionId,
+                                              String questionDesc, Date createDateFrom,
+                                              Date createDateTo, Float scoreFrom,
+                                              Float scoreTo, Integer statusId){
+
+        Criteria criteria = getSession().createCriteria(Question.class);
+
+
+
+        return criteria.list();
+    }
+
+    public void mergeQuestion(Question question){
+        beginTransaction();
+        getSession().merge(question);
+        closeSession();
     }
 
 }
