@@ -36,6 +36,33 @@ public class Choice  implements Serializable {
 //    private Set<ExamAnswerRecord> examAnswerRecords;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Choice)) return false;
+
+        Choice choice = (Choice) o;
+
+        if (getId() != null ? !getId().equals(choice.getId()) : choice.getId() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(choice.getDescription()) : choice.getDescription() != null)
+            return false;
+        if (getCorrection() != null ? !getCorrection().equals(choice.getCorrection()) : choice.getCorrection() != null)
+            return false;
+        if (getQuestion() != null ? !getQuestion().equals(choice.getQuestion()) : choice.getQuestion() != null)
+            return false;
+        return !(getStatus() != null ? !getStatus().equals(choice.getStatus()) : choice.getStatus() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getCorrection() != null ? getCorrection().hashCode() : 0);
+        result = 31 * result + (getQuestion() != null ? getQuestion().hashCode() : 0);
+        result = 31 * result + (getStatus() != null ? getStatus().hashCode() : 0);
+        return result;
+    }
 
     public Status getStatus() {
         return status;

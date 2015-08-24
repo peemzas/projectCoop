@@ -93,7 +93,7 @@
 
                                 <div class="col-md-8 col-md-offset-2" style="padding: 0px" align="left">
                                     <span class="input-group">
-                                        <input class="form-control" type="text" id="choice1"/>
+                                        <input class="form-control choiceDesc" type="text" id="choice1"/>
                                         <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio"
                                                    value="1"/>
@@ -104,17 +104,16 @@
                                     <br>
 
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="choice2"/>
+                                        <input class="form-control choiceDesc" type="text" id="choice2"/>
                                     <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio" value="2"/>
                                         <div class=" glyphicon glyphicon-ok"></div>
                                     </span>
                                     </div>
-
                                     <br>
 
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="choice3"/>
+                                        <input class="form-control choiceDesc" type="text" id="choice3"/>
                                         <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio" value="3"/>
                                             <div class=" glyphicon glyphicon-ok"></div>
@@ -124,7 +123,7 @@
                                     <br>
 
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="choice4"/>
+                                        <input class="form-control choiceDesc" type="text" id="choice4"/>
                                         <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio" value="4"/>
                                             <div class=" glyphicon glyphicon-ok "></div>

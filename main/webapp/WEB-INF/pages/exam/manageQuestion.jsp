@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="modal/addEmployeeToInputModal.jsp" %>
 <%@include file="modal/createQuestionModal.jsp" %>
 <%@include file="modal/questionDetailModal.jsp" %>
 <div class="container row">

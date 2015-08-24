@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,14 +61,14 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody
     public ResponseEntity<String> addQuestion(ModelMap model,
-                            @RequestParam(value = "categoryName", required = true) String cat,
-                            @RequestParam(value = "subCategoryName", required = true) String subCat,
-                            @RequestParam(value = "questionDesc", required = true) String qDesc,
-                            @RequestParam(value = "choiceDescArray", required = false) List<String> cDescList,
-                            @RequestParam(value = "correctChoice", required = false) Integer correctChoice,
-                            @RequestParam(value = "questionType", required = true) Integer questionTypeId,
-                            @RequestParam(value = "difficulty", required = true) Integer difficultyLevel,
-                            @RequestParam(value = "score", required = true) Float score
+                                              @RequestParam(value = "categoryName", required = true) String cat,
+                                              @RequestParam(value = "subCategoryName", required = true) String subCat,
+                                              @RequestParam(value = "questionDesc", required = true) String qDesc,
+                                              @RequestParam(value = "choiceDescArray", required = false) List<String> cDescList,
+                                              @RequestParam(value = "correctChoice", required = false) Integer correctChoice,
+                                              @RequestParam(value = "questionType", required = true) Integer questionTypeId,
+                                              @RequestParam(value = "difficulty", required = true) Integer difficultyLevel,
+                                              @RequestParam(value = "score", required = true) Float score
             , HttpServletRequest request, HttpServletResponse response) {
 
 
@@ -100,6 +101,7 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.POST, value = "/exam/editQuestion")
     @ResponseBody
     public void editQuestion(ModelMap model,
+                             @RequestParam(value = "questionId", required = true) Integer questionId,
                              @RequestParam(value = "categoryName", required = true) String cat,
                              @RequestParam(value = "subCategoryName", required = true) String subCat,
                              @RequestParam(value = "questionDesc", required = true) String qDesc,
@@ -110,6 +112,29 @@ public class QuestionController {
                              @RequestParam(value = "score", required = true) Float score
             , HttpServletRequest request, HttpServletResponse response) {
 
+        Question originalQuestion = queryQuestionDomain.getQuestionById(questionId);
+
+        Question questionToBeEdit = originalQuestion;
+        questionToBeEdit.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat
+                , queryCategoryDomain.getCategoryByName(cat)));
+        questionToBeEdit.setDescription(qDesc);
+        questionToBeEdit.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
+        questionToBeEdit.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
+        questionToBeEdit.setScore(score);
+
+        List<Choice> originalChoices = queryChoiceDomain.getChoiceListByQuestionId(questionId);
+        List<Choice> newChoices = originalChoices;
+
+        if (!originalQuestion.equals(questionToBeEdit)) {
+//            originalQuestion.setStatus(queryStatusDomain.getDeletedStatus());
+//            queryQuestionDomain.mergeQuestion(originalQuestion);
+            System.out.println("======================================================");
+            System.out.println("TRUE !!!!!!");
+
+        } else {
+            System.out.println("======================================================");
+            System.out.println("FALSE!!!!!!");
+        }
 
     }
 
@@ -142,7 +167,7 @@ public class QuestionController {
     @ResponseBody
     public ResponseEntity<String> getChoiceDetail(ModelMap model
             , @RequestParam(value = "questionId", required = true) Integer questionId
-            , HttpServletRequest request, HttpServletResponse respons){
+            , HttpServletRequest request, HttpServletResponse respons) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
@@ -152,6 +177,60 @@ public class QuestionController {
         String json = new Gson().toJson(choices);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
+    @ResponseBody
+    public ResponseEntity<String> searchQuestion(ModelMap modelMap
+            , @RequestParam(value = "category", required = false) Integer categoryId
+            , @RequestParam(value = "sucCategory", required = false) Integer subCategoryId
+            , @RequestParam(value = "createBy", required = false) String createByUsername
+            , @RequestParam(value = "questionId", required = false) Integer questionId
+            , @RequestParam(value = "questionDesc", required = false) String questionDesc
+            , @RequestParam(value = "createDateFrom", required = false) Date createDateFrom
+            , @RequestParam(value = "createDateTo", required = false) Date createDateTo
+            , @RequestParam(value = "scoreFrom", required = false) Float scoreFrom
+            , @RequestParam(value = "scoreTo", required = false) Float scoreTo
+            , @RequestParam(value = "status", required = false) Integer statusId
+            , HttpServletRequest request, HttpServletResponse response
+    ) {
+        System.out.println("==============================================================");
+        System.out.println(categoryId);
+        System.out.println(subCategoryId);
+        System.out.println(createByUsername);
+        System.out.println(questionId);
+        System.out.println(questionDesc);
+        System.out.println(createDateFrom);
+        System.out.println(createDateTo);
+        System.out.println(scoreFrom);
+        System.out.println(scoreTo);
+        System.out.println(statusId);
+        System.out.println("==============================================================");
+
+
+        List<Question> questions = queryQuestionDomain.searchQuestionQuery(categoryId, subCategoryId
+                , createByUsername, questionId, questionDesc, createDateFrom, createDateTo, scoreFrom, scoreTo, statusId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+        String json = new Gson().toJson(questions);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/getQuestionDetail")
+    @ResponseBody
+    public ResponseEntity<String> getQuesotionDetail(ModelMap modelMap,
+                                                     @RequestParam(value = "questionId", required = true) Integer questionId,
+                                                     HttpServletRequest request, HttpServletResponse response) {
+        Question question = queryQuestionDomain.getQuestionById(questionId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+        String json1 = new Gson().toJson(question);
+
+        return new ResponseEntity<String>(json1, headers, HttpStatus.OK);
     }
 
 

@@ -32,17 +32,7 @@
           </div>
           <br/>
           <div class = "row">
-            <div class = "col-md-2 text-right">
-              <label>ผู้สร้าง</label>
-            </div>
-            <div class = "col-md-6">
-              <div class = "input-group">
-                <input class = "form-control" type = "text"/>
-                <div class = "input-group-btn">
-                  <button class = "btn btn-primary" type = "button" data-toggle = "modal" data-target = "#modalSearchByEmployeeName">+</button>
-                </div>
-              </div>
-            </div>
+            <%@include file="selectCreateByInput.jsp"%>
           </div>
           <hr/>
           <%--<div class="row">--%>

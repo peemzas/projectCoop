@@ -23,7 +23,7 @@
                 <br>
 
                 <div class="row">
-                <%@include file="template/selectCeateByInput.jsp" %>
+                <%@include file="template/selectCreateByInput.jsp" %>
 
 
                     <div class="col-md-4 col-md-offset-1" align="right">

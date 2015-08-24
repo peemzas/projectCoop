@@ -31,7 +31,17 @@ public class ExamRecord implements Serializable {
     @Column(name = "EXAM_DATE")
     private Date examDate;
 
+    @Column(name = "TIME_TAKEN")
+    private Float timeTaken;
 
+
+    public Float getTimeTaken() {
+        return timeTaken;
+    }
+
+    public void setTimeTaken(Float timeTaken) {
+        this.timeTaken = timeTaken;
+    }
 
     public Integer getRecordId() {
         return recordId;
