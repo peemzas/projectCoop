@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  */
 @Controller
 @RequestMapping("/TDCS")
-public  class CategoryController {
+public class CategoryController {
 
     @Autowired
     QueryCategoryDomain queryCategoryDomain;

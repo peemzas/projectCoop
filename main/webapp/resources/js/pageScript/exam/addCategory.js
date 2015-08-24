@@ -1,5 +1,6 @@
 function saveCategory(){
-    alert("hi");
+    //alert("hi");
+
     var categoryName = $("#categoryNameText").val();
     var categoryId = $("#categoryIdText").val();
 

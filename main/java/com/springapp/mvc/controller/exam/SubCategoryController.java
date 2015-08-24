@@ -110,6 +110,7 @@ public class SubCategoryController {
 
     public void editSubCategory(Model model,
                                 @RequestParam(value = "categoryId", required = true) String categoryId,
+                                @RequestParam(value = "categoryName", required = true) String categoryName,
                                 @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
                                 HttpServletRequest request, HttpServletResponse response) {
 

@@ -59,7 +59,7 @@ public class QueryCategoryDomain extends HibernateUtil {
         return resultCategory;
     }
 
-    //------------Add by neng
+    //------------Add by Mr.Wanchana Himseft
     public List<Category> getListCategories(){
 
         Criteria criteria = getSession().createCriteria(Category.class);

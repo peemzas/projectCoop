@@ -23,15 +23,21 @@
           <div class = "row">
             <%@include file="selectCreateByInput.jsp" %>
           </div>
+
+          <%--Add By Mr.Wanchana--%>
+          <br/>
+          <div class="row">
+            <div class="col-sm-8 col-md-offset-2">
+              <div id="showEmployeeSelected">
+
+              </div>
+            </div>
+          </div>
           <hr/>
-          <%--<div class="row">--%>
-            <%--<div id="btnSearch" class="col-md-4 col-md-offset-7" align="center">--%>
-            <%--</div>--%>
-          <%--</div>--%>
           <div class = "row" id = "btnSearch">
             <div class = "col-md-12 text-center">
-              <button class = "btn btn-default searchInputSubmitBtn" type = "button">ค้นหา</button>
-              <button class = "btn btn-default searchInputClearBtn" type = "button">ล้างข้อมูล</button>
+              <button id="generalSearchButtonInModalSelectionQuestion" class = "btn btn-default" type = "button">ค้นหา</button>
+              <button class = "btn btn-default" type = "button">ล้างข้อมูล</button>
             </div>
           </div>
         </div>
