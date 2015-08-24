@@ -14,8 +14,7 @@
         <input id="selectCreateBySearchInput" type="text" class="form-control" disabled="disabled"/>
 
         <div class="input-group-btn">
-            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary "
-                    id="addEmpIdBtn"> +
+            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary " id="addEmpIdBtn"> +
             </button>
         </div>
     </div>

@@ -31,6 +31,9 @@
     <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-combobox.js" />"></script>
     <%--<script type="text/javascript" src="<c:url value="/resources/datepicker/jquery-ui.js" />"></script>--%>
 
+    <script type="text/javascript" src="<c:url value="/resources/js/bootstrapValidator.min.js"/>"></script>
+    <link class="cssdeck" href="<c:url value="/resources/css/bootstrapValidator.min.css" />" rel="stylesheet" >
+
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 </head>

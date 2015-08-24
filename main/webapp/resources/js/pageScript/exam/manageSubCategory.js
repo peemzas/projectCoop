@@ -22,7 +22,6 @@ function viewSubCategory(){
 
                     //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
                     '<td style="text-align: center;"><label id="labelFor'+value.id+'">'+value.name+'</label>'+
-                    '<input id="dataFor'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
                     '</td>'+
 
                     //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
@@ -105,17 +104,18 @@ function updateSubCategory(subcategoryId) {
 
 
         //var cname =$("#category"+subcategoryId).value();
-        var id = $("#subId"+subcategoryId).val();
-        var name = $("#editsubName" + subcategoryId).val();
+        var categoryId = $("#id"+subcategoryId).val();
+        var categoryName = $("#labelfor"+subcategoryId).val();
+        var subcategoryName = $("#editsubName" + subcategoryId).val();
 
-        alert(name+subcategoryId);
+        alert(categoryId + " " + categoryName);
 
         var dataResponse = $.ajax({
             type: "POST",
             url: "/TDCS/exam/editSubCategory",
             data: {
-                id:id,
-                name:name
+                categoryId:categoryId,
+                subcategoryName:subcategoryName
 
                 //categoryId:categoryId,
                 //subcategoryName:subcategoryName
