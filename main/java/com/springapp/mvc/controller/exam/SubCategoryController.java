@@ -106,25 +106,104 @@ public class SubCategoryController {
 //
 //        return new ResponseEntity(headers, HttpStatus.OK);
 //    }
-
-
     public void editSubCategory(Model model,
-                                @RequestParam(value = "categoryId", required = true) String categoryId,
-                                @RequestParam(value = "categoryName", required = true) String categoryName,
+//<<<<<<< HEAD
+//                                @RequestParam(value = "categoryId", required = true) String categoryId,
+//                                @RequestParam(value = "categoryName", required = true) String categoryName,
+//=======
+//                                @RequestParam(value = "categoryId", required = true) String categoryId,
+                                @RequestParam(value = "subcategoryId", required = true) Integer subcategoryId,
+//>>>>>>> SubCatPage
                                 @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
                                 HttpServletRequest request, HttpServletResponse response) {
 
-        SubCategory subCategory = new SubCategory();
-
+        SubCategory subCategory = querySubCategoryDomain.getSubCategoryById(subcategoryId);
         subCategory.setName(subcategoryName);
-        subCategory.setCategory(queryCategoryDomain.getCategoryById(categoryId));
-
+//        subCategory.setCategory(queryCategoryDomain.getCategoryById(categoryId));
         User currentUser = queryUserDomain.getCurrentUser(request);
-
         subCategory.setCreateBy(currentUser);
-
         querySubCategoryDomain.editSubCategory(subCategory);
-
-
     }
+
+    @RequestMapping(value = "/exam/searchSubCategory", method = RequestMethod.POST)
+    @ResponseBody
+//    public ResponseEntity<String> searchSubCategory(Model model,
+//                                                    @RequestParam(value = "categoryId", required = true) String categoryId,
+//                                                    @RequestParam(value = "subcategoryId", required = true) Integer subcategoryId,
+//                                                    @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
+//                                                    HttpServletRequest request, HttpServletResponse response) {
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Content-Type", "application/json;charset=UTF-8");
+//
+////        List<Category> categories = queryCategoryDomain.searchCategory(categoryId, categoryName);
+////        String json = new Gson().toJson(categories);
+////        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//
+//
+//        SubCategory subCategory = querySubCategoryDomain.getSubCategoryById(subcategoryId);
+//        subCategory.setName(subcategoryName);
+//        subCategory.setCategory(queryCategoryDomain.getCategoryById(categoryId));
+//        List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryId, subcategoryName);
+//        String json = new Gson().toJson(subcategories);
+//        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//
+//
+//    }
+
+    //------------------------------------------------------------------------------
+
+//    public ResponseEntity<String> searchSubCategory(Model model,
+//                                                    @RequestParam(value = "categoryId", required = true) String categoryId,
+//                                                    @RequestParam(value = "subcategoryId", required = true) Integer subcategoryId,
+//                                                    @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
+//                                                    HttpServletRequest request, HttpServletResponse response) {
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Content-Type", "application/json;charset=UTF-8");
+//
+////        List<Category> categories = queryCategoryDomain.searchCategory(categoryId, categoryName);
+////        String json = new Gson().toJson(categories);
+////        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//
+//
+//        SubCategory subCategory = querySubCategoryDomain.getSubCategoryById(subcategoryId);
+//        subCategory.setName(subcategoryName);
+//        subCategory.setCategory(queryCategoryDomain.getCategoryById(categoryId));
+//        List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryId, subcategoryName);
+//        String json = new Gson().toJson(subcategories);
+//        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//    }
+
+
+    //------------------------------------------------------------------------------
+
+//    public ResponseEntity<String> searchSubCategory(Model model,
+//
+//                                                    @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
+//                                                    HttpServletRequest request, HttpServletResponse response) {
+
+
+    public ResponseEntity<String> searchSubCategory(@ModelAttribute("subcategoryName") String subcategoryName,
+                                                    @ModelAttribute("categoryId") String categoryId,
+                                                    @ModelAttribute("categoryName") String categoryName)
+//                                                    @ModelAttribute("subcategoryId") Integer subcategoryId)
+    {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+//        queryCategoryDomain.getCategoryById(categoryId);
+//        queryCategoryDomain.getCategoryByName(categoryName);
+//        queryCategoryDomain.searchCategory(categoryName);
+//        List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName);
+        List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName,categoryId,categoryName);
+
+//        querySubCategoryDomain.getSubCategoryById(subcategoryId);
+//        subCategory.setName(subcategoryName);
+
+        String json = new Gson().toJson(subcategories);
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+
 }

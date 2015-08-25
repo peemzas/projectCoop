@@ -18,10 +18,12 @@ function viewSubCategory(){
                 $("#tbodySubCategory").append(
                     '<tr>'+
 
-                    '<td style="text-align: center;"><label id="id'+value.id+'"><b>'+value.id+'</b></label>'+
+                    '<td style="text-align: center;"><label id="catId'+value.id+'"><b>'+value.id+'</b></label>'+
 
                     //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
-                    '<td style="text-align: center;"><label id="labelFor'+value.id+'">'+value.name+'</label>'+
+
+                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.name+'</label>'+
+
                     '</td>'+
 
                     //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
@@ -103,19 +105,38 @@ function updateSubCategory(subcategoryId) {
     //    var id = $("#editId" + categoryId).val();
 
 
-        //var cname =$("#category"+subcategoryId).value();
-        var categoryId = $("#id"+subcategoryId).val();
-        var categoryName = $("#labelfor"+subcategoryId).val();
-        var subcategoryName = $("#editsubName" + subcategoryId).val();
+//        //var cname =$("#category"+subcategoryId).value();
+//<<<<<<< HEAD
+//        var categoryId = $("#id"+subcategoryId).val();
+//        var categoryName = $("#labelfor"+subcategoryId).val();
+//        var subcategoryName = $("#editsubName" + subcategoryId).val();
+//
+//        alert(categoryId + " " + categoryName);
+//=======
+        //var id = $("#Id"+subcategoryId).val();
 
-        alert(categoryId + " " + categoryName);
+        //var catId = $("#catId"+subcategoryId).val();
+        //var catName =$("#catName").val();
+        //var subcategoryId= $("#subcategoryId" + subcategoryId).val();
+        var subName = $("#editsubName" + subcategoryId).val();
 
+        //alert($("#id"+subcategoryId));
+    alert(subcategoryId+' '+subName);
+//>>>>>>> SubCatPage
+//
         var dataResponse = $.ajax({
             type: "POST",
             url: "/TDCS/exam/editSubCategory",
             data: {
-                categoryId:categoryId,
-                subcategoryName:subcategoryName
+//<<<<<<< HEAD
+//                categoryId:categoryId,
+//                subcategoryName:subcategoryName
+//=======
+                //categoryId: $("#catId"+subcategoryId),
+                //id:catId,
+                subcategoryId:subcategoryId,
+                subcategoryName:subName
+//>>>>>>> SubCatPage
 
                 //categoryId:categoryId,
                 //subcategoryName:subcategoryName
@@ -137,4 +158,151 @@ function updateSubCategory(subcategoryId) {
     //}
 }
 
+
+
+
+//$(document).ready(function(){
+//    $("#searchSubCategory").click(function(){
+//
+//        search();
+//    });
+//});
+//function search(){
+//    var categoryId = $("#categoryId").val();
+//    var subcategoryId = $("#subcategoryId").val();
+//    var subcategoryName= $("#subcategoryName").val();
+//
+//    alert("hi");
+//
+//    var dataResponse = $.ajax({
+//        type: "POST",
+//        url: "/TDCS/exam/searchCategory",
+//        data: {
+//            categoryId: categoryId,
+//            subcategoryId: subcategoryId,
+//            subcategoryName: subcategoryName
+//        },
+//        async: false,
+//        success: function(data){
+//            //alert(data.id + " "+ data.name);
+//            //$("#tbodyCategory").hide();
+//            $("#tbodyCategory").empty();
+//            data.forEach(function(value){
+//                //$("#tbodyCategory").empty();
+//
+//                $("#tbodyCategory").append(
+//                    '<tr>'+
+//
+//                    '<td style="text-align: center;"><label id="catId'+value.id+'"><b>'+value.id+'</b></label>'+
+//
+//                        //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
+//                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.name+'</label>'+
+//                    '</td>'+
+//
+//                        //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
+//
+//                    '<td style="text-align: center;"><label id="subName'+value.subId+'">'+value.subName+'</label>'+
+//                    '<input id="editsubName'+value.subId+'" class="form-control" type="text" value="'+value.subName+'" style="display: none;">'+
+//
+//
+//                    '<td style="text-align: center">'+
+//                    '<button id="editBtn'+value.subId+'" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+//                    '&nbsp;<button id="updateBtn'+value.subId+'" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+//
+//                    '</td>'+
+//
+//                    '<td style="text-align: center">'+
+//                    '<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.subId+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
+//                    '</td>'+
+//                    '</tr>'
+//                )
+//            });
+//        },
+//        error: function(){
+//            alert("error");
+//        }
+//    })
+//}
+
+$(document).ready(function(){
+    $("#searchSubCategory").click(function(){
+        search();
+    });
+});
+function search(){
+    var categoryId= $("#categoryId").val();
+    var categoryName= $("#categoryName").val();
+    var subcategoryName= $("#subcategoryName").val();
+    //var subcategoryId= $("#subcategoryId").val();
+
+    alert(categoryId+categoryName+subcategoryName);
+
+    var dataResponse = $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/searchSubCategory",
+        data: {
+            categoryId: categoryId,
+            categoryName:categoryName,
+            //subcategoryId: subcategoryId,
+            subcategoryName: subcategoryName
+        },
+        async: false,
+        success: function(data){
+            //alert(data.id + " "+ data.name);
+            //$("#tbodyCategory").hide();
+            $("#tbodySubCategory").empty();
+            data.forEach(function(value){
+                //$("#tbodySubCategory").empty();
+                console.log(value.this.name);
+                $("#tbodySubCategory").append(
+                    '<tr>'+
+
+                    '<td style="text-align: center;"><label id="catId'+value.id+'"><b>'+value.category.id+'</b></label>'+
+
+                        //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
+                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.category.name+'</label>'+
+                    '</td>'+
+
+                        //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
+
+                    '<td style="text-align: center;"><label id="subName'+value.this.id+'">'+value.this.name+'</label>'+
+                    '<input id="editsubName'+value.this.id+'" class="form-control" type="text" value="'+value.this.name+'" style="display: none;">'+
+
+
+
+                    '<td style="text-align: center">'+
+                    '<button id="editBtn'+value.this.id+'" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.this.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+                    '&nbsp;<button id="updateBtn'+value.this.id+'" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.this.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+
+                    '</td>'+
+
+                    '<td style="text-align: center">'+
+                    '<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.this.id+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
+                    '</td>'+
+                    '</tr>'
+                )
+            });
+        },
+        error: function(){
+            alert("error");
+        }
+    })
+}
+
+
+
+
+$(document).ready(function(){
+    $("#clearsearchinput").on('click',function(){
+        clearsearch();
+    });
+});
+function clearsearch(){
+    $("#categoryId").val("");
+    $("#categoryName").val("");
+    $("#subcategoryName").val("");
+
+
+
+}
 

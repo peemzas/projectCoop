@@ -28,7 +28,7 @@
                             <label>รหัสวิชา :</label>
                         </div>
                         <div class="col-md-1" style="width: 10%">
-                            <input class="form-control" type="text" maxlength="5"/>
+                            <input id="categoryId" class="form-control" type="text" maxlength="5"/>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                         <%--</select>--%>
                         <%--</div>--%>
                         <div class="col-md-4">
-                            <input class="form-control" type="text"/>
+                            <input  id="categoryName" class="form-control" type="text"/>
                         </div>
 
 
@@ -67,7 +67,7 @@
                         <%--</select>--%>
                         <%--</div>--%>
                         <div class="col-md-4">
-                            <input class="form-control" type="text"/>
+                            <input id="subcategoryName" class="form-control" type="text"/>
                         </div>
                     </div>
 
@@ -84,19 +84,19 @@
                         <%--</div>--%>
                         <%--</div>--%>
                     </div>
-                    <hr/>
-
-
+                </div>
+                <div class="panel-footer">
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
-                            <button class="btn btn-primary" type="button">ค้นหา</button>
-                            <button class="btn" type="button"
+                            <button id="searchSubCategory" class="btn btn-primary" type="button">ค้นหา</button>
+                            <button id="clearsearchinput" class="btn" type="button"
                                     style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
 
