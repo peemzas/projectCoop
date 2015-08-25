@@ -4,6 +4,7 @@ import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.pojo.exam.SubCategory;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,15 @@ import java.util.Map;
 public class QuerySubCategoryDomain extends HibernateUtil {
 
 
-    public void insertSubCategory(SubCategory subCategory){
+    public void insertSubCategory(SubCategory subCategory) {
 
         beginTransaction();
         getSession().save(subCategory);
         commitTransaction();
         closeSession();
     }
-    public boolean checkSubCategoryDuplication(SubCategory subCategory){
+
+    public boolean checkSubCategoryDuplication(SubCategory subCategory) {
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         criteria.add(Restrictions.eq("name", subCategory.getName()));
         criteria.add(Restrictions.eq("category", subCategory.getCategory()));
@@ -37,13 +39,13 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         return result;
     }
 
-    public List<SubCategory> getListSubCategories(){
+    public List<SubCategory> getListSubCategories() {
         Criteria criteria = getSession().createCriteria(SubCategory.class, "subCategory");
         criteria.createAlias("subCategory.category", "category");
         criteria.addOrder(Order.asc("id"));
         ProjectionList projection = Projections.projectionList();
 
-        projection.add(Projections.property("category.id"),"id");
+        projection.add(Projections.property("category.id"), "id");
         projection.add(Projections.property("category.name"), "name");
         projection.add(Projections.property("subCategory.id"), "subId");
         projection.add(Projections.property("subCategory.name"), "subName");
@@ -55,21 +57,32 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         List<SubCategory> subCategories = criteria.list();
         return subCategories;
     }
-    
-    public SubCategory getSubCategoryByNameAndCategory(String name,Category category){
+
+    public SubCategory getSubCategoryByNameAndCategory(String name, Category category) {
 
         Criteria criteria = getSession().createCriteria(SubCategory.class);
-        
+
 
         criteria.add(Restrictions.eq("name", name));
         criteria.add(Restrictions.eq("category", category));
 
         List<SubCategory> subCategories = criteria.list();
-        return (SubCategory)subCategories.get(0);
+        return (SubCategory) subCategories.get(0);
+    }
+
+    public SubCategory getSubCategoryById(Integer id) {
+
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
+
+
+        criteria.add(Restrictions.eq("id", id));
+
+        List<SubCategory> subCategories = criteria.list();
+        return (SubCategory) subCategories.get(0);
     }
 
 
-    public void deleteSubCategory(Integer subCategoryId){
+    public void deleteSubCategory(Integer subCategoryId) {
 
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         criteria.add(Restrictions.eq("id", subCategoryId));
@@ -86,12 +99,106 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-    public void editSubCategory(SubCategory subCategory){
+    public void editSubCategory(SubCategory subCategory) {
 
         HibernateUtil.beginTransaction();
         getSession().merge(subCategory);
         HibernateUtil.commitTransaction();
     }
 
+
+//    public List<SubCategory> searchSubCategory(Integer subcategoryId, String subcategoryName) {
+//
+//        if (subcategoryId == null) {
+//
+//            String queryStatement = "from SubCategory where name like :subcategoryName";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("subcategoryName", "%" + subcategoryName + "%");
+//            List<SubCategory> subcategories = query.list();
+//
+//            return subcategories;
+//        }
+//        return null;
+//        else if (subcategoryName == null) {
+//
+//            String queryStatement = "from SubCategory where id like :subcategoryId";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("subcategoryId", "%" + subcategoryName + "%");
+//            List<SubCategory> subcategories = query.list();
+//
+//            return subcategories;
+//        } else {
+//            String queryStatement = "from SubCategory where id like :subcategoryId and name like :subcategoryName";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("subcategoryId", "%" + subcategoryId + "%");
+//            query.setParameter("subcategoryName", "%" + subcategoryName + "%");
+//            List<SubCategory> subcategories = query.list();
+//
+//            return subcategories;
+//        }
+//        //criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//    }
+
+
+//    public List<SubCategory> searchSubCategory(String subcategoryName){
+//            String queryStatement = "from SubCategory where name like :subcategoryName";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("subcategoryName", "%" + subcategoryName + "%");
+//            List<SubCategory> subcategories = query.list();
+//            return subcategories;
+//    }
+
+
+//    public List<SubCategory> searchSubCategory(String subcategoryName,String categoryId,String categoryName){
+//        if (categoryId == null) {
+//
+//            String queryStatement = "from Category where name like :categoryName";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("categoryName", "%" + categoryName + "%");
+//            List<SubCategory> subcategories = query.list();
+//            return subcategories;
+//        }
+//        else if (categoryName == null) {
+//
+//            String queryStatement = "from Category where id like :categoryId";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("categoryId", "%" + subcategoryName + "%");
+//            List<SubCategory> subcategories = query.list();
+//
+//            return subcategories;
+//        } else {
+//            String queryStatement = "from SubCategory where id like :subcategoryId and name like :subcategoryName";
+//            Query query = getSession().createQuery(queryStatement);
+////            query.setParameter("subcategoryId", "%" + subcategoryId + "%");
+//            query.setParameter("subcategoryName", "%" + subcategoryName + "%");
+//            List<SubCategory> subcategories = query.list();
+//
+//            return subcategories;
+//        }
+
+            public List<SubCategory> searchSubCategory(String subcategoryName, String categoryId, String categoryName) {
+
+                Criteria criteria = getSession().createCriteria(SubCategory.class);
+
+                criteria.createAlias("category","category");
+////
+//                ProjectionList projectionList = Projections.projectionList();
+//                projectionList.add(Projections.property("category.id"),"catId");
+//                projectionList.add(Projections.property("category.name"),"catName");
+//                projectionList.add(Projections.property("sc.name"),"subName");
+                criteria.addOrder(Order.asc("category.id"));
+
+                criteria.add(Restrictions.like("name","%" + subcategoryName + "%"));
+                criteria.add(Restrictions.like("category.id","%" + categoryId + "%"));
+                criteria.add(Restrictions.like("category.name","%" + categoryName + "%"));
+
+
+
+
+                criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+                List<SubCategory> subCategories = criteria.list();
+
+                return subCategories;
+    }
 }
 
