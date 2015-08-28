@@ -20,12 +20,12 @@
 
 
                 <%--<div class="row">--%>
-                    <%--<div class="col-md-2 col-lg-offset-3 text-right">--%>
-                        <%--<label>รหัสวิชา :</label>--%>
-                    <%--</div>--%>
-                    <%--<div class="col-md-1" style="width: 16%">--%>
-                        <%--<input class="form-control" type="text" maxlength="5"/>--%>
-                    <%--</div>--%>
+                <%--<div class="col-md-2 col-lg-offset-3 text-right">--%>
+                <%--<label>รหัสวิชา :</label>--%>
+                <%--</div>--%>
+                <%--<div class="col-md-1" style="width: 16%">--%>
+                <%--<input class="form-control" type="text" maxlength="5"/>--%>
+                <%--</div>--%>
                 <%--</div>--%>
 
                 <%--<div style="margin-bottom: 5px"></div>--%>
@@ -45,7 +45,8 @@
                             <option value="">โปรดเลือกวิชา</option>
 
                             <c:forEach var="category" items="${listCat}">
-                                <option categoryName="${category.name} " value="${category.id}">${category.id} : ${category.name}</option>
+                                <option categoryName="${category.name} " value="${category.id}">${category.id}
+                                    : ${category.name}</option>
                             </c:forEach>
 
                         </select>
@@ -86,8 +87,6 @@
 <!-- /.modal -->
 
 
-
-
 <%--<spring:url value="../../../resources/js/pageScript/exam/addSubCategory.js" var="addSubCategory"> </spring:url>--%>
 <%--<script src="${addSubCategory}" type="text/javascript"><!--Not Empty --></script>--%>
 
@@ -103,29 +102,29 @@
 
 <%--<script>--%>
 
-    <%--$('#addSubCatSubmit-Btn').on('click', function () {--%>
-        <%--saveSubCategory();--%>
-    <%--})--%>
-    <%--function saveSubCategory() {--%>
+<%--$('#addSubCatSubmit-Btn').on('click', function () {--%>
+<%--saveSubCategory();--%>
+<%--})--%>
+<%--function saveSubCategory() {--%>
 
-        <%--var subCatName = $('#subCategoryName-forAddSubCat').val();--%>
-        <%--var catName = $('#categoryName-forAddSubCat').val();--%>
+<%--var subCatName = $('#subCategoryName-forAddSubCat').val();--%>
+<%--var catName = $('#categoryName-forAddSubCat').val();--%>
 
-        <%--alert('CategoryName : ' + catName + ' - SubCategoryName : ' + subCatName);--%>
+<%--alert('CategoryName : ' + catName + ' - SubCategoryName : ' + subCatName);--%>
 
-        <%--var dat = $.ajax({--%>
-            <%--type: "POST",--%>
-            <%--url: "addSubCategory",--%>
-            <%--data: 'name=' + subCatName--%>
-            <%--+ '&categoryName=' + catName,--%>
-            <%--success: function () {--%>
-                <%--alert('เพิ่มหัวข้อเรื่องสำเร็จ ' + catName + ' : ' + subCatName)--%>
-            <%--},--%>
-            <%--error: function () {--%>
-                <%--alert('การเพิ่มหัวข้อเรื่องล้มเหลว');--%>
-            <%--}--%>
-        <%--}).responseText;--%>
-    <%--}--%>
+<%--var dat = $.ajax({--%>
+<%--type: "POST",--%>
+<%--url: "addSubCategory",--%>
+<%--data: 'name=' + subCatName--%>
+<%--+ '&categoryName=' + catName,--%>
+<%--success: function () {--%>
+<%--alert('เพิ่มหัวข้อเรื่องสำเร็จ ' + catName + ' : ' + subCatName)--%>
+<%--},--%>
+<%--error: function () {--%>
+<%--alert('การเพิ่มหัวข้อเรื่องล้มเหลว');--%>
+<%--}--%>
+<%--}).responseText;--%>
+<%--}--%>
 
 
 <%--</script>--%>

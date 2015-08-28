@@ -38,6 +38,10 @@ public class ExamPaper implements Serializable {
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
 
+    @ManyToOne
+    @JoinColumn(name = "PROPORTIONAL_SCORE")
+    private Boo proportionalScore;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "TDCS_PAPER_CONTAINING",
             joinColumns = {@JoinColumn(name = "PAPER_ID",nullable = false , updatable = false)},
@@ -47,6 +51,14 @@ public class ExamPaper implements Serializable {
 
     public Integer getExamTime() {
         return examTime;
+    }
+
+    public Boo getProportionalScore() {
+        return proportionalScore;
+    }
+
+    public void setProportionalScore(Boo proportionalScore) {
+        this.proportionalScore = proportionalScore;
     }
 
     public void setExamTime(Integer examTime) {

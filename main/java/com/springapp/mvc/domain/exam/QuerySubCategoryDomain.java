@@ -180,7 +180,7 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
                 Criteria criteria = getSession().createCriteria(SubCategory.class);
 
-                criteria.createAlias("category","category");
+                criteria.createAlias("category", "category");
 ////
 //                ProjectionList projectionList = Projections.projectionList();
 //                projectionList.add(Projections.property("category.id"),"catId");
@@ -188,17 +188,22 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 //                projectionList.add(Projections.property("sc.name"),"subName");
                 criteria.addOrder(Order.asc("category.id"));
 
-                criteria.add(Restrictions.like("name","%" + subcategoryName + "%"));
-                criteria.add(Restrictions.like("category.id","%" + categoryId + "%"));
-                criteria.add(Restrictions.like("category.name","%" + categoryName + "%"));
-
-
+                criteria.add(Restrictions.like("name", "%" + subcategoryName + "%"));
+                criteria.add(Restrictions.like("category.id", "%" + categoryId + "%"));
+                criteria.add(Restrictions.like("category.name", "%" + categoryName + "%"));
 
 
                 criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
                 List<SubCategory> subCategories = criteria.list();
 
                 return subCategories;
+            }
+
+    public List<SubCategory> getSubCategoryListByCategory(Category category){
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
+        criteria.add(Restrictions.eq("category",category));
+
+        return (List<SubCategory>)criteria.list();
     }
 }
 

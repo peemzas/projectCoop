@@ -107,13 +107,9 @@ public class SubCategoryController {
 //        return new ResponseEntity(headers, HttpStatus.OK);
 //    }
     public void editSubCategory(Model model,
-//<<<<<<< HEAD
-//                                @RequestParam(value = "categoryId", required = true) String categoryId,
-//                                @RequestParam(value = "categoryName", required = true) String categoryName,
-//=======
-//                                @RequestParam(value = "categoryId", required = true) String categoryId,
+//                              @RequestParam(value = "categoryId", required = true) String categoryId,
                                 @RequestParam(value = "subcategoryId", required = true) Integer subcategoryId,
-//>>>>>>> SubCatPage
+
                                 @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
                                 HttpServletRequest request, HttpServletResponse response) {
 
@@ -205,5 +201,18 @@ public class SubCategoryController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/getAllSubCategoryInCategory", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> getAllSubCategory(@RequestParam(value = "categoryId",required = true)String catId) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        Category category = queryCategoryDomain.getCategoryById(catId);
+        List<SubCategory> subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+        String json = new Gson().toJson(subcategories);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
 
 }

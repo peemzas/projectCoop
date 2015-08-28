@@ -41,8 +41,6 @@ var setQuestionObj = function (tr) {
 
 editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp
     // IF THIS ISN'T WORKING TRY PUT THE CODE IN editQuestion() in createQuestionModal.jsp instead
-    alert("manageQuestion.js Yeaahhh");
-
     var questionId = questionObj.attr('questionId');
     var categoryName = $("#categoryInputForCreateQuestion").val();
     var subCategoryName = $("#subCategoryInputForCreateQuestion").val();
@@ -51,19 +49,28 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
     var choiceDesc = null;
     var questionDesc = $("#questionDescription").val();
     var difficulty = $("input[name='level']:checked").val();
-    var correctChoice = $(".correctRadio:checked").val();
+    var correctC = $(".correctRadio:checked")
+    var correctChoice = correctC.val();
+    //if (!$.trim(correctChoice).length) {
+    //    correctChoice == 0;
+    //    console.log(correctChoice)
+    //}
+
+    if(correctChoice == undefined){
+        correctChoice = 0 ;
+        console.log(correctChoice);
+    }
 
     var questionType = null;
     if (questionTypeString == 'Objective') {
         questionType = 1;
-    } else if (questionType == 'Subjective') {
+    } else {
         questionType = 2;
     }
 
-    if (questionType == 1) {
-        choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val());
-    }
-
+//if (questionType == 1) {
+    choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val());
+//}
     var dat = $.ajax({
         type: 'POST',
         url: '/TDCS/exam/editQuestion',
@@ -108,28 +115,28 @@ var setEditModalParameter = function () {
 
             updateCreateModalLayout()
         },
-        error:function(){
+        error: function () {
             console.log("fail in ajaxDat1");
         }
     })
 
     var ith = 1;
     var ajaxDat2 = $.ajax({ //choices
-        type:"POST",
-        url:"/TDCS/exam/getChoiceDetail",
+        type: "POST",
+        url: "/TDCS/exam/getChoiceDetail",
         data: {
             questionId: tr.attr('questionId')
         },
-        success: function (choices){
-            choices.forEach(function(choice){
-                setCreateModalIthChoice(choice.description,ith);
-                if(choice.correction.value == 1){
+        success: function (choices) {
+            choices.forEach(function (choice) {
+                setCreateModalIthChoice(choice.description, ith);
+                if (choice.correction.value == 1) {
                     setCreateModalCorrectQuestion(ith);
                 }
-                ith = ith+1;
+                ith = ith + 1;
             })
         },
-        error: function(){
+        error: function () {
             console.log("fail in ajaxDat2")
         }
     })
@@ -139,7 +146,7 @@ var listAllQuestion = function () {
     var questionList = $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/TDCS/exam/getAllQuestion",
+            url: "/TDCS/exam/getAllReadyQuestion",
             async: false,
             success: function (questionList) {
                 console.log("hello")

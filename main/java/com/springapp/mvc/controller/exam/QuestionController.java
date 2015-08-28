@@ -3,8 +3,7 @@ package com.springapp.mvc.controller.exam;
 import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
-import com.springapp.mvc.pojo.exam.Choice;
-import com.springapp.mvc.pojo.exam.Question;
+import com.springapp.mvc.pojo.exam.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -56,6 +55,9 @@ public class QuestionController {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
+    @Autowired
+    QueryBooDomain queryBooDomain;
+
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody
     public ResponseEntity<String> addQuestion(ModelMap model,
@@ -100,8 +102,8 @@ public class QuestionController {
     @ResponseBody
     public void editQuestion(ModelMap model,
                              @RequestParam(value = "questionId", required = true) Integer questionId,
-                             @RequestParam(value = "categoryName", required = true) String cat,
-                             @RequestParam(value = "subCategoryName", required = true) String subCat,
+                             @RequestParam(value = "categoryName", required = true) String catName,
+                             @RequestParam(value = "subCategoryName", required = true) String subCatName,
                              @RequestParam(value = "questionDesc", required = true) String qDesc,
                              @RequestParam(value = "choiceDescArray", required = false) List<String> cDescList,
                              @RequestParam(value = "correctChoice", required = false) Integer correctChoice,
@@ -110,29 +112,67 @@ public class QuestionController {
                              @RequestParam(value = "score", required = true) Float score
             , HttpServletRequest request, HttpServletResponse response) {
 
-        Question originalQuestion = queryQuestionDomain.getQuestionById(questionId);
+        Category category = queryCategoryDomain.getCategoryByName(catName);
+        SubCategory subCategory = querySubCategoryDomain.getSubCategoryByNameAndCategory(subCatName, category);
+        QuestionType questionType = queryQuestionTypeDomain.getQuestionTypeById(questionTypeId);
+        Difficulty difficulty = queryDifficultyDomain.getDifficultyByInteger(difficultyLevel);
 
-        Question questionToBeEdit = originalQuestion;
-        questionToBeEdit.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat
-                , queryCategoryDomain.getCategoryByName(cat)));
-        questionToBeEdit.setDescription(qDesc);
-        questionToBeEdit.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
-        questionToBeEdit.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
-        questionToBeEdit.setScore(score);
+        Question question = queryQuestionDomain.getQuestionById(questionId);
 
-        List<Choice> originalChoices = queryChoiceDomain.getChoiceListByQuestionId(questionId);
-        List<Choice> newChoices = originalChoices;
+        List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(question.getId());
 
-        if (!originalQuestion.equals(questionToBeEdit)) {
-//            originalQuestion.setStatus(queryStatusDomain.getDeletedStatus());
-//            queryQuestionDomain.mergeQuestion(originalQuestion);
-            System.out.println("======================================================");
+        if (queryQuestionTypeDomain.isObjective(questionType)) {
+
+            for (int i = 0; i < choices.size(); i++) {
+
+                Choice c = choices.get(i);
+//                c.setDescription(cDescList.get(i));
+
+                Boo boo = null;
+                if (i + 1 == correctChoice) {
+                    boo = queryBooDomain.getTrue();
+                } else {
+                    boo = queryBooDomain.getFalse();
+                }
+                if (!(c.getDescription() == cDescList.get(i) && c.getCorrection() == boo)) { //edited
+                    Choice newChoice = new Choice();
+                    newChoice.setDescription(cDescList.get(i));
+                    newChoice.setCorrection(boo);
+                    newChoice.setQuestion(question);
+                    newChoice.setStatus(queryStatusDomain.getReadyStatus());
+//                queryChoiceDomain.insertChoice(newChoice);
+//                c.setStatus(queryStatusDomain.getDeletedStatus());
+//                queryChoiceDomain.mergeUpdateChoice(c);
+                } else { // no change
+
+                }
+            }
+        }
+        if (!(question.getDescription().equals(qDesc) && question.getScore().equals(score) &&
+                question.getQuestionType() == questionType && question.getDifficultyLevel() == difficulty &&
+                question.getSubCategory() == subCategory)) { //edited
+
+            System.out.println("======================question================================");
             System.out.println("TRUE !!!!!!");
 
-        } else {
-            System.out.println("======================================================");
+            question.setStatus(queryStatusDomain.getDeletedStatus());
+            queryQuestionDomain.mergeQuestion(question);
+
+            Question newQuestion = cloneQuestion(question,request);
+            newQuestion.setDescription(qDesc);
+            newQuestion.setScore(score);
+            newQuestion.setQuestionType(questionType);
+            newQuestion.setDifficultyLevel(difficulty);
+            newQuestion.setSubCategory(subCategory);
+
+            queryQuestionDomain.insertQuestion(newQuestion,cDescList,correctChoice);
+
+        } else {// no change
+            System.out.println("=======================question===============================");
             System.out.println("FALSE!!!!!!");
         }
+
+        System.out.println("===============================================Fin");
 
     }
 
@@ -148,8 +188,20 @@ public class QuestionController {
         String json = new Gson().toJson(questions);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllReadyQuestion")
+    @ResponseBody
+    public ResponseEntity<String> getAllReadyQuestion(ModelMap model
+            , HttpServletRequest request, HttpServletResponse response) {
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Question> questions = queryQuestionDomain.getAllReadyQuestion();
+        String json = new Gson().toJson(questions);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/deleteQuestion")
@@ -183,7 +235,7 @@ public class QuestionController {
     public ResponseEntity<String> searchQuestion(ModelMap modelMap
             , @RequestParam(value = "category", required = false) Integer categoryId
             , @RequestParam(value = "sucCategory", required = false) Integer subCategoryId
-            , @RequestParam(value = "createBy", required = false) String createByUsername
+            , @RequestParam(value = "createBy", required = false) String createBy
             , @RequestParam(value = "questionId", required = false) Integer questionId
             , @RequestParam(value = "questionDesc", required = false) String questionDesc
             , @RequestParam(value = "createDateFrom", required = false) Date createDateFrom
@@ -196,7 +248,7 @@ public class QuestionController {
         System.out.println("==============================================================");
         System.out.println(categoryId);
         System.out.println(subCategoryId);
-        System.out.println(createByUsername);
+        System.out.println(createBy);
         System.out.println(questionId);
         System.out.println(questionDesc);
         System.out.println(createDateFrom);
@@ -208,7 +260,7 @@ public class QuestionController {
 
 
         List<Question> questions = queryQuestionDomain.searchQuestionQuery(categoryId, subCategoryId
-                , createByUsername, questionId, questionDesc, createDateFrom, createDateTo, scoreFrom, scoreTo, statusId);
+                , createBy, questionId, questionDesc, createDateFrom, createDateTo, scoreFrom, scoreTo, statusId);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
@@ -220,9 +272,9 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getQuestionDetail")
     @ResponseBody
-    public ResponseEntity<String> getQuesotionDetail(ModelMap modelMap,
-                                                     @RequestParam(value = "questionId", required = true) Integer questionId,
-                                                     HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<String> getQuestionDetail(ModelMap modelMap,
+                                                    @RequestParam(value = "questionId", required = true) Integer questionId,
+                                                    HttpServletRequest request, HttpServletResponse response) {
         Question question = queryQuestionDomain.getQuestionById(questionId);
 
         HttpHeaders headers = new HttpHeaders();
@@ -230,6 +282,21 @@ public class QuestionController {
         String json1 = new Gson().toJson(question);
 
         return new ResponseEntity<String>(json1, headers, HttpStatus.OK);
+    }
+
+    public Question cloneQuestion(Question question,HttpServletRequest request){
+
+        Question questionNew = new Question();
+        questionNew.setDifficultyLevel(question.getDifficultyLevel());
+        questionNew.setStatus(queryStatusDomain.getReadyStatus());
+        questionNew.setCreateDate(new Date());
+        questionNew.setDescription(question.getDescription());
+        questionNew.setScore(question.getScore());
+        questionNew.setSubCategory(question.getSubCategory());
+        questionNew.setQuestionType(question.getQuestionType());
+        questionNew.setCreateBy(queryUserDomain.getCurrentUser(request));
+
+        return questionNew;
     }
 
 

@@ -60,6 +60,13 @@ var submitSearchQuestion = function(){
         scoreTo:$("#searchScoreToInput").val(),
         status:$("#searchStatusInput").val()
     }
+    var ajaxDat = $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/",
+        data: {
+
+        }
+    })
 
 
 }

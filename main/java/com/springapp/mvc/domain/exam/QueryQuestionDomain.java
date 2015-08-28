@@ -25,6 +25,8 @@ public class QueryQuestionDomain extends HibernateUtil {
     QueryChoiceDomain queryChoiceDomain;
     @Autowired
     QuerySubCategoryDomain querySubCategoryDomain;
+    @Autowired
+    QueryStatusDomain queryStatusDomain;
 
     public void insertQuestion(Question question, List<String> cDesc, Integer correctChoice) {
 
@@ -75,6 +77,41 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
+    public List<Question> getAllReadyQuestion() {
+        Criteria criteria = getSession().createCriteria(Question.class, "q");
+        criteria.add(Restrictions.eq("status",queryStatusDomain.getReadyStatus()));
+
+        criteria.createAlias("q.createBy","createBy");
+//        criteria.createAlias("q.subCategory.category","category");
+        criteria.createAlias("q.subCategory","subCategory");
+        criteria.createAlias("subCategory.category","category");
+        criteria.createAlias("q.questionType","questionType");
+        criteria.createAlias("q.status","status");
+        criteria.createAlias("q.difficultyLevel","difficulty");
+//        criteria.createAlias("","");
+
+        ProjectionList projectionList = Projections.projectionList();
+        projectionList.add(Projections.property("createBy.userName"),"createByEmpId");
+        projectionList.add(Projections.property("q.id"),"id");
+        projectionList.add(Projections.property("q.description"),"description");
+        projectionList.add(Projections.property("q.score"),"score");
+        projectionList.add(Projections.property("q.createDate"),"createDate");
+        projectionList.add(Projections.property("difficulty.description"),"difficultyDesc");
+        projectionList.add(Projections.property("category.name"),"categoryName");
+        projectionList.add(Projections.property("subCategory.name"),"subCategoryName");
+        projectionList.add(Projections.property("questionType.description"), "questionTypeDesc");
+        projectionList.add(Projections.property("status.id"), "statusId");
+//        projectionList.add(Projections.property(""),"");
+
+        criteria.setProjection(projectionList);
+
+
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Question> questions = criteria.list();
+
+        return questions;
+    }
+
     public Question getQuestionById(Integer id){
         Criteria criteria = getSession().createCriteria(Question.class);
         criteria.add(Restrictions.eq("id",id));
@@ -98,13 +135,17 @@ public class QueryQuestionDomain extends HibernateUtil {
 
 
 
+
         return criteria.list();
     }
 
     public void mergeQuestion(Question question){
         beginTransaction();
         getSession().merge(question);
+        commitTransaction();
         closeSession();
     }
+
+
 
 }
