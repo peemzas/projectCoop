@@ -47,6 +47,7 @@
                             <c:forEach var="category" items="${listCat}">
                                 <option categoryName="${category.name} " value="${category.id}">${category.id}
                                     : ${category.name}</option>
+                                </c:forEach>
 
                             </c:forEach>
 
