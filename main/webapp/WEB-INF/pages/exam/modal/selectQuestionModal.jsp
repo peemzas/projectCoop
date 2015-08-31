@@ -17,77 +17,32 @@
 
                     <%@include file="../template/searchQuestionTemplateNew.jsp"%>
 
-
-                    <table class="table">
+                    <table class="table table-view">
                         <thead class="bg-primary">
-                        <tr>
-                            <th>เลือก</th>
-                            <th>หมายเลขคำถาม</th>
-                            <th>คำถาม</th>
-                            <th>ประเภท</th>
-                            <th>ความยาก</th>
-                            <th>คะแนน</th>
-                            <th>วิชา</th>
-                            <th>หัวข้อเรื่อง</th>
-                            <th>สร้างโดย</th>
-                            <th>วันที่สร้าง</th>
-                            <th>ดูรายละเอียด</th>
-                        </tr>
+                            <tr>
+                                <th>เลือก</th>
+                                <%--<th>หมายเลขคำถาม</th>--%>
+                                <th>วิชา</th>
+                                <th>หัวข้อเรื่อง</th>
+                                <th>คำถาม</th>
+                                <th>ประเภท</th>
+                                <th>ความยาก</th>
+                                <th>คะแนน</th>
+                                <%--<th>สร้างโดย</th>--%>
+                                <%--<th>วันที่สร้าง</th>--%>
+                                <th>ดูรายละเอียด</th>
+                            </tr>
                         </thead>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>AAAA</td>
-                            <td>AAAAAAAAAAAAAAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
+                        <tbody id="tbodySelectQuestion">
 
-                            <td>
-                                <button class="btn btn-info">
-                                    <div class="glyphicon glyphicon-search"></div>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>AAAA</td>
-                            <td>AAAAAAAAAAAAAAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
 
-                            <td>
-                                <button class="btn btn-info">
-                                    <div class="glyphicon glyphicon-search"></div>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>AAAA</td>
-                            <td>AAAAAAAAAAAAAAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
-                            <td>AAAA</td>
+                            <%--<td>--%>
+                                <%--<button class="btn btn-info">--%>
+                                    <%--<div class="glyphicon glyphicon-search"></div>--%>
+                                <%--</button>--%>
+                            <%--</td>--%>
 
-                            <td>
-                                <button class="btn btn-info">
-                                    <div class="glyphicon glyphicon-search"></div>
-                                </button>
-                            </td>
-                        </tr>
+                        </tbody>
                     </table>
                     <div class="row">
                         <div class="col-md-offset-8 col-md-2" align="right"><h5>คะแนนรวม =</h5></div>
@@ -107,7 +62,6 @@
                             </ul>
                         </div>
                     </div>
-
                     <br>
                     <div class = "row" >
                         <div class = "col-md-12 text-center">
@@ -128,3 +82,24 @@
 </div>
 <!-- /.modal -->
 <!-- End Modal Select Question -->
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
+
+<%--Add By Mr.Wanchana--%>
+<!-- Modal show Quertion Information -->
+<div id="showQuestionInfoModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body" id="questionInfoBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

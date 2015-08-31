@@ -23,11 +23,11 @@
             </div>
             <div class="panel-body ">
                 <div class="row">
-                    <div class="col-md-2 col-lg-offset-3 text-right">
+                    <div class="col-md-2 col-lg-offset-2 text-right">
                         <label>รหัสวิชา :</label>
                     </div>
                     <div class="col-md-1" style="width: 15%">
-                        <input id="categoryId" class="form-control" type="text" maxlength="5"/>
+                        <input id="categoryId" class="form-control" type="text" maxlength="5" placeholder="ค้นหารหัสวิชา"/>
                     </div>
                 </div>
                 <div style="margin-bottom: 5px"></div>
@@ -36,7 +36,7 @@
                             <label>วิชา :</label>
                         </div>
                         <div class="col-md-4" >
-                            <input id="categoryName" class="form-control" type="text"/>
+                            <input id="categoryName" class="form-control" type="text" placeholder="ค้นหารายวิชา"/>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <button id="searchCategory" class="btn btn-primary" type="button">ค้นหา</button>
-                            <button type="button" class="btn" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล</button>
+                            <button id="resetBtnSearchCategory" type="button" class="btn" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล</button>
                         </div>
                     </div>
                 </div>
@@ -84,13 +84,16 @@
                     <%--</c:forEach>--%>
                 </tbody>
             </table>
+            <div class="bg-info" id="searchNotFound">
+                <p class="bg-info">
+                    <h3 style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
+                </p>
+            </div>
         </div>
     </div>
 </div>
 
 <%@include file="modal/createCategoryModal.jsp"%>
-
-
 
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageCategory.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchCategory.js" />"></script>

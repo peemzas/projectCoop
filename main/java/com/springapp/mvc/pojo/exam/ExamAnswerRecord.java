@@ -86,4 +86,17 @@ public class ExamAnswerRecord implements Serializable {
     public void setAnswerSubjective(String answerSubjective) {
         this.answerSubjective = answerSubjective;
     }
+
+//    Add By Mr.Wanchana
+//    private Question question;
+//    @ManyToOne
+//    @JoinColumn(name = "QUESTION_ID")
+//
+//    public Question getQuestion() {
+//        return question;
+//    }
+//
+//    public void setQuestion(Question question) {
+//        this.question = question;
+//    }
 }

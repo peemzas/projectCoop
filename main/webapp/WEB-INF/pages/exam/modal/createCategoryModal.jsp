@@ -29,7 +29,7 @@
                             <h4><label for="categoryIdText" class="label" style="color: black ; font-weight: 100">รหัสวิชา :</label></h4>
                         </div>
                         <div class="col-md-2">
-                            <input  type="text" class="form-control" name="catId" id="categoryIdText"/>
+                            <input  type="text" class="form-control" name="catId" id="categoryIdText" required autofocus/>
                         </div>
                         <div class="col-md-1" align="right">
                             <h4><label for="categoryNameText" class="label" style="color: black ; font-weight: 100">วิชา :</label></h4>
@@ -58,12 +58,12 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
+</div>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/addCategory.js" />"></script>
     <script>
-
         $('#submitCreateCategoryBtn').on('click', function () {
             saveCategory();
         });
 
+//        $('#addCategoryForm').formValidation
     </script>

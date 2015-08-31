@@ -97,31 +97,62 @@ public class QueryCategoryDomain extends HibernateUtil {
 
         HibernateUtil.beginTransaction();
         getSession().merge(category);
+//        Category category = new Category();
+
+//        if((id != oldId) && (name != oldName)){
+//            String updateQueryStatement = "update Category set id = :id, name = :name where id = :oldId";
+//            Query query = getSession().createQuery(updateQueryStatement);
+//            query.setParameter("id", id);
+//            query.setParameter("name", name);
+//            query.setParameter("oldId", oldId);
+//            HibernateUtil.commitTransaction();
+//        }
+//        else if(id != oldId){
+//            String updateQueryStatement = "update Category set id = :id where id = :oldId";
+//            Query query = getSession().createQuery(updateQueryStatement);
+//            query.setParameter("id", id);
+//            query.setParameter("oldId", oldId);
+//            HibernateUtil.commitTransaction();
+//        }
+//        else if(name != oldName){
+//            String updateQueryStatement = "update Category set name = :name, name = :name where id = :oldId";
+//            Query query = getSession().createQuery(updateQueryStatement);
+//            query.setParameter("name", name);
+//            query.setParameter("oldId", oldId);
+//            HibernateUtil.commitTransaction();
+//        }
+//        else{
+//            HibernateUtil.commitTransaction();
+//        }
         HibernateUtil.commitTransaction();
     }
 
     public List<Category> searchCategory(String  categoryId, String categoryName){
 
-        if(categoryId == null){
+        categoryId.toLowerCase();
+        categoryName.toLowerCase();
 
-            String queryStatement = "from Category where name like :categoryName";
+        if(categoryId == ""){
+// in case sensitive
+//            String queryStatement = "from Category where name like :categoryName";
+            String queryStatement = "from Category where lower(name) like :categoryName";
             Query query = getSession().createQuery(queryStatement);
             query.setParameter("categoryName", "%" + categoryName + "%");
             List<Category> categories = query.list();
 
             return categories;
         }
-        else if(categoryName == null){
+        else if(categoryName == ""){
 
-            String queryStatement = "from Category where id like :categoryId";
+            String queryStatement = "from Category where lower(id) like :categoryId";
             Query query = getSession().createQuery(queryStatement);
-            query.setParameter("categoryId", "%" + categoryName + "%");
+            query.setParameter("categoryId", "%" + categoryId + "%");
             List<Category> categories = query.list();
 
             return categories;
         }
         else {
-            String queryStatement = "from Category where id like :categoryId and name like :categoryName";
+            String queryStatement = "from Category where lower(id) like :categoryId and lower(name) like :categoryName order by id";
             Query query = getSession().createQuery(queryStatement);
             query.setParameter("categoryId", "%" + categoryId + "%");
             query.setParameter("categoryName", "%" + categoryName + "%");

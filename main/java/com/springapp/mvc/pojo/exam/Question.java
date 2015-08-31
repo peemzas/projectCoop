@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -50,14 +51,15 @@ public class Question implements Serializable,Cloneable {
     @JoinColumn(name = "QUESTION_STATUS")
     private Status status;
 
-//    @OneToMany(mappedBy = "questionId")
+
+    //    @OneToMany(mappedBy = "questionId")
 //    private Set<ExamAnswerRecord> examAnswerRecords;
 
     @ManyToMany(mappedBy = "questions" ,fetch = FetchType.LAZY)
     private Set<ExamPaper> examPapers = new HashSet<ExamPaper>();
 
-//    @OneToMany(mappedBy = "question")
-//    private Set<Choice> choices;
+    @OneToMany(mappedBy = "question")
+    private Set<Choice> choices;
 
 
     @Override
@@ -187,11 +189,35 @@ public class Question implements Serializable,Cloneable {
         this.examPapers = examPapers;
     }
 
-//    public Set<Choice> getChoices() {
-//        return choices;
+    public Set<Choice> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Set<Choice> choices) {
+        this.choices = choices;
+    }
+
+// Add By Wanchana
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "QUESTION_ID", insertable = false, updatable = false)
+//    Set<ExamAnswerRecord> examAnswerRecord;
+//
+//    public Set<ExamAnswerRecord> getExamAnswerRecord() {
+//        return examAnswerRecord;
 //    }
 //
-//    public void setChoices(Set<Choice> choices) {
-//        this.choices = choices;
+//    public void setExamAnswerRecord(Set<ExamAnswerRecord> examAnswerRecord) {
+//        this.examAnswerRecord = examAnswerRecord;
+//    }
+
+//    private Set<ExamAnswerRecord> examAnswerRecords;
+//    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+//
+//    public Set<ExamAnswerRecord> getExamAnswerRecords() {
+//        return examAnswerRecords;
+//    }
+//
+//    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
+//        this.examAnswerRecords = examAnswerRecords;
 //    }
 }
