@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Phuthikorn_T on 8/7/2015.
@@ -37,6 +38,8 @@ public class SubCategoryController {
     @Autowired
     QueryCategoryDomain queryCategoryDomain;
 
+    private static final Logger logger = Logger.getLogger(SubCategoryController.class.getName());
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addSubCategory")
     @ResponseBody
@@ -52,7 +55,7 @@ public class SubCategoryController {
     //  ----------------------------------------
     public void addSubCategory(Model model,
                                @RequestParam(value = "categoryId", required = true) String categoryId,
-                               @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
+                               @RequestParam(value = "subcategoryNameadd", required = true) String subcategoryName,
                                HttpServletRequest request, HttpServletResponse response) {
 //            throws Exception {
 
@@ -78,6 +81,7 @@ public class SubCategoryController {
 
         List<SubCategory> subcategories = querySubCategoryDomain.getListSubCategories();
         String json = new Gson().toJson(subcategories);
+//        logger.info(subcategories.toString());
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
@@ -173,13 +177,6 @@ public class SubCategoryController {
 
 
     //------------------------------------------------------------------------------
-
-//    public ResponseEntity<String> searchSubCategory(Model model,
-//
-//                                                    @RequestParam(value = "subcategoryName", required = true) String subcategoryName,
-//                                                    HttpServletRequest request, HttpServletResponse response) {
-
-
     public ResponseEntity<String> searchSubCategory(@ModelAttribute("subcategoryName") String subcategoryName,
                                                     @ModelAttribute("categoryId") String categoryId,
                                                     @ModelAttribute("categoryName") String categoryName)
@@ -188,14 +185,8 @@ public class SubCategoryController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-//        queryCategoryDomain.getCategoryById(categoryId);
-//        queryCategoryDomain.getCategoryByName(categoryName);
-//        queryCategoryDomain.searchCategory(categoryName);
-//        List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName);
         List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName,categoryId,categoryName);
 
-//        querySubCategoryDomain.getSubCategoryById(subcategoryId);
-//        subCategory.setName(subcategoryName);
 
         String json = new Gson().toJson(subcategories);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);

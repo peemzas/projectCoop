@@ -22,7 +22,7 @@ function viewSubCategory(){
 
                     //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
 
-                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.name+'</label>'+
+                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.   name+'</label>'+
 
                     '</td>'+
 
@@ -105,19 +105,7 @@ function updateSubCategory(subcategoryId) {
     //    var id = $("#editId" + categoryId).val();
 
 
-//        //var cname =$("#category"+subcategoryId).value();
-//<<<<<<< HEAD
-//        var categoryId = $("#id"+subcategoryId).val();
-//        var categoryName = $("#labelfor"+subcategoryId).val();
-//        var subcategoryName = $("#editsubName" + subcategoryId).val();
-//
-//        alert(categoryId + " " + categoryName);
-//=======
-        //var id = $("#Id"+subcategoryId).val();
 
-        //var catId = $("#catId"+subcategoryId).val();
-        //var catName =$("#catName").val();
-        //var subcategoryId= $("#subcategoryId" + subcategoryId).val();
         var subName = $("#editsubName" + subcategoryId).val();
 
         //alert($("#id"+subcategoryId));
@@ -128,12 +116,7 @@ function updateSubCategory(subcategoryId) {
             type: "POST",
             url: "/TDCS/exam/editSubCategory",
             data: {
-//<<<<<<< HEAD
-//                categoryId:categoryId,
-//                subcategoryName:subcategoryName
-//=======
-                //categoryId: $("#catId"+subcategoryId),
-                //id:catId,
+
                 subcategoryId:subcategoryId,
                 subcategoryName:subName
 //>>>>>>> SubCatPage
@@ -235,7 +218,7 @@ function search(){
     var subcategoryName= $("#subcategoryName").val();
     //var subcategoryId= $("#subcategoryId").val();
 
-    alert(categoryId+categoryName+subcategoryName);
+    //alert(categoryId+categoryName+subcategoryName);
 
     var dataResponse = $.ajax({
         type: "POST",

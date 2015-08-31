@@ -24,10 +24,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-2 col-lg-offset-3 text-right">
+                        <div class="col-md-2 col-lg-offset-2 text-right">
                             <label>รหัสวิชา :</label>
                         </div>
-                        <div class="col-md-1" style="width: 10%">
+                        <div class="col-md-4" style="width: 15%">
                             <input id="categoryId" class="form-control" type="text" maxlength="5"/>
                         </div>
                     </div>
@@ -187,3 +187,6 @@
 <%--</script>--%>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageSubCategory.js" />"></script>
 <%@include file="modal/createSubCategoryModal.jsp" %>
+
+
+
