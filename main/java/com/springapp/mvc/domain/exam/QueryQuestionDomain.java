@@ -4,6 +4,7 @@ import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
@@ -12,8 +13,10 @@ import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Phuthikorn_T on 8/11/2015.
@@ -28,6 +31,9 @@ public class QueryQuestionDomain extends HibernateUtil {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
+
+    
+    private static final Logger logger = Logger.getLogger(QueryQuestionDomain.class.getName());
     public void insertQuestion(Question question, List<String> cDesc, Integer correctChoice) {
 
         beginTransaction();
@@ -147,5 +153,26 @@ public class QueryQuestionDomain extends HibernateUtil {
     }
 
 
+//    Add by Mr.Wanchana Himself
+//    public List<Question> generalQuestionSearch(ArraarrayEmpNameToQuery){
+//
+//        for(int i = 0; i < arrayEmpNameToQuery.getLength(); i++){
+//
+//        }
+//    }
 
+    public List<Question> getAllQuestionDetail(){
+
+        Criteria criteria = getSession().createCriteria(Question.class);
+        criteria.setProjection(Projections.projectionList()
+                                .add(Projections.property("id"), "id")
+                                .add(Projections.property("choices"), "choices"));
+//        String hql = "from Question q inner join q.examAnswerRecords";
+//        Query query = getSession().createQuery(hql);
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//        List<Question> questions = query.list();
+        List<Question> questions = criteria.list();
+        logger.info(questions.toString());
+        return questions;
+    }
 }

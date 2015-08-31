@@ -1,5 +1,30 @@
 function saveCategory(){
-    //alert("hi");
+    alert("hi");
+
+    //$('#addCategoryForm').bootstrapValidator({
+    //    container: '#messages',
+    //    feedbackIcons: {
+    //        valid: 'glyphicon glyphicon-ok',
+    //        invalid: 'glyphicon glyphicon-remove',
+    //        validating: 'glyphicon glyphicon-refresh'
+    //    },
+    //    fields:{
+    //        catId:{
+    //            validators: {
+    //                notEmpty: {
+    //                    message: 'ssssssssssssss'
+    //                }
+    //            }
+    //        },
+    //        catName:{
+    //            validators: {
+    //                notEmpty: {
+    //                    message: 'aaaaaaaaaa'
+    //                }
+    //            }
+    //        }
+    //    }
+    //});
 
     var categoryName = $("#categoryNameText").val();
     var categoryId = $("#categoryIdText").val();

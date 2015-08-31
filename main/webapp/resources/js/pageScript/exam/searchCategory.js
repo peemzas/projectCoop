@@ -3,10 +3,18 @@
  */
 
 $(document).ready(function(){
+
+   $("#categoryId").val('');
+   $("#categoryName").val('');
+   $("#searchNotFound").hide();
    $("#searchCategory").click(function(){
        //alert("hi");
        search();
    });
+   $("#resetBtnSearchCategory").on('click', function(){
+       $("#categoryId").val('');
+       $("#categoryName").val('');
+   })
 });
 
 function search(){
@@ -27,9 +35,12 @@ function search(){
             //alert(data.id + " "+ data.name);
             //$("#tbodyCategory").hide();
             $("#tbodyCategory").empty();
+            if(data.size == null){
+                $("#searchNotFound").show();
+            }
             data.forEach(function(value){
                 //$("#tbodyCategory").empty();
-
+                $("#searchNotFound").hide();
                 $("#tbodyCategory").append(
                     '<tr>'+
                     '<td style="text-align: center;"><label id="id'+value.id+'">'+value.id+'</label>'+

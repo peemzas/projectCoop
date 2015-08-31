@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.exam.*;
+import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.pojo.exam.Choice;
+import com.springapp.mvc.pojo.exam.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -55,8 +60,12 @@ public class QuestionController {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
+<<<<<<< HEAD
     @Autowired
     QueryBooDomain queryBooDomain;
+=======
+    private static final Logger logger = Logger.getLogger(QuestionController.class.getName());
+>>>>>>> modify paper page
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody
@@ -284,6 +293,7 @@ public class QuestionController {
         return new ResponseEntity<String>(json1, headers, HttpStatus.OK);
     }
 
+
     public Question cloneQuestion(Question question,HttpServletRequest request){
 
         Question questionNew = new Question();
@@ -300,11 +310,37 @@ public class QuestionController {
     }
 
 
+//    Add By Mr.Wanchana
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
+    @ResponseBody
+    public ResponseEntity<String> generalQuestionSearch(String[] arrayEmpNameToQuery){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+////
+//        for(int i = 0; i < arrayEmpNameToQuery.length; i ++){
+//            System.out.println(arrayEmpNameToQuery[i] + " ");
+//        }
+        logger.info(arrayEmpNameToQuery.toString());
+        String json = new Gson().toJson(arrayEmpNameToQuery);
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestionDetail")
+    @ResponseBody
+    public ResponseEntity<String> getAllQuestionDetail(){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Question> questions = queryQuestionDomain.getAllQuestionDetail();
+        String json = new Gson().toJson(questions);
+        logger.info(questions.toString());
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
 }
-// Add By Mr.Wanchana
-//    @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
-//    @ResponseBody
-//    public ResponseEntity<String> generalQuestionSearch(){
-//
-//    }
+
 

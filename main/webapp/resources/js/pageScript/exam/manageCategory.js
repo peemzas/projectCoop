@@ -1,10 +1,9 @@
 $("document").ready(function(){
-
     viewCategory();
 });
 function viewCategory(){
     $("#tbodyCategory").empty();
-
+    $("#thEdit").text("แก้ไข");
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -35,7 +34,7 @@ function viewCategory(){
 
 function deleteCategory(categoryId){
 
-    if(!confirm("แน่ใจนะว่าคุณจะลบ")){
+    if(!confirm("แน่ใจนะว่าคุณจะลบรายวิชา "+$("#data"+categoryId).text())){
         return false;
     }
     $.ajax({
@@ -50,7 +49,7 @@ function deleteCategory(categoryId){
             window.location.reload();
         },
         error:function(){
-            alert(' ลบวิชาไม่สำเร็จ เนื่องจาก')
+            alert(' ลบวิชาไม่สำเร็จ ')
         }
     });
 }
@@ -61,7 +60,7 @@ function editCategory(categoryId){
     $("#data"+categoryId).hide();
 
     //alert($("#thEdit").text("บันทึก"));
-    //$("#thEdit").text("บันทึก");
+    $("#thEdit").text("บันทึก");
     //$("#deleteBtn"+categoryId).attr("disabled", "disabled");
     $("#editId"+categoryId).show();
     $("#editData"+categoryId).show();
@@ -73,29 +72,39 @@ function updateCategory(categoryId){
     if($("#editId"+categoryId).length > 5){
         alert("คุณกรอกรหัสวิชาไม่ถูกต้อง");
     }
+    else if($("#editData"+categoryId).val() == "" && $("#editId"+categoryId).val() == ""){
+        alert("รหัสวิชาและชื่อวิชาต้องไม่เป็นค่าว่าง")
+    }
     else if($("#editData"+categoryId).val() == ""){
         alert("ชื่อวิชาต้องไม่เป็นค่าว่าง")
+    }
+    else if( $("#editId"+categoryId).val() == ""){
+        alert("รหัสวิชาต้องไม่เป็นค่าว่าง")
     }
     else{
         var id = $("#editId"+categoryId).val();
         var name = $("#editData"+categoryId).val();
 
-        //alert(id+" "+name);
-
         var dataResponse = $.ajax({
             type: "POST",
             url: "/TDCS/exam/editCategory",
             data: "id="+id+"&name="+name,
+            //data: {
+            //  //categoryId: id,
+            //  //categoryName: name
+            //  //oldId: oldId,
+            //  //oldName: oldName
+            //},
             complete: function (xhr) {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
                         viewCategory();
                     }
                     else {
-                        alert("fail");
+                        alert("การอัพเดทข้อมูลผิดพลาด"+"\n\n"+"1. กรุณาตรวจสอบรหัสวิชาห้ามซ้ำกัน หรือ"+"\n"+"2. กรุณาตรวจสอบชื่อรายวิชาห้ามซ้ำกัน");
                     }
                 } else {
-                    alert("fail");
+                    alert("การอัพเดทข้อมูลผิดพลาด");
                 }
             }
         });

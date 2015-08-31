@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.springapp.mvc.util.HibernateUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,10 +76,15 @@ public class CategoryController {
     @RequestMapping(value = "/exam/editCategory", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity editCategory(@Valid Category category, HttpServletRequest request){
-
+//    public ResponseEntity editCategory(@RequestParam(value = "categoryId") String id,
+//                                       @RequestParam(value = "categoryName") String name,
+////                                       @RequestParam(value = "oldId") String oldId,
+////                                       @RequestParam(value = "oldName") String oldName,
+//                                       HttpServletRequest request){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
+//        Category category = new Category();
         User createBy = queryUserDomain.getCurrentUser(request);
         category.setCreateBy(createBy);
         queryCategoryDomain.editCategory(category);

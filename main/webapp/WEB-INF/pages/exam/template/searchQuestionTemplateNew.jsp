@@ -36,7 +36,7 @@
           <hr/>
           <div class = "row" id = "btnSearch">
             <div class = "col-md-12 text-center">
-              <button id="generalSearchButtonInModalSelectionQuestion" class = "btn btn-default" type = "button">ค้นหา</button>
+              <button id="generalSearchButtonInModalSelectionQuestion" onclick="generalSearchQuestion()" class = "btn btn-default" type = "button">ค้นหา</button>
               <button class = "btn btn-default" type = "button">ล้างข้อมูล</button>
             </div>
           </div>
@@ -131,3 +131,4 @@
 </div>
 
 <script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
