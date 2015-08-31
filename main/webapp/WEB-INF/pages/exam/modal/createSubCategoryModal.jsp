@@ -27,7 +27,6 @@
                 <%--<input class="form-control" type="text" maxlength="5"/>--%>
                 <%--</div>--%>
                 <%--</div>--%>
-
                 <%--<div style="margin-bottom: 5px"></div>--%>
 
 
@@ -36,6 +35,7 @@
 
                     <div class="col-md-4" align="right">
                         <h4><label class="label" style="color: black ; font-weight: 100">
+                            <small style="color: red">*</small>
                             เลือกวิชา :
                         </label></h4>
                     </div>
@@ -47,22 +47,34 @@
                             <c:forEach var="category" items="${listCat}">
                                 <option categoryName="${category.name} " value="${category.id}">${category.id}
                                     : ${category.name}</option>
+                                </c:forEach>
+
                             </c:forEach>
+
 
                         </select>
                     </div>
                 </div>
+                <form class="form-group has-error" id="subcatform" method="post">
+                    <div class="row">
+                        <div class="col-md-4" align="right">
+                            <h4><label class="label" style="color:black;font-weight: 100">
+                                <small style="color: red">*</small>
+                                หัวข้อเรื่อง :
+                            </label></h4>
+                        </div>
+                        <div class="col-md-6" style="padding-left: 0px">
+                            <input type="text" class="form-control" id="subcategoryNameadd"
+                                   placeholder="กรอกชื่อหัวข้อเรื่อง" required="required" name="subcategoryNameadd">
 
-                <div class="row">
-                    <div class="col-md-4" align="right">
-                        <h4><label class="label" style="color:black;font-weight: 100">
-                            หัวข้อเรื่อง :
-                        </label></h4>
+                            </input>
+                        </div>
+                        <div class="help-block with-errors">error+++</div>
                     </div>
-                    <div class="col-md-6" style="padding-left: 0px">
-                        <input type="text" class="form-control" name="subcat" id="subcategoryName"/>
-                    </div>
-                </div>
+                </form>
+
+
+
 
                 <div style="margin-bottom: 5px"></div>
                 <div class="row">
@@ -91,6 +103,21 @@
 <%--<script src="${addSubCategory}" type="text/javascript"><!--Not Empty --></script>--%>
 
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/addSubCategory.js" />"></script>
+<%--<script>--%>
+    <%--(function($) {--%>
+        <%--$('#subcategoryNameadd').bind('blur', function(e) {--%>
+            <%--var $this = $(this)--%>
+            <%--if ($this.val().length < 1 && $this.val().length != 0) {--%>
+                <%--alert('คุณกรอกข้อมูลไม่ครบ CreateSubmodal');--%>
+<%--//                $("#Amount").focus();--%>
+                <%--$this.attr('subcategoryNameadd','border:solid 1px red');--%>
+                <%--return false;--%>
+            <%--}else{--%>
+                <%--$this.attr('subcategoryNameadd','');--%>
+            <%--}--%>
+        <%--});--%>
+    <%--})(jQuery);--%>
+<%--</script>--%>
 <script>
 
     $('#submitCreateSubCategoryBtn').on('click', function () {
@@ -98,10 +125,8 @@
     })
 
 
-</script>
 
-<%--<script>--%>
-
+<<<<<<< HEAD
 <%--$('#addSubCatSubmit-Btn').on('click', function () {--%>
 <%--saveSubCategory();--%>
 <%--})--%>
@@ -125,6 +150,34 @@
 <%--}--%>
 <%--}).responseText;--%>
 <%--}--%>
+=======
 
 
+</script>
+<%--<script>--%>
+    <%--$(document).ready(function() {--%>
+        <%--alert('hi');--%>
+        <%--$('#subcatform').validator({--%>
+            <%--framework: 'bootstrap',--%>
+            <%--excluded: ':disabled',--%>
+            <%--icon: {--%>
+                <%--valid: 'glyphicon glyphicon-ok',--%>
+                <%--invalid: 'glyphicon glyphicon-remove',--%>
+                <%--validating: 'glyphicon glyphicon-refresh'--%>
+            <%--},--%>
+            <%--fields: {--%>
+                <%--subcategoryNameadd: {--%>
+                    <%--validators: {--%>
+                        <%--notEmpty: {--%>
+                            <%--message: 'The username is required'--%>
+                        <%--}--%>
+                    <%--}--%>
+                <%--}--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
 <%--</script>--%>
+
+>>>>>>> Edit error 500 for user
+
+

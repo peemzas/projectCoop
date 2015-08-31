@@ -188,9 +188,13 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 //                projectionList.add(Projections.property("sc.name"),"subName");
                 criteria.addOrder(Order.asc("category.id"));
 
-                criteria.add(Restrictions.like("name", "%" + subcategoryName + "%"));
-                criteria.add(Restrictions.like("category.id", "%" + categoryId + "%"));
-                criteria.add(Restrictions.like("category.name", "%" + categoryName + "%"));
+
+                criteria.add(Restrictions.like("name","%" + subcategoryName + "%").ignoreCase());
+                criteria.add(Restrictions.like("category.id","%" + categoryId + "%").ignoreCase());
+                criteria.add(Restrictions.like("category.name","%" + categoryName + "%").ignoreCase());
+
+
+
 
 
                 criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
