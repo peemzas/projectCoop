@@ -13,10 +13,12 @@
 <hr/>
 <div class="container">
     <%@include file="template/searchPaperTemplateNew.jsp" %>
-    <br/>
-    <br/>
 
     <!-- Example table information, it will remove soon ^^ -->
+
+    <a href="/TDCS/exam/createPaper"><button class="btn btn-success" align="center"
+            style="width:50px;height:35px"><span class="glyphicon glyphicon-plus"></span>
+    </button></a>
     <div class="row">
         <div class="col-md-12" align="center">
             <table class="table">

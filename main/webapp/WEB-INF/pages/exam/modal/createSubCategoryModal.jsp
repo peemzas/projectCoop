@@ -49,7 +49,7 @@
                                     : ${category.name}</option>
                                 </c:forEach>
 
-                            </c:forEach>
+
 
 
                         </select>
@@ -69,7 +69,7 @@
 
                             </input>
                         </div>
-                        <div class="help-block with-errors">error+++</div>
+                        <%--<div class="help-block with-errors">error+++</div>--%>
                     </div>
                 </form>
 
@@ -126,7 +126,6 @@
 
 
 
-<<<<<<< HEAD
 <%--$('#addSubCatSubmit-Btn').on('click', function () {--%>
 <%--saveSubCategory();--%>
 <%--})--%>
@@ -150,7 +149,7 @@
 <%--}--%>
 <%--}).responseText;--%>
 <%--}--%>
-=======
+
 
 
 </script>
@@ -178,6 +177,5 @@
     <%--});--%>
 <%--</script>--%>
 
->>>>>>> Edit error 500 for user
 
 
