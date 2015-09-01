@@ -88,4 +88,11 @@
     addEmployee();
   });
 
+
+  $("#addMarkerEmpIdBtn").on('click', function(){
+    addEmployee();
+  });
+
+
+
 </script>

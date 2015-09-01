@@ -60,12 +60,12 @@ public class QuestionController {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
-<<<<<<< HEAD
+
     @Autowired
     QueryBooDomain queryBooDomain;
-=======
+
     private static final Logger logger = Logger.getLogger(QuestionController.class.getName());
->>>>>>> modify paper page
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody

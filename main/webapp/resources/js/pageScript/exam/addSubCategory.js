@@ -1,22 +1,25 @@
 //$("document").ready(function(){
 //    saveSubCategory();
-//    alert(subcategoryName);
+//    //alert(subcategoryName);
 //});
-//(function($) {
-//
-//    $('#subcategoryNameadd').bind('blur', function(e) {
-//        var $this = $(this)
-//        if ($this.val().length < 1 || $("#categoryId").val() ==null) {
-//            alert('คุณกรอกรหัสผ่านไม่ครบ');
-////                $("#Amount").focus();
+(function($) {
+
+    $('#subcategoryNameadd').bind('blur', function(e) {
+        var $this = $(this)
+        if ($this.val().length < 1 || $("#categoryId").val() ==null) {
+            alert('คุณกรอกรหัสผ่านไม่ครบ');
+//                $("#Amount").focus();
 //            $this.attr('style','border:solid 1px red');
-//            return false;
-//        }else{
-//            $this.attr('style','');
-//            $('#subcategoryNameadd').attr('style','');
-//        }
-//    });
-//})(jQuery);
+            return false;
+        }else{
+            //$this.attr('style','');
+            //$('#subcategoryNameadd').attr('style','');
+
+            alert('คุณกรอกรหัสผ่านไม่ครบ');
+            return false;
+        }
+    });
+})(jQuery);
 
 function saveSubCategory() {
 

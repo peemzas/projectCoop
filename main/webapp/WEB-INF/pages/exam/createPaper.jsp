@@ -92,6 +92,7 @@
 <%--</div>--%>
 <%--</div>--%>
 
+
 <div class="row">
   <div class="col-md-2 col-md-offset-5">
     <h3 align="center">ข้อสอบ</h3>
@@ -103,7 +104,13 @@
   </div>
 </div>
 
+
+
+
 <div class="row">
+  <a href="/TDCS/exam/managePapers"><button class="btn btn-success" align="center"
+                                            style="width:50px;height:35px"><span class="glyphicon glyphicon-arrow-left"></span>
+  </button></a>
   <table class="table">
     <thead class="bg-primary">
     <tr>
