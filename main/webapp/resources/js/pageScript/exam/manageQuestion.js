@@ -7,15 +7,10 @@
 
 $(document).ready(function () {
     listAllQuestion();
+    alert("HI")
+})
 
-    $(".actionDeleteBtn").on('click', function () {
-        var questionId = parseInt($(".actionDeleteBtn").parents('tr').attr('questionId'));
-        var r = confirm("ลบข้อสอบที่ " + questionId);
-        if (r == true) {
-            console.log(questionId);
-            deleteQuestion(questionId);
-        }
-    })
+var generateEventHandler = function () {
 
     $(".actionEditBtn").on('click', function () {
         $('#submitCreateBtn').text('ยืนยัน');
@@ -26,13 +21,24 @@ $(document).ready(function () {
     $('.createQuestionBtn').on('click', function () {
         $('#createQuestModalTitle').text('สร้างข้อสอบ');
         $('#submitCreateBtn').text('ตกลง');
+        createQuestionModalClearInput();
     })
     $('.actionViewBtn').on('click', function () {
         var tr = $(this).parents('tr');
         updateDetailModal(tr);
     })
+    $(".actionDeleteBtn").on('click', function () {
+        var questionId = parseInt($(this).parents('tr').attr('questionId'));
+        var r = confirm("ลบข้อสอบที่ " + questionId);
+        if (r == true) {
+            deleteQuestion(questionId);
+        }
+    })
+}
 
-})
+
+
+
 
 var questionObj;
 var setQuestionObj = function (tr) {
@@ -56,9 +62,8 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
     //    console.log(correctChoice)
     //}
 
-    if(correctChoice == undefined){
-        correctChoice = 0 ;
-        console.log(correctChoice);
+    if (correctChoice == undefined) {
+        correctChoice = 0;
     }
 
     var questionType = null;
@@ -88,11 +93,13 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
         ,
         success: function () {
             alert('Success');
+            listAllQuestion();
         },
         error: function () {
             alert('Error');
         }
     })
+
 }
 
 var setEditModalParameter = function () {
@@ -147,9 +154,8 @@ var listAllQuestion = function () {
             type: "POST",
             contentType: "application/json",
             url: "/TDCS/exam/getAllReadyQuestion",
-            async: false,
             success: function (questionList) {
-                console.log("hello")
+                $('tbody').empty();
                 questionList.forEach(function (quest) {
                     var createDate = new Date(quest.createDate);
                     var formattedDate = createDate.getDate() + "/" + createDate.getMonth() + "/" + createDate.getFullYear();
@@ -169,7 +175,7 @@ var listAllQuestion = function () {
                     '<button class="btn dropdown-toggle" data-toggle="dropdown">' +
                     'เลือก<span class="caret"></span>' +
                     '</button>' +
-                    '<ul class="dropdown-menu">' +
+                    '<ul class="dropdown-menu actionBtn">' +
                     '<li><a class="actionViewBtn" data-toggle="modal" data-target="#questionDetailModal">ดู</a></li>' +
                     '<li><a class="actionEditBtn" data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>' +
                     '<li><a class="actionDeleteBtn">ลบ</a></li>' +
@@ -177,11 +183,16 @@ var listAllQuestion = function () {
                     '</div>' +
                     '</td>' +
                     "</tr>")
+                    //return false;
                 })
-
+                generateEventHandler();
+            }, error: function () {
+                console.log("Error in listAllQuestion() ajax");
             }
+
         }
     )
+
 }
 
 var deleteQuestion = function (questionId) {
@@ -193,9 +204,11 @@ var deleteQuestion = function (questionId) {
         },
         success: function () {
             alert("Delete Success");
+            listAllQuestion();
         }, error: function () {
             alert("Failed");
         }
     })
+
 }
 
