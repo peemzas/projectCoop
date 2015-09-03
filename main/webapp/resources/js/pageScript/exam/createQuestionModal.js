@@ -11,7 +11,6 @@ $(".choiceRadioAddon").on('click', function () {
     $('.correctRadio:checked').parent().addClass('success');
     $('.correctRadio:checked').parent().children('div').show();
     $('.correctRadio:checked').hide();
-
 })
 
 $('#select-QuestionType').on('change', function () {
@@ -84,6 +83,7 @@ function saveQuestion() {
         var dat = $.ajax({
             type: 'POST',
             url: '/TDCS/exam/addQuestion',
+            //async: false,
             data: {
                 categoryName: categoryName,
                 subCategoryName: subCategoryName,
@@ -103,18 +103,18 @@ function saveQuestion() {
             }
         })
     }
+    createQuestionModalClearInput();
+}
 
-    var clearInput = function () {
-        $("#categoryInputForCreateQuestion").val("");
-        $("#subCategoryInputForCreateQuestion").val("");
-        $("#select-QuestionType").val("");
-        $("#questionScoreForCreateQuestion").val("");
-        $("#questionDescription").val();
-        $("input[name='level']").uncheck();
-        $(".correctRadio").uncheck();
-        $(".choiceDesc").val("");
-    }
-
+var createQuestionModalClearInput = function () {
+    $("#categoryInputForCreateQuestion").val("");
+    $("#subCategoryInputForCreateQuestion").val("");
+    $("#select-QuestionType").val("");
+    $("#questionScoreForCreateQuestion").val("");
+    $("#questionDescription").val("");
+    $("input[name='level']").attr('checked', false);
+    $(".correctRadio").attr('checked', false);
+    $(".choiceDesc").val("");
 }
 
 var setCreateModalCategory = function (category) {
