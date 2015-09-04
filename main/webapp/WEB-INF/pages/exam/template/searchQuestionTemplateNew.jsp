@@ -15,7 +15,6 @@
         </div>
         <div class="panel-body">
           <div class = "row">
-
             <%@include file="selectCategoryInput.jsp" %>
           </div>
           <div style="margin-bottom: 5px"></div>
@@ -28,7 +27,7 @@
           <br/>
           <div class="row">
             <div class="col-sm-8 col-md-offset-2">
-              <div id="showEmployeeSelected">
+              <div id="showEmployeeSelected" width="100%;">
 
               </div>
             </div>
@@ -131,4 +130,19 @@
 </div>
 
 <script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
+<script>
+  $(document).ready(function(){
+    $("#selectAllEmployeeName").click(function(event){
+      if(this.checked){
+        $(".userSelectCheckbox").each(function(){
+          this.checked = true;
+        });
+      }
+      else{
+        $(".userSelectCheckbox").each(function(){
+          this.checked = false;
+        });
+      }
+    })
+  });
+</script>

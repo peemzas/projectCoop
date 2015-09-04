@@ -2,6 +2,7 @@ package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
+import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -173,6 +174,29 @@ public class QueryQuestionDomain extends HibernateUtil {
 //        List<Question> questions = query.list();
         List<Question> questions = criteria.list();
         logger.info(questions.toString());
+        return questions;
+    }
+
+    public List<User> getUserIdByName(List empName){
+
+        String queryStatement = "select userId from User where thFname in(:empName)";
+        Query query = getSession().createQuery(queryStatement);
+        query.setParameterList("empName", empName);
+        List<User> userIds = query.list();
+        logger.info(userIds.toString());
+
+        return userIds;
+    }
+
+    public List<Question> generalSearchQuestion(List<User> empId){
+
+
+        String queryStatement = "select id, description, score from Question where createBy.userId in(:empId)";
+        Query query = getSession().createQuery(queryStatement);
+        query.setParameterList("empId" ,empId);
+        List<Question> questions = query.list();
+        logger.info(">" +questions.toString());
+
         return questions;
     }
 }

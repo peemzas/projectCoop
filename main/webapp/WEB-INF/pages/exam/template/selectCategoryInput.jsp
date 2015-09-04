@@ -13,17 +13,24 @@
     <h5>วิชา : </h5>
 </div>
 <div class="col-md-3">
-    <select type="text" class="form-control" id="selectCategoryInput-category">
-        <option selected disabled></option>
+    <%--<select type="text" class="form-control" id="selectCategoryInput-category">--%>
+        <%--<option selected disabled></option>--%>
+    <%--</select>--%>
+    <%--Add By Wanchana.K--%>
+    <select type="text" class="selectpicker" id="selectCategoryToSelection">
+        <option value="" disabled selected>เลือกรายวิชา</option>
     </select>
 </div>
 <div class="col-md-2" align="right">
     <h5>หัวข้อเรื่อง : </h5>
 </div>
 <div class="col-md-3">
-    <select type="text" class="form-control" id="selectCategoryInput-subCategory">
-        <option selected disabled></option>
+    <%--<select type="text" class="form-control" id="selectCategoryInput-subCategory">--%>
+        <%--<option selected disabled>sdsdsds</option>--%>
+    <%--</select>--%>
+    <select type="text" class="selectpicker" id="selectSubCategoryToSelection">
+        <option value="" disabled selected>เลือกหัวข้อ</option>
     </select>
 </div>
 
-<script src="../../../resources/js/pageScript/exam/selectCategoryInput.js" charset="UTF-8"></script>
+<%--<script src="../../../resources/js/pageScript/exam/selectCategoryInput.js" charset="UTF-8"></script>--%>

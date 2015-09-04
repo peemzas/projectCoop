@@ -1,10 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Modal eSelectQuestion-->
+<style>
+    #selectQuest{
+        overflow-y: auto;
+    }
+</style>
 <div class="modal fade" id="selectQuest">
     <div class="modal-dialog modal-lg" style="width: 80%">
         <div class="modal-content">
             <div class="modal-header">
-
                 <div class="modal-body">
                     <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
                             aria-hidden="true">&times;</span></button>
@@ -100,6 +104,5 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>

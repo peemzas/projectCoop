@@ -95,8 +95,10 @@ public class QueryCategoryDomain extends HibernateUtil {
 
     public void editCategory(Category category){
 
+        logger.info(category.getId()+"---------------------------"+category);
         HibernateUtil.beginTransaction();
-        getSession().merge(category);
+
+        getSession().update(category);
 //        Category category = new Category();
 
 //        if((id != oldId) && (name != oldName)){

@@ -40,7 +40,6 @@ public class SubCategoryController {
 
     private static final Logger logger = Logger.getLogger(SubCategoryController.class.getName());
 
-
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addSubCategory")
     @ResponseBody
 //
@@ -206,4 +205,19 @@ public class SubCategoryController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/getSubCategoryByCategoryId", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> getSubCategoryByCategoryId(String searchSubCategory) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        Category category = new Category();
+        category.setId(searchSubCategory);
+        logger.info("============================================="+category.getId());
+        List<SubCategory> subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+        String json = new Gson().toJson(subcategories);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
 }

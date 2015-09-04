@@ -18,24 +18,16 @@
             <div class="panel-heading" style="background-color: lightblue"><h4>Search</h4></div>
             <div class="panel-body">
                 <div class="row">
-                         <%@include file="template/selectCategoryInput.jsp" %>
+                    <%@include file="template/selectCategoryInput.jsp" %>
                 </div>
                 <br>
-
                 <div class="row">
-                <%@include file="template/selectCreateByInput.jsp" %>
-
-
-                    <div class="col-md-4 col-md-offset-1" align="right">
-                        <button id="search" class="btn btn-gray">Search</button>
-                        <button id="clear" class="btn btn-gray">Clear</button>
-
+                    <%@include file="template/selectCreateByInput.jsp" %>
                 </div>
-        </div>
-
-
-
-
+                <div class="col-md-4 col-md-offset-1" align="right">
+                    <button id="search" class="btn btn-gray">Search</button>
+                    <button id="clear" class="btn btn-gray">Clear</button>
+                </div>
             </div>
         </div>
     </div>
@@ -137,7 +129,7 @@
     </div>
 </div>
 
-
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
 <script>
     $("#collapse").click(function () {
         var str = $("#search").prop('outerHTML') + "&nbsp" + $("#clear").prop('outerHTML');
@@ -155,7 +147,6 @@
         }
 
 
-    })
-
+    });
     $(".datepicker").datepicker();
 </script>

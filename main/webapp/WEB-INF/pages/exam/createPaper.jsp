@@ -51,6 +51,7 @@
 </div>
 <br>
 
+<<<<<<< HEAD
 <%--<div class="row">--%>
 <%--<div class="col-md-2 col-md-offset-1" align="right">--%>
 <%--<label><h4 style="margin-top: 5px">Category :</h4></label>--%>
@@ -93,6 +94,8 @@
 <%--</div>--%>
 
 
+=======
+>>>>>>> Develop createPaper and edit category page.
 <div class="row">
   <div class="col-md-2 col-md-offset-5">
     <h3 align="center">ข้อสอบ</h3>
@@ -192,11 +195,9 @@
   </div>
 </div>
 
-
-
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>
 <script>
   $("#date").datepicker();
-
   function select(){
     $('#obj').click(function(){
       $('#objective').show();
@@ -211,7 +212,6 @@
       $('#objective').hide();
       $('#objective2').hide();
     })
-
   }
 </script>
 

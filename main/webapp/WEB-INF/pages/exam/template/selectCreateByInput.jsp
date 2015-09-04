@@ -11,13 +11,19 @@
 </div>
 <div class="col-md-6">
     <div class="input-group">
-        <input id="selectCreateBySearchInput" type="text" class="form-control" disabled="disabled"/>
-
+        <input id="selectCreateBySearchInput" type="text" class="form-control" />
         <div class="input-group-btn">
-            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary " id="addEmpIdBtn"> +
+            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary " id="addEmpCreateByBtn"> 45
             </button>
         </div>
     </div>
 </div>
 
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/selectEmployee.js" />"></script>
+<script src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
+<script>
+    $("#addEmpCreateByBtn").on('click', function(){
+        searchEmpName();
+    });
+</script>
 <%@include file="../modal/addEmployeeToInputModal.jsp" %>

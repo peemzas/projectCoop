@@ -1,12 +1,17 @@
 package com.springapp.mvc.controller.exam;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,14 +20,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import sun.org.mozilla.javascript.internal.json.JsonParser;
 
+import javax.json.Json;
+import javax.json.stream.JsonParserFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -60,12 +66,10 @@ public class QuestionController {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
-
     @Autowired
     QueryBooDomain queryBooDomain;
 
     private static final Logger logger = Logger.getLogger(QuestionController.class.getName());
-
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
     @ResponseBody
@@ -313,18 +317,24 @@ public class QuestionController {
 //    Add By Mr.Wanchana
     @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
     @ResponseBody
-    public ResponseEntity<String> generalQuestionSearch(String[] arrayEmpNameToQuery){
+    public ResponseEntity<String> generalQuestionSearch(@RequestBody String jsoN) throws JSONException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-////
-//        for(int i = 0; i < arrayEmpNameToQuery.length; i ++){
-//            System.out.println(arrayEmpNameToQuery[i] + " ");
-//        }
-        logger.info(arrayEmpNameToQuery.toString());
-        String json = new Gson().toJson(arrayEmpNameToQuery);
+        List empNameSearch = new ArrayList();
+        logger.info("I'm Hereeeeeeeeeeeeeeeeeeeeeeeeeeee " + (jsoN));
+        JSONArray jsonArray = new JSONArray(jsoN);
+        for(int i = 0; i < jsonArray.length(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            System.out.println(jsonObject.getString("thFname"));
+            empNameSearch.add(jsonObject.getString("thFname"));
+        }
+        List<User> users = queryQuestionDomain.getUserIdByName(empNameSearch);
+        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users);
+        logger.info(questions.toString());
+        String json = new Gson().toJson(questions);
+
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
-//        return null;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestionDetail")
