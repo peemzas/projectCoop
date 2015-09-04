@@ -185,11 +185,13 @@ public class SubCategoryController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
         List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName,categoryId,categoryName);
-
+        logger.info(String.valueOf("++++++++++++++++++++++++++++"));
 
         String json = new Gson().toJson(subcategories);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
+
+
 
     @RequestMapping(value = "/exam/getAllSubCategoryInCategory", method = RequestMethod.POST)
     @ResponseBody
@@ -200,6 +202,7 @@ public class SubCategoryController {
 
         Category category = queryCategoryDomain.getCategoryById(catId);
         List<SubCategory> subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+
         String json = new Gson().toJson(subcategories);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);

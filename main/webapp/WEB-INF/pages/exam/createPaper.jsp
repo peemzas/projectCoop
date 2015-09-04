@@ -111,7 +111,7 @@
 
 
 <div class="row">
-  <a href="/TDCS/exam/managePapers"><button class="btn btn-success" align="center"
+  <a href="/TDCS/exam/managePapers"><button class="btn btn-danger" align="center"
                                             style="width:50px;height:35px"><span class="glyphicon glyphicon-arrow-left"></span>
   </button></a>
   <table class="table">
