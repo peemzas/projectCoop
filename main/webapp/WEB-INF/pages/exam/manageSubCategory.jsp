@@ -28,7 +28,7 @@
                             <label>รหัสวิชา :</label>
                         </div>
                         <div class="col-md-4" style="width: 15%">
-                            <input id="categoryId" class="form-control" type="text" maxlength="5"/>
+                            <input id="categoryId" class="form-control" type="text" maxlength="5" placeholder="ค้นหารหัสวิชา"/>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                         <%--</select>--%>
                         <%--</div>--%>
                         <div class="col-md-4">
-                            <input  id="categoryName" class="form-control" type="text"/>
+                            <input  id="categoryName" class="form-control" type="text" placeholder="ค้นหารายวิชา"/>
                         </div>
 
 
@@ -67,7 +67,7 @@
                         <%--</select>--%>
                         <%--</div>--%>
                         <div class="col-md-4">
-                            <input id="subcategoryName" class="form-control" type="text"/>
+                            <input id="subcategoryName" class="form-control" type="text" placeholder="ค้นหาหัวข้อเรื่อง"/>
                         </div>
                     </div>
 

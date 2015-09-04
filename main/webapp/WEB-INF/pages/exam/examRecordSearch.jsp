@@ -75,6 +75,15 @@
                 </div>
 
             </div>
+
+            <div class="row">
+                <div class="col-sm-8 col-md-offset-3">
+                    <div id="showEmployeeSelected">
+
+                    </div>
+                </div>
+            </div>
+
             <div style="margin-bottom: 5px"></div>
         </div>
 

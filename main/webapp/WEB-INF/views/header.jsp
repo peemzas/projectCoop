@@ -137,6 +137,7 @@
 
                     </a>
                     <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">จัดการ</li>
                         <li>
                             <a href="/TDCS/exam/manageCategory">
                                 <c:if test="${status == 'staff'}">จัดการรายวิชา</c:if>
@@ -158,6 +159,8 @@
                                 <c:if test="${status == 'staff'}">จัดการชุดข้อสอบ</c:if>
                             </a>
                         </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">ตรวจ</li>
                         <li>
                             <a href="/TDCS/exam/examRecordSearch">
                                 <c:if test="${status == 'staff'}">ตรวจข้อสอบ</c:if>

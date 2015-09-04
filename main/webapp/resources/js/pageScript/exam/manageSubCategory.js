@@ -8,6 +8,8 @@ $("document").ready(function(){
 function viewSubCategory(){
     $("#tbodySubCategory").empty();
 
+
+
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -15,6 +17,7 @@ function viewSubCategory(){
         async: false,
         success: function(data){
             data.forEach(function(value){
+
                 $("#tbodySubCategory").append(
                     '<tr>'+
 
@@ -22,7 +25,7 @@ function viewSubCategory(){
 
                     //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
 
-                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.   name+'</label>'+
+                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.name+'</label>'+
 
                     '</td>'+
 
@@ -284,8 +287,5 @@ function clearsearch(){
     $("#categoryId").val("");
     $("#categoryName").val("");
     $("#subcategoryName").val("");
-
-
-
 }
 

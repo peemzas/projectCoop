@@ -5,6 +5,9 @@
   Time: 11:13 AM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
@@ -34,54 +37,46 @@
 
 
                     <div class="col-md-4" align="right">
-                        <h4><label class="label" style="color: black ; font-weight: 100">
+                        <h4><label class="control-label" style="color: black ; font-weight: 100">
                             <small style="color: red">*</small>
                             เลือกวิชา :
                         </label></h4>
                     </div>
-                    <div class="input-group col-md-5">
+                    <div class="col-md-6">
                         <%--<input type="text" class="form-control" name="cat" id="categoryName-forAddSubCat" style="width: 245px"/>--%>
-                        <select id="sCat" class="form-control" data-width="100%">
+                        <%--<select class="selectpicker" id="sCat" class="form-control" data-width="100%">--%>
+                            <form:select path="listCat" id="sCat" name="advisor" class="form-control" required="true" >
                             <option value="">โปรดเลือกวิชา</option>
-
                             <c:forEach var="category" items="${listCat}">
                                 <option categoryName="${category.name} " value="${category.id}">${category.id}
                                     : ${category.name}</option>
-                                </c:forEach>
+                            </c:forEach>
+                            </form:select>
 
-
-
-
-                        </select>
+                        <%--</select>--%>
                     </div>
                 </div>
-                <form class="form-group has-error" id="subcatform" method="post">
+
+                <%--<form class="form-horizontal" id="subcatform" method="post">--%>
+                <div class="form-group">
                     <div class="row">
                         <div class="col-md-4" align="right">
-                            <h4><label class="label" style="color:black;font-weight: 100">
-                                <small style="color: red">*</small>
-                                หัวข้อเรื่อง :
-                            </label></h4>
+                            <h4><label for="subcategoryNameadd" class="control-label" style="color:black;font-weight: 100"><small style="color: red">*</small>หัวข้อเรื่อง :</label></h4>
                         </div>
-                        <div class="col-md-6" style="padding-left: 0px">
-                            <input type="text" class="form-control" id="subcategoryNameadd"
-                                   placeholder="กรอกชื่อหัวข้อเรื่อง" required="required" name="subcategoryNameadd">
-
+                        <div class="col-md-6 controls">
+                            <input type="text" class="form-control" id="subcategoryNameadd" placeholder="กรอกชื่อหัวข้อเรื่อง" name="subcategoryNameadd" required="true" >
                             </input>
                         </div>
                         <%--<div class="help-block with-errors">error+++</div>--%>
                     </div>
-                </form>
-
-
+                </div>
+                <%--</form>--%>
 
 
                 <div style="margin-bottom: 5px"></div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button id="submitCreateSubCategoryBtn" class="btn btn-primary" type="submit"
-                                data-dismiss="modal">
-                            บันทึก
+                        <button id="submitCreateSubCategoryBtn" class="btn btn-primary" type="submit"  onclick="saveSubCategory()">บันทึก
                         </button>
 
                         <button id="hiddenBtn2" class="btn btn-warning" class="hidden" data-dismiss="modal">
@@ -103,79 +98,17 @@
 <%--<script src="${addSubCategory}" type="text/javascript"><!--Not Empty --></script>--%>
 
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/addSubCategory.js" />"></script>
-<%--<script>--%>
-    <%--(function($) {--%>
-        <%--$('#subcategoryNameadd').bind('blur', function(e) {--%>
-            <%--var $this = $(this)--%>
-            <%--if ($this.val().length < 1 && $this.val().length != 0) {--%>
-                <%--alert('คุณกรอกข้อมูลไม่ครบ CreateSubmodal');--%>
-<%--//                $("#Amount").focus();--%>
-                <%--$this.attr('subcategoryNameadd','border:solid 1px red');--%>
-                <%--return false;--%>
-            <%--}else{--%>
-                <%--$this.attr('subcategoryNameadd','');--%>
-            <%--}--%>
-        <%--});--%>
-    <%--})(jQuery);--%>
-<%--</script>--%>
-<script>
 
-    $('#submitCreateSubCategoryBtn').on('click', function () {
-        saveSubCategory();
-    })
+<%--<script src="<c:url value="/resources/js/checkKeybord.js" />"></script>--%>
+<%--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>--%>
+<%--<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>--%>
+<%--<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>--%>
 
 
 
-<%--$('#addSubCatSubmit-Btn').on('click', function () {--%>
-<%--saveSubCategory();--%>
-<%--})--%>
-<%--function saveSubCategory() {--%>
-
-<%--var subCatName = $('#subCategoryName-forAddSubCat').val();--%>
-<%--var catName = $('#categoryName-forAddSubCat').val();--%>
-
-<%--alert('CategoryName : ' + catName + ' - SubCategoryName : ' + subCatName);--%>
-
-<%--var dat = $.ajax({--%>
-<%--type: "POST",--%>
-<%--url: "addSubCategory",--%>
-<%--data: 'name=' + subCatName--%>
-<%--+ '&categoryName=' + catName,--%>
-<%--success: function () {--%>
-<%--alert('เพิ่มหัวข้อเรื่องสำเร็จ ' + catName + ' : ' + subCatName)--%>
-<%--},--%>
-<%--error: function () {--%>
-<%--alert('การเพิ่มหัวข้อเรื่องล้มเหลว');--%>
-<%--}--%>
-<%--}).responseText;--%>
-<%--}--%>
 
 
 
-</script>
-<%--<script>--%>
-    <%--$(document).ready(function() {--%>
-        <%--alert('hi');--%>
-        <%--$('#subcatform').validator({--%>
-            <%--framework: 'bootstrap',--%>
-            <%--excluded: ':disabled',--%>
-            <%--icon: {--%>
-                <%--valid: 'glyphicon glyphicon-ok',--%>
-                <%--invalid: 'glyphicon glyphicon-remove',--%>
-                <%--validating: 'glyphicon glyphicon-refresh'--%>
-            <%--},--%>
-            <%--fields: {--%>
-                <%--subcategoryNameadd: {--%>
-                    <%--validators: {--%>
-                        <%--notEmpty: {--%>
-                            <%--message: 'The username is required'--%>
-                        <%--}--%>
-                    <%--}--%>
-                <%--}--%>
-            <%--}--%>
-        <%--});--%>
-    <%--});--%>
-<%--</script>--%>
 
 
 
