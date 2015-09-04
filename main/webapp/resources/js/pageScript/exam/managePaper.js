@@ -1,6 +1,5 @@
 $("document").ready(function(){
     $("#selectionQuestionBtnInpagePaper").on("click", function(){
-        //alert("hi");
         viewQuestions();
     });
 });

@@ -14,7 +14,7 @@ var updateCategoryList = function () {
         success: function (catList) {
             catList.forEach(function (category) {
                 $('#selectCategoryInput-category').append('<option class="category" categoryId="'+category.id+'"' +
-                ' categoryName="'+category.name+'"> '+category.id+' : '+category.name+'')
+                ' categoryName="'+category.name+'"> '+category.name+'')
 
             })
         },

@@ -34,7 +34,7 @@ function viewCategory(){
 
 function deleteCategory(categoryId){
 
-    if(!confirm("แน่ใจนะว่าคุณจะลบรายวิชา "+$("#data"+categoryId).text())){
+    if(!confirm("ลบรายวิชา "+$("#data"+categoryId).text())){
         return false;
     }
     $.ajax({
@@ -84,17 +84,19 @@ function updateCategory(categoryId){
     else{
         var id = $("#editId"+categoryId).val();
         var name = $("#editData"+categoryId).val();
-
+        var oldId = $("#id"+categoryId).text();
+        var oldName = $("#data"+categoryId).text();
+        alert(id+" "+oldId+" "+name+" "+oldName);
         var dataResponse = $.ajax({
             type: "POST",
             url: "/TDCS/exam/editCategory",
-            data: "id="+id+"&name="+name,
-            //data: {
-            //  //categoryId: id,
-            //  //categoryName: name
-            //  //oldId: oldId,
-            //  //oldName: oldName
-            //},
+            //data: "id="+id+"&name="+name,
+            data: {
+              categoryId: id,
+              categoryName: name,
+              oldId: oldId,
+              oldName: oldName
+            },
             complete: function (xhr) {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {

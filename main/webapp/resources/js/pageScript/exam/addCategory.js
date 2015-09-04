@@ -1,5 +1,5 @@
 function saveCategory(){
-    alert("hi");
+    //alert("hi");
 
     //$('#addCategoryForm').bootstrapValidator({
     //    container: '#messages',

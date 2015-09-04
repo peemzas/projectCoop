@@ -17,6 +17,7 @@ import com.springapp.mvc.util.HibernateUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -75,19 +76,19 @@ public class CategoryController {
 
     @RequestMapping(value = "/exam/editCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity editCategory(@Valid Category category, HttpServletRequest request){
-//    public ResponseEntity editCategory(@RequestParam(value = "categoryId") String id,
-//                                       @RequestParam(value = "categoryName") String name,
-////                                       @RequestParam(value = "oldId") String oldId,
-////                                       @RequestParam(value = "oldName") String oldName,
-//                                       HttpServletRequest request){
+//    public ResponseEntity editCategory(@Valid Category category, HttpServletRequest request){
+    public ResponseEntity editCategory(@RequestParam("categoryId") String id,
+                                       @RequestParam("categoryName") String name,
+                                       @RequestParam("oldId") String oldId,
+                                       @RequestParam("oldName") String oldName){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
 //        Category category = new Category();
-        User createBy = queryUserDomain.getCurrentUser(request);
-        category.setCreateBy(createBy);
-        queryCategoryDomain.editCategory(category);
+//        User createBy = queryUserDomain.getCurrentUser(request);
+//        category.setCreateBy(createBy);
+//        queryCategoryDomain.editCategory(category);
+        logger.info(id+"=============="+name+"=="+oldId+"=="+oldName);
 
         return new ResponseEntity(headers, HttpStatus.OK);
     }

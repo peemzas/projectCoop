@@ -209,5 +209,13 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
         return (List<SubCategory>)criteria.list();
     }
+
+//    public List<SubCategory> getSubCategoryByCategoryId(String catId){
+//
+//        Criteria criteria = getSession().createCriteria(SubCategory.class);
+//        criteria.add(Restrictions.eq("category", catId));
+//
+//        return criteria.list();
+//    }
 }
 

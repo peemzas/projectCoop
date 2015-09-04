@@ -9,6 +9,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Modal Search Advance -->
 
+<style>
+  #dataNotFound{
+    background-color: #b2e0ff;
+    height: 100px;
+    display: none;
+    top: 40px;
+    vertical-align: middle;
+    border-radius: 5px;
+  }
+  #dataNotFoundDesc{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+    color: #00647f;
+  }
+</style>
+
 <div id = "modalSearchByEmployeeName" class = "modal fade" role = "dialog">
   <div class = "modal-dialog">
     <div class = "modal-content">
@@ -24,7 +41,7 @@
                 <div class="col-md-offset-1 col-md-1" align="right"><h5>ชื่อ</h5></div>
                 <%--<label>ชื่อ</label>--%>
                 <div class="col-md-6">
-                  <input id="searchEmployeeNameText" class = "form-control" type = "text"/>
+                  <input id="searchEmployeeNameText" class = "form-control" type = "text" placeholder="ค้นหา..."/>
                 </div>
                 <div class="col-md-1">
                   <button id="searchBtnFromModalSearchEmployee" class = "btn btn-gray" type="submit">ค้นหา</button>
@@ -38,21 +55,24 @@
           <div class = "col-md-12" align = "center">
             <table class = "table table-bordered">
               <thead align = "center">
-              <tr>
-                <th>เลือก</th>
-                <th>รหัสพนักงาน</th>
-                <th>ชื่อพนักงาน</th>
-                <th>ตำแหน่ง</th>
-                <th>ทีม</th>
-              </tr>
+                <tr>
+                  <th><input id="selectAllEmployeeName" type="checkbox" style="display: none;"/> เลือก</th>
+                  <th>รหัสพนักงาน</th>
+                  <th>ชื่อพนักงาน</th>
+                  <th>ตำแหน่ง</th>
+                  <th>ทีม</th>
+                </tr>
               </thead>
               <tbody id="tbodySelectEmployeeName">
 
               </tbody>
             </table>
-
+            <div id="dataNotFound" width="100%">
+              <h3 id="dataNotFoundDesc">ไม่พบข้อมูล</h3>
+            </div>
           </div>
         </div>
+        <br/>
         <div class = "row">
           <div class = "col-md-12" align="right">
             <div class = "form-group">
@@ -66,7 +86,6 @@
   </div>
 </div>
 
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/selectEmployee.js" />"></script>
 <script>
 
   $('.modalSearchByEmployeeNameSubmitBtn').on('click',function(){
