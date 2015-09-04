@@ -58,8 +58,8 @@ public class Question implements Serializable,Cloneable {
     @ManyToMany(mappedBy = "questions" ,fetch = FetchType.LAZY)
     private Set<ExamPaper> examPapers = new HashSet<ExamPaper>();
 
-    @OneToMany(mappedBy = "question")
-    private Set<Choice> choices;
+//    @OneToMany(mappedBy = "question")
+//    private Set<Choice> choices;
 
 
     @Override
@@ -189,13 +189,13 @@ public class Question implements Serializable,Cloneable {
         this.examPapers = examPapers;
     }
 
-    public Set<Choice> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(Set<Choice> choices) {
-        this.choices = choices;
-    }
+//    public Set<Choice> getChoices() {
+//        return choices;
+//    }
+//
+//    public void setChoices(Set<Choice> choices) {
+//        this.choices = choices;
+//    }
 
 // Add By Wanchana
 //    @OneToMany(fetch = FetchType.EAGER)

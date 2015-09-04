@@ -22,9 +22,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-xs-1">
-                    <button class="btn btn-success createQuestionBtn"
-                            data-toggle = "modal" data-target = "#createQuest">&nbsp;+&nbsp;</button>
+                <div class="col-xs-1 ">
+                        <button class="btn btn-success btn-block createQuestionBtn form-control"
+                                data-toggle="modal" data-target="#createQuest" style="height: 35px;width: 50px;">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
                 </div>
             </div>
             <table class="table">

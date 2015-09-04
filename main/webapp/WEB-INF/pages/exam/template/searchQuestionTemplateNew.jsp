@@ -109,7 +109,7 @@
               </div>
               <div class="col-md-3">
                 <select id="searchStatusInput" class="form-control">
-                  <option selected value="none"></option>
+                  <option selected value=""></option>
                   <option>ถูกลบ --เท่านั้น</option>
                   <option>ถูกลบ --และยังไม่ถูกลบ</option>
                 </select>
