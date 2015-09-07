@@ -8,48 +8,27 @@ $(document).ready(function(){
         success: function(data){
             data.forEach(function(value){
                 $("#selectCategoryToSelection").append(
-                    //                  '<option>'+value.id+'</option>'
                     '<option value="'+value.id+'">'+value.id+ " : "+value.name+'</option>'
                 )
             });
         }
     });
     $("#selectCategoryToSelection").on('change', function(){
-       //alert(this.value);
+        $("#selectSubCategoryToSelection").empty();
         searchSubCategory = this.value;
-        alert(searchSubCategory);
         var subCategory = $.ajax({
             type: "POST",
             contentType: "application/json",
             url: "/TDCS/exam/getSubCategoryByCategoryId",
-            async: true,
             data: searchSubCategory,
+            async: false,
             success: function(data){
                 data.forEach(function(val){
                     $("#selectSubCategoryToSelection").append(
-                        '<option value="'+val.subName+'">'+val.subName+'</option>'
+                        '<option value="'+val.id+'">'+val.name+'</option>'
                     )
                 });
             }
         });
     });
-    //subCategoryDropDown(catId);
 });
-
-//function subCategoryDropDown(catId){
-//    var subCategory = $.ajax({
-//        type: "POST",
-//        contentType: "application/json",
-//        url: "/TDCS/exam/getAllSubCategory",
-//        data :{
-//            categoryId: catId
-//        },
-//        success: function(data){
-//            data.forEach(function(val){
-//                $("#selectSubCategoryToSelection").append(
-//                    '<option value="'+val.subName+'">'+val.subName+'</option>'
-//                )
-//            });
-//        }
-//    });
-//}

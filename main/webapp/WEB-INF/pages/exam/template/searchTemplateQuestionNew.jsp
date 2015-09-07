@@ -9,34 +9,48 @@
 
 <div class = "container">
   <div class = "row">
-      <div class = "panel-collapse" id = "searchCollapse">
+    <div class = "panel-collapse" id = "searchCollapse">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h4>ค้นหา...</h4>
         </div>
         <div class="panel-body">
           <div class = "row">
-            <%@include file="selectCategoryInput.jsp" %>
+            <div class = "col-md-2 text-right">
+              <label>หมวดหมู่หลัก</label>
+            </div>
+            <div class = "col-md-3">
+              <input class = "form-control" type = "text"/>
+            </div>
+            <div class = "col-md-2 text-right">
+              <label>หมวดหมู่หลัก</label>
+            </div>
+            <div class = "col-md-3">
+              <input class = "form-control" type = "text"/>
+            </div>
           </div>
-          <div style="margin-bottom: 5px"></div>
-
-          <div class = "row">
-            <%@include file="selectCreateByInput.jsp" %>
-          </div>
-
-          <%--Add By Mr.Wanchana--%>
           <br/>
-          <div class="row">
-            <div class="col-sm-8 col-md-offset-2">
-              <div id="showEmployeeSelected" width="100%;">
-
+          <div class = "row">
+            <div class = "col-md-2 text-right">
+              <label>ผู้สร้าง</label>
+            </div>
+            <div class = "col-md-3">
+              <div class = "input-group">
+                <input class = "form-control" type = "text"/>
+                <div class = "input-group-btn">
+                  <button class = "btn btn-primary" type = "button">+</button>
+                </div>
               </div>
             </div>
           </div>
           <hr/>
+          <%--<div class="row">--%>
+            <%--<div id="btnSearch" class="col-md-4 col-md-offset-7" align="center">--%>
+            <%--</div>--%>
+          <%--</div>--%>
           <div class = "row" id = "btnSearch">
             <div class = "col-md-12 text-center">
-              <button id="generalSearchButtonInModalSelectionQuestion" onclick="generalSearchQuestion()" class = "btn btn-default" type = "button">ค้นหา</button>
+              <button class = "btn btn-default" type = "button">ค้นหา</button>
               <button class = "btn btn-default" type = "button">ล้างข้อมูล</button>
             </div>
           </div>
@@ -54,7 +68,7 @@
                 <label>หมายเลขข้อสอบ</label>
               </div>
               <div class = "col-md-3">
-                <input id="searchQuestionIdInput" class = "form-control" type = "text"/>
+                <input class = "form-control" type = "text"/>
               </div>
             </div>
             <br/>
@@ -63,7 +77,7 @@
                 <label>คำถาม</label>
               </div>
               <div class="col-md-8">
-                <input id="searchQuestionDescInput" type="text" class="form-control"/>
+                <input type="text" class="form-control"/>
               </div>
             </div>
             <br/>
@@ -73,7 +87,7 @@
               </div>
               <div class="col-md-3">
                 <div class="input-group">
-                  <input id="searchCreateDateFromInput" type="text" class="form-control datepicker"/>
+                  <input type="text" class="form-control datepicker"/>
                   <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                 </div>
               </div>
@@ -82,7 +96,7 @@
               </div>
               <div class="col-md-3">
                 <div class="input-group">
-                  <input id="searchCreateDateToInput" type="text" class="form-control datepicker"/>
+                  <input type="text" class="form-control datepicker"/>
                   <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                 </div>
               </div>
@@ -93,13 +107,13 @@
                 <h5>คะแนน : </h5>
               </div>
               <div class="col-md-3">
-                <input id="searchScoreFromInput" type="text" class="form-control"/>
+                <input type="text" class="form-control"/>
               </div>
               <div class="col-md-2" align="right">
                 <h5>ถึง : </h5>
               </div>
               <div class="col-md-3">
-                <input id="searchScoreToInput" type="text" class="form-control"/>
+                <input type="text" class="form-control"/>
               </div>
             </div>
             <br/>
@@ -108,10 +122,10 @@
                 <h5>สถานะ : </h5>
               </div>
               <div class="col-md-3">
-                <select id="searchStatusInput" class="form-control">
+                <select class="form-control">
                   <option selected value="none"></option>
-                  <option>ถูกลบ --เท่านั้น</option>
-                  <option>ถูกลบ --และยังไม่ถูกลบ</option>
+                  <option>ตรวจแล้ว</option>
+                  <option>ยังไม่ตรวจ</option>
                 </select>
               </div>
             </div>
@@ -119,8 +133,8 @@
             <hr/>
             <div class = "row" id = "btnAdvanceSearch">
               <div class = "col-md-12 text-center">
-                <button class = "btn btn-default searchInputSubmitBtn" type = "button">ค้นหา</button>
-                <button class = "btn btn-default searchInputClearBtn" type = "button">ล้างข้อมูล</button>
+                <button class = "btn btn-default" type = "button">ค้นหา</button>
+                <button class = "btn btn-default" type = "button">ล้างข้อมูล</button>
               </div>
             </div>
           </div>
@@ -130,20 +144,43 @@
   </div>
 </div>
 
-<script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
 <script>
   $(document).ready(function(){
-    $("#selectAllEmployeeName").click(function(event){
-      if(this.checked){
-        $(".userSelectCheckbox").each(function(){
-          this.checked = true;
-        });
+    $("#advanceBtn").click(function(){
+      var str = $("#search").prop('outerHTML') + "&nbsp" + $("#clear").prop('outerHTML');
+      $("#advanceBody").collapse('toggle');
+
+//      if ($("#advanceBtn").hasClass("btn btn-primary")) {
+//        $("#advanceBtn").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
+//        $("#btnAdvanceSearch").html(str);
+//
+//        $("#btnSearch").hide();
+//        $("#btnAdvanceSearch").show();
+////        $("#clear").hide();
+//      } else {
+//        $("#advanceBtn").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
+////        $("#search").show();
+////        $("#clear").show();
+//        $("#btnSearch").show();
+//        $("#btnAdvanceSearch").hide();
+//      }
+      if($("#advanceBtn").children("span").hasClass("glyphicon glyphicon-chevron-down")){
+        $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
+//        $("btnAdvanceSearch").html(str);
+        $("#btnSearch").hide();
+        $("#btnAdvanceSearch").show();
+//        $("#search").hide();
+//        $("#clear").hide();
       }
       else{
-        $(".userSelectCheckbox").each(function(){
-          this.checked = false;
-        });
+        $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-up").addClass("glyphicon glyphicon-chevron-down");
+
+        $("#btnSearch").show();
+        $("#btnAdvanceSearch").hide();
+//        $("#search").show();
+//        $("#clear").show();
       }
-    })
+    });
+    $(".datepicker").datepicker();
   });
 </script>

@@ -13,7 +13,7 @@
     <div class="input-group">
         <input id="selectCreateBySearchInput" type="text" class="form-control" />
         <div class="input-group-btn">
-            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary " id="addEmpCreateByBtn"> 45
+            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary " id="addEmpCreateByBtn"> เพิ่ม
             </button>
         </div>
     </div>

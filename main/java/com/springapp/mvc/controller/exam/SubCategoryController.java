@@ -210,14 +210,12 @@ public class SubCategoryController {
 
     @RequestMapping(value = "/exam/getSubCategoryByCategoryId", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> getSubCategoryByCategoryId(String searchSubCategory) {
+    public ResponseEntity<String> getSubCategoryByCategoryId(@RequestBody String searchSubCategory) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-        Category category = new Category();
-        category.setId(searchSubCategory);
-        logger.info("============================================="+category.getId());
+        Category category = queryCategoryDomain.getCategoryById(searchSubCategory);
         List<SubCategory> subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
         String json = new Gson().toJson(subcategories);
 
