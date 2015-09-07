@@ -3,6 +3,10 @@ $(document).ready(function(){
 });
 function generalSearchQuestion(){
     var i;
+    var categoryId = $("#selectCategoryToSelection").val();
+    var subcategoryId = $("#selectSubCategoryToSelection").val();
+    var empName = $("#selectCreateBySearchInput").val();
+    alert(categoryId + " " + subcategoryId);
     var arrayEmpNameToQuery = new Array();
     var itemLenght = ($("#showEmployeeSelected").children("button")).length;
     for(i = 0; i < itemLenght; i++){
@@ -17,13 +21,17 @@ function generalSearchQuestion(){
     var tempArray = new Array();
     for(var idx = 0; idx < arrayEmpNameToQuery.length; idx ++){
         var item = {
-          "thFname" : arrayEmpNameToQuery[idx]
+          "thFname" : arrayEmpNameToQuery[idx],
+          "categoryId" : categoryId,
+          "subCategoryId" : subcategoryId,
+          "empName" : empName
         };
         tempArray.push(item);
     }
     jsonObj = JSON.stringify(tempArray);
     //alert(jQuery.type(arrayEmpNameToQuery));
-    alert(jsonObj + jQuery.type(jsonObj));
+    //alert(jsonObj + jQuery.type(jsonObj));
+    alert(jsonObj);
 
     var dataResponse = $.ajax({
         type: "POST",
@@ -36,7 +44,7 @@ function generalSearchQuestion(){
             //alert('Hi');
         },
         error: function(){
-            alert('error');
+            alert('เกิดข้อผิดพลาด');
         }
     });
 }

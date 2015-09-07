@@ -322,7 +322,6 @@ public class QuestionController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
         List empNameSearch = new ArrayList();
-        logger.info("I'm Hereeeeeeeeeeeeeeeeeeeeeeeeeeee " + (jsoN));
         JSONArray jsonArray = new JSONArray(jsoN);
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);

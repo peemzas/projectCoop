@@ -17,15 +17,15 @@ function viewQuestions(){
                     '<tr>'+
                         '<td><input type="checkbox"/></td>'+
                         //'<td>'+value.id+'</td>'+
-                        '<td><label id="labelCategoryName'+value.id+'">'+value.categoryName+'<label></td>'+
-                        '<td><label id="labelSubCategoryName'+value.id+'">'+value.subCategoryName+'</td>'+
+                        '<td><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
+                        '<td><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</td>'+
                         '<td style="text-align: left;"><label id="labelQestionDesc'+value.id+'">'+value.description+'</td>'+
-                        '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionTypeDesc+'</td>'+
-                        '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyDesc+'</td>'+
+                        '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
+                        '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
                         '<td><label id="labelScore'+value.id+'">'+value.score+'</td>'+
 
                         '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
-                        '<td style="display: none;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createByEmpId+'</td>'+
+                        '<td style="display: none;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
 
                         '<td style="text-align: center"><button id="btnQuestionInfo'+value.id+'" data-toggle="modal" data-target="#showQuestionInfoModal" class="btn btn-info" type="button" onclick="showInfo('+value.id+')"><span class="glyphicon glyphicon-book"></span></button></td>'+

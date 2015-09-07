@@ -28,9 +28,7 @@
     <%--<select type="text" class="form-control" id="selectCategoryInput-subCategory">--%>
         <%--<option selected disabled>sdsdsds</option>--%>
     <%--</select>--%>
-    <select type="text" class="selectpicker" id="selectSubCategoryToSelection">
+    <select type="text" class="form-control" id="selectSubCategoryToSelection">
         <option value="" disabled selected>เลือกหัวข้อ</option>
     </select>
 </div>
-
-<%--<script src="../../../resources/js/pageScript/exam/selectCategoryInput.js" charset="UTF-8"></script>--%>

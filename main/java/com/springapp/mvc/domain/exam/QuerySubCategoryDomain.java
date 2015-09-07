@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by Phuthikorn_T on 8/7/2015.
@@ -20,6 +21,7 @@ import java.util.Map;
 @Service
 public class QuerySubCategoryDomain extends HibernateUtil {
 
+    private static final Logger logger = Logger.getLogger(QuerySubCategoryDomain.class.getName());
 
     public void insertSubCategory(SubCategory subCategory) {
 
@@ -210,12 +212,13 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         return (List<SubCategory>)criteria.list();
     }
 
-//    public List<SubCategory> getSubCategoryByCategoryId(String catId){
-//
-//        Criteria criteria = getSession().createCriteria(SubCategory.class);
-//        criteria.add(Restrictions.eq("category", catId));
-//
-//        return criteria.list();
-//    }
+    public List<SubCategory> getSubCategoryByCategoryId(Category category){
+
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
+        criteria.add(Restrictions.eq("category", category));
+        List<SubCategory> subCategories = criteria.list();
+        logger.info("================================================" + subCategories);
+        return subCategories;
+    }
 }
 
