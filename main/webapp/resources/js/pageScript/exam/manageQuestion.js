@@ -7,7 +7,6 @@
 
 $(document).ready(function () {
     listAllQuestion();
-    alert("HI")
 })
 
 var generateEventHandler = function () {
@@ -35,10 +34,6 @@ var generateEventHandler = function () {
         }
     })
 }
-
-
-
-
 
 var questionObj;
 var setQuestionObj = function (tr) {
@@ -112,15 +107,15 @@ var setEditModalParameter = function () {
             questionId: tr.attr('questionId')
         },
         success: function (question) {
+            createQuestionModalClearInput();
+            setCreateModalCategory(question.subCategory.category.name);
+            setCreateModalSubCategory(question.subCategory.name);
+            setCreateModalQuestionType(question.questionType.description);
+            setCreateModalDufficulty(question.difficultyLevel.level);
+            setCreateModalScore(question.score);
+            setCreateModalQuestionDesc(question.description);
 
-            setCreateModalCategory(question.subCategory.category.name)
-            setCreateModalSubCategory(question.subCategory.name)
-            setCreateModalQuestionType(question.questionType.description)
-            setCreateModalDufficulty(question.difficultyLevel.level)
-            setCreateModalScore(question.score)
-            setCreateModalQuestionDesc(question.description)
-
-            updateCreateModalLayout()
+            updateCreateModalLayout();
         },
         error: function () {
             console.log("fail in ajaxDat1");

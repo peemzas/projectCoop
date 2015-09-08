@@ -1,5 +1,8 @@
 package com.springapp.mvc.domain.exam;
 
+import com.springapp.mvc.domain.QueryUserDomain;
+import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 import com.springapp.mvc.pojo.User;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -31,6 +36,10 @@ public class QueryQuestionDomain extends HibernateUtil {
     QuerySubCategoryDomain querySubCategoryDomain;
     @Autowired
     QueryStatusDomain queryStatusDomain;
+    @Autowired
+    QueryCategoryDomain queryCategoryDomain;
+    @Autowired
+    QueryUserDomain queryUserDomain;
 
 
     
@@ -121,7 +130,7 @@ public class QueryQuestionDomain extends HibernateUtil {
 
     public Question getQuestionById(Integer id){
         Criteria criteria = getSession().createCriteria(Question.class);
-        criteria.add(Restrictions.eq("id",id));
+        criteria.add(Restrictions.eq("id", id));
         return (Question)criteria.list().get(0);
     }
 
@@ -132,16 +141,60 @@ public class QueryQuestionDomain extends HibernateUtil {
         commitTransaction();
     }
 
-    public List<Question> searchQuestionQuery(Integer categoryId, Integer subCategoryId,
-                                              String createByUsername, Integer questionId,
-                                              String questionDesc, Date createDateFrom,
-                                              Date createDateTo, Float scoreFrom,
-                                              Float scoreTo, Integer statusId){
+    public List<Question> searchQuestionQuery(String categoryId, String subCategoryName,
+                                              String createById, String questionId,
+                                              String questionDesc, String createDateFrom,
+                                              String createDateTo, String scoreFrom,
+                                              String scoreTo, String statusId){
 
-        Criteria criteria = getSession().createCriteria(Question.class);
+        Criteria criteria = getSession().createCriteria(Question.class, "q");
+        criteria.createAlias("q.subCategory","subCategory");
+        criteria.createAlias("q.createBy","createBy");
+        if (categoryId != null){
+            Category category = queryCategoryDomain.getCategoryById(categoryId);
+            criteria.add(Restrictions.eq("subCategory.category",category));
+            if (subCategoryName != null){
+                criteria.add(Restrictions.eq("subCategory",querySubCategoryDomain.getSubCategoryByNameAndCategory(subCategoryName,category)));
+            }
+        }
+        if (createById != null){
+            User user = queryUserDomain.getUserById(Integer.parseInt(createById));
+            criteria.add(Restrictions.eq("q.createBy",user));
+        }
+        if (questionId != null){
+            criteria.add(Restrictions.eq("q.id", questionId));
+        }
+        if (questionDesc != null){
+            criteria.add(Restrictions.like("q.description", "%" + questionDesc + "%"));
+        }
+        DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
 
-
-
+        if (createDateFrom != null) {
+            Date dateFrom = null;
+            try {
+                dateFrom = format.parse(createDateFrom);
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println(e);
+            }
+            criteria.add(Restrictions.ge("q.createDate",dateFrom));
+        }
+        if (createDateTo != null) {
+            Date dateTo = null;
+            try {
+                dateTo = format.parse(createDateTo);
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println(e);
+            }
+            criteria.add(Restrictions.le("q.createDate", dateTo));
+        }
+        if (scoreFrom != null){
+            criteria.add(Restrictions.ge("q.score", Float.parseFloat(scoreFrom)));
+        }
+        if (scoreTo != null){
+            criteria.add(Restrictions.le("q.score",Float.parseFloat(scoreTo)));
+        }
 
         return criteria.list();
     }

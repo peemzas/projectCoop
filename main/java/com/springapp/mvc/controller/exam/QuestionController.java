@@ -22,8 +22,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import sun.org.mozilla.javascript.internal.json.JsonParser;
 
-import javax.json.Json;
-import javax.json.stream.JsonParserFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
@@ -242,47 +240,6 @@ public class QuestionController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
-    @ResponseBody
-    public ResponseEntity<String> searchQuestion(ModelMap modelMap
-            , @RequestParam(value = "category", required = false) Integer categoryId
-            , @RequestParam(value = "sucCategory", required = false) Integer subCategoryId
-            , @RequestParam(value = "createBy", required = false) String createBy
-            , @RequestParam(value = "questionId", required = false) Integer questionId
-            , @RequestParam(value = "questionDesc", required = false) String questionDesc
-            , @RequestParam(value = "createDateFrom", required = false) Date createDateFrom
-            , @RequestParam(value = "createDateTo", required = false) Date createDateTo
-            , @RequestParam(value = "scoreFrom", required = false) Float scoreFrom
-            , @RequestParam(value = "scoreTo", required = false) Float scoreTo
-            , @RequestParam(value = "status", required = false) Integer statusId
-            , HttpServletRequest request, HttpServletResponse response
-    ) {
-        System.out.println("==============================================================");
-        System.out.println(categoryId);
-        System.out.println(subCategoryId);
-        System.out.println(createBy);
-        System.out.println(questionId);
-        System.out.println(questionDesc);
-        System.out.println(createDateFrom);
-        System.out.println(createDateTo);
-        System.out.println(scoreFrom);
-        System.out.println(scoreTo);
-        System.out.println(statusId);
-        System.out.println("==============================================================");
-
-
-        List<Question> questions = queryQuestionDomain.searchQuestionQuery(categoryId, subCategoryId
-                , createBy, questionId, questionDesc, createDateFrom, createDateTo, scoreFrom, scoreTo, statusId);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;charset=UTF-8");
-        String json = new Gson().toJson(questions);
-
-        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
-
-    }
-
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getQuestionDetail")
     @ResponseBody
     public ResponseEntity<String> getQuestionDetail(ModelMap modelMap,
@@ -314,6 +271,7 @@ public class QuestionController {
     }
 
 
+
 //    Add By Mr.Wanchana
     @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
     @ResponseBody
@@ -336,6 +294,7 @@ public class QuestionController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestionDetail")
     @ResponseBody
     public ResponseEntity<String> getAllQuestionDetail(){
@@ -347,6 +306,48 @@ public class QuestionController {
         String json = new Gson().toJson(questions);
         logger.info(questions.toString());
 
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
+    @ResponseBody
+    public ResponseEntity<String> searchQuestion(
+            @RequestParam(value = "categoryId", required = false) String catId,
+            @RequestParam(value = "subCatName", required = false) String subCatName,
+            @RequestParam(value = "createBy", required = false) String createBy,
+            @RequestParam(value = "questionId", required = false) String questionId,
+            @RequestParam(value = "questionDesc", required = false) String questionDesc,
+            @RequestParam(value = "createDateFrom", required = false) String createDateFrom,
+            @RequestParam(value = "createDateTo", required = false) String createDateTo,
+            @RequestParam(value = "scoreFrom", required = false) String scoreFrom,
+            @RequestParam(value = "scoreTo", required = false) String scoreTo,
+            @RequestParam(value = "status", required = false) String status,
+            HttpServletRequest request,HttpServletResponse response
+    ){
+
+        System.out.println("==============================================================");
+        System.out.println(catId);
+        System.out.println(subCatName);
+        System.out.println(createBy);
+        System.out.println(questionId);
+        System.out.println(questionDesc);
+        System.out.println(createDateFrom);
+        System.out.println(createDateTo);
+        System.out.println(scoreFrom);
+        System.out.println(scoreTo);
+        System.out.println(status);
+        System.out.println("==============================================================");
+
+        List<Question> questions = queryQuestionDomain.searchQuestionQuery(
+                catId, subCatName, createBy, questionId,
+                questionDesc, createDateFrom, createDateTo,
+                scoreFrom, scoreTo, status
+        );
+
+        String json = new Gson().toJson(questions);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 

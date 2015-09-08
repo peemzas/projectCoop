@@ -1,9 +1,9 @@
-var getSearchCategoryInput = function () {
-    return $('#selectCategoryInput-category').val();
+var getSearchCategoryInputValue = function () {
+    return $('#selectCategoryInput-category').children('.category:selected').attr('categoryId');
 }
 
-var getSearchSubCategoryInput = function () {
-    return $('#selectCategoryInput-subCategory').val();
+var getSearchSubCategoryInputValue = function () {
+    return $('#selectCategoryInput-subCategory').children('.category:selected').attr('categoryId');
 }
 
 var updateCategoryList = function () {
@@ -25,16 +25,21 @@ var updateCategoryList = function () {
 }
 
 var updateSubCategoryList = function(){
+    var subcatSelect = $('selectCategoryInput-subCategory');
+    subcatSelect.empty();
+    subcatSelect.append("<option selected disabled></option>");
+    console.log($('#selectCategoryInput-category').children('.category:selected').attr('categoryId'));
+
     var ajaxDat = $.ajax({
         type: "POST",
         url: "/TDCS/exam/getAllSubCategoryInCategory",
         date:{
-            categoryId: $('#selectCategoryInput-category').children('.category:selected').attr('categoryId')
+            categoryId: $('#selectCategoryInput-category').children('.category:selected').attr('categoryId').toString()
         },
         success: function (item) {
             alert("success")
             item.forEach(function (item) {
-                $('#selectCategoryInput-subCategory').append('<option class="subCategory" subCategoryId="'+item.subId+'"' +
+                subcatSelect.append('<option class="subCategory" subCategoryId="'+item.subId+'"' +
                 ' subCategoryName="'+item.subName+'" categoryId="'+item.id+'"' +
                 'value = "'+item.subId+'"> '+item.subName+'')
             })
@@ -44,8 +49,13 @@ var updateSubCategoryList = function(){
         }
     })
 }
+var clearCategoryList = function(){
+    $('selectCategoryInput-category').empty();
+    $('selectCategoryInput-category').append("<option selected disabled></option>");
+}
 
 $(document).ready(function(){
+    clearCategoryList()
     updateCategoryList()
 
     $('#selectCategoryInput-category').on('change',function(){

@@ -47,8 +47,8 @@ $(document).ready(function(){
 
 var submitSearchQuestion = function(){
     var SI = { // SearchInput
-        category:getSearchCategoryInput(),
-        subCategory:getSearchSubCategoryInput(),
+        category:getSearchCategoryInputValue(),
+        subCategory:getSearchSubCategoryInputValue(),
         createBy:getSearchCreateByInput(),
         questionId:$('#searchQuestionIdInput').val(),
         questionDesc:$("#searchQuestionDescInput").val(),
@@ -62,7 +62,22 @@ var submitSearchQuestion = function(){
         type: "POST",
         url: "/TDCS/exam/",
         data: {
-
+            categoryId:SI.category,
+            subCatName:SI.subCategory,
+            createBy:SI.createBy,
+            questionId:SI.questionId,
+            questionDesc:SI.questionDesc,
+            createDateFrom:SI.createDateFrom,
+            createDateTo:SI.createDateTo,
+            scoreFrom:SI.scoreFrom,
+            scoreTo:SI.scoreTo,
+            status:SI.status
+        },
+        success: function(){
+            alert("SUCCESS");
+        },
+        error: function(){
+            alert("ERROR")
         }
     })
 

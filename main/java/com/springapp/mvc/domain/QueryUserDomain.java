@@ -106,7 +106,7 @@ public class QueryUserDomain extends HibernateUtil {
         return list;
     }
 
-    public List insertUser(User user, String piority, String usernameInsert , boolean isPM) {
+    public List insertUser(User user, String piority, String usernameInsert, boolean isPM) {
 //        user.setId(1);
         Integer countPiority = 0;
         StringBuffer newPiority = new StringBuffer();
@@ -124,13 +124,13 @@ public class QueryUserDomain extends HibernateUtil {
         user.setUserCreate(usernameInsert);
         user.setDateCreate(dateStr);
 
-        if(isPM){
+        if (isPM) {
             countPiority = 0;
-        }else{
-            countPiority = findPiority(piority,user.getStatus());
+        } else {
+            countPiority = findPiority(piority, user.getStatus());
         }
 
-        if(countPiority > 0) {
+        if (countPiority > 0) {
 
             if (countPiority < 10) {
                 newPiority.append("00" + countPiority);
@@ -165,16 +165,16 @@ public class QueryUserDomain extends HibernateUtil {
         List<User> list = (List<User>) criteria.list();
         sizePioruty = list.size();
 
-        if((list.size()>0 && status == 3) || (status == 2 && list.size() >0)){
-            piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-3)+"");
-            piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-2)+"");
-            piorityBuffer.append(list.get(list.size()-1).getPiority().charAt(list.get(list.size()-1).getPiority().length()-1)+"");
-            sizePioruty = Integer.parseInt(piorityBuffer.toString())+1;
+        if ((list.size() > 0 && status == 3) || (status == 2 && list.size() > 0)) {
+            piorityBuffer.append(list.get(list.size() - 1).getPiority().charAt(list.get(list.size() - 1).getPiority().length() - 3) + "");
+            piorityBuffer.append(list.get(list.size() - 1).getPiority().charAt(list.get(list.size() - 1).getPiority().length() - 2) + "");
+            piorityBuffer.append(list.get(list.size() - 1).getPiority().charAt(list.get(list.size() - 1).getPiority().length() - 1) + "");
+            sizePioruty = Integer.parseInt(piorityBuffer.toString()) + 1;
         }
-        if(list.size() <= 0 && status == 2){
+        if (list.size() <= 0 && status == 2) {
             sizePioruty++;
         }
-        if(list.size() <= 0 && status == 3){
+        if (list.size() <= 0 && status == 3) {
 
             sizePioruty++;
         }
@@ -421,22 +421,27 @@ public class QueryUserDomain extends HibernateUtil {
         criteria.add(Restrictions.eq("userName", username));
         criteria.add(Restrictions.eq("userId", id));
         List<User> list = criteria.list();
-        return list.get(0);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }else return null;
     }
 
-    public User getCurrentUser(HttpServletRequest request){
+    public User getCurrentUser(HttpServletRequest request) {
 
-        User currentUser = getUserByUsernameAndId(request.getSession().getAttribute("username").toString()
-                ,Integer.parseInt(request.getSession().getAttribute("userid").toString()));
+//        User currentUser = getUserByUsernameAndId(request.getSession().getAttribute("username").toString()
+//                , Integer.parseInt(request.getSession().getAttribute("userid").toString()));
+        User currentUser = getUserById(Integer.parseInt(request.getSession().getAttribute("userid").toString()));
 
         return currentUser;
     }
 
-    public String getUsernameByUserId(Integer userId) {
+    public User getUserById(Integer userId) {
         Criteria criteria = getSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("userId", userId));
         List<User> list = criteria.list();
         closeSession();
-        return list.get(0).getUserName();
+        if (!list.isEmpty()) {
+            return list.get(0);
+        } else return null;
     }
 }

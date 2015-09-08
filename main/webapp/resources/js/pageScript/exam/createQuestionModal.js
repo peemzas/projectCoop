@@ -5,12 +5,14 @@
 $(".choiceRadioAddon").on('click', function () {
     $(this).children().prop("checked", true);
     //$('.correctRadio:checked').hasClass();
-    $('.correctRadio:not(:checked)').parent().removeClass('success');
-    $('.correctRadio:not(:checked)').show();
-    $('.correctRadio:not(:checked)').parent().children('div').hide();
-    $('.correctRadio:checked').parent().addClass('success');
-    $('.correctRadio:checked').parent().children('div').show();
-    $('.correctRadio:checked').hide();
+    var correctRadioNotChecked = $('.correctRadio:not(:checked)')
+    correctRadioNotChecked.parent().removeClass('success');
+    correctRadioNotChecked.show();
+    correctRadioNotChecked.parent().children('div').hide();
+    var correctRadioChecked = $('.correctRadio:checked')
+    correctRadioChecked.parent().addClass('success');
+    correctRadioChecked.parent().children('div').show();
+    correctRadioChecked.hide();
 })
 
 $('#select-QuestionType').on('change', function () {
