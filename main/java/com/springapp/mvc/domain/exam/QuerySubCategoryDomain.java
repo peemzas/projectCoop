@@ -5,6 +5,7 @@ import com.springapp.mvc.pojo.exam.SubCategory;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +104,6 @@ public class QuerySubCategoryDomain extends HibernateUtil {
     }
 
     public void editSubCategory(SubCategory subCategory) {
-
         HibernateUtil.beginTransaction();
         getSession().merge(subCategory);
         getSession().flush();
@@ -181,7 +181,6 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 //        }
 
             public List<SubCategory> searchSubCategory(String subcategoryName, String categoryId, String categoryName) {
-
                 Criteria criteria = getSession().createCriteria(SubCategory.class,"SubCategory");
 
                 criteria.createAlias("SubCategory.category", "category");
@@ -209,13 +208,9 @@ public class QuerySubCategoryDomain extends HibernateUtil {
                     criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
                 }
 
-
-
-
-
                 criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
                 List<SubCategory> subCategories = criteria.list();
-
+                closeSession();
                 return subCategories;
             }
 
