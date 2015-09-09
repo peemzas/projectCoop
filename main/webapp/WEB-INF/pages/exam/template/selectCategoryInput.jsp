@@ -17,8 +17,8 @@
         <%--<option selected disabled></option>--%>
     <%--</select>--%>
     <%--Add By Wanchana.K--%>
-    <select type="text" class="selectpicker" id="selectCategoryToSelection">
-        <option value="" disabled selected>เลือกรายวิชา</option>
+    <select type="text" class="form-control" id="selectCategoryToSelection">
+        <option value="" selected></option>
     </select>
 </div>
 <div class="col-md-2" align="right">
@@ -29,6 +29,7 @@
         <%--<option selected disabled>sdsdsds</option>--%>
     <%--</select>--%>
     <select type="text" class="form-control" id="selectSubCategoryToSelection">
-        <option value="" disabled selected>เลือกหัวข้อ</option>
+        <option value="" disabled selected></option>
     </select>
 </div>
+<script src="../../../resources/js/pageScript/exam/selectCategoryInput.js"></script>

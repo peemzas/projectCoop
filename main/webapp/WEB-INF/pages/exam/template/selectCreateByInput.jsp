@@ -19,11 +19,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/selectEmployee.js" />"></script>
-<script src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
-<script>
-    $("#addEmpCreateByBtn").on('click', function(){
-        searchEmpName();
-    });
-</script>
+<script src="../../../resources/js/pageScript/exam/selectEmployee.js" ></script>
+<script src="../../../resources/js/pageScript/exam/searchQuestion.js" ></script>
+<script src="../../../resources/js/pageScript/exam/selectCreateByInput.js"></script>
 <%@include file="../modal/addEmployeeToInputModal.jsp" %>

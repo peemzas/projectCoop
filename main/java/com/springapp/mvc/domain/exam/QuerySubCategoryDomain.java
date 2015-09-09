@@ -191,9 +191,9 @@ public class QuerySubCategoryDomain extends HibernateUtil {
                 criteria.addOrder(Order.asc("category.id"));
 
 
-                criteria.add(Restrictions.like("name","%" + subcategoryName + "%").ignoreCase());
-                criteria.add(Restrictions.like("category.id","%" + categoryId + "%").ignoreCase());
-                criteria.add(Restrictions.like("category.name","%" + categoryName + "%").ignoreCase());
+                criteria.add(Restrictions.like("name", "%" + subcategoryName + "%").ignoreCase());
+                criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+                criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
 
 
 
@@ -209,6 +209,11 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         criteria.add(Restrictions.eq("category",category));
 
+        return (List<SubCategory>)criteria.list();
+    }
+
+    public List<SubCategory> getAllSubCategory(){
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
         return (List<SubCategory>)criteria.list();
     }
 
