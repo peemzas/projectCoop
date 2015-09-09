@@ -248,24 +248,24 @@ public class QueryQuestionDomain extends HibernateUtil {
         return userIds;
     }
 
-    public List<Question> generalSearchQuestion(List<User> empIds, String catId, String subId, String empName){
-
-//        String queryStatement = "select id, description, score from Question where createBy.userId in(:empId)";
-//        Query query = getSession().createQuery(queryStatement);
-//        query.setParameterList("empId" ,empId);
-//        List<Question> questions = query.list();
-//        logger.info(">" +questions.toString());
+//    public List<Question> generalSearchQuestion(List<User> empIds, String catId, String subId, String empName){
 //
-//        return questions;
-        if((empIds != null) && (catId != "") && (subId != null) && (empName != null)){
-            String queryStatement = "select id, description, score from Question where createBy.userId in(:empIds)" +
-                                    "and category.id =: catId";
-            Query query = getSession().createQuery(queryStatement);
-            query.setParameterList("empIds" ,empIds);
-            List<Question> questions = query.list();
-            logger.info(">" +questions.toString());
-
-            return questions;
-        }
-    }
+////        String queryStatement = "select id, description, score from Question where createBy.userId in(:empId)";
+////        Query query = getSession().createQuery(queryStatement);
+////        query.setParameterList("empId" ,empId);
+////        List<Question> questions = query.list();
+////        logger.info(">" +questions.toString());
+////
+////        return questions;
+//        if((empIds != null) && (catId != "") && (subId != null) && (empName != null)){
+//            String queryStatement = "select id, description, score from Question where createBy.userId in(:empIds)" +
+//                                    "and category.id =: catId";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameterList("empIds" ,empIds);
+//            List<Question> questions = query.list();
+//            logger.info(">" +questions.toString());
+//
+//            return questions;
+//        }
+//    }
 }
