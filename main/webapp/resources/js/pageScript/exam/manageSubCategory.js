@@ -107,14 +107,11 @@ function updateSubCategory(subcategoryId) {
     //else {
     //    var id = $("#editId" + categoryId).val();
 
-
-
         var subName = $("#editsubName" + subcategoryId).val();
 
         //alert($("#id"+subcategoryId));
     alert(subcategoryId+' '+subName);
-//>>>>>>> SubCatPage
-//
+
         var dataResponse = $.ajax({
             type: "POST",
             url: "/TDCS/exam/editSubCategory",
@@ -122,17 +119,16 @@ function updateSubCategory(subcategoryId) {
 
                 subcategoryId:subcategoryId,
                 subcategoryName:subName
-//>>>>>>> SubCatPage
 
-                //categoryId:categoryId,
-                //subcategoryName:subcategoryName
 
             },
             complete: function (xhr) {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
                         viewSubCategory();
+                        //window.   location.reload();
                     }
+
                     else {
                         alert("fail1");
                     }
@@ -146,82 +142,27 @@ function updateSubCategory(subcategoryId) {
 
 
 
-
-//$(document).ready(function(){
-//    $("#searchSubCategory").click(function(){
-//
-//        search();
-//    });
-//});
-//function search(){
-//    var categoryId = $("#categoryId").val();
-//    var subcategoryId = $("#subcategoryId").val();
-//    var subcategoryName= $("#subcategoryName").val();
-//
-//    alert("hi");
-//
-//    var dataResponse = $.ajax({
-//        type: "POST",
-//        url: "/TDCS/exam/searchCategory",
-//        data: {
-//            categoryId: categoryId,
-//            subcategoryId: subcategoryId,
-//            subcategoryName: subcategoryName
-//        },
-//        async: false,
-//        success: function(data){
-//            //alert(data.id + " "+ data.name);
-//            //$("#tbodyCategory").hide();
-//            $("#tbodyCategory").empty();
-//            data.forEach(function(value){
-//                //$("#tbodyCategory").empty();
-//
-//                $("#tbodyCategory").append(
-//                    '<tr>'+
-//
-//                    '<td style="text-align: center;"><label id="catId'+value.id+'"><b>'+value.id+'</b></label>'+
-//
-//                        //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
-//                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.name+'</label>'+
-//                    '</td>'+
-//
-//                        //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
-//
-//                    '<td style="text-align: center;"><label id="subName'+value.subId+'">'+value.subName+'</label>'+
-//                    '<input id="editsubName'+value.subId+'" class="form-control" type="text" value="'+value.subName+'" style="display: none;">'+
-//
-//
-//                    '<td style="text-align: center">'+
-//                    '<button id="editBtn'+value.subId+'" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-//                    '&nbsp;<button id="updateBtn'+value.subId+'" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
-//
-//                    '</td>'+
-//
-//                    '<td style="text-align: center">'+
-//                    '<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.subId+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
-//                    '</td>'+
-//                    '</tr>'
-//                )
-//            });
-//        },
-//        error: function(){
-//            alert("error");
-//        }
-//    })
-//}
-
 $(document).ready(function(){
-    $("#searchSubCategory").click(function(){
+    $("#searchSubCategory").on('click',function(){
         search();
     });
+
+    $("#clearsearchinput").on('click',function(){
+        clearsearch();
+    });
 });
+
+function clearsearch(){
+    $("#categoryId").val("");
+    $("#categoryName").val("");
+    $("#subcategoryName").val("");
+}
+
 function search(){
     var categoryId= $("#categoryId").val();
     var categoryName= $("#categoryName").val();
     var subcategoryName= $("#subcategoryName").val();
-    //var subcategoryId= $("#subcategoryId").val();
 
-    //alert(categoryId+categoryName+subcategoryName);
 
     var dataResponse = $.ajax({
         type: "POST",
@@ -234,12 +175,16 @@ function search(){
         },
         async: false,
         success: function(data){
-            //alert(data.id + " "+ data.name);
-            //$("#tbodyCategory").hide();
+
             $("#tbodySubCategory").empty();
+            if(data.size == null){
+                $("#alertMess").show();
+            }
+
             data.forEach(function(value){
                 //$("#tbodySubCategory").empty();
-                console.log(value.this.name);
+                console.log(value.SubCategory.name);
+                $("#alertMess").hide();
                 $("#tbodySubCategory").append(
                     '<tr>'+
 
@@ -251,23 +196,25 @@ function search(){
 
                         //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
 
-                    '<td style="text-align: center;"><label id="subName'+value.this.id+'">'+value.this.name+'</label>'+
-                    '<input id="editsubName'+value.this.id+'" class="form-control" type="text" value="'+value.this.name+'" style="display: none;">'+
+                    '<td style="text-align: center;"><label id="subName'+value.SubCategory.id+'">'+value.SubCategory.name+'</label>'+
+                    '<input id="editsubName'+value.SubCategory.id+'" class="form-control" type="text" value="'+value.SubCategory.name+'" style="display: none;">'+
 
 
 
                     '<td style="text-align: center">'+
-                    '<button id="editBtn'+value.this.id+'" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.this.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button id="updateBtn'+value.this.id+'" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.this.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '<button id="editBtn'+value.SubCategory.id+'" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+                    '&nbsp;<button id="updateBtn'+value.SubCategory.id+'" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
 
                     '</td>'+
 
                     '<td style="text-align: center">'+
-                    '<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.this.id+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
+                    '<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.SubCategory.id+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
                     '</td>'+
                     '</tr>'
                 )
+
             });
+
         },
         error: function(){
             alert("error");
@@ -278,14 +225,6 @@ function search(){
 
 
 
-$(document).ready(function(){
-    $("#clearsearchinput").on('click',function(){
-        clearsearch();
-    });
-});
-function clearsearch(){
-    $("#categoryId").val("");
-    $("#categoryName").val("");
-    $("#subcategoryName").val("");
-}
+
+
 

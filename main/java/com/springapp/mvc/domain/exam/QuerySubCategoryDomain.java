@@ -27,6 +27,7 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
         beginTransaction();
         getSession().save(subCategory);
+        getSession().flush();    //Flush
         commitTransaction();
         closeSession();
     }
@@ -105,6 +106,7 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
         HibernateUtil.beginTransaction();
         getSession().merge(subCategory);
+        getSession().flush();
         HibernateUtil.commitTransaction();
     }
 
@@ -180,9 +182,9 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
             public List<SubCategory> searchSubCategory(String subcategoryName, String categoryId, String categoryName) {
 
-                Criteria criteria = getSession().createCriteria(SubCategory.class);
+                Criteria criteria = getSession().createCriteria(SubCategory.class,"SubCategory");
 
-                criteria.createAlias("category", "category");
+                criteria.createAlias("SubCategory.category", "category");
 ////
 //                ProjectionList projectionList = Projections.projectionList();
 //                projectionList.add(Projections.property("category.id"),"catId");
@@ -191,9 +193,21 @@ public class QuerySubCategoryDomain extends HibernateUtil {
                 criteria.addOrder(Order.asc("category.id"));
 
 
-                criteria.add(Restrictions.like("name", "%" + subcategoryName + "%").ignoreCase());
-                criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
-                criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
+
+//                criteria.add(Restrictions.like("name", "%" + subcategoryName + "%").ignoreCase());
+//                criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+//                criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
+
+
+                if(subcategoryName != "") {
+                    criteria.add(Restrictions.like("SubCategory.name", "%" + subcategoryName + "%").ignoreCase());
+                }
+                if(categoryId!="") {
+                    criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+                }
+                if(categoryName!="") {
+                    criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
+                }
 
 
 

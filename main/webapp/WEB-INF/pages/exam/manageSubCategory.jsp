@@ -169,6 +169,9 @@
         </table>
     </div>
 </div>
+<div id="alertMess" class="alert alert-danger text-center" style="display: none;">ไม่พบข้อมูลที่ค้นหา </div>
+
+
 
 
 <%--<script>--%>
