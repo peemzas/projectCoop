@@ -215,8 +215,14 @@ public class SubCategoryController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-        Category category = queryCategoryDomain.getCategoryById(searchSubCategory);
-        List<SubCategory> subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+        List<SubCategory> subcategories = null;
+
+        if (searchSubCategory.equals(0)) {
+            subcategories = querySubCategoryDomain.getAllSubCategory();
+        } else {
+            Category category = queryCategoryDomain.getCategoryById(searchSubCategory);
+            subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+        }
         String json = new Gson().toJson(subcategories);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
