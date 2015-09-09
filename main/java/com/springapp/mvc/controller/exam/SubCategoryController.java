@@ -42,16 +42,6 @@ public class SubCategoryController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addSubCategory")
     @ResponseBody
-//
-//    public void  addSubCategory(ModelMap model, @Valid SubCategory subCategory
-//            ,HttpServletRequest request, HttpServletResponse response){
-//
-//        User createBy = queryUserDomain.getCurrentUser(request);
-//        subCategory.setCreateBy(createBy);
-//
-//        querySubCategoryDomain.insertSubCategory(subCategory);
-
-    //  ----------------------------------------
     public void addSubCategory(Model model,
                                @RequestParam(value = "categoryId", required = true) String categoryId,
                                @RequestParam(value = "subcategoryNameadd", required = true) String subcategoryName,
@@ -97,18 +87,6 @@ public class SubCategoryController {
 
     @RequestMapping(value = "/exam/editSubCategory", method = RequestMethod.POST)
     @ResponseBody
-//    public ResponseEntity editSubCategory(@Valid SubCategory subCategory,HttpServletRequest request){
-//
-//        HttpHeaders headers = new HttpHeaders();
-//
-//        headers.add("Content-Type", "application/json;charset=UTF-8");
-//        User createBy = queryUserDomain.getCurrentUser(request);
-//        subCategory.setCreateBy(createBy);
-//        querySubCategoryDomain.editSubCategory(subCategory);
-//
-//
-//        return new ResponseEntity(headers, HttpStatus.OK);
-//    }
     public void editSubCategory(Model model,
 //                              @RequestParam(value = "categoryId", required = true) String categoryId,
                                 @RequestParam(value = "subcategoryId", required = true) Integer subcategoryId,
@@ -186,6 +164,7 @@ public class SubCategoryController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
         List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName, categoryId, categoryName);
         logger.info(String.valueOf("++++++++++++++++++++++++++++"));
+        System.out.println("AAA : " + subcategories);
 
         String json = new Gson().toJson(subcategories);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
