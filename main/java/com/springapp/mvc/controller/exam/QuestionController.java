@@ -280,14 +280,22 @@ public class QuestionController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
         List empNameSearch = new ArrayList();
+        String categoryIdSearch = "";
+        String subCategorySearch = "";
+        String nameSearch = "";
         JSONArray jsonArray = new JSONArray(jsoN);
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             System.out.println(jsonObject.getString("thFname"));
             empNameSearch.add(jsonObject.getString("thFname"));
+            if(i == 0){
+                categoryIdSearch = jsonObject.getString("categoryId");
+                subCategorySearch = jsonObject.getString("subCategoryId");
+                nameSearch = jsonObject.getString("empName");
+            }
         }
         List<User> users = queryQuestionDomain.getUserIdByName(empNameSearch);
-        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users);
+        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users, categoryIdSearch, subCategorySearch, nameSearch);
         logger.info(questions.toString());
         String json = new Gson().toJson(questions);
 
