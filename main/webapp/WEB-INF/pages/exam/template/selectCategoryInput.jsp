@@ -32,4 +32,4 @@
         <option value="" disabled selected></option>
     </select>
 </div>
-<script src="../../../resources/js/pageScript/exam/selectCategoryInput.js"></script>
+<script src="../../../resources/js/pageScript/exam/selectCategoryInput.js" charset="utf-8"></script>

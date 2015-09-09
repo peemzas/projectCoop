@@ -184,7 +184,7 @@ public class SubCategoryController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName,categoryId,categoryName);
+        List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName, categoryId, categoryName);
         logger.info(String.valueOf("++++++++++++++++++++++++++++"));
 
         String json = new Gson().toJson(subcategories);
@@ -192,16 +192,22 @@ public class SubCategoryController {
     }
 
 
-
     @RequestMapping(value = "/exam/getAllSubCategoryInCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> getAllSubCategory(@RequestParam(value = "categoryId",required = true)String catId) {
+    public ResponseEntity<String> getAllSubCategory(@RequestParam(value = "categoryId", required = true) String catId) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-        Category category = queryCategoryDomain.getCategoryById(catId);
-        List<SubCategory> subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+        List<SubCategory> subcategories = null;
+
+        if (catId.length()==0) {
+            return null;
+//            subcategories = querySubCategoryDomain.getAllSubCategory();
+        } else {
+            Category category = queryCategoryDomain.getCategoryById(catId);
+            subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+        }
 
         String json = new Gson().toJson(subcategories);
 
@@ -216,13 +222,9 @@ public class SubCategoryController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List<SubCategory> subcategories = null;
+        Category category = queryCategoryDomain.getCategoryById(searchSubCategory);
+        subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
 
-        if (searchSubCategory.equals(0)) {
-            subcategories = querySubCategoryDomain.getAllSubCategory();
-        } else {
-            Category category = queryCategoryDomain.getCategoryById(searchSubCategory);
-            subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
-        }
         String json = new Gson().toJson(subcategories);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
