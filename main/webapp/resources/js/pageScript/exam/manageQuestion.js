@@ -207,3 +207,46 @@ var deleteQuestion = function (questionId) {
 
 }
 
+var listSearchQuestion = function () {
+    var data = getSearchQuestionResultList();
+
+    console.log("HELLO===========")
+    console.log(data)
+
+    $("tbody").empty();
+    data.forEach(function (q) {
+        var createDate = new Date(q.createDate);
+        var formattedDate = createDate.getDate() + "/" + createDate.getMonth() + "/" + createDate.getFullYear();
+        $("#tableBody").append('<tr questionId=' + q.id + '>' +
+        '<td class="questionId">' + q.id + '</td>' +
+        '<td class="questionDescription">' + q.description + '</td>' +
+        '<td class="questionType">' + q.questionType.description + '</td>' +
+        '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
+        '<td class="questionScore">' + q.score + '</td>' +
+        '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
+        '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
+        '<td class="questionCreateBy">' + q.createBy.thFname +' '+ q.createBy.thLname + '</td>' +
+        '<td class="questionCreateDate">' + formattedDate + '</td>' +
+        '<td>' +
+        '<div class="btn-group">' +
+        '<button class="btn dropdown-toggle" data-toggle="dropdown">' +
+        'เลือก<span class="caret"></span>' +
+        '</button>' +
+        '<ul class="dropdown-menu actionBtn">' +
+        '<li><a class="actionViewBtn" data-toggle="modal" data-target="#questionDetailModal">ดู</a></li>' +
+        '<li><a class="actionEditBtn" data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>' +
+        '<li><a class="actionDeleteBtn">ลบ</a></li>' +
+        '</ul>' +
+        '</div>' +
+        '</td>' +
+        "</tr>")
+    })
+    generateEventHandler();
+}
+
+//===================================================================================EVENT TRIGGER=================================================================================================//
+
+
+$(".searchInputSubmitBtn").on('click', function () {
+    listSearchQuestion()
+})

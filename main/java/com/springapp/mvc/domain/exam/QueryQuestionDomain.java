@@ -9,10 +9,7 @@ import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,7 +78,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         projectionList.add(Projections.property("category.name"),"categoryName");
         projectionList.add(Projections.property("subCategory.name"),"subCategoryName");
         projectionList.add(Projections.property("questionType.description"),"questionTypeDesc");
-        projectionList.add(Projections.property("status.id"),"statusId");
+        projectionList.add(Projections.property("status.id"), "statusId");
 //        projectionList.add(Projections.property(""),"");
 
         criteria.setProjection(projectionList);
@@ -118,7 +115,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         projectionList.add(Projections.property("questionType.description"), "questionTypeDesc");
         projectionList.add(Projections.property("status.id"), "statusId");
 //        projectionList.add(Projections.property(""),"");
-
+        criteria.addOrder(Order.asc("q.id"));
         criteria.setProjection(projectionList);
 
 
@@ -157,45 +154,68 @@ public class QueryQuestionDomain extends HibernateUtil {
                 criteria.add(Restrictions.eq("subCategory",querySubCategoryDomain.getSubCategoryByNameAndCategory(subCategoryName,category)));
             }
         }
-        if (createById != null){
-            User user = queryUserDomain.getUserById(Integer.parseInt(createById));
-            criteria.add(Restrictions.eq("q.createBy",user));
+        if (createById != null && createById.trim().length()!=0){
+            try{
+                User user = queryUserDomain.getUserById(Integer.parseInt(createById));
+                criteria.add(Restrictions.eq("q.createBy",user));
+            }catch (NumberFormatException ne){
+                System.out.println("error in parsing createBy");
+                ne.printStackTrace();
+            }
         }
-        if (questionId != null){
-            criteria.add(Restrictions.eq("q.id", questionId));
+        if (questionId != null && questionId.trim().length()!=0){
+            try{
+                criteria.add(Restrictions.eq("q.id", Integer.parseInt(questionId)));
+            }catch (Exception e){
+                System.out.println("error in parsing questiopnId from String to Integer");
+                e.printStackTrace();
+            }
+
         }
-        if (questionDesc != null){
+        if (questionDesc != null && questionDesc.trim().length()!=0){
             criteria.add(Restrictions.like("q.description", "%" + questionDesc + "%"));
         }
-        DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-        if (createDateFrom != null) {
+        if (createDateFrom != null && createDateFrom.trim().length()!=0) {
             Date dateFrom = null;
             try {
                 dateFrom = format.parse(createDateFrom);
+                System.out.println("DATEFROM");
+                System.out.println(dateFrom);
+                System.out.println("HOORAYYY");
+                criteria.add(Restrictions.ge("q.createDate",dateFrom));
             }catch (Exception e){
                 e.printStackTrace();
                 System.out.println(e);
             }
-            criteria.add(Restrictions.ge("q.createDate",dateFrom));
+
         }
-        if (createDateTo != null) {
+        if (createDateTo != null && createDateTo.trim().length()!=0) {
             Date dateTo = null;
             try {
                 dateTo = format.parse(createDateTo);
+                System.out.println("DATE TO");
+                System.out.println(dateTo);
+                System.out.println("HOORAHHH");
+                System.out.println("");
+                Disjunction disjunction = Restrictions.disjunction();
+                disjunction.add(Restrictions.le("q.createDate", dateTo));
+                disjunction.add(Restrictions.eq("q.createDate", dateTo));
+                criteria.add(disjunction);
             }catch (Exception e){
                 e.printStackTrace();
                 System.out.println(e);
             }
-            criteria.add(Restrictions.le("q.createDate", dateTo));
         }
-        if (scoreFrom != null){
+        if (scoreFrom != null && scoreFrom.trim().length()!=0){
             criteria.add(Restrictions.ge("q.score", Float.parseFloat(scoreFrom)));
         }
-        if (scoreTo != null){
+        if (scoreTo != null && scoreTo.trim().length()!=0){
             criteria.add(Restrictions.le("q.score",Float.parseFloat(scoreTo)));
         }
 
+        criteria.addOrder(Order.asc("q.id"));
         return criteria.list();
     }
 
@@ -230,7 +250,7 @@ public class QueryQuestionDomain extends HibernateUtil {
                 .add(Projections.property("status"), "status")
                 .add(Projections.property("examPapers"), "examPapers")
                 .add(Projections.property("score"), "score"));
-
+        criteria.addOrder(Order.asc("id"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Question> questions = criteria.list();
         logger.info(questions.toString());
