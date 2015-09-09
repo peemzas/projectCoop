@@ -51,49 +51,6 @@
 </div>
 <br>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<%--<div class="row">--%>
-<%--<div class="col-md-2 col-md-offset-1" align="right">--%>
-<%--<label><h4 style="margin-top: 5px">Category :</h4></label>--%>
-<%--</div>--%>
-<%--<div class="col-md-2">--%>
-<%--<div class="input-group">--%>
-<%--<input class="form-control" type="text" name="cat"/>--%>
-<%--<span class="input-group-addon glyphicon glyphicon-search" style="position: static"></span>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--<div class="col-md-3" align="right">--%>
-<%--<label><h4 style="margin-top: 5px">Sub-Category :</h4></label>--%>
-<%--</div>--%>
-<%--<div class="col-md-2">--%>
-<%--<div class="input-group">--%>
-<%--<input class="form-control" type="text" name="subcat"/>--%>
-<%--<span class="input-group-addon glyphicon glyphicon-search" style="position: static"></span>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--<div class="row">--%>
-<%--<div class="col-md-2 col-md-offset-1" align="right">--%>
-<%--<label><h4 style="margin-top: 5px">Create Date :</h4></label>--%>
-<%--</div>--%>
-<%--<div class="col-md-2">--%>
-<%--<div class="input-group">--%>
-<%--<input class="form-control" type="date" id="date"/>--%>
-<%--<span class="input-group-addon glyphicon glyphicon-calendar" style="position: static"></span>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--<div class="col-md-3" align="right">--%>
-<%--<label><h4 style="margin-top: 5px">Question Create By :</h4></label>--%>
-<%--</div>--%>
-<%--<div class="col-md-2">--%>
-<%--<div class="input-group">--%>
-<%--<input class="form-control" type="text" name="questcreate"/>--%>
-<%--<span class="input-group-addon glyphicon glyphicon-search" style="position: static"></span>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-
 <div class="row">
   <div class="col-md-2 col-md-offset-5">
     <h3 align="center">ข้อสอบ</h3>
@@ -104,9 +61,6 @@
     <button data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray">สุ่มข้อสอบ</button>
   </div>
 </div>
-
-
-
 
 <div class="row">
   <a href="/TDCS/exam/managePapers"><button class="btn btn-danger" align="center"
@@ -158,7 +112,6 @@
     </tbody>
   </table>
 </div>
-
 
 <div class="row">
   <div class="col-md-2 col-md-offset-9">

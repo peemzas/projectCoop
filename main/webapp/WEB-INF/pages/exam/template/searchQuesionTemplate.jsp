@@ -127,7 +127,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -151,7 +150,7 @@
         }
 
 
-    })
+    });
 
     $(".datepicker").datepicker();
 </script>

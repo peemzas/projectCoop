@@ -1,5 +1,9 @@
 $(document).ready(function(){
-
+    $("#advanceBtn").on('click', function(){
+        if($("#collapse").hasClass("glyphicon-arrow-down")){
+            alert("general");
+        }
+    });
 });
 function generalSearchQuestion(){
     var i;
