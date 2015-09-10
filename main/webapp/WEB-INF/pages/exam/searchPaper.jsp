@@ -129,7 +129,8 @@
     </div>
 </div>
 
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
+<%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>--%>
+
 <script>
     $("#collapse").click(function () {
         var str = $("#search").prop('outerHTML') + "&nbsp" + $("#clear").prop('outerHTML');
@@ -145,8 +146,6 @@
             $("#search").show();
             $("#clear").show();
         }
-
-
     });
     $(".datepicker").datepicker();
 </script>

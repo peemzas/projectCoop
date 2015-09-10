@@ -60,6 +60,8 @@ public class Question implements Serializable,Cloneable {
 
 //    @OneToMany(mappedBy = "question")
 //    private Set<Choice> choices;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+    private Set<Choice> choices;
 
 
     @Override

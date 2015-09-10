@@ -21,11 +21,11 @@
 
                     <%@include file="../template/searchQuestionTemplateNew.jsp"%>
 
-                    <table class="table table-view">
+                    <table id="tbSelectQuestion" class="table table-view">
                         <thead class="bg-primary">
                             <tr>
                                 <th>เลือก</th>
-                                <%--<th>หมายเลขคำถาม</th>--%>
+                                <th>หมายเลขข้อสอบ</th>
                                 <th>วิชา</th>
                                 <th>หัวข้อเรื่อง</th>
                                 <th>คำถาม</th>
@@ -69,7 +69,7 @@
                     <br>
                     <div class = "row" >
                         <div class = "col-md-12 text-center">
-                            <button class = "btn btn-default" type = "button">เพิ่มคำถาม</button>
+                            <button id="addQuestionBtn" class = "btn btn-default" type = "button">เพิ่มคำถาม</button>
                             <button class = "btn btn-default" type = "button">แสดงข้อมูล</button>
                         </div>
                     </div>
@@ -87,7 +87,6 @@
 <!-- /.modal -->
 <!-- End Modal Select Question -->
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
-
 <%--Add By Mr.Wanchana--%>
 <!-- Modal show Quertion Information -->
 <div id="showQuestionInfoModal" class="modal fade" role="dialog">
@@ -95,7 +94,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">รายละเอียดข้อสอบ</h4>
             </div>
             <div class="modal-body" id="questionInfoBody">
 
@@ -106,3 +105,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#addQuestionBtn").on('click', function(){
+        $("#selectQuest").hide();
+    });
+</script>

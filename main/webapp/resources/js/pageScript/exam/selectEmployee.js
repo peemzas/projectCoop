@@ -113,7 +113,7 @@ function addEmployee(){
 
         var arrayEmployeeName = $(this).parent().siblings().map(function(){
             return $(this).text().trim();
-    }).get();
+        }).get();
 
         //$("#show").append(JSON.stringify(arrayEmployeeName));
         //alert(JSON.stringify(arrayEmployeeName));

@@ -24,7 +24,7 @@ public class Choice  implements Serializable {
     @JoinColumn(name="CHOICE_CORRECTION")
     private Boo correction;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="QUESTION_ID")
     private Question question;
 
