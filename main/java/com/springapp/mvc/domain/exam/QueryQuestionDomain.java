@@ -228,19 +228,13 @@ public class QueryQuestionDomain extends HibernateUtil {
 
 
 //    Add by Mr.Wanchana
-//    public List<Question> generalQuestionSearch(ArraarrayEmpNameToQuery){
-//
-//        for(int i = 0; i < arrayEmpNameToQuery.getLength(); i++){
-//
-//        }
-//    }
 
     public List<Question> getAllQuestionDetail(){
 
         Criteria criteria = getSession().createCriteria(Question.class);
         criteria.setProjection(Projections.projectionList()
                 .add(Projections.property("id"), "id")
-//                .add(Projections.property("choices"), "choices")
+                .add(Projections.property("choices"), "choices")
                 .add(Projections.property("description"), "description")
                 .add(Projections.property("createDate"), "createDate")
                 .add(Projections.property("difficultyLevel"), "difficultyLevel")
@@ -256,6 +250,18 @@ public class QueryQuestionDomain extends HibernateUtil {
         logger.info(questions.toString());
         return questions;
     }
+//
+//    public List<User> getUserIdByNames(List empName){
+//
+//        String queryStatement = "select userId from User where thFname in(:empName)";
+//        Query query = getSession().createQuery(queryStatement);
+//        query.setParameterList("empName", empName);
+//        List<User> userIds = query.list();
+//        logger.info(userIds.toString());
+//
+//        return userIds;
+//    }
+
 
     public List<User> getUserIdByName(List empName){
 
@@ -280,6 +286,30 @@ public class QueryQuestionDomain extends HibernateUtil {
 //        if((empIds != null) && (catId != "") && (subId != null) && (empName != null)){
 //            String queryStatement = "select id, description, score from Question where createBy.userId in(:empIds)" +
 //                                    "and category.id =: catId";
+
+//    public String getUserIdBuName(String name){
+//
+//        String queryStatement = "select userId from User where thFname =:name";
+//        Query query = getSession().createQuery(queryStatement);
+//        query.setParameter("name", name);
+//        String userId = query.toString();
+//
+//        return userId;
+//    }
+
+//    public List<Question> generalSearchQuestion(List<User> empIds, String subId){
+//
+//        String queryStatement = "select id, description, score from Question where createBy.userId in(:empId)";
+//        Query query = getSession().createQuery(queryStatement);
+//        query.setParameterList("empId" ,empId);
+//        List<Question> questions = query.list();
+//        logger.info(">" +questions.toString());
+//
+//        return questions;
+//        if((empIds != null) && (subId != null)){
+//            String queryStatement = "select id, description, score from Question where createBy.userId in(:empIds)" +
+//                                    "and subCategory.id =: subId";
+
 //            Query query = getSession().createQuery(queryStatement);
 //            query.setParameterList("empIds" ,empIds);
 //            List<Question> questions = query.list();
@@ -287,5 +317,8 @@ public class QueryQuestionDomain extends HibernateUtil {
 //
 //            return questions;
 //        }
+
+//        return null;
+
 //    }
 }

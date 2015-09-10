@@ -147,6 +147,7 @@
 </div>
 
 <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
+
 <script>
   $("#date").datepicker();
   function select(){
