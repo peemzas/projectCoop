@@ -3,7 +3,7 @@ var getSearchCategoryInputValue = function () {
 }
 
 var getSearchSubCategoryInputValue = function () {
-    return $('selectSubCategoryToSelection').children('.category:selected').attr('categoryId');
+        return $('#selectSubCategoryToSelection').children('.subCategory:selected').attr('subCategoryName');
 }
 
 var updateCategoryList = function () {

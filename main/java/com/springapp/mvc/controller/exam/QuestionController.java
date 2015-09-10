@@ -95,8 +95,10 @@ public class QuestionController {
         question.setCreateBy(queryUserDomain.getCurrentUser(request));
         question.setDescription(qDesc);
 
+        Date curDate = new Date();
+//        curDate.setTime();
 
-        question.setCreateDate(new Date());
+        question.setCreateDate(new Date(curDate.getYear()+1900,curDate.getMonth()+1,curDate.getDate()));
         question.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
         question.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
         question.setScore(score);
@@ -173,14 +175,14 @@ public class QuestionController {
             question.setStatus(queryStatusDomain.getDeletedStatus());
             queryQuestionDomain.mergeQuestion(question);
 
-            Question newQuestion = cloneQuestion(question,request);
+            Question newQuestion = cloneQuestion(question, request);
             newQuestion.setDescription(qDesc);
             newQuestion.setScore(score);
             newQuestion.setQuestionType(questionType);
             newQuestion.setDifficultyLevel(difficulty);
             newQuestion.setSubCategory(subCategory);
 
-            queryQuestionDomain.insertQuestion(newQuestion,cDescList,correctChoice);
+            queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
 
         } else {// no change
             System.out.println("=======================question===============================");
@@ -259,7 +261,7 @@ public class QuestionController {
     }
 
 
-    public Question cloneQuestion(Question question,HttpServletRequest request){
+    public Question cloneQuestion(Question question, HttpServletRequest request) {
 
         Question questionNew = new Question();
         questionNew.setDifficultyLevel(question.getDifficultyLevel());
@@ -273,8 +275,6 @@ public class QuestionController {
 
         return questionNew;
     }
-
-
 
 //    Add By Mr.Wanchana
 //    @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
@@ -309,7 +309,7 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestionDetail")
     @ResponseBody
-    public ResponseEntity<String> getAllQuestionDetail(){
+    public ResponseEntity<String> getAllQuestionDetail() {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
@@ -334,20 +334,28 @@ public class QuestionController {
             @RequestParam(value = "scoreFrom", required = false) String scoreFrom,
             @RequestParam(value = "scoreTo", required = false) String scoreTo,
             @RequestParam(value = "status", required = false) String status,
-            HttpServletRequest request,HttpServletResponse response
-    ){
+            HttpServletRequest request, HttpServletResponse response
+    ) {
 
         System.out.println("==============================================================");
-        System.out.println(catId);
-        System.out.println(subCatName);
-        System.out.println(createBy);
-        System.out.println(questionId);
-        System.out.println(questionDesc);
-        System.out.println(createDateFrom);
-        System.out.println(createDateTo);
-        System.out.println(scoreFrom);
-        System.out.println(scoreTo);
-        System.out.println(status);
+        if (catId != null) {
+            System.out.println(catId + " : " + catId.trim().length());
+        }else {
+            System.out.println("null catId");
+        }
+        if (subCatName != null) {
+            System.out.println(subCatName + " : " + subCatName.trim().length());
+        }else {
+            System.out.println("null subCatName ");
+        }
+        System.out.println(createBy + " : " + createBy.trim().length());
+        System.out.println(questionId + " : " + questionId.trim().length());
+        System.out.println(questionDesc + " : " + questionDesc.trim().length());
+        System.out.println(createDateFrom + " : " + createDateFrom.trim().length());
+        System.out.println(createDateTo + " : " + createDateTo.trim().length());
+        System.out.println(scoreFrom + " : " + scoreFrom.trim().length());
+        System.out.println(scoreTo + " : " + scoreTo.trim().length());
+        System.out.println(status + " : " + status.trim().length());
         System.out.println("==============================================================");
 
         List<Question> questions = queryQuestionDomain.searchQuestionQuery(

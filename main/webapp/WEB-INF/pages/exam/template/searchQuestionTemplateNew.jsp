@@ -37,8 +37,8 @@
                     <hr/>
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
-                            <button id="generalSearchButtonInModalSelectionQuestion" onclick="generalSearchQuestion()"
-                                    class="btn btn-default" type="button">ค้นหา
+                            <button id="generalSearchButtonInModalSelectionQuestion"
+                                    class="btn btn-default searchInputSubmitBtn" type="button">ค้นหา
                             </button>
                             <button class="btn btn-default" type="button">ล้างข้อมูล</button>
                         </div>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input id="searchCreateDateFromInput" type="text" class="form-control datepicker"/>
+                                    <input id="searchCreateDateFromInput" type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy"/>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"
                                                                           href="#"></span></span>
                                 </div>
@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input id="searchCreateDateToInput" type="text" class="form-control datepicker"/>
+                                    <input id="searchCreateDateToInput" type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy"/>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"
                                                                           href="#"></span></span>
                                 </div>
@@ -140,6 +140,7 @@
         </div>
     </div>
 </div>
+<input type="checkbox" class="hidden" id="searchCompleteTrigger"/>
 
 <script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
 <script>
