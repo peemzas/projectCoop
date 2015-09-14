@@ -92,112 +92,89 @@
                 <%---------------------------------------------------------------%>
 
                 <c:if test="${status == 'user' || status == 'staff'}">
-                <li id="exam2" class="dropdown">
-                    <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--%>
-                        <%--การประเมิน--%>
-                            <%--&lt;%&ndash;<c:if test="${viewEva != 0 && status == 'user'}">&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;<span class="badge">&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;${viewEva}&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;</span>&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-                    <%--</a>--%>
-                    <%--<ul class="dropdown-menu" role="menu">--%>
-                        <%--<li>--%>
-                            <%--<a href="/TDCS/evaluation.html">--%>
-                                <%--<c:if test="${status == 'staff'}">ประเมินนักศึกษา</c:if>--%>
-                                <%--<c:if test="${status == 'user'}">ประเมินผล</c:if>--%>
-                            <%--</a>--%>
-                        <%--</li>--%>
-                        <%--<li>--%>
-                            <%--<a href="/TDCS/viewevaluate.html">--%>
-                                <%--ดูผลการประเมิน--%>
-                                <%--<c:if test="${viewEva != 0 && status == 'user'}">--%>
-                                    <%--<span class="badge">--%>
-                                            <%--${viewEva}--%>
-                                    <%--</span>--%>
-                                <%--</c:if>--%>
-                            <%--</a>--%>
-                        <%--</li>--%>
-                    <%--</ul>--%>
-                <%--</li>--%>
+                <%--<li id="exam2" class="dropdown">--%>
 
-
-                    <%-----------------------------------------------------------------------%>
-
-                    <%--DropDown--%>
 
                 <%-----------------------------------------------------------------------%>
 
-                    <%--Exam Student main page BY JOKIZZ--%>
+                <%--Exam Student main page BY JOKIZZ--%>
 
-                        <c:if test="${ status == 'staff'}">
-                <li id="evaluation" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        เฮดข้อสอบ
+                <c:if test="${ status == 'staff'}">
+                    <li id="dropdownExamEmp" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            เฮดข้อสอบ
 
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li class="dropdown-header">จัดการ</li>
-                        <li>
-                            <a href="/TDCS/exam/manageCategory">
-                                <c:if test="${status == 'staff'}">จัดการรายวิชา</c:if>
-                                <%--<c:if test="${status == 'user'}">ประเมินผล</c:if>--%>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/TDCS/exam/manageSubCategory">
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-header">จัดการ</li>
+                            <li>
+                                <a href="/TDCS/exam/manageCategory">
+                                    <c:if test="${status == 'staff'}">จัดการรายวิชา</c:if>
+                                        <%--<c:if test="${status == 'user'}">ประเมินผล</c:if>--%>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/TDCS/exam/manageSubCategory">
                                     <c:if test="${status == 'staff'}">จัดการหัวข้อเรื่อง</c:if>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/TDCS/exam/manageQuestion">
-                                <c:if test="${status == 'staff'}">จัดการข้อสอบ</c:if>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/TDCS/exam/managePapers">
-                                <c:if test="${status == 'staff'}">จัดการชุดข้อสอบ</c:if>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">ตรวจ</li>
-                        <li>
-                            <a href="/TDCS/exam/examRecordSearch">
-                                <c:if test="${status == 'staff'}">ตรวจข้อสอบ</c:if>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/TDCS/exam/mainPageEmp">
-                                <c:if test="${status == 'staff'}">หน้าหลักอันเก่า</c:if>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/TDCS/exam/manageQuestion">
+                                    <c:if test="${status == 'staff'}">จัดการข้อสอบ</c:if>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/TDCS/exam/managePapers">
+                                    <c:if test="${status == 'staff'}">จัดการชุดข้อสอบ</c:if>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">ตรวจ</li>
+                            <li>
+                                <a href="/TDCS/exam/examRecordSearch">
+                                    <c:if test="${status == 'staff'}">ตรวจข้อสอบ</c:if>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/TDCS/exam/mainPageEmp">
+                                    <c:if test="${status == 'staff'}">หน้าหลักอันเก่า</c:if>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </c:if>
                 <%----%>
 
 
+                <c:if test="${ status == 'user'}">
+                    <li id="dropdownExamStudent" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            ข้อสอบสำหรับนักศึกษา
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="/TDCS/exam/mainPageStudent">ทำข้อสอบ</a>
+                            </li>
+                            <li>
+                                <a href="/TDCS/exam/checkScore">ตรวจคะแนน</a>
+                            </li>
+
+                        </ul>
 
 
+                    </li>
+                </c:if>
+                <%--<li>--%>
+                <%--<c:if test="${status == 'user'}">--%>
+                <%--<a href="/TDCS/exam/checkScore">ตรวจคะแนน</a>--%>
+                <%--</c:if>--%>
 
-
-
-                    <c:if test="${status == 'user'}">
-                        <a href="/TDCS/exam/mainPageStudent">ข้อสอบ</a>
-                    </c:if>
-
-                </li>
-                <li>
-                    <c:if test="${status == 'user'}">
-                        <a href="/TDCS/exam/checkScore">ตรวจคะแนน</a>
-                    </c:if>
-
-                </li>
+                <%--</li>--%>
 
             </ul>
 
 
-                <%--end exam student--%>
+            <%--end exam student--%>
             </c:if>
 
             </ul>

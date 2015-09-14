@@ -98,7 +98,7 @@ function editSubCategory(subcategoryId){
 
 function updateSubCategory(subcategoryId) {
 
-    //if ($("#editsubName" + subcategoryId).length > 5) {
+    //if ($("#editsubName" + subName).length > 5) {
     //    alert("คุณกรอกรหัสวิชาไม่ถูกต้อง");
     //}
     //else if ($("#editData" + categoryId).val() == "") {
@@ -107,9 +107,19 @@ function updateSubCategory(subcategoryId) {
     //else {
     //    var id = $("#editId" + categoryId).val();
 
+
+
         var subName = $("#editsubName" + subcategoryId).val();
 
+    if (subName ==""){
+        alert("ไม่สามารถเป็นค่าว่างได้");
+    }
+    //if (subName==$("#editsubName")){
+    //    alert("ชื่อซ้ำ");
+    //}
         //alert($("#id"+subcategoryId));
+
+
     alert(subcategoryId+' '+subName);
 
         var dataResponse = $.ajax({
@@ -122,6 +132,7 @@ function updateSubCategory(subcategoryId) {
 
 
             },
+
             complete: function (xhr) {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
@@ -130,7 +141,7 @@ function updateSubCategory(subcategoryId) {
                     }
 
                     else {
-                        alert("fail1");
+                        alert("ชื่อซ้ำ");
                     }
                 } else {
                     alert("fail2");
@@ -221,6 +232,58 @@ function search(){
         }
     })
 }
+
+
+
+
+$("subcategoryName").keyup(function(e) {
+    if (e.which > 0) {
+        e.preventDefault();
+        LOVSUB();
+    }
+});
+
+$(function LOVSUB() {
+    var availableTags = [
+        "ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++",
+        "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran",
+        "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl",
+        "PHP", "Python", "Ruby", "Scala", "Scheme","DD","test","Test"
+    ];
+
+    //for(var idx = 0; idx < arrayEmpNameToQuery.length; idx ++){
+    //    var item = {
+    //        "thFname" : arrayEmpNameToQuery[idx],
+    //        "empName" : userNameRequest
+    //    };
+    //    tempArray.push(item);
+    //}
+    //var data = $.ajax({
+    //    type: "POST",
+    //    contentType: "application/json",
+    //    url: "/TDCS/exam/getAllSubCategory",
+    //    async: false,
+    //    success: function(data){
+    //        data.forEach(function(value){
+    //
+    //            $(".autocomplete").append(
+    //                '<tr>'+
+    //                '<td style="text-align: center;"><label id="subName'+value.subId+'">'+value.subName+'</label>'+
+    //                '<td style="text-align: center">'
+    //
+    //            )
+    //        });
+    //    },
+    //    error: function(data){
+    //        alert('error while request...');
+    //    }
+    //});
+    $(".autocomplete").autocomplete({
+        source: availableTags
+    });
+});
+
+
 
 
 
