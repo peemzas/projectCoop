@@ -13,7 +13,7 @@
     <div class = "panel-collapse" id = "searchCollapse">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h4>ค้นหา...</h4>
+          ค้นหา...
         </div>
         <div class="panel-body">
           <div class = "row">
@@ -142,36 +142,16 @@
     $("#advanceBtn").click(function(){
       var str = $("#search").prop('outerHTML') + "&nbsp" + $("#clear").prop('outerHTML');
       $("#advanceBody").collapse('toggle');
-
-//      if ($("#advanceBtn").hasClass("btn btn-primary")) {
-//        $("#advanceBtn").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
-//        $("#btnAdvanceSearch").html(str);
-//
-//        $("#btnSearch").hide();
-//        $("#btnAdvanceSearch").show();
-////        $("#clear").hide();
-//      } else {
-//        $("#advanceBtn").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
-////        $("#search").show();
-////        $("#clear").show();
-//        $("#btnSearch").show();
-//        $("#btnAdvanceSearch").hide();
-//      }
       if($("#advanceBtn").children("span").hasClass("glyphicon glyphicon-chevron-down")){
-        $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
-//        $("btnAdvanceSearch").html(str);
+        $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up")
         $("#btnSearch").hide();
         $("#btnAdvanceSearch").show();
-//        $("#search").hide();
-//        $("#clear").hide();
       }
       else{
         $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-up").addClass("glyphicon glyphicon-chevron-down");
 
         $("#btnSearch").show();
         $("#btnAdvanceSearch").hide();
-//        $("#search").show();
-//        $("#clear").show();
       }
     });
     $(".datepicker").datepicker();

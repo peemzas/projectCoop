@@ -9,8 +9,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
-  tr{
-    align:center;
+  #questionNotFound{
+    background-color: #b2e0ff;
+    height: 100px;
+    display: none;
+    top: 40px;
+    vertical-align: middle;
+    border-radius: 5px;
+  }
+  #questionNotFoundDesc{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+    color: #00647f;
   }
 </style>
 
@@ -63,54 +74,31 @@
 </div>
 
 <div class="row">
-  <a href="/TDCS/exam/managePapers"><button class="btn btn-danger" align="center"
-                                            style="width:50px;height:35px"><span class="glyphicon glyphicon-arrow-left"></span>
-  </button></a>
-  <table class="table">
+  <a href="/TDCS/exam/managePapers">
+    <button class="btn btn-danger" align="center" style="width:50px;height:35px">
+      <span class="glyphicon glyphicon-arrow-left"></span>
+    </button>
+  </a>
+  <table id="tbSelectedQuestionToPaper" class="table table-hover table-bordered">
     <thead class="bg-primary">
-    <tr>
-      <th style="text-align: center ; border: 1px solid white">ประเภท</th>
-      <th style="text-align: center ; border: 1px solid white">หมวดหมู่</th>
-      <th style="text-align: center ; border: 1px solid white">หัวข้อเรื่อง</th>
-      <th style="text-align: center ; border: 1px solid white">ข้อสอบ</th>
-      <th style="text-align: center ; border: 1px solid white">ระดับ</th>
-      <th style="text-align: center ; border: 1px solid white">คะแนน</th>
-      <th style="text-align: center ; border: 1px solid white">สร้างโดย</th>
-      <th style="text-align: center ; border: 1px solid white">วันที่สร้าง</th>
-      <th style="text-align: center ; border: 1px solid white">นำออก</th>
-    </tr>
+      <tr>
+        <th style="text-align: center ; border: 1px solid white">เลือก</th>
+        <th style="text-align: center ; border: 1px solid white">ประเภท</th>
+        <th style="text-align: center ; border: 1px solid white">หมวดหมู่</th>
+        <th style="text-align: center ; border: 1px solid white">หัวข้อเรื่อง</th>
+        <th style="text-align: center ; border: 1px solid white">ข้อสอบ</th>
+        <th style="text-align: center ; border: 1px solid white">ระดับ</th>
+        <th style="text-align: center ; border: 1px solid white">คะแนน</th>
+        <th style="text-align: center ; border: 1px solid white">ผู้สร้าง</th>
+      </tr>
     </thead>
+    <tbody id="tbodySelectedQuestionToPaper">
 
-    <tbody>
-    <tr>
-      <td style="text-align: center">ปรนัย</td>
-      <td style="text-align: center">Java</td>
-      <td style="text-align: center">OOP</td>
-      <td style="text-align: center">What color do you like?</td>
-      <td style="text-align: center">ยาก</td>
-      <td style="text-align: center">2</td>
-      <td style="text-align: center">PEEM</td>
-      <td style="text-align: center">13/07/2015</td>
-      <td style="text-align: center">
-        <button class="btn glyphicon glyphicon-trash"></button>
-      </td>
-    </tr>
-
-    <tr>
-      <td style="text-align: center">อัตนัย</td>
-      <td style="text-align: center">Java</td>
-      <td style="text-align: center">Hibernate</td>
-      <td style="text-align: center">What color do you like?</td>
-      <td style="text-align: center">ยากเหี้ยๆ</td>
-      <td style="text-align: center">100000000</td>
-      <td style="text-align: center">PEEM</td>
-      <td style="text-align: center">13/07/2015</td>
-      <td style="text-align: center">
-        <button class="btn glyphicon glyphicon-trash"></button>
-      </td>
-    </tr>
     </tbody>
   </table>
+  <div id="questionNotFound" width="100%">
+    <h3 id="questionNotFoundDesc">ยังไม่มีข้อสอบในชุดข้อสอบ</h3>
+  </div>
 </div>
 
 <div class="row">
@@ -118,8 +106,7 @@
     <h4 align="right">คะแนนรวม = </h4>
   </div>
   <div class="col-md-1">
-    <input class="form-control" readonly="true" name="score" id="score" value="5"
-           style="text-align: center">
+    <input class="form-control" readonly="true" name="score" id="score" value="5" style="text-align: center">
   </div>
 </div>
 
@@ -147,7 +134,7 @@
 </div>
 
 <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
-
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
 <script>
   $("#date").datepicker();
   function select(){
