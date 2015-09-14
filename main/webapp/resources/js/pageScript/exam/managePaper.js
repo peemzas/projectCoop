@@ -1,53 +1,35 @@
+var questionIdString = new Array;
 $("document").ready(function(){
+    $("#questionNotFound").show();
     $("#selectionQuestionBtnInpagePaper").on("click", function(){
         viewQuestions();
     });
-    $("#addQuestionBtn").on('click', function(){
-        addQuestionToPaper();
-        alert("hi there");
-    });
-    //    Add Pagination
+});
 
-    //$("#tbSelectQuestion").after('<div id="nav"></div>');
-    //var rowShown = 5;
-    //var rowTotal = $("#tbSelectQuestion #tbodySelectQuestion tr").length;
-    ////alert(rowTotal);
-    //var numberOfPages = rowTotal/rowShown;
-    //alert(numberOfPages);
-    //
-    //for(var page = 0; page < pageNumber; page ++){
-    //    var pageNum = page + 1;
-    //    $("#nav").append('<a href="#" rel="'+page+'">'+pageNum+'</a>');
+$("#addQuestionBtn").on('click', function(){
+    selectQuestion();
+
+    //if($("#tbodySelectedQuestionToPaper tr").length > 0){
+    //    $("#questionNotFound").show();
     //}
-    //$("#tbSelectQuestion").hide();
-    //$("#tbSelectQuestion #tbodySelectQuestion tr").slice(0, rowShown).show();
-    //
-    //$('#nav a:first').addClass('active');
-    //$('#nav a').bind('click', function(){
-    //
-    //    $('#nav a').removeClass('active');
-    //    $(this).addClass('active');
-    //    var currPage = $(this).attr('rel');
-    //    var startItem = currPage * rowsShown;
-    //    var endItem = startItem + rowsShown;
-    //    $("#tbSelectQuestion #tbodySelectQuestion tr").css('opacity','0.0').hide().slice(startItem, endItem).
-    //        css('display','table-row').animate({opacity:1}, 300);
-    //});
+    //else{
+    //    $("#questionNotFound").hide();
+    //}
 });
 
 function viewQuestions(){
-    $("#tbodySelectQuestion").empty();
-    var dataResponse = $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: "/TDCS/exam/getAllQuestionDetail",
-        async: false,
-        success: function(dataResponse){
-            dataResponse.forEach(function(value){
-                $("#tbodySelectQuestion").append(
-                    '<tr>'+
+    if($("#tbodySelectedQuestionToPaper tr").length == 0){
+        var dataResponse = $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/TDCS/exam/getAllQuestionDetail",
+            async: false,
+            success: function(dataResponse){
+                dataResponse.forEach(function(value){
+                    $("#tbodySelectQuestion").append(
+                        '<tr>'+
+                        '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
                         '<td><input type="checkbox"/></td>'+
-                        '<td>'+value.id+'</td>'+
                         '<td><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
                         '<td><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</td>'+
                         '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</td>'+
@@ -55,24 +37,69 @@ function viewQuestions(){
                         '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
                         '<td><label id="labelScore'+value.id+'">'+value.score+'</td>'+
 
-                        '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
 
                         '<td style="text-align: center"><button id="btnQuestionInfo'+value.id+'" data-toggle="modal" data-target="#showQuestionInfoModal" class="btn btn-info" type="button" onclick="showInfo('+value.id+')"><span class="glyphicon glyphicon-book"></span></button></td>'+
-                    '</tr>'
-                );
-            });
-        },
-        error: function(){
-            alert("เกิดข้อผิดพลาดขณะร้องขอข้อมูล...");
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(){
+                alert("เกิดข้อผิดพลาดขณะร้องขอข้อมูล...");
+            }
+        });
+    }
+    else{
+        //alert("else" + questionIdString);
+        var index;
+        var arrayQuestionId;
+        // converse array to json.
+        var toJsonObject = {};
+        var tempz = new Array();
+        for(var i = 0; i < questionIdString.length; i++){
+            var item = {
+                "id" : questionIdString[i]
+            };
+            tempz.push(item);
         }
-    })
+        toJsonObject = JSON.stringify(tempz);
+        alert(toJsonObject);
+
+        var dataResponse = $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/TDCS/exam/getAllQuestionDetail",
+            async: false,
+            success: function(dataResponse){
+                dataResponse.forEach(function(value){
+                    $("#tbodySelectQuestion").append(
+                        '<tr>'+
+                        '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
+                        '<td><input type="checkbox"/></td>'+
+                        '<td><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
+                        '<td><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</td>'+
+                        '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</td>'+
+                        '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
+                        '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
+                        '<td><label id="labelScore'+value.id+'">'+value.score+'</td>'+
+
+                        '<td style="display: none;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
+                        '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
+
+                        '<td style="text-align: center"><button id="btnQuestionInfo'+value.id+'" data-toggle="modal" data-target="#showQuestionInfoModal" class="btn btn-info" type="button" onclick="showInfo('+value.id+')"><span class="glyphicon glyphicon-book"></span></button></td>'+
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(){
+                alert("เกิดข้อผิดพลาดขณะร้องขอข้อมูล...");
+            }
+        });
+    }
 }
 
 function showInfo(showInfoId){
-    //alert(showInfoId);
-    //alert($("#labelCategoryName"+showInfoId).text());
     $("#showQuestionInfoModal .modal-body").empty();
     $("#showQuestionInfoModal .modal-body").append(
         '<div class="row">'+
@@ -90,13 +117,29 @@ function showInfo(showInfoId){
     )
 }
 
-function addQuestionToPaper(){
-
-    var qIdArray = new Array;
-    $("#tbodySelectQuestion input:checkbox:checked").each(function(){
-        var questionId = $(this).parent().siblings().map(function(){
-           return $(this).text().trim();
-        }).get();
+//This function for get values from modal Question.
+function selectQuestion(){
+    $("#tbSelectQuestion input:checkbox:checked").each(function(){
+        var qId = $(this).parent().siblings().map(function(){
+            return $(this).text();
+        }).get(0);
+        addQuestionToPaper(qId);
     });
+}
 
+function addQuestionToPaper(qId){
+    questionIdString.push(qId);
+    $("#tbodySelectedQuestionToPaper").append(
+        '<tr>'+
+            '<td style="display: none;">'+$("#labelQuestionId").text()+'</td>'+
+            '<td><input type="checkbox" class="selectedQuestion"/></td>'+
+            '<td>'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
+            '<td>'+$("#labelCategoryName"+qId).text()+'</td>'+
+            '<td>'+$("#labelSubCategoryName"+qId).text()+'</td>'+
+            '<td style="text-align: left;">'+$("#labelQuestionDesc"+qId).text()+'</td>'+
+            '<td>'+$("#labelDiffDesc"+qId).text()+'</td>'+
+            '<td>'+$("#labelScore"+qId).text()+'</td>'+
+            '<td>'+$("#labelQuestionCreateBy"+qId).text()+'</td>'+
+        '</tr>'
+    );
 }
