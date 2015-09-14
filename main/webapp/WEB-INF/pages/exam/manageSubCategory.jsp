@@ -28,7 +28,8 @@
                             <label>รหัสวิชา :</label>
                         </div>
                         <div class="col-md-4" style="width: 15%">
-                            <input id="categoryId" class="form-control" type="text" maxlength="5" placeholder="ค้นหารหัสวิชา"/>
+                            <input id="categoryId" class="form-control" type="text" maxlength="5"
+                                   placeholder="ค้นหารหัสวิชา"/>
                         </div>
                     </div>
 
@@ -46,7 +47,7 @@
                         <%--</select>--%>
                         <%--</div>--%>
                         <div class="col-md-4">
-                            <input  id="categoryName" class="form-control" type="text" placeholder="ค้นหารายวิชา"/>
+                            <input id="categoryName" class="form-control" type="text" placeholder="ค้นหารายวิชา"/>
                         </div>
 
 
@@ -67,7 +68,11 @@
                         <%--</select>--%>
                         <%--</div>--%>
                         <div class="col-md-4">
-                            <input id="subcategoryName" class="form-control" type="text" placeholder="ค้นหาหัวข้อเรื่อง"/>
+                            <input id="subcategoryName" class="form-control autocomplete" type="text"
+                                   placeholder="ค้นหาหัวข้อเรื่อง"/>
+                                            <%--<span class="input-group-addon">--%>
+                                                <%--<i class="glyphicon glyphicon-search" style="cursor: pointer" onclick="shoeDepartMent()"></i>--%>
+                                            <%--</span>--%>
                         </div>
                     </div>
 
@@ -150,46 +155,50 @@
             </thead>
             <tbody id="tbodySubCategory">
 
-            <%--<c:forEach var="subcategory" items="${LIST_OF_SUBCATEOGRIES}">--%>
-            <%--&lt;%&ndash;<tr>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<td>${subcategory.id}</td>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<td>${subcategory.name}</td>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<td style="text-align: center">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<button type="button" class="btn btn-gray"><span&ndash;%&gt;--%>
-            <%--&lt;%&ndash;class="glyphicon glyphicon-pencil"></span>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</button>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<button type="button" class="btn btn-danger"><span&ndash;%&gt;--%>
-            <%--&lt;%&ndash;class="glyphicon glyphicon-trash"></span>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</button>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</td>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</tr>&ndash;%&gt;--%>
-            <%--</c:forEach>--%>
 
             </tbody>
         </table>
     </div>
 </div>
-<div id="alertMess" class="alert alert-danger text-center" style="display: none;">ไม่พบข้อมูลที่ค้นหา </div>
+<div id="alertMess" class="alert alert-danger text-center" style="display: none;">ไม่พบข้อมูลที่ค้นหา</div>
 
 
 
-
-<%--<script>--%>
-
-<%--$("#tblSubCategory").hide();--%>
-
-<%--$('#viewControlSelector').on('change',function(){--%>
-<%--if(this.value == 'Category'){--%>
-<%--$("#tblCategory").show();--%>
-<%--$("#tblSubCategory").hide();--%>
-<%--}else if(this.value == 'SubCategory'){--%>
-<%--$("#tblCategory").hide();--%>
-<%--$("#tblSubCategory").show();--%>
-<%--}else{alert('No God Please No');}--%>
-<%--})--%>
-<%--</script>--%>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageSubCategory.js" />"></script>
 <%@include file="modal/createSubCategoryModal.jsp" %>
 
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+
+<style>
+    .ui-autocomplete {
+        position: absolute;
+        z-index: 1000;
+        cursor: default;
+        padding: 0;
+        margin-top: 2px;
+        list-style: none;
+        background-color: #ffffff;
+        border: 1px solid #ccc -webkit-border-radius : 5 px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .ui-autocomplete > li {
+        padding: 3px 20px;
+    }
+
+    .ui-autocomplete > li.ui-state-focus {
+        background-color: #DDD;
+    }
+
+    .ui-helper-hidden-accessible {
+        display: none;
+    }
+</style>
 
 
