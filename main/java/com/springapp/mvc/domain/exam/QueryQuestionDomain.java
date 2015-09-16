@@ -5,7 +5,7 @@ import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
-import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -37,6 +37,7 @@ public class QueryQuestionDomain extends HibernateUtil {
     QueryCategoryDomain queryCategoryDomain;
     @Autowired
     QueryUserDomain queryUserDomain;
+    @Autowired
 
 
     
@@ -147,6 +148,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(Question.class, "q");
         criteria.createAlias("q.subCategory","subCategory");
         criteria.createAlias("q.createBy","createBy");
+        criteria.createAlias("q.status","status");
         if (categoryId != null){
             Category category = queryCategoryDomain.getCategoryById(categoryId);
             criteria.add(Restrictions.eq("subCategory.category",category));
@@ -199,10 +201,11 @@ public class QueryQuestionDomain extends HibernateUtil {
                 System.out.println(dateTo);
                 System.out.println("HOORAHHH");
                 System.out.println("");
-                Disjunction disjunction = Restrictions.disjunction();
-                disjunction.add(Restrictions.le("q.createDate", dateTo));
-                disjunction.add(Restrictions.eq("q.createDate", dateTo));
-                criteria.add(disjunction);
+                criteria.add(Restrictions.le("q.createDate",dateTo));
+//                Disjunction disjunction = Restrictions.disjunction();
+//                disjunction.add(Restrictions.le("q.createDate", dateTo));
+//                disjunction.add(Restrictions.eq("q.createDate", dateTo));
+//                criteria.add(disjunction);
             }catch (Exception e){
                 e.printStackTrace();
                 System.out.println(e);
@@ -213,6 +216,9 @@ public class QueryQuestionDomain extends HibernateUtil {
         }
         if (scoreTo != null && scoreTo.trim().length()!=0){
             criteria.add(Restrictions.le("q.score",Float.parseFloat(scoreTo)));
+        }
+        if (statusId != null && statusId.trim().length()!=0){
+            criteria.add(Restrictions.eq("status.id",statusId));
         }
 
         criteria.addOrder(Order.asc("q.id"));

@@ -33,8 +33,18 @@ public class ExamResult implements Serializable {
     @JoinColumn(name = "EXAM_RECORD_ID")
     private ExamRecord examRecordId;
 
+    @ManyToOne
+    @JoinColumn(name = "RESULT_STATUS")
+    private Status status;
 
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public ExamRecord getExamRecordId() {
         return examRecordId;

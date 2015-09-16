@@ -6,7 +6,7 @@
 //$('#createQuestModalTitle').text('แก้ไขข้อสอบ');
 
 $(document).ready(function () {
-    listAllQuestion();
+    listSearchQuestion();
 })
 
 var generateEventHandler = function () {
@@ -144,51 +144,50 @@ var setEditModalParameter = function () {
     })
 }
 
-var listAllQuestion = function () {
-    var questionList = $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "/TDCS/exam/getAllReadyQuestion",
-            success: function (questionList) {
-                $('tbody').empty();
-                questionList.forEach(function (quest) {
-                    var createDate = new Date(quest.createDate);
-                    var formattedDate = createDate.getDate() + "/" + createDate.getMonth() + "/" + createDate.getFullYear();
-
-                    $("#tableBody").append('<tr questionId=' + quest.id + '>' +
-                    '<td class="questionId">' + quest.id + '</td>' +
-                    '<td class="questionDescription">' + quest.description + '</td>' +
-                    '<td class="questionType">' + quest.questionTypeDesc + '</td>' +
-                    '<td class="questionDifficulty">' + quest.difficultyDesc + '</td>' +
-                    '<td class="questionScore">' + quest.score + '</td>' +
-                    '<td class="questionCategory">' + quest.categoryName + '</td>' +
-                    '<td class="questionSubCategory">' + quest.subCategoryName + '</td>' +
-                    '<td class="questionCreateBy">' + quest.createByEmpId + '</td>' +
-                    '<td class="questionCreateDate">' + formattedDate + '</td>' +
-                    '<td>' +
-                    '<div class="btn-group">' +
-                    '<button class="btn dropdown-toggle" data-toggle="dropdown">' +
-                    'เลือก<span class="caret"></span>' +
-                    '</button>' +
-                    '<ul class="dropdown-menu actionBtn">' +
-                    '<li><a class="actionViewBtn" data-toggle="modal" data-target="#questionDetailModal">ดู</a></li>' +
-                    '<li><a class="actionEditBtn" data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>' +
-                    '<li><a class="actionDeleteBtn">ลบ</a></li>' +
-                    '</ul>' +
-                    '</div>' +
-                    '</td>' +
-                    "</tr>")
-                    //return false;
-                })
-                generateEventHandler();
-            }, error: function () {
-                console.log("Error in listAllQuestion() ajax");
-            }
-
-        }
-    )
-
-}
+//var listAllQuestion = function () {
+//    var questionList = $.ajax({
+//            type: "POST",
+//            contentType: "application/json",
+//            url: "/TDCS/exam/getAllReadyQuestion",
+//            success: function (questionList) {
+//                $('tbody').empty();
+//                questionList.forEach(function (quest) {
+//                    var createDate = new Date(quest.createDate);
+//                    var formattedDate = createDate.getDate() + "/" + createDate.getMonth() + "/" + createDate.getFullYear();
+//
+//                    $("#tableBody").append('<tr questionId=' + quest.id + '>' +
+//                    '<td class="questionId">' + quest.id + '</td>' +
+//                    '<td class="questionDescription">' + quest.description + '</td>' +
+//                    '<td class="questionType">' + quest.questionTypeDesc + '</td>' +
+//                    '<td class="questionDifficulty">' + quest.difficultyDesc + '</td>' +
+//                    '<td class="questionScore">' + quest.score + '</td>' +
+//                    '<td class="questionCategory">' + quest.categoryName + '</td>' +
+//                    '<td class="questionSubCategory">' + quest.subCategoryName + '</td>' +
+//                    '<td class="questionCreateBy">' + quest.createByEmpId + '</td>' +
+//                    '<td class="questionCreateDate">' + formattedDate + '</td>' +
+//                    '<td>' +
+//                    '<div class="btn-group">' +
+//                    '<button class="btn dropdown-toggle" data-toggle="dropdown">' +
+//                    'เลือก<span class="caret"></span>' +
+//                    '</button>' +
+//                    '<ul class="dropdown-menu actionBtn">' +
+//                    '<li><a class="actionViewBtn" data-toggle="modal" data-target="#questionDetailModal">ดู</a></li>' +
+//                    '<li><a class="actionEditBtn" data-toggle = "modal" data-target = "#createQuest">แก้ไข</a></li>' +
+//                    '<li><a class="actionDeleteBtn">ลบ</a></li>' +
+//                    '</ul>' +
+//                    '</div>' +
+//                    '</td>' +
+//                    "</tr>")
+//                    //return false;
+//                })
+//                generateEventHandler();
+//            }, error: function () {
+//                console.log("Error in listAllQuestion() ajax");
+//            }
+//
+//        }
+//    )
+//}
 
 var deleteQuestion = function (questionId) {
     $.ajax({
@@ -210,15 +209,12 @@ var deleteQuestion = function (questionId) {
 var listSearchQuestion = function () {
     var data = getSearchQuestionResultList();
 
-    console.log("HELLO===========")
-    console.log(data)
-
     $("tbody").empty();
     data.forEach(function (q) {
         var createDate = new Date(q.createDate);
-        var formattedDate = createDate.getDate() + "/" + createDate.getMonth() + "/" + createDate.getFullYear();
+        var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth())+1) + "/" + createDate.getFullYear();
         $("#tableBody").append('<tr questionId=' + q.id + '>' +
-        '<td class="questionId">' + q.id + '</td>' +
+        //'<td class="questionId">' + q.id + '</td>' +
         '<td class="questionDescription">' + q.description + '</td>' +
         '<td class="questionType">' + q.questionType.description + '</td>' +
         '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
