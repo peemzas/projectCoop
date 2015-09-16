@@ -15,17 +15,16 @@
                     <h4>ค้นหา...</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
+                    <div class="row form-group">
                         <%@include file="selectCategoryInput.jsp" %>
                     </div>
                     <div style="margin-bottom: 5px"></div>
 
-                    <div class="row">
+                    <div class="row form-group">
                         <%@include file="selectCreateByInput.jsp" %>
                     </div>
 
                     <%--Add By Mr.Wanchana--%>
-                    <br/>
 
                     <div class="row">
                         <div class="col-sm-8 col-md-offset-2">
@@ -34,13 +33,15 @@
                             </div>
                         </div>
                     </div>
-                    <hr/>
+                    <%--<hr/>--%>
+                    <br>
+
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
                             <button id="generalSearchButtonInModalSelectionQuestion"
                                     class="btn btn-default searchInputSubmitBtn" type="button">ค้นหา
                             </button>
-                            <button class="btn btn-default" type="button">ล้างข้อมูล</button>
+                            <button class="btn btn-default searchInputClearBtn" type="button">ล้างข้อมูล</button>
                         </div>
                     </div>
                 </div>
@@ -52,35 +53,36 @@
                         </div>
                     </div>
                     <div id="advanceBody" class="collapse">
-                        <div class="row">
-                            <br/><br/>
+                        <%--<div class="row">--%>
+                        <%--<br/><br/>--%>
 
-                            <div class="col-md-2 text-right">
-                                <label>หมายเลขข้อสอบ</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input id="searchQuestionIdInput" class="form-control" type="text"/>
-                            </div>
-                        </div>
+                        <%--<div class="col-md-2 text-right">--%>
+                        <%--<label>หมายเลขข้อสอบ : </label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-3">--%>
+                        <%--<input id="searchQuestionIdInput" class="form-control" type="text"/>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
                         <br/>
 
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col-md-2 text-right">
-                                <label>คำถาม</label>
+                                <label>คำถาม : </label>
                             </div>
                             <div class="col-md-8">
                                 <input id="searchQuestionDescInput" type="text" class="form-control"/>
                             </div>
                         </div>
-                        <br/>
+                        <%--<br/>--%>
 
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col-md-2 text-right">
                                 <h5>วันที่สร้าง : </h5>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input id="searchCreateDateFromInput" type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy"/>
+                                    <input id="searchCreateDateFromInput" type="text" class="form-control datepicker"
+                                           data-date-format="dd/mm/yyyy"/>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"
                                                                           href="#"></span></span>
                                 </div>
@@ -90,15 +92,16 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input id="searchCreateDateToInput" type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy"/>
+                                    <input id="searchCreateDateToInput" type="text" class="form-control datepicker"
+                                           data-date-format="dd/mm/yyyy"/>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"
                                                                           href="#"></span></span>
                                 </div>
                             </div>
                         </div>
-                        <br/>
+                        <%--<br/>--%>
 
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col-md-2 text-right">
                                 <h5>คะแนน : </h5>
                             </div>
@@ -112,22 +115,22 @@
                                 <input id="searchScoreToInput" type="text" class="form-control"/>
                             </div>
                         </div>
-                        <br/>
 
-                        <div class="row">
-                            <div class="col-md-2 text-right">
-                                <h5>สถานะ : </h5>
-                            </div>
-                            <div class="col-md-3">
-                                <select id="searchStatusInput" class="form-control">
-                                    <option selected value=""></option>
-                                    <option>ถูกลบ --เท่านั้น</option>
-                                    <option>ถูกลบ --และยังไม่ถูกลบ</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br/>
-                        <hr/>
+                        <%--<div class="row">--%>
+                        <%--<div class="col-md-2 text-right">--%>
+                        <%--<h5>สถานะ : </h5>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-3">--%>
+                        <%--<select id="searchStatusInput" class="form-control">--%>
+                        <%--<option selected value=""></option>--%>
+                        <%--<option>ถูกลบ --เท่านั้น</option>--%>
+                        <%--<option>ถูกลบ --และยังไม่ถูกลบ</option>--%>
+                        <%--</select>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<hr/>--%>
+                        <br>
+
                         <div class="row" id="btnAdvanceSearch">
                             <div class="col-md-12 text-center">
                                 <button class="btn btn-default searchInputSubmitBtn" type="button">ค้นหา</button>

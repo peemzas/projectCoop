@@ -337,13 +337,13 @@ public class QuestionController {
             @RequestParam(value = "categoryId", required = false) String catId,
             @RequestParam(value = "subCatName", required = false) String subCatName,
             @RequestParam(value = "createBy", required = false) String createBy,
-            @RequestParam(value = "questionId", required = false) String questionId,
+//            @RequestParam(value = "questionId", required = false) String questionId,
             @RequestParam(value = "questionDesc", required = false) String questionDesc,
             @RequestParam(value = "createDateFrom", required = false) String createDateFrom,
             @RequestParam(value = "createDateTo", required = false) String createDateTo,
             @RequestParam(value = "scoreFrom", required = false) String scoreFrom,
             @RequestParam(value = "scoreTo", required = false) String scoreTo,
-            @RequestParam(value = "status", required = false) String status,
+//            @RequestParam(value = "status", required = false) String status,
             HttpServletRequest request, HttpServletResponse response
     ) {
 
@@ -359,19 +359,19 @@ public class QuestionController {
             System.out.println("null subCatName ");
         }
         System.out.println(createBy + " : " + createBy.trim().length());
-        System.out.println(questionId + " : " + questionId.trim().length());
+//        System.out.println(questionId + " : " + questionId.trim().length());
         System.out.println(questionDesc + " : " + questionDesc.trim().length());
         System.out.println(createDateFrom + " : " + createDateFrom.trim().length());
         System.out.println(createDateTo + " : " + createDateTo.trim().length());
         System.out.println(scoreFrom + " : " + scoreFrom.trim().length());
         System.out.println(scoreTo + " : " + scoreTo.trim().length());
-        System.out.println(status + " : " + status.trim().length());
+//        System.out.println(status + " : " + status.trim().length());
         System.out.println("==============================================================");
 
         List<Question> questions = queryQuestionDomain.searchQuestionQuery(
-                catId, subCatName, createBy, questionId,
+                catId, subCatName, createBy, null,
                 questionDesc, createDateFrom, createDateTo,
-                scoreFrom, scoreTo, status
+                scoreFrom, scoreTo, null
         );
 
         String json = new Gson().toJson(questions);

@@ -30,8 +30,8 @@
             <table class="table">
                 <thead class="bg-primary">
                 <tr>
-                    <th style="text-align: center">หมายเลขข้อสอบ</th>
-                    <th style="text-align: center">ข้อสอบ</th>
+                    <%--<th style="text-align: center">หมายเลขข้อสอบ</th>--%>
+                    <th style="text-align: center">คำถาม</th>
                     <th style="text-align: center">ชนิดข้อสอบ</th>
                     <th style="text-align: center">ระดับความยาก</th>
                     <th style="text-align: center">คะแนน</th>

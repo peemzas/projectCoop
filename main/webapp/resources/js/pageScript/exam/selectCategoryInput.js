@@ -3,7 +3,7 @@ var getSearchCategoryInputValue = function () {
 }
 
 var getSearchSubCategoryInputValue = function () {
-        return $('#selectSubCategoryToSelection').children('.subCategory:selected').attr('subCategoryName');
+    return $('#selectSubCategoryToSelection').children('.subCategory:selected').attr('subCategoryName');
 }
 
 var updateCategoryList = function () {
@@ -43,9 +43,13 @@ var updateSubCategoryList = function () {
             categoryId: data
         },
         success: function (item) {
-            if(jQuery.isEmptyObject(item)){
+            if (jQuery.isEmptyObject(item)) {
                 subcatSelect.empty();
-                subcatSelect.append("<option selected value=''>ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้</option>");
+                if (catSelect.val() == "") {
+                    subcatSelect.append("<option selected value=''></option>");
+                } else {
+                    subcatSelect.append("<option selected value=''>ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้</option>");
+                }
             }
             if (item) {
                 item.forEach(function (item) {
@@ -76,3 +80,10 @@ $('#selectCategoryToSelection').on('change', function () {
     $('selectSubCategoryToSelection').children('.subCategory').remove()
     updateSubCategoryList()
 })
+
+var catAndSubcatSelectNothing = function () {
+    $('#selectCategoryToSelection option:selected').removeAttr("selected");
+    $('#selectCategoryToSelection option[value=""]').attr('selected', 'selected');
+    updateSubCategoryList();
+
+}

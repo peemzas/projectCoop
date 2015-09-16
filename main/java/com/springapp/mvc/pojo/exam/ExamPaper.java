@@ -38,27 +38,53 @@ public class ExamPaper implements Serializable {
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
 
+//    @ManyToOne
+//    @JoinColumn(name = "PROPORTIONAL_SCORE")
+//    private Boo proportionalScore;f
+
+    @Column(name = "PAPER_CODE")
+    private String code;
+
+    @Column(name = "PAPER_UPDATE_DATE")
+    private Date updateDate;
+
     @ManyToOne
-    @JoinColumn(name = "PROPORTIONAL_SCORE")
-    private Boo proportionalScore;
+    @JoinColumn(name = "PAPER_UPDATE_BY")
+    private User updateBy;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "TDCS_PAPER_CONTAINING",
-            joinColumns = {@JoinColumn(name = "PAPER_ID",nullable = false , updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",nullable = false , updatable = false)})
-    private Set<Question> questions = new HashSet<Question>();
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "TDCS_PAPER_CONTAINING",
+//            joinColumns = {@JoinColumn(name = "PAPER_ID", nullable = false, updatable = false)},
+//            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false)})
+//    private Set<Question> questions = new HashSet<Question>();
 
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public User getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(User updateBy) {
+        this.updateBy = updateBy;
+    }
 
     public Integer getExamTime() {
         return examTime;
-    }
-
-    public Boo getProportionalScore() {
-        return proportionalScore;
-    }
-
-    public void setProportionalScore(Boo proportionalScore) {
-        this.proportionalScore = proportionalScore;
     }
 
     public void setExamTime(Integer examTime) {
@@ -105,12 +131,4 @@ public class ExamPaper implements Serializable {
         this.createBy = createBy;
     }
 
-
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
-    }
 }
