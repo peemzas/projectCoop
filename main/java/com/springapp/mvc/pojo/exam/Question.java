@@ -1,6 +1,7 @@
 package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
+import flexjson.JSONSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -59,9 +60,9 @@ public class Question implements Serializable, Cloneable {
     private User updateBy;
 
 
-    @OneToMany(mappedBy = "questionId")
-    private Set<ExamAnswerRecord> examAnswerRecords;
-//
+//    @OneToMany(mappedBy = "questionId")
+//    private Set<ExamAnswerRecord> examAnswerRecords;
+
 //    @ManyToMany(mappedBy = "questions" ,fetch = FetchType.LAZY)
 //    private Set<ExamPaper> examPapers = new HashSet<ExamPaper>();
 
@@ -69,6 +70,11 @@ public class Question implements Serializable, Cloneable {
 //    private Set<Choice> choices;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private Set<Choice> choices;
+
+    public String toJson(){
+
+        return new JSONSerializer().exclude("choices.question").exclude("").serialize(this);
+    }
 
 
     @Override
@@ -114,6 +120,14 @@ public class Question implements Serializable, Cloneable {
         result = 31 * result + (getUpdateDate() != null ? getUpdateDate().hashCode() : 0);
         result = 31 * result + (getUpdateBy() != null ? getUpdateBy().hashCode() : 0);
         return result;
+    }
+
+    public Set<Choice> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Set<Choice> choices) {
+        this.choices = choices;
     }
 
     public Date getUpdateDate() {
