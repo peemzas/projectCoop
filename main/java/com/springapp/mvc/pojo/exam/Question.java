@@ -76,7 +76,6 @@ public class Question implements Serializable, Cloneable {
         return new JSONSerializer().exclude("choices.question").exclude("").serialize(this);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

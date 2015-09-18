@@ -1,12 +1,12 @@
 package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import com.springapp.mvc.pojo.exam.PaperQuestion;
 
 /**
  * Created by Phuthikorn_T on 6/30/2015.
@@ -58,6 +58,19 @@ public class ExamPaper implements Serializable {
 //            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false)})
 //    private Set<Question> questions = new HashSet<Question>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="pk.examPaper", cascade =
+            {CascadeType.PERSIST, CascadeType.MERGE})
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private Set<PaperQuestion> paperContains;
+
+    public Set<PaperQuestion> getPaperContains() {
+        return paperContains;
+    }
+
+    public void setPaperContains(Set<PaperQuestion> paperContains) {
+        this.paperContains = paperContains;
+    }
 
     public String getCode() {
         return code;
