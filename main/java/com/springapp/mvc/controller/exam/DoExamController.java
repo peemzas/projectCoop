@@ -50,18 +50,18 @@ public class DoExamController {
     QueryBooDomain queryBooDomain;
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
-    public String doExam(ModelMap modelMap, Model model,HttpServletRequest request,HttpServletResponse response){
-
-
-        return "doExam";
-    }
-    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
-    public String doExam(ModelMap modelMap, Model model,HttpServletRequest request,HttpServletResponse response,
-                         @RequestParam(value = "paperId")String paperId){
-
-
-        return "doExam";
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
+//    public String doExam(ModelMap modelMap, Model model,HttpServletRequest request,HttpServletResponse response){
+//
+//
+//        return "doExam";
+//    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
+//    public String doExam(ModelMap modelMap, Model model,HttpServletRequest request,HttpServletResponse response,
+//                         @RequestParam(value = "paperId")String paperId){
+//
+//
+//        return "doExam";
+//    }
 
 }
