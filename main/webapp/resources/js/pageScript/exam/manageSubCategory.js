@@ -1,98 +1,123 @@
 /**
  * Created by JOKIZZ on 17/8/2558.
  */
-$("document").ready(function(){
+
+
+$("#dropdownExamEmp").attr('class', 'dropdown active');
+
+$(document).ready(function () {
+    $("#selectAllSubCategory").on('click', function () {
+        if (this.checked) {
+            $(".selectSubCategory").each(function () {
+                this.checked = true;
+            })
+        }
+        else {
+            $(".selectSubCategory").each(function () {
+                this.checked = false;
+            })
+        }
+    });
+
+    //$("#tbodySubCategory").on('click', '.selectSubCategory', function () {
+    //    alert($(this).attr('subCatId'));
+    //});
+
+});
+
+
+$("document").ready(function () {
     //alert('hi')
     viewSubCategory();
 });
-function viewSubCategory(){
+function viewSubCategory() {
     $("#tbodySubCategory").empty();
-
-
-
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/TDCS/exam/getAllSubCategory",
         async: false,
-        success: function(data){
-            data.forEach(function(value){
+        success: function (data) {
+            data.forEach(function (value) {
 
                 $("#tbodySubCategory").append(
-                    '<tr>'+
+                    '<tr>' +
 
-                    '<td style="text-align: center;"><label id="catId'+value.id+'"><b>'+value.id+'</b></label>'+
+                        //'<td style="text-align: center;"><label id="catId'+value.id+'"><b>'+value.id+'</b></label>'+
+                    '<td style="text-align: center;"><input class="selectSubCategory" type="checkbox" subCatId="' + value.subId + '"></input>' +
 
-                    //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
+                        //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
 
-                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.name+'</label>'+
+                    '<td style="text-align: center;"><label id="catName' + value.id + '">' + value.name + '</label>' +
 
-                    '</td>'+
+                    '</td>' +
 
-                    //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
+                        //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
 
-                    '<td style="text-align: center;"><label id="subName'+value.subId+'">'+value.subName+'</label>'+
-                    '<input id="editsubName'+value.subId+'" class="form-control" type="text" value="'+value.subName+'" style="display: none;">'+
+                    '<td style="text-align: center;"><label id="subName' + value.subId + '">' + value.subName + '</label>' +
+                    '<input id="editsubName' + value.subId + '" class="form-control" type="text" value="' + value.subName + '" style="display: none;">' +
 
 
-                    '<td style="text-align: center">'+
-                    '<button id="editBtn'+value.subId+'" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button id="updateBtn'+value.subId+'" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '<td style="text-align: center">' +
+                    '<button id="editBtn' + value.subId + '" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
+                    '&nbsp;<button id="updateBtn' + value.subId + '" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
 
-                    '</td>'+
+                    '</td>' +
 
-                    '<td style="text-align: center">'+
-                    '<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.subId+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
-                    '</td>'+
+                        //'<td style="text-align: center">'+
+                        //'<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.subId+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
+                        //'</td>'+
                     '</tr>'
                 )
             });
         },
-        error: function(data){
+        error: function (data) {
             alert('error while request...');
         }
     });
 }
 
 
-function deleteSubCategory(subCategoryId){
 
-    if(!confirm(" แน่ใจนะว่าคุณจะลบ ")){ 
 
+function deleteSubCategory(subCategoryId) {
+    if (!confirm(" แน่ใจนะว่าคุณจะลบ ")) {
         return false;
     }
-    $.ajax({
-        type: "POST",
-        url: "/TDCS/exam/deleteSubCategory",
-        data:{
-            id: subCategoryId
-        },
-        async: false,
-        success:function(){
-            alert(' ลบวิชาสำเร็จ ');
-            //$("#tbodySubCategory").empty();
-            //viewSubCategory();
-            window.location.reload();
-        },
-        error: function(deleteSubCategory){
-            alert('error Delete...');
-        }
-    });
+    $("#tbodySubCategory input:checkbox:checked").each(function(){
+        //categoryIds.push($(this).parent().siblings(":first").text());
+        var subCategoryId=($(this).attr('subCatId'));
+        //alert (subCategoryId);
+        $.ajax({
+            type: "POST",
+            url: "/TDCS/exam/deleteSubCategory",
+            data: {
+                id: subCategoryId
+            },
+            async: false,
+            success: function () {
+                //$("#tbodySubCategory").empty();
+                //viewSubCategory();
+            },
+            error: function () {
+                alert('error Delete...');
+            }
+        });
+    })
+    alert(' ลบวิชาสำเร็จ ');
+    window.location.reload();
 }
 
-function editSubCategory(subcategoryId){
+function editSubCategory(subcategoryId) {
 
-    $("#editBtn"+subcategoryId).hide();
-    $("#subName"+subcategoryId).hide();
+    $("#editBtn" + subcategoryId).hide();
+    $("#subName" + subcategoryId).hide();
     //$("#data"+subcategoryId).hide();
 
-    //alert($("#thEdit").text("บันทึก"));
-    //$("#thEdit").text("บันทึก");
-    //$("#deleteBtn"+categoryId).attr("disabled", "disabled");
 
-    $("#editsubName"+subcategoryId).show();
+    $("#editsubName" + subcategoryId).show();
     //$("#editData"+subcategoryId).show();
-    $("#updateBtn"+subcategoryId).show();
+    $("#updateBtn" + subcategoryId).show();
 }
 
 
@@ -108,71 +133,70 @@ function updateSubCategory(subcategoryId) {
     //    var id = $("#editId" + categoryId).val();
 
 
+    var subName = $("#editsubName" + subcategoryId).val();
 
-        var subName = $("#editsubName" + subcategoryId).val();
-
-    if (subName ==""){
+    if (subName == "") {
         alert("ไม่สามารถเป็นค่าว่างได้");
     }
     //if (subName==$("#editsubName")){
     //    alert("ชื่อซ้ำ");
     //}
-        //alert($("#id"+subcategoryId));
+    //alert($("#id"+subcategoryId));
 
 
-    alert(subcategoryId+' '+subName);
+    alert(subcategoryId + ' ' + subName);
 
-        var dataResponse = $.ajax({
-            type: "POST",
-            url: "/TDCS/exam/editSubCategory",
-            data: {
+    var dataResponse = $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/editSubCategory",
+        data: {
 
-                subcategoryId:subcategoryId,
-                subcategoryName:subName
+            subcategoryId: subcategoryId,
+            subcategoryName: subName
 
 
-            },
+        },
 
-            complete: function (xhr) {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        viewSubCategory();
-                        //window.   location.reload();
-                    }
-
-                    else {
-                        alert("ชื่อซ้ำ");
-                    }
-                } else {
-                    alert("fail2");
+        complete: function (xhr) {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    viewSubCategory();
+                    //window.   location.reload();
                 }
+
+                else {
+                    alert("ชื่อซ้ำ");
+                }
+            } else {
+                alert("fail2");
             }
-        });
+        }
+    });
     //}
 }
 
 
-
-$(document).ready(function(){
-    $("#searchSubCategory").on('click',function(){
+$(document).ready(function () {
+    $("#searchSubCategory").on('click', function () {
         search();
     });
 
-    $("#clearsearchinput").on('click',function(){
+    $("#clearsearchinput").on('click', function () {
         clearsearch();
     });
 });
 
-function clearsearch(){
+function clearsearch() {
     $("#categoryId").val("");
-    $("#categoryName").val("");
-    $("#subcategoryName").val("");
+    $("#sSubCat").val("");
 }
 
-function search(){
-    var categoryId= $("#categoryId").val();
-    var categoryName= $("#categoryName").val();
-    var subcategoryName= $("#subcategoryName").val();
+function search() {
+    var categoryId = $("#categoryId").val();
+    var subcategoryName = $("#sSubCat").val();
+
+
+    categoryId = categoryId.substr(0, categoryId.indexOf(' '));
 
 
     var dataResponse = $.ajax({
@@ -180,54 +204,53 @@ function search(){
         url: "/TDCS/exam/searchSubCategory",
         data: {
             categoryId: categoryId,
-            categoryName:categoryName,
-            //subcategoryId: subcategoryId,
             subcategoryName: subcategoryName
+
         },
         async: false,
-        success: function(data){
+
+        success: function (data) {
 
             $("#tbodySubCategory").empty();
-            if(data.size == null){
+            if (data.size == null) {
                 $("#alertMess").show();
             }
 
-            data.forEach(function(value){
+            data.forEach(function (value) {
                 //$("#tbodySubCategory").empty();
                 console.log(value.SubCategory.name);
                 $("#alertMess").hide();
                 $("#tbodySubCategory").append(
-                    '<tr>'+
+                    '<tr>' +
 
-                    '<td style="text-align: center;"><label id="catId'+value.id+'"><b>'+value.category.id+'</b></label>'+
+                    '<td style="text-align: center;"><input class="selectSubCategory" type="checkbox" subCatId="' + value.SubCategory.id + '">' + value.SubCategory.id + '</input>' +
 
                         //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
-                    '<td style="text-align: center;"><label id="catName'+value.id+'">'+value.category.name+'</label>'+
-                    '</td>'+
+                    '<td style="text-align: center;"><label id="catName' + value.id + '">' + value.category.name + '</label>' +
+                    '</td>' +
 
                         //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
 
-                    '<td style="text-align: center;"><label id="subName'+value.SubCategory.id+'">'+value.SubCategory.name+'</label>'+
-                    '<input id="editsubName'+value.SubCategory.id+'" class="form-control" type="text" value="'+value.SubCategory.name+'" style="display: none;">'+
+                    '<td style="text-align: center;"><label id="subName' + value.SubCategory.id + '">' + value.SubCategory.name + '</label>' +
+                    '<input id="editsubName' + value.SubCategory.id + '" class="form-control" type="text" value="' + value.SubCategory.name + '" style="display: none;">' +
 
 
+                    '<td style="text-align: center">' +
+                    '<button id="editBtn' + value.SubCategory.id + '" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
+                    '&nbsp;<button id="updateBtn' + value.SubCategory.id + '" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
 
-                    '<td style="text-align: center">'+
-                    '<button id="editBtn'+value.SubCategory.id+'" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button id="updateBtn'+value.SubCategory.id+'" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '</td>' +
 
-                    '</td>'+
-
-                    '<td style="text-align: center">'+
-                    '<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.SubCategory.id+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
-                    '</td>'+
+                    //'<td style="text-align: center">' +
+                        //'<button class="btn btn-danger" type="button" onclick="deleteSubCategory('+ "'" +value.SubCategory.id+ "'"+')"> <span class="glyphicon glyphicon-trash"></span></button>'+
+                    //'</td>' +
                     '</tr>'
                 )
 
             });
 
         },
-        error: function(){
+        error: function () {
             alert("error");
         }
     })
@@ -235,53 +258,120 @@ function search(){
 
 
 
-
-$("subcategoryName").keyup(function(e) {
+$("categoryId").keyup(function(e) {
     if (e.which > 0) {
         e.preventDefault();
-        LOVSUB();
+        LOVCAT();
     }
 });
+$(function LOVCAT() {
+    var availableTags2 = [];
 
-$(function LOVSUB() {
-    var availableTags = [
-        "ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++",
-        "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran",
-        "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl",
-        "PHP", "Python", "Ruby", "Scala", "Scheme","DD","test","Test"
-    ];
-
-    //for(var idx = 0; idx < arrayEmpNameToQuery.length; idx ++){
-    //    var item = {
-    //        "thFname" : arrayEmpNameToQuery[idx],
-    //        "empName" : userNameRequest
-    //    };
-    //    tempArray.push(item);
-    //}
-    //var data = $.ajax({
-    //    type: "POST",
-    //    contentType: "application/json",
-    //    url: "/TDCS/exam/getAllSubCategory",
-    //    async: false,
-    //    success: function(data){
-    //        data.forEach(function(value){
-    //
-    //            $(".autocomplete").append(
-    //                '<tr>'+
-    //                '<td style="text-align: center;"><label id="subName'+value.subId+'">'+value.subName+'</label>'+
-    //                '<td style="text-align: center">'
-    //
-    //            )
-    //        });
-    //    },
-    //    error: function(data){
-    //        alert('error while request...');
-    //    }
-    //});
-    $(".autocomplete").autocomplete({
-        source: availableTags
+    var data = $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TDCS/exam/getAllCategory",
+        async: false,
+        success: function(data){
+            data.forEach(function(value){
+                    availableTags2.push(value.id + ' : ' + value.name);
+            });
+        },
+        error: function(data){
+            alert('error while request...');
+        }
+    });
+    $(".autocomplete2").autocomplete({
+        source: availableTags2
     });
 });
+
+function listsubcat() {
+    alert('kk');
+
+    var availableTagsall = [];
+
+    var data = $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TDCS/exam/getAllCategory",
+        async: false,
+        success: function(data){
+            data.forEach(function(value){
+                availableTagsall.push(value.id + ' : ' + value.name);
+            });
+        },
+        error: function(data){
+            alert('error while request...');
+        }
+    });
+    $(".autocompleteall").autocomplete({
+        source: availableTagsall
+    });
+}
+
+//$(function LOVCAT2() {
+//
+//    var availableTags2 = [];
+//
+//
+//
+//    var data = $.ajax({
+//        type: "POST",
+//        contentType: "application/json",
+//        url: "/TDCS/exam/getAllCategory",
+//        async: false,
+//        success: function(data){
+//            data.forEach(function(value){
+//                availableTags2.push(value.id + ' : ' + value.name);
+//            });
+//        },
+//        error: function(data){
+//            alert('error while request...');
+//        }
+//    });
+//    $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
+//        name: 'availableTags2',
+//        limit: 2,
+//        source: availableTags2
+//    });
+//
+//
+//});
+
+
+//$("subcategoryName").keyup(function(e) {
+//    if (e.which > 0) {
+//        e.preventDefault();
+//        LOVSUB();
+//    }
+//});
+//$(function LOVSUB() {
+//    var availableTags = [
+//        //"ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++",
+//        //"Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran",
+//        //"Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl",
+//        //"PHP", "Python", "Ruby", "Scala", "Scheme","DD","test","Test"
+//    ];
+//
+//    var data = $.ajax({
+//        type: "POST",
+//        contentType: "application/json",
+//        url: "/TDCS/exam/getAllSubCategory",
+//        async: false,
+//        success: function(data){
+//            data.forEach(function(value){
+//                availableTags.push(value.subName);
+//            });
+//        },
+//        error: function(data){
+//            alert('error while request...');
+//        }
+//    });
+//    $(".autocomplete").autocomplete({
+//        source: availableTags
+//    });
+//});
 
 
 
