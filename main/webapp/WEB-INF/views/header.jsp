@@ -9,7 +9,8 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <span class="icon-bar" ></span>
+                <span class="icon-bar" ></span>
             </button>
             <a class="navbar-brand">TDCS</a>
         </div>
@@ -135,11 +136,7 @@
                                     <c:if test="${status == 'staff'}">ตรวจข้อสอบ</c:if>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/TDCS/exam/mainPageEmp">
-                                    <c:if test="${status == 'staff'}">หน้าหลักอันเก่า</c:if>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
                 </c:if>

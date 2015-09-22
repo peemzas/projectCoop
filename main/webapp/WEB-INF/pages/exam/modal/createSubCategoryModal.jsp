@@ -99,10 +99,7 @@
 
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/addSubCategory.js" />"></script>
 
-<%--<script src="<c:url value="/resources/js/checkKeybord.js" />"></script>--%>
-<%--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>--%>
-<%--<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>--%>
-<%--<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>--%>
+
 
 
 
