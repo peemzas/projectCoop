@@ -6,6 +6,7 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+
 import com.springapp.mvc.pojo.exam.PaperQuestion;
 
 /**
@@ -31,9 +32,6 @@ public class ExamPaper implements Serializable {
     @Column(name = "PAPER_MAX_SCORE")
     private Integer maxScore;
 
-    @Column(name = "PAPER_EXAM_TIME_MINUTE")
-    private Integer examTime;
-
     @ManyToOne
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
@@ -48,6 +46,9 @@ public class ExamPaper implements Serializable {
     @Column(name = "PAPER_UPDATE_DATE")
     private Date updateDate;
 
+    @Column(name = "PAPER_TIME_LIMIT_MINUTE")
+    private Integer timeLimit;
+
     @ManyToOne
     @JoinColumn(name = "PAPER_UPDATE_BY")
     private User updateBy;
@@ -58,18 +59,27 @@ public class ExamPaper implements Serializable {
 //            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false)})
 //    private Set<Question> questions = new HashSet<Question>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy ="pk.examPaper", cascade =
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.examPaper", cascade =
             {CascadeType.PERSIST, CascadeType.MERGE})
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
             org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
-    private Set<PaperQuestion> paperContains;
+    private Set<PaperQuestion> questions;
 
-    public Set<PaperQuestion> getPaperContains() {
-        return paperContains;
+
+    public Integer getTimeLimit() {
+        return timeLimit;
     }
 
-    public void setPaperContains(Set<PaperQuestion> paperContains) {
-        this.paperContains = paperContains;
+    public void setTimeLimit(Integer timeLimit) {
+        this.timeLimit = timeLimit;
+    }
+
+    public Set<PaperQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<PaperQuestion> questions) {
+        this.questions = questions;
     }
 
     public String getCode() {
@@ -94,14 +104,6 @@ public class ExamPaper implements Serializable {
 
     public void setUpdateBy(User updateBy) {
         this.updateBy = updateBy;
-    }
-
-    public Integer getExamTime() {
-        return examTime;
-    }
-
-    public void setExamTime(Integer examTime) {
-        this.examTime = examTime;
     }
 
     public Integer getId() {

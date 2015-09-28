@@ -3,7 +3,6 @@ package com.springapp.mvc.pojo.exam;
 import com.springapp.mvc.pojo.User;
 
 import javax.persistence.*;
-import java.awt.print.Paper;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,53 +17,53 @@ public class ExamRecord implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_RECORD_ID_SEQ_GEN")
     @SequenceGenerator(name = "TDCS_EXAM_RECORD_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_RECORD_SEQ")
     @Column(name = "RECORD_ID")
-    private Integer recordId;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
-    private User userId;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "PAPER_ID")
-    private ExamPaper paperId;
+    private ExamPaper paper;
 
     @Column(name = "EXAM_DATE")
     private Date examDate;
 
-    @Column(name = "TIME_TAKEN")
-    private Float timeTaken;
+    @Column(name = "TIME_TAKEN_MINUTE")
+    private Integer timeTaken;
 
 
-    public Float getTimeTaken() {
+    public Integer getTimeTaken() {
         return timeTaken;
     }
 
-    public void setTimeTaken(Float timeTaken) {
+    public void setTimeTaken(Integer timeTaken) {
         this.timeTaken = timeTaken;
     }
 
-    public Integer getRecordId() {
-        return recordId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRecordId(Integer recordId) {
-        this.recordId = recordId;
+    public void setId(Integer recordId) {
+        this.id = recordId;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User userId) {
+        this.user = userId;
     }
 
-    public ExamPaper getPaperId() {
-        return paperId;
+    public ExamPaper getPaper() {
+        return paper;
     }
 
-    public void setPaperId(ExamPaper paperId) {
-        this.paperId = paperId;
+    public void setPaper(ExamPaper paperId) {
+        this.paper = paperId;
     }
 
     public Date getExamDate() {

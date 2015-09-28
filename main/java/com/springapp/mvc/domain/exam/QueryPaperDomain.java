@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class QueryPaperDomain extends HibernateUtil {
 
-    public ExamPaper getPaperDetailById(Integer paperId) {
+    public ExamPaper getPaperById(Integer paperId) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.eq("id", paperId));
 

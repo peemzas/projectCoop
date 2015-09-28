@@ -2,9 +2,7 @@ package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.pojo.User;
-import com.springapp.mvc.pojo.exam.Category;
-import com.springapp.mvc.pojo.exam.Choice;
-import com.springapp.mvc.pojo.exam.Question;
+import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
@@ -17,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -202,10 +201,6 @@ public class QueryQuestionDomain extends HibernateUtil {
                 System.out.println("HOORAHHH");
                 System.out.println("");
                 criteria.add(Restrictions.le("q.createDate",dateTo));
-//                Disjunction disjunction = Restrictions.disjunction();
-//                disjunction.add(Restrictions.le("q.createDate", dateTo));
-//                disjunction.add(Restrictions.eq("q.createDate", dateTo));
-//                criteria.add(disjunction);
             }catch (Exception e){
                 e.printStackTrace();
                 System.out.println(e);
@@ -256,18 +251,6 @@ public class QueryQuestionDomain extends HibernateUtil {
         logger.info(questions.toString());
         return questions;
     }
-//
-//    public List<User> getUserIdByNames(List empName){
-//
-//        String queryStatement = "select userId from User where thFname in(:empName)";
-//        Query query = getSession().createQuery(queryStatement);
-//        query.setParameterList("empName", empName);
-//        List<User> userIds = query.list();
-//        logger.info(userIds.toString());
-//
-//        return userIds;
-//    }
-
 
     public List<User> getUserIdByName(List empName){
 
@@ -280,51 +263,16 @@ public class QueryQuestionDomain extends HibernateUtil {
         return userIds;
     }
 
-//    public List<Question> generalSearchQuestion(List<User> empIds, String catId, String subId, String empName){
-//
-////        String queryStatement = "select id, description, score from Question where createBy.userId in(:empId)";
-////        Query query = getSession().createQuery(queryStatement);
-////        query.setParameterList("empId" ,empId);
-////        List<Question> questions = query.list();
-////        logger.info(">" +questions.toString());
-////
-////        return questions;
-//        if((empIds != null) && (catId != "") && (subId != null) && (empName != null)){
-//            String queryStatement = "select id, description, score from Question where createBy.userId in(:empIds)" +
-//                                    "and category.id =: catId";
+    public List<Question> getQuestionListByPaper(ExamPaper ep){
+        Criteria criteria = getSession().createCriteria(PaperQuestion.class);
+        criteria.add(Restrictions.eq("pk.examPaper",ep));
+        List<PaperQuestion> paperQuestions = criteria.list();
+        List<Question> questions = new ArrayList<Question>();
 
-//    public String getUserIdBuName(String name){
-//
-//        String queryStatement = "select userId from User where thFname =:name";
-//        Query query = getSession().createQuery(queryStatement);
-//        query.setParameter("name", name);
-//        String userId = query.toString();
-//
-//        return userId;
-//    }
+        for(PaperQuestion p : paperQuestions){
+            questions.add(p.getQuestion());
+        }
 
-//    public List<Question> generalSearchQuestion(List<User> empIds, String subId){
-//
-//        String queryStatement = "select id, description, score from Question where createBy.userId in(:empId)";
-//        Query query = getSession().createQuery(queryStatement);
-//        query.setParameterList("empId" ,empId);
-//        List<Question> questions = query.list();
-//        logger.info(">" +questions.toString());
-//
-//        return questions;
-//        if((empIds != null) && (subId != null)){
-//            String queryStatement = "select id, description, score from Question where createBy.userId in(:empIds)" +
-//                                    "and subCategory.id =: subId";
-
-//            Query query = getSession().createQuery(queryStatement);
-//            query.setParameterList("empIds" ,empIds);
-//            List<Question> questions = query.list();
-//            logger.info(">" +questions.toString());
-//
-//            return questions;
-//        }
-
-//        return null;
-
-//    }
+        return questions;
+    }
 }
