@@ -268,6 +268,8 @@ public class InPageController {
 //        model.addAttribute("LIST_OF_SUBCATEOGRIES", querySubCategoryDomain.getListSubCategories());
 
         model.addAttribute("listCat", queryCategoryDomain.getListCategories());
+        model.addAttribute("listSubCat", querySubCategoryDomain.getListSubCategories());
+
         return "manageSubCategory";
     }
 
@@ -283,10 +285,13 @@ public class InPageController {
     public String editButtonOnPageEditPapers(HttpServletRequest request){
         return "editButtonOnPageManagePapers";
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
-    public String doExam(HttpServletRequest request){
-        return "doExam";
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
+//    public String doExam(HttpServletRequest request){
+//
+//
+//        return "doExam";
+//    }
+
     // Create by Neng
 
     @RequestMapping(method = RequestMethod.GET, value = "viewevaluate")

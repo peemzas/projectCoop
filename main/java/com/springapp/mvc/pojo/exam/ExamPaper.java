@@ -1,12 +1,13 @@
 package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
+import com.springapp.mvc.pojo.exam.PaperQuestion;
 
 /**
  * Created by Phuthikorn_T on 6/30/2015.
@@ -31,38 +32,78 @@ public class ExamPaper implements Serializable {
     @Column(name = "PAPER_MAX_SCORE")
     private Integer maxScore;
 
-    @Column(name = "PAPER_EXAM_TIME_MINUTE")
-    private Integer examTime;
-
     @ManyToOne
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
 
+//    @ManyToOne
+//    @JoinColumn(name = "PROPORTIONAL_SCORE")
+//    private Boo proportionalScore;f
+
+    @Column(name = "PAPER_CODE")
+    private String code;
+
+    @Column(name = "PAPER_UPDATE_DATE")
+    private Date updateDate;
+
+    @Column(name = "PAPER_TIME_LIMIT_MINUTE")
+    private Integer timeLimit;
+
     @ManyToOne
-    @JoinColumn(name = "PROPORTIONAL_SCORE")
-    private Boo proportionalScore;
+    @JoinColumn(name = "PAPER_UPDATE_BY")
+    private User updateBy;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "TDCS_PAPER_CONTAINING",
-            joinColumns = {@JoinColumn(name = "PAPER_ID",nullable = false , updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",nullable = false , updatable = false)})
-    private Set<Question> questions = new HashSet<Question>();
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "TDCS_PAPER_CONTAINING",
+//            joinColumns = {@JoinColumn(name = "PAPER_ID", nullable = false, updatable = false)},
+//            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false)})
+//    private Set<Question> questions = new HashSet<Question>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.examPaper", cascade =
+            {CascadeType.PERSIST, CascadeType.MERGE})
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private Set<PaperQuestion> questions;
 
 
-    public Integer getExamTime() {
-        return examTime;
+    public Integer getTimeLimit() {
+        return timeLimit;
     }
 
-    public Boo getProportionalScore() {
-        return proportionalScore;
+    public void setTimeLimit(Integer timeLimit) {
+        this.timeLimit = timeLimit;
     }
 
-    public void setProportionalScore(Boo proportionalScore) {
-        this.proportionalScore = proportionalScore;
+    public Set<PaperQuestion> getQuestions() {
+        return questions;
     }
 
-    public void setExamTime(Integer examTime) {
-        this.examTime = examTime;
+    public void setQuestions(Set<PaperQuestion> questions) {
+        this.questions = questions;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public User getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(User updateBy) {
+        this.updateBy = updateBy;
     }
 
     public Integer getId() {
@@ -105,12 +146,4 @@ public class ExamPaper implements Serializable {
         this.createBy = createBy;
     }
 
-
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
-    }
 }

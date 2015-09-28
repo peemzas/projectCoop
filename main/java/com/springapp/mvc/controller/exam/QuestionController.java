@@ -1,17 +1,11 @@
 package com.springapp.mvc.controller.exam;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.exam.*;
-import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import flexjson.JSONSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,19 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import sun.org.mozilla.javascript.internal.json.JsonParser;
-
-
-//import javax.json.Json;
-//import javax.json.stream.JsonParserFactory;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.logging.Logger;
-
 
 /**
  * Created by Phuthikorn_T on 8/11/2015.
@@ -109,7 +94,7 @@ public class QuestionController {
 
         queryQuestionDomain.insertQuestion(question, cDescList, correctChoice);
 
-        String json = new Gson().toJson(question);
+        String json = new JSONSerializer().exclude("*.class").serialize(question);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
@@ -160,8 +145,6 @@ public class QuestionController {
 //                queryChoiceDomain.insertChoice(newChoice);
 //                c.setStatus(queryStatusDomain.getDeletedStatus());
 //                queryChoiceDomain.mergeUpdateChoice(c);
-                } else { // no change
-
                 }
             }
         }
@@ -184,13 +167,7 @@ public class QuestionController {
 
             queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
 
-        } else {// no change
-            System.out.println("=======================question===============================");
-            System.out.println("FALSE!!!!!!");
         }
-
-        System.out.println("===============================================Fin");
-
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestion")
@@ -202,7 +179,7 @@ public class QuestionController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List<Question> questions = queryQuestionDomain.getAllQuestion();
-        String json = new Gson().toJson(questions);
+        String json = new JSONSerializer().exclude("*.class").serialize(questions);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
@@ -216,7 +193,7 @@ public class QuestionController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List<Question> questions = queryQuestionDomain.getAllReadyQuestion();
-        String json = new Gson().toJson(questions);
+        String json = new JSONSerializer().exclude("*.class").serialize(questions);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
@@ -241,7 +218,7 @@ public class QuestionController {
 
 //        Question question = queryQuestionDomain.getQuestionById(questionId);
         List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(questionId);
-        String json = new Gson().toJson(choices);
+        String json = new JSONSerializer().exclude("*.class").serialize(choices);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
@@ -255,7 +232,7 @@ public class QuestionController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        String json1 = new Gson().toJson(question);
+        String json1 = new JSONSerializer().exclude("*.class").serialize(question);
 
         return new ResponseEntity<String>(json1, headers, HttpStatus.OK);
     }
@@ -311,7 +288,7 @@ public class QuestionController {
 //        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users, subCategorySearch);
 
 //        logger.info(questions.toString());
-//        String json = new Gson().toJson(questions);
+//        String json = new JSONSerializer().exclude("*.class").serialize(questions);
 //
 //        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
 //    }
@@ -325,7 +302,7 @@ public class QuestionController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List<Question> questions = queryQuestionDomain.getAllQuestionDetail();
-        String json = new Gson().toJson(questions);
+        String json = new JSONSerializer().exclude("*.class").serialize(questions);
         logger.info(questions.toString());
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
@@ -341,13 +318,13 @@ public class QuestionController {
             @RequestParam(value = "categoryId", required = false) String catId,
             @RequestParam(value = "subCatName", required = false) String subCatName,
             @RequestParam(value = "createBy", required = false) String createBy,
-            @RequestParam(value = "questionId", required = false) String questionId,
+//            @RequestParam(value = "questionId", required = false) String questionId,
             @RequestParam(value = "questionDesc", required = false) String questionDesc,
             @RequestParam(value = "createDateFrom", required = false) String createDateFrom,
             @RequestParam(value = "createDateTo", required = false) String createDateTo,
             @RequestParam(value = "scoreFrom", required = false) String scoreFrom,
             @RequestParam(value = "scoreTo", required = false) String scoreTo,
-            @RequestParam(value = "status", required = false) String status,
+//            @RequestParam(value = "status", required = false) String status,
             HttpServletRequest request, HttpServletResponse response
     ) {
 
@@ -362,29 +339,19 @@ public class QuestionController {
         }else {
             System.out.println("null subCatName ");
         }
-        System.out.println(createBy + " : " + createBy.trim().length());
-        System.out.println(questionId + " : " + questionId.trim().length());
-        System.out.println(questionDesc + " : " + questionDesc.trim().length());
-        System.out.println(createDateFrom + " : " + createDateFrom.trim().length());
-        System.out.println(createDateTo + " : " + createDateTo.trim().length());
-        System.out.println(scoreFrom + " : " + scoreFrom.trim().length());
-        System.out.println(scoreTo + " : " + scoreTo.trim().length());
-        System.out.println(status + " : " + status.trim().length());
-        System.out.println("==============================================================");
 
         List<Question> questions = queryQuestionDomain.searchQuestionQuery(
-                catId, subCatName, createBy, questionId,
+                catId, subCatName, createBy, null,
                 questionDesc, createDateFrom, createDateTo,
-                scoreFrom, scoreTo, status
+                scoreFrom, scoreTo, null
         );
 
-        String json = new Gson().toJson(questions);
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questions);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
-
 }
 
 

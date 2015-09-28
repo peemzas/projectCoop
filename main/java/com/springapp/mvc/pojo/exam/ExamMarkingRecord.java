@@ -23,7 +23,7 @@ public class ExamMarkingRecord implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ANSWER_RECORD_ID")
-    private  ExamAnswerRecord recordId;
+    private  ExamAnswerRecord answerRecordId;
 
     @ManyToOne
     @JoinColumn(name = "MARKED_BY")
@@ -36,12 +36,12 @@ public class ExamMarkingRecord implements Serializable {
 
 
 
-    public ExamAnswerRecord getRecordId() {
-        return recordId;
+    public ExamAnswerRecord getAnswerRecordId() {
+        return answerRecordId;
     }
 
-    public void setRecordId(ExamAnswerRecord recordId) {
-        this.recordId = recordId;
+    public void setAnswerRecordId(ExamAnswerRecord recordId) {
+        this.answerRecordId = recordId;
     }
 
     public ExamResult getResultId() {
@@ -69,11 +69,11 @@ public class ExamMarkingRecord implements Serializable {
     }
 
     public ExamAnswerRecord getrecordId() {
-        return recordId;
+        return answerRecordId;
     }
 
     public void setrecordId(ExamAnswerRecord recordId) {
-        this.recordId = recordId;
+        this.answerRecordId = recordId;
     }
 
     public User getMarkedBy() {

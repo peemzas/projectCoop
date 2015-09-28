@@ -1,6 +1,7 @@
 package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
+import flexjson.JSONSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,55 +15,66 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name="TDCS_QUESTIONS")
-public class Question implements Serializable,Cloneable {
-//    @SequenceGenerator(name = "TDCS_QUESTION_TRIG", sequenceName = "TDCS_QUESTION_SEQ")
+@Table(name = "TDCS_QUESTIONS")
+public class Question implements Serializable, Cloneable {
+    //    @SequenceGenerator(name = "TDCS_QUESTION_TRIG", sequenceName = "TDCS_QUESTION_SEQ")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="QUESTION_ID")
+    @Column(name = "QUESTION_ID")
     private Integer id;
 
     @Column(name = "QUESTION_DESCRIPTION")
     private String description;
 
-    @Column(name="QUESTION_SCORE")
+    @Column(name = "QUESTION_SCORE")
     private Float score;
 
-    @Column(name="QUESTION_CREATE_DATE")
+    @Column(name = "QUESTION_CREATE_DATE")
     private Date createDate;
 
     @ManyToOne
-    @JoinColumn(name="DIFFICULTY_LEVEL")
+    @JoinColumn(name = "DIFFICULTY_LEVEL")
     private Difficulty difficultyLevel;
 
     @ManyToOne
-    @JoinColumn(name="SUB_CATEGORY_ID")
+    @JoinColumn(name = "SUB_CATEGORY_ID")
     private SubCategory subCategory;
 
     @ManyToOne
-    @JoinColumn(name="QUESTION_TYPE_ID")
+    @JoinColumn(name = "QUESTION_TYPE_ID")
     private QuestionType questionType;
 
     @ManyToOne
-    @JoinColumn(name="QUESTION_CREATE_BY")
+    @JoinColumn(name = "QUESTION_CREATE_BY")
     private User createBy;
 
     @ManyToOne
     @JoinColumn(name = "QUESTION_STATUS")
     private Status status;
 
+    @Column(name = "QUESTION_UPDATE_DATE")
+    private Date updateDate;
 
-    //    @OneToMany(mappedBy = "questionId")
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_UPDATE_BY")
+    private User updateBy;
+
+
+//    @OneToMany(mappedBy = "questionId")
 //    private Set<ExamAnswerRecord> examAnswerRecords;
 
-    @ManyToMany(mappedBy = "questions" ,fetch = FetchType.LAZY)
-    private Set<ExamPaper> examPapers = new HashSet<ExamPaper>();
+//    @ManyToMany(mappedBy = "questions" ,fetch = FetchType.LAZY)
+//    private Set<ExamPaper> examPapers = new HashSet<ExamPaper>();
 
 //    @OneToMany(mappedBy = "question")
 //    private Set<Choice> choices;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    private Set<Choice> choices;
+    private List<Choice> choices;
 
+    public String toJson(){
+
+        return new JSONSerializer().exclude("choices.question").exclude("").serialize(this);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -85,7 +97,11 @@ public class Question implements Serializable,Cloneable {
             return false;
         if (getCreateBy() != null ? !getCreateBy().equals(question.getCreateBy()) : question.getCreateBy() != null)
             return false;
-        return !(getStatus() != null ? !getStatus().equals(question.getStatus()) : question.getStatus() != null);
+        if (getStatus() != null ? !getStatus().equals(question.getStatus()) : question.getStatus() != null)
+            return false;
+        if (getUpdateDate() != null ? !getUpdateDate().equals(question.getUpdateDate()) : question.getUpdateDate() != null)
+            return false;
+        return !(getUpdateBy() != null ? !getUpdateBy().equals(question.getUpdateBy()) : question.getUpdateBy() != null);
 
     }
 
@@ -100,7 +116,33 @@ public class Question implements Serializable,Cloneable {
         result = 31 * result + (getQuestionType() != null ? getQuestionType().hashCode() : 0);
         result = 31 * result + (getCreateBy() != null ? getCreateBy().hashCode() : 0);
         result = 31 * result + (getStatus() != null ? getStatus().hashCode() : 0);
+        result = 31 * result + (getUpdateDate() != null ? getUpdateDate().hashCode() : 0);
+        result = 31 * result + (getUpdateBy() != null ? getUpdateBy().hashCode() : 0);
         return result;
+    }
+
+    public List<Choice> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(List<Choice> choices) {
+        this.choices = choices;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public User getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(User updateBy) {
+        this.updateBy = updateBy;
     }
 
     public Integer getId() {
@@ -182,14 +224,6 @@ public class Question implements Serializable,Cloneable {
 //    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
 //        this.examAnswerRecords = examAnswerRecords;
 //    }
-
-    public Set<ExamPaper> getExamPapers() {
-        return examPapers;
-    }
-
-    public void setExamPapers(Set<ExamPaper> examPapers) {
-        this.examPapers = examPapers;
-    }
 
 //    public Set<Choice> getChoices() {
 //        return choices;

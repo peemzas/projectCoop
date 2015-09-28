@@ -180,17 +180,16 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 //            return subcategories;
 //        }
 
-            public List<SubCategory> searchSubCategory(String subcategoryName, String categoryId, String categoryName) {
-                Criteria criteria = getSession().createCriteria(SubCategory.class,"SubCategory");
+    public List<SubCategory> searchSubCategory(String subcategoryName, String categoryId, String categoryName) {
+        Criteria criteria = getSession().createCriteria(SubCategory.class, "SubCategory");
 
-                criteria.createAlias("SubCategory.category", "category");
+        criteria.createAlias("SubCategory.category", "category");
 ////
 //                ProjectionList projectionList = Projections.projectionList();
 //                projectionList.add(Projections.property("category.id"),"catId");
 //                projectionList.add(Projections.property("category.name"),"catName");
 //                projectionList.add(Projections.property("sc.name"),"subName");
-                criteria.addOrder(Order.asc("category.id"));
-
+        criteria.addOrder(Order.asc("category.id"));
 
 
 //                criteria.add(Restrictions.like("name", "%" + subcategoryName + "%").ignoreCase());
@@ -198,41 +197,41 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 //                criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
 
 
-                if(subcategoryName != "") {
-                    criteria.add(Restrictions.like("SubCategory.name", "%" + subcategoryName + "%").ignoreCase());
-                }
-                if(categoryId!="") {
-                    criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
-                }
-                if(categoryName!="") {
-                    criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
-                }
+        if (subcategoryName != "") {
+            criteria.add(Restrictions.like("SubCategory.name", "%" + subcategoryName + "%").ignoreCase());
+        }
+        if (categoryId != "") {
+            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+        }
+        if (categoryName != "") {
+            criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
+        }
 
-                criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-                List<SubCategory> subCategories = criteria.list();
-                closeSession();
-                return subCategories;
-            }
-
-    public List<SubCategory> getSubCategoryListByCategory(Category category){
-        Criteria criteria = getSession().createCriteria(SubCategory.class);
-        criteria.add(Restrictions.eq("category",category));
-
-        return (List<SubCategory>)criteria.list();
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<SubCategory> subCategories = criteria.list();
+        closeSession();
+        return subCategories;
     }
 
-    public List<SubCategory> getAllSubCategory(){
-        Criteria criteria = getSession().createCriteria(SubCategory.class);
-        return (List<SubCategory>)criteria.list();
-    }
-
-    public List<SubCategory> getSubCategoryByCategoryId(Category category){
-
+    public List<SubCategory> getSubCategoryListByCategory(Category category) {
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         criteria.add(Restrictions.eq("category", category));
-        List<SubCategory> subCategories = criteria.list();
-        logger.info("================================================" + subCategories);
-        return subCategories;
+
+        return (List<SubCategory>) criteria.list();
+    }
+
+    public List<SubCategory> getAllSubCategory() {
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
+        return (List<SubCategory>) criteria.list();
+    }
+
+    public List<SubCategory> getSubCategoryByCategoryId(Category category) {
+
+        Criteria criteria = getSession().createCriteria(SubCategory.class);
+        if (category != null) {
+            criteria.add(Restrictions.eq("category", category));
+        }
+        return criteria.list();
     }
 }
 

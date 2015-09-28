@@ -43,9 +43,8 @@ $(document).ready(function () {
 })
 
 var searchQuestionResultList
-var getSearchQuestionResultList = function(){
+var getSearchQuestionResultList = function () {
     submitSearchQuestion()
-    console.log(searchQuestionResultList)
     return searchQuestionResultList
 }
 
@@ -66,18 +65,18 @@ var submitSearchQuestion = function () {
     var ajaxDat = $.ajax({
         type: "POST",
         url: "/TDCS/exam/searchQuestion",
-        async:false,
+        async: false,
         data: {
             categoryId: SI.category,
             subCatName: SI.subCategory,
             createBy: SI.createBy,
-            questionId: SI.questionId,
+            //questionId: SI.questionId,
             questionDesc: SI.questionDesc,
             createDateFrom: SI.createDateFrom,
             createDateTo: SI.createDateTo,
             scoreFrom: SI.scoreFrom,
-            scoreTo: SI.scoreTo,
-            status: SI.status
+            scoreTo: SI.scoreTo
+            //status: SI.status
         },
         success: function (dat) {
             //console.log(dat)
@@ -88,3 +87,19 @@ var submitSearchQuestion = function () {
         }
     })
 }
+
+var clearAllField = function () {
+    catAndSubcatSelectNothing();
+    questionId: $('#searchQuestionIdInput').val("");
+    questionDesc: $("#searchQuestionDescInput").val("");
+    createDateFrom: $('#searchCreateDateFromInput').val("");
+    createDateTo: $("#searchCreateDateToInput").val("");
+    scoreFrom: $("#searchScoreFromInput").val("");
+    scoreTo: $("#searchScoreToInput").val("");
+    status: $("#searchStatusInput").val("");
+    clearCreateByInput();
+}
+
+$(".searchInputClearBtn").on('click',function(){
+    clearAllField();
+})
