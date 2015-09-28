@@ -1,8 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Modal eSelectQuestion-->
+<!-- Modal SelectQuestion-->
 <style>
     #selectQuest{
         overflow-y: auto;
+    }
+    td{
+        font-size: 13.5px;
+    }
+    #questionsAreEmpty{
+        background-color: #b2e0ff;
+        height: 100px;
+        display: none;
+        top: 40px;
+        vertical-align: middle;
+        border-radius: 5px;
+        margin-top: -15px;
+    }
+    #questionsAreEmptyDesc {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100px;
+        color: #00647f;
     }
 </style>
 <div class="modal fade" id="selectQuest">
@@ -10,49 +28,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-body">
-                    <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span
-                            aria-hidden="true">&times;</span></button>
-                    <%--<h3 class="modal-title" align="center">เลือกคำถาม</h3>--%>
-
+                    <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                     <div class="container row">
-                        <h3>เลือกข้อสอบ</h3>
+                        <h4>เลือกข้อสอบ</h4>
                         <hr>
                     </div>
-
                     <%@include file="../template/searchQuestionTemplateNew.jsp"%>
-
-                    <table id="tbSelectQuestion" class="table table-view">
-                        <thead class="bg-primary">
-                            <tr>
-                                <th>เลือก</th>
-                                <%--<th>หมายเลขข้อสอบ</th>--%>
-                                <th>วิชา</th>
-                                <th>หัวข้อเรื่อง</th>
-                                <th>คำถาม</th>
-                                <th>ประเภท</th>
-                                <th>ความยาก</th>
-                                <th>คะแนน</th>
-                                <%--<th>สร้างโดย</th>--%>
-                                <%--<th>วันที่สร้าง</th>--%>
-                                <th>ดูรายละเอียด</th>
-                            </tr>
+                    <button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>
+                    <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
+                    <table id="tbSelectQuestion" class="table table-responsive table-hover">
+                        <thead class="bg-primary small">
+                        <tr>
+                            <th><input id="checkQuestionAll" type="checkbox"> เลือก</th>
+                            <th>หมวดหมู่</th>
+                            <th>หัวข้อเรื่อง</th>
+                            <th>คำถาม</th>
+                            <th>ข้อสอบ</th>
+                            <th>ระดับ</th>
+                            <th>คะแนน</th>
+                            <th>ผู้สร้าง</th>
+                        </tr>
                         </thead>
                         <tbody id="tbodySelectQuestion">
 
-
-                            <%--<td>--%>
-                                <%--<button class="btn btn-info">--%>
-                                    <%--<div class="glyphicon glyphicon-search"></div>--%>
-                                <%--</button>--%>
-                            <%--</td>--%>
-
                         </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-offset-8 col-md-2" align="right"><h5>คะแนนรวม =</h5></div>
-                        <div class="col-md-1"><input class="form-control" align="center" disabled id="totalRandomQuestionScore" value="5/60"  >
+                        <div id="questionsAreEmpty" width="100%">
+                            <h3 id="questionsAreEmptyDesc">ไม่พบข้อสอบ</h3>
                         </div>
-                    </div>
+                    </table>
                     <div class = "row">
                         <div class = "col-md-12" align = "center">
                             <ul class = "pagination">
@@ -66,20 +69,9 @@
                             </ul>
                         </div>
                     </div>
-                    <br>
-                    <div class = "row" >
-                        <div class = "col-md-12 text-center">
-                            <button id="addQuestionBtn" class = "btn btn-default" type = "button">เพิ่มคำถาม</button>
-                            <button class = "btn btn-default" type = "button">แสดงข้อมูล</button>
-                        </div>
-                    </div>
-
-                    <div id="show"></div>
-
                 </div>
             </div>
         </div>
-
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
@@ -107,7 +99,10 @@
 </div>
 
 <script>
+    <%--$("#addQuestionBtn").on('click', function(){--%>
+        <%--$("#selectQuest").hide();--%>
+    <%--});--%>
     $("#addQuestionBtn").on('click', function(){
-        $("#selectQuest").hide();
+        $("#selectQuest").modal('hide');
     });
 </script>

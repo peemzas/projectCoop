@@ -252,6 +252,42 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
+    public List<Question> getQuestionNotInSelected(List qId){
+
+        Criteria criteria = getSession().createCriteria(Question.class);
+        criteria.add(Restrictions.not(Restrictions.in("id", qId)));
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("id"), "idz")
+                .add(Projections.property("choices"), "choicesz")
+                .add(Projections.property("description"), "descriptionz")
+                .add(Projections.property("createDate"), "createDatez")
+                .add(Projections.property("difficultyLevel"), "difficultyLevelz")
+                .add(Projections.property("subCategory"), "subCategoryz")
+                .add(Projections.property("questionType"), "questionTypez")
+                .add(Projections.property("createBy"), "createByz")
+                .add(Projections.property("status"), "statusz")
+                .add(Projections.property("examPapers"), "examPapersz")
+                .add(Projections.property("score"), "score"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Question> questions = criteria.list();
+
+        return questions;
+    }
+
+
+//
+//    public List<User> getUserIdByNames(List empName){
+//
+//        String queryStatement = "select userId from User where thFname in(:empName)";
+//        Query query = getSession().createQuery(queryStatement);
+//        query.setParameterList("empName", empName);
+//        List<User> userIds = query.list();
+//        logger.info(userIds.toString());
+//
+//        return userIds;
+//    }
+    
+
     public List<User> getUserIdByName(List empName){
 
         String queryStatement = "select userId from User where thFname in(:empName)";

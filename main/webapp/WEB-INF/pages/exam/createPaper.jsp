@@ -16,6 +16,7 @@
     top: 40px;
     vertical-align: middle;
     border-radius: 5px;
+    margin-top: -15px;
   }
   #questionNotFoundDesc{
     text-align: center;
@@ -23,115 +24,145 @@
     line-height: 100px;
     color: #00647f;
   }
+  td{
+    font-size: 13.5px;
+  }
 </style>
 
-<div class="container row">
+<div class="container">
   <h3>สร้างชุดข้อสอบ</h3>
   <hr>
-</div>
-<div class="row">
-  <div class="col-md-4" align="right">
-    <label><h4 style="margin-top: 5px">ชื่อชุดข้อสอบ :</h4></label>
-  </div>
-  <div class="col-md-4">
-    <input class="form-control" type="text" name="ppName"/>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4" align="right">
-    <label><h4 style="margin-top: 5px">คะแนนเต็มรวม :</h4></label>
-  </div>
-  <div class="col-md-4">
-    <input class="form-control" type="text" name="ppScore"/>
-  </div>
-  <div class="col-md-4">
-    <input class="check-box" type="checkbox" name="check"/>
-    <label><h5>คะแนนตามสัดส่วน</h5></label>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4" align="right">
-    <label><h4 style="margin-top: 5px">ตำแหน่ง :</h4></label>
-  </div>
-  <div class="col-md-4">
-    <select class="form-control">
-      <option>Dev</option>
-      <option>BA</option>
-    </select>
-  </div>
-</div>
-<br>
+  <form class="form-horizontal" role="form">
+     <div class="row">
+         <div class="col-sm-5">
+           <div class="col-sm-4 col-sm-offset-2" align="right">
+             <span style="color:red;">*</span><label for="newPaperId" class="label-control"><h5 style="margin-top: 5px">รหัสชุดข้อสอบ</h5></label>
+           </div>
+           <div class="col-sm-6" align="right">
+             <input id="newPaperId" class="form-control input-sm" type="text" required/>
+           </div>
+         </div>
+         <div class="col-sm-7">
+           <div class="col-sm-3" align="right">
+             <label for="newPaperName" class="label-control"><h5 style="margin-top: 5px">ชื่อชุดข้อสอบ</h5></label>
+           </div>
+           <div class="col-sm-8">
+             <input id="newPaperName" class="form-control input-sm" type="text"/>
+           </div>
+         </div>
+     </div>
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="col-sm-4 col-sm-offset-2" align="right">
+          <span style="color:red;">*</span><label for="newPaperScore" class="label-control"><h5 style="margin-top: 5px">คะแนน</h5></label>
+        </div>
+        <div class="col-sm-6">
+          <input id="newPaperScore" class="form-control input-sm" type="text" required/>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="col-sm-3" align="right">
+          <span style="color:red;">*</span><label for="newPaperForPosition" class="label-control"><h5 style="margin-top: 5px">ตำแหน่ง</h5></label>
+        </div>
+        <div class="col-sm-5">
+          <select id="newPaperForPosition" class="form-control input-sm">
+            <option active>เลือกตำแหน่ง</option>
+            <option value="all">ทั้งหมด</option>
+            <option value="dev">Developer</option>
+            <option value="ba">Business Analysis</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="col-sm-4 col-sm-offset-2" align="right">
+          <span style="color:red;">*</span><label class="label-control"><h5 style="margin-top: 5px">เวลา</h5></label>
+        </div>
+        <div class="col-sm-3">
+          <input id="hours" class="form-control input-sm" type="number" required/>
+        </div>
+        <div class="col-sm-3">
+          <input id="minutes" class="form-control input-sm" type="number" required/>
+        </div>
+      </div>
+    </div>
+  </form>
 
-<div class="row">
-  <div class="col-md-2 col-md-offset-5">
-    <h3 align="center">ข้อสอบ</h3>
+  <div class="row">
+    <div class="col-sm-12" style="text-align: center">
+      <button id="selectionQuestionBtnInpagePaper" data-toggle="modal" data-target="#selectQuest" class="btn btn-gray btn-sm">เลือกข้อสอบ</button>
+      <button data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray btn-sm">สุ่มข้อสอบ</button>
+    </div>
   </div>
-  <div class="col-md-5" align="right" style="padding: 0px">
-    <button  data-toggle="modal" data-target="#createQuest" class="btn btn-gray">สร้างข้อสอบ</button>
-    <button id="selectionQuestionBtnInpagePaper" data-toggle="modal" data-target="#selectQuest" class="btn btn-gray">เลือกข้อสอบ</button>
-    <button data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray">สุ่มข้อสอบ</button>
-  </div>
-</div>
 
-<div class="row">
-  <a href="/TDCS/exam/managePapers">
-    <button class="btn btn-danger" align="center" style="width:50px;height:35px">
-      <span class="glyphicon glyphicon-arrow-left"></span>
-    </button>
-  </a>
-  <table id="tbSelectedQuestionToPaper" class="table table-hover table-bordered">
-    <thead class="bg-primary">
-      <tr>
-        <th style="text-align: center ; border: 1px solid white">เลือก</th>
-        <th style="text-align: center ; border: 1px solid white">ประเภท</th>
-        <th style="text-align: center ; border: 1px solid white">หมวดหมู่</th>
-        <th style="text-align: center ; border: 1px solid white">หัวข้อเรื่อง</th>
-        <th style="text-align: center ; border: 1px solid white">ข้อสอบ</th>
-        <th style="text-align: center ; border: 1px solid white">ระดับ</th>
-        <th style="text-align: center ; border: 1px solid white">คะแนน</th>
-        <th style="text-align: center ; border: 1px solid white">ผู้สร้าง</th>
-      </tr>
-    </thead>
-    <tbody id="tbodySelectedQuestionToPaper">
+  <div class="row">
+    <a href="/TDCS/exam/managePapers">
+      <button class="btn btn-danger" align="center" style="width:50px;height:35px">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+      </button>
+    </a>
+    <hr/>
+    <button id="removeRowQuestionSelect" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>
+    <button id="createPaperBtn" class="btn btn-success btn-sm" type="button">บันทึก</button>
+    <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">ยกเลิก</button>
+    <table id="tbSelectedQuestionToPaper" class="table">
+      <thead class="bg-primary small">
+        <tr>
+          <th style="text-align: center ;"><input id="checkAllQuestionFromCreatePaperPage" type="checkbox"> เลือก</th>
+          <th style="text-align: center ;">ประเภท</th>
+          <th style="text-align: center ;">หมวดหมู่</th>
+          <th style="text-align: center ;">หัวข้อเรื่อง</th>
+          <th style="text-align: center ;">ข้อสอบ</th>
+          <th style="text-align: center ;">ระดับ</th>
+          <th style="text-align: center ;">คะแนน</th>
+          <th style="text-align: center ;">ผู้สร้าง</th>
+        </tr>
+      </thead>
+      <tbody id="tbodySelectedQuestionToPaper">
 
-    </tbody>
-  </table>
-  <div id="questionNotFound" width="100%">
-    <h3 id="questionNotFoundDesc">ยังไม่มีข้อสอบในชุดข้อสอบ</h3>
+      </tbody>
+    </table>
+    <div id="questionNotFound" width="100%">
+      <h3 id="questionNotFoundDesc">ยังไม่มีข้อสอบในชุดข้อสอบ</h3>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-2 col-md-offset-9">
-    <h4 align="right">คะแนนรวม = </h4>
+  <br/>
+  <div class="row">
+    <div class="col-sm-1 col-sm-offset-9">
+      <label align="right"><h5>คะแนน =</h5></label>
+    </div>
+    <div class="col-md-1">
+      <input class="form-control input-sm" readonly="true" name="score" id="maxScore" style="text-align: center">
+    </div>
+    <div class="col-md-1">
+      <input class="form-control input-sm" readonly="true" name="score" id="score" style="text-align: center">
+    </div>
+    <%--<div class="col-sm-3 col-sm-offset-9">--%>
+      <%--<div class="form-group">--%>
+        <%--<label for="maxScore" class="col-sm-3 label-control"><h5>คะแนนรวม = </h5></label>--%>
+        <%--<input id="maxScore" class="col-sm-3 form-control input-sm" readonly="true" style="text-align: center"/>--%>
+        <%--<label for="sumScore" class="col-sm-3 label-control"><h5>/</h5></label>--%>
+        <%--<input id="sumScore" class="col-sm-3 form-control input-sm" readonly="true" style="text-align: center">--%>
+      <%--</div>--%>
+    <%--</div>--%>
   </div>
-  <div class="col-md-1">
-    <input class="form-control" readonly="true" name="score" id="score" value="5" style="text-align: center">
-  </div>
-</div>
 
-<div class = "row">
-  <div class = "col-md-12" align = "center">
-    <ul class = "pagination">
-      <li class = "disabled"><a href = "#">&laquo;</a></li>
-      <li class = "active"><a href = "#">1</a></li>
-      <li><a>2</a></li>
-      <li><a>3</a></li>
-      <li><a>4</a></li>
-      <li><a>5</a></li>
-      <li class = "disabled"><a href = "#">&raquo;</a></li>
-    </ul>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-4 col-md-offset-4" align="center">
-    <button class="btn btn-primary" style="width: 100px;">ยืนยัน</button>
-    <button class="btn btn-gray " style="width: 100px;">ล้าง</button>
-    <button class="btn btn-warning" style="width: 100px;">ยกเลิก</button>
-  </div>
-</div>
+  <%--<div class = "row">--%>
+    <%--<div class = "col-md-12" align = "center">--%>
+      <%--<ul class = "pagination">--%>
+        <%--<li class = "disabled"><a href = "#">&laquo;</a></li>--%>
+        <%--<li class = "active"><a href = "#">1</a></li>--%>
+        <%--<li><a>2</a></li>--%>
+        <%--<li><a>3</a></li>--%>
+        <%--<li><a>4</a></li>--%>
+        <%--<li><a>5</a></li>--%>
+        <%--<li class = "disabled"><a href = "#">&raquo;</a></li>--%>
+      <%--</ul>--%>
+    <%--</div>--%>
+  <%--</div>--%>
+<%--</div>--%>
 
 <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
