@@ -1,11 +1,19 @@
 package com.springapp.mvc.controller.exam;
 
+import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
+
 import flexjson.JSONSerializer;
+
+import org.json.CDL;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -308,10 +316,28 @@ public class QuestionController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
-//    @RequestMapping(method = RequestMethod.POST, value = "/exam/getQuestionNotInSelected")
-//    @ResponseBody
-//    public ResponseEntity<>
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/getQuestionNotInSelected")
+    @ResponseBody
+    public ResponseEntity<String> getQuestionNotInSelected(@RequestBody String jsoN) throws JSONException {
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        JSONArray jsonArray = new JSONArray(jsoN);
+        List questionIds = new ArrayList();
+        logger.info("=================================="+jsonArray.toString());
+        for(int i = 0; i < jsonArray.length(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            questionIds.add(jsonObject.getInt("id"));
+        }
+        logger.info(".................................."+questionIds);
+        List<Question> questions = queryQuestionDomain.getQuestionNotInSelected(questionIds);
+        String json = new Gson().toJson(questions);
+        logger.info(questions+".......................................................");
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//        return null;
+    }
+//
     @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
     @ResponseBody
     public ResponseEntity<String> searchQuestion(

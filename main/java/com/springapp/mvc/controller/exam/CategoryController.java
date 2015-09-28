@@ -5,6 +5,9 @@ import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.QueryCategoryDomain;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.Category;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.xml.ws.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -50,7 +54,7 @@ public class CategoryController {
 
 // return null;
     }
-//    Add by Mr. Wanchana Himself
+//    Add by Mr. Wanchana
     @RequestMapping(value = "/exam/getAllCategory",method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getAllCategory() {
@@ -66,29 +70,30 @@ public class CategoryController {
 
     @RequestMapping(value = "/exam/deleteCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity deleteCategory(@ModelAttribute("id") String categoryId){
+    public ResponseEntity<String> deleteCategory(@RequestBody String jsoN) throws JSONException {
 
-        queryCategoryDomain.deleteCategory(categoryId);
+        JSONArray jsonArray = new JSONArray(jsoN);
+        List categoryIds = new ArrayList();
+        for(int i = 0; i < jsonArray.length(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            categoryIds.add(jsonObject.getString("categoryId"));
+        }
+        queryCategoryDomain.deleteCategory(categoryIds);
 
-
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/exam/editCategory", method = RequestMethod.POST)
     @ResponseBody
-//    public ResponseEntity editCategory(@Valid Category category, HttpServletRequest request){
-    public ResponseEntity editCategory(@RequestParam("categoryId") String id,
-                                       @RequestParam("categoryName") String name,
-                                       @RequestParam("oldId") String oldId,
-                                       @RequestParam("oldName") String oldName){
+    public ResponseEntity editCategory(@Valid Category category,
+                                       HttpServletRequest request){
+
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-//        Category category = new Category();
-//        User createBy = queryUserDomain.getCurrentUser(request);
-//        category.setCreateBy(createBy);
-//        queryCategoryDomain.editCategory(category);
-        logger.info(id+"=============="+name+"=="+oldId+"=="+oldName);
+        User createBy = queryUserDomain.getCurrentUser(request);
+        category.setCreateBy(createBy);
+        queryCategoryDomain.editCategory(category);
 
         return new ResponseEntity(headers, HttpStatus.OK);
     }

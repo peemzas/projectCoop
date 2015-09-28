@@ -76,55 +76,29 @@ public class QueryCategoryDomain extends HibernateUtil {
                 .add(Projections.property("id"), "id"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Category> categories = criteria.list();
+        closeSession();
 
         return categories;
     }
 
-    public void deleteCategory(String categoryId){
+    public void deleteCategory(List categoryIds){
 
-        Criteria criteria = getSession().createCriteria(Category.class);
-        criteria.add(Restrictions.eq("id", categoryId));
-        Category category = (Category) criteria.uniqueResult();
-
-        HibernateUtil.beginTransaction();
-        getSession().delete(category);
-        HibernateUtil.commitTransaction();
+        beginTransaction();
+        for(int i = 0; i < categoryIds.size(); i ++){
+            System.out.println(categoryIds.get(i));
+            Category category = getCategoryById((String) categoryIds.get(i));
+            getSession().delete(category);
+            commitTransaction();
+        }
+        closeSession();
     }
 
     public void editCategory(Category category){
 
-        logger.info(category.getId()+"---------------------------"+category);
         HibernateUtil.beginTransaction();
-
-        getSession().update(category);
-//        Category category = new Category();
-
-//        if((id != oldId) && (name != oldName)){
-//            String updateQueryStatement = "update Category set id = :id, name = :name where id = :oldId";
-//            Query query = getSession().createQuery(updateQueryStatement);
-//            query.setParameter("id", id);
-//            query.setParameter("name", name);
-//            query.setParameter("oldId", oldId);
-//            HibernateUtil.commitTransaction();
-//        }
-//        else if(id != oldId){
-//            String updateQueryStatement = "update Category set id = :id where id = :oldId";
-//            Query query = getSession().createQuery(updateQueryStatement);
-//            query.setParameter("id", id);
-//            query.setParameter("oldId", oldId);
-//            HibernateUtil.commitTransaction();
-//        }
-//        else if(name != oldName){
-//            String updateQueryStatement = "update Category set name = :name, name = :name where id = :oldId";
-//            Query query = getSession().createQuery(updateQueryStatement);
-//            query.setParameter("name", name);
-//            query.setParameter("oldId", oldId);
-//            HibernateUtil.commitTransaction();
-//        }
-//        else{
-//            HibernateUtil.commitTransaction();
-//        }
+        getSession().merge(category);
         HibernateUtil.commitTransaction();
+        HibernateUtil.closeSession();
     }
 
     public List<Category> searchCategory(String  categoryId, String categoryName){
