@@ -69,13 +69,12 @@ public class Question implements Serializable, Cloneable {
 //    @OneToMany(mappedBy = "question")
 //    private Set<Choice> choices;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    private Set<Choice> choices;
+    private List<Choice> choices;
 
     public String toJson(){
 
         return new JSONSerializer().exclude("choices.question").exclude("").serialize(this);
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -122,11 +121,11 @@ public class Question implements Serializable, Cloneable {
         return result;
     }
 
-    public Set<Choice> getChoices() {
+    public List<Choice> getChoices() {
         return choices;
     }
 
-    public void setChoices(Set<Choice> choices) {
+    public void setChoices(List<Choice> choices) {
         this.choices = choices;
     }
 

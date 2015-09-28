@@ -83,4 +83,9 @@ public class QueryChoiceDomain extends HibernateUtil {
         getSession().merge(choice);
         commitTransaction();
     }
+    public Choice getChoiceById(Integer choiceId){
+        Criteria criteria = getSession().createCriteria(Choice.class);
+        criteria.add(Restrictions.eq("id",choiceId));
+        return (Choice)criteria.uniqueResult();
+    }
 }

@@ -1,25 +1,21 @@
 package com.springapp.mvc.pojo.exam;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 /**
- * Created by Phuthikorn_T on 15-Sep-15.
+ * Created by Phuthikorn_T on 17-Sep-15.
  */
-@Entity
-@Table(name = "TDCS_PAPER_CONTAINING")
-public class PaperContain {
-    @Id
+@Embeddable
+public class PaperQuestionPk implements Serializable{
+
     @ManyToOne
-    @JoinColumn(name = "PAPER_ID")
     private ExamPaper examPaper;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "QUESTION_ID")
     private Question question;
-
-    @Column(name = "SCORE")
-    private Float score;
 
     public ExamPaper getExamPaper() {
         return examPaper;
@@ -37,11 +33,5 @@ public class PaperContain {
         this.question = question;
     }
 
-    public Float getScore() {
-        return score;
-    }
 
-    public void setScore(Float score) {
-        this.score = score;
-    }
 }

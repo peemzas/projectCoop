@@ -1,10 +1,7 @@
 package com.springapp.mvc.pojo.exam;
 
-import com.springapp.mvc.pojo.User;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * Created by Phuthikorn_T on 7/1/2015.
@@ -14,14 +11,13 @@ import java.util.Set;
 public class ExamAnswerRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_ANSWER_RECORD_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_EXAM_ANSWER_RECORD_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_ANSWER_RECORD_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ANSWER_RECORD_ID")
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name="QUESTION_ID")
-    private Question questionId;
+    private Question question;
 
     @ManyToOne
     @JoinColumn(name="ANSWER_OBJECTIVE")
@@ -35,8 +31,7 @@ public class ExamAnswerRecord implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "EXAM_RECORD_ID")
-    private ExamRecord examRecordId;
-
+    private ExamRecord examRecord;
 
 
 //    public Set<ExamMarkingRecord> getExamMarkingRecords() {
@@ -47,12 +42,12 @@ public class ExamAnswerRecord implements Serializable {
 //        this.examMarkingRecords = examMarkingRecords;
 //    }
 
-    public ExamRecord getExamRecordId() {
-        return examRecordId;
+    public ExamRecord getExamRecord() {
+        return examRecord;
     }
 
-    public void setExamRecordId(ExamRecord examRecordId) {
-        this.examRecordId = examRecordId;
+    public void setExamRecord(ExamRecord examRecordId) {
+        this.examRecord = examRecordId;
     }
 
     public Integer getId() {
@@ -63,12 +58,12 @@ public class ExamAnswerRecord implements Serializable {
         this.id = id;
     }
 
-    public Question getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuestionId(Question questionId) {
-        this.questionId = questionId;
+    public void setQuestion(Question questionId) {
+        this.question = questionId;
     }
 
     public Choice getAnswerObjective() {
