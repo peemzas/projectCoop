@@ -19,7 +19,6 @@ public class ExamPaper implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_PAPER_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_EXAM_PAPER_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_PAPER_SEQ")
     @Column(name = "PAPER_ID")
     private Integer id;
 
@@ -63,7 +62,7 @@ public class ExamPaper implements Serializable {
             {CascadeType.PERSIST, CascadeType.MERGE})
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
             org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
-    private Set<PaperQuestion> questions;
+    private List<PaperQuestion> questions;
 
 
     public Integer getTimeLimit() {
@@ -74,11 +73,11 @@ public class ExamPaper implements Serializable {
         this.timeLimit = timeLimit;
     }
 
-    public Set<PaperQuestion> getQuestions() {
+    public List<PaperQuestion> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<PaperQuestion> questions) {
+    public void setQuestions(List<PaperQuestion> questions) {
         this.questions = questions;
     }
 

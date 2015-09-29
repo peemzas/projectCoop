@@ -46,13 +46,11 @@ public class QueryQuestionDomain extends HibernateUtil {
         beginTransaction();
         getSession().save(question);
 
-        commitTransaction();
-//        getSession().flush();
-
         if (question.getQuestionType().getId() == 1) {
             queryChoiceDomain.insertAllChoice(question, cDesc, correctChoice);
         }
 
+        commitTransaction();
         closeSession();
     }
 

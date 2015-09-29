@@ -16,7 +16,6 @@ public class SubCategory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_SUB_CATEGORY_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_SUB_CATEGORY_ID_SEQ_GEN", sequenceName = "TDCS_SUB_CATEGORY_SEQ")
     @Column(name="SUB_CATEGORY_ID")
     private Integer id;
 
