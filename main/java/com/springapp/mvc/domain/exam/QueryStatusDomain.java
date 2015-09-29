@@ -15,34 +15,43 @@ public class QueryStatusDomain extends HibernateUtil{
     public Status getReadyStatus(){
         Criteria criteria = getSession().createCriteria(Status.class);
         criteria.add(Restrictions.eq("id", 3));
-
-        Status result = (Status)criteria.list().get(0);
-        System.out.println(result.getDescription());
-
-        return result;
+        return (Status)criteria.uniqueResult();
     }
 
     public Status getDeletedStatus(){
         Criteria criteria = getSession().createCriteria(Status.class);
         criteria.add(Restrictions.eq("id", 4));
-        return (Status)criteria.list().get(0);
+        return (Status)criteria.uniqueResult();
     }
 
     public Status getOpenStatus(){
         Criteria criteria = getSession().createCriteria(Status.class);
         criteria.add(Restrictions.eq("id", 1));
-        return (Status)criteria.list().get(0);
+        return (Status)criteria.uniqueResult();
     }
 
-    public Status getCloseStatus(){
+    public Status getClosedStatus(){
         Criteria criteria = getSession().createCriteria(Status.class);
         criteria.add(Restrictions.eq("id", 2));
-        return (Status)criteria.list().get(0);
+        return (Status)criteria.uniqueResult();
     }
 
     public Status getStatusById(Integer id){
         Criteria criteria = getSession().createCriteria(Status.class);
         criteria.add(Restrictions.eq("id", id));
-        return (Status)criteria.list().get(0);
+        return (Status)criteria.uniqueResult();
     }
+
+    public Status getPendingStatus(){
+        Criteria criteria = getSession().createCriteria(Status.class);
+        criteria.add(Restrictions.eq("id",5));
+        return (Status)criteria.uniqueResult();
+    }
+
+    public Status getMarkedStatus(){
+        Criteria criteria = getSession().createCriteria(Status.class);
+        criteria.add(Restrictions.eq("id",6));
+        return (Status)criteria.uniqueResult();
+    }
+
 }

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 public class QueryExamAnswerDomain extends HibernateUtil{
 
     public void saveExamAnswer(ExamAnswerRecord examAnswerRecord){
-        beginTransaction();
+//        beginTransaction();
         getSession().save(examAnswerRecord);
-        commitTransaction();
+//        commitTransaction();
     }
 }

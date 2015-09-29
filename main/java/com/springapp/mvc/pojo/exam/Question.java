@@ -66,8 +66,6 @@ public class Question implements Serializable, Cloneable {
 //    @ManyToMany(mappedBy = "questions" ,fetch = FetchType.LAZY)
 //    private Set<ExamPaper> examPapers = new HashSet<ExamPaper>();
 
-//    @OneToMany(mappedBy = "question")
-//    private Set<Choice> choices;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private List<Choice> choices;
 
