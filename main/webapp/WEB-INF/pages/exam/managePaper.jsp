@@ -26,6 +26,7 @@
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </a>
+        <button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
     </div>
     <div class="row">
         <table id="tbManagePaper" class="table table-responsive table-hover">
@@ -41,7 +42,7 @@
                     <th style="text-align: center">แก้ไข</th>
                 </tr>
             </thead>
-            <tbody align="center">
+            <tbody id="tbodyManagePaper" align="center">
 
                     <%--<div class="btn-group">--%>
                         <%--<button class="btn dropdown-toggle" data-toggle="dropdown">--%>

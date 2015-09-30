@@ -55,6 +55,10 @@ public class ExamPaper implements Serializable {
     private Position position;
 
     @ManyToOne
+    @JoinColumn(name = "PAPER_STATUS")
+    private Status paperStatus;
+
+    @ManyToOne
     @JoinColumn(name = "PAPER_UPDATE_BY")
     private User updateBy;
 
@@ -157,5 +161,13 @@ public class ExamPaper implements Serializable {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Status getPaperStatus() {
+        return paperStatus;
+    }
+
+    public void setPaperStatus(Status paperStatus) {
+        this.paperStatus = paperStatus;
     }
 }
