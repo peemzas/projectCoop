@@ -4,6 +4,7 @@ var allQuestionIdOnTableCreatePaper = new Array();
 var minutes;
 var hours;
 var questionsInPaper = new Array();
+var newQuestionScore = new Array();
 
 $("document").ready(function(){
     $("#questionNotFound").show();
@@ -51,26 +52,32 @@ $("document").ready(function(){
         }
     });
 
-    $("#minutes").bind('change', function(){
-        //alert('change');
+    $("#createPaperBtn").unbind('click').click(function(){
+        newQuestionScore = [];
+        $("#tbodySelectedQuestionToPaper tr input[type='number']").each(function(){
+            newQuestionScore.push($(this).val());
+        });
         minutes =  $("#minutes").val();
-    });
-    $("#hours").bind('change', function(){
         hours = $("#hours").val();
+        createPaper();
     });
-    $("#createPaperBtn").on('click', function(){
-        var paperId = $("#newPaperId").val();
-        var paperName = $("#newPaperName").val();
-        var paperScore = $("#newPaperScore").val();
-        var paperTime = ((parseInt(hours) * 60) + parseInt(minutes));
-        var paperForPosition = $("#newPaperForPosition").val();
-        //var questionsArray = new Array();
-        alert(paperId+" "+paperName+" "+paperScore+" "+paperTime+" "+paperForPosition+" "+questionsInPaper);
-        $.ajax({
-            type: "POST",
-            url: "/TDCS/"
+
+    $("#date").datepicker();
+    function select(){
+        $('#obj').click(function(){
+            $('#objective').show();
+            $('#objective2').show();
+            $('#subjective').hide();
+            $('#subjective2').hide();
+        });
+
+        $('#sub').click(function(){
+            $('#subjective').show();
+            $('#subjective2').show();
+            $('#objective').hide();
+            $('#objective2').hide();
         })
-    });
+    }
 });
 
 $("#addQuestionBtn").on('click', function(){
@@ -195,16 +202,16 @@ function showInfo(showInfoId){
     $("#showQuestionInfoModal .modal-body").empty();
     $("#showQuestionInfoModal .modal-body").append(
         '<div class="row">'+
-        '<div class="col-sm-3 text-right"><b>หมายเลขข้อสอบ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionId"+showInfoId).text()+'</div><br/>'+
-        '<div class="col-sm-3 text-right"><b>วิชา :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelCategoryName"+showInfoId).text()+'</div><br/>'+
-        '<div class="col-sm-3 text-right"><b>รายวิชา :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelSubCategoryName"+showInfoId).text()+'</div><br/>'+
-        '<div class="col-sm-3 text-right"><b>ผู้สร้างข้อสอบ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionCreateBy"+showInfoId).text()+'</div><br/>'+
-        '<div class="col-sm-3 text-right"><b>วันที่สร้างข้อสอบ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionCreateDate"+showInfoId).text()+'</div><br/>'+
-        '<div class="col-sm-3 text-right"><b>ระดับ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionTypeDesc"+showInfoId).text()+'</div><br/>'+
-        '<div class="col-sm-3 text-right"><b>คะแนน :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelScore"+showInfoId).text()+'</div><br/>'+
-        '<div class="col-sm-12" style="width: 90%; height: 50px; margin: 5%; background-color: #ffffff;border: solid #c3c3c3 1px;">'+
-        '<h3>'+$("#labelQuestionDesc"+showInfoId).text()+'</h3>'+
-        '</div>'+
+            '<div class="col-sm-3 text-right"><b>หมายเลขข้อสอบ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionId"+showInfoId).text()+'</div><br/>'+
+            '<div class="col-sm-3 text-right"><b>วิชา :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelCategoryName"+showInfoId).text()+'</div><br/>'+
+            '<div class="col-sm-3 text-right"><b>รายวิชา :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelSubCategoryName"+showInfoId).text()+'</div><br/>'+
+            '<div class="col-sm-3 text-right"><b>ผู้สร้างข้อสอบ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionCreateBy"+showInfoId).text()+'</div><br/>'+
+            '<div class="col-sm-3 text-right"><b>วันที่สร้างข้อสอบ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionCreateDate"+showInfoId).text()+'</div><br/>'+
+            '<div class="col-sm-3 text-right"><b>ระดับ :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelQuestionTypeDesc"+showInfoId).text()+'</div><br/>'+
+            '<div class="col-sm-3 text-right"><b>คะแนน :</b></div><div class="col-sm-9" style="margin-left: -20px;"> '+$("#labelScore"+showInfoId).text()+'</div><br/>'+
+            '<div class="col-sm-12" style="width: 90%; height: 50px; margin: 5%; background-color: #ffffff;border: solid #c3c3c3 1px;">'+
+            '<h3>'+$("#labelQuestionDesc"+showInfoId).text()+'</h3>'+
+            '</div>'+
         '<div>'
     )
 }
@@ -222,21 +229,65 @@ function showInfo(showInfoId){
 function addQuestionToPaper(qId){
     questionIdString = [];
     questionIdString.push(qId);
+    var newScore = $('#labelScore'+qId).text();
     $("#tbSelectedQuestionToPaper").show();
     $("#tbodySelectedQuestionToPaper").append(
         '<tr>'+
-        '<td style="display: none;">'+$("#labelQuestionId"+qId).text()+'</td>'+
-        '<td><input type="checkbox" class="selectedQuestion"/></td>'+
-        '<td>'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
-        '<td>'+$("#labelCategoryName"+qId).text()+'</td>'+
-        '<td>'+$("#labelSubCategoryName"+qId).text()+'</td>'+
-        '<td style="text-align: left;">'+$("#labelQuestionDesc"+qId).text()+'</td>'+
-        '<td>'+$("#labelDiffDesc"+qId).text()+'</td>'+
-        '<td>'+$("#labelScore"+qId).text()+'</td>'+
-        '<td>'+$("#labelQuestionCreateBy"+qId).text()+'</td>'+
+            '<td style="display: none;">'+$("#labelQuestionId"+qId).text()+'</td>'+
+            '<td><input type="checkbox" class="selectedQuestion"/></td>'+
+            '<td>'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
+            '<td>'+$("#labelCategoryName"+qId).text()+'</td>'+
+            '<td>'+$("#labelSubCategoryName"+qId).text()+'</td>'+
+            '<td style="text-align: left;">'+$("#labelQuestionDesc"+qId).text()+'</td>'+
+            '<td>'+$("#labelDiffDesc"+qId).text()+'</td>'+
+            '<td><input id="newScore'+qId+'" name="newScore" type="number" class="form-control"  min="1" max="50" value="'+newScore+'"/></td>'+
+            '<td>'+$("#labelQuestionCreateBy"+qId).text()+'</td>'+
         '</tr>'
     );
     $("#questionNotFound").hide();
     //
     questionsInPaper.push(qId);
+}
+
+function createPaper(){
+    var paperId = $("#newPaperId").val();
+    var paperName = $("#newPaperName").val();
+    var paperScore = $("#newPaperScore").val();
+    var paperTime = ((parseInt(hours) * 60) + parseInt(minutes));
+    var paperForPosition = $("#newPaperForPosition").val();
+    var jsonObjQuestion = {};
+    var tempArrayQuestion = new Array();
+
+    for(var idx = 0; idx < questionsInPaper.length; idx++){
+        var item = {
+            "qId": questionsInPaper[idx],
+            "qScore" : newQuestionScore[idx]
+        };
+        tempArrayQuestion.push(item);
+    }
+    jsonObjQuestion = JSON.stringify(tempArrayQuestion);
+
+    alert(paperId+" "+paperName+" "+paperScore+" "+paperTime+" "+paperForPosition+" "+questionsInPaper+" "+newQuestionScore);
+    //alert(jsonObjQuestion);
+    $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/createPaper",
+        data: {
+            paperId : paperId,
+            paperName : paperName,
+            paperScore : paperScore,
+            paperTime : paperTime,
+            paperForPosition : paperForPosition,
+            jsonObjQuestion : jsonObjQuestion
+        },
+        success: function(){
+            alert('เพิ่มชุดข้อสอบเรียบร้อยแล้ว');
+        },
+        error: function(){
+            alert('เกิดข้อผิดพลาด');
+        }
+    });
+
+    //questionsInPaper = [];
+    //newQuestionScore = [];
 }

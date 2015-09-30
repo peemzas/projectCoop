@@ -48,6 +48,9 @@ public class ExamPaper implements Serializable {
     @Column(name = "PAPER_TIME_LIMIT_MINUTE")
     private Integer timeLimit;
 
+    @Column(name = "PAPER_FOR_POSITION")
+    private String position;
+
     @ManyToOne
     @JoinColumn(name = "PAPER_UPDATE_BY")
     private User updateBy;
@@ -145,4 +148,11 @@ public class ExamPaper implements Serializable {
         this.createBy = createBy;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 }

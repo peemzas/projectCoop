@@ -2,6 +2,7 @@ package com.springapp.mvc.domain;
 
 import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.util.HibernateUtil;
+import javafx.geometry.Pos;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
@@ -20,4 +21,13 @@ public class QueryPositionDomain extends HibernateUtil {
         closeSession();
         return list;
     }
+
+//    Add By Wanchana
+//    public Position getPositionById(Integer id){
+//        Criteria criteria = getSession().createCriteria(Position.class);
+//        criteria.add(Restrictions.eq("posiId", id));
+//        Position position = (Position) criteria.list().get(0);
+//
+//        return position;
+//    }
 }
