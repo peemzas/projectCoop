@@ -1,5 +1,6 @@
 package com.springapp.mvc.pojo.exam;
 
+import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
 import org.hibernate.annotations.Cascade;
 
@@ -49,8 +50,9 @@ public class ExamPaper implements Serializable {
     @Column(name = "PAPER_TIME_LIMIT_MINUTE")
     private Integer timeLimit;
 
-    @Column(name = "PAPER_FOR_POSITION")
-    private String position;
+    @ManyToOne
+    @JoinColumn(name = "PAPER_FOR_POSITION")
+    private Position position;
 
     @ManyToOne
     @JoinColumn(name = "PAPER_UPDATE_BY")
@@ -149,11 +151,11 @@ public class ExamPaper implements Serializable {
         this.createBy = createBy;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 }
