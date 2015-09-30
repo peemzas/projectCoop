@@ -1,15 +1,18 @@
 package com.springapp.mvc.controller.exam;
 
+import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryPositionDomain;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.QueryCategoryDomain;
 import com.springapp.mvc.domain.exam.QueryPaperDomain;
+import com.springapp.mvc.domain.exam.QueryPaperStatusDomain;
 import com.springapp.mvc.domain.exam.QuerySubCategoryDomain;
 import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.pojo.exam.ExamPaper;
 import com.springapp.mvc.pojo.exam.PaperQuestion;
+import com.springapp.mvc.pojo.exam.Status;
 import flexjson.JSONSerializer;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +63,10 @@ public class PaperController {
 //    Add By Mr.Wanchana
     @Autowired
     QueryPositionDomain queryPositionDomain;
+
+    @Autowired
+    QueryPaperStatusDomain queryPaperStatusDomain;
+
     private static final Logger logger = Logger.getLogger(PaperController.class.getName());
 
     @RequestMapping(value = "/exam/createPaper", method = RequestMethod.POST)
@@ -83,6 +90,7 @@ public class PaperController {
         Integer pPosition = new Integer(paperForPosition);
 //        Position position = queryPositionDomain.getPositionById(pPosition);
         User createBy = queryUserDomain.getCurrentUser(request);
+        Status paperStatus = queryPaperStatusDomain.getStatusById(1);
         Calendar calendar = Calendar.getInstance();
         Date createDate = new Date(calendar.getTime().getTime());
 
@@ -102,10 +110,9 @@ public class PaperController {
         examPaper.setMaxScore(paperMaxScore);
         examPaper.setCreateDate(createDate);
         examPaper.setTimeLimit(pTime);
+        examPaper.setPaperStatus(paperStatus);
 //        examPaper.setPosition(position);
-        logger.info(qIds+"\n"+qScores);
         queryPaperDomain.createPaper(examPaper, qIds, qScores);
-        logger.info("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 
         return new ResponseEntity<String>(HttpStatus.CREATED);
     }
@@ -118,8 +125,25 @@ public class PaperController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List<ExamPaper> examPapers = queryPaperDomain.getAllPapers();
-        String json = new JSONSerializer().exclude("*.class").serialize(examPapers);
+//        String json = new JSONSerializer().exclude("*.class").serialize(examPapers);
+        String json = new Gson().toJson(examPapers);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/updatePaperStatus", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> updatePaperStatus(Model model,
+                                                    @RequestParam(value = "paperId") int paperId,
+                                                    @RequestParam(value = "paperStatus") int paperStatus){
+
+        Status status = new Status();
+        status = queryPaperStatusDomain.getStatusById(paperStatus);
+        ExamPaper examPaper = new ExamPaper();
+        examPaper = queryPaperDomain.getPaperById(paperId);
+        examPaper.setPaperStatus(status);
+        queryPaperDomain.updatePaperStatus(examPaper);
+
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 }

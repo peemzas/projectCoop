@@ -5,7 +5,11 @@ import com.springapp.mvc.pojo.exam.PaperQuestion;
 import com.springapp.mvc.pojo.exam.Question;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -51,7 +55,6 @@ public class QueryPaperDomain extends HibernateUtil {
     }
 
     public static ExamPaper getExamPaperByCode(String code){
-        HibernateUtil.beginTransaction();
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.eq("code", code));
         ExamPaper examPaper = (ExamPaper) criteria.list().get(0);
@@ -60,11 +63,21 @@ public class QueryPaperDomain extends HibernateUtil {
     }
 
     public List<ExamPaper> getAllPapers(){
-        HibernateUtil.beginTransaction();
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("id"), "id")
+                .add(Projections.property("name"), "name")
+                .add(Projections.property("createDate"), "createDate")
+                .add(Projections.property("createBy"), "createBy")
+                .add(Projections.property("maxScore"), "maxScore")
+                .add(Projections.property("code"), "code")
+                .add(Projections.property("updateDate"), "updateDate")
+                .add(Projections.property("updateBy"), "updateBy")
+                .add(Projections.property("timeLimit"), "timeLimit")
+                .add(Projections.property("position"), "position"));
+        criteria.addOrder(Order.asc("id"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<ExamPaper> papers = criteria.list();
-        HibernateUtil.commitTransaction();
-        closeSession();
 
         return papers;
     }
@@ -79,7 +92,13 @@ public class QueryPaperDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-    public void updatePaper(ExamPaper updateExampaper, List<Integer>updateQIds, List<Float> updateScores){
-
+//    public void updatePaper(ExamPaper updateExampaper, List<Integer>updateQIds, List<Float> updateScores){
+//
+//    }
+    public void updatePaperStatus(ExamPaper examPaper){
+        HibernateUtil.beginTransaction();
+        getSession().update(examPaper);
+        HibernateUtil.commitTransaction();
+        HibernateUtil.closeSession();
     }
 }
