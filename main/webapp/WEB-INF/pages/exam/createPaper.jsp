@@ -27,6 +27,9 @@
   td{
     font-size: 13.5px;
   }
+  #tbSelectedQuestionToPaper{
+    margin-top: 5px;
+  }
 </style>
 
 <div class="container">
@@ -68,8 +71,8 @@
           <select id="newPaperForPosition" class="form-control input-sm">
             <option active>เลือกตำแหน่ง</option>
             <option value="all">ทั้งหมด</option>
-            <option value="dev">Developer</option>
-            <option value="ba">Business Analysis</option>
+            <option value="1">Developer</option>
+            <option value="5">Business Analysis</option>
           </select>
         </div>
       </div>
@@ -109,7 +112,7 @@
     <table id="tbSelectedQuestionToPaper" class="table">
       <thead class="bg-primary small">
         <tr>
-          <th style="text-align: center ;"><input id="checkAllQuestionFromCreatePaperPage" type="checkbox"> เลือก</th>
+          <th style="text-align: center ;"><input id="checkAllQuestionFromCreatePaperPage" type="checkbox"></th>
           <th style="text-align: center ;">ประเภท</th>
           <th style="text-align: center ;">หมวดหมู่</th>
           <th style="text-align: center ;">หัวข้อเรื่อง</th>
@@ -139,14 +142,6 @@
     <div class="col-md-1">
       <input class="form-control input-sm" readonly="true" name="score" id="score" style="text-align: center">
     </div>
-    <%--<div class="col-sm-3 col-sm-offset-9">--%>
-      <%--<div class="form-group">--%>
-        <%--<label for="maxScore" class="col-sm-3 label-control"><h5>คะแนนรวม = </h5></label>--%>
-        <%--<input id="maxScore" class="col-sm-3 form-control input-sm" readonly="true" style="text-align: center"/>--%>
-        <%--<label for="sumScore" class="col-sm-3 label-control"><h5>/</h5></label>--%>
-        <%--<input id="sumScore" class="col-sm-3 form-control input-sm" readonly="true" style="text-align: center">--%>
-      <%--</div>--%>
-    <%--</div>--%>
   </div>
 
   <%--<div class = "row">--%>
@@ -166,24 +161,6 @@
 
 <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
-<script>
-  $("#date").datepicker();
-  function select(){
-    $('#obj').click(function(){
-      $('#objective').show();
-      $('#objective2').show();
-      $('#subjective').hide();
-      $('#subjective2').hide();
-    });
-
-    $('#sub').click(function(){
-      $('#subjective').show();
-      $('#subjective2').show();
-      $('#objective').hide();
-      $('#objective2').hide();
-    })
-  }
-</script>
 
 <%@include file="modal/createQuestionModal.jsp"%>
 <%@include file="modal/selectQuestionModal.jsp"%>

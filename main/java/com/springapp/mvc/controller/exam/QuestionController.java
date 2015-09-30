@@ -332,7 +332,8 @@ public class QuestionController {
         }
         logger.info(".................................."+questionIds);
         List<Question> questions = queryQuestionDomain.getQuestionNotInSelected(questionIds);
-        String json = new Gson().toJson(questions);
+//        String json = new Gson().toJson(questions);
+        String json = new JSONSerializer().exclude("*.class").serialize(questions);
         logger.info(questions+".......................................................");
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
 //        return null;

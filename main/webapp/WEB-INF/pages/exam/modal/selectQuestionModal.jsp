@@ -22,6 +22,9 @@
         line-height: 100px;
         color: #00647f;
     }
+    #tbSelectQuestion{
+        margin-top: 5px;
+    }
 </style>
 <div class="modal fade" id="selectQuest">
     <div class="modal-dialog modal-lg" style="width: 80%">
@@ -34,12 +37,12 @@
                         <hr>
                     </div>
                     <%@include file="../template/searchQuestionTemplateNew.jsp"%>
-                    <button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>
+                    <%--<button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>--%>
                     <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
                     <table id="tbSelectQuestion" class="table table-responsive table-hover">
                         <thead class="bg-primary small">
                         <tr>
-                            <th><input id="checkQuestionAll" type="checkbox"> เลือก</th>
+                            <th><input id="checkQuestionAll" type="checkbox"></th>
                             <th>หมวดหมู่</th>
                             <th>หัวข้อเรื่อง</th>
                             <th>คำถาม</th>
