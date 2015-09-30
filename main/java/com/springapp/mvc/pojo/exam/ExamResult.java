@@ -10,43 +10,33 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "TDCS_EXAM_RESULTS")
+@Table(name="TDCS_EXAM_RESULTS")
 public class ExamResult implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_RESULT_ID_SEQ_GEN")
+    @SequenceGenerator(name = "TDCS_EXAM_RESULT_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_RESULT_SEQ")
     @Column(name = "RESULT_ID")
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "MARKED_BY", referencedColumnName = "USER_ID")
-    private User markedBy;
+    @JoinColumn(name = "MARKED_BY",referencedColumnName = "USER_ID")
+    private  User markedBy;
 
     @Column(name = "COMMENTING")
-    private String comment;
+    private  String comment;
 
-    @Column(name = "OBJECTIVE_SCORE")
-    private Float objectiveScore;
-
-    @Column(name = "SUBJECTIVE_SCORE")
-    private Float subjectiveScore;
+    @Column(name = "RESULT_SCORE")
+    private Integer resultScore;
 
     @ManyToOne
     @JoinColumn(name = "EXAM_RECORD_ID")
-    private ExamRecord examRecord;
+    private ExamRecord examRecordId;
 
     @ManyToOne
     @JoinColumn(name = "RESULT_STATUS")
     private Status status;
 
-
-    public Float getSubjectiveScore() {
-        return subjectiveScore;
-    }
-
-    public void setSubjectiveScore(Float subjectiveScore) {
-        this.subjectiveScore = subjectiveScore;
-    }
 
     public Status getStatus() {
         return status;
@@ -56,12 +46,12 @@ public class ExamResult implements Serializable {
         this.status = status;
     }
 
-    public ExamRecord getExamRecord() {
-        return examRecord;
+    public ExamRecord getExamRecordId() {
+        return examRecordId;
     }
 
-    public void setExamRecord(ExamRecord examRecordId) {
-        this.examRecord = examRecordId;
+    public void setExamRecordId(ExamRecord examRecordId) {
+        this.examRecordId = examRecordId;
     }
 
     public Integer getId() {
@@ -88,11 +78,11 @@ public class ExamResult implements Serializable {
         this.comment = comment;
     }
 
-    public Float getObjectiveScore() {
-        return objectiveScore;
+    public Integer getResultScore() {
+        return resultScore;
     }
 
-    public void setObjectiveScore(Float resultScore) {
-        this.objectiveScore = resultScore;
+    public void setResultScore(Integer resultScore) {
+        this.resultScore = resultScore;
     }
 }

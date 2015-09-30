@@ -47,11 +47,11 @@ public class QueryChoiceDomain extends HibernateUtil {
             choiceList.add(choice);
         }
 
-//        beginTransaction();
+        beginTransaction();
         for (Choice c : choiceList){
             getSession().save(c);
         }
-//        commitTransaction();
+        commitTransaction();
 
 
     }
