@@ -153,7 +153,7 @@
                                 <a href="/TDCS/exam/mainPageStudent">ทำข้อสอบ</a>
                             </li>
                             <li>
-                                <a href="/TDCS/exam/checkScore">ตรวจคะแนน</a>
+                                <a href="/TDCS/exam/checkScore">ผลคะแนนการสอบ</a>
                             </li>
 
                         </ul>
