@@ -3,11 +3,9 @@ package com.springapp.mvc.controller.exam;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.User;
-import com.springapp.mvc.pojo.exam.ExamAnswerRecord;
-import com.springapp.mvc.pojo.exam.ExamPaper;
-import com.springapp.mvc.pojo.exam.ExamRecord;
-import com.springapp.mvc.pojo.exam.Question;
+import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
+import com.springapp.mvc.util.HibernateUtil;
 import flexjson.JSONSerializer;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -67,12 +66,15 @@ public class DoExamController {
     @Autowired
     QueryExamAnswerDomain queryExamAnswerDomain;
 
+    @Autowired
+    QueryExamResultDomain queryExamResultDomain;
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
     public String doExam(ModelMap modelMap, Model model, HttpServletRequest request, HttpServletResponse response,
-                         @RequestParam(value = "paperId") String paperId) {
+                         @RequestParam(value = "paperId") Integer paperId) {
 
-        ExamPaper examPaper = queryPaperDomain.getPaperById(Integer.parseInt(paperId));
+        ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
 //        String json = new JSONSerializer().exclude("*.class").include("questions").include("questions.pk").include("questions.pk.question").serialize(examPaper);
 //        modelMap.addAttribute("paper", json);
         modelMap.addAttribute("paper", examPaper);
@@ -138,9 +140,7 @@ public class DoExamController {
             , @RequestParam(value = "answerRecords") JSONArray answerRecords
             , @RequestParam(value = "timeTaken") Integer timeTaken
 //                             , @RequestBody List<AnswerRecord> answerRecords
-    ) {
-        String submitStatus = "Submit Complete";
-
+    ) throws Exception {
 
         ExamPaper paper = queryPaperDomain.getPaperById(Integer.parseInt(paperId));
         User user = queryUserDomain.getCurrentUser(request);
@@ -151,40 +151,64 @@ public class DoExamController {
         examRecord.setExamDate(new Date());
         examRecord.setExamDate(DateUtil.getCurrentDateWithRemovedTime());
 
+        Float objectiveScore = (float) 0.0;
+        Choice currentChoice = null;
+        Question currentQuestion = null;
         try {
+            HibernateUtil.beginTransaction();
+
             queryExamRecordDomain.saveExamRecord(examRecord);
-
-            System.out.println(examRecord.getId());
-
-            for (int i = 0 ; i< answerRecords.length(); i++) {
+            //Save ExamRecord
+            for (int i = 0; i < answerRecords.length(); i++) {
                 ExamAnswerRecord examAnswerRecord = new ExamAnswerRecord();
                 examAnswerRecord.setExamRecord(examRecord);
-                examAnswerRecord.setQuestion(queryQuestionDomain.getQuestionById(
-                        answerRecords.getJSONObject(i).getInt("questionId")));
+                currentQuestion = queryQuestionDomain.getQuestionById(answerRecords.getJSONObject(i).getInt("questionId"));
+                examAnswerRecord.setQuestion(currentQuestion);
 
                 if (answerRecords.getJSONObject(i).optInt("answerObjective") != 0) {
-                    examAnswerRecord.setAnswerObjective(queryChoiceDomain.getChoiceById(
-                            answerRecords.getJSONObject(i).getInt("answerObjective")));
-                }else {
-                    examAnswerRecord.setAnswerSubjective(
-                            answerRecords.getJSONObject(i).getString("answerSubjective"));
+                    currentChoice = queryChoiceDomain.getChoiceById(answerRecords.getJSONObject(i).getInt("answerObjective"));
+                    examAnswerRecord.setAnswerObjective(currentChoice);
+
+                    if (currentChoice.getCorrection() == queryBooDomain.getTrue()) {
+                        for(PaperQuestion paperQuestion : paper.getQuestions()){
+                            if(paperQuestion.getQuestion().equals(currentQuestion)){
+                                objectiveScore += paperQuestion.getScore();
+                            }
+                        }
+                    }
+                } else {
+                    try {
+                        examAnswerRecord.setAnswerSubjective(
+                                answerRecords.getJSONObject(i).getString("answerSubjective"));
+                    }catch (Exception e){
+                        //Do nothing
+                    }
                 }
 
                 queryExamAnswerDomain.saveExamAnswer(examAnswerRecord);
             }
+            //Save ExamResult
+            ExamResult examResult = new ExamResult();
+            examResult.setExamRecord(examRecord);
+            examResult.setObjectiveScore(objectiveScore);
+            examResult.setStatus(queryStatusDomain.getPendingStatus());
+            queryExamResultDomain.saveExamResult(examResult);
+
+            System.out.println("HELLO WORLD");
+
+            HibernateUtil.commitTransaction();
+
         } catch (Exception e) {
             e.printStackTrace();
-            submitStatus = "Submit Failed";
-
+            HibernateUtil.rollbackTransaction();
+            throw e;
         }
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        String json = new JSONSerializer().serialize(submitStatus);
+        String json = new JSONSerializer().serialize("hello");
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
-
-//        return submitStatus;
     }
 
     @RequestMapping(value = "/exam/getExamBody")

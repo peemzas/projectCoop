@@ -1,10 +1,15 @@
 package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Phuthikorn_T on 8/5/2015.
@@ -14,8 +19,7 @@ import java.util.Date;
 public class ExamRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_RECORD_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_EXAM_RECORD_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_RECORD_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RECORD_ID")
     private Integer id;
 
@@ -33,6 +37,17 @@ public class ExamRecord implements Serializable {
     @Column(name = "TIME_TAKEN_MINUTE")
     private Integer timeTaken;
 
+    @OneToMany(mappedBy = "examRecord")
+    @Cascade(CascadeType.ALL)
+    private List<ExamAnswerRecord> examAnswerRecords;
+
+    public List<ExamAnswerRecord> getExamAnswerRecords() {
+        return examAnswerRecords;
+    }
+
+    public void setExamAnswerRecords(List<ExamAnswerRecord> examAnswerRecords) {
+        this.examAnswerRecords = examAnswerRecords;
+    }
 
     public Integer getTimeTaken() {
         return timeTaken;

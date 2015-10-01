@@ -6,6 +6,7 @@
 //$('#createQuestModalTitle').text('แก้ไขข้อสอบ');
 
 $(document).ready(function () {
+    clearAllSearchQuestionField()
     listSearchQuestion();
 })
 
@@ -219,7 +220,7 @@ var listSearchQuestion = function () {
         '<td class="questionType">' + q.questionType.description + '</td>' +
         '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
         '<td class="questionScore">' + q.score + '</td>' +
-        '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
+        '<td class="questionCategory">' + ' ' + '</td>' +
         '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
         '<td class="questionCreateBy">' + q.createBy.thFname +' '+ q.createBy.thLname + '</td>' +
         '<td class="questionCreateDate">' + formattedDate + '</td>' +

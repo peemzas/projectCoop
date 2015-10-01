@@ -5,7 +5,7 @@
 var countdownContainerElement;
 var timeLimitMillisec;
 var timeTakenMillisec;
-var unansweredQuestionArray;
+var unmarkedQuestionArray;
 
 $(document).ready(function () {
     getExamPaperBody();
@@ -17,7 +17,7 @@ $(document).ready(function () {
 var goToUnfinishBtn = $('#goToUnfinish');
 var goToUnfinishBtnInitialText = goToUnfinishBtn.text();
 $("#SendPaper").on('click', function () {
-    goToUnfinishBtnUpdate()
+    confirmationModalUpdate()
 })
 
 $("#confirmSubmitExam").on('click', function () {
@@ -29,6 +29,7 @@ goToUnfinishBtn.on('click', function () {
         scrollTop: ($('.questionContainer[questionNo="'+$(this).val()+'"').offset().top - 100)
     });
 })
+
 $('#countdownContainer').on('click',function(){
     $(':first-child',$(this)).toggle()
 })
@@ -42,25 +43,27 @@ $('#toBottom').on('click',function(){
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var goToUnfinishBtnUpdate = function(){
-    unansweredQuestionArray = checkExamCompletion();
+var confirmationModalUpdate = function(){
+    unmarkedQuestionArray = checkExamCompletion();
     var confirmMessage = '';
     var confirmMessageElement = $('#submitExamConfirmMessage');
 
-    if (unansweredQuestionArray != null) {
-        confirmMessage = 'มีข้อสอบที่ยังไม่ได้ตอบ ได้แก่ ข้อที่<br/>[ ';
-        for (var i = 0; i < unansweredQuestionArray.length; i++) {
+    if (unmarkedQuestionArray != null) {
+        confirmMessage = 'มีข้อสอบที่ยังไม่ได้ตอบ ได้แก่ข้อที่<br/>[ ';
+        for (var i = 0; i < unmarkedQuestionArray.length; i++) {
             if (i == 0) {
-                confirmMessage = confirmMessage + unansweredQuestionArray[i]
+                confirmMessage = confirmMessage + unmarkedQuestionArray[i]
             } else {
-                confirmMessage = confirmMessage + ", " + unansweredQuestionArray[i]
+                confirmMessage = confirmMessage + ", " + unmarkedQuestionArray[i]
             }
         }
-        confirmMessage += "]";
-        goToUnfinishBtn.val(unansweredQuestionArray[0]);
-        goToUnfinishBtn.text(goToUnfinishBtnInitialText+" "+unansweredQuestionArray[0])
+        confirmMessage += " ]";
+        goToUnfinishBtn.val(unmarkedQuestionArray[0]);
+        goToUnfinishBtn.text(goToUnfinishBtnInitialText+" "+unmarkedQuestionArray[0])
+        goToUnfinishBtn.show();
     } else {
         confirmMessage = 'ยืนยันการส่งข้อสอบ'
+        goToUnfinishBtn.hide()
     }
     confirmMessageElement.empty();
     confirmMessageElement.append(confirmMessage)
@@ -257,10 +260,15 @@ var submitExam = function () {
         var questionId = $(this).attr('questionId');
         var answerObj = 0
         var answerSubj = null
-        var questionType = $(this).attr('questionType')
+        var questionType = 0
+        if($(this).find('input').length > 0 ){
+            questionType = 1
+        }
         if (questionType == 1) {
+            console.log('if')
             answerObj = $(this).find('input:checked').val()
         } else {
+            console.log('else')
             answerSubj = $(this).find('textarea').val()
         }
         answerArray.push(new answerRecord(questionId, answerObj, answerSubj))
@@ -275,11 +283,11 @@ var submitExam = function () {
             , timeTaken: parseInt(timeTakenMillisec / 60 / 100)
         }
         , success: function () {
-            alert()
-            location.href = "/TDCS/home.html"
+            alert('ส่งขอสอบเรียบร้อบ')
+            //location.href = "/TDCS/home.html"
         }
         , error: function () {
-            alert()
+            alert('การส่งข้อสอบล้มเหลว')
         }
     })
 }
