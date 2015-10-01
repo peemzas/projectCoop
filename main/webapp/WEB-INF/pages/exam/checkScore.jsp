@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
     <div class="row">
-        <h3 class="h3">ตรวจคะแนน</h3>
+        <h3 class="h3">ผลคะแนนการสอบ</h3>
     </div>
 </div>
 <hr/>

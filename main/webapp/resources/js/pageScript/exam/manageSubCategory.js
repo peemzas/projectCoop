@@ -3,7 +3,7 @@
  */
 
 
-$("#dropdownExamEmp").attr('class', 'dropdown active');
+$("#dropdownExamEmp").attr('class', 'dropdown-toggle active');
 
 $(document).ready(function () {
     $("#selectAllSubCategory").on('click', function () {
@@ -59,7 +59,7 @@ function viewSubCategory() {
 
 
                     '<td style="text-align: center">' +
-                    '<button id="editBtn' + value.subId + '" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
+                    '<button id="editBtn' + value.subId + '" type="button" class="btn btn-gray btn-sm" onclick="editSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
                     '&nbsp;<button id="updateBtn' + value.subId + '" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.subId + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
 
                     '</td>' +
@@ -98,13 +98,14 @@ function deleteSubCategory(subCategoryId) {
             success: function () {
                 //$("#tbodySubCategory").empty();
                 //viewSubCategory();
+                alert(' ลบวิชาสำเร็จ ');
             },
             error: function () {
-                alert('error Delete...');
+                alert('ไม่สามารถลบ '+subCategoryId +' ได้');
             }
         });
     })
-    alert(' ลบวิชาสำเร็จ ');
+
     window.location.reload();
 }
 
@@ -150,20 +151,15 @@ function updateSubCategory(subcategoryId) {
         type: "POST",
         url: "/TDCS/exam/editSubCategory",
         data: {
-
             subcategoryId: subcategoryId,
             subcategoryName: subName
-
-
         },
-
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     viewSubCategory();
                     //window.   location.reload();
                 }
-
                 else {
                     alert("ชื่อซ้ำ");
                 }
@@ -172,15 +168,12 @@ function updateSubCategory(subcategoryId) {
             }
         }
     });
-    //}
 }
-
 
 $(document).ready(function () {
     $("#searchSubCategory").on('click', function () {
         search();
     });
-
     $("#clearsearchinput").on('click', function () {
         clearsearch();
     });
@@ -195,9 +188,7 @@ function search() {
     var categoryId = $("#categoryId").val();
     var subcategoryName = $("#sSubCat").val();
 
-
     categoryId = categoryId.substr(0, categoryId.indexOf(' '));
-
 
     var dataResponse = $.ajax({
         type: "POST",
@@ -205,12 +196,9 @@ function search() {
         data: {
             categoryId: categoryId,
             subcategoryName: subcategoryName
-
         },
         async: false,
-
         success: function (data) {
-
             $("#tbodySubCategory").empty();
             if (data.size == null) {
                 $("#alertMess").show();
@@ -223,7 +211,7 @@ function search() {
                 $("#tbodySubCategory").append(
                     '<tr>' +
 
-                    '<td style="text-align: center;"><input class="selectSubCategory" type="checkbox" subCatId="' + value.SubCategory.id + '">' + value.SubCategory.id + '</input>' +
+                    '<td style="text-align: center;"><input class="selectSubCategory" type="checkbox" subCatId="' + value.SubCategory.id + '"> </input>' +
 
                         //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
                     '<td style="text-align: center;"><label id="catName' + value.id + '">' + value.category.name + '</label>' +
@@ -236,7 +224,7 @@ function search() {
 
 
                     '<td style="text-align: center">' +
-                    '<button id="editBtn' + value.SubCategory.id + '" type="button" class="btn btn-gray" onclick="editSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
+                    '<button id="editBtn' + value.SubCategory.id + '" type="button" class="btn btn-gray btn-sm" onclick="editSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
                     '&nbsp;<button id="updateBtn' + value.SubCategory.id + '" class="btn btn-primary" style="display: none;" onclick="updateSubCategory(' + "'" + value.SubCategory.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
 
                     '</td>' +
@@ -258,38 +246,48 @@ function search() {
 
 
 
-$("categoryId").keyup(function(e) {
-    if (e.which > 0) {
-        e.preventDefault();
-        LOVCAT();
-    }
-});
-$(function LOVCAT() {
-    var availableTags2 = [];
+//$("categoryId").keyup(function(e) {
+//    if (e.which > 0) {
+//        e.preventDefault();
+//        LOVCAT();
+//    }
+//
+//});
+//$(function LOVCAT() {
+//    var availableTags2 = [];
+//
+//    var data = $.ajax({
+//        type: "POST",
+//        contentType: "application/json",
+//        url: "/TDCS/exam/getAllCategory",
+//        async: false,
+//        success: function(data){
+//            data.forEach(function(value){
+//                    availableTags2.push(value.id);
+//            });
+//        },
+//        error: function(data){
+//            alert('error while request...');
+//        }
+//    });
+//    //$(".autocomplete2").autocomplete({
+//    //    source: availableTags2
+//    //});
+//
+//    var search = $("#categoryId").val();
+//    $("#categoryId").typeahead('destroy').typeahead({
+//        source: availableTags2,
+//        minLength: 0,
+//        items: 20
+//    }).focus().val('').keyup().val(search);
+//});
 
-    var data = $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: "/TDCS/exam/getAllCategory",
-        async: false,
-        success: function(data){
-            data.forEach(function(value){
-                    availableTags2.push(value.id + ' : ' + value.name);
-            });
-        },
-        error: function(data){
-            alert('error while request...');
-        }
-    });
-    $(".autocomplete2").autocomplete({
-        source: availableTags2
-    });
-});
+
+
+
 
 function listsubcat() {
-    alert('kk');
-
-    var availableTagsall = [];
+    var availableall = [];
 
     var data = $.ajax({
         type: "POST",
@@ -298,24 +296,28 @@ function listsubcat() {
         async: false,
         success: function(data){
             data.forEach(function(value){
-                availableTagsall.push(value.id + ' : ' + value.name);
+                availableall.push(value.id + ' : ' + value.name);
             });
         },
         error: function(data){
             alert('error while request...');
         }
     });
-    $(".autocompleteall").autocomplete({
-        source: availableTagsall
-    });
-}
+    //$(".autocomplete2").autocomplete({
+//    //    source: availableTags2
+//    //});
+
+    var search = $("#categoryId").val();
+    $("#categoryId").typeahead('destroy').typeahead({
+        source: availableall,
+        minLength: 0,
+        items: 20
+    }).focus().val('').keyup().val(search);
+};
 
 //$(function LOVCAT2() {
 //
 //    var availableTags2 = [];
-//
-//
-//
 //    var data = $.ajax({
 //        type: "POST",
 //        contentType: "application/json",
@@ -339,39 +341,44 @@ function listsubcat() {
 //
 //});
 
+$(document).ready(function () {
 
-//$("subcategoryName").keyup(function(e) {
-//    if (e.which > 0) {
-//        e.preventDefault();
-//        LOVSUB();
-//    }
-//});
-//$(function LOVSUB() {
-//    var availableTags = [
-//        //"ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++",
-//        //"Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran",
-//        //"Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl",
-//        //"PHP", "Python", "Ruby", "Scala", "Scheme","DD","test","Test"
-//    ];
-//
-//    var data = $.ajax({
-//        type: "POST",
-//        contentType: "application/json",
-//        url: "/TDCS/exam/getAllSubCategory",
-//        async: false,
-//        success: function(data){
-//            data.forEach(function(value){
-//                availableTags.push(value.subName);
-//            });
-//        },
-//        error: function(data){
-//            alert('error while request...');
-//        }
-//    });
-//    $(".autocomplete").autocomplete({
-//        source: availableTags
-//    });
-//});
+    $("#categoryId").on('change', function () {
+        //alert('555');
+            var categoryId = $("#categoryId").val();
+            //var subcategoryName = $("#sSubCat").val();
+            categoryId = categoryId.substr(0, categoryId.indexOf(' '));
+            $("#sSubCat").empty();
+
+        var data = $.ajax({
+            type: "POST",
+            url: "/TDCS/exam/getSubCategoryToDropDown",
+            data: {
+                categoryId: categoryId
+                //subcategoryName: subcategoryName
+            },
+            async: false,
+
+            success: function (data) {
+                if(($("#sSubCat").val()==null))
+                {
+                    alert("kk");
+                }
+                data.forEach(function (value) {
+
+                    $("#sSubCat").append(
+                        '<option >'+value.name+'</option>'
+                    )
+
+                });
+            },
+            error: function (data) {
+                alert('error while request...');
+            }
+        });
+    }
+    )
+});
 
 
 

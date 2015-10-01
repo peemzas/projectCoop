@@ -7,12 +7,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<script>--%>
+<script>
     <%--if('${status}' == 'user' || '${status}' == 'staff' || '${status}' == ''){--%>
         <%--window.location.href = "/TDCS/index.html";--%>
     <%--}--%>
-<%--</script>--%>
 
+    <%--if ('${status}' != 'staff') {--%>
+        <%--window.location.href = "/TDCS/index.html";--%>
+    <%--}--%>
+</script>
 
 <div class="container row">
     <h3>หัวข้อเรื่อง</h3>
@@ -39,41 +42,51 @@
                     <div style="margin-bottom: 5px"></div>
                     <div class="row col-md-6 ">
                         <div class="col-md-5  text-right">
-                            <label>หมวดหมู่ :</label>
+                            <label style="margin-top: 4px;">หมวดหมู่ :</label>
                         </div>
-                        <div class="col-md-7 input-group " >
-                            <input id="categoryId" class="form-control autocomplete2" type="text" placeholder="ค้นหาหมวดหมู่"/>
-                            <span class="input-group-addon ">
-                            <i class="glyphicon glyphicon-search autocompleteall" onclick="listsubcat()" style="cursor: pointer; height: 20px;"></i>
+                        <div class="col-md-6 input-group " >
+                            <input id="categoryId" class="form-control"  placeholder="ค้นหาหมวดหมู่"/>
+                            <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-search" onclick="listsubcat()" style="cursor: pointer; height: 20px;"></i>
                              </span>
                         </div>
                     </div>
+
 
                     <div style="margin-bottom: 5px"></div>
 
                     <div class="row col-ms-5">
                         <div class="col-md-2 text-right">
-                            <label>หัวข้อเรื่อง :</label>
+                            <label style="margin-top: 4px;">หัวข้อเรื่อง :</label>
                         </div>
-                        <%--<div class="col-md-4" >--%>
+                        <div class="col-md-3" >
+
+
                         <%--<select id="sSubCat" class="form-control" data-width="100%">--%>
                         <%--<option value="">โปรดเลือกหัวข้อเรื่อง</option>--%>
-                        <%--<c:forEach var="category" items="${listCat}">--%>
-                        <%--<option value="${category.id}">${category.name}</option>--%>
-                        <%--</c:forEach>--%>
+                            <%--<c:forEach var="subCategory" items="${listSubCat}">--%>
+                            <%--<option value="${subCategory.subName}">${subCategory.subName}</option>--%>
+                            <%--</c:forEach>--%>
                         <%--</select>--%>
-                        <%--</div>--%>
+
+                            <select  id="sSubCat" class="form-control" data-width="100%">
+
+
+                            </select>
+
+
+                        </div>
                         <div class="input-group">
                         <div class="">
                             <%--<input id="subcategoryName" class="form-control autocomplete" type="text"--%>
                                    <%--placeholder="ค้นหาหัวข้อเรื่อง"/>--%>
 
-                                <select id="sSubCat" class="form-control" data-width="100%">
-                                <option value="">โปรดเลือกหัวข้อเรื่อง</option>
-                                <c:forEach var="subCategory" items="${listSubCat}">
-                                <option value="${subCategory.subName}">${subCategory.subName}</option>
-                                </c:forEach>
-                                </select>
+                                <%--<select id="sSubCat" class="form-control" data-width="100%">--%>
+                                <%--<option value="">โปรดเลือกหัวข้อเรื่อง</option>--%>
+                                <%--<c:forEach var="subCategory" items="${listSubCat}">--%>
+                                <%--<option value="${subCategory.subName}">${subCategory.subName}</option>--%>
+                                <%--</c:forEach>--%>
+                                <%--</select>--%>
 
 
                                 <%--<form:select path="listSubCat" id="sSubCat" name="advisor" class="form-control" required="true" >--%>
@@ -113,16 +126,14 @@
 
 
 
-        <button data-toggle="modal" data-target="#createSub" class="btn btn-success" align="center"
-                style="width:50px;height:35px"><span class="glyphicon glyphicon-plus"></span>
+        <button data-toggle="modal" data-target="#createSub" class="btn btn-success btn-sm" align="center"
+                ><span class="glyphicon glyphicon-plus"></span>
         </button>
-        <button align="center" style="width:50px;height:35px" class="btn btn-danger" onclick="deleteSubCategory()">
+        <button align="center"  class="btn btn-danger btn-sm" onclick="deleteSubCategory()">
             <span class="glyphicon glyphicon-trash"></span>
         </button>
 
 
-        </tbody>
-        </table>
 
         <table class="table table-bordered" id="tblSubCategory">
             <col width="10%"/>
@@ -155,43 +166,52 @@
 <%@include file="modal/createSubCategoryModal.jsp" %>
 
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+<%--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>--%>
+<%--<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>--%>
 
 
 <style>
-    .ui-autocomplete {
-        position: absolute;
-        z-index: 1000;
-        cursor: default;
-        padding: 0;
-        margin-top: 2px;
-        list-style: none;
-        background-color: #ffffff;
-        border: 1px solid #ccc -webkit-border-radius : 5 px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    }
+    /*.ui-autocomplete {*/
+        /*position: absolute;*/
+        /*z-index: 1000;*/
+        /*cursor: default;*/
+        /*padding: 0;*/
+        /*margin-top: 2px;*/
+        /*list-style: none;*/
+        /*background-color: #ffffff;*/
+        /*border: 1px solid #ccc -webkit-border-radius : 5 px;*/
+        /*-moz-border-radius: 5px;*/
+        /*border-radius: 5px;*/
+        /*-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+        /*-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+        /*box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
 
-    .ui-autocomplete > li {
-        padding: 3px 20px;
-    }
-
-    .ui-autocomplete > li.ui-state-focus {
-        background-color: #DDD;
-    }
-
-    .ui-helper-hidden-accessible {
-        display: none;
-    }
-
-    /*#scrollable-dropdown-menu .tt-dropdown-menu {*/
-    /*max-height: 150px;*/
-    /*overflow-y: auto;*/
+        /*max-height: 150px;*/
+        /*overflow-y: auto;*/
     /*}*/
+
+    /*.ui-autocomplete > li {*/
+        /*padding: 3px 20px;*/
+    /*}*/
+
+    /*.ui-autocomplete > li.ui-state-focus {*/
+        /*background-color: #DDD;*/
+    /*}*/
+
+    /*.ui-helper-hidden-accessible {*/
+        /*display: none;*/
+    /*}*/
+    td{
+        font-size: 12px
+
+    }
+
+    #categoryId + .dropdown-menu{
+        /*font-size: 12px;*/
+        max-width: 100%;
+        max-height: 150px;
+        overflow-y: auto;
+    }
 
 
 </style>

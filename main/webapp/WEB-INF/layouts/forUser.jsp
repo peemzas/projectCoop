@@ -29,7 +29,9 @@
     <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-select.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datepicker.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-combobox.js" />"></script>
-    <%--<script type="text/javascript" src="<c:url value="/resources/datepicker/jquery-ui.js" />"></script>--%>
+    <script type="text/javascript" src="<c:url value="/resources/jquery/jquery.typeahead.js" />"></script>
+
+<%--<script type="text/javascript" src="<c:url value="/resources/datepicker/jquery-ui.js" />"></script>--%>
 
     <script type="text/javascript" src="<c:url value="/resources/js/bootstrapValidator.min.js"/>"></script>
     <link class="cssdeck" href="<c:url value="/resources/css/bootstrapValidator.min.css" />" rel="stylesheet" >

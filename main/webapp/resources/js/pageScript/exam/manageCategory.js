@@ -1,3 +1,7 @@
+
+
+$("#dropdownExamEmp").attr('class', 'dropdown-toggle active');
+
 $("document").ready(function(){
     viewCategory();
     $("#deleteCategory").on('click', function(){

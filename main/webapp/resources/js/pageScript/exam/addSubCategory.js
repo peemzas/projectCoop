@@ -49,11 +49,11 @@ function saveSubCategory() {
                 alert("คุณกรอกข้อมูลไม่ครบ");
             }
             if (Number($("#categoryId").val()) == Number(value.id) && $("#categoryName").val() == value.name) {
-                alert("รหัสวิชา " + $("#categoryId").val() + ", รายวิชา " + $("#categoryName").val() + " มีอยู่แล้วในระบบ");
+                alert("รหัสหมวดหมู่ " + $("#categoryId").val() + ", หมวดหมู่ " + $("#categoryName").val() + " มีอยู่แล้วในระบบ");
             }
             if (Number($("#categoryId").val()) == Number(value.id)) {
-                //alert("รหัสวิชา "+$("#categoryId").val()+" ซ่ำ");
-                alert("รหัสวิชา " + $("#categoryId").val() + " มีอยู่แล้วในระบบ");
+                //alert("รหัสหมวดหมู่ "+$("#categoryId").val()+" ซ่ำ");
+                alert("รหัสหมวดหมู่ " + $("#categoryId").val() + " มีอยู่แล้วในระบบ");
             }
             if ($("#subcategoryNameadd").val() == value.subName) {
                 alert(" หัวข้อเรื่อง " + $("#subcategoryNameadd").val() + " มีอยู่แล้วในระบบ");

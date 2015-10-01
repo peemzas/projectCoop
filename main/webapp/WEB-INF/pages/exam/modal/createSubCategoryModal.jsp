@@ -21,32 +21,20 @@
             </div>
             <div class="modal-body">
 
-
-                <%--<div class="row">--%>
-                <%--<div class="col-md-2 col-lg-offset-3 text-right">--%>
-                <%--<label>รหัสวิชา :</label>--%>
-                <%--</div>--%>
-                <%--<div class="col-md-1" style="width: 16%">--%>
-                <%--<input class="form-control" type="text" maxlength="5"/>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-                <%--<div style="margin-bottom: 5px"></div>--%>
-
-
                 <div class="row form-group">
 
 
                     <div class="col-md-4" align="right">
                         <h4><label class="control-label" style="color: black ; font-weight: 100">
                             <small style="color: red">*</small>
-                            เลือกวิชา :
+                            เลือกหมวดหมู่ :
                         </label></h4>
                     </div>
                     <div class="col-md-6">
                         <%--<input type="text" class="form-control" name="cat" id="categoryName-forAddSubCat" style="width: 245px"/>--%>
                         <%--<select class="selectpicker" id="sCat" class="form-control" data-width="100%">--%>
                             <form:select path="listCat" id="sCat" name="advisor" class="form-control" required="true" >
-                            <option value="">โปรดเลือกวิชา</option>
+                            <option value="">โปรดเลือกหมวดหมู่</option>
                             <c:forEach var="category" items="${listCat}">
                                 <option categoryName="${category.name} " value="${category.id}">${category.id}
                                     : ${category.name}</option>
@@ -98,6 +86,16 @@
 <%--<script src="${addSubCategory}" type="text/javascript"><!--Not Empty --></script>--%>
 
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/addSubCategory.js" />"></script>
+
+<%--<style>--%>
+
+    <%--#category + .dropdown-menu{--%>
+        <%--/*font-size: 12px;*/--%>
+        <%--max-width: 100%;--%>
+        <%--max-height: 50px;--%>
+        <%--overflow-y: auto;--%>
+    <%--}--%>
+<%--</style>--%>
 
 
 
