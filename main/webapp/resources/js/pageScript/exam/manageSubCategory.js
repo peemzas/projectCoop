@@ -360,10 +360,10 @@ $(document).ready(function () {
             async: false,
 
             success: function (data) {
-                if(($("#sSubCat").val()==null))
-                {
-                    alert("kk");
-                }
+                //if(($("#sSubCat").val()==null))
+                //{
+                //    alert("kk");
+                //}
                 data.forEach(function (value) {
 
                     $("#sSubCat").append(

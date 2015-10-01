@@ -26,7 +26,7 @@
         <div class="panel-collapse" id="searchCollapse">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h4>ค้นหา...</h4>
+                    <h5 class="panel-title">ค้นหา</h5>
                 </div>
                 <div class="panel-body">
                     <%--<div class="row">--%>
@@ -112,8 +112,8 @@
                 <div class="panel-footer">
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
-                            <button id="searchSubCategory" class="btn btn-primary" type="button">ค้นหา</button>
-                            <button id="clearsearchinput" class="btn" type="button"
+                            <button id="searchSubCategory" class="btn btn-primary btn-sm" type="button">ค้นหา</button>
+                            <button id="clearsearchinput" class="btn btn-sm" type="button"
                                     style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล
                             </button>
                         </div>
@@ -141,7 +141,7 @@
             <col width="40%"/>
             <col width="10%"/>
             <%--<col width="10%"/>--%>
-            <thead class="bg-primary">
+            <thead class="bg-primary label-primary small" >
             <tr>
                 <th style="text-align: center; color: white;"><input id="selectAllSubCategory" type="checkbox"/> เลือก
                 </th>
@@ -201,10 +201,12 @@
     /*.ui-helper-hidden-accessible {*/
         /*display: none;*/
     /*}*/
-    td{
-        font-size: 12px
 
-    }
+    /**/
+    /*td{*/
+        /*font-size: 12px*/
+
+    /*}*/
 
     #categoryId + .dropdown-menu{
         /*font-size: 12px;*/
