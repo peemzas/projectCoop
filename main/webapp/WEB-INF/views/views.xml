@@ -139,20 +139,20 @@
 
     <!-- Create by Neng -->
     <definition name = "manageCategory" extends="tempForUser">
-        <put-attribute name="title" value="แก้ไขรายวิชา" />
+        <put-attribute name="title" value="จัดการรายวิชา" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/manageCategory.jsp" />
     </definition>
     <definition name = "manageSubCategory" extends="tempForUser">
-        <put-attribute name="title" value="แก้ไขหัวข้อเรื่อง" />
+        <put-attribute name="title" value="จัดดการหัวข้อเรื่อง" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/manageSubCategory.jsp" />
     </definition>
 
     <definition name = "manageQuestion" extends = "tempForUser">
-        <put-attribute name="title" value = "แก้ไขข้อสอบ" />
+        <put-attribute name="title" value = "จัดการข้อสอบ" />
         <put-attribute name="body" value = "/WEB-INF/pages/exam/manageQuestion.jsp" />
     </definition>
     <definition name = "managePapers" extends = "tempForUser">
-        <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
+        <put-attribute name="title" value = "จัดการชุดข้อสอบ" />
         <put-attribute name="body" value = "/WEB-INF/pages/exam/managePaper.jsp" />
     </definition>
     <definition name = "editButtonOnPageManagePapers" extends = "tempForUser">
@@ -165,12 +165,12 @@
     </definition>
 
     <definition name="paperExamRecord" extends="tempForUser">
-        <put-attribute name="title" value="ผลการทำข้อสอบ"/>
+        <put-attribute name="title" value="ค้นหาผลการทำข้อสอบ"/>
         <put-attribute name="body" value="/WEB-INF/pages/exam/paperExamRecord.jsp"/>
     </definition>
 
     <definition name="marking" extends="tempForUser">
-        <put-attribute name="title" value="ผลการทำข้อสอบ"/>
+        <put-attribute name="title" value="ตรวจข้อสอบ"/>
         <put-attribute name="body" value="/WEB-INF/pages/exam/marking.jsp"/>
     </definition>
 

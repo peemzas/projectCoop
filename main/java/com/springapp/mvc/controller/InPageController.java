@@ -314,7 +314,7 @@ public class InPageController {
     public String paperExamRecord(HttpServletRequest request) {return "paperExamRecord";}
 
     //CREATE BY NICK
-    @RequestMapping(method = RequestMethod.GET,value = "/exam/marking")
-    public String marking(HttpServletRequest request){return "marking";}
+//    @RequestMapping(method = RequestMethod.GET,value = "/exam/marking")
+//    public String marking(HttpServletRequest request){return "marking";}
 
 }

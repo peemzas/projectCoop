@@ -88,7 +88,7 @@ var submitSearchQuestion = function () {
     })
 }
 
-var clearAllField = function () {
+var clearAllSearchQuestionField = function () {
     catAndSubcatSelectNothing();
     questionId: $('#searchQuestionIdInput').val("");
     questionDesc: $("#searchQuestionDescInput").val("");
@@ -101,5 +101,5 @@ var clearAllField = function () {
 }
 
 $(".searchInputClearBtn").on('click',function(){
-    clearAllField();
+    clearAllSearchQuestionField();
 })
