@@ -70,17 +70,10 @@ public class CategoryController {
 
     @RequestMapping(value = "/exam/deleteCategory", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> deleteCategory(@RequestBody String jsoN) throws JSONException {
+    public void deleteCategory(@RequestParam(value = "catId", required = true) String catId){
 
-        JSONArray jsonArray = new JSONArray(jsoN);
-        List categoryIds = new ArrayList();
-        for(int i = 0; i < jsonArray.length(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            categoryIds.add(jsonObject.getString("categoryId"));
-        }
-        queryCategoryDomain.deleteCategory(categoryIds);
-
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        Category category = queryCategoryDomain.getCategoryById(catId);
+        queryCategoryDomain.deleteCategory(category);
     }
 
     @RequestMapping(value = "/exam/editCategory", method = RequestMethod.POST)

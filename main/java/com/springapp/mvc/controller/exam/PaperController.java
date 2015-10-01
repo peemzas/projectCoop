@@ -80,17 +80,15 @@ public class PaperController {
                             HttpServletRequest request,
                             HttpServletResponse response) throws JSONException {
 
-        logger.info("........................."+ paperForPosition);
-
         JSONArray jsonArray = new JSONArray(jsonObjQuestion);
         List<Integer> qIds = new ArrayList();
         List<Float> qScores = new ArrayList();
         Integer paperMaxScore = new Integer(paperScore);
         Integer pTime = new Integer(paperTime);
         Integer pPosition = new Integer(paperForPosition);
-//        Position position = queryPositionDomain.getPositionById(pPosition);
+        Position pForPosition = queryPositionDomain.getPositionById(pPosition);
         User createBy = queryUserDomain.getCurrentUser(request);
-        Status paperStatus = queryPaperStatusDomain.getStatusById(1);
+        Status paperStatus = queryPaperStatusDomain.getStatusById(3);
         Calendar calendar = Calendar.getInstance();
         Date createDate = new Date(calendar.getTime().getTime());
 
@@ -111,7 +109,7 @@ public class PaperController {
         examPaper.setCreateDate(createDate);
         examPaper.setTimeLimit(pTime);
         examPaper.setPaperStatus(paperStatus);
-//        examPaper.setPosition(position);
+        examPaper.setPosition(pForPosition);
         queryPaperDomain.createPaper(examPaper, qIds, qScores);
 
         return new ResponseEntity<String>(HttpStatus.CREATED);

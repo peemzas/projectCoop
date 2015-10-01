@@ -12,14 +12,18 @@
         margin-top: 3px;
     }
     td{
-        font-size: 13.5px;
+        font-size: 13px;
     }
 </style>
 
 <div class="container-fluid">
-    <h3 class="h3">จัดการชุดข้อสอบ</h3>
-    <hr/>
-    <%@include file="template/searchPaperTemplateNew.jsp" %>
+    <div class="row">
+        <h3 class="h3">จัดการชุดข้อสอบ</h3>
+        <hr/>
+    </div>
+    <div class="row">
+        <%@include file="template/searchPaperTemplateNew.jsp" %>
+    </div>
     <div class="row">
         <a href="/TDCS/exam/createPaper">
             <button class="btn btn-success btn-sm" align="center">
@@ -43,19 +47,6 @@
                 </tr>
             </thead>
             <tbody id="tbodyManagePaper" align="center">
-
-                    <%--<div class="btn-group">--%>
-                        <%--<button class="btn dropdown-toggle" data-toggle="dropdown">--%>
-                            <%--เลือก<span class="caret"></span>--%>
-                        <%--</button>--%>
-                        <%--<ul class="dropdown-menu">--%>
-                            <%--<li><a href="/TDCS/exam/paperPreview">ดู</a></li>--%>
-                            <%--<li><a href="/TDCS/exam/marking">ตรวจ</a> </li>--%>
-                            <%--<li><a href="/TDCS/exam/editButtonOnPageManagePapers">แก้ไข</a></li>--%>
-                            <%--<li><a href="#">ลบ</a></li>--%>
-                        <%--</ul>--%>
-                    <%--</div>--%>
-            </tbody>
 
             </tbody>
         </table>

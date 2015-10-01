@@ -11,7 +11,10 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
+import sun.security.krb5.Config;
 
+import javax.security.auth.login.AppConfigurationEntry;
+import javax.security.auth.login.Configuration;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class QueryPaperDomain extends HibernateUtil {
+
 
     public ExamPaper getPaperById(Integer paperId) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
@@ -74,7 +78,8 @@ public class QueryPaperDomain extends HibernateUtil {
                 .add(Projections.property("updateDate"), "updateDate")
                 .add(Projections.property("updateBy"), "updateBy")
                 .add(Projections.property("timeLimit"), "timeLimit")
-                .add(Projections.property("position"), "position"));
+                .add(Projections.property("position"), "position")
+                .add(Projections.property("paperStatus"), "paperStatus"));
         criteria.addOrder(Order.asc("id"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<ExamPaper> papers = criteria.list();
@@ -96,8 +101,17 @@ public class QueryPaperDomain extends HibernateUtil {
 //
 //    }
     public void updatePaperStatus(ExamPaper examPaper){
+//       try{
+//           HibernateUtil.beginTransaction();
+//           getSession().update(examPaper);
+//           HibernateUtil.commitTransaction();
+//       }catch(Exception e){
+//           System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>ERROR<<<<<<<<<<<<<<<<<<<<<<<\n"+e);
+//       }finally {
+//           HibernateUtil.closeSession();
+//       }
         HibernateUtil.beginTransaction();
-        getSession().update(examPaper);
+        getSession().merge(examPaper);
         HibernateUtil.commitTransaction();
         HibernateUtil.closeSession();
     }

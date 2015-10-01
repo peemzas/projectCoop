@@ -8,12 +8,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<style>
+    td{
+        font-size: 14px;
+    }
+</style>
 
 <div class="container row">
     <h3>จัดการหมวดหมู่</h3>
     <hr>
 </div>
-
 
 <div class="container">
     <div class="row">
@@ -59,7 +63,7 @@
             <table class="table table-bordered table-responsive table-hover" id="tblCategory">
                 <thead class="label-primary small">
                     <tr>
-                        <th style="text-align: center; color: white;"><input type="checkbox" style="display: none;">เลือก</th>
+                        <th style="text-align: center; color: white;"><input type="checkbox"/></th>
                         <th style="text-align: center; color: white;">รหัสหมวดหมู่</th>
                         <th style="text-align: center; color: white;">หมวดหมู่</th>
                         <th id="thEdit" style="text-align: center; color: white;">แก้ไข</th>

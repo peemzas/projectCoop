@@ -23,11 +23,11 @@ public class QueryPositionDomain extends HibernateUtil {
     }
 
 //    Add By Wanchana
-//    public Position getPositionById(Integer id){
-//        Criteria criteria = getSession().createCriteria(Position.class);
-//        criteria.add(Restrictions.eq("posiId", id));
-//        Position position = (Position) criteria.list().get(0);
-//
-//        return position;
-//    }
+    public Position getPositionById(Integer id){
+        Criteria criteria = getSession().createCriteria(Position.class);
+        criteria.add(Restrictions.eq("posiId", id));
+        Position position = (Position) criteria.list().get(0);
+
+        return position;
+    }
 }

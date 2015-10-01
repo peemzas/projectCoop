@@ -5,7 +5,7 @@
         overflow-y: auto;
     }
     td{
-        font-size: 13.5px;
+        font-size: 13.85px;
     }
     #questionsAreEmpty{
         background-color: #b2e0ff;
@@ -41,16 +41,16 @@
                     <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
                     <table id="tbSelectQuestion" class="table table-responsive table-hover">
                         <thead class="bg-primary small">
-                        <tr>
-                            <th><input id="checkQuestionAll" type="checkbox"></th>
-                            <th>หมวดหมู่</th>
-                            <th>หัวข้อเรื่อง</th>
-                            <th>คำถาม</th>
-                            <th>ข้อสอบ</th>
-                            <th>ระดับ</th>
-                            <th>คะแนน</th>
-                            <th>ผู้สร้าง</th>
-                        </tr>
+                            <tr>
+                                <th><input id="checkQuestionAll" type="checkbox"></th>
+                                <th>หมวดหมู่</th>
+                                <th>หัวข้อเรื่อง</th>
+                                <th>คำถาม</th>
+                                <th>ข้อสอบ</th>
+                                <th>ระดับ</th>
+                                <th>คะแนน</th>
+                                <th>ผู้สร้าง</th>
+                            </tr>
                         </thead>
                         <tbody id="tbodySelectQuestion">
 
@@ -59,19 +59,19 @@
                             <h3 id="questionsAreEmptyDesc">ไม่พบข้อสอบ</h3>
                         </div>
                     </table>
-                    <div class = "row">
-                        <div class = "col-md-12" align = "center">
-                            <ul class = "pagination">
-                                <li class = "disabled"><a href = "#">&laquo;</a></li>
-                                <li class = "active"><a href = "#">1</a></li>
-                                <li><a>2</a></li>
-                                <li><a>3</a></li>
-                                <li><a>4</a></li>
-                                <li><a>5</a></li>
-                                <li class = "disabled"><a href = "#">&raquo;</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <%--<div class = "row">--%>
+                        <%--<div class = "col-md-12" align = "center">--%>
+                            <%--<ul class = "pagination">--%>
+                                <%--<li class = "disabled"><a href = "#">&laquo;</a></li>--%>
+                                <%--<li class = "active"><a href = "#">1</a></li>--%>
+                                <%--<li><a>2</a></li>--%>
+                                <%--<li><a>3</a></li>--%>
+                                <%--<li><a>4</a></li>--%>
+                                <%--<li><a>5</a></li>--%>
+                                <%--<li class = "disabled"><a href = "#">&raquo;</a></li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>

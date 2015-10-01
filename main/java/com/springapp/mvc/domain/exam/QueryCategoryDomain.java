@@ -3,10 +3,7 @@ package com.springapp.mvc.domain.exam;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.util.BeanUtils;
 import com.springapp.mvc.util.HibernateUtil;
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.hibernate.*;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -81,16 +78,23 @@ public class QueryCategoryDomain extends HibernateUtil {
         return categories;
     }
 
-    public void deleteCategory(List categoryIds){
+    public void deleteCategory(Category category){
 
-        beginTransaction();
-        for(int i = 0; i < categoryIds.size(); i ++){
-            System.out.println(categoryIds.get(i));
-            Category category = getCategoryById((String) categoryIds.get(i));
+//        for(int i = 0; i < categoryIds.size(); i ++){
+//            System.out.println(categoryIds.get(i));
+//            Category category = getCategoryById((String) categoryIds.get(i));
+//            getSession().delete(category);
+//            commitTransaction();
+//        }
+        try{
+            HibernateUtil.beginTransaction();
             getSession().delete(category);
-            commitTransaction();
+            HibernateUtil.commitTransaction();
+        }catch(HibernateException hEx){
+            System.out.println("++++++++++++ERROR+++++++++++++\n"+hEx);
+        }finally {
+            HibernateUtil.closeSession();
         }
-        closeSession();
     }
 
     public void editCategory(Category category){
