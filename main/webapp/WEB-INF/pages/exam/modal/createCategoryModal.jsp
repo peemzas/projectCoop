@@ -16,7 +16,7 @@
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-4" align="right">
-                                    <label for="categoryIdText" class="label-control" >รหัสวิชาหมวดหมู่ :</label>
+                                    <label for="categoryIdText" class="label-control" >รหัสหมวดหมู่</label>
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control input-sm" name="catId" id="categoryIdText" required autofocus/>
@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-4" align="right">
-                                    <label for="categoryNameText" class="label-control">หมวดหมู่ :</label>
+                                    <label for="categoryNameText" class="label-control">หมวดหมู่</label>
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control input-sm" name="catName" id="categoryNameText" required/>

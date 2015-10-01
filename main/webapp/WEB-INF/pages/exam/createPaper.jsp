@@ -25,7 +25,7 @@
     color: #00647f;
   }
   td{
-    font-size: 13.5px;
+    font-size: 13px;
   }
   #tbSelectedQuestionToPaper{
     margin-top: 5px;

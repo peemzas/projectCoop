@@ -7,6 +7,9 @@ $("document").ready(function(){
     $("#deleteCategory").on('click', function(){
         deleteCategory();
     });
+    $("#submitCreateCategoryBtn").on('click', function(){
+        saveCategory();
+    });
 });
 function viewCategory(){
     $("#tbodyCategory").empty();
@@ -40,40 +43,55 @@ function viewCategory(){
 }
 
 function deleteCategory(){
-
-    //if(!confirm("ลบรายวิชา "+$("#data"+categoryId).text())){
-    //    return false;
-    //}
-    categoryIds = new Array();
-    $("#tblCategory input:checkbox:checked").each(function(){
-        categoryIds.push($(this).parent().siblings(":first").text());
-    });
-    alert(categoryIds+" "+categoryIds.length);
-    var jsonObj = {};
-    var tempArray = new Array();
-    for(var i = 0; i < categoryIds.length; i++){
-        var item = {
-            "categoryId" : categoryIds[i]
-        };
-        tempArray.push(item);
+    if(!confirm("คุณต้องการลบหมวดหมู่ที่เลือกใช่หรือไม่")){
+        return false;
     }
-    jsonObj = JSON.stringify(tempArray);
-    $.ajax({
-        type: "POST",
-        url: "/TDCS/exam/deleteCategory",
-        dataType: "json",
-        contentType: 'application/json',
-        mimeType: 'application/json',
-        data: jsonObj,
-        success: function(){
-            alert("Success...");
-            window.location.reload();
-        },
-        error: function(){
-            alert("Error...");
-            window.location.reload();
-        }
+    var catId;
+    $("#tblCategory input:checkbox:checked").each(function(){
+        catId = $(this).parent().siblings(":first").text();
+        //if(!confirm("ลบรายวิชา "+$("#data"+catid).text())+"ใช่หรือไม่"){
+        //    return false;
+        //}
+        $.ajax({
+            type: "POST",
+            url: "/TDCS/exam/deleteCategory",
+            data: {
+                catId : catId
+            },
+            success: function(){
+                alert("ลบวิชาสำเร็จ");
+                window.location.reload();
+            },
+            error: function(){
+                alert("ลบวิชาไม่สำเร็จ");
+            }
+        });
     });
+    //alert(categoryIds+" "+categoryIds.length);
+    //var jsonObj = {};
+    //var tempArray = new Array();
+    //for(var i = 0; i < categoryIds.length; i++){
+    //    var item = {
+    //        "categoryId" : categoryIds[i]
+    //    };
+    //    tempArray.push(item);
+    //}
+    //jsonObj = JSON.stringify(tempArray);
+    //$.ajax({
+    //    type: "POST",
+    //    url: "/TDCS/exam/deleteCategory",
+    //    dataType: "json",
+    //    contentType: 'application/json',
+    //    mimeType: 'application/json',
+    //    data: jsonObj,
+    //    success: function(){
+    //        alert("Success...");
+    //        window.location.reload();
+    //    },
+    //    error: function(){
+    //        alert("Error...");
+    //    }
+    //});
 }
 function editCategory(categoryId){
 
@@ -112,3 +130,57 @@ function updateCategory(categoryId){
         });
     }
 }
+
+function saveCategory(){
+
+    var categoryName = $("#categoryNameText").val();
+    var categoryId = $("#categoryIdText").val();
+
+    var data = $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TDCS/exam/getAllCategory",
+        async: false,
+        success: function (data) {
+            data.forEach(function (value) {
+                if (Number($("#categoryIdText").val()) == Number(value.id) && $("#categoryNameText").val() == value.name) {
+                    alert("รหัสวิชา " + $("#categoryId").val() + ", รายวิชา " + $("#categoryNameText").val() + " มีอยู่แล้วในระบบ");
+                }
+                if (Number($("#categoryIdText").val()) == Number(value.id)) {
+                    //alert("รหัสวิชา "+$("#categoryId").val()+" ซ่ำ");
+                    alert("รหัสวิชา " + $("#categoryId").val() + " มีอยู่แล้วในระบบ");
+                }
+                if ($("#categoryNameText").val() == value.name) {
+                    alert("รายวิชา " + $("#categoryName").val() + " มีอยู่แล้วในระบบ");
+                }
+            });
+
+            if($("#categoryIdText").val() == "" || $("#categoryNameText").val() == ""){
+
+                alert("hi there..");
+            }
+
+            var dat = $.ajax({
+                type: "POST",
+                url: "/TDCS/exam/addCategory",
+                data: 'id=' + categoryId + '&name=' + categoryName,
+                success: function () {
+                    alert('เพิ่มวิชา ' + categoryName + ' สำเร็จ ');
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('เพิ่มวิชาไม่สำเร็จ');
+                }
+                //}).responseText;
+            });
+        },
+        error: function (data) {
+            alert('error while request...');
+        }
+    });
+
+    $("#categoryNameText").val("");
+    $("#categoryIdText").val("");
+}
+
+

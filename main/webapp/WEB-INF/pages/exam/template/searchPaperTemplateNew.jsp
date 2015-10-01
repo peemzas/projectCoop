@@ -13,38 +13,39 @@
     <div class = "panel-collapse" id = "searchCollapse">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          ค้นหา...
+          <h5>ค้นหาชุดข้อสอบ</h5>
         </div>
         <div class="panel-body">
-          <div class = "row">
-            <div class = "col-md-2 text-right">
-              <label>ชื่อชุดข้อสอบ</label>
+          <%--<form class="form-horizontal" role="form">--%>
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="col-sm-4 col-sm-offset-2" align="right">
+                  <label for="newPaperId" class="label-control"><h5 style="margin-top: 5px">รหัสชุดข้อสอบ</h5></label>
+                </div>
+                <div class="col-sm-6">
+                  <input id="newPaperId" class="form-control input-sm" type="text" required/>
+                </div>
+              </div>
+              <div class="col-sm-7">
+                <div class="col-sm-3 text-right">
+                  <label for="newPaperName" class="label-control text-left"><h5 style="margin-top: 5px">ชื่อชุดข้อสอบ</h5></label>
+                </div>
+                <div class="col-sm-6">
+                  <input id="newPaperName" class="form-control input-sm" type="text"/>
+                </div>
+              </div>
             </div>
-            <div class = "col-md-6">
-              <input class = "form-control" type = "text"/>
+            <div class = "row">
+              <%@include file="selectCreateByInput.jsp"%>
             </div>
-            <%--<div class = "col-md-2 text-right">--%>
-              <%--<label>หมวดหมู่หลัก</label>--%>
-            <%--</div>--%>
-            <%--<div class = "col-md-3">--%>
-              <%--<input class = "form-control" type = "text"/>--%>
-            <%--</div>--%>
-          </div>
-          <br/>
-          <div class = "row">
-            <%@include file="selectCreateByInput.jsp"%>
-          </div>
-          <hr/>
-          <%--<div class="row">--%>
-            <%--<div id="btnSearch" class="col-md-4 col-md-offset-7" align="center">--%>
-            <%--</div>--%>
-          <%--</div>--%>
-          <div class = "row" id = "btnSearch">
-            <div class = "col-md-12 text-center">
-              <button class = "btn btn-default" type = "button">ค้นหา</button>
-              <button class = "btn btn-default" type = "button">ล้างข้อมูล</button>
+            <hr>
+            <div class = "row" id = "btnSearch">
+              <div class = "col-md-12 text-center">
+                <button class = "btn btn-primary btn-sm" type = "button">ค้นหา</button>
+                <button class = "btn btn-gray btn-sm" type = "button">ล้างข้อมูล</button>
+              </div>
             </div>
-          </div>
+          <%--</form>--%>
         </div>
         <div class = "panel-footer">
           <div class = "row">
