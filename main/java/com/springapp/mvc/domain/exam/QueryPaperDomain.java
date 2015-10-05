@@ -5,6 +5,8 @@ import com.springapp.mvc.pojo.exam.PaperQuestion;
 import com.springapp.mvc.pojo.exam.Question;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
@@ -13,8 +15,13 @@ import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 import sun.security.krb5.Config;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
+import java.awt.print.Paper;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,7 +30,6 @@ import java.util.List;
  */
 @Service
 public class QueryPaperDomain extends HibernateUtil {
-
 
     public ExamPaper getPaperById(Integer paperId) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
@@ -87,16 +93,27 @@ public class QueryPaperDomain extends HibernateUtil {
         return papers;
     }
 
-    public void deletePaper(List<Integer> paperId){
+    public void deletePaper(ExamPaper examPaper, int paperId){
+//        for(Integer i: paperId){
+//            ExamPaper examPaper = getPaperById(paperId.get(i));
+//            getSession().delete(examPaper);
+//            HibernateUtil.commitTransaction();
+//        }
         HibernateUtil.beginTransaction();
-        for(Integer i: paperId){
-            ExamPaper examPaper = getPaperById(paperId.get(i));
-            getSession().delete(examPaper);
-            HibernateUtil.commitTransaction();
-        }
+        deletePaperQuestionByPaperId(examPaper);
+        getSession().delete(examPaper);
         HibernateUtil.commitTransaction();
     }
 
+    public void deletePaperQuestionByPaperId(ExamPaper examPaper){
+
+        Criteria criteria = getSession().createCriteria(PaperQuestion.class);
+        criteria.add(Restrictions.eq("pk.examPaper", examPaper));
+        PaperQuestion paperQuestion = (PaperQuestion) criteria.list().get(0);
+//        String statment = "delete from PaperQuestion where PaperQuestion.pk =: examPaper";
+//        Query query = getSession().createQuery(statment);
+        getSession().delete(paperQuestion);
+    }
 //    public void updatePaper(ExamPaper updateExampaper, List<Integer>updateQIds, List<Float> updateScores){
 //
 //    }

@@ -1,3 +1,4 @@
+var pId;
 $(document).ready(function(){
     getAllPapers();
 
@@ -5,6 +6,51 @@ $(document).ready(function(){
         var paperId = $(this).attr('id');
         paperId = paperId.substr(10);
         updatePaperStatus(paperId);
+        $(".checkPaper").each(function(){
+            this.checked = false;
+        });
+        $("#checkPaperAll").removeAttr('checked');
+    });
+
+    $(".checkPaper").click(function(){
+        pId = $(this).parent().siblings().map(function(){
+            return $(this).text();
+        }).get(0);
+        if($("#dropdownId"+pId).val() == 1){
+            alert('ไม่สามารถลบชุดข้อสอบนี้ได้');
+            this.checked = false;
+        }
+    });
+
+    $("#checkPaperAll").on('click', function(){
+        if(this.checked){
+            $(".checkPaper").each(function(){
+                pId = $(this).parent().siblings().map(function(){
+                    return $(this).text();
+                }).get(0);
+                if($("#dropdownId"+pId).val() == 1){
+                    this.checked = false;
+                }
+                else{
+                    this.checked = true;
+                }
+            });
+        }
+        else{
+            $(".checkPaper").each(function(){
+                this.checked = false;
+            });
+        }
+    });
+
+    $("#deletePapers").on('click', function(){
+        $("#tbodyManagePaper tr input[type='checkbox']:checked").each(function(){
+            pId = $(this).parent().siblings().map(function(){
+                return $(this).text();
+            }).get(0);
+            //alert(pId);
+            deletePapers(pId);
+        });
     });
 });
 
@@ -20,7 +66,7 @@ function getAllPapers(){
                 $("#tbodyManagePaper").append(
                     '<tr>'+
                     '<td style="display: none;"><label id="'+value.id+'">'+value.id+'</label></td>'+
-                    '<td><input type="checkbox"/></td>'+
+                    '<td><input class="checkPaper" type="checkbox"/></td>'+
                     '<td><label id="lpaperCode'+value.code+'">'+value.code+'</label></td>'+
                     '<td style="text-align: left;"><label id="lpaperName'+value.name+'">'+value.name+'</label></td>'+
                     '<td><label id="lpaperCreateBy'+value.createBy.empId+'">'+value.createBy.thFname+' '+value.createBy.thLname+'</label></td>'+
@@ -79,4 +125,21 @@ function setColorDropdown(paperId, paperStatus){
         $("#dropdownId"+paperId).css('background-color', '#33CCFF');
         $("#dropdownId"+paperId).css('border-color', '#33CCFF');
     }
+}
+
+function deletePapers(paperId){
+    $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/deletePaper",
+        data: {
+            paperId: paperId
+        },
+        success: function () {
+            alert('ลบชุดข้อสอบเรียบร้อยแล้ว');
+            window.location.reload();
+        },
+        error: function () {
+            alert('ลบชุดข้อสอบผิดพลาด');
+        }
+    });
 }

@@ -89,9 +89,6 @@ public class PaperController {
         Position pForPosition = queryPositionDomain.getPositionById(pPosition);
         User createBy = queryUserDomain.getCurrentUser(request);
         Status paperStatus = queryPaperStatusDomain.getStatusById(3);
-//        Calendar calendar = Calendar.getInstance();
-//        Date createDate = new Date(calendar.getTime().getTime());
-//        Date curDate = new Date(utilDate.getTime());
         long time = System.currentTimeMillis();
         Date curDate = new Date(time);
 
@@ -143,6 +140,16 @@ public class PaperController {
         examPaper = queryPaperDomain.getPaperById(paperId);
         examPaper.setPaperStatus(status);
         queryPaperDomain.updatePaperStatus(examPaper);
+
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/deletePaper", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> deletePaper(@RequestParam(value = "paperId") int paperId){
+
+        ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
+        queryPaperDomain.deletePaper(examPaper, paperId);
 
         return new ResponseEntity<String>(HttpStatus.OK);
     }

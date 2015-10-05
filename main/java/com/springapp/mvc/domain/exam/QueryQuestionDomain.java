@@ -233,7 +233,7 @@ public class QueryQuestionDomain extends HibernateUtil {
     public List<Question> getAllQuestionDetail(){
 
         Criteria criteria = getSession().createCriteria(Question.class);
-        criteria.add(Restrictions.eq("status",3));
+//        criteria.add(Restrictions.eq("status",3));
         criteria.setProjection(Projections.projectionList()
                 .add(Projections.property("id"), "id")
                 .add(Projections.property("choices"), "choices")
