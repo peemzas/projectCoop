@@ -119,7 +119,7 @@ function addEmployee(){
         //alert(JSON.stringify(arrayEmployeeName));
         //alert(arrayEmployeeName[1]);
         $("#showEmployeeSelected").append(
-            '<button class="btn btn-sm" type="button" style="background-color: #e7fff5; border: 1px solid gray;">'+arrayEmployeeName[1]+
+            '<button class="btn btn-sm" type="button" style="background-color: #cbff9e; border: 1px solid #f4ffdb;">'+arrayEmployeeName[1]+
             '<span class="glyphicon glyphicon-remove"/></button>&nbsp;'
         );
         $("#showEmployeeSelected").cleanWhitespace();

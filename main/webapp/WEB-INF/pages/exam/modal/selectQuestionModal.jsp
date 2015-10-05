@@ -59,19 +59,6 @@
                             <h3 id="questionsAreEmptyDesc">ไม่พบข้อสอบ</h3>
                         </div>
                     </table>
-                    <%--<div class = "row">--%>
-                        <%--<div class = "col-md-12" align = "center">--%>
-                            <%--<ul class = "pagination">--%>
-                                <%--<li class = "disabled"><a href = "#">&laquo;</a></li>--%>
-                                <%--<li class = "active"><a href = "#">1</a></li>--%>
-                                <%--<li><a>2</a></li>--%>
-                                <%--<li><a>3</a></li>--%>
-                                <%--<li><a>4</a></li>--%>
-                                <%--<li><a>5</a></li>--%>
-                                <%--<li class = "disabled"><a href = "#">&raquo;</a></li>--%>
-                            <%--</ul>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
                 </div>
             </div>
         </div>
@@ -102,9 +89,6 @@
 </div>
 
 <script>
-    <%--$("#addQuestionBtn").on('click', function(){--%>
-        <%--$("#selectQuest").hide();--%>
-    <%--});--%>
     $("#addQuestionBtn").on('click', function(){
         $("#selectQuest").modal('hide');
     });

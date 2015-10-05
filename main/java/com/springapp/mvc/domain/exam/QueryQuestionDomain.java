@@ -233,13 +233,14 @@ public class QueryQuestionDomain extends HibernateUtil {
     public List<Question> getAllQuestionDetail(){
 
         Criteria criteria = getSession().createCriteria(Question.class);
+//        criteria.add(Restrictions.eq("status",3));
         criteria.setProjection(Projections.projectionList()
                 .add(Projections.property("id"), "id")
                 .add(Projections.property("choices"), "choices")
                 .add(Projections.property("description"), "description")
                 .add(Projections.property("createDate"), "createDate")
                 .add(Projections.property("difficultyLevel"), "difficultyLevel")
-                .add(Projections.property("subCategory"), "subCategory")
+//                .add(Projections.property("subCategory"), "subCategory")
                 .add(Projections.property("questionType"), "questionType")
                 .add(Projections.property("createBy"), "createBy")
                 .add(Projections.property("status"), "status")
@@ -262,7 +263,7 @@ public class QueryQuestionDomain extends HibernateUtil {
                 .add(Projections.property("description"), "descriptionz")
                 .add(Projections.property("createDate"), "createDatez")
                 .add(Projections.property("difficultyLevel"), "difficultyLevelz")
-                .add(Projections.property("subCategory"), "subCategoryz")
+//                .add(Projections.property("subCategory"), "subCategoryz")
                 .add(Projections.property("questionType"), "questionTypez")
                 .add(Projections.property("createBy"), "createByz")
                 .add(Projections.property("status"), "statusz")

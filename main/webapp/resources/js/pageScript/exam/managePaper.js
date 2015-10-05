@@ -13,9 +13,19 @@ $("document").ready(function(){
     $("#addQuestionBtn").removeAttr('disabled');
     //$("#checkQuestionAll").attr('checked', false);
 
-    $("#selectionQuestionBtnInpagePaper").on("click", function(){
-        viewQuestions();
+    //$("#selectionQuestionBtnInpagePaper").unbind(click).click(function(){
+    $("#selectionQuestionBtnInpagePaper").on('click' ,function(){
+        if($("#tbSelectQuestion #tbodySelectQuestion tr").length == 0){
+            $("#questionsAreEmpty").show();
+            $("#removeRowSelected").attr('disabled', 'disabled');
+            $("#addQuestionBtn").attr('disabled', 'disabled');
+            $("#tbSelectQuestion").hide();
+        }
+        else{
+            viewQuestions();
+        }
     });
+
     $("#checkQuestionAll").click(function(event){
         if(this.checked){
             $(".selectQ").each(function(){
@@ -91,6 +101,8 @@ $("#addQuestionBtn").on('click', function(){
 });
 
 function viewQuestions(){
+    alert('his');
+
     if($("#tbSelectedQuestionToPaper").is(":hidden") || $("#selectQuest").is(":visible")){
         //alert('1');
         $("#checkQuestionAll").attr('checked', false);
@@ -267,7 +279,7 @@ function createPaper(){
     }
     jsonObjQuestion = JSON.stringify(tempArrayQuestion);
 
-    alert(paperId+" "+paperName+" "+paperScore+" "+paperTime+" "+paperForPosition+" "+questionsInPaper+" "+newQuestionScore);
+    //alert(paperId+" "+paperName+" "+paperScore+" "+paperTime+" "+paperForPosition+" "+questionsInPaper+" "+newQuestionScore);
     //alert(jsonObjQuestion);
     $.ajax({
         type: "POST",

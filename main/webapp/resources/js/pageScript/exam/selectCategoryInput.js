@@ -55,7 +55,7 @@ var updateSubCategoryList = function () {
                 item.forEach(function (item) {
                     subcatSelect.append('<option class="subCategory" subCategoryId="' + item.id + '"' +
                     ' subCategoryName="' + item.name + '" subCategoryId="' + item.id + '"' +
-                    'value="' + item.name + '""> ' + item.name + ' : ' + item.category.id +
+                    'value="' + item.name + '""> ' + item.name+
                     '</option>')
                 })
             }
