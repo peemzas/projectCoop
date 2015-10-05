@@ -4,6 +4,7 @@ import com.springapp.mvc.pojo.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Phuthikorn_T on 7/1/2015.
@@ -32,6 +33,9 @@ public class ExamResult implements Serializable {
     @Column(name = "SUBJECTIVE_SCORE")
     private Float subjectiveScore;
 
+    @Column(name = "MARKED_DATE")
+    private Date markedDate;
+
     @ManyToOne
     @JoinColumn(name = "EXAM_RECORD_ID")
     private ExamRecord examRecord;
@@ -40,6 +44,13 @@ public class ExamResult implements Serializable {
     @JoinColumn(name = "RESULT_STATUS")
     private Status status;
 
+    public Date getMarkedDate() {
+        return markedDate;
+    }
+
+    public void setMarkedDate(Date markedDate) {
+        this.markedDate = markedDate;
+    }
 
     public Float getSubjectiveScore() {
         return subjectiveScore;

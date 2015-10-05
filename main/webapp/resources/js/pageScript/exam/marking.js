@@ -24,6 +24,10 @@ $('#marking-body').on('focusout', '.scoreInput', function () {
     }
 })
 
+$('#confirmSubmitMarking').on('click',function(){
+    submitMarking();
+})
+
 var goToUnfinishBtn = $('#goToUnfinish');
 var goToUnfinishBtnInitialText = goToUnfinishBtn.text();
 $(".submitMarkingBtn").on('click', function () {
@@ -44,8 +48,8 @@ $('#toBottom').on('click', function () {
 
 
 //-------------------------------------------------
-function markingRecord(questionId, score) {
-    this.questionId = questionId;
+function markingRecord(answerRecordId, score) {
+    this.answerRecords = answerRecordId;
     this.score = score;
 }
 
@@ -54,11 +58,27 @@ var submitMarking = function () {
     var markingArray = [];
 
     $.each(questions, function (index, value) {
-        var questionId = $(this).attr('questionId')
+        var answerRecordId = $(this).attr('answerRecordId')
         var score = parseFloat($(this).find('.scoreInput').val())
 
         if (!isNaN(score)) {
-            markingArray.push(new markingRecord(questionId,score))
+            markingArray.push(new markingRecord(answerRecordId,score))
+        }
+    })
+
+    $.ajax({
+        type: "POST",
+        url:"/TDCS/exam/marking/submit",
+        data:{
+            markingRecord:JSON.stringify(markingArray),
+            resultId:$('#marking-body').attr('resultId'),
+            comment:$('#comment').val()
+        },
+        success:function(){
+            alert('ส่งผลตรวจเรียบร้อย')
+        },
+        error:function(){
+            alert('ส่งผลตรวจล้มเหลว')
         }
     })
 

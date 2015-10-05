@@ -37,7 +37,7 @@ public class ExamRecord implements Serializable {
     @Column(name = "TIME_TAKEN_MINUTE")
     private Integer timeTaken;
 
-    @OneToMany(mappedBy = "examRecord")
+    @OneToMany(mappedBy = "examRecord",fetch = FetchType.EAGER)
     @Cascade(CascadeType.ALL)
     private List<ExamAnswerRecord> examAnswerRecords;
 

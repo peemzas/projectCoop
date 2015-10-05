@@ -2,6 +2,8 @@ package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.pojo.exam.ExamAnswerRecord;
 import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +16,12 @@ public class QueryExamAnswerDomain extends HibernateUtil{
 //        beginTransaction();
         getSession().save(examAnswerRecord);
 //        commitTransaction();
+    }
+
+    public ExamAnswerRecord getExamAnswerRecordById(Integer id){
+        Criteria criteria = getSession().createCriteria(ExamAnswerRecord.class);
+        criteria.add(Restrictions.eq("id",id));
+        return (ExamAnswerRecord)criteria.uniqueResult();
     }
 
 }

@@ -81,13 +81,13 @@
 
 <h4>คำตอบ</h4>
 
-<div id="marking-body">
+<div id="marking-body" resultId="${examResult.id}">
 
     <!---------------------------------------------->
     <c:forEach var="answerRecord" items="${examResult.examRecord.examAnswerRecords}">
         <c:if test="${answerRecord.question.questionType.id == 2}">
 
-            <div class="questionContainer" questionNo="${questionNumber}" questionId="${answerRecord.question.id}">
+            <div class="questionContainer" questionNo="${questionNumber}" questionId="${answerRecord.question.id}" answerRecordId="${answerRecord.id}">
                 <div class="row question-row">
                     <div class="col-md-1 text-right">${questionNumber} :</div>
                     <div class="col-md-10"><span style="font-weight:bold ">คำถาม :</span>
@@ -186,7 +186,7 @@
                         </button>
                         &nbsp;
                     </span>
-                    <button id="confirmSubmitMarking" class="btn btn-primary">ส่งผลตรวจ</button>
+                    <button id="confirmSubmitMarking" class="btn btn-primary" data-dismiss="modal">ส่งผลตรวจ</button>
                     &nbsp;
                     <button id="cancleSubmitMarking" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
 
