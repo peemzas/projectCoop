@@ -37,9 +37,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import java.sql.Date;
 
 /**
  * Created by Phuthikorn_T on 8/11/2015.
@@ -89,8 +89,11 @@ public class PaperController {
         Position pForPosition = queryPositionDomain.getPositionById(pPosition);
         User createBy = queryUserDomain.getCurrentUser(request);
         Status paperStatus = queryPaperStatusDomain.getStatusById(3);
-        Calendar calendar = Calendar.getInstance();
-        Date createDate = new Date(calendar.getTime().getTime());
+//        Calendar calendar = Calendar.getInstance();
+//        Date createDate = new Date(calendar.getTime().getTime());
+//        Date curDate = new Date(utilDate.getTime());
+        long time = System.currentTimeMillis();
+        Date curDate = new Date(time);
 
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -106,7 +109,7 @@ public class PaperController {
         examPaper.setCode(paperId);
         examPaper.setName(paperName);
         examPaper.setMaxScore(paperMaxScore);
-        examPaper.setCreateDate(createDate);
+        examPaper.setCreateDate(curDate);
         examPaper.setTimeLimit(pTime);
         examPaper.setPaperStatus(paperStatus);
         examPaper.setPosition(pForPosition);
@@ -123,7 +126,6 @@ public class PaperController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List<ExamPaper> examPapers = queryPaperDomain.getAllPapers();
-//        String json = new JSONSerializer().exclude("*.class").serialize(examPapers);
         String json = new Gson().toJson(examPapers);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);

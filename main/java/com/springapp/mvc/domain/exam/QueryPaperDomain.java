@@ -101,15 +101,7 @@ public class QueryPaperDomain extends HibernateUtil {
 //
 //    }
     public void updatePaperStatus(ExamPaper examPaper){
-//       try{
-//           HibernateUtil.beginTransaction();
-//           getSession().update(examPaper);
-//           HibernateUtil.commitTransaction();
-//       }catch(Exception e){
-//           System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>ERROR<<<<<<<<<<<<<<<<<<<<<<<\n"+e);
-//       }finally {
-//           HibernateUtil.closeSession();
-//       }
+
         HibernateUtil.beginTransaction();
         getSession().merge(examPaper);
         HibernateUtil.commitTransaction();

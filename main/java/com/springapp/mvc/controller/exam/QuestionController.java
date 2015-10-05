@@ -325,20 +325,17 @@ public class QuestionController {
 
         JSONArray jsonArray = new JSONArray(jsoN);
         List questionIds = new ArrayList();
-        logger.info("=================================="+jsonArray.toString());
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             questionIds.add(jsonObject.getInt("id"));
         }
         logger.info(".................................."+questionIds);
         List<Question> questions = queryQuestionDomain.getQuestionNotInSelected(questionIds);
-//        String json = new Gson().toJson(questions);
         String json = new JSONSerializer().exclude("*.class").serialize(questions);
         logger.info(questions+".......................................................");
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
-//        return null;
     }
-//
+
     @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
     @ResponseBody
     public ResponseEntity<String> searchQuestion(
