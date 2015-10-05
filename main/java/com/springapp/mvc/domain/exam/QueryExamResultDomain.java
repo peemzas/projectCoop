@@ -27,4 +27,8 @@ public class QueryExamResultDomain extends HibernateUtil{
         return (ExamResult)criteria.uniqueResult();
     }
 
+    public void updateExamResult(ExamResult examResult){
+        getSession().merge(examResult);
+    }
+
 }

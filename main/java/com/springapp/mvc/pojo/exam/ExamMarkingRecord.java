@@ -19,11 +19,11 @@ public class ExamMarkingRecord implements Serializable {
     private Integer id;
 
     @Column(name = "MARKING_SCORE")
-    private Integer markingScore;
+    private Float markingScore;
 
     @ManyToOne
     @JoinColumn(name = "ANSWER_RECORD_ID")
-    private  ExamAnswerRecord answerRecordId;
+    private  ExamAnswerRecord answerRecord;
 
     @ManyToOne
     @JoinColumn(name = "MARKED_BY")
@@ -31,26 +31,7 @@ public class ExamMarkingRecord implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "RESULT_ID")
-    private ExamResult resultId;
-
-
-
-
-    public ExamAnswerRecord getAnswerRecordId() {
-        return answerRecordId;
-    }
-
-    public void setAnswerRecordId(ExamAnswerRecord recordId) {
-        this.answerRecordId = recordId;
-    }
-
-    public ExamResult getResultId() {
-        return resultId;
-    }
-
-    public void setResultId(ExamResult resultId) {
-        this.resultId = resultId;
-    }
+    private ExamResult examResult;
 
     public Integer getId() {
         return id;
@@ -60,20 +41,20 @@ public class ExamMarkingRecord implements Serializable {
         this.id = id;
     }
 
-    public Integer getMarkingScore() {
+    public Float getMarkingScore() {
         return markingScore;
     }
 
-    public void setMarkingScore(Integer markingScore) {
+    public void setMarkingScore(Float markingScore) {
         this.markingScore = markingScore;
     }
 
-    public ExamAnswerRecord getrecordId() {
-        return answerRecordId;
+    public ExamAnswerRecord getAnswerRecord() {
+        return answerRecord;
     }
 
-    public void setrecordId(ExamAnswerRecord recordId) {
-        this.answerRecordId = recordId;
+    public void setAnswerRecord(ExamAnswerRecord answerRecord) {
+        this.answerRecord = answerRecord;
     }
 
     public User getMarkedBy() {
@@ -82,5 +63,13 @@ public class ExamMarkingRecord implements Serializable {
 
     public void setMarkedBy(User markedBy) {
         this.markedBy = markedBy;
+    }
+
+    public ExamResult getExamResult() {
+        return examResult;
+    }
+
+    public void setExamResult(ExamResult resultId) {
+        this.examResult = resultId;
     }
 }
