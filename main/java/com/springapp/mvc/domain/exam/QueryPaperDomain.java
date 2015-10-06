@@ -94,11 +94,7 @@ public class QueryPaperDomain extends HibernateUtil {
     }
 
     public void deletePaper(ExamPaper examPaper, int paperId){
-//        for(Integer i: paperId){
-//            ExamPaper examPaper = getPaperById(paperId.get(i));
-//            getSession().delete(examPaper);
-//            HibernateUtil.commitTransaction();
-//        }
+
         HibernateUtil.beginTransaction();
         deletePaperQuestionByPaperId(examPaper);
         getSession().delete(examPaper);
@@ -110,8 +106,6 @@ public class QueryPaperDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(PaperQuestion.class);
         criteria.add(Restrictions.eq("pk.examPaper", examPaper));
         PaperQuestion paperQuestion = (PaperQuestion) criteria.list().get(0);
-//        String statment = "delete from PaperQuestion where PaperQuestion.pk =: examPaper";
-//        Query query = getSession().createQuery(statment);
         getSession().delete(paperQuestion);
     }
 //    public void updatePaper(ExamPaper updateExampaper, List<Integer>updateQIds, List<Float> updateScores){

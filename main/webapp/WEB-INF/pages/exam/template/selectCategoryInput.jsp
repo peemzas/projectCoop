@@ -38,7 +38,7 @@
         <h5>หมวดหมู่</h5>
     </div>
     <div class="col-sm-6">
-        <select type="text" class="btn btn-sm" id="selectCategoryToSelection" style="border: solid #a8a8a8 1px; text-align: left;">
+        <select type="text" class="col-sm-11 btn btn-sm" id="selectCategoryToSelection" style="border: solid #a8a8a8 1px; text-align: left;">
             <option value="" selected></option>
         </select>
     </div>
