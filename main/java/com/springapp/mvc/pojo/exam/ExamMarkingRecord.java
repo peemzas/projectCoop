@@ -4,6 +4,7 @@ import com.springapp.mvc.pojo.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by Phuthikorn_T on 7/15/2015.
@@ -13,13 +14,12 @@ import java.io.Serializable;
 public class ExamMarkingRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_MARKING_RECORD_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_EXAM_MARKING_RECORD_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_MARKING_RECORD_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="MARKING_RECORD_ID")
     private Integer id;
 
     @Column(name = "MARKING_SCORE")
-    private Float markingScore;
+    private BigDecimal markingScore;
 
     @ManyToOne
     @JoinColumn(name = "ANSWER_RECORD_ID")
@@ -30,7 +30,7 @@ public class ExamMarkingRecord implements Serializable {
     private User markedBy;
 
     @ManyToOne
-    @JoinColumn(name = "RESULT_ID")
+    @JoinColumn(name = "EXAM_RESULT_ID")
     private ExamResult examResult;
 
     public Integer getId() {
@@ -41,11 +41,11 @@ public class ExamMarkingRecord implements Serializable {
         this.id = id;
     }
 
-    public Float getMarkingScore() {
+    public BigDecimal getMarkingScore() {
         return markingScore;
     }
 
-    public void setMarkingScore(Float markingScore) {
+    public void setMarkingScore(BigDecimal markingScore) {
         this.markingScore = markingScore;
     }
 
@@ -69,7 +69,7 @@ public class ExamMarkingRecord implements Serializable {
         return examResult;
     }
 
-    public void setExamResult(ExamResult resultId) {
-        this.examResult = resultId;
+    public void setExamResult(ExamResult examResult) {
+        this.examResult = examResult;
     }
 }

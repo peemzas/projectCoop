@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Phuthikorn_T on 17-Sep-15.
@@ -170,7 +167,8 @@ public class DoExamController {
                     examAnswerRecord.setAnswerObjective(currentChoice);
 
                     if (currentChoice.getCorrection() == queryBooDomain.getTrue()) {
-                        for(PaperQuestion paperQuestion : paper.getQuestions()){
+                        Set<PaperQuestion> tempPaperQuestionlist = paper.getQuestions();
+                        for(PaperQuestion paperQuestion : tempPaperQuestionlist){
                             if(paperQuestion.getQuestion().equals(currentQuestion)){
                                 objectiveScore += paperQuestion.getScore();
                             }

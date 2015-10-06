@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -73,30 +74,29 @@ public class MarkingController {
         examResult.setComment(comment);
         examResult.setMarkedDate(new Date());
 
-        Float subjectiveScore = (float)0;
+        BigDecimal subjectiveScore = BigDecimal.ZERO;
         List<ExamAnswerRecord> examAnswerRecords = examResult.getExamRecord().getExamAnswerRecords();
 
         try{
             HibernateUtil.beginTransaction();
 
             for(int i = 0 ; i < markingRecord.length() ; i++){
+//                HibernateUtil.beginTransaction();
                 ExamMarkingRecord examMarkingRecord = new ExamMarkingRecord();
 
                 examMarkingRecord.setMarkedBy(currentUser);
-
-                for(ExamAnswerRecord e : examAnswerRecords){
-                    if(e.getId().equals(markingRecord.getJSONObject(i).optInt("answerRecordId"))){
-                        examMarkingRecord.setAnswerRecord(e);
-                    }
-                }
-                Float score = (float)markingRecord.getJSONObject(i).optInt("score");
+                examMarkingRecord.setAnswerRecord(queryExamAnswerDomain.getExamAnswerRecordById(markingRecord.getJSONObject(i).optInt("answerRecordId")));
+                BigDecimal score = new BigDecimal(markingRecord.getJSONObject(i).optDouble("score"));
                 examMarkingRecord.setMarkingScore(score);
                 examMarkingRecord.setExamResult(examResult);
                 queryMarkingRecord.saveMarkingRecord(examMarkingRecord);
-                subjectiveScore += score;
+                subjectiveScore =  subjectiveScore.add(score);
+//                HibernateUtil.commitTransaction();
             }
-            examResult.setSubjectiveScore(subjectiveScore);
+//            examResult.setSubjectiveScore(subjectiveScore);
+            HibernateUtil.commitTransaction();
 
+            HibernateUtil.beginTransaction();
             queryExamResultDomain.updateExamResult(examResult);
 
             HibernateUtil.commitTransaction();

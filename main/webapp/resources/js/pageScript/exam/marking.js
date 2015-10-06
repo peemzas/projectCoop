@@ -49,7 +49,7 @@ $('#toBottom').on('click', function () {
 
 //-------------------------------------------------
 function markingRecord(answerRecordId, score) {
-    this.answerRecords = answerRecordId;
+    this.answerRecord = answerRecordId;
     this.score = score;
 }
 

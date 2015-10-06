@@ -31,12 +31,12 @@
                 <thead class="bg-primary">
                 <tr>
                     <%--<th style="text-align: center">หมายเลขข้อสอบ</th>--%>
-                    <th style="text-align: center">คำถาม</th>
+                    <th style="text-align: center" width="35%">คำถาม</th>
                     <th style="text-align: center">ชนิดข้อสอบ</th>
                     <th style="text-align: center">ระดับความยาก</th>
                     <th style="text-align: center">คะแนน</th>
-                    <th style="text-align: center">หมวดหมู่หลัก</th>
-                    <th style="text-align: center">หมวดหมู่ย่อย</th>
+                    <th style="text-align: center">หมวดหมู่</th>
+                    <th style="text-align: center">หัวข้อเรื่อง</th>
                     <th style="text-align: center">ผู้สร้าง</th>
                     <th style="text-align: center">วันที่สร้าง</th>
                     <th style="text-align: center">Action</th>
