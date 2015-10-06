@@ -114,7 +114,7 @@ public class SubCategoryController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
         List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName, categoryId, categoryName);
         logger.info(String.valueOf("++++++++++++++++++++++++++++"));
-        System.out.println("AAA : " + subcategories);
+            System.out.println("AAA : " + subcategories);
 
         String json = new Gson().toJson(subcategories);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);

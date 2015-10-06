@@ -16,15 +16,15 @@
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-4" align="right">
-                                    <label for="categoryIdText" class="label-control" >รหัสหมวดหมู่</label>
+                                    <label for="categoryIdText" class="label-control" > <small style="color: red">*</small> รหัสหมวดหมู่ :</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control input-sm" name="catId" id="categoryIdText" required autofocus/>
+                                    <input type="text" class="form-control input-sm" name="catId" id="categoryIdText" required autofocus maxlength="5"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-4" align="right">
-                                    <label for="categoryNameText" class="label-control">หมวดหมู่</label>
+                                    <label for="categoryNameText" class="label-control"><small style="color: red">*</small> ชื่อหมวดหมู่ :</label>
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control input-sm" name="catName" id="categoryNameText" required/>
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="form-group">
                         <div class="col-md-12 text-center">
-                            <input id="submitCreateCategoryBtn" class="btn btn-primary btn-sm" type="submit" data-dismiss="modal" value="บันทึก"/>
+                            <input id="submitCreateCategoryBtn" class="btn btn-primary btn-sm" type="submit"  value="บันทึก"/>
                             <button id="hiddenBtn2" class="btn btn-warning btn-sm"  data-dismiss="modal">ยกเลิก</button>
                         </div>
                     </div>

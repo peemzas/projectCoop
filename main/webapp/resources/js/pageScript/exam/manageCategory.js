@@ -133,6 +133,37 @@ function updateCategory(categoryId){
 
 function saveCategory(){
 
+    ///////////////////////////
+
+    var countError = 0;
+    var elementFirst;
+    var element = [ $("#categoryIdText"), $("#categoryNameText")];
+    //if($("#password").val()!=$("#cpassword").val()){
+    //    $("#password").val("");
+    //    $("#cpassword").val("");
+    //}
+    for(var i=0;i<element.length;i++){
+        if(element[i].val()==""){
+//            alert(element[i].val()+"~~~"+element[i].selector);
+            countError++;
+            if(countError==0){
+                elementFirst = element[i].selector;
+            }
+            element[i].attr('style','border:solid 1px red');
+        }else{
+            element[i].attr('style','');
+        }
+    }
+    if(countError>0){
+//        alert(elementFirst);
+//        $("#btnSubmit").click();
+        alert("คุณกรอกข้อมูลไม่ครบ");
+        return false;
+    }
+
+
+    ///////////////////////
+
     var categoryName = $("#categoryNameText").val();
     var categoryId = $("#categoryIdText").val();
 
@@ -183,4 +214,46 @@ function saveCategory(){
     $("#categoryIdText").val("");
 }
 
+
+
+
+
+
+
+
+$("#categoryName").keyup(function(e) {
+    if (e.which > 0) {
+        e.preventDefault();
+        listcat();
+    }
+});
+
+function listcat() {
+    var availableall = [];
+
+    var data = $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TDCS/exam/getAllCategory",
+        async: false,
+        success: function(data){
+            data.forEach(function(value){
+                availableall.push(value.id + ' : ' + value.name);
+            });
+        },
+        error: function(data){
+            alert('error while request...');
+        }
+    });
+    //$(".autocomplete2").autocomplete({
+//    //    source: availableTags2
+//    //});
+
+    var search = $("#categoryName").val();
+    $("#categoryName").typeahead('destroy').typeahead({
+        source: availableall,
+        minLength: 0,
+        items: 20
+    }).focus().val('').keyup().val(search);
+};
 

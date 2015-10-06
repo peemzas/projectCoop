@@ -29,28 +29,24 @@
                     <h5 class="panel-title">ค้นหา</h5>
                 </div>
                 <div class="panel-body">
-                    <%--<div class="row">--%>
-                        <%--<div class="col-md-2 col-lg-offset-2 text-right">--%>
-                            <%--<label>รหัสวิชา :</label>--%>
-                        <%--</div>--%>
-                        <%--<div class="col-md-4" style="width: 15%">--%>
-                            <%--<input id="categoryId" class="form-control" type="text" maxlength="5"--%>
-                                   <%--placeholder="ค้นหารหัสวิชา"/>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
 
                     <div style="margin-bottom: 5px"></div>
                     <div class="row col-md-6 ">
                         <div class="col-md-5  text-right">
                             <label style="margin-top: 4px;">หมวดหมู่ :</label>
                         </div>
-                        <div class="col-md-6 input-group " >
-                            <input id="categoryId" class="form-control"  placeholder="ค้นหาหมวดหมู่"/>
+                        <div class="col-md-6 input-group">
+                            <input  id="categoryId" class="form-control"  placeholder="ค้นหาหมวดหมู่" data-provide="typeahead" />
                             <span class="input-group-addon">
                             <i class="glyphicon glyphicon-search" onclick="listsubcat()" style="cursor: pointer; height: 20px;"></i>
                              </span>
                         </div>
                     </div>
+
+                <%--<div id="the-basics">--%>
+                    <%--<input id="search" data-provide="typeahead" class="typeahead" type="text" placeholder="States of USA" >--%>
+                <%--</div>--%>
+
 
 
                     <div style="margin-bottom: 5px"></div>
@@ -70,8 +66,6 @@
                         <%--</select>--%>
 
                             <select  id="sSubCat" class="form-control" data-width="100%">
-
-
                             </select>
 
 
@@ -178,7 +172,7 @@
         /*padding: 0;*/
         /*margin-top: 2px;*/
         /*list-style: none;*/
-        /*background-color: #ffffff;*/
+        /*bac;kground-color: #ffffff;*/
         /*border: 1px solid #ccc -webkit-border-radius : 5 px;*/
         /*-moz-border-radius: 5px;*/
         /*border-radius: 5px;*/

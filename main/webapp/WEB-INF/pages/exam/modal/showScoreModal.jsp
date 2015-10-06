@@ -52,7 +52,7 @@
 
           <div >
             <div class=" col-md-offset-1">
-              <textarea style="width: 40%"> FUCKKKKKKKKK Noob </textarea>
+              <textarea style="width: 40%"> ทำดีมาก  </textarea>
             </div>
           </div>
 

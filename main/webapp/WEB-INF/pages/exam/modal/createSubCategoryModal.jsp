@@ -17,7 +17,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" align="center">เพิ่มหัวข้อเรื่อง</h3>
+                <h4 class="modal-title" align="center">เพิ่มหัวข้อเรื่อง</h4>
             </div>
             <div class="modal-body">
 
@@ -25,16 +25,16 @@
 
 
                     <div class="col-md-4" align="right">
-                        <h4><label class="control-label" style="color: black ; font-weight: 100">
+                        <label class="control-label" style="color: black ; font-weight: 100">
                             <small style="color: red">*</small>
-                            เลือกหมวดหมู่ :
-                        </label></h4>
+                            หมวดหมู่ :
+                        </label>
                     </div>
                     <div class="col-md-6">
                         <%--<input type="text" class="form-control" name="cat" id="categoryName-forAddSubCat" style="width: 245px"/>--%>
                         <%--<select class="selectpicker" id="sCat" class="form-control" data-width="100%">--%>
                             <form:select path="listCat" id="sCat" name="advisor" class="form-control" required="true" >
-                            <option value="">โปรดเลือกหมวดหมู่</option>
+                            <option value="">รหัส : ชื่อหมวดหมู่</option>
                             <c:forEach var="category" items="${listCat}">
                                 <option categoryName="${category.name} " value="${category.id}">${category.id}
                                     : ${category.name}</option>
@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-4" align="right">
-                            <h4><label for="subcategoryNameadd" class="control-label" style="color:black;font-weight: 100"><small style="color: red">*</small>หัวข้อเรื่อง :</label></h4>
+                            <label for="subcategoryNameadd" class="control-label" style="color:black;font-weight: 100"><small style="color: red">*</small>หัวข้อเรื่อง :</label>
                         </div>
                         <div class="col-md-6 controls">
                             <input type="text" class="form-control" id="subcategoryNameadd" placeholder="กรอกชื่อหัวข้อเรื่อง" name="subcategoryNameadd" required="true" >

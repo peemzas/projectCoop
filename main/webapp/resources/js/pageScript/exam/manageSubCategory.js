@@ -48,13 +48,13 @@ function viewSubCategory() {
 
                         //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
 
-                    '<td style="text-align: center;"><label id="catName' + value.id + '">' + value.name + '</label>' +
+                    '<td style="text-align: left;"><label id="catName' + value.id + '">' + value.name + '</label>' +
 
                     '</td>' +
 
                         //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
 
-                    '<td style="text-align: center;"><label id="subName' + value.subId + '">' + value.subName + '</label>' +
+                    '<td style="text-align: left;"><label id="subName' + value.subId + '">' + value.subName + '</label>' +
                     '<input id="editsubName' + value.subId + '" class="form-control" type="text" value="' + value.subName + '" style="display: none;">' +
 
 
@@ -98,13 +98,14 @@ function deleteSubCategory(subCategoryId) {
             success: function () {
                 //$("#tbodySubCategory").empty();
                 //viewSubCategory();
-                alert(' ลบวิชาสำเร็จ ');
+
             },
             error: function () {
                 alert('ไม่สามารถลบ '+subCategoryId +' ได้');
             }
         });
     })
+    alert(' ลบวิชาสำเร็จ ');
 
     window.location.reload();
 }
@@ -190,6 +191,7 @@ function search() {
 
     categoryId = categoryId.substr(0, categoryId.indexOf(' '));
 
+
     var dataResponse = $.ajax({
         type: "POST",
         url: "/TDCS/exam/searchSubCategory",
@@ -204,6 +206,8 @@ function search() {
                 $("#alertMess").show();
             }
 
+
+
             data.forEach(function (value) {
                 //$("#tbodySubCategory").empty();
                 console.log(value.SubCategory.name);
@@ -214,12 +218,12 @@ function search() {
                     '<td style="text-align: center;"><input class="selectSubCategory" type="checkbox" subCatId="' + value.SubCategory.id + '"> </input>' +
 
                         //'<input id="id'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
-                    '<td style="text-align: center;"><label id="catName' + value.id + '">' + value.category.name + '</label>' +
+                    '<td style="text-align: left;"><label id="catName' + value.id + '">' + value.category.name + '</label>' +
                     '</td>' +
 
                         //'<td style="text-align: center;"><label id="subId'+value.subId+'"><b>'+value.subId+'</b></label>'+
 
-                    '<td style="text-align: center;"><label id="subName' + value.SubCategory.id + '">' + value.SubCategory.name + '</label>' +
+                    '<td style="text-align: left;"><label id="subName' + value.SubCategory.id + '">' + value.SubCategory.name + '</label>' +
                     '<input id="editsubName' + value.SubCategory.id + '" class="form-control" type="text" value="' + value.SubCategory.name + '" style="display: none;">' +
 
 
@@ -249,11 +253,11 @@ function search() {
 //$("categoryId").keyup(function(e) {
 //    if (e.which > 0) {
 //        e.preventDefault();
-//        LOVCAT();
+//        listsubcat();
 //    }
 //
 //});
-//$(function LOVCAT() {
+//$(function listsubcat() {
 //    var availableTags2 = [];
 //
 //    var data = $.ajax({
@@ -270,22 +274,27 @@ function search() {
 //            alert('error while request...');
 //        }
 //    });
-//    //$(".autocomplete2").autocomplete({
-//    //    source: availableTags2
-//    //});
+//    $(".autocomplete").autocomplete({
+//        source: availableTags2
+//    });
 //
-//    var search = $("#categoryId").val();
-//    $("#categoryId").typeahead('destroy').typeahead({
-//        source: availableTags2,
-//        minLength: 0,
-//        items: 20
-//    }).focus().val('').keyup().val(search);
+//    //var search = $("#categoryId").val();
+//    //$("#categoryId").typeahead('destroy').typeahead({
+//    //    source: availableTags2,
+//    //    minLength: 0,
+//    //    items: 20
+//    //}).focus().val('').keyup().val(search);
 //});
 
 
 
 
-
+$("#categoryId").keyup(function(e) {
+    if (e.which > 0) {
+        e.preventDefault();
+        listsubcat();
+    }
+});
 function listsubcat() {
     var availableall = [];
 
@@ -303,9 +312,9 @@ function listsubcat() {
             alert('error while request...');
         }
     });
-    //$(".autocomplete2").autocomplete({
-//    //    source: availableTags2
-//    //});
+    //$(".autocomplete").autocomplete({
+    //    source: availableTagsall
+    //});
 
     var search = $("#categoryId").val();
     $("#categoryId").typeahead('destroy').typeahead({
@@ -344,9 +353,11 @@ function listsubcat() {
 $(document).ready(function () {
 
     $("#categoryId").on('change', function () {
-        //alert('555');
+
             var categoryId = $("#categoryId").val();
-            //var subcategoryName = $("#sSubCat").val();
+            var subcategoryName = $("#sSubCat").val();
+
+
             categoryId = categoryId.substr(0, categoryId.indexOf(' '));
             $("#sSubCat").empty();
 
@@ -360,10 +371,18 @@ $(document).ready(function () {
             async: false,
 
             success: function (data) {
-                //if(($("#sSubCat").val()==null))
-                //{
-                //    alert("kk");
+
+
+                //if (categoryId.val() == "") {
+                //    subcategoryName.append("<option selected value=''></option>");
+                //} else {
+                //    subcategoryName.append("<option selected value=''>ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้</option>");
                 //}
+
+                //if (data.size == null) {
+                //    alert("kkkkkkkkkkkkkkkk");
+                //}
+
                 data.forEach(function (value) {
 
                     $("#sSubCat").append(
@@ -375,10 +394,76 @@ $(document).ready(function () {
             error: function (data) {
                 alert('error while request...');
             }
+
         });
+            if(($("#sSubCat").val()==null))
+            {
+                $("#sSubCat").append(
+                    '<option >' +"ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้"+'</option>'
+                )
+            }
     }
     )
 });
+
+
+///////////////////////////////////////////
+//$('#search').typeahead({
+//    source: function(query, process) {
+//        var $url =SITE_URL+ 'api/vehicle_techfield_typeahead/' + query + '.json';
+//        var $items = new Array;
+//        $items = [""];
+//        $.ajax({
+//            url: $url,
+//            dataType: "json",
+//            type: "POST",
+//            success: function(data) {
+//                console.log(data);
+//                $.map(data, function(data){
+//                    var group;
+//                    group = {
+//                        id: data.id,
+//                        name: data.name,
+//                        toString: function () {
+//                            return JSON.stringify(this);
+//                            //return this.app;
+//                        },
+//                        toLowerCase: function () {
+//                            return this.name.toLowerCase();
+//                        },
+//                        indexOf: function (string) {
+//                            return String.prototype.indexOf.apply(this.name, arguments);
+//                        },
+//                        replace: function (string) {
+//                            var value = '';
+//                            value +=  this.name;
+//                            if(typeof(this.level) != 'undefined') {
+//                                value += ' <span class="pull-right muted">';
+//                                value += this.level;
+//                                value += '</span>';
+//                            }
+//                            return String.prototype.replace.apply('<div style="padding: 10px; font-size: 1.5em;">' + value + '</div>', arguments);
+//                        }
+//                    };
+//                    $items.push(group);
+//                });
+//
+//                process($items);
+//            }
+//        });
+//    },
+//    property: 'name',
+//    items: 10,
+//    minLength: 2,
+//    updater: function (item) {
+//        var item = JSON.parse(item);
+//        console.log(item.name);
+//        $('#hiddenID').val(item.id);
+//        return item.name;
+//    }
+//});
+
+
 
 
 
