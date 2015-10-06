@@ -240,11 +240,10 @@ public class QueryQuestionDomain extends HibernateUtil {
                 .add(Projections.property("description"), "description")
                 .add(Projections.property("createDate"), "createDate")
                 .add(Projections.property("difficultyLevel"), "difficultyLevel")
-//                .add(Projections.property("subCategory"), "subCategory")
+                .add(Projections.property("subCategory"), "subCategory")
                 .add(Projections.property("questionType"), "questionType")
                 .add(Projections.property("createBy"), "createBy")
                 .add(Projections.property("status"), "status")
-//                .add(Projections.property("examPapers"), "examPapers")
                 .add(Projections.property("score"), "score"));
         criteria.addOrder(Order.asc("id"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
@@ -263,11 +262,10 @@ public class QueryQuestionDomain extends HibernateUtil {
                 .add(Projections.property("description"), "descriptionz")
                 .add(Projections.property("createDate"), "createDatez")
                 .add(Projections.property("difficultyLevel"), "difficultyLevelz")
-//                .add(Projections.property("subCategory"), "subCategoryz")
+                .add(Projections.property("subCategory"), "subCategoryz")
                 .add(Projections.property("questionType"), "questionTypez")
                 .add(Projections.property("createBy"), "createByz")
                 .add(Projections.property("status"), "statusz")
-//                .add(Projections.property("examPapers"), "examPapersz")
                 .add(Projections.property("score"), "score"));
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<Question> questions = criteria.list();

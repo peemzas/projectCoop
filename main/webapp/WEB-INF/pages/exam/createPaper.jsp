@@ -42,7 +42,7 @@
              <span style="color:red;">*</span><label for="newPaperId" class="label-control"><h5 style="margin-top: 5px">รหัสชุดข้อสอบ</h5></label>
            </div>
            <div class="col-sm-6" align="right">
-             <input id="newPaperId" class="form-control input-sm" type="text" required/>
+             <input id="newPaperId" class="form-control input-sm" type="text" maxlength="5" required/>
            </div>
          </div>
          <div class="col-sm-7">
@@ -83,10 +83,10 @@
           <span style="color:red;">*</span><label class="label-control"><h5 style="margin-top: 5px">เวลา</h5></label>
         </div>
         <div class="col-sm-3">
-          <input id="hours" class="form-control input-sm" type="number" required/>
+          <input id="hours" class="form-control input-sm" type="number" max="0" min="60" value="0" required/>
         </div>
         <div class="col-sm-3">
-          <input id="minutes" class="form-control input-sm" type="number" required/>
+          <input id="minutes" class="form-control input-sm" type="number" max="0" min="60" value="0" required/>
         </div>
       </div>
     </div>
@@ -100,15 +100,19 @@
   </div>
 
   <div class="row">
-    <a href="/TDCS/exam/managePapers">
-      <button class="btn btn-danger" align="center" style="width:50px;height:35px">
-        <span class="glyphicon glyphicon-arrow-left"></span>
-      </button>
-    </a>
+    <%--<a href="/TDCS/exam/managePapers">--%>
+      <%--<button class="btn btn-danger" align="center" style="width:50px;height:35px">--%>
+        <%--<span class="glyphicon glyphicon-arrow-left"></span>--%>
+      <%--</button>--%>
+    <%--</a>--%>
     <hr/>
     <button id="removeRowQuestionSelect" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>
     <button id="createPaperBtn" class="btn btn-success btn-sm" type="button">บันทึก</button>
-    <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">ยกเลิก</button>
+    <a href="/TDCS/exam/managePapers">
+      <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">
+        ยกเลิก
+      </button>
+    </a>
     <table id="tbSelectedQuestionToPaper" class="table">
       <thead class="bg-primary small">
         <tr>
@@ -118,7 +122,7 @@
           <th style="text-align: center ;">หัวข้อเรื่อง</th>
           <th style="text-align: center ;">ข้อสอบ</th>
           <th style="text-align: center ;">ระดับ</th>
-          <th style="text-align: center ;">คะแนน</th>
+          <th style="text-align: center ;" width="8%">คะแนน</th>
           <th style="text-align: center ;">ผู้สร้าง</th>
         </tr>
       </thead>
@@ -134,13 +138,13 @@
   <br/>
   <div class="row">
     <div class="col-sm-1 col-sm-offset-9">
-      <label align="right"><h5>คะแนน =</h5></label>
-    </div>
-    <div class="col-md-1">
-      <input class="form-control input-sm" readonly="true" name="score" id="maxScore" style="text-align: center">
+      <label align="right"><h5>คะแนน</h5></label>
     </div>
     <div class="col-md-1">
       <input class="form-control input-sm" readonly="true" name="score" id="score" style="text-align: center">
+    </div>
+    <div class="col-md-1">
+      <input class="form-control input-sm" readonly="true" name="score" id="maxScore" style="text-align: center">
     </div>
   </div>
 

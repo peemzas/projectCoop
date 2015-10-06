@@ -69,7 +69,7 @@
     <button id="deleteCategory" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered table-responsive table-hover" id="tblCategory">
+            <table class="table table-bordered table-hover" id="tblCategory">
                 <thead class="label-primary small">
                     <tr>
                         <th style="text-align: center; color: white;"><input type="checkbox"/></th>
