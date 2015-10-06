@@ -199,7 +199,7 @@ var deleteQuestion = function (questionId) {
         },
         success: function () {
             alert("Delete Success");
-            listAllQuestion();
+            listSearchQuestion();
         }, error: function () {
             alert("Failed");
         }
@@ -216,11 +216,11 @@ var listSearchQuestion = function () {
         var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth())+1) + "/" + createDate.getFullYear();
         $("#tableBody").append('<tr questionId=' + q.id + '>' +
         //'<td class="questionId">' + q.id + '</td>' +
-        '<td class="questionDescription">' + q.description + '</td>' +
+        '<td class="questionDescription" align="left">' + q.description.substring(0,100) + '</td>' +
         '<td class="questionType">' + q.questionType.description + '</td>' +
         '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
         '<td class="questionScore">' + q.score + '</td>' +
-        '<td class="questionCategory">' + ' ' + '</td>' +
+        '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
         '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
         '<td class="questionCreateBy">' + q.createBy.thFname +' '+ q.createBy.thLname + '</td>' +
         '<td class="questionCreateDate">' + formattedDate + '</td>' +
@@ -237,7 +237,12 @@ var listSearchQuestion = function () {
         '</div>' +
         '</td>' +
         "</tr>")
+        if(q.description.length > 100){
+            $('td[class="questionDescription"]:last').append("....")
+        }
     })
+
+
     generateEventHandler();
 }
 

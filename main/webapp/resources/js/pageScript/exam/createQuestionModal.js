@@ -37,8 +37,6 @@ var editQuestion = function () {
 
 function saveQuestion() {
 
-    alert("Inserting Question");
-
     var categoryName = $("#categoryInputForCreateQuestion").val();
     var subCategoryName = $("#subCategoryInputForCreateQuestion").val();
     var questionTypeString = $("#select-QuestionType").val();
@@ -69,13 +67,13 @@ function saveQuestion() {
                 correctChoice: correctChoice,
                 questionType: questionType,
                 difficulty: parseInt(difficulty),
-                score: parseInt(score)
+                score: parseFloat(score)
             }
             ,
             success: function (question) {
                 alert('สร้างข้อสอบสำเร็จ รหัสข้อสอบ' + question.id);
                 $('#tableBody').empty();
-                listAllQuestion();
+                listSearchQuestion();
             },
             error: function () {
                 alert('Error');
