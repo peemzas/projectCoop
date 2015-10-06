@@ -3,6 +3,8 @@
 //    //alert(subcategoryName);
 //});
 
+
+
 function saveSubCategory() {
     var countError = 0;
     var elementFirst;

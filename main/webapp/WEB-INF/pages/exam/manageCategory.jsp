@@ -29,18 +29,27 @@
                 <div style="margin-bottom: 5px"></div>
                     <div class="row">
                         <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-1 col-lg-offset-3 text-right" style="padding-right: 0px;">
-                                    <label for="categoryName" class="control-label">หมวดหมู่ :</label>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-2 col-lg-offset-3 text-right">
+                                    <label for="categoryName" class="control-label">หมวดหมู่ : </label>
                                 </div>
-                                <div class="col-md-4" >
-                                    <div class="input-group">
-                                        <input id="categoryName" class="form-control input-sm" type="text"placeholder="ค้นหาหมวดหมู่">
-                                        <span class="input-group-btn" >
-                                            <button class="btn btn-default btn-group-sm" type="button"><span class="glyphicon glyphicon-search"></span></button>
+
+                                <div class="col-md-3 input-group" >
+
+                                        <input id="categoryName" class="form-control" type="text"placeholder="ค้นหาหมวดหมู่">
+                                        <span class="input-group-addon" >
+                                            <i class="glyphicon glyphicon-search" onclick="listcat()" style="cursor: pointer; height: 20px;"></i>
                                         </span>
-                                    </div>
+
                                 </div>
+
+                                <%--<div class="col-md-6 input-group " >--%>
+                                    <%--<input id="categoryId" class="form-control"  placeholder="ค้นหาหมวดหมู่"/>--%>
+                            <%--<span class="input-group-addon">--%>
+                            <%--<i class="glyphicon glyphicon-search" onclick="listsubcat()" style="cursor: pointer; height: 20px;"></i>--%>
+                             <%--</span>--%>
+                                <%--</div>--%>
+
                             </div>
                         </div>
                     </div>

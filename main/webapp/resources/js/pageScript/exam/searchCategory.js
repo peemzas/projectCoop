@@ -21,6 +21,10 @@ function search(){
     var categoryIdRequest = $("#categoryId").val();
     var categoryNameRequest = $("#categoryName").val();
 
+    categoryIdRequest =categoryNameRequest.substr(0,categoryNameRequest.indexOf(' '));
+    categoryNameRequest = categoryNameRequest.substr(8);
+    alert(categoryIdRequest+'--'+categoryNameRequest);
+
     var dataResponse = $.ajax({
         type: "POST",
         url: "/TDCS/exam/searchCategory",
