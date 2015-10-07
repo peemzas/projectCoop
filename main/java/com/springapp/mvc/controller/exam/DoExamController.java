@@ -7,6 +7,7 @@ import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import flexjson.JSONSerializer;
+import org.hibernate.Hibernate;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -65,6 +67,9 @@ public class DoExamController {
 
     @Autowired
     QueryExamResultDomain queryExamResultDomain;
+
+    @Autowired
+    QueryPaperQuestionDomain queryPaperQuestionDomain;
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
@@ -147,6 +152,11 @@ public class DoExamController {
         examRecord.setTimeTaken(timeTaken);
         examRecord.setExamDate(new Date());
         examRecord.setExamDate(DateUtil.getCurrentDateWithRemovedTime());
+        if (queryExamRecordDomain.isPreTest(examRecord)){
+            examRecord.setIsPreTest(true);
+        }else {
+            examRecord.setIsPreTest(false);
+        }
 
         Float objectiveScore = (float) 0.0;
         Choice currentChoice = null;
@@ -156,23 +166,26 @@ public class DoExamController {
 
             queryExamRecordDomain.saveExamRecord(examRecord);
             //Save ExamRecord
+
             for (int i = 0; i < answerRecords.length(); i++) {
                 ExamAnswerRecord examAnswerRecord = new ExamAnswerRecord();
                 examAnswerRecord.setExamRecord(examRecord);
                 currentQuestion = queryQuestionDomain.getQuestionById(answerRecords.getJSONObject(i).getInt("questionId"));
                 examAnswerRecord.setQuestion(currentQuestion);
 
+
                 if (answerRecords.getJSONObject(i).optInt("answerObjective") != 0) {
                     currentChoice = queryChoiceDomain.getChoiceById(answerRecords.getJSONObject(i).getInt("answerObjective"));
                     examAnswerRecord.setAnswerObjective(currentChoice);
 
                     if (currentChoice.getCorrection() == queryBooDomain.getTrue()) {
-                        Set<PaperQuestion> tempPaperQuestionlist = paper.getQuestions();
-                        for(PaperQuestion paperQuestion : tempPaperQuestionlist){
-                            if(paperQuestion.getQuestion().equals(currentQuestion)){
-                                objectiveScore += paperQuestion.getScore();
-                            }
-                        }
+//                        Set<PaperQuestion> tempPaperQuestionlist = paper.getQuestions();
+//                        for(PaperQuestion paperQuestion : tempPaperQuestionlist){
+//                            if(paperQuestion.getQuestion().equals(currentQuestion)){
+//                                objectiveScore += paperQuestion.getScore();
+//                            }
+//                        }
+                        objectiveScore += queryPaperQuestionDomain.getPaperQuestion(paper,currentQuestion).getScore();
                     }
                 } else {
                     try {
@@ -182,13 +195,12 @@ public class DoExamController {
                         //Do nothing
                     }
                 }
-
                 queryExamAnswerDomain.saveExamAnswer(examAnswerRecord);
             }
             //Save ExamResult
             ExamResult examResult = new ExamResult();
             examResult.setExamRecord(examRecord);
-            examResult.setObjectiveScore(objectiveScore);
+            examResult.setObjectiveScore(new BigDecimal(objectiveScore));
             examResult.setStatus(queryStatusDomain.getPendingStatus());
             queryExamResultDomain.saveExamResult(examResult);
 

@@ -41,6 +41,19 @@ public class ExamRecord implements Serializable {
     @Cascade(CascadeType.ALL)
     private List<ExamAnswerRecord> examAnswerRecords;
 
+    @Column(name = "IS_PRE_TEST")
+    @Type(type = "true_false")
+    private Boolean isPreTest;
+
+    public Boolean getIsPreTest() {
+        return isPreTest;
+    }
+
+    public void setIsPreTest(Boolean isPreTest) {
+        this.isPreTest = isPreTest;
+    }
+
+
     public List<ExamAnswerRecord> getExamAnswerRecords() {
         return examAnswerRecords;
     }

@@ -1,9 +1,11 @@
 package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -28,10 +30,10 @@ public class ExamResult implements Serializable {
     private String comment;
 
     @Column(name = "OBJECTIVE_SCORE")
-    private Float objectiveScore;
+    private BigDecimal objectiveScore;
 
     @Column(name = "SUBJECTIVE_SCORE")
-    private Float subjectiveScore;
+    private BigDecimal subjectiveScore;
 
     @Column(name = "MARKED_DATE")
     private Date markedDate;
@@ -50,14 +52,6 @@ public class ExamResult implements Serializable {
 
     public void setMarkedDate(Date markedDate) {
         this.markedDate = markedDate;
-    }
-
-    public Float getSubjectiveScore() {
-        return subjectiveScore;
-    }
-
-    public void setSubjectiveScore(Float subjectiveScore) {
-        this.subjectiveScore = subjectiveScore;
     }
 
     public Status getStatus() {
@@ -100,11 +94,19 @@ public class ExamResult implements Serializable {
         this.comment = comment;
     }
 
-    public Float getObjectiveScore() {
+    public BigDecimal getObjectiveScore() {
         return objectiveScore;
     }
 
-    public void setObjectiveScore(Float resultScore) {
-        this.objectiveScore = resultScore;
+    public void setObjectiveScore(BigDecimal objectiveScore) {
+        this.objectiveScore = objectiveScore;
+    }
+
+    public BigDecimal getSubjectiveScore() {
+        return subjectiveScore;
+    }
+
+    public void setSubjectiveScore(BigDecimal subjectiveScore) {
+        this.subjectiveScore = subjectiveScore;
     }
 }

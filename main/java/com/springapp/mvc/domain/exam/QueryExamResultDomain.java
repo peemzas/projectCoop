@@ -28,7 +28,7 @@ public class QueryExamResultDomain extends HibernateUtil{
     }
 
     public void updateExamResult(ExamResult examResult){
-        getSession().merge(examResult);
+        getSession().update(examResult);
     }
 
 }

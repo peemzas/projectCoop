@@ -20,6 +20,7 @@ public class QueryExamAnswerDomain extends HibernateUtil{
 
     public ExamAnswerRecord getExamAnswerRecordById(Integer id){
         Criteria criteria = getSession().createCriteria(ExamAnswerRecord.class);
+
         criteria.add(Restrictions.eq("id",id));
         return (ExamAnswerRecord)criteria.uniqueResult();
     }

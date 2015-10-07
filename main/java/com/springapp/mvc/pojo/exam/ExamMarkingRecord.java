@@ -10,11 +10,12 @@ import java.math.BigDecimal;
  * Created by Phuthikorn_T on 7/15/2015.
  */
 @Entity
-@Table(name="TDCS_EXAM_MARKING_RECORDS")
+@Table(name="TDCS_EXAM_MARKING_RECORD")
 public class ExamMarkingRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO ,generator = "markingRecordSeq")
+    @SequenceGenerator(name = "markingRecordSeq")
     @Column(name="MARKING_RECORD_ID")
     private Integer id;
 

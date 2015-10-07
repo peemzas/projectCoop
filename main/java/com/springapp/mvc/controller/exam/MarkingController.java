@@ -81,22 +81,19 @@ public class MarkingController {
             HibernateUtil.beginTransaction();
 
             for(int i = 0 ; i < markingRecord.length() ; i++){
-//                HibernateUtil.beginTransaction();
                 ExamMarkingRecord examMarkingRecord = new ExamMarkingRecord();
 
                 examMarkingRecord.setMarkedBy(currentUser);
-                examMarkingRecord.setAnswerRecord(queryExamAnswerDomain.getExamAnswerRecordById(markingRecord.getJSONObject(i).optInt("answerRecordId")));
+                ExamAnswerRecord answerRecord = queryExamAnswerDomain.getExamAnswerRecordById(markingRecord.getJSONObject(i).optInt("answerRecord"));
+                examMarkingRecord.setAnswerRecord(answerRecord);
                 BigDecimal score = new BigDecimal(markingRecord.getJSONObject(i).optDouble("score"));
                 examMarkingRecord.setMarkingScore(score);
                 examMarkingRecord.setExamResult(examResult);
                 queryMarkingRecord.saveMarkingRecord(examMarkingRecord);
                 subjectiveScore =  subjectiveScore.add(score);
-//                HibernateUtil.commitTransaction();
             }
-//            examResult.setSubjectiveScore(subjectiveScore);
-            HibernateUtil.commitTransaction();
+            examResult.setSubjectiveScore(subjectiveScore);
 
-            HibernateUtil.beginTransaction();
             queryExamResultDomain.updateExamResult(examResult);
 
             HibernateUtil.commitTransaction();
