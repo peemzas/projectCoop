@@ -86,32 +86,32 @@
   </div>
 </div>
 
-<script>
+<%--<script>--%>
 
-  $('.modalSearchByEmployeeNameSubmitBtn').on('click',function(){
-    // DO SOMETHING//
+  <%--$('.modalSearchByEmployeeNameSubmitBtn').on('click',function(){--%>
+    <%--// DO SOMETHING//--%>
 
-    // FINISH //
-    $("#modalSearchByEmployeeName").modal("hide");
-  });
+    <%--// FINISH //--%>
+    <%--$("#modalSearchByEmployeeName").modal("hide");--%>
+  <%--});--%>
 
-  $('.modalSearchByEmployeeNameCloseBtn').on('click',function(){
-    $("#modalSearchByEmployeeName").modal("hide");
-  });
+  <%--$('.modalSearchByEmployeeNameCloseBtn').on('click',function(){--%>
+    <%--$("#modalSearchByEmployeeName").modal("hide");--%>
+  <%--});--%>
 
-  $('#searchBtnFromModalSearchEmployee').on('click', function () {
-    searchEmpName();
-  });
+  <%--$('#searchBtnFromModalSearchEmployee').on('click', function () {--%>
+    <%--searchEmpName();--%>
+  <%--});--%>
 
-  $("#addEmployeeBtn").on('click', function(){
-    addEmployee();
-  });
-
-
-  $("#addMarkerEmpIdBtn").on('click', function(){
-    addEmployee();
-  });
+  <%--$("#addEmployeeBtn").on('click', function(){--%>
+    <%--addEmployee();--%>
+  <%--});--%>
 
 
+  <%--$("#addMarkerEmpIdBtn").on('click', function(){--%>
+    <%--addEmployee();--%>
+  <%--});--%>
 
-</script>
+
+
+<%--</script>--%>

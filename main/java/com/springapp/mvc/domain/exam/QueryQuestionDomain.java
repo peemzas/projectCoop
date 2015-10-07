@@ -273,21 +273,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
-
-//
-//    public List<User> getUserIdByNames(List empName){
-//
-//        String queryStatement = "select userId from User where thFname in(:empName)";
-//        Query query = getSession().createQuery(queryStatement);
-//        query.setParameterList("empName", empName);
-//        List<User> userIds = query.list();
-//        logger.info(userIds.toString());
-//
-//        return userIds;
-//    }
-    
-
-    public List<User> getUserIdByName(List empName){
+    public List<User> getUserIdByNames(List<String> empName){
 
         String queryStatement = "select userId from User where thFname in(:empName)";
         Query query = getSession().createQuery(queryStatement);
@@ -299,8 +285,9 @@ public class QueryQuestionDomain extends HibernateUtil {
     }
 
     public List<Question> getQuestionListByPaper(ExamPaper ep){
+
         Criteria criteria = getSession().createCriteria(PaperQuestion.class);
-        criteria.add(Restrictions.eq("pk.examPaper",ep));
+        criteria.add(Restrictions.eq("pk.examPaper", ep));
         List<PaperQuestion> paperQuestions = criteria.list();
         List<Question> questions = new ArrayList<Question>();
 
@@ -309,5 +296,31 @@ public class QueryQuestionDomain extends HibernateUtil {
         }
 
         return questions;
+    }
+
+    public List<Question> generalSearchQuestion(List users, Integer subName){
+
+        Criteria criteria = getSession().createCriteria(Question.class);
+        if(users != null){
+            criteria.add(Restrictions.in("createBy.id", users));
+        }
+        if(subName != null){
+            criteria.add(Restrictions.eq("subCategory.id", subName));
+        }
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("id"), "ids")
+                .add(Projections.property("choices"), "choicess")
+                .add(Projections.property("description"), "descriptions")
+                .add(Projections.property("createDate"), "createDates")
+                .add(Projections.property("difficultyLevel"), "difficultyLevels")
+                .add(Projections.property("subCategory"), "subCategorys")
+                .add(Projections.property("questionType"), "questionTypes")
+                .add(Projections.property("createBy"), "createBys")
+                .add(Projections.property("status"), "statuss")
+                .add(Projections.property("score"), "scores"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Question> questions = criteria.list();
+
+        return  questions;
     }
 }

@@ -3,6 +3,7 @@ package com.springapp.mvc.controller.exam;
 import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
+import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
@@ -262,44 +263,47 @@ public class QuestionController {
     }
 
 //    Add By Mr.Wanchana
-//    @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
-//    @ResponseBody
-//    public ResponseEntity<String> generalQuestionSearch(@RequestBody String jsoN) throws JSONException {
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("Content-Type", "application/json;charset=UTF-8");
-//        List empNameSearch = new ArrayList();
+    @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
+    @ResponseBody
+    public ResponseEntity<String> generalQuestionSearch(@RequestBody String jsoN) throws JSONException {
 
-//        String categoryIdSearch = "";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+        List<String> empNameSearch = new ArrayList<String>();
+        String subCategorySearch = "";
+        JSONArray jsonArray = new JSONArray(jsoN);
+        JSONObject jObj = jsonArray.getJSONObject(0);
+        Integer check = new Integer(jObj.getString("thFname"));
+        logger.info(check + ".........................");
+        if(check == 0){
+            logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            subCategorySearch = jsonObject.getString("subCategoryId");
+        }
+        else{
+            logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                empNameSearch.add(jsonObject.getString("thFname"));
+                if(i == 0){
+                    subCategorySearch = jsonObject.getString("subCategoryId");
+                }
+            }
+        }
 
-//        String subCategorySearch = "";
-//        String nameSearch = "";
-//        JSONArray jsonArray = new JSONArray(jsoN);
-//        for(int i = 0; i < jsonArray.length(); i++){
-//            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//            System.out.println(jsonObject.getString("thFname"));
-//            empNameSearch.add(jsonObject.getString("thFname"));
-//            if(i == 0){
+        List<User> users = new ArrayList<User>();
+        if(empNameSearch.size() != 0){
+            users = queryQuestionDomain.getUserIdByNames(empNameSearch);
+        }
+        else{
+            users = null;
+        }
+        Integer subCategoryId = querySubCategoryDomain.getSubCategoryIdByName(subCategorySearch);
+        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users, subCategoryId);
+        String json = new Gson().toJson(questions);
 
-//                categoryIdSearch = jsonObject.getString("categoryId");
-
-//                subCategorySearch = jsonObject.getString("subCategoryId");
-//                nameSearch = jsonObject.getString("empName");
-//            }
-//        }
-
-//        List<User> users = queryQuestionDomain.getUserIdByName(empNameSearch);
-//        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users, categoryIdSearch, subCategorySearch, nameSearch);
-
-//        empNameSearch.add(nameSearch);
-//        List<User> users = queryQuestionDomain.getUserIdByNames(empNameSearch);
-//        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users, subCategorySearch);
-
-//        logger.info(questions.toString());
-//        String json = new JSONSerializer().exclude("*.class").serialize(questions);
-//
-//        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
-//    }
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestionDetail")
@@ -329,10 +333,8 @@ public class QuestionController {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             questionIds.add(jsonObject.getInt("id"));
         }
-        logger.info(".................................."+questionIds);
         List<Question> questions = queryQuestionDomain.getQuestionNotInSelected(questionIds);
         String json = new JSONSerializer().exclude("*.class").serialize(questions);
-        logger.info(questions+".......................................................");
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 

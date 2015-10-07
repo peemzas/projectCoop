@@ -10,6 +10,10 @@ var sumPaperScore = 0;
 $(document).ready(function(){
     onLoadPage();
 
+    $("#generalSearchButtonInModalSelectionQuestion").unbind('click').click(function(){
+        generalSearchQuestion();
+    });
+
     if($("#newPaperScore").val() == ""){
         $("#maxScore").val(0);
     }
@@ -192,10 +196,7 @@ function viewQuestions(){
             success: function(data){
                 if(data.length == 0){
                     //alert('2');
-                    $("#questionsAreEmpty").show();
-                    $("#removeRowSelected").attr('disabled', 'disabled');
-                    $("#addQuestionBtn").attr('disabled', 'disabled');
-                    $("#tbSelectQuestion").hide();
+                    dataNotFound();
                 }
                 //if($("#tbSelectQuestion").is(":hidden") && data.length != 0){
                 if(data.length > 0){
@@ -211,10 +212,10 @@ function viewQuestions(){
                         $("#tbodySelectQuestion").append(
                             '<tr>'+
                             '<td style="display: none;"><label id="labelQuestionId'+valuez.idz+'">'+valuez.idz+'</td>'+
-                            '<td><input class="selectQ" type="checkbox"/></td>'+
-                            '<td><label id="labelCategoryName'+valuez.idz+'">'+valuez.subCategoryz.category.name+'<label></td>'+
-                            '<td><label id="labelSubCategoryName'+valuez.idz+'">'+valuez.subCategoryz.name+'</label></td>'+
-                            '<td style="text-align: left;"><label id="labelQuestionDesc'+valuez.idz+'">'+qDescriptionz+'</label></td>'+
+                            '<td><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
+                            '<td style="text-align: left;"><label id="labelCategoryName'+valuez.idz+'">'+valuez.subCategoryz.category.name+'<label></td>'+
+                            '<td style="text-align: left;"><label id="labelSubCategoryName'+valuez.idz+'">'+valuez.subCategoryz.name+'</label></td>'+
+                            '<td style="text-align: left;"><button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign"></span></span></button><label id="labelQuestionDesc'+valuez.idz+'">'+qDescription+'</label></td>'+
                             '<td><label id="labelQuestionTypeDesc'+valuez.idz+'">'+valuez.questionTypez.description+'</td>'+
                             '<td><label id="labelDiffDesc'+valuez.idz+'">'+valuez.difficultyLevelz.description+'</td>'+
                             '<td><label id="labelScore'+valuez.idz+'">'+valuez.score+'</td>'+
@@ -336,6 +337,7 @@ function onLoadPage(){
     $("#addQuestionBtn").removeAttr('disabled');
     $("#score").val(0);
     $("#maxScore").val(0);
+    $("#hours").defaultValue = "0";
 }
 
 function sumScore(score){
@@ -348,4 +350,91 @@ function scoreOnChange(){
         sumScoreChanged = sumScoreChanged + Number($(this).val());
     });
     $("#score").val(sumScoreChanged);
+}
+
+function generalSearchQuestion() {
+    var i;
+    var categoryId = $("#selectCategoryToSelection").val();
+    categoryId = categoryId.substring(0, 5);
+    var subcategoryId = $("#selectSubCategoryToSelection").val();
+    var empName = $("#selectCreateBySearchInput").val();
+    var arrayEmpNameToQuery = new Array();
+    var jsonObj = {};
+    var itemLenght = ($("#showEmployeeSelected").children("button")).length;
+    var tempArray = new Array();
+
+    if(itemLenght > 0){
+        for (i = 0; i < itemLenght; i++) {
+            var temp = $("#showEmployeeSelected").children("button")[i].innerHTML;
+            alert(temp);
+            temp = temp.substring(temp.indexOf('_')+1, temp.indexOf('z')-1);
+            alert(temp);
+            arrayEmpNameToQuery.push(temp);
+        }
+
+        for (var idx = 0; idx < arrayEmpNameToQuery.length; idx++) {
+            var items = {
+                "thFname": arrayEmpNameToQuery[idx],
+                "subCategoryId": subcategoryId
+            };
+            tempArray.push(items);
+        }
+    }
+    else{
+        var item = {
+            "thFname": '0',
+            "subCategoryId": subcategoryId
+        };
+        tempArray.push(item);
+    }
+    jsonObj = JSON.stringify(tempArray);
+    alert(jsonObj);
+    var dataResponse = $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/generalQuestionSearch",
+        dataType: "json",
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        data: jsonObj,
+        success: function (result) {
+            if(result.length == 0){
+                dataNotFound();
+            }
+            $("#tbodySelectQuestion").empty();
+            result.forEach(function(i){
+                var qDescriptions = i.descriptions;
+                if(i.descriptions.length > 60){
+                    qDescriptions = (i.descriptions).substring(0, 50);
+                }
+                $("#tbodySelectQuestion").append(
+                    '<tr>'+
+                    '<td style="display: none;"><label id="labelQuestionId'+i.ids+'">'+i.ids+'</td>'+
+                    '<td><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
+                    '<td style="text-align: left;"><label id="labelCategoryName'+i.ids+'">'+i.subCategorys.category.name+'<label></td>'+
+                    '<td style="text-align: left;"><label id="labelSubCategoryName'+i.ids+'">'+i.subCategorys.name+'</label></td>'+
+                    '<td style="text-align: left;"><button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign"></span></span></button><label id="labelQuestionDesc'+i.ids+'">'+qDescriptions+'</label></td>'+
+                    '<td><label id="labelQuestionTypeDesc'+i.ids+'">'+i.questionTypes.description+'</td>'+
+                    '<td><label id="labelDiffDesc'+i.ids+'">'+i.difficultyLevels.description+'</td>'+
+                    '<td><label id="labelScore'+i.ids+'">'+i.scores+'</td>'+
+
+                    '<td><label id="labelQuestionCreateBy'+i.ids+'">'+i.createBys.thFname+" "+i.createBys.thLname+'</td>'+
+                    '<td style="display: none;"><label id="labelQuestionCreateDate'+i.ids+'">'+i.createDates+'</td>'+
+
+                    '<td style="display: none; text-align: center"><button id="btnQuestionInfo'+i.ids+'" data-toggle="modal" data-target="#showQuestionInfoModal" class="btn btn-info" type="button" onclick="showInfo('+i.ids+')"><span class="glyphicon glyphicon-book"></span></button></td>'+
+                    '</tr>'
+                );
+            });
+        },
+        error: function () {
+            alert('เกิดข้อผิดพลาด');
+        }
+    });
+    tempArray = [];
+}
+
+function dataNotFound(){
+    $("#questionsAreEmpty").show();
+    $("#removeRowSelected").attr('disabled', 'disabled');
+    $("#addQuestionBtn").attr('disabled', 'disabled');
+    $("#tbSelectQuestion").hide();
 }
