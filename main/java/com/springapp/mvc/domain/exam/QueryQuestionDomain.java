@@ -128,7 +128,7 @@ public class QueryQuestionDomain extends HibernateUtil {
     public Question getQuestionById(Integer id){
         Criteria criteria = getSession().createCriteria(Question.class);
         criteria.add(Restrictions.eq("id", id));
-        return (Question)criteria.list().get(0);
+        return (Question)criteria.uniqueResult();
     }
 
     public void deleteQuestion(Integer id){

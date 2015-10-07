@@ -59,6 +59,7 @@ var submitMarking = function () {
 
     $.each(questions, function (index, value) {
         var answerRecordId = $(this).attr('answerRecordId')
+        console.log(answerRecordId)
         var score = parseFloat($(this).find('.scoreInput').val())
 
         if (!isNaN(score)) {

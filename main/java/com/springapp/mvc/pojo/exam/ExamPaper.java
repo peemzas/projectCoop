@@ -9,12 +9,17 @@ import java.io.Serializable;
 import java.util.*;
 
 import com.springapp.mvc.pojo.exam.PaperQuestion;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.FetchProfile;
 
 /**
  * Created by Phuthikorn_T on 6/30/2015.
  */
 
 @Entity
+@FetchProfile(name = "paperQuestions", fetchOverrides = {
+        @FetchProfile.FetchOverride(entity = ExamPaper.class, association = "questions", mode = FetchMode.JOIN)
+})
 @Table(name = "TDCS_EXAM_PAPERS")
 public class ExamPaper implements Serializable {
 
