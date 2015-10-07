@@ -17,9 +17,6 @@ import org.hibernate.annotations.FetchProfile;
  */
 
 @Entity
-@FetchProfile(name = "paperQuestions", fetchOverrides = {
-        @FetchProfile.FetchOverride(entity = ExamPaper.class, association = "questions", mode = FetchMode.JOIN)
-})
 @Table(name = "TDCS_EXAM_PAPERS")
 public class ExamPaper implements Serializable {
 
