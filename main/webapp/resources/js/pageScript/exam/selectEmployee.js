@@ -1,5 +1,22 @@
 function searchEmpName(){
 
+    $('.modalSearchByEmployeeNameSubmitBtn').unbind('click').click(function(){
+        $("#modalSearchByEmployeeName").modal("hide");
+    });
+
+    $('.modalSearchByEmployeeNameCloseBtn').unbind('click').click(function(){
+        $("#modalSearchByEmployeeName").modal("hide");
+    });
+
+    $('#searchBtnFromModalSearchEmployee').unbind('click').click(function(){
+        searchEmpName();
+    });
+
+    $("#addEmployeeBtn").unbind('click').click(function(){
+        $("#modalSearchByEmployeeName").modal("hide");
+        addEmployee();
+    });
+
     $("#tbodySelectEmployeeName").empty();
     $("#selectAllEmployeeName").hide();
     var userNameRequest = $("#searchEmployeeNameText").val();
@@ -110,7 +127,9 @@ function searchEmpName(){
 function addEmployee(){
 
     $("#tbodySelectEmployeeName input:checkbox:checked").each(function(){
-
+        var eId= $(this).parent().siblings().map(function(){
+            return $(this).text().trim();
+        }).get(0);
         var arrayEmployeeName = $(this).parent().siblings().map(function(){
             return $(this).text().trim();
         }).get();
@@ -119,7 +138,9 @@ function addEmployee(){
         //alert(JSON.stringify(arrayEmployeeName));
         //alert(arrayEmployeeName[1]);
         $("#showEmployeeSelected").append(
+
             '<button class="btn btn-sm" type="button" style="background-color: #cbff9e; border: 1px solid #f4ffdb;">'+arrayEmployeeName[1]+
+                '<label style="display: none;">'+"_"+eId+"z"+'</label>'+
             '<span class="glyphicon glyphicon-remove"/></button>&nbsp;'
         );
         $("#showEmployeeSelected").cleanWhitespace();

@@ -233,5 +233,17 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         }
         return criteria.list();
     }
+
+//    Add By Mr.Wanchana
+    public Integer getSubCategoryIdByName(String subName){
+
+        String queryStatement = "select id from SubCategory where name like :subName";
+        Query query = getSession().createQuery(queryStatement);
+        query.setParameter("subName", "%" + subName + "%");
+        Integer subId = (Integer) query.list().get(0);
+        logger.info(subId.toString());
+
+        return subId;
+    }
 }
 
