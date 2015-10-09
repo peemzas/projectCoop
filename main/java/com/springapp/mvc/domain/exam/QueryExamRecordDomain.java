@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 public class QueryExamRecordDomain extends HibernateUtil{
 
     public void saveExamRecord(ExamRecord examRecord){
-//        beginTransaction();
         getSession().save(examRecord);
-//        commitTransaction();
     }
 
     public ExamRecord getExamRecordById(Integer id){
@@ -30,7 +28,6 @@ public class QueryExamRecordDomain extends HibernateUtil{
         criteria.add(Restrictions.eq("paper",examRecord.getPaper()));
         criteria.add(Restrictions.eq("user",examRecord.getUser()));
         criteria.add(Restrictions.eq("preTestRecord",null));
-//        criteria.add(Restrictions.eq("isPreTest"),true);
         return (ExamRecord)criteria.uniqueResult();
     }
 
