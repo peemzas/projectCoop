@@ -46,6 +46,9 @@ public class MarkingController {
     @Autowired
     QueryMarkingRecord queryMarkingRecord;
 
+    @Autowired
+    QueryStatusDomain queryStatusDomain;
+
     @RequestMapping(method = RequestMethod.GET, value = "/exam/marking")
     public String marking(ModelMap modelMap, Model model, HttpServletRequest request, HttpServletResponse response
 //                         ,@RequestParam(value = "recordId") Integer recordId
@@ -93,6 +96,7 @@ public class MarkingController {
                 subjectiveScore =  subjectiveScore.add(score);
             }
             examResult.setSubjectiveScore(subjectiveScore);
+            examResult.setStatus(queryStatusDomain.getMarkedStatus());
 
             queryExamResultDomain.updateExamResult(examResult);
 

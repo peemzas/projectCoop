@@ -21,24 +21,30 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-xs-1 ">
-                        <button class="btn btn-success btn-block createQuestionBtn form-control"
-                                data-toggle="modal" data-target="#createQuest" style="height: 35px;width: 50px;">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
+                    <button class="btn btn-success btn-block createQuestionBtn form-control"
+                            data-toggle="modal" data-target="#createQuest" style="height: 35px;width: 50px;">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button class="btn btn-info btn-block form-control" data-toggle="modal" data-target="#questionDetailModal2" style="height: 35px;width: 50px;" >
+                        Test
+                    </button>
                 </div>
             </div>
             <table class="table">
                 <thead class="bg-primary">
                 <tr>
                     <%--<th style="text-align: center">หมายเลขข้อสอบ</th>--%>
-                    <th style="text-align: center" width="35%">คำถาม</th>
+                    <th><input type="checkbox" id="selectAllItem" class="form-control"/></th>
                     <th style="text-align: center">ชนิดข้อสอบ</th>
-                    <th style="text-align: center">ระดับความยาก</th>
-                    <th style="text-align: center">คะแนน</th>
                     <th style="text-align: center">หมวดหมู่</th>
                     <th style="text-align: center">หัวข้อเรื่อง</th>
+
+                    <th style="text-align: center" width="35%">คำถาม</th>
+                    <th style="text-align: center">ระดับความยาก</th>
+                    <th style="text-align: center">คะแนน</th>
                     <th style="text-align: center">ผู้สร้าง</th>
                     <th style="text-align: center">วันที่สร้าง</th>
+
                     <th style="text-align: center">Action</th>
                 </tr>
                 </thead>
@@ -64,6 +70,80 @@
         </div>
     </div>
 </div>
+</div>
+
+<div class="modal fade" id="questionDetailModal2">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <%--<button type="button" class="glyphicon glyphicon-pencil btn btn-warning" id="editThisQuestion" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+                <h4>ข้อมูลข้อสอบ</h4>
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        ID&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailId"></div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        หมวดหมู่&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailCategory"></div>
+                    <div class="col-md-2 col-md-offset-1 text-right">
+                        หัวข้อเรื่อง&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailSubCategory"></div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        สร้างโดย&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailCreateBy"></div>
+                    <div class="col-md-2 col-md-offset-1 text-right">
+                        วันที่สร้าง&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailCreateDate"></div>
+                </div>
+                <br>
+
+                <div class="row" class="qUpdateDetail" hidden>
+                    <div class="col-md-2 text-right">
+                        อัพเดทโดย&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailUpdateBy"></div>
+                    <div class="col-md-2 col-md-offset-1 text-right">
+                        วันที่อัพเดท&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailUpdateDate"></div>
+
+                </div>
+                <br class="qUpdateDetail" hidden>
+
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        ระดับความยาก&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailDifficutyLevel"></div>
+                    <div class="col-md-2 col-md-offset-1 text-right">
+                        คะแนนเริ่มต้น&nbsp;:
+                    </div>
+                    <div class="col-md-3" id="qDetailDefaultScore"></div>
+                </div>
+
+            </div>
+
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
 </div>
 
 

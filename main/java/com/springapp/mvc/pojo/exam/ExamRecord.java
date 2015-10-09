@@ -41,18 +41,54 @@ public class ExamRecord implements Serializable {
     @Cascade(CascadeType.ALL)
     private List<ExamAnswerRecord> examAnswerRecords;
 
-    @Column(name = "IS_PRE_TEST")
-    @Type(type = "true_false")
-    private Boolean isPreTest;
+//    @Column(name = "IS_PRE_TEST")
+//    @Type(type = "true_false")
+//    private Boolean isPreTest;
 
-    public Boolean getIsPreTest() {
-        return isPreTest;
+//    public Boolean getIsPreTest() {
+//        return isPreTest;
+//    }
+//
+//    public void setIsPreTest(Boolean isPreTest) {
+//        this.isPreTest = isPreTest;
+//    }
+
+    @OneToMany(mappedBy = "examRecord")
+    @Cascade(CascadeType.ALL)
+    private List<ExamResult> examResults;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRE_TEST_RECORD_ID")
+    private ExamRecord preTestRecord;
+
+    @OneToOne(mappedBy = "preTestRecord",fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
+    private ExamRecord postTestRecord;
+
+
+    public List<ExamResult> getExamResults() {
+        return examResults;
     }
 
-    public void setIsPreTest(Boolean isPreTest) {
-        this.isPreTest = isPreTest;
+    public void setExamResults(List<ExamResult> examResults) {
+        this.examResults = examResults;
     }
 
+    public ExamRecord getPostTestRecord() {
+        return postTestRecord;
+    }
+
+    public void setPostTestRecord(ExamRecord postTestRecord) {
+        this.postTestRecord = postTestRecord;
+    }
+
+    public ExamRecord getPreTestRecord() {
+        return preTestRecord;
+    }
+
+    public void setPreTestRecord(ExamRecord preTestRecord) {
+        this.preTestRecord = preTestRecord;
+    }
 
     public List<ExamAnswerRecord> getExamAnswerRecords() {
         return examAnswerRecords;
