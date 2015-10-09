@@ -17,8 +17,8 @@ import java.util.Date;
 public class ExamResult implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_RESULT_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_EXAM_RESULT_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_RESULT_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "examResult_id_generator")
+    @SequenceGenerator(name = "examResult_id_generator", sequenceName = "examResult_id_sequence")
     @Column(name = "RESULT_ID")
     private Integer id;
 

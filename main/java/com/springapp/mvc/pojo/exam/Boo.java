@@ -18,12 +18,6 @@ public class Boo implements Serializable {
     @Column(name="BOOLEAN_DESCRIPTION")
     private String description;
 
-//    @OneToMany(mappedBy = "correction")
-//    private Set<Choice> choices;
-
-
-
-
 
     public boolean getBoolean(){
         if(value == 1){
@@ -49,11 +43,4 @@ public class Boo implements Serializable {
         this.description = description;
     }
 
-//    public Set<Choice> getChoices() {
-//        return choices;
-//    }
-//
-//    public void setChoices(Set<Choice> choices) {
-//        this.choices = choices;
-//    }
 }

@@ -31,21 +31,6 @@ public class SubCategory implements Serializable {
     @JoinColumn(name="SUB_CATEGORY_CREATE_BY",referencedColumnName = "USER_ID")
     private User createBy;
 
-//    @OneToMany
-//    private Set<Question> question;
-
-//    @ManyToOne
-//    @JoinColumn(name = "SUB_CATEGORY_STATUS")
-//    private Status status;
-
-//    public Status getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(Status status) {
-//        this.status = status;
-//    }
-
     public Integer getId() {
         return id;
     }
@@ -78,11 +63,4 @@ public class SubCategory implements Serializable {
         this.createBy = createBy;
     }
 
-//    public Set<Question> getQuestion() {
-//        return question;
-//    }
-//
-//    public void setQuestion(Set<Question> question) {
-//        this.question = question;
-//    }
 }

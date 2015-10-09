@@ -14,22 +14,15 @@ import java.util.Set;
 @Table(name="TDCS_CATEGORIES")
 public class Category implements Serializable{
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CATEGORY_TRIG")
-//    @SequenceGenerator(name = "TDCS_CATEGORY_TRIG", sequenceName = "TDCS_CATEGORY_SEQ")
     @Column(name="CATEGORY_ID", unique = true)
     private  String id;
 
     @Column(name="CATEGORY_NAME",unique = false)
     private String name;
 
-
-
     @ManyToOne
     @JoinColumn(name="CATEGORY_CREATE_BY")
     private User createBy;
-
-//    @OneToMany(mappedBy = "category")
-//    private Set<SubCategory> subCategories;
 
     public String getId() {
         return id;
@@ -54,12 +47,4 @@ public class Category implements Serializable{
     public void setCreateBy(User createBy) {
         this.createBy = createBy;
     }
-
-//    public Set<SubCategory> getSubCategories() {
-//        return subCategories;
-//    }
-//
-//    public void setSubCategories(Set<SubCategory> subCategories) {
-//        this.subCategories = subCategories;
-//    }
 }

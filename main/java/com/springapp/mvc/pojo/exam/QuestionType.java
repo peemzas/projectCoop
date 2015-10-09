@@ -19,12 +19,6 @@ public class QuestionType implements Serializable {
     @Column(name="QUESTION_TYPE_DESCRIPTION")
     private String description;
 
-//    @OneToMany(mappedBy = "questionType")
-//    private Set<Question> questions;
-
-
-
-
     public Integer getId() {
         return id;
     }
@@ -41,11 +35,4 @@ public class QuestionType implements Serializable {
         this.description = description;
     }
 
-//    public Set<Question> getQuestions() {
-//        return questions;
-//    }
-//
-//    public void setQuestions(Set<Question> questions) {
-//        this.questions = questions;
-//    }
 }
