@@ -46,12 +46,12 @@ public class QueryQuestionDomain extends HibernateUtil {
         beginTransaction();
         getSession().save(question);
 
-        commitTransaction();
 //        getSession().flush();
 
         if (question.getQuestionType().getId() == 1) {
             queryChoiceDomain.insertAllChoice(question, cDesc, correctChoice);
         }
+        commitTransaction();
 
         closeSession();
     }
@@ -146,8 +146,10 @@ public class QueryQuestionDomain extends HibernateUtil {
 
         Criteria criteria = getSession().createCriteria(Question.class, "q");
         criteria.createAlias("q.subCategory","subCategory");
-        criteria.createAlias("q.createBy","createBy");
-        criteria.createAlias("q.status","status");
+        criteria.createAlias("q.createBy", "createBy");
+        criteria.createAlias("q.status", "status");
+        criteria.createAlias("q.difficultyLevel","difficulty");
+        criteria.addOrder(Order.asc("subCategory.category")).addOrder(Order.asc("subCategory")).addOrder(Order.asc("id")).addOrder(Order.asc("difficulty.level"));
         if (categoryId != null){
             Category category = queryCategoryDomain.getCategoryById(categoryId);
             criteria.add(Restrictions.eq("subCategory.category",category));
@@ -158,7 +160,10 @@ public class QueryQuestionDomain extends HibernateUtil {
         if (createById != null && createById.trim().length()!=0){
             try{
                 User user = queryUserDomain.getUserById(Integer.parseInt(createById));
-                criteria.add(Restrictions.eq("q.createBy",user));
+                Criterion createByCriterion = Restrictions.eq("q.createBy",user);
+                Criterion updateByCriterion = Restrictions.eq("q.createBy",user);
+                criteria.add(Restrictions.or(createByCriterion,updateByCriterion));
+
             }catch (NumberFormatException ne){
                 System.out.println("error in parsing createBy");
                 ne.printStackTrace();
@@ -182,13 +187,12 @@ public class QueryQuestionDomain extends HibernateUtil {
             Date dateFrom = null;
             try {
                 dateFrom = format.parse(createDateFrom);
-                System.out.println("DATEFROM");
-                System.out.println(dateFrom);
-                System.out.println("HOORAYYY");
-                criteria.add(Restrictions.ge("q.createDate",dateFrom));
+                Criterion createDateCriterion = Restrictions.ge("q.createDate",dateFrom);
+                Criterion updateDateCriterion = Restrictions.ge("q.updateDate",dateFrom);
+                criteria.add(Restrictions.or(createDateCriterion,updateDateCriterion));
+
             }catch (Exception e){
                 e.printStackTrace();
-                System.out.println(e);
             }
 
         }
@@ -196,11 +200,10 @@ public class QueryQuestionDomain extends HibernateUtil {
             Date dateTo = null;
             try {
                 dateTo = format.parse(createDateTo);
-                System.out.println("DATE TO");
-                System.out.println(dateTo);
-                System.out.println("HOORAHHH");
-                System.out.println("");
-                criteria.add(Restrictions.le("q.createDate",dateTo));
+                Criterion createDateCriterion = Restrictions.le("q.createDate",dateTo);
+                Criterion updateDateCriterion = Restrictions.le("q.updateDate",dateTo);
+                criteria.add(Restrictions.or(createDateCriterion,updateDateCriterion));
+
             }catch (Exception e){
                 e.printStackTrace();
                 System.out.println(e);
@@ -210,7 +213,7 @@ public class QueryQuestionDomain extends HibernateUtil {
             criteria.add(Restrictions.ge("q.score", Float.parseFloat(scoreFrom)));
         }
         if (scoreTo != null && scoreTo.trim().length()!=0){
-            criteria.add(Restrictions.le("q.score",Float.parseFloat(scoreTo)));
+            criteria.add(Restrictions.le("q.score", Float.parseFloat(scoreTo)));
         }
         if (statusId != null && statusId.trim().length()!=0){
             criteria.add(Restrictions.eq("status.id",statusId));

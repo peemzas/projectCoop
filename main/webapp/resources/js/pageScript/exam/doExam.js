@@ -26,24 +26,24 @@ $("#confirmSubmitExam").on('click', function () {
 
 goToUnfinishBtn.on('click', function () {
     $('html, body').animate({
-        scrollTop: ($('.questionContainer[questionNo="'+$(this).val()+'"').offset().top - 100)
+        scrollTop: ($('.questionContainer[questionNo="' + $(this).val() + '"').offset().top - 100)
     });
 })
 
-$('#countdownContainer').on('click',function(){
-    $(':first-child',$(this)).toggle()
+$('#countdownContainer').on('click', function () {
+    $(':first-child', $(this)).toggle()
 })
 
-$('#toTop').on('click',function(){
-    $("html, body").animate({ scrollTop: 0 }, "fast");
+$('#toTop').on('click', function () {
+    $("html, body").animate({scrollTop: 0}, "fast");
 })
 
-$('#toBottom').on('click',function(){
-    $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+$('#toBottom').on('click', function () {
+    $("html, body").animate({scrollTop: $(document).height()}, "fast");
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var confirmationModalUpdate = function(){
+var confirmationModalUpdate = function () {
     unmarkedQuestionArray = checkExamCompletion();
     var confirmMessage = '';
     var confirmMessageElement = $('#submitExamConfirmMessage');
@@ -59,7 +59,7 @@ var confirmationModalUpdate = function(){
         }
         confirmMessage += " ]";
         goToUnfinishBtn.val(unmarkedQuestionArray[0]);
-        goToUnfinishBtn.text(goToUnfinishBtnInitialText+" "+unmarkedQuestionArray[0])
+        goToUnfinishBtn.text(goToUnfinishBtnInitialText + " " + unmarkedQuestionArray[0])
         goToUnfinishBtn.show();
     } else {
         confirmMessage = 'ยืนยันการส่งข้อสอบ'
@@ -173,7 +173,7 @@ var getExamPaperBody = function () {
                 var appendString = "";
 
                 appendString +=
-                    '<div class="row questionContainer" questionId="' + question.id + '" questionNo = "'+questionNo+'">' +
+                    '<div class="row questionContainer" questionId="' + question.id + '" questionNo = "' + questionNo + '">' +
                     '<div class="panel panel-default">' +
                     '<div class="panel-body">' +
                     '<div class="row">' +
@@ -185,10 +185,6 @@ var getExamPaperBody = function () {
 
                 if (question.questionType.id == 1) {
                     var choiceNo = 1;
-                    appendString +=
-                        '<div class="row">' +
-                        '<div class="col-md-10 col-md-offset-1">' +
-                        '<form role="form">'
 
                     question.choices.forEach(function (c) {
 
@@ -209,14 +205,18 @@ var getExamPaperBody = function () {
                             default :
                                 choiceLabel = 'ฮ'
                         }
+                        if (c.status.id == 3) {
+                            appendString +=
+                                '<div class="row">' +
+                                '<div class="col-md-10 col-md-offset-1">' +
+                                '<form role="form">'+
+                                '<div class="radio">' +
+                                '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
+                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + c.description + '</label>' +
+                                '</div>'
 
-                        appendString +=
-                            '<div class="radio">' +
-                            '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
-                            choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+c.description+'</label>' +
-                            '</div>'
-
-                        choiceNo++;
+                            choiceNo++;
+                        }
 
                     })
                 }
@@ -261,7 +261,7 @@ var submitExam = function () {
         var answerObj = 0
         var answerSubj = null
         var questionType = 0
-        if($(this).find('input').length > 0 ){
+        if ($(this).find('input').length > 0) {
             questionType = 1
         }
         if (questionType == 1) {

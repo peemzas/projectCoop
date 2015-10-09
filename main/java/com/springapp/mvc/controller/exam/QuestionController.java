@@ -8,6 +8,7 @@ import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 
+import com.springapp.mvc.util.DateUtil;
 import flexjson.JSONSerializer;
 
 import org.json.CDL;
@@ -89,10 +90,7 @@ public class QuestionController {
         question.setCreateBy(queryUserDomain.getCurrentUser(request));
         question.setDescription(qDesc);
 
-        Date curDate = new Date();
-//        curDate.setTime();
-
-        question.setCreateDate(new Date(curDate.getYear()+1900,curDate.getMonth()+1,curDate.getDate()));
+        question.setCreateDate(DateUtil.getDateWithRemovedTime(new Date()));
         question.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
         question.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
         question.setScore(score);
@@ -145,7 +143,7 @@ public class QuestionController {
                 } else {
                     boo = queryBooDomain.getFalse();
                 }
-                if (!(c.getDescription() == cDescList.get(i) && c.getCorrection() == boo)) { //edited
+                if (!(c.getDescription() == cDescList.get(i) && c.getCorrection() == boo)) { //if question is edited
                     Choice newChoice = new Choice();
                     newChoice.setDescription(cDescList.get(i));
                     newChoice.setCorrection(boo);
@@ -159,10 +157,7 @@ public class QuestionController {
         }
         if (!(question.getDescription().equals(qDesc) && question.getScore().equals(score) &&
                 question.getQuestionType() == questionType && question.getDifficultyLevel() == difficulty &&
-                question.getSubCategory() == subCategory)) { //edited
-
-            System.out.println("======================question================================");
-            System.out.println("TRUE !!!!!!");
+                question.getSubCategory() == subCategory)) { //if question is edited
 
             question.setStatus(queryStatusDomain.getDeletedStatus());
             queryQuestionDomain.mergeQuestion(question);
@@ -173,9 +168,10 @@ public class QuestionController {
             newQuestion.setQuestionType(questionType);
             newQuestion.setDifficultyLevel(difficulty);
             newQuestion.setSubCategory(subCategory);
+            newQuestion.setUpdateBy(queryUserDomain.getCurrentUser(request));
+            newQuestion.setUpdateDate(DateUtil.getDateWithRemovedTime(new Date()));
 
             queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
-
         }
     }
 
@@ -241,7 +237,7 @@ public class QuestionController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        String json1 = new JSONSerializer().exclude("*.class").serialize(question);
+        String json1 = new JSONSerializer().include("choices").exclude("*.class").serialize(question);
 
         return new ResponseEntity<String>(json1, headers, HttpStatus.OK);
     }
@@ -353,19 +349,6 @@ public class QuestionController {
 //            @RequestParam(value = "status", required = false) String status,
             HttpServletRequest request, HttpServletResponse response
     ) {
-
-        System.out.println("==============================================================");
-        if (catId != null) {
-            System.out.println(catId + " : " + catId.trim().length());
-        }else {
-            System.out.println("null catId");
-        }
-        if (subCatName != null) {
-            System.out.println(subCatName + " : " + subCatName.trim().length());
-        }else {
-            System.out.println("null subCatName ");
-        }
-
         List<Question> questions = queryQuestionDomain.searchQuestionQuery(
                 catId, subCatName, createBy, null,
                 questionDesc, createDateFrom, createDateTo,

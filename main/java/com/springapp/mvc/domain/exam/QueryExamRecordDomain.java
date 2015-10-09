@@ -25,12 +25,13 @@ public class QueryExamRecordDomain extends HibernateUtil{
         return (ExamRecord)criteria.uniqueResult();
     }
 
-    public Boolean isPreTest(ExamRecord examRecord){
+    public ExamRecord getPreTestRecord(ExamRecord examRecord){
         Criteria criteria = getSession().createCriteria(ExamRecord.class);
         criteria.add(Restrictions.eq("paper",examRecord.getPaper()));
         criteria.add(Restrictions.eq("user",examRecord.getUser()));
+        criteria.add(Restrictions.eq("preTestRecord",null));
 //        criteria.add(Restrictions.eq("isPreTest"),true);
-        return criteria.list().isEmpty();
+        return (ExamRecord)criteria.uniqueResult();
     }
 
 }

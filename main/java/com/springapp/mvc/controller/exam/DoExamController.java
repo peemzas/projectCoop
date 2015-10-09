@@ -152,10 +152,10 @@ public class DoExamController {
         examRecord.setTimeTaken(timeTaken);
         examRecord.setExamDate(new Date());
         examRecord.setExamDate(DateUtil.getCurrentDateWithRemovedTime());
-        if (queryExamRecordDomain.isPreTest(examRecord)){
-            examRecord.setIsPreTest(true);
-        }else {
-            examRecord.setIsPreTest(false);
+
+        ExamRecord preTestRecord = queryExamRecordDomain.getPreTestRecord(examRecord);
+        if (preTestRecord != null){
+            examRecord.setPreTestRecord(preTestRecord);
         }
 
         Float objectiveScore = (float) 0.0;
@@ -179,12 +179,6 @@ public class DoExamController {
                     examAnswerRecord.setAnswerObjective(currentChoice);
 
                     if (currentChoice.getCorrection() == queryBooDomain.getTrue()) {
-//                        Set<PaperQuestion> tempPaperQuestionlist = paper.getQuestions();
-//                        for(PaperQuestion paperQuestion : tempPaperQuestionlist){
-//                            if(paperQuestion.getQuestion().equals(currentQuestion)){
-//                                objectiveScore += paperQuestion.getScore();
-//                            }
-//                        }
                         objectiveScore += queryPaperQuestionDomain.getPaperQuestion(paper,currentQuestion).getScore();
                     }
                 } else {
@@ -203,8 +197,6 @@ public class DoExamController {
             examResult.setObjectiveScore(new BigDecimal(objectiveScore));
             examResult.setStatus(queryStatusDomain.getPendingStatus());
             queryExamResultDomain.saveExamResult(examResult);
-
-            System.out.println("HELLO WORLD");
 
             HibernateUtil.commitTransaction();
 

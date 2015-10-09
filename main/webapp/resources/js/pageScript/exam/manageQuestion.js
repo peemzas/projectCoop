@@ -42,7 +42,6 @@ var setQuestionObj = function (tr) {
 }
 
 editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp
-    // IF THIS ISN'T WORKING TRY PUT THE CODE IN editQuestion() in createQuestionModal.jsp instead
     var questionId = questionObj.attr('questionId');
     var categoryName = $("#categoryInputForCreateQuestion").val();
     var subCategoryName = $("#subCategoryInputForCreateQuestion").val();
@@ -53,10 +52,6 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
     var difficulty = $("input[name='level']:checked").val();
     var correctC = $(".correctRadio:checked")
     var correctChoice = correctC.val();
-    //if (!$.trim(correctChoice).length) {
-    //    correctChoice == 0;
-    //    console.log(correctChoice)
-    //}
 
     if (correctChoice == undefined) {
         correctChoice = 0;
@@ -69,9 +64,8 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
         questionType = 2;
     }
 
-//if (questionType == 1) {
     choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val());
-//}
+
     var dat = $.ajax({
         type: 'POST',
         url: '/TDCS/exam/editQuestion',
@@ -213,16 +207,17 @@ var listSearchQuestion = function () {
     $("tbody").empty();
     data.forEach(function (q) {
         var createDate = new Date(q.createDate);
-        var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth())+1) + "/" + createDate.getFullYear();
+        var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
         $("#tableBody").append('<tr questionId=' + q.id + '>' +
-        //'<td class="questionId">' + q.id + '</td>' +
-        '<td class="questionDescription" align="left">' + q.description.substring(0,100) + '</td>' +
+            //'<td class="questionId">' + q.id + '</td>' +
+        '<td class="questionSelect"><input type="checkbox" class="form-control questionSelectBox"/></td>' +
         '<td class="questionType">' + q.questionType.description + '</td>' +
-        '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
-        '<td class="questionScore">' + q.score + '</td>' +
         '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
         '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
-        '<td class="questionCreateBy">' + q.createBy.thFname +' '+ q.createBy.thLname + '</td>' +
+        '<td class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
+        '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
+        '<td class="questionScore">' + q.score + '</td>' +
+        '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
         '<td class="questionCreateDate">' + formattedDate + '</td>' +
         '<td>' +
         '<div class="btn-group">' +
@@ -237,7 +232,7 @@ var listSearchQuestion = function () {
         '</div>' +
         '</td>' +
         "</tr>")
-        if(q.description.length > 100){
+        if (q.description.length > 100) {
             $('td[class="questionDescription"]:last').append("....")
         }
     })
