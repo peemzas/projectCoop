@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
@@ -276,17 +278,6 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
-    public List<User> getUserIdByNames(List<String> empName){
-
-        String queryStatement = "select userId from User where thFname in(:empName)";
-        Query query = getSession().createQuery(queryStatement);
-        query.setParameterList("empName", empName);
-        List<User> userIds = query.list();
-        logger.info(userIds.toString());
-
-        return userIds;
-    }
-
     public List<Question> getQuestionListByPaper(ExamPaper ep){
 
         Criteria criteria = getSession().createCriteria(PaperQuestion.class);
@@ -301,14 +292,17 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
-    public List<Question> generalSearchQuestion(List users, Integer subName){
+    public List<Question> generalSearchQuestion(List users, Integer subId, List<Integer> qIds){
 
         Criteria criteria = getSession().createCriteria(Question.class);
         if(users != null){
             criteria.add(Restrictions.in("createBy.id", users));
         }
-        if(subName != null){
-            criteria.add(Restrictions.eq("subCategory.id", subName));
+        if(subId != 0){
+            criteria.add(Restrictions.eq("subCategory.id", subId));
+        }
+        if(qIds.size() != 0){
+            criteria.add(Restrictions.not(Restrictions.in("id", qIds)));
         }
         criteria.setProjection(Projections.projectionList()
                 .add(Projections.property("id"), "ids")
@@ -325,5 +319,69 @@ public class QueryQuestionDomain extends HibernateUtil {
         List<Question> questions = criteria.list();
 
         return  questions;
+    }
+
+    public List<Question> advanceSearchQuestion(List users, Integer subId, List<Integer> qIds, String qDesc, String qCreateDateFrom, String qCreateDateTo, String qScoreFrom, String qScoreTo) throws ParseException {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy",Locale.US);
+        Date dateFrom = null;
+        Date dateTo = null;
+        if(!qCreateDateFrom.equals("")){
+            dateFrom = simpleDateFormat.parse(qCreateDateFrom);
+        }
+        if(!qCreateDateTo.equals("")){
+            dateTo = simpleDateFormat.parse(qCreateDateTo);
+        }
+        Float scoreFrom = null;
+        Float scoreTo = null;
+
+        if (!qScoreFrom.equals("")) {
+            scoreFrom = Float.parseFloat(qScoreFrom);
+        }
+        if (!qScoreTo.equals("")) {
+            scoreTo = Float.parseFloat(qScoreTo);
+        }
+
+        Criteria criteria = getSession().createCriteria(Question.class);
+
+        if (users != null) {
+            criteria.add(Restrictions.in("createBy.id", users));
+        }
+        if (!subId.equals("")) {
+            criteria.add(Restrictions.eq("subCategory.id", subId));
+        }
+        if (qIds.size() != 0) {
+            criteria.add(Restrictions.not(Restrictions.in("id", qIds)));
+        }
+        if (!qDesc.equals("")) {
+            criteria.add(Restrictions.like("description", "%" + qDesc + "%"));
+        }
+        if (!qCreateDateFrom.equals("")) {
+            criteria.add(Restrictions.ge("createDate", dateFrom));
+        }
+        if (!qCreateDateTo.equals("")) {
+            criteria.add(Restrictions.le("createDate", dateTo));
+        }
+        if (!qScoreFrom.equals("")) {
+            criteria.add(Restrictions.ge("score", scoreFrom));
+        }
+        if (!qScoreTo.equals("")) {
+            criteria.add(Restrictions.le("score", scoreTo));
+        }
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("id"), "ids")
+                .add(Projections.property("choices"), "choicess")
+                .add(Projections.property("description"), "descriptions")
+                .add(Projections.property("createDate"), "createDates")
+                .add(Projections.property("difficultyLevel"), "difficultyLevels")
+                .add(Projections.property("subCategory"), "subCategorys")
+                .add(Projections.property("questionType"), "questionTypes")
+                .add(Projections.property("createBy"), "createBys")
+                .add(Projections.property("status"), "statuss")
+                .add(Projections.property("score"), "scores"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Question> questions = criteria.list();
+
+        return questions;
     }
 }

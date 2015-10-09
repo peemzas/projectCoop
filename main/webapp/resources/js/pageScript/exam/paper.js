@@ -2,7 +2,11 @@ var pId;
 $(document).ready(function(){
     getAllPapers();
 
-    $("select").on('change', function(){
+    $("td > button").unbind('click').click(function(){
+        toUrl($(this).attr('id'));
+    });
+
+    $("select >  .btn").on('change', function(){
         var paperId = $(this).attr('id');
         paperId = paperId.substr(10);
         updatePaperStatus(paperId);
@@ -79,7 +83,7 @@ function getAllPapers(){
                             '<option value="2">ปิดการเผยแพร่</option>'+
                         '</select>'+
                     '</td>'+
-                    '<td><button class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '<td><button id="'+value.id+'" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
                 '</tr>'
                 );
                 presentStatus(value.id, value.paperStatus.id);

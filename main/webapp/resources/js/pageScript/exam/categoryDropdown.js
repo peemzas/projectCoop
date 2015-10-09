@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var searchSubCategory;
-    var category = $.ajax({
+    $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/TDCS/exam/getAllCategory",

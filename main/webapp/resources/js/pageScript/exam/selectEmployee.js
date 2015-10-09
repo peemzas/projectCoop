@@ -45,7 +45,7 @@ function searchEmpName(){
                         $("#tbodySelectEmployeeName").append(
                             '<tr>'+
                             '<td><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
-                            '<td><label id="label1'+value.userId+'">'+value.empId+'<label></td>'+
+                            '<td><label id="label1'+value.userId+'">'+value.userId+'<label></td>'+
                             '<td><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
                             '<td><label id="label3'+value.userId+'">'+value.sectionPosition.position.posiName+'<label></td>'+
                             '<td><label id="label4'+value.userId+'">'+value.team.teamName+'<label></td>'+
@@ -80,7 +80,6 @@ function searchEmpName(){
             tempArray.push(item);
         }
         jsonObj = JSON.stringify(tempArray);
-        alert(jsonObj);
 
         var dataResponse = $.ajax({
             type: "POST",
@@ -105,7 +104,7 @@ function searchEmpName(){
                         $("#tbodySelectEmployeeName").append(
                             '<tr>'+
                             '<td><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
-                            '<td><label id="label1'+value.userId+'">'+value.empId+'<label></td>'+
+                            '<td><label id="label1'+value.userId+'">'+value.userId+'<label></td>'+
                             '<td><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
                             '<td><label id="label3'+value.userId+'">'+value.sectionPosition.position.posiName+'<label></td>'+
                             '<td><label id="label4'+value.userId+'">'+value.team.teamName+'<label></td>'+
@@ -127,27 +126,23 @@ function searchEmpName(){
 function addEmployee(){
 
     $("#tbodySelectEmployeeName input:checkbox:checked").each(function(){
-        var eId= $(this).parent().siblings().map(function(){
+        var uId= $(this).parent().siblings().map(function(){
             return $(this).text().trim();
         }).get(0);
         var arrayEmployeeName = $(this).parent().siblings().map(function(){
             return $(this).text().trim();
         }).get();
 
-        //$("#show").append(JSON.stringify(arrayEmployeeName));
-        //alert(JSON.stringify(arrayEmployeeName));
-        //alert(arrayEmployeeName[1]);
         $("#showEmployeeSelected").append(
 
             '<button class="btn btn-sm" type="button" style="background-color: #cbff9e; border: 1px solid #f4ffdb;">'+arrayEmployeeName[1]+
-                '<label style="display: none;">'+"_"+eId+"z"+'</label>'+
+                '<label style="display: none;">'+"_"+uId+"z"+'</label>'+
             '<span class="glyphicon glyphicon-remove"/></button>&nbsp;'
         );
         $("#showEmployeeSelected").cleanWhitespace();
     });
 
     $("#showEmployeeSelected button").on("click", function(){
-        //alert("hi");
         $(this).remove();
         $("#showEmployeeSelected").cleanWhitespace();
     });

@@ -245,12 +245,9 @@ public class InPageController {
     }
     //CREATE BY PEEM
 
-    // Create by Neng
+    // Create by Mr.Wanchana
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
     public String editCategories(HttpServletRequest request , Model model){
-
-
-
 //        Criteria criteria = HibernateUtil.getSession().createCriteria(Category.class);
 //
 //        criteria.setProjection(Projections.projectionList().add(Projections.property("name") , "name"));
@@ -260,6 +257,10 @@ public class InPageController {
 //        model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
 
         return "manageCategory";
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/editPaper")
+    public String editPaper(HttpServletRequest request, Model model){
+        return "editPaper";
     }
     //Create Jokizz
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageSubCategory")
@@ -292,7 +293,7 @@ public class InPageController {
 //        return "doExam";
 //    }
 
-    // Create by Neng
+    // Create by Mr.Wanchana
 
     @RequestMapping(method = RequestMethod.GET, value = "viewevaluate")
     public String afterEvaluation(ModelMap model,HttpServletRequest request) {

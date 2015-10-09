@@ -179,6 +179,7 @@
 
     <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paper.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
 
     <%@include file="modal/createQuestionModal.jsp" %>
