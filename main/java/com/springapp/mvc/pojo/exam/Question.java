@@ -17,9 +17,10 @@ import java.util.Set;
 @Entity
 @Table(name = "TDCS_QUESTIONS")
 public class Question implements Serializable, Cloneable {
-    //    @SequenceGenerator(name = "TDCS_QUESTION_TRIG", sequenceName = "TDCS_QUESTION_SEQ")
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "question_id_generator")
+    @SequenceGenerator(name = "question_id_generator", sequenceName = "question_sequence")
     @Column(name = "QUESTION_ID")
     private Integer id;
 
