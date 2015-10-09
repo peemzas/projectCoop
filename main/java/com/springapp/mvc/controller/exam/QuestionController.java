@@ -136,7 +136,6 @@ public class QuestionController {
             for (int i = 0; i < choices.size(); i++) {
 
                 Choice c = choices.get(i);
-//                c.setDescription(cDescList.get(i));
 
                 Boo boo = null;
                 if (i + 1 == correctChoice) {
@@ -150,9 +149,6 @@ public class QuestionController {
                     newChoice.setCorrection(boo);
                     newChoice.setQuestion(question);
                     newChoice.setStatus(queryStatusDomain.getReadyStatus());
-//                queryChoiceDomain.insertChoice(newChoice);
-//                c.setStatus(queryStatusDomain.getDeletedStatus());
-//                queryChoiceDomain.mergeUpdateChoice(c);
                 }
             }
         }

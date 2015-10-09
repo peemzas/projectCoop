@@ -77,63 +77,10 @@ public class DoExamController {
                          @RequestParam(value = "paperId") Integer paperId) {
 
         ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
-//        String json = new JSONSerializer().exclude("*.class").include("questions").include("questions.pk").include("questions.pk.question").serialize(examPaper);
-//        modelMap.addAttribute("paper", json);
         modelMap.addAttribute("paper", examPaper);
-//        modelMap.addAttribute("questionTypeObjective",queryQuestionTypeDomain.getObjective());
 
         return "doExam";
     }
-
-
-//    @RequestMapping(method = RequestMethod.POST, value = "/exam/submitExam")
-//    public String submitExam(HttpServletRequest request, HttpServletResponse response, ModelMap model
-//            , @RequestParam(value = "paperId") String paperId
-//            , @RequestParam(value = "answerRecords") Map<String,String> answerRecords
-//            , @RequestParam(value = "timeTaken") Integer timeTaken
-//    ) {
-//        String submitStatus = "Submit Complete";
-//        User user = queryUserDomain.getCurrentUser(request);
-//        ExamPaper paper = queryPaperDomain.getPaperById(Integer.parseInt(paperId));
-//
-//        ExamRecord examRecord = new ExamRecord();
-//        examRecord.setPaper(paper);
-//        examRecord.setUser(user);
-//        examRecord.setTimeTaken(timeTaken);
-//        examRecord.setExamDate(new Date());
-//
-//        try {
-//            queryExamRecordDomain.saveExamRecord(examRecord);
-//
-//            for (Map.Entry<Integer, String> entry : answerMap.entrySet()) {
-//                System.out.println(entry.getKey() + " : " + entry.getValue());
-//
-//                ExamAnswerRecord examAnswer = new ExamAnswerRecord();
-//                examAnswer.setExamRecord(examRecord);
-//                Question question = queryQuestionDomain.getQuestionById(entry.getKey());
-//                examAnswer.setQuestion(question);
-//
-//                if (question.getQuestionType() == queryQuestionTypeDomain.getObjective()) {
-//                    examAnswer.setAnswerObjective(
-//                            queryChoiceDomain.getChoiceById(
-//                                    Integer.parseInt(entry.getValue())
-//                            )
-//                    );
-//                } else {
-//                    examAnswer.setAnswerSubjective(entry.getValue());
-//                }
-//                queryExamAnswerDomain.saveExamAnswer(examAnswer);
-//            }
-//        }catch (NullPointerException npe){
-//            npe.printStackTrace();
-//            submitStatus = "Submit Fail : Null Pointer Exception";
-//        }catch (Exception e){
-//            submitStatus = "Submit Fail";
-//        }
-//
-//        return submitStatus;
-//    }
-
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/submitExam")
     @ResponseBody
