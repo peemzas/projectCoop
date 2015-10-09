@@ -19,7 +19,8 @@ import java.util.List;
 public class ExamRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "record_id_generator")
+    @SequenceGenerator(name = "record_id_generator",sequenceName = "record_id_sequence")
     @Column(name = "RECORD_ID")
     private Integer id;
 
@@ -40,18 +41,6 @@ public class ExamRecord implements Serializable {
     @OneToMany(mappedBy = "examRecord",fetch = FetchType.EAGER)
     @Cascade(CascadeType.ALL)
     private List<ExamAnswerRecord> examAnswerRecords;
-
-//    @Column(name = "IS_PRE_TEST")
-//    @Type(type = "true_false")
-//    private Boolean isPreTest;
-
-//    public Boolean getIsPreTest() {
-//        return isPreTest;
-//    }
-//
-//    public void setIsPreTest(Boolean isPreTest) {
-//        this.isPreTest = isPreTest;
-//    }
 
     @OneToMany(mappedBy = "examRecord")
     @Cascade(CascadeType.ALL)

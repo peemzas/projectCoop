@@ -21,14 +21,6 @@ public class Status implements Serializable {
     @Column(name = "STATUS_DESCRIPTION")
     private String description;
 
-//    @OneToMany(mappedBy = "status")
-//    private Set<Question> questions;
-//
-//    @OneToMany(mappedBy = "status")
-//    private Set<Choice> choices;
-
-
-
     public Integer getId() {
         return id;
     }
@@ -53,20 +45,4 @@ public class Status implements Serializable {
         this.description = description;
     }
 
-
-//    public Set<Question> getQuestions() {
-//        return questions;
-//    }
-//
-//    public void setQuestions(Set<Question> questions) {
-//        this.questions = questions;
-//    }
-//
-//    public Set<Choice> getChoices() {
-//        return choices;
-//    }
-//
-//    public void setChoices(Set<Choice> choices) {
-//        this.choices = choices;
-//    }
 }

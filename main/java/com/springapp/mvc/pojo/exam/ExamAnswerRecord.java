@@ -11,7 +11,8 @@ import java.io.Serializable;
 public class ExamAnswerRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "examAnswerRecord_id_generator")
+    @SequenceGenerator(name = "examAnswerRecord_id_generator" , sequenceName = "examAnswerRecord_id_sequence")
     @Column(name="ANSWER_RECORD_ID")
     private Integer id;
 
@@ -26,21 +27,9 @@ public class ExamAnswerRecord implements Serializable {
     @Column(name="ANSWER_SUBJECTIVE")
     private String answerSubjective;
 
-//    @OneToMany(mappedBy = "recordId")
-//    private Set<ExamMarkingRecord> examMarkingRecords;
-
     @ManyToOne
     @JoinColumn(name = "EXAM_RECORD_ID")
     private ExamRecord examRecord;
-
-
-//    public Set<ExamMarkingRecord> getExamMarkingRecords() {
-//        return examMarkingRecords;
-//    }
-//
-//    public void setExamMarkingRecords(Set<ExamMarkingRecord> examMarkingRecords) {
-//        this.examMarkingRecords = examMarkingRecords;
-//    }
 
     public ExamRecord getExamRecord() {
         return examRecord;
@@ -82,16 +71,4 @@ public class ExamAnswerRecord implements Serializable {
         this.answerSubjective = answerSubjective;
     }
 
-//    Add By Mr.Wanchana
-//    private Question question;
-//    @ManyToOne
-//    @JoinColumn(name = "QUESTION_ID")
-//
-//    public Question getQuestion() {
-//        return question;
-//    }
-//
-//    public void setQuestion(Question question) {
-//        this.question = question;
-//    }
 }

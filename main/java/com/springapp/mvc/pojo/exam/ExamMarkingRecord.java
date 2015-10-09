@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 public class ExamMarkingRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO ,generator = "markingRecordSeq")
-    @SequenceGenerator(name = "markingRecordSeq")
+    @GeneratedValue(strategy = GenerationType.AUTO ,generator = "markingRecord_id_generator")
+    @SequenceGenerator(name = "markingRecord_id_generator",sequenceName = "markingRecord_id_sequence")
     @Column(name="MARKING_RECORD_ID")
     private Integer id;
 

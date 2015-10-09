@@ -12,8 +12,8 @@ import java.util.Set;
 public class Choice  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_CHOICE_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_CHOICE_ID_SEQ_GEN", sequenceName = "TDCS_CHOICE_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "choice_id_generator")
+    @SequenceGenerator(name = "choice_id_generator", sequenceName = "choice_id_sequence")
     @Column(name="CHOICE_ID")
     private Integer id;
 
@@ -31,10 +31,6 @@ public class Choice  implements Serializable {
     @ManyToOne
     @JoinColumn(name = "CHOICE_STATUS")
     private Status status;
-
-//    @OneToMany(mappedBy = "answerObjective")
-//    private Set<ExamAnswerRecord> examAnswerRecords;
-
 
     @Override
     public boolean equals(Object o) {
@@ -71,14 +67,6 @@ public class Choice  implements Serializable {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-//    public Set<ExamAnswerRecord> getExamAnswerRecords() {
-//        return examAnswerRecords;
-//    }
-//
-//    public void setExamAnswerRecords(Set<ExamAnswerRecord> examAnswerRecords) {
-//        this.examAnswerRecords = examAnswerRecords;
-//    }
 
     public Integer getId() {
         return id;

@@ -20,8 +20,8 @@ import org.hibernate.annotations.FetchMode;
 public class ExamPaper implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_EXAM_PAPER_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_EXAM_PAPER_ID_SEQ_GEN", sequenceName = "TDCS_EXAM_PAPER_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "examPaper_id_generator")
+    @SequenceGenerator(name = "examPaper_id_generator", sequenceName = "examPaper_id_sequence")
     @Column(name = "PAPER_ID")
     private Integer id;
 
@@ -37,10 +37,6 @@ public class ExamPaper implements Serializable {
     @ManyToOne
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
-
-//    @ManyToOne
-//    @JoinColumn(name = "PROPORTIONAL_SCORE")
-//    private Boo proportionalScore;f
 
     @Column(name = "PAPER_CODE")
     private String code;
@@ -62,12 +58,6 @@ public class ExamPaper implements Serializable {
     @ManyToOne
     @JoinColumn(name = "PAPER_UPDATE_BY")
     private User updateBy;
-
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "TDCS_PAPER_CONTAINING",
-//            joinColumns = {@JoinColumn(name = "PAPER_ID", nullable = false, updatable = false)},
-//            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false)})
-//    private Set<Question> questions = new HashSet<Question>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.examPaper", cascade =
             {CascadeType.PERSIST, CascadeType.MERGE})
