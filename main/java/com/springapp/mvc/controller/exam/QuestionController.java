@@ -26,6 +26,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -261,46 +262,82 @@ public class QuestionController {
 //    Add By Mr.Wanchana
     @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
     @ResponseBody
-    public ResponseEntity<String> generalQuestionSearch(@RequestBody String jsoN) throws JSONException {
+    public ResponseEntity<String> generalQuestionSearch(@RequestBody String jsonObj) throws JSONException, ParseException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        List<String> empNameSearch = new ArrayList<String>();
+
+        List<Integer> empNameSearch = new ArrayList<Integer>();
+        List<Integer> qIdsNotSearch = new ArrayList<Integer>();
+
         String subCategorySearch = "";
-        JSONArray jsonArray = new JSONArray(jsoN);
+        String qDesc = "";
+        String qCreateDateFrom = "";
+        String qCreateDateTo = "";
+        String qScoreFrom = "";
+        String qScoreTo = "";
+
+        JSONArray jsonArray = new JSONArray(jsonObj);
         JSONObject jObj = jsonArray.getJSONObject(0);
+
+        String allQuestionIdOnTableCreatePaper = jObj.getString("allQuestionIdOnTableCreatePaper");
+        JSONArray jsonArray2 = new JSONArray(allQuestionIdOnTableCreatePaper);
+        for(int idx = 0; idx < jsonArray2.length(); idx ++){
+            JSONObject jObj2 = jsonArray2.getJSONObject(idx);
+            qIdsNotSearch.add(jObj2.getInt("qId"));
+        }
+
         Integer check = new Integer(jObj.getString("thFname"));
-        logger.info(check + ".........................");
+        Integer btnStatus = 0;
+
         if(check == 0){
-            logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             subCategorySearch = jsonObject.getString("subCategoryId");
+            btnStatus = jsonObject.getInt("btnSearchStatus");
+
+            qDesc = jsonObject.getString("questionDescriptionSearch");
+            qCreateDateFrom = jsonObject.getString("questionCreateDateFromSearch");
+            qCreateDateTo = jsonObject.getString("questionCreateDateToSearch");
+            qScoreFrom = jsonObject.getString("questionScoreFromSearch");
+            qScoreTo = jsonObject.getString("questionScoreToSearch");
         }
         else{
-            logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                empNameSearch.add(jsonObject.getString("thFname"));
+                empNameSearch.add(new Integer(jsonObject.getString("thFname")));
                 if(i == 0){
                     subCategorySearch = jsonObject.getString("subCategoryId");
+
+                    qDesc = jsonObject.getString("questionDescriptionSearch");
+                    qCreateDateFrom = jsonObject.getString("questionCreateDateFromSearch");
+                    qCreateDateTo = jsonObject.getString("questionCreateDateToSearch");
+                    qScoreFrom = jsonObject.getString("questionScoreFromSearch");
+                    qScoreTo = jsonObject.getString("questionScoreToSearch");
                 }
+                btnStatus = jsonObject.getInt("btnSearchStatus");
             }
         }
 
-        List<User> users = new ArrayList<User>();
-        if(empNameSearch.size() != 0){
-            users = queryQuestionDomain.getUserIdByNames(empNameSearch);
+        Integer subCategoryId = 0;
+        if(empNameSearch.size() == 0){
+            empNameSearch = null;
+        }
+//        this condition maybe not working if dropdown from view not choose.
+        if(subCategorySearch != ""){
+            subCategoryId = querySubCategoryDomain.getSubCategoryIdByName(subCategorySearch);
+        }
+//        Check Search
+        if(btnStatus == 0){
+            List<Question> questionsGeneralResult = queryQuestionDomain.generalSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch);
+            String json = new Gson().toJson(questionsGeneralResult);
+            return new ResponseEntity<String>(json, headers, HttpStatus.OK);
         }
         else{
-            users = null;
+            List<Question> questionsAdvanceResult = queryQuestionDomain.advanceSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch, qDesc, qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo);
+            String json = new Gson().toJson(questionsAdvanceResult);
+            return new ResponseEntity<String>(json, headers, HttpStatus.OK);
         }
-        Integer subCategoryId = querySubCategoryDomain.getSubCategoryIdByName(subCategorySearch);
-        List<Question> questions = queryQuestionDomain.generalSearchQuestion(users, subCategoryId);
-        String json = new Gson().toJson(questions);
-
-        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
-
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestionDetail")
     @ResponseBody
@@ -333,7 +370,7 @@ public class QuestionController {
         String json = new JSONSerializer().exclude("*.class").serialize(questions);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
-
+// ---------------------------------------------------------------------------------------------------------
     @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
     @ResponseBody
     public ResponseEntity<String> searchQuestion(

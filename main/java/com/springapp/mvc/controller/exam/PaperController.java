@@ -153,4 +153,17 @@ public class PaperController {
 
         return new ResponseEntity<String>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/exam/getPaper", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> getPaper(@RequestParam(value = "paperId") int paperId){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<ExamPaper> examPaper = queryPaperDomain.getExamPaperById(paperId);
+        String json = new Gson().toJson(examPaper);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
 }

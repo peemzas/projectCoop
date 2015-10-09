@@ -174,5 +174,9 @@
         <put-attribute name="body" value="/WEB-INF/pages/exam/marking.jsp"/>
     </definition>
 
+    <!--<definition name="editPaper" extends="tempForUser">-->
+        <!--<put-attribute name="title" value="แก้ไขชุดข้อสอบ"/>-->
+        <!--<put-attribute name="body" value="/WEB-INF/pages/exam/editPaper.jsp"/>-->
+    <!--</definition>-->
 
 </tiles-definitions>

@@ -72,6 +72,28 @@ public class QueryPaperDomain extends HibernateUtil {
         return examPaper;
     }
 
+    public List<ExamPaper> getExamPaperById(Integer id){
+        Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        criteria.add(Restrictions.eq("id", id));
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("id"), "ide")
+                .add(Projections.property("name"), "namee")
+                .add(Projections.property("createDate"), "createDatee")
+                .add(Projections.property("createBy"), "createBye")
+                .add(Projections.property("maxScore"), "maxScoree")
+                .add(Projections.property("code"), "codee")
+                .add(Projections.property("updateDate"), "updateDatee")
+                .add(Projections.property("updateBy"), "updateBye")
+                .add(Projections.property("timeLimit"), "timeLimite")
+                .add(Projections.property("position"), "positione")
+                .add(Projections.property("paperStatus"), "paperStatuse"));
+        criteria.addOrder(Order.asc("id"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<ExamPaper> examPaper = criteria.list();
+
+        return examPaper;
+    }
+
     public List<ExamPaper> getAllPapers(){
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.setProjection(Projections.projectionList()
@@ -96,9 +118,10 @@ public class QueryPaperDomain extends HibernateUtil {
     public void deletePaper(ExamPaper examPaper, int paperId){
 
         HibernateUtil.beginTransaction();
-        deletePaperQuestionByPaperId(examPaper);
+//        deletePaperQuestionByPaperId(examPaper);
         getSession().delete(examPaper);
         HibernateUtil.commitTransaction();
+        HibernateUtil.closeSession();
     }
 
     public void deletePaperQuestionByPaperId(ExamPaper examPaper){
@@ -108,9 +131,7 @@ public class QueryPaperDomain extends HibernateUtil {
         PaperQuestion paperQuestion = (PaperQuestion) criteria.list().get(0);
         getSession().delete(paperQuestion);
     }
-//    public void updatePaper(ExamPaper updateExampaper, List<Integer>updateQIds, List<Float> updateScores){
-//
-//    }
+
     public void updatePaperStatus(ExamPaper examPaper){
 
         HibernateUtil.beginTransaction();
