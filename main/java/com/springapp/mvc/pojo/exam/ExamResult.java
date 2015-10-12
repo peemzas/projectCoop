@@ -18,7 +18,7 @@ public class ExamResult implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "examResult_id_generator")
-    @SequenceGenerator(name = "examResult_id_generator", sequenceName = "examResult_id_sequence")
+    @SequenceGenerator(name = "examResult_id_generator")
     @Column(name = "RESULT_ID")
     private Integer id;
 

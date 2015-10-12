@@ -15,7 +15,7 @@ public class ExamMarkingRecord implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO ,generator = "markingRecord_id_generator")
-    @SequenceGenerator(name = "markingRecord_id_generator",sequenceName = "markingRecord_id_sequence")
+    @SequenceGenerator(name = "markingRecord_id_generator")
     @Column(name="MARKING_RECORD_ID")
     private Integer id;
 

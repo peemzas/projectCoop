@@ -12,7 +12,7 @@ public class ExamAnswerRecord implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "examAnswerRecord_id_generator")
-    @SequenceGenerator(name = "examAnswerRecord_id_generator" , sequenceName = "examAnswerRecord_id_sequence")
+    @SequenceGenerator(name = "examAnswerRecord_id_generator")
     @Column(name="ANSWER_RECORD_ID")
     private Integer id;
 

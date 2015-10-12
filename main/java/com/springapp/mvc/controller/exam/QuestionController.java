@@ -102,7 +102,7 @@ public class QuestionController {
 
         queryQuestionDomain.insertQuestion(question, cDescList, correctChoice);
 
-        String json = new JSONSerializer().exclude("*.class").serialize(question);
+        String json = new JSONSerializer().exclude("*").include("id").serialize(question);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
