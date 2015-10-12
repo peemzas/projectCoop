@@ -2,13 +2,10 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.*;
 import com.springapp.mvc.domain.exam.QueryCategoryDomain;
+
+import com.springapp.mvc.domain.exam.QueryExamRecordSearchDomain;
 import com.springapp.mvc.domain.exam.QuerySubCategoryDomain;
 import com.springapp.mvc.pojo.*;
-import com.springapp.mvc.pojo.exam.Category;
-import com.springapp.mvc.util.HibernateUtil;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/TDCS")
@@ -50,6 +46,10 @@ public class InPageController {
     private QueryTeamDomain queryTeamDomain;
     @Autowired
     private QueryTopicDomain queryTopicDomain;
+
+//add by job
+    @Autowired
+    private QueryExamRecordSearchDomain queryExamRecordSearchDomain;
     
 //    Add by Neng
     @Autowired
