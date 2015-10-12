@@ -21,7 +21,7 @@ public class ExamPaper implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "examPaper_id_generator")
-    @SequenceGenerator(name = "examPaper_id_generator", sequenceName = "examPaper_id_sequence")
+    @SequenceGenerator(name = "examPaper_id_generator")
     @Column(name = "PAPER_ID")
     private Integer id;
 

@@ -13,7 +13,7 @@ public class Choice  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "choice_id_generator")
-    @SequenceGenerator(name = "choice_id_generator", sequenceName = "choice_id_sequence")
+    @SequenceGenerator(name = "choice_id_generator")
     @Column(name="CHOICE_ID")
     private Integer id;
 

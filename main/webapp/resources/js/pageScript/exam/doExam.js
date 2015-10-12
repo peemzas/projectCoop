@@ -209,10 +209,13 @@ var getExamPaperBody = function () {
                             appendString +=
                                 '<div class="row">' +
                                 '<div class="col-md-10 col-md-offset-1">' +
-                                '<form role="form">'+
+                                '<form role="form">' +
                                 '<div class="radio">' +
                                 '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
                                 choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + c.description + '</label>' +
+                                '</div>' +
+                                '</form>' +
+                                '</div>' +
                                 '</div>'
 
                             choiceNo++;
@@ -228,12 +231,7 @@ var getExamPaperBody = function () {
                         'style="resize: none" name="' + question.id + '"></textarea>' +
                         '</div>' +
                         '</div>'
-
                 }
-                appendString +=
-                    '</form>' +
-                    '</div>' +
-                    '</div>'
 
                 $('#examBody').append(appendString);
                 questionNo++;

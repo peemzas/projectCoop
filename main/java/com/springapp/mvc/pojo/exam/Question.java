@@ -20,7 +20,7 @@ public class Question implements Serializable, Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "question_id_generator")
-    @SequenceGenerator(name = "question_id_generator", sequenceName = "question_id_sequence")
+    @SequenceGenerator(name = "question_id_generator")
     @Column(name = "QUESTION_ID")
     private Integer id;
 

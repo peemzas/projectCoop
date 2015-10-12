@@ -19,8 +19,8 @@ import java.util.List;
 public class ExamRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO,generator = "record_id_generator")
-    @SequenceGenerator(name = "record_id_generator",sequenceName = "record_id_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "record_id_generator")
     @Column(name = "RECORD_ID")
     private Integer id;
 
