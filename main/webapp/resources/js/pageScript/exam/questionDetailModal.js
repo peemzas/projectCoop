@@ -10,13 +10,12 @@ $(document).ready(function () {
 })
 
 $('#detailEditBtn').on('click', function () {
-    $('#questionDetailModal').modal('toggle')
-    $('tr[questionId="' + $(this).val() + '"').find('.actionEditBtn').click()
+    $('#questionDetailModal').modal('hide')
+    $('#submitCreateBtn').text('ยืนยัน');
+    $('#createQuestModalTitle').text('แก้ไขข้อสอบ');
+    setEditModalParameter();
+    $('#createQuest').modal('show')
 })
-
-$("#updateInfoIcon").popover({trigger: "hover"});
-$('#popoverData').popover();
-
 
 var updateDetailModal = function (tr) {
 
@@ -44,10 +43,11 @@ var updateDetailModal = function (tr) {
                 var updateDetail = $('#updateDetail')
                 updateDetail.empty()
                 updateDetail.append(formattedUpdateDate + '&nbsp;' +
-                '<span id="updateInfoIcon" class="glyphicon glyphicon-info-sign btn-link" data-content="อัพเดทโดย : ' + question.updateBy.thFname + ' ' + question.updateBy.thLname +
-                '" rel="popover" data-placement="top" data-trigger="hover" style="text-decoration: none"></span>')
+                '<span id="updateInfoToolTip" class="glyphicon glyphicon-info-sign btn-link" data-toggle="tooltip"' +
+                ' data-html="true" data-placement="top"  title="อัพเดทโดย<br> ' + question.updateBy.thFname + ' ' + question.updateBy.thLname+'"' +
+                'style="text-decoration: none"></span>')
 
-                $("#updateInfoIcon").popover({trigger: "hover"});
+                $('[data-toggle="tooltip"]').tooltip();
 
             }
 
@@ -77,7 +77,6 @@ var updateDetailModal = function (tr) {
             }else{
                 $('#choiceDetailContainer').hide()
             }
-
         }, error: function () {
             alert("Failed");
         }

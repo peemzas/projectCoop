@@ -93,10 +93,23 @@ function saveQuestion() {
                 score: parseInt(score)
             }
             ,
-            success: function (question) {
-                alert('สร้างข้อสอบสำเร็จ รหัสข้อสอบ' + question.id);
-                $('#tableBody').empty();
-                listAllQuestion();
+            success: function (q) {
+                alert('สร้างข้อสอบสำเร็จ รหัสข้อสอบ' + q.id);
+                if($('.h3').text() == "จัดการข้อสอบ"){
+                    var createDate = new Date(q.createDate);
+                    var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
+                    $("#tableBody").prepend('<tr questionId=' + q.id + '>' +
+                    '<td class="questionSelect"><input type="checkbox" class="form-control questionSelectBox"/></td>' +
+                    '<td class="questionType">' + q.questionType.description + '</td>' +
+                    '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
+                    '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
+                    '<td class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
+                    '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
+                    '<td class="questionScore">' + q.score + '</td>' +
+                    '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
+                    '<td class="questionCreateDate">' + formattedDate + '</td>' +
+                    "</tr>")
+                }
             },
             error: function () {
                 alert('Error');

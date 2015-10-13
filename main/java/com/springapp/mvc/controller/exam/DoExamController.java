@@ -78,6 +78,7 @@ public class DoExamController {
 
         ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
         modelMap.addAttribute("paper", examPaper);
+        modelMap.addAttribute("user", queryUserDomain.getCurrentUser(request));
 
         return "doExam";
     }
@@ -176,6 +177,4 @@ public class DoExamController {
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
-
-
 }

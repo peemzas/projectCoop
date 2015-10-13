@@ -423,16 +423,20 @@ public class QueryUserDomain extends HibernateUtil {
         List<User> list = criteria.list();
         if (!list.isEmpty()) {
             return list.get(0);
-        }else return null;
+        } else return null;
     }
 
     public User getCurrentUser(HttpServletRequest request) {
 
 //        User currentUser = getUserByUsernameAndId(request.getSession().getAttribute("username").toString()
 //                , Integer.parseInt(request.getSession().getAttribute("userid").toString()));
-        User currentUser = getUserById(Integer.parseInt(request.getSession().getAttribute("userid").toString()));
-
-        return currentUser;
+        Object userIdObj = request.getSession().getAttribute("userid");
+        if (userIdObj != null) {
+            User currentUser = getUserById(Integer.parseInt(userIdObj.toString()));
+            return currentUser;
+        }else{
+            return null;
+        }
     }
 
     public User getUserById(Integer userId) {

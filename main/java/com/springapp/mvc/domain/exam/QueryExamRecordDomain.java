@@ -27,7 +27,7 @@ public class QueryExamRecordDomain extends HibernateUtil{
         Criteria criteria = getSession().createCriteria(ExamRecord.class);
         criteria.add(Restrictions.eq("paper",examRecord.getPaper()));
         criteria.add(Restrictions.eq("user",examRecord.getUser()));
-        criteria.add(Restrictions.eq("preTestRecord",null));
+        criteria.add(Restrictions.isNull("preTestRecord"));
         return (ExamRecord)criteria.uniqueResult();
     }
 
