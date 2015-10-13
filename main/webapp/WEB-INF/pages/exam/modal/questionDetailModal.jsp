@@ -29,7 +29,7 @@
                     <span class="col-md-2" id="categoryDetail"></span>
 
                     <div class="col-md-2 text-right">หัวข้อเรื่อง :</div>
-                    <span class="col-md-2" id="subCategoryDetail"></span>
+                    <span class="col-md-4" id="subCategoryDetail"></span>
 
                 </div>
                 <br>
@@ -115,8 +115,4 @@
 </div>
 
 <script src="../../../resources/js/pageScript/exam/questionDetailModal.js" charset="UTF-8"></script>
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="popover"]').popover();
-    });
-</script>
+

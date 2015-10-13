@@ -19,15 +19,15 @@
     <!-- Example table information, it will remove soon ^^ -->
     <div class="row">
         <div class="col-md-12">
-            <div class="row">
-                <div class="col-xs-1 ">
-                    <button class="btn btn-success btn-block createQuestionBtn form-control"
-                            data-toggle="modal" data-target="#createQuest" style="height: 35px;width: 50px;">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                    <button class="btn btn-info btn-block form-control" data-toggle="modal" data-target="#questionDetailModal2" style="height: 35px;width: 50px;" >
-                        Test
-                    </button>
+            <div class="row" style="margin-bottom: 5px;">
+                <div class="col-xs-1" >
+                        <button class="btn btn-success btn-block createQuestionBtn form-control"
+                                data-toggle="modal" data-target="#createQuest" style="height: 35px;width: 50px;">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                </div>
+                <div class="col-xs-1">
+                    <button class="btn btn-danger btn-block deleteSelectedBtn form-control"><span class="glyphicon glyphicon-trash"></span> </button>
                 </div>
             </div>
             <table class="table">
@@ -45,7 +45,7 @@
                     <th style="text-align: center">ผู้สร้าง</th>
                     <th style="text-align: center">วันที่สร้าง</th>
 
-                    <th style="text-align: center">Action</th>
+                    <%--<th style="text-align: center">Action</th>--%>
                 </tr>
                 </thead>
                 <tbody align="center" id="tableBody">

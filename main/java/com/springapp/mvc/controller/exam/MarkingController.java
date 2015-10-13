@@ -60,6 +60,7 @@ public class MarkingController {
 //        modelMap.addAttribute("subjectiveScore", examResult.getSubjectiveScore());
         ExamResult examResult = queryExamResultDomain.getExamResultById(resultId);
         modelMap.addAttribute("examResult",examResult);
+        modelMap.addAttribute("user",queryUserDomain.getCurrentUser(request));
 
         return "marking";
     }

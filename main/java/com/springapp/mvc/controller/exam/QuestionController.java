@@ -102,7 +102,7 @@ public class QuestionController {
 
         queryQuestionDomain.insertQuestion(question, cDescList, correctChoice);
 
-        String json = new JSONSerializer().exclude("*").include("id").serialize(question);
+        String json = new JSONSerializer().exclude("*.class").serialize(question);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
@@ -203,10 +203,12 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.POST, value = "/exam/deleteQuestion")
     @ResponseBody
     public void deleteQuestion(ModelMap model
-            , @RequestParam(value = "questionId", required = true) Integer questionId
+            , @RequestParam(value = "questionArray", required = true)JSONArray questionIds
             , HttpServletRequest request, HttpServletResponse response) {
-
-        queryQuestionDomain.deleteQuestion(questionId);
+        for(int i = 0 ; i < questionIds.length() ; i++){
+            Integer questionId = questionIds.optInt(i);
+            queryQuestionDomain.deleteQuestion(questionId);
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getChoiceDetail")
