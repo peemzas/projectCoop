@@ -5,35 +5,16 @@ $(document).ready(function () {
         var str = $("#search").prop('outerHTML') + "&nbsp" + $("#clear").prop('outerHTML');
         $("#advanceBody").collapse('toggle');
 
-//      if ($("#advanceBtn").hasClass("btn btn-primary")) {
-//        $("#advanceBtn").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
-//        $("#btnAdvanceSearch").html(str);
-//
-//        $("#btnSearch").hide();
-//        $("#btnAdvanceSearch").show();
-////        $("#clear").hide();
-//      } else {
-//        $("#advanceBtn").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
-////        $("#search").show();
-////        $("#clear").show();
-//        $("#btnSearch").show();
-//        $("#btnAdvanceSearch").hide();
-//      }
         if ($("#advanceBtn").children("span").hasClass("glyphicon glyphicon-chevron-down")) {
             $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
-//        $("btnAdvanceSearch").html(str);
             $("#btnSearch").hide();
             $("#btnAdvanceSearch").show();
-//        $("#search").hide();
-//        $("#clear").hide();
         }
         else {
             $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-up").addClass("glyphicon glyphicon-chevron-down");
 
             $("#btnSearch").show();
             $("#btnAdvanceSearch").hide();
-//        $("#search").show();
-//        $("#clear").show();
         }
     });
 
@@ -43,24 +24,30 @@ $(document).ready(function () {
 })
 
 var searchQuestionResultList
-var getSearchQuestionResultList = function () {
-    submitSearchQuestion()
+
+var getSearchQuestionResultListBasic = function(){
+    submitSearchQuestionBasic()
     return searchQuestionResultList
 }
 
-var submitSearchQuestion = function () {
+var getSearchQuestionResultListAdv = function () {
+    submitSearchQuestionAdv()
+    return searchQuestionResultList
+}
+
+var submitSearchQuestionBasic = function () {
     searchResultReady = false;
     var SI = { // SearchInput
         category: getSearchCategoryInputValue(),
         subCategory: getSearchSubCategoryInputValue(),
         createBy: getSearchCreateByInput(),
-        questionId: $('#searchQuestionIdInput').val(),
-        questionDesc: $("#searchQuestionDescInput").val(),
-        createDateFrom: $('#searchCreateDateFromInput').val(),
-        createDateTo: $("#searchCreateDateToInput").val(),
-        scoreFrom: $("#searchScoreFromInput").val(),
-        scoreTo: $("#searchScoreToInput").val(),
-        status: $("#searchStatusInput").val()
+        //questionId: null,
+        questionDesc: null,
+        createDateFrom: null,
+        createDateTo: null,
+        scoreFrom: null,
+        scoreTo: null
+        //status: null
     }
     var ajaxDat = $.ajax({
         type: "POST",
@@ -79,11 +66,51 @@ var submitSearchQuestion = function () {
             //status: SI.status
         },
         success: function (dat) {
-            //console.log(dat)
             searchQuestionResultList = dat
         },
         error: function () {
-            alert("ERROR in submitSearchQuestion()")
+            alert("ERROR in submitSearchQuestionAdv()")
+        }
+    })
+}
+
+
+
+var submitSearchQuestionAdv = function () {
+    searchResultReady = false;
+    var SI = { // SearchInput
+        category: getSearchCategoryInputValue(),
+        subCategory: getSearchSubCategoryInputValue(),
+        createBy: getSearchCreateByInput(),
+        //questionId: $('#searchQuestionIdInput').val(),
+        questionDesc: $("#searchQuestionDescInput").val(),
+        createDateFrom: $('#searchCreateDateFromInput').val(),
+        createDateTo: $("#searchCreateDateToInput").val(),
+        scoreFrom: $("#searchScoreFromInput").val(),
+        scoreTo: $("#searchScoreToInput").val()
+        //status: $("#searchStatusInput").val()
+    }
+    var ajaxDat = $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/searchQuestion",
+        async: false,
+        data: {
+            categoryId: SI.category,
+            subCatName: SI.subCategory,
+            createBy: SI.createBy,
+            //questionId: SI.questionId,
+            questionDesc: SI.questionDesc,
+            createDateFrom: SI.createDateFrom,
+            createDateTo: SI.createDateTo,
+            scoreFrom: SI.scoreFrom,
+            scoreTo: SI.scoreTo
+            //status: SI.status
+        },
+        success: function (dat) {
+            searchQuestionResultList = dat
+        },
+        error: function () {
+            alert("ERROR in submitSearchQuestionAdv()")
         }
     })
 }

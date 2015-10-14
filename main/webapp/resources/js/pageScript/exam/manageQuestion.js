@@ -27,6 +27,10 @@ $('.createQuestionBtn').on('click', function () {
     createQuestionModalClearInput();
 })
 
+$('.searchSubmitBtn').on('click',function(){
+    listSearchQuestion($(this));
+})
+
 var deleteSelectedQuestion = function(){
     console.log('prepare to delete')
     var selectedQuestions = $('.questionSelectBox:checked');
@@ -179,7 +183,7 @@ var deleteQuestions = function (questionIds) {
         },
         success: function () {
             alert("Delete Success");
-            listSearchQuestion();
+            listSearchQuestion($('#advSearchBtn'));
         }, error: function () {
             alert("Failed");
         }
@@ -187,8 +191,16 @@ var deleteQuestions = function (questionIds) {
 
 }
 
-var listSearchQuestion = function () {
-    var data = getSearchQuestionResultList();
+var listSearchQuestion = function (btn) {
+    console.log('hello')
+    var data;
+
+    if(btn == undefined || btn.attr('id') != 'advSearchBtn'){
+        data = getSearchQuestionResultListBasic();
+    }
+    else{
+        data = getSearchQuestionResultListAdv();
+    }
 
     $("tbody").empty();
     data.forEach(function (q) {
