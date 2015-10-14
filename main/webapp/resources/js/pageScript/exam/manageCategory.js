@@ -218,19 +218,14 @@ function saveCategory(){
 
 
 
-
-
-
 $("#categoryName").keyup(function(e) {
     if (e.which > 0) {
         e.preventDefault();
         listcat();
     }
 });
-
 function listcat() {
     var availableall = [];
-
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",

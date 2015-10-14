@@ -7,15 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script>
-    <%--if('${status}' == 'user' || '${status}' == 'staff' || '${status}' == ''){--%>
+<%--<script>--%>
+    <%--if('${status}' == 'user' || '${status}' == ''){--%>
         <%--window.location.href = "/TDCS/index.html";--%>
     <%--}--%>
-
     <%--if ('${status}' != 'staff') {--%>
         <%--window.location.href = "/TDCS/index.html";--%>
     <%--}--%>
-</script>
+<%--</script>--%>
 
 <div class="container row">
     <h3>หัวข้อเรื่อง</h3>
@@ -151,9 +150,17 @@
 
             </tbody>
         </table>
+        <div class="bg-info" id="alertMess">
+            <p class="bg-info">
+            <h3 style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
+            </p>
+        </div>
     </div>
+
 </div>
-<div id="alertMess" class="alert alert-danger text-center" style="display: none;">ไม่พบข้อมูลที่ค้นหา</div>
+<%--<div id="alertMess" class="alert alert-danger text-center" style="display: none;">ไม่พบข้อมูลที่ค้นหา</div>--%>
+
+
 
 
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/manageSubCategory.js" />"></script>

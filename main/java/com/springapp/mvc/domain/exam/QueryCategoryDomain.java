@@ -106,21 +106,7 @@ public class QueryCategoryDomain extends HibernateUtil {
     }
 
     public List<Category> searchCategory(String  categoryId, String categoryName){
-
-//        categoryId.toLowerCase();
-//        categoryName.toLowerCase();
-
-        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+categoryId.toLowerCase()+" "+categoryName.toLowerCase());
-
-//        if(categoryId != null && categoryName != null){
-//            String queryStatement = "from Category where lower(name) like : categoryName and lower(id) like : categoryId";
-//            Query query = getSession().createQuery(queryStatement);
-//            query.setParameter("categoryName", "%" + categoryName + "%");
-//            query.setParameter("categoryId", "%" + categoryId + "%");
-//            List<Category> categories = query.list();
-//            return categories;
-//        }
-
+        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + categoryId.toLowerCase() + " " + categoryName.toLowerCase());
         if(categoryId == ""){
 // in case sensitive
 //            String queryStatement = "from Category where name like :categoryName";
@@ -150,6 +136,22 @@ public class QueryCategoryDomain extends HibernateUtil {
             return categories;
         }
         //criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+    }
+
+
+    public Category getCategoryByIdLOV(String id){
+        Criteria criteria = getSession().createCriteria(Category.class);
+        criteria.add(Restrictions.eq("id", id));
+        List<Category> categories = criteria.list();
+
+        if (categories.isEmpty())
+        {
+            return null;
+        }else {
+            return categories.get(0);
+        }
+//        Category resultCategory = (Category)criteria.list().get(0);
+//        return resultCategory;
     }
 }
 

@@ -42,20 +42,20 @@ public class CategoryController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/addCategory")
     @ResponseBody
-    public void  addCategory(ModelMap model, @Valid Category category
-            ,HttpServletRequest request, HttpServletResponse response){
+    public void addCategory(ModelMap model, @Valid Category category
+            , HttpServletRequest request, HttpServletResponse response) {
 
         User createBy = queryUserDomain.getCurrentUser(request);
         category.setCreateBy(createBy);
 
-            queryCategoryDomain.insertCategory(category);
-
+        queryCategoryDomain.insertCategory(category);
 
 
 // return null;
     }
-//    Add by Mr. Wanchana
-    @RequestMapping(value = "/exam/getAllCategory",method = RequestMethod.POST)
+
+    //    Add by Mr. Wanchana
+    @RequestMapping(value = "/exam/getAllCategory", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getAllCategory() {
 
@@ -70,7 +70,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/exam/deleteCategory", method = RequestMethod.POST)
     @ResponseBody
-    public void deleteCategory(@RequestParam(value = "catId", required = true) String catId){
+    public void deleteCategory(@RequestParam(value = "catId", required = true) String catId) {
 
         Category category = queryCategoryDomain.getCategoryById(catId);
         queryCategoryDomain.deleteCategory(category);
@@ -79,7 +79,7 @@ public class CategoryController {
     @RequestMapping(value = "/exam/editCategory", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity editCategory(@Valid Category category,
-                                       HttpServletRequest request){
+                                       HttpServletRequest request) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
@@ -95,7 +95,7 @@ public class CategoryController {
     @ResponseBody
     public ResponseEntity<String> searchCategory(@ModelAttribute("id") String categoryId,
                                                  @ModelAttribute("name") String categoryName,
-                                                 HttpServletRequest request){
+                                                 HttpServletRequest request) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
@@ -106,4 +106,26 @@ public class CategoryController {
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/exam/LOVcategory", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> LOVcategory(@RequestParam(value = "categoryId", required = true) String categoryId) {
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        Category category = queryCategoryDomain.getCategoryByIdLOV(categoryId);
+
+        String json = new Gson().toJson(category);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+
+
+    }
+
+
+
+
+
 }
