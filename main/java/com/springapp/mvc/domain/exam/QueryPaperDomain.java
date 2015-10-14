@@ -23,6 +23,7 @@ import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
 import java.awt.print.Paper;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,6 +65,19 @@ public class QueryPaperDomain extends HibernateUtil {
         closeSession();
     }
 
+    public void updatePaper(ExamPaper examPaper, List<Integer> qIds, List<Float> newScores, Integer paperId){
+
+        HibernateUtil.beginTransaction();
+        QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
+        queryPaperDomain.deletePaperQuestionByPaperId(examPaper);
+        getSession().merge(examPaper);
+        try{
+            createPaperQuestion(examPaper, qIds, newScores);
+        }catch(Exception e){
+            System.out.println("++++++++++++ERROR+++++++++++\n"+e);
+        }
+    }
+
     public static ExamPaper getExamPaperByCode(String code){
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.eq("code", code));
@@ -72,26 +86,14 @@ public class QueryPaperDomain extends HibernateUtil {
         return examPaper;
     }
 
-    public List<ExamPaper> getExamPaperById(Integer id){
+    public PaperQuestion getPaperQuestionByExamPaperById(Integer id){
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.eq("id", id));
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("id"), "ide")
-                .add(Projections.property("name"), "namee")
-                .add(Projections.property("createDate"), "createDatee")
-                .add(Projections.property("createBy"), "createBye")
-                .add(Projections.property("maxScore"), "maxScoree")
-                .add(Projections.property("code"), "codee")
-                .add(Projections.property("updateDate"), "updateDatee")
-                .add(Projections.property("updateBy"), "updateBye")
-                .add(Projections.property("timeLimit"), "timeLimite")
-                .add(Projections.property("position"), "positione")
-                .add(Projections.property("paperStatus"), "paperStatuse"));
-        criteria.addOrder(Order.asc("id"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        List<ExamPaper> examPaper = criteria.list();
+        ExamPaper examPaper = (ExamPaper) criteria.list().get(0);
+        PaperQuestion paperQuestion = new PaperQuestion();
+        paperQuestion.setExamPaper(examPaper);
 
-        return examPaper;
+        return paperQuestion;
     }
 
     public List<ExamPaper> getAllPapers(){

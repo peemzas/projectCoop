@@ -54,6 +54,7 @@
 </div>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>
 <style>
     th {
         border:solid 1px white;

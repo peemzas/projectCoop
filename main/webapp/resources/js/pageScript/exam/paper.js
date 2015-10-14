@@ -6,7 +6,7 @@ $(document).ready(function(){
         toUrl($(this).attr('id'));
     });
 
-    $("select >  .btn").on('change', function(){
+    $("select[name='paperStatus']").on('change', function(){
         var paperId = $(this).attr('id');
         paperId = paperId.substr(10);
         updatePaperStatus(paperId);
@@ -77,7 +77,7 @@ function getAllPapers(){
                     '<td><label id="lpaperScore'+value.maxScore+'" class="label-control">'+value.maxScore+'</label></td>'+
                     '<td><label id="lpaperForPosition'+value.position.posiId+'" class="label-control">'+value.position.posiName+'</label></td>'+
                     '<td>'+
-                        '<select id="dropdownId'+value.id+'" class="btn btn-success btn-sm" style="text-align: left;">'+
+                        '<select id="dropdownId'+value.id+'" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">'+
                             '<option value="3">ยังไม่เผยแพร่</option>'+
                             '<option value="1">เผยแพร่</option>'+
                             '<option value="2">ปิดการเผยแพร่</option>'+
