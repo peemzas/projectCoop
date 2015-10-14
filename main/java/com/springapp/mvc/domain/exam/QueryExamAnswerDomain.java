@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Phuthikorn_T on 18-Sep-15.
  */
@@ -22,5 +24,4 @@ public class QueryExamAnswerDomain extends HibernateUtil{
         criteria.add(Restrictions.eq("id",id));
         return (ExamAnswerRecord)criteria.uniqueResult();
     }
-
 }

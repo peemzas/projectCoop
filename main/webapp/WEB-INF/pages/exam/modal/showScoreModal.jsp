@@ -17,7 +17,7 @@
             <button class = "close showScoreCloseBtn" type = "close">&times;</button>
             <div class="col-md-6 col-md-offset-3">
 
-              <h3 style="text-align: center">คะแนนที่ได้ = 25/50</h3>
+              <h3 style="text-align: center" id="sumScoreShow"></h3>
             </div>
           </div>
           <hr>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-md-3 col-md-offset-1">
-              <label><h4>20/25</h4></label>
+              <label><h4 id="objectiveShowScore"></h4></label>
             </div>
           </div>
 
@@ -38,7 +38,7 @@
             </div>
 
             <div class="col-md-3 col-md-offset-1">
-              <label><h4> 5/25</h4></label>
+              <label><h4 id="subjectiveShowScore"></h4></label>
             </div>
           </div>
         </div>
@@ -46,19 +46,23 @@
         <hr>
 
         <div class="row">
-          <div class="col-md-3 col-md-offset-1">
+          <div class="col-md-3 text-right">
             <h5>ความคิดเห็น :</h5>
           </div>
 
           <div >
-            <div class=" col-md-offset-1">
-              <textarea style="width: 40%"> ทำดีมาก  </textarea>
+            <div class=" col-md-7">
+              <textarea id="commentTextArea" class="form-control" rows="5" disabled
+                        style="resize: none; background-color: #FFFFFF;"></textarea>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-md-3 col-md-offset-7">
-              <h5>ตรวจโดย : นายB</h5>
+            <div class="col-md-2 col-md-offset-6 text-right">
+              <h5>ตรวจโดย :</h5>
+            </div>
+            <div class="col-md-4">
+              <h5 id="markedByShow"></h5>
             </div>
 
           </div>
@@ -75,10 +79,10 @@
 
 <script>
 
-
-
   $('.showScoreCloseBtn').on('click',function(){
     $("#showScore").modal("hide");
   })
+
+  $('#objectiveShowScore').text
 
 </script>

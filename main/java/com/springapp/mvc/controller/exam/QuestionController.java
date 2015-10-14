@@ -91,7 +91,7 @@ public class QuestionController {
         question.setCreateBy(queryUserDomain.getCurrentUser(request));
         question.setDescription(qDesc);
 
-        question.setCreateDate(DateUtil.getDateWithRemovedTime(new Date()));
+        question.setCreateDate(DateUtil.getCurrentDateWithRemovedTime());
         question.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
         question.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
         question.setScore(score);
@@ -166,7 +166,7 @@ public class QuestionController {
             newQuestion.setDifficultyLevel(difficulty);
             newQuestion.setSubCategory(subCategory);
             newQuestion.setUpdateBy(queryUserDomain.getCurrentUser(request));
-            newQuestion.setUpdateDate(DateUtil.getDateWithRemovedTime(new Date()));
+            newQuestion.setUpdateDate(DateUtil.getCurrentDateWithRemovedTime());
 
             queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
         }

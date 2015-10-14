@@ -42,6 +42,12 @@ $('#toBottom').on('click', function () {
     $("html, body").animate({scrollTop: $(document).height()}, "fast");
 })
 
+$('#examBody').on('change', 'input[type="radio"]', function () {
+    var name = $(this).attr('name');
+    $('input[name="' + name + '"]').prop('checked', false)
+    $(this).prop('checked', true)
+})
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var confirmationModalUpdate = function () {
     unmarkedQuestionArray = checkExamCompletion();
@@ -217,7 +223,6 @@ var getExamPaperBody = function () {
                                 '</form>' +
                                 '</div>' +
                                 '</div>'
-
                             choiceNo++;
                         }
 
@@ -274,6 +279,7 @@ var submitExam = function () {
 
     $.ajax({
         type: "POST"
+        , async: false
         , url: "/TDCS/exam/submitExam"
         , data: {
             answerRecords: JSON.stringify(answerArray)
@@ -282,7 +288,7 @@ var submitExam = function () {
         }
         , success: function () {
             alert('ส่งขอสอบเรียบร้อบ')
-            //location.href = "/TDCS/home.html"
+            location.href = "/TDCS/home.html"
         }
         , error: function () {
             alert('การส่งข้อสอบล้มเหลว')

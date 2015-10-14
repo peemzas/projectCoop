@@ -1,10 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JOKIZZ
-  Date: 29/7/2558
-  Time: 13:18
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
     <div class="row">
@@ -15,70 +10,51 @@
 
 <div class="container">
     <div class="row">
-        <table class="table table-bordered">
-            <thead style="background-color: #006dcc; color: white;">
+        <table class="table">
+            <thead class="bg-primary label-primary small">
             <tr>
                 <th style="text-align: center">ชื่อชุดข้อสอบ</th>
-                <th style="text-align: center">วันที่ส่งข้อสอบ</th>
-                <th style="text-align: center">วันที่ตรวจ</th>
-                <th style="text-align: center">ตรวจโดย</th>
+                <th style="text-align: center">คะแนนเต็ม</th>
                 <th style="text-align: center">คะแนนPreTest</th>
                 <th style="text-align: center">คะแนนPostTest</th>
-                <th style="text-align: center">คะแนนเต็ม</th>
-                <th style="text-align: center">สถานะ</th>
-
-
+                <%--<th style="text-align: center">สถานะ</th>--%>
             </tr>
             </thead>
             <tbody>
 
-            <tr>
-                <td>
-                    <button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign" href="#"></span></button>
-                    แบบทดสอบภาษาอังกฤษพื้นฐาน
-                </td>
-                <td align="center">10/7/2558</td>
-                <td align="center">13/7/2558</td>
-                <td align="center">นายA</td>
-                <td align="center">30</td>
-                <td align="center">35</td>
-                <td align="center">40</td>
-                <td align="center">ตรวจแล้ว</td>
-            </tr>
 
-            <tr>
-                <td>
-                    <button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign" href="#"></span></button>
-                    แบบทดสอบJAVA
-                </td>
-                <td align="center">5/10/2558</td>
-                <td align="center">4/11/2558</td>
-                <td align="center">นายB</td>
-                <td align="center">20</td>
-                <td align="center">21</td>
-                <td align="center">80</td>
-                <td align="center">ยังไม่ตรวจแล้ว</td>
-            </tr>
+            <c:forEach items="${examResults}" var="result">
+                <tr resultId="${result.id}">
+                    <td>${result.examRecord.paper.name}</td>
+                    <td align="center" class="col-max-score">
+                            ${result.examRecord.paper.maxScore}
+                    </td>
 
+                    <td align="center" class="col-pre-score">
+                            ${result.objectiveScore + result.subjectiveScore}
+                        <button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"
+                                data-target="#showScore" resultId="${result.id}">
+                            <span class="glyphicon glyphicon-info-sign" href="#"></span>
+                        </button>
+                    </td>
+
+                    <td align="center"
+                        class="col-post-score">
+                        ${result.examRecord.postTestRecord.examResult.objectiveScore + result.examRecord.postTestRecord.examResult.subjectiveScore}
+                        <button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"
+                                data-target="#showScore" resultId="${result.examRecord.postTestRecord.examResult.id}">
+                            <span class="glyphicon glyphicon-info-sign" href="#"></span>
+                        </button>
+                    </td>
+
+                        <%--<td align="center" class="col-status">${result.status.description}</td>--%>
+                </tr>
+            </c:forEach>
 
             </tbody>
         </table>
     </div>
 </div>
 
-<%--paging--%>
-<%--<div class="row">--%>
-    <%--<div class="col-md-12" align="center">--%>
-        <%--<ul class="pagination">--%>
-            <%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
-            <%--<li class="active"><a href="#">1</a></li>--%>
-            <%--<li><a>2</a></li>--%>
-            <%--<li><a>3</a></li>--%>
-            <%--<li><a>4</a></li>--%>
-            <%--<li><a>5</a></li>--%>
-            <%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
-        <%--</ul>--%>
-    <%--</div>--%>
-<%--</div>--%>
-
-<%@include file="modal/showScoreModal.jsp"%>
+<%@include file="modal/showScoreModal.jsp" %>
+<script src="../../../resources/js/pageScript/exam/checkScore.js"></script>

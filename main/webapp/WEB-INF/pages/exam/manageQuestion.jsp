@@ -20,27 +20,27 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row" style="margin-bottom: 5px;">
-                <div class="col-xs-1" >
-                        <button class="btn btn-success btn-block createQuestionBtn form-control"
-                                data-toggle="modal" data-target="#createQuest" style="height: 35px;width: 50px;">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                </div>
-                <div class="col-xs-1">
-                    <button class="btn btn-danger btn-block deleteSelectedBtn form-control"><span class="glyphicon glyphicon-trash"></span> </button>
+                <div class="col-md-12">
+                    <button class="btn btn-success btn-sm createQuestionBtn"
+                            data-toggle="modal" data-target="#createQuest">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm deleteSelectedBtn "><span
+                            class="glyphicon glyphicon-trash"></span>
+                    </button>
                 </div>
             </div>
             <table class="table">
-                <thead class="bg-primary">
+                <thead class="bg-primary label-primary small">
                 <tr>
                     <%--<th style="text-align: center">หมายเลขข้อสอบ</th>--%>
-                    <th><input type="checkbox" id="selectAllItem" class="form-control"/></th>
+                    <th><input type="checkbox" id="selectAllItem"/></th>
                     <th style="text-align: center">ชนิดข้อสอบ</th>
                     <th style="text-align: center">หมวดหมู่</th>
                     <th style="text-align: center">หัวข้อเรื่อง</th>
 
                     <th style="text-align: center" width="35%">คำถาม</th>
-                    <th style="text-align: center">ระดับความยาก</th>
+                    <%--<th style="text-align: center">ระดับความยาก</th>--%>
                     <th style="text-align: center">คะแนน</th>
                     <th style="text-align: center">ผู้สร้าง</th>
                     <th style="text-align: center">วันที่สร้าง</th>

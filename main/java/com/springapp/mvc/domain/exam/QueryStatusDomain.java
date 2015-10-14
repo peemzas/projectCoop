@@ -54,4 +54,10 @@ public class QueryStatusDomain extends HibernateUtil{
         return (Status)criteria.uniqueResult();
     }
 
+    public Status getMarkConfirmedStatus(){
+        Criteria criteria = getSession().createCriteria(Status.class);
+        criteria.add(Restrictions.eq("id",7));
+        return (Status)criteria.uniqueResult();
+    }
+
 }

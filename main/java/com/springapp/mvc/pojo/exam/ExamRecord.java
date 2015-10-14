@@ -42,9 +42,9 @@ public class ExamRecord implements Serializable {
     @Cascade(CascadeType.ALL)
     private List<ExamAnswerRecord> examAnswerRecords;
 
-    @OneToMany(mappedBy = "examRecord")
+    @OneToOne(mappedBy = "examRecord")
     @Cascade(CascadeType.ALL)
-    private List<ExamResult> examResults;
+    private ExamResult examResult;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRE_TEST_RECORD_ID")
@@ -55,12 +55,12 @@ public class ExamRecord implements Serializable {
     private ExamRecord postTestRecord;
 
 
-    public List<ExamResult> getExamResults() {
-        return examResults;
+    public ExamResult getExamResult() {
+        return examResult;
     }
 
-    public void setExamResults(List<ExamResult> examResults) {
-        this.examResults = examResults;
+    public void setExamResult(ExamResult examResult) {
+        this.examResult = examResult;
     }
 
     public ExamRecord getPostTestRecord() {

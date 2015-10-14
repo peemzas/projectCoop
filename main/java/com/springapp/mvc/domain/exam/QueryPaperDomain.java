@@ -25,6 +25,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
 import java.awt.print.Paper;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,7 +65,7 @@ public class QueryPaperDomain extends HibernateUtil {
             PaperQuestion paperQuestion = new PaperQuestion();
             paperQuestion.setExamPaper(examPaper);
             paperQuestion.setQuestion(queryQuestionDomain.getQuestionById(qIds.get(i)));
-            paperQuestion.setScore(newScores.get(i));
+            paperQuestion.setScore(new BigDecimal(newScores.get(i)));
             getSession().save(paperQuestion);
         }
         HibernateUtil.commitTransaction();

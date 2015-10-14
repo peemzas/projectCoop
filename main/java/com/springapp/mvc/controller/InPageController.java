@@ -228,10 +228,10 @@ public class InPageController {
         return "mainPageStudent";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/exam/checkScore")
-    public String checkScore(HttpServletRequest request){
-        return "checkScore";
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/exam/checkScore")
+//    public String checkScore(HttpServletRequest request){
+//        return "checkScore";
+//    }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/createPaper")
