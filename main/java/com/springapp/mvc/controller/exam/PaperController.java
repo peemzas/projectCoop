@@ -3,16 +3,10 @@ package com.springapp.mvc.controller.exam;
 import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryPositionDomain;
 import com.springapp.mvc.domain.QueryUserDomain;
-import com.springapp.mvc.domain.exam.QueryCategoryDomain;
-import com.springapp.mvc.domain.exam.QueryPaperDomain;
-import com.springapp.mvc.domain.exam.QueryPaperStatusDomain;
-import com.springapp.mvc.domain.exam.QuerySubCategoryDomain;
+import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
-import com.springapp.mvc.pojo.exam.Category;
-import com.springapp.mvc.pojo.exam.ExamPaper;
-import com.springapp.mvc.pojo.exam.PaperQuestion;
-import com.springapp.mvc.pojo.exam.Status;
+import com.springapp.mvc.pojo.exam.*;
 import flexjson.JSONSerializer;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,6 +61,12 @@ public class PaperController {
     @Autowired
     QueryPaperStatusDomain queryPaperStatusDomain;
 
+    @Autowired
+    QueryQuestionDomain queryQuestionDomain;
+
+    @Autowired
+    QueryPaperQuestionDomain queryPaperQuestionDomain;
+
     private static final Logger logger = Logger.getLogger(PaperController.class.getName());
 
     @RequestMapping(value = "/exam/createPaper", method = RequestMethod.POST)
@@ -111,6 +111,53 @@ public class PaperController {
         examPaper.setPaperStatus(paperStatus);
         examPaper.setPosition(pForPosition);
         queryPaperDomain.createPaper(examPaper, qIds, qScores);
+
+        return new ResponseEntity<String>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/exam/updatePaper", method = RequestMethod.POST)
+    public ResponseEntity<String> updatePaper(Model model,
+                                              @RequestParam(value = "paperCodeUpdate", required = true) String paperId,
+                                              @RequestParam(value = "paperNameUpdate", required = false) String paperName,
+                                              @RequestParam(value = "paperScoreUpdate", required = true) String paperScore,
+                                              @RequestParam(value = "paperTimeUpdate", required = true) String paperTime,
+                                              @RequestParam(value = "paperForPositionUpdate", required = true) String paperForPosition,
+                                              @RequestParam(value = "jsonObjQuestionUpdate", required = true) String jsonObjQuestion,
+                                              @RequestParam(value = "paperIdUpdate", required = true) Integer pId,
+                                              HttpServletRequest request,
+                                              HttpServletResponse response) throws JSONException {
+
+        JSONArray jsonArray = new JSONArray(jsonObjQuestion);
+        List<Integer> qIds = new ArrayList();
+        List<Float> qScores = new ArrayList();
+        Integer paperMaxScore = new Integer(paperScore);
+        Integer pTime = new Integer(paperTime);
+        Integer pPosition = new Integer(paperForPosition);
+        Position pForPosition = queryPositionDomain.getPositionById(pPosition);
+        User updateBy = queryUserDomain.getCurrentUser(request);
+        Status paperStatus = queryPaperStatusDomain.getStatusById(3);
+        long time = System.currentTimeMillis();
+        Date updateDate = new Date(time);
+
+        for(int i = 0; i < jsonArray.length(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            Integer tempQId = new Integer(jsonObject.getString("qId"));
+            tempQId.getClass().getName();
+            Float tempQScore = new Float(jsonObject.getString("qScore"));
+            qIds.add(tempQId);
+            qScores.add(tempQScore);
+        }
+
+        ExamPaper examPaper = new ExamPaper();
+        examPaper.setUpdateBy(updateBy);
+        examPaper.setCode(paperId);
+        examPaper.setName(paperName);
+        examPaper.setMaxScore(paperMaxScore);
+        examPaper.setUpdateDate(updateDate);
+        examPaper.setTimeLimit(pTime);
+        examPaper.setPaperStatus(paperStatus);
+        examPaper.setPosition(pForPosition);
+        queryPaperDomain.updatePaper(examPaper, qIds, qScores, new Integer(paperId));
 
         return new ResponseEntity<String>(HttpStatus.CREATED);
     }
@@ -161,8 +208,10 @@ public class PaperController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-        List<ExamPaper> examPaper = queryPaperDomain.getExamPaperById(paperId);
-        String json = new Gson().toJson(examPaper);
+        ExamPaper paper = queryPaperDomain.getPaperById(paperId);
+        List<PaperQuestion> paperQuestion = (List<PaperQuestion>) queryPaperQuestionDomain.getPaperQuestionByExamPaper(paper);
+
+        String json = new JSONSerializer().exclude("*.class").serialize(paperQuestion);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }

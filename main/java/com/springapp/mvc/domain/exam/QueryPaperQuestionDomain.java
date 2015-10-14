@@ -8,6 +8,8 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by PTang_000 on 06-Oct-15.
  */
@@ -21,4 +23,23 @@ public class QueryPaperQuestionDomain extends HibernateUtil{
 
         return (PaperQuestion)criteria.uniqueResult();
     }
+
+//    Add By Wanchana
+    public List<PaperQuestion> getPaperQuestionByExamPaper(ExamPaper examPaper){
+
+        Criteria criteria = getSession().createCriteria(PaperQuestion.class);
+        criteria.add(Restrictions.eq("pk.examPaper",examPaper));
+
+        return criteria.list();
+    }
+
+//    public List<PaperQuestion> getQuestionInPaperQuestionByExamPaper(ExamPaper examPaper){
+//
+//        Criteria criteria = getSession().createCriteria(PaperQuestion.class);
+//        criteria.add(Restrictions.eq("pk.examPaper", examPaper));
+//        List<PaperQuestion> paperQuestions = criteria.list();
+//        paperQuestions.get
+//
+//        return criteria.list();
+//    }
 }

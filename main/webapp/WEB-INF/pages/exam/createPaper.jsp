@@ -33,6 +33,10 @@
     #tbSelectedQuestionToPaper {
         margin-top: 5px;
     }
+
+    #tbSelectedQuestionToEditPaper {
+        top: -50px;
+    }
 </style>
 
 <div class="container">
@@ -95,7 +99,8 @@
                     <input id="hours" class="form-control input-sm" type="number" max="60" min="0" value="0" required/>
                 </div>
                 <div class="col-sm-3">
-                    <input id="minutes" class="form-control input-sm" type="number" max="60" min="0" value="0" required/>
+                    <input id="minutes" class="form-control input-sm" type="number" max="60" min="0" value="0"
+                           required/>
                 </div>
             </div>
         </div>
@@ -121,6 +126,7 @@
         <button id="removeRowQuestionSelect" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span
                 class="glyphicon glyphicon-trash"></span></button>
         <button id="createPaperBtn" class="btn btn-success btn-sm" type="button">บันทึก</button>
+        <button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">แก้ไข</button>
         <a href="/TDCS/exam/managePapers">
             <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">
                 ยกเลิก
@@ -128,16 +134,16 @@
         </a>
         <table id="tbSelectedQuestionToPaper" class="table">
             <thead class="bg-primary small">
-            <tr>
-                <th style="text-align: center ;"><input id="checkAllQuestionFromCreatePaperPage" type="checkbox"></th>
-                <th style="text-align: center ;">ประเภท</th>
-                <th style="text-align: center ;">หมวดหมู่</th>
-                <th style="text-align: center ;">หัวข้อเรื่อง</th>
-                <th style="text-align: center ;">ข้อสอบ</th>
-                <th style="text-align: center ;">ระดับ</th>
-                <th style="text-align: center ;" width="8%">คะแนน</th>
-                <th style="text-align: center ;">ผู้สร้าง</th>
-            </tr>
+                <tr>
+                    <th style="text-align: center ;"><input class="checkAllQuestionFromCreatePaperPage" type="checkbox"></th>
+                    <th style="text-align: center ;">ประเภท</th>
+                    <th style="text-align: center ;">หมวดหมู่</th>
+                    <th style="text-align: center ;">หัวข้อเรื่อง</th>
+                    <th style="text-align: center ;">ข้อสอบ</th>
+                    <th style="text-align: center ;">ระดับ</th>
+                    <th style="text-align: center ;" width="8%">คะแนน</th>
+                    <th style="text-align: center ;">ผู้สร้าง</th>
+                </tr>
             </thead>
             <tbody id="tbodySelectedQuestionToPaper">
 
@@ -162,25 +168,10 @@
         </div>
     </div>
 
-    <%--<div class = "row">--%>
-    <%--<div class = "col-md-12" align = "center">--%>
-    <%--<ul class = "pagination">--%>
-    <%--<li class = "disabled"><a href = "#">&laquo;</a></li>--%>
-    <%--<li class = "active"><a href = "#">1</a></li>--%>
-    <%--<li><a>2</a></li>--%>
-    <%--<li><a>3</a></li>--%>
-    <%--<li><a>4</a></li>--%>
-    <%--<li><a>5</a></li>--%>
-    <%--<li class = "disabled"><a href = "#">&raquo;</a></li>--%>
-    <%--</ul>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-
     <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paper.js" />"></script>
-    <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>
+    <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>--%>
 
     <%@include file="modal/createQuestionModal.jsp" %>
     <%@include file="modal/selectQuestionModal.jsp" %>
