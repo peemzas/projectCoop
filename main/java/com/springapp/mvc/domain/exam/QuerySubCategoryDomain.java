@@ -234,16 +234,40 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         return criteria.list();
     }
 
+
 //    Add By Mr.Wanchana
-    public Integer getSubCategoryIdByName(String subName){
+//    public Integer getSubCategoryIdByName(String subName){
+//
+//        String queryStatement = "select id from SubCategory where name like :subName";
+//        Query query = getSession().createQuery(queryStatement);
+//        query.setParameter("subName", "%" + subName + "%");
+//        Integer subId = (Integer) query.list().get(0);
+//        logger.info(subId.toString());
+//
+//        return subId;
 
-        String queryStatement = "select id from SubCategory where name like :subName";
-        Query query = getSession().createQuery(queryStatement);
-        query.setParameter("subName", "%" + subName + "%");
-        Integer subId = (Integer) query.list().get(0);
-        logger.info(subId.toString());
+    public List<SubCategory> getSubCategoryToDropDown(String categoryId, String categoryName) {
+        Criteria criteria = getSession().createCriteria(SubCategory.class, "SubCategory");
+        criteria.createAlias("SubCategory.category", "category");
+//
+        criteria.addOrder(Order.asc("category.id"));
 
-        return subId;
+
+        if (!categoryId.equals("")) {
+            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+        }
+        if (categoryName != "" && categoryId == "") {
+            criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
+        }
+        else{
+            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+        }
+
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<SubCategory> subCategoriesToDropDown = criteria.list();
+        closeSession();
+        return subCategoriesToDropDown;
+
     }
 }
 

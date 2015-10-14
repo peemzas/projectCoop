@@ -28,13 +28,13 @@
       </thead>
       <tbody>
       <tr>
-        <td>แบบทดสอบก่อนการอบรม</td>
+        <td>ทดสอบสร้างชุดข้อสอบ </td>
         <td>EmployeeA</td>
         <td>Developer Trainee</td>
         <td align="center">50</td>
         <td>60 นาที</td>
         <td style="text-align: center;">
-         <a href="/TDCS/exam/doExam"> <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button> </a>
+         <a href="/TDCS/exam/doExam?paperId=123"> <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button> </a>
 
 
         </td>

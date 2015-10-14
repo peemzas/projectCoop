@@ -19,66 +19,45 @@
             <thead style="background-color: #006dcc; color: white;">
             <tr>
                 <th style="text-align: center">ชื่อชุดข้อสอบ</th>
-                <th style="text-align: center">วันที่ส่ง</th>
+                <th style="text-align: center">วันที่ส่งข้อสอบ</th>
+                <th style="text-align: center">วันที่ตรวจ</th>
                 <th style="text-align: center">ตรวจโดย</th>
+                <th style="text-align: center">คะแนนPreTest</th>
+                <th style="text-align: center">คะแนนPostTest</th>
                 <th style="text-align: center">คะแนนเต็ม</th>
-                <th style="text-align: center">คะแนนที่ได้</th>
-                <th style="text-align: center;width: 10%">ดูรายละเอียด</th>
+                <th style="text-align: center">สถานะ</th>
+
 
             </tr>
             </thead>
             <tbody>
 
             <tr>
-                <td>แบบทดสอบก่อนการอบรม</td>
-                <td align="center">7/7/2015</td>
-                <td align="center">นายB</td>
-                <td align="center">50</td>
-                <td align="center">25</td>
-                <td style="text-align: center; width: 7%">
-                    <button class="btn btn-default" data-toggle="modal" data-target="#showScore" id="">
-                        <a class="glyphicon glyphicon-search" href="#"></a>
-                    </button>
+                <td>
+                    <button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign" href="#"></span></button>
+                    แบบทดสอบภาษาอังกฤษพื้นฐาน
                 </td>
-            </tr>
-
-            <tr>
-                <td>แบบทดสอบก่อนหลังอบรม</td>
-                <td align="center">7/7/2015</td>
-                <td align="center">นายC</td>
-                <td align="center">50</td>
+                <td align="center">10/7/2558</td>
+                <td align="center">13/7/2558</td>
+                <td align="center">นายA</td>
+                <td align="center">30</td>
+                <td align="center">35</td>
                 <td align="center">40</td>
-                <td style="text-align: center; width: 7%">
-                    <button class="btn btn-default" id="">
-                        <a class="glyphicon glyphicon-search" href="#"></a>
-                    </button>
-                </td>
+                <td align="center">ตรวจแล้ว</td>
             </tr>
 
             <tr>
-                <td>แบบทดสอบความรู้พื้นฐานภาษาอังกฤษ</td>
-                <td align="center">8/7/2015</td>
-                <td align="center">นายD</td>
-                <td align="center">50</td>
-                <td align="center">45</td>
-                <td style="text-align: center; width: 7%">
-                    <button class="btn btn-default" id="">
-                        <a class="glyphicon glyphicon-search" href="#"></a>
-                    </button>
+                <td>
+                    <button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign" href="#"></span></button>
+                    แบบทดสอบJAVA
                 </td>
-            </tr>
-
-            <tr>
-                <td>แบบทดสอบความรู้พื้นฐานภาษาทางธุรกิจ</td>
-                <td align="center">9/7/2015</td>
-                <td align="center">นายE</td>
-                <td align="center">60</td>
-                <td align="center">58</td>
-                <td style="text-align: center; width: 7%">
-                    <button class="btn btn-default" id="">
-                        <a class="glyphicon glyphicon-search" href="#"></a>
-                    </button>
-                </td>
+                <td align="center">5/10/2558</td>
+                <td align="center">4/11/2558</td>
+                <td align="center">นายB</td>
+                <td align="center">20</td>
+                <td align="center">21</td>
+                <td align="center">80</td>
+                <td align="center">ยังไม่ตรวจแล้ว</td>
             </tr>
 
 

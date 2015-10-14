@@ -40,6 +40,7 @@
                     <div class="row">
                         <%@include file="selectCreateByInput.jsp" %>
                     </div>
+                    </div>
                     <hr>
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">

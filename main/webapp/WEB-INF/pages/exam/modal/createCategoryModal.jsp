@@ -49,19 +49,4 @@
     </div>
     <!-- /.modal -->
 </div>
-    <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/addCategory.js" />"></script>
-    <script>
-//        $('#submitCreateCategoryBtn').on('click', function () {
-//            saveCategory();
-//        });
-//
-//        $('categoryIdText').on('input', function(){
-//            var input = $(this).val();
-//            if(input){
-//                input.removeClass("invalid").addClass("valid");
-//            }
-//            else{
-//                input.removeClass("valid").addClass("invalid");
-//            }
-//        });
-    </script>
+
