@@ -46,7 +46,7 @@
                                 <div class="col-sm-2 col-sm-offset-1" align="right">
                                     <label>คำถาม</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <input id="searchQuestionDescInput" type="text" class="form-control input-sm"/>
                                 </div>
                             </div>
@@ -108,19 +108,19 @@
 </div>
 <%--<input type="checkbox" class="hidden" id="searchCompleteTrigger"/>--%>
 <script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
-<script>
-    $(document).ready(function () {
-        $("#selectAllEmployeeName").click(function (event) {
-            if (this.checked) {
-                $(".userSelectCheckbox").each(function () {
-                    this.checked = true;
-                });
-            }
-            else {
-                $(".userSelectCheckbox").each(function () {
-                    this.checked = false;
-                });
-            }
-        })
-    });
-</script>
+<%--<script>--%>
+    <%--$(document).ready(function () {--%>
+        <%--$("#selectAllEmployeeName").click(function (event) {--%>
+            <%--if (this.checked) {--%>
+                <%--$(".userSelectCheckbox").each(function () {--%>
+                    <%--this.checked = true;--%>
+                <%--});--%>
+            <%--}--%>
+            <%--else {--%>
+                <%--$(".userSelectCheckbox").each(function () {--%>
+                    <%--this.checked = false;--%>
+                <%--});--%>
+            <%--}--%>
+        <%--})--%>
+    <%--});--%>
+<%--</script>--%>

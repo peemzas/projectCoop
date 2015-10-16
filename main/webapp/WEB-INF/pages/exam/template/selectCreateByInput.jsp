@@ -16,9 +16,23 @@
         </div>
     </div>
 
-
-<script src="../../../resources/js/pageScript/exam/selectEmployee.js" ></script>
-<script src="../../../resources/js/pageScript/exam/searchQuestion.js" ></script>
-<script src="../../../resources/js/pageScript/exam/selectCreateByInput.js"></script>
 <%@include file="../modal/addEmployeeToInputModal.jsp" %>
+<script src="../../../resources/js/pageScript/exam/selectEmployee.js" ></script>
+<script src="../../../resources/js/pageScript/exam/selectCreateByInput.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#selectAllEmployeeName").click(function (event) {
+            if (this.checked) {
+                $(".userSelectCheckbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $(".userSelectCheckbox").each(function () {
+                    this.checked = false;
+                });
+            }
+        })
+    });
+</script>
 

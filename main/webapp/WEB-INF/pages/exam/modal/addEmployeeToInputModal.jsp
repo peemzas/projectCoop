@@ -41,10 +41,10 @@
                 <div class="col-md-offset-1 col-md-1" align="right"><h5>ชื่อ</h5></div>
                 <%--<label>ชื่อ</label>--%>
                 <div class="col-md-6">
-                  <input id="searchEmployeeNameText" class = "form-control" type = "text" placeholder="ค้นหา..."/>
+                  <input id="searchEmployeeNameText" class = "form-control input-sm" type = "text" placeholder="ค้นหาพนักงาน"/>
                 </div>
                 <div class="col-md-1">
-                  <button id="searchBtnFromModalSearchEmployee" class = "btn btn-gray" type="submit">ค้นหา</button>
+                  <button id="searchBtnFromModalSearchEmployee" class = "btn btn-primary btn-sm" type="submit">ค้นหา</button>
                 </div>
               </div>
             <%--</form>--%>
@@ -54,13 +54,13 @@
         <div class = "row">
           <div class = "col-md-12" align = "center">
             <table class = "table table-bordered">
-              <thead align = "center">
+              <thead>
                 <tr>
-                  <th><input id="selectAllEmployeeName" type="checkbox" style="display: none;"/> เลือก</th>
-                  <th>รหัสพนักงาน</th>
-                  <th>ชื่อพนักงาน</th>
-                  <th>ตำแหน่ง</th>
-                  <th>ทีม</th>
+                  <th style="text-align: center;"><input id="selectAllEmployeeName" type="checkbox" style="display: none;"/> เลือก</th>
+                  <th style="text-align: center;">รหัสพนักงาน</th>
+                  <th style="text-align: center;">ชื่อพนักงาน</th>
+                  <th style="text-align: center;">ตำแหน่ง</th>
+                  <th style="text-align: center;">ทีม</th>
                 </tr>
               </thead>
               <tbody id="tbodySelectEmployeeName">
@@ -76,8 +76,8 @@
         <div class = "row">
           <div class = "col-md-12" align="right">
             <div class = "form-group">
-              <button id="addEmployeeBtn" class = "btn btn-default modalSearchByEmployeeNameSubmitBtn">เพิ่ม</button>
-              <button class = "btn btn-gray modalSearchByEmployeeNameCloseBtn ">ยกเลิก</button>
+              <button id="addEmployeeBtn" class = "btn btn-default modalSearchByEmployeeNameSubmitBtn btn-sm">เพิ่ม</button>
+              <button class = "btn btn-gray modalSearchByEmployeeNameCloseBtn btn-sm">ยกเลิก</button>
             </div>
           </div>
         </div>

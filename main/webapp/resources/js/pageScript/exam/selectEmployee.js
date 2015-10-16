@@ -43,7 +43,7 @@ function searchEmpName(){
                     data.forEach(function(value){
                         //alert(value.userName);
                         $("#tbodySelectEmployeeName").append(
-                            '<tr>'+
+                            '<tr style="text-align: center;">'+
                             '<td><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
                             '<td><label id="label1'+value.userId+'">'+value.userId+'<label></td>'+
                             '<td><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
@@ -148,8 +148,6 @@ function addEmployee(){
     });
 }
 
-//Function clear blank space when the element was removed.
-//ref. http://stackoverflow.com/questions/1539367/remove-whitespace-and-line-breaks-between-html-elements-using-jquery
 jQuery.fn.cleanWhitespace = function() {
     textNodes = this.contents().filter(
         function() {

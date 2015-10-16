@@ -1,8 +1,11 @@
 package com.springapp.mvc.domain.exam;
 
+import com.springapp.mvc.pojo.Position;
+import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.ExamPaper;
 import com.springapp.mvc.pojo.exam.PaperQuestion;
 import com.springapp.mvc.pojo.exam.Question;
+import com.springapp.mvc.pojo.exam.Status;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -23,8 +26,12 @@ import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
 import java.awt.print.Paper;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Phuthikorn_T on 8/11/2015.
@@ -44,11 +51,10 @@ public class QueryPaperDomain extends HibernateUtil {
         HibernateUtil.beginTransaction();
         getSession().save(examPaper);
         HibernateUtil.commitTransaction();
-        closeSession();
-        ExamPaper examP = new ExamPaper();
-        String code = examPaper.getCode();
-        examP = getExamPaperByCode(code);
+        Integer pId = examPaper.getId();
+        ExamPaper examP = getPaperById(pId);
         createPaperQuestion(examP, qIds, newScores);
+        HibernateUtil.closeSession();
     }
 
     public void createPaperQuestion(ExamPaper examPaper, List<Integer> qIds, List<Float> newScores){
@@ -62,38 +68,30 @@ public class QueryPaperDomain extends HibernateUtil {
             getSession().save(paperQuestion);
         }
         HibernateUtil.commitTransaction();
-        closeSession();
     }
 
-    public void updatePaper(ExamPaper examPaper, List<Integer> qIds, List<Float> newScores, Integer paperId){
+    public void updatePaper(List<Integer> qIds, List<Float> newScores, Integer paperId, User updateBy, String paperCode, String paperName, Integer paperMaxScore, Date updateDate, Integer paperTime, Status paperStatus, Position paperForPosition){
+
+        QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
+        ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
+
+        deletePaperQuestionByExamPaper(examPaper);
+
+        createPaperQuestion(examPaper, qIds, newScores);
+
+        examPaper.setUpdateBy(updateBy);
+        examPaper.setCode(paperCode);
+        examPaper.setName(paperName);
+        examPaper.setMaxScore(paperMaxScore);
+        examPaper.setUpdateDate(updateDate);
+        examPaper.setTimeLimit(paperTime);
+        examPaper.setPaperStatus(paperStatus);
+        examPaper.setPosition(paperForPosition);
 
         HibernateUtil.beginTransaction();
-        QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
-        queryPaperDomain.deletePaperQuestionByPaperId(examPaper);
         getSession().merge(examPaper);
-        try{
-            createPaperQuestion(examPaper, qIds, newScores);
-        }catch(Exception e){
-            System.out.println("++++++++++++ERROR+++++++++++\n"+e);
-        }
-    }
-
-    public static ExamPaper getExamPaperByCode(String code){
-        Criteria criteria = getSession().createCriteria(ExamPaper.class);
-        criteria.add(Restrictions.eq("code", code));
-        ExamPaper examPaper = (ExamPaper) criteria.list().get(0);
-
-        return examPaper;
-    }
-
-    public PaperQuestion getPaperQuestionByExamPaperById(Integer id){
-        Criteria criteria = getSession().createCriteria(ExamPaper.class);
-        criteria.add(Restrictions.eq("id", id));
-        ExamPaper examPaper = (ExamPaper) criteria.list().get(0);
-        PaperQuestion paperQuestion = new PaperQuestion();
-        paperQuestion.setExamPaper(examPaper);
-
-        return paperQuestion;
+        HibernateUtil.commitTransaction();
+        HibernateUtil.closeSession();
     }
 
     public List<ExamPaper> getAllPapers(){
@@ -120,18 +118,19 @@ public class QueryPaperDomain extends HibernateUtil {
     public void deletePaper(ExamPaper examPaper, int paperId){
 
         HibernateUtil.beginTransaction();
-//        deletePaperQuestionByPaperId(examPaper);
         getSession().delete(examPaper);
         HibernateUtil.commitTransaction();
         HibernateUtil.closeSession();
     }
 
-    public void deletePaperQuestionByPaperId(ExamPaper examPaper){
+    public void deletePaperQuestionByExamPaper(ExamPaper examPaper){
 
         Criteria criteria = getSession().createCriteria(PaperQuestion.class);
         criteria.add(Restrictions.eq("pk.examPaper", examPaper));
-        PaperQuestion paperQuestion = (PaperQuestion) criteria.list().get(0);
-        getSession().delete(paperQuestion);
+        List<PaperQuestion> paperQuestions = criteria.list();
+        for(int i = 0; i < paperQuestions.size(); i++){
+            getSession().delete(paperQuestions.get(i));
+        }
     }
 
     public void updatePaperStatus(ExamPaper examPaper){
@@ -140,5 +139,78 @@ public class QueryPaperDomain extends HibernateUtil {
         getSession().merge(examPaper);
         HibernateUtil.commitTransaction();
         HibernateUtil.closeSession();
+    }
+
+    public List<ExamPaper> generalSearchPaper(List empIds, String code, String name){
+
+        Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        if(empIds != null){
+            criteria.add(Restrictions.in("createBy.id", empIds));
+        }
+        if(!code.equals("")){
+            criteria.add(Restrictions.like("code", "%" + code + "%").ignoreCase());
+        }
+        if(!name.equals("")){
+            criteria.add(Restrictions.like("name", "%" + name + "%").ignoreCase());
+        }
+        criteria.addOrder(Order.asc("id"));
+        List<ExamPaper> papers = criteria.list();
+
+        return papers;
+    }
+
+    public List<ExamPaper> advanceSearchPaper(List empIds, String code, String name, String createDateFrom, String createDateTo, String scoreFrom, String scoreTo, String paperStatus) throws ParseException {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        Date dateFrom = null;
+        Date dateTo = null;
+        if (!createDateFrom.equals("")){
+            dateFrom = simpleDateFormat.parse(createDateFrom);
+        }
+        if (!createDateTo.equals("")){
+            dateTo = simpleDateFormat.parse(createDateTo);
+        }
+        Integer sFrom = null;
+        Integer sTo = null;
+
+        if (!scoreFrom.equals("")) {
+            sFrom = new Integer(scoreFrom);
+        }
+        if (!scoreTo.equals("")) {
+            sTo = new Integer(scoreTo);
+        }
+
+        Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        if (empIds != null){
+            criteria.add(Restrictions.in("createBy.id", empIds));
+        }
+        if (!code.equals("")){
+            criteria.add(Restrictions.like("code", "%" + code + "%").ignoreCase());
+        }
+        if (!name.equals("")){
+            criteria.add(Restrictions.like("name", "%" + name + "%").ignoreCase());
+        }
+        if (!createDateFrom.equals("")) {
+            criteria.add(Restrictions.ge("createDate", dateFrom));
+        }
+        if (!createDateTo.equals("")) {
+            criteria.add(Restrictions.le("createDate", dateTo));
+        }
+        if (!scoreFrom.equals("")) {
+            criteria.add(Restrictions.ge("maxScore", sFrom));
+        }
+        if (!scoreTo.equals("")) {
+            criteria.add(Restrictions.le("maxScore", sTo));
+        }
+        if(!paperStatus.equals("")){
+            Integer pStatus = new Integer(paperStatus);
+            if(pStatus != 0){
+                criteria.add(Restrictions.eq("paperStatus.id", new Integer(paperStatus)));
+            }
+        }
+        criteria.addOrder(Order.asc("id"));
+        List<ExamPaper> papers = criteria.list();
+
+        return papers;
     }
 }

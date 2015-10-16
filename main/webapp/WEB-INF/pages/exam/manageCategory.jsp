@@ -42,14 +42,6 @@
                                         </span>
 
                                 </div>
-
-                                <%--<div class="col-md-6 input-group " >--%>
-                                    <%--<input id="categoryId" class="form-control"  placeholder="ค้นหาหมวดหมู่"/>--%>
-                            <%--<span class="input-group-addon">--%>
-                            <%--<i class="glyphicon glyphicon-search" onclick="listsubcat()" style="cursor: pointer; height: 20px;"></i>--%>
-                             <%--</span>--%>
-                                <%--</div>--%>
-
                             </div>
                         </div>
                     </div>

@@ -326,10 +326,10 @@ public class QueryQuestionDomain extends HibernateUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy",Locale.US);
         Date dateFrom = null;
         Date dateTo = null;
-        if(!qCreateDateFrom.equals("")){
+        if (!qCreateDateFrom.equals("")){
             dateFrom = simpleDateFormat.parse(qCreateDateFrom);
         }
-        if(!qCreateDateTo.equals("")){
+        if (!qCreateDateTo.equals("")){
             dateTo = simpleDateFormat.parse(qCreateDateTo);
         }
         Float scoreFrom = null;
