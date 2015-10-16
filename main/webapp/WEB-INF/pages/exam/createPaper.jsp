@@ -50,7 +50,7 @@
                         style="margin-top: 5px">รหัสชุดข้อสอบ</h5></label>
                 </div>
                 <div class="col-sm-6" align="right">
-                    <input id="newPaperId" class="form-control input-sm" type="text" maxlength="5" placeholder
+                    <input id="newPaperId" class="form-control input-sm" type="text" maxlength="5" placeholder="โปรดกรอกรหัสชุดข้อสอบ"
                            required/>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     </label>
                 </div>
                 <div class="col-sm-8">
-                    <input id="newPaperName" class="form-control input-sm" type="text"/>
+                    <input id="newPaperName" class="form-control input-sm" type="text" placeholder="โปรดกรอกชื่อชุดข้อสอบ"/>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
                         style="margin-top: 5px">คะแนน</h5></label>
                 </div>
                 <div class="col-sm-6">
-                    <input id="newPaperScore" class="form-control input-sm" type="text" required/>
+                    <input id="newPaperScore" class="form-control input-sm" type="text" placeholder="โปรดกรอกคะแนน" required/>
                 </div>
             </div>
             <div class="col-sm-7">
@@ -117,11 +117,6 @@
     </div>
 
     <div class="row">
-        <%--<a href="/TDCS/exam/managePapers">--%>
-        <%--<button class="btn btn-danger" align="center" style="width:50px;height:35px">--%>
-        <%--<span class="glyphicon glyphicon-arrow-left"></span>--%>
-        <%--</button>--%>
-        <%--</a>--%>
         <hr/>
         <button id="removeRowQuestionSelect" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span
                 class="glyphicon glyphicon-trash"></span></button>
@@ -132,7 +127,7 @@
                 ยกเลิก
             </button>
         </a>
-        <table id="tbSelectedQuestionToPaper" class="table">
+        <table id="tbSelectedQuestionToPaper" class="table table-bordered table-hover">
             <thead class="bg-primary small">
                 <tr>
                     <th style="text-align: center ;"><input class="checkAllQuestionFromCreatePaperPage" type="checkbox"></th>
@@ -157,14 +152,15 @@
     <br/>
 
     <div class="row">
-        <div class="col-sm-1 col-sm-offset-9">
-            <label align="right"><h5>คะแนน</h5></label>
-        </div>
-        <div class="col-md-1">
-            <input class="form-control input-sm" readonly="true" name="score" id="score" style="text-align: center">
-        </div>
-        <div class="col-md-1">
-            <input class="form-control input-sm" readonly="true" name="score" id="maxScore" style="text-align: center">
+        <div class="col-sm-5 col-sm-offset-8">
+            <label align="right" class="col-sm-2"><h5>คะแนน</h5></label>
+            <div class="col-sm-3">
+                <input class="form-control input-sm" readonly="true" name="score" id="score" style="text-align: center">
+            </div>
+            <label align="right" class="col-sm-1"><h5>เต็ม</h5></label>
+            <div class="col-sm-3">
+                <input class="form-control input-sm" readonly="true" name="score" id="maxScore" style="text-align: center">
+            </div>
         </div>
     </div>
 

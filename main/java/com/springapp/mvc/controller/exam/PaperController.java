@@ -7,6 +7,7 @@ import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
+import com.springapp.mvc.util.DateUtil;
 import flexjson.JSONSerializer;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,16 +19,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.awt.print.Paper;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,6 +66,9 @@ public class PaperController {
     @Autowired
     QueryPaperQuestionDomain queryPaperQuestionDomain;
 
+    @Autowired
+    QueryExamRecordDomain queryExamRecordDomain;
+
     private static final Logger logger = Logger.getLogger(PaperController.class.getName());
 
     @RequestMapping(value = "/exam/createPaper", method = RequestMethod.POST)
@@ -89,8 +91,9 @@ public class PaperController {
         Position pForPosition = queryPositionDomain.getPositionById(pPosition);
         User createBy = queryUserDomain.getCurrentUser(request);
         Status paperStatus = queryPaperStatusDomain.getStatusById(3);
-        long time = System.currentTimeMillis();
-        Date curDate = new Date(time);
+//        long time = System.currentTimeMillis();
+//        Date curDate = new Date(time);
+        java.util.Date curDate = DateUtil.getCurrentDateWithRemovedTime();
 
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -117,7 +120,7 @@ public class PaperController {
 
     @RequestMapping(value = "/exam/updatePaper", method = RequestMethod.POST)
     public ResponseEntity<String> updatePaper(Model model,
-                                              @RequestParam(value = "paperCodeUpdate", required = true) String paperId,
+                                              @RequestParam(value = "paperCodeUpdate", required = true) String paperCode,
                                               @RequestParam(value = "paperNameUpdate", required = false) String paperName,
                                               @RequestParam(value = "paperScoreUpdate", required = true) String paperScore,
                                               @RequestParam(value = "paperTimeUpdate", required = true) String paperTime,
@@ -136,8 +139,9 @@ public class PaperController {
         Position pForPosition = queryPositionDomain.getPositionById(pPosition);
         User updateBy = queryUserDomain.getCurrentUser(request);
         Status paperStatus = queryPaperStatusDomain.getStatusById(3);
-        long time = System.currentTimeMillis();
-        Date updateDate = new Date(time);
+//        long time = System.currentTimeMillis();
+//        Date updateDate = new Date(time);
+        java.util.Date updateDate = DateUtil.getCurrentDateWithRemovedTime();
 
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -148,18 +152,9 @@ public class PaperController {
             qScores.add(tempQScore);
         }
 
-        ExamPaper examPaper = new ExamPaper();
-        examPaper.setUpdateBy(updateBy);
-        examPaper.setCode(paperId);
-        examPaper.setName(paperName);
-        examPaper.setMaxScore(paperMaxScore);
-        examPaper.setUpdateDate(updateDate);
-        examPaper.setTimeLimit(pTime);
-        examPaper.setPaperStatus(paperStatus);
-        examPaper.setPosition(pForPosition);
-        queryPaperDomain.updatePaper(examPaper, qIds, qScores, new Integer(paperId));
+        queryPaperDomain.updatePaper(qIds, qScores, pId, updateBy, paperCode, paperName, paperMaxScore, updateDate, pTime, paperStatus, pForPosition);
 
-        return new ResponseEntity<String>(HttpStatus.CREATED);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/exam/getAllPapers", method = RequestMethod.POST)
@@ -201,6 +196,20 @@ public class PaperController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/checkExamPaperInUse", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> checkExamPaperInUse(@RequestParam(value = "paperId") Integer paperId){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        Boolean check = queryExamRecordDomain.checkExamRecordInUse(paperId);
+
+        String json = new Gson().toJson(check);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/exam/getPaper", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> getPaper(@RequestParam(value = "paperId") int paperId){
@@ -214,5 +223,73 @@ public class PaperController {
         String json = new JSONSerializer().exclude("*.class").serialize(paperQuestion);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/searchPaper", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> searchPaper(@RequestBody String jsoN) throws JSONException, ParseException {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Integer> empIds = new ArrayList<Integer>();
+
+        String code = "";
+        String name = "";
+        String createDateFrom = "";
+        String createDateTo = "";
+        String scoreFrom = "";
+        String scoreTo = "";
+        String paperStatus = "";
+
+        JSONArray jsonArray = new JSONArray(jsoN);
+        JSONObject jsonObj = jsonArray.getJSONObject(0);
+
+        Integer check = new Integer(jsonObj.getString("empId"));
+        Integer btnStatus = 0;
+
+        if(check == 0){
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            code = jsonObject.getString("code");
+            name = jsonObject.getString("name");
+            btnStatus = jsonObject.getInt("buttonStatus");
+
+            createDateFrom = jsonObject.getString("createDateFrom");
+            createDateTo = jsonObject.getString("createDateTo");
+            scoreFrom = jsonObject.getString("scoreFrom");
+            scoreTo = jsonObject.getString("scoreTo");
+            paperStatus = jsonObject.getString("paperStatus");
+        }
+        else{
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                empIds.add(new Integer(jsonObject.getString("empId")));
+                if(i == 0){
+                    code = jsonObject.getString("code");
+                    name = jsonObject.getString("name");
+                    createDateFrom = jsonObject.getString("createDateFrom");
+                    createDateTo = jsonObject.getString("createDateTo");
+                    scoreFrom = jsonObject.getString("scoreFrom");
+                    scoreTo = jsonObject.getString("scoreTo");
+                    paperStatus = jsonObject.getString("paperStatus");
+                }
+                btnStatus = jsonObject.getInt("buttonStatus");
+            }
+        }
+
+        if(empIds.size() == 0){
+            empIds = null;
+        }
+
+        if(btnStatus == 0){
+            List<ExamPaper> papers = queryPaperDomain.generalSearchPaper(empIds, code, name);
+            String toJson = new JSONSerializer().include("choices").exclude("*.class").serialize(papers);
+            return new ResponseEntity<String>(toJson, headers, HttpStatus.OK);
+        }
+        else{
+            List<ExamPaper> papers = queryPaperDomain.advanceSearchPaper(empIds, code, name, createDateFrom, createDateTo, scoreFrom, scoreTo, paperStatus);
+            String toJson = new JSONSerializer().include("choices").exclude("*.class").serialize(papers);
+            return new ResponseEntity<String>(toJson, headers, HttpStatus.OK);
+        }
     }
 }

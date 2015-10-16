@@ -1,12 +1,67 @@
 var pId;
+var itemLenght;
+var code;
+var name;
+var arrayEmployeeToSearch = new Array();
+var createDateFrom;
+var createDateTo;
+var scoreFrom;
+var scoreTo;
+var paperStatus;
+var btnSearchStatus;
+var tempArray = new Array();
+
 $(document).ready(function(){
+
     getAllPapers();
 
-    $("td > button").unbind('click').click(function(){
-        toUrl($(this).attr('id'));
+    $("#advPaperResetBtn").unbind('click').click(function(){
+        resetAdvInput();
     });
 
-    $("select[name='paperStatus']").on('change', function(){
+    $("#resetSearchPaper").unbind('click').click(function(){
+        resetInput();
+    });
+
+    $("#searchPaperStatus").on('change', function(){
+        paperStatus = $("#searchPaperStatus").val();
+    });
+
+    $(".panel-body").on('click', '#searchPaper', function(){
+        btnSearchStatus = 0;
+        generalSearchPaper(btnSearchStatus);
+    });
+
+    $(".panel-footer").on('click', '#advPaperSearchBtn', function(){
+        btnSearchStatus = 1;
+        generalSearchPaper(btnSearchStatus);
+    });
+
+    $("#tbodyManagePaper").on('click', 'td > button', function(){
+        var paperId = $(this).attr('id');
+        pId = $(this).parent().siblings().map(function(){
+            return $(this).text();
+        }).get(0);
+
+        $.ajax({
+            url: "/TDCS/exam/checkExamPaperInUse",
+            type: "POST",
+            data: {
+                paperId: paperId
+            },
+            success: function(check){
+                if(check == true || $("#dropdownId"+pId).val() == 1){
+                    alert('ไม่สามารถแก้ไขชุดข้อสอบนี้ได้');
+                }
+                else{
+                    toUrl(paperId);
+                }
+            }
+        });
+    });
+
+    $("#tbodyManagePaper").on('change', 'select[name="paperStatus"]', function(){
+        //$("select[name='paperStatus']").on('change', function(){
         var paperId = $(this).attr('id');
         paperId = paperId.substr(10);
         updatePaperStatus(paperId);
@@ -77,14 +132,14 @@ function getAllPapers(){
                     '<td><label id="lpaperScore'+value.maxScore+'" class="label-control">'+value.maxScore+'</label></td>'+
                     '<td><label id="lpaperForPosition'+value.position.posiId+'" class="label-control">'+value.position.posiName+'</label></td>'+
                     '<td>'+
-                        '<select id="dropdownId'+value.id+'" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">'+
-                            '<option value="3">ยังไม่เผยแพร่</option>'+
-                            '<option value="1">เผยแพร่</option>'+
-                            '<option value="2">ปิดการเผยแพร่</option>'+
-                        '</select>'+
+                    '<select id="dropdownId'+value.id+'" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">'+
+                    '<option value="3">ยังไม่เผยแพร่</option>'+
+                    '<option value="1">เผยแพร่</option>'+
+                    '<option value="2">ปิดการเผยแพร่</option>'+
+                    '</select>'+
                     '</td>'+
-                    '<td><button id="'+value.id+'" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
-                '</tr>'
+                    '<td><button id="'+value.id+'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '</tr>'
                 );
                 presentStatus(value.id, value.paperStatus.id);
             });
@@ -132,6 +187,9 @@ function setColorDropdown(paperId, paperStatus){
 }
 
 function deletePapers(paperId){
+    if(!confirm('คุณต้องการลบชุดข้อสอบที่เลือกใช่หรือไม่?')){
+        return false;
+    }
     $.ajax({
         type: "POST",
         url: "/TDCS/exam/deletePaper",
@@ -146,4 +204,160 @@ function deletePapers(paperId){
             alert('ลบชุดข้อสอบผิดพลาด');
         }
     });
+}
+
+function generalSearchPaper(btnSearchStatus) {
+
+    itemLenght = ($("#showEmployeeSelected").children("button")).length;
+    code = $("#paperCodeSearch").val();
+    if (code == "" ? code = "" : code = $("#paperCodeSearch").val());
+    name = $("#paperName").val();
+    if (name == "" ? name = "" : name = $("#paperName").val());
+    createDateFrom = $("#searchCreateDateFromInput").val();
+    if (createDateFrom == "" ? createDateFrom = "" : createDateFrom = $("#searchCreateDateFromInput").val());
+    createDateTo = $("#searchCreateDateToInput").val();
+    if (createDateTo == "" ? createDateTo = "" : createDateTo = $("#searchCreateDateToInput").val());
+    scoreFrom = $("#searchScoreFromInput").val();
+    if (scoreFrom == "" ? scoreFrom = "" : scoreFrom = $("#searchScoreFromInput").val());
+    $("#searchScoreToInput").val();
+    if (scoreTo == "" ? scoreTo = "" : scoreTo = $("#searchScoreToInput").val());
+    if (paperStatus == 0 ? paperStatus = 0 : paperStatus = $("#searchPaperStatus").val());
+    arrayEmployeeToSearch = [];
+
+    if (itemLenght > 0) {
+        for (var i = 0; i < itemLenght; i++) {
+            var temp = $("#showEmployeeSelected").children("button")[i].innerHTML;
+            temp = temp.substring(temp.indexOf('_') + 1, temp.indexOf('z'));
+            arrayEmployeeToSearch.push(temp);
+        }
+        if (btnSearchStatus == 0) {
+            for (var idx = 0; idx < arrayEmployeeToSearch.length; idx++) {
+                var empIds = {
+                    "empId": arrayEmployeeToSearch[idx],
+                    "code": code,
+                    "name": name,
+                    "createDateFrom": createDateFrom,
+                    "createDateTo": createDateTo,
+                    "scoreFrom": scoreFrom,
+                    "scoreTo": scoreTo,
+                    "paperStatus": paperStatus,
+                    "buttonStatus": btnSearchStatus
+                };
+                tempArray.push(empIds);
+            }
+        }
+        if (btnSearchStatus == 1) {
+            for (var idx1 = 0; idx1 < arrayEmployeeToSearch.length; idx1++) {
+                var empIds1 = {
+                    "empId": arrayEmployeeToSearch[idx1],
+                    "code": code,
+                    "name": name,
+                    "createDateFrom": createDateFrom,
+                    "createDateTo": createDateTo,
+                    "scoreFrom": scoreFrom,
+                    "scoreTo": scoreTo,
+                    "paperStatus": paperStatus,
+                    "buttonStatus": btnSearchStatus
+                };
+                tempArray.push(empIds1);
+            }
+        }
+    }
+    else {
+        if (btnSearchStatus == 0) {
+            var empIds2 = {
+                "empId": '0',
+                "code": code,
+                "name": name,
+                "createDateFrom": createDateFrom,
+                "createDateTo": createDateTo,
+                "scoreFrom": scoreFrom,
+                "scoreTo": scoreTo,
+                "paperStatus": paperStatus,
+                "buttonStatus": btnSearchStatus
+            };
+            tempArray.push(empIds2);
+        }
+        if (btnSearchStatus == 1) {
+            var empIds3 = {
+                "empId": '0',
+                "code": code,
+                "name": name,
+                "createDateFrom": createDateFrom,
+                "createDateTo": createDateTo,
+                "scoreFrom": scoreFrom,
+                "scoreTo": scoreTo,
+                "paperStatus": paperStatus,
+                "buttonStatus": btnSearchStatus
+            };
+            tempArray.push(empIds3);
+        }
+    }
+    var jsonObjz = JSON.stringify(tempArray);
+    $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/searchPaper",
+        dataType: "json",
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        data: jsonObjz,
+        success: function (data) {
+            if(data.length == 0){
+                paperNotFound();
+            }
+            else{
+                paperFound();
+                $("#tbodyManagePaper").empty();
+                data.forEach(function (value) {
+                    $("#tbodyManagePaper").append(
+                        '<tr>' +
+                        '<td style="display: none;"><label id="' + value.id + '">' + value.id + '</label></td>' +
+                        '<td><input class="checkPaper" type="checkbox"/></td>' +
+                        '<td><label id="lpaperCode' + value.code + '">' + value.code + '</label></td>' +
+                        '<td style="text-align: left;"><label id="lpaperName' + value.name + '">' + value.name + '</label></td>' +
+                        '<td><label id="lpaperCreateBy' + value.createBy.empId + '">' + value.createBy.thFname + ' ' + value.createBy.thLname + '</label></td>' +
+                        '<td><label id="lpaperScore' + value.maxScore + '" class="label-control">' + value.maxScore + '</label></td>' +
+                        '<td><label id="lpaperForPosition' + value.position.posiId + '" class="label-control">' + value.position.posiName + '</label></td>' +
+                        '<td>' +
+                        '<select id="dropdownId' + value.id + '" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">' +
+                        '<option value="3">ยังไม่เผยแพร่</option>' +
+                        '<option value="1">เผยแพร่</option>' +
+                        '<option value="2">ปิดการเผยแพร่</option>' +
+                        '</select>' +
+                        '</td>' +
+                        '<td><button id="' + value.id + '" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
+                        '</tr>'
+                    );
+                    presentStatus(value.id, value.paperStatus.id);
+                });
+            }
+        }
+    });
+    tempArray = [];
+}
+
+function paperNotFound(){
+    $("#paperNotFound").show();
+    $("#tbManagePaper").hide();
+}
+
+function paperFound(){
+    $("#paperNotFound").hide();
+    $("#tbManagePaper").show();
+}
+
+function resetInput(){
+    $("#paperCodeSearch").val('');
+    $("#paperName").val('');
+}
+
+function resetAdvInput(){
+    $("#paperCodeSearch").val('');
+    $("#paperName").val('');
+    $("#showEmployeeSelected").empty();
+    $("#searchCreateDateFromInput").val('');
+    $("#searchCreateDateToInput").val('');
+    $("#searchScoreFromInput").val('');
+    $("#searchScoreToInput").val('');
+    $("#searchPaperStatus").val(0);
 }

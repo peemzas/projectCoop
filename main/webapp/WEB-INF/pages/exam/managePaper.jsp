@@ -11,8 +11,24 @@
     #tbManagePaper{
         margin-top: 3px;
     }
-    td{
+    #tbodyManagePaper td{
         font-size: 13px;
+    }
+    #paperNotFound {
+        background-color: #b2e0ff;
+        height: 100px;
+        display: none;
+        top: 40px;
+        vertical-align: middle;
+        border-radius: 5px;
+        margin-top: -15px;
+    }
+
+    #paperNotFoundDesc {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100px;
+        color: #00647f;
     }
 </style>
 
@@ -33,7 +49,7 @@
         <button id="deletePapers" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
     </div>
     <div class="row">
-        <table id="tbManagePaper" class="table table-responsive table-hover">
+        <table id="tbManagePaper" class="table table-responsive table-hover table-bordered">
             <thead class="bg-primary small">
                 <tr>
                     <th style="text-align: center"><input id="checkPaperAll" type="checkbox"/></th>
@@ -49,6 +65,9 @@
             <tbody id="tbodyManagePaper" align="center">
 
             </tbody>
+            <div id="paperNotFound" width="100%">
+                <h3 id="paperNotFoundDesc">ไม่พบชุดข้อสอบ</h3>
+            </div>
         </table>
     </div>
 </div>

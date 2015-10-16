@@ -1,5 +1,7 @@
 package com.springapp.mvc.domain.exam;
 
+import com.springapp.mvc.pojo.exam.Boo;
+import com.springapp.mvc.pojo.exam.ExamPaper;
 import com.springapp.mvc.pojo.exam.ExamRecord;
 import com.springapp.mvc.pojo.exam.ExamResult;
 import com.springapp.mvc.util.HibernateUtil;
@@ -31,4 +33,19 @@ public class QueryExamRecordDomain extends HibernateUtil{
         return (ExamRecord)criteria.uniqueResult();
     }
 
+//    Add By Mr.Wanchana
+    public Boolean checkExamRecordInUse(Integer paperId){
+
+        Boolean check = false;
+        QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
+        ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
+        Criteria criteria = getSession().createCriteria(ExamRecord.class);
+        criteria.add(Restrictions.eq("paper", examPaper));
+
+        if(criteria.list().size() != 0){
+            check = true;
+        }
+
+        return check;
+    }
 }

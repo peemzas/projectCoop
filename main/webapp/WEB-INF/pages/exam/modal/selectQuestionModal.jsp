@@ -39,7 +39,7 @@
                     <%@include file="../template/searchQuestionTemplateNew.jsp"%>
                     <%--<button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>--%>
                     <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
-                    <table id="tbSelectQuestion" class="table table-responsive table-hover">
+                    <table id="tbSelectQuestion" class="table table-responsive table-hover table-bordered">
                         <thead class="bg-primary small">
                             <tr>
                                 <th><input id="checkQuestionAll" type="checkbox"></th>
