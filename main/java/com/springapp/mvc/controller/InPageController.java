@@ -3,7 +3,6 @@ package com.springapp.mvc.controller;
 import com.springapp.mvc.domain.*;
 import com.springapp.mvc.domain.exam.QueryCategoryDomain;
 
-import com.springapp.mvc.domain.exam.QueryExamRecordSearchDomain;
 import com.springapp.mvc.domain.exam.QuerySubCategoryDomain;
 import com.springapp.mvc.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +46,6 @@ public class InPageController {
     @Autowired
     private QueryTopicDomain queryTopicDomain;
 
-//add by job
-    @Autowired
-    private QueryExamRecordSearchDomain queryExamRecordSearchDomain;
-    
 //    Add by Neng
     @Autowired
     private QueryCategoryDomain queryCategoryDomain;

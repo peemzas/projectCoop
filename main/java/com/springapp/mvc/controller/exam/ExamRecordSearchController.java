@@ -3,13 +3,15 @@ package com.springapp.mvc.controller.exam;
 import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryPositionDomain;
 import com.springapp.mvc.domain.exam.QueryExamRecordDomain;
-import com.springapp.mvc.domain.exam.QueryExamRecordSearchDomain;
 import com.springapp.mvc.domain.exam.QueryExamResultDomain;
 import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.exam.ExamPaper;
 import com.springapp.mvc.pojo.exam.ExamRecord;
 import com.springapp.mvc.pojo.exam.ExamResult;
 import flexjson.JSONSerializer;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,22 +37,47 @@ public class ExamRecordSearchController {
     @Autowired
     QueryPositionDomain queryPositionDomain;
 
-    @RequestMapping(value = "/exam/getQueryExamRecordSearch", method = RequestMethod.POST)
+    @RequestMapping(value = "/exam/getQueryExamRecordSearch", method = RequestMethod.POST,headers = "Accept=application/json")
     @ResponseBody
-    public ResponseEntity<String> getQueryExamRecordSearch(@RequestParam(value = "code",required = false)String code,
-                                                           @RequestParam(value = "position",required = false)Integer positionId) {
+    public ResponseEntity<String> getQueryExamRecordSearch(@RequestBody String jsonObj) throws JSONException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        JSONArray jsonArray = new JSONArray(jsonObj);
+        List<Integer> userId = new ArrayList<Integer>();
+        for (int i = 0 ; i < jsonArray.length()-1;i++){
+            JSONObject jsonItems = jsonArray.getJSONObject(i);
+            String forUserId = (String) jsonItems.get("userId");
+            userId.add(Integer.parseInt(forUserId));
+        }
+        JSONObject jsonItems = jsonArray.getJSONObject(jsonArray.length()-1);
+        String codeId = (String) jsonItems.get("code");
+        String posiId = (String) jsonItems.get("position");
+        Position position = null;
+        Integer posiIdInt = Integer.parseInt(posiId);
+        if(posiIdInt != 0){
+            position =  queryPositionDomain.getPositionById(posiIdInt);
+        }
+        List<ExamResult> results = queryExamResualt.getAllExamResult(userId,codeId,position);
+
+//        List<Integer> items = new ArrayList<Integer>();
+//        System.out.println(jsonItems);
+//        String code= (String) jsonItems.get("userId");
+//        Integer positionId = jsonItems.getInt("position");
+//        for(int i = 0; i < jsonArray.length(); i++){
+//            JSONObject jsonObject = jsonArray.getJSONObject(i);
+//            items.add(jsonObject.getInt("userId"));
+//        }
 //        Position position = null;
 //        if(positionId != 0){
 //            position =  queryPositionDomain.getPositionById(positionId);
 //        }
-//        List<ExamResult> examResult = queryExamResualt.getQueryExamResultSearch(code, position);
-        List<ExamResult> results = queryExamResualt.getAllExamResult();
+
+//        List<ExamResult> results = queryExamResualt.getAllExamResult(code, position);
+
 
         String json = new JSONSerializer().exclude("*.class").serialize(results);
-
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 }
