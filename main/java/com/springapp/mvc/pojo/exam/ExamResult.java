@@ -38,7 +38,7 @@ public class ExamResult implements Serializable {
     @Column(name = "MARKED_DATE")
     private Date markedDate;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "EXAM_RECORD_ID")
     private ExamRecord examRecord;
 

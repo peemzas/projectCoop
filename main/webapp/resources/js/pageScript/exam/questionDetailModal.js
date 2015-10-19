@@ -78,7 +78,8 @@ var updateDetailModal = function (tr) {
                 $('#choiceDetailContainer').hide()
             }
         }, error: function () {
-            alert("Failed");
+            alert("error occur");
+            $('#questionDetailModal').modal('hide');
         }
     })
 }

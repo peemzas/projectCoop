@@ -2,8 +2,6 @@ package com.springapp.mvc.util;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,31 +11,12 @@ import java.util.Date;
 @Component
 public class DateUtil {
 
-//    public static Timestamp getDateWithRemoveTime(String date){
-//        String newFormateDate =  convertStringDate(date);
-//        Timestamp maxTimeDate = Timestamp.valueOf(newFormateDate+" "+"00:00:00.000");
-//
-//        return maxTimeDate;
-//    }
-//    private static String convertStringDate(String dateString1){
-//        String newDate ="";
-//        try{
-//            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString1);
-//            SimpleDateFormat newformat = new SimpleDateFormat("yyyy-MM-dd");
-//            newDate = newformat.format(date);
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        return newDate;
-//    }
-
     public static Date getCurrentDateWithRemovedTime(){
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
+        calendar.set(Calendar.YEAR,calendar.get(Calendar.YEAR) + 543);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -50,6 +29,7 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
+//        calendar.set(Calendar.YEAR, calendar.YEAR + 543);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -63,10 +43,11 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.YEAR, calendar.YEAR + 543);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 59);
 
         return calendar.getTime();
     }

@@ -27,6 +27,10 @@ $('.createQuestionBtn').on('click', function () {
     createQuestionModalClearInput();
 })
 
+$('.searchSubmitBtn').on('click',function(){
+    listSearchQuestion($(this));
+})
+
 var deleteSelectedQuestion = function(){
     console.log('prepare to delete')
     var selectedQuestions = $('.questionSelectBox:checked');
@@ -38,25 +42,6 @@ var deleteSelectedQuestion = function(){
     })
     console.log('deleting '+ questionIds)
     deleteQuestions(questionIds);
-}
-
-
-
-var generateEventHandler = function () {
-
-
-    $('.actionViewBtn').on('click', function () {
-        var tr = $(this).parents('tr');
-        updateDetailModal(tr);
-    })
-    $(".actionDeleteBtn").on('click', function () {
-        var questionId = parseInt($(this).parents('tr').attr('questionId'));
-        var r = confirm("ลบข้อสอบที่ " + questionId);
-        if (r == true) {
-            deleteQuestion(questionId);
-        }
-    })
-
 }
 
 $('#selectAllItem').on('click',function(){
@@ -113,11 +98,11 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
         }
         ,
         success: function () {
-            alert('Success');
-            listAllQuestion();
+            alert('แก้ไขข้อสอบสำเร็จ');
         },
         error: function () {
-            alert('Error');
+            alert('Error occur');
+            $('#createQuest').modal('show')
         }
     })
 
@@ -179,7 +164,7 @@ var deleteQuestions = function (questionIds) {
         },
         success: function () {
             alert("Delete Success");
-            listSearchQuestion();
+            listSearchQuestion($('#advSearchBtn'));
         }, error: function () {
             alert("Failed");
         }
@@ -187,20 +172,28 @@ var deleteQuestions = function (questionIds) {
 
 }
 
-var listSearchQuestion = function () {
-    var data = getSearchQuestionResultList();
+var listSearchQuestion = function (btn) {
+    console.log('hello')
+    var data;
+
+    if(btn == undefined || btn.attr('id') != 'advSearchBtn'){
+        data = getSearchQuestionResultListBasic();
+    }
+    else{
+        data = getSearchQuestionResultListAdv();
+    }
 
     $("tbody").empty();
     data.forEach(function (q) {
         var createDate = new Date(q.createDate);
         var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
         $("#tableBody").append('<tr questionId=' + q.id + '>' +
-        '<td class="questionSelect"><input type="checkbox" class="form-control questionSelectBox"/></td>' +
+        '<td class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
         '<td class="questionType">' + q.questionType.description + '</td>' +
         '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
         '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
         '<td class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
-        '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
+        //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
         '<td class="questionScore">' + q.score + '</td>' +
         '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
         '<td class="questionCreateDate">' + formattedDate + '</td>' +
@@ -212,8 +205,6 @@ var listSearchQuestion = function () {
 
     $('tbody tr td:not(.questionSelect)').css('cursor','pointer');
     $('.questionSelectBox').css('cursor','pointer');
-
-    generateEventHandler();
 }
 
 //===================================================================================EVENT TRIGGER=================================================================================================//

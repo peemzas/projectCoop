@@ -28,7 +28,7 @@
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
                             <%--<button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm searchInputSubmitBtn" type="button">ค้นหา</button>--%>
-                                <button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm" type="button">ค้นหา</button>
+                                <button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm searchSubmitBtn" type="button">ค้นหา</button>
                             <button class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                         <div class="row" id="btnAdvanceSearch">
                             <div class="col-md-12 text-center">
                                 <hr/>
-                                <button id="advSearchBtn" class="btn btn-primary btn-sm" type="button">ค้นหา</button>
+                                <button id="advSearchBtn" class="btn btn-primary btn-sm searchSubmitBtn" type="button">ค้นหา</button>
                                 <button id="advResetBtn" class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
                             </div>
                         </div>

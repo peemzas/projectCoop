@@ -91,7 +91,7 @@ public class QuestionController {
         question.setCreateBy(queryUserDomain.getCurrentUser(request));
         question.setDescription(qDesc);
 
-        question.setCreateDate(DateUtil.getDateWithRemovedTime(new Date()));
+        question.setCreateDate(DateUtil.getCurrentDateWithRemovedTime());
         question.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
         question.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
         question.setScore(score);
@@ -166,7 +166,7 @@ public class QuestionController {
             newQuestion.setDifficultyLevel(difficulty);
             newQuestion.setSubCategory(subCategory);
             newQuestion.setUpdateBy(queryUserDomain.getCurrentUser(request));
-            newQuestion.setUpdateDate(DateUtil.getDateWithRemovedTime(new Date()));
+            newQuestion.setUpdateDate(DateUtil.getCurrentDateWithRemovedTime());
 
             queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
         }
@@ -220,7 +220,6 @@ public class QuestionController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-//        Question question = queryQuestionDomain.getQuestionById(questionId);
         List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(questionId);
         String json = new JSONSerializer().exclude("*.class").serialize(choices);
 
@@ -375,13 +374,11 @@ public class QuestionController {
             @RequestParam(value = "categoryId", required = false) String catId,
             @RequestParam(value = "subCatName", required = false) String subCatName,
             @RequestParam(value = "createBy", required = false) String createBy,
-//            @RequestParam(value = "questionId", required = false) String questionId,
             @RequestParam(value = "questionDesc", required = false) String questionDesc,
             @RequestParam(value = "createDateFrom", required = false) String createDateFrom,
             @RequestParam(value = "createDateTo", required = false) String createDateTo,
             @RequestParam(value = "scoreFrom", required = false) String scoreFrom,
             @RequestParam(value = "scoreTo", required = false) String scoreTo,
-//            @RequestParam(value = "status", required = false) String status,
             HttpServletRequest request, HttpServletResponse response
     ) {
         List<Question> questions = queryQuestionDomain.searchQuestionQuery(

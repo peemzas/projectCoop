@@ -4,10 +4,14 @@ import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
+import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by PTang_000 on 30-Sep-15.
@@ -49,18 +53,22 @@ public class MarkingController {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
+    @Autowired
+    QueryBooDomain queryBooDomain;
+
+    @Autowired
+    QueryPaperQuestionDomain queryPaperQuestionDomain;
+
+    @Transactional
     @RequestMapping(method = RequestMethod.GET, value = "/exam/marking")
     public String marking(ModelMap modelMap, Model model, HttpServletRequest request, HttpServletResponse response
 //                         ,@RequestParam(value = "recordId") Integer recordId
-            , @RequestParam(value = "resultId") Integer resultId){
+            , @RequestParam(value = "resultId") Integer resultId) {
 
-//        ExamRecord examRecord = queryExamRecordDomain.getExamRecordById(recordId);
-//        ExamResult examResult = queryExamResultDomain.getExamResultByExamRecord(examRecord);
-//        modelMap.addAttribute("examRecord", examRecord);
-//        modelMap.addAttribute("subjectiveScore", examResult.getSubjectiveScore());
         ExamResult examResult = queryExamResultDomain.getExamResultById(resultId);
-        modelMap.addAttribute("examResult",examResult);
-        modelMap.addAttribute("user",queryUserDomain.getCurrentUser(request));
+        Hibernate.initialize(examResult.getExamRecord().getPaper().getQuestions());
+        modelMap.addAttribute("examResult", examResult);
+        modelMap.addAttribute("user", queryUserDomain.getCurrentUser(request));
 
         return "marking";
     }
@@ -68,23 +76,23 @@ public class MarkingController {
     @RequestMapping(method = RequestMethod.POST, value = "/exam/marking/submit")
     @ResponseBody
     public void submitMarking(HttpServletRequest request, HttpServletResponse response
-                              ,@RequestParam(value = "resultId",required = true)Integer resultId
-                              ,@RequestParam(value = "markingRecord",required = true)JSONArray markingRecord
-                              ,@RequestParam(value = "comment",required = false)String comment) throws Exception{
+            , @RequestParam(value = "resultId", required = true) Integer resultId
+            , @RequestParam(value = "markingRecord", required = true) JSONArray markingRecord
+            , @RequestParam(value = "comment", required = false) String comment) throws Exception {
 
         ExamResult examResult = queryExamResultDomain.getExamResultById(resultId);
         User currentUser = queryUserDomain.getCurrentUser(request);
         examResult.setMarkedBy(currentUser);
         examResult.setComment(comment);
-        examResult.setMarkedDate(new Date());
+        examResult.setMarkedDate(DateUtil.getCurrentDateWithRemovedTime());
 
         BigDecimal subjectiveScore = BigDecimal.ZERO;
         List<ExamAnswerRecord> examAnswerRecords = examResult.getExamRecord().getExamAnswerRecords();
 
-        try{
+        try {
             HibernateUtil.beginTransaction();
 
-            for(int i = 0 ; i < markingRecord.length() ; i++){
+            for (int i = 0; i < markingRecord.length(); i++) {
                 ExamMarkingRecord examMarkingRecord = new ExamMarkingRecord();
 
                 examMarkingRecord.setMarkedBy(currentUser);
@@ -94,7 +102,7 @@ public class MarkingController {
                 examMarkingRecord.setMarkingScore(score);
                 examMarkingRecord.setExamResult(examResult);
                 queryMarkingRecord.saveMarkingRecord(examMarkingRecord);
-                subjectiveScore =  subjectiveScore.add(score);
+                subjectiveScore = subjectiveScore.add(score);
             }
             examResult.setSubjectiveScore(subjectiveScore);
             examResult.setStatus(queryStatusDomain.getMarkedStatus());
@@ -102,11 +110,12 @@ public class MarkingController {
             queryExamResultDomain.updateExamResult(examResult);
 
             HibernateUtil.commitTransaction();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
 
     }
+
 }
 

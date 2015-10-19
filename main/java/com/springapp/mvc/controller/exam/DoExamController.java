@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.print.Paper;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -98,15 +99,16 @@ public class DoExamController {
         examRecord.setUser(user);
         examRecord.setPaper(paper);
         examRecord.setTimeTaken(timeTaken);
-        examRecord.setExamDate(new Date());
         examRecord.setExamDate(DateUtil.getCurrentDateWithRemovedTime());
+        boolean haveSubjective = false;
+        QuestionType subjective = queryQuestionTypeDomain.getSubjective();
 
         ExamRecord preTestRecord = queryExamRecordDomain.getPreTestRecord(examRecord);
         if (preTestRecord != null){
             examRecord.setPreTestRecord(preTestRecord);
         }
 
-        Float objectiveScore = (float) 0.0;
+        BigDecimal objectiveScore = BigDecimal.ZERO;
         Choice currentChoice = null;
         Question currentQuestion = null;
         try {
@@ -121,13 +123,19 @@ public class DoExamController {
                 currentQuestion = queryQuestionDomain.getQuestionById(answerRecords.getJSONObject(i).getInt("questionId"));
                 examAnswerRecord.setQuestion(currentQuestion);
 
+                if(currentQuestion.getQuestionType() == subjective){
+                    haveSubjective = true;
+                }
 
                 if (answerRecords.getJSONObject(i).optInt("answerObjective") != 0) {
                     currentChoice = queryChoiceDomain.getChoiceById(answerRecords.getJSONObject(i).getInt("answerObjective"));
                     examAnswerRecord.setAnswerObjective(currentChoice);
 
-                    if (currentChoice.getCorrection() == queryBooDomain.getTrue()) {
-                        objectiveScore += queryPaperQuestionDomain.getPaperQuestion(paper,currentQuestion).getScore();
+                    if (currentChoice.getCorrection().getBoolean()) {
+
+                        PaperQuestion pq = queryPaperQuestionDomain.getPaperQuestion(paper, currentQuestion);
+                        BigDecimal score = pq.getScore();
+                        objectiveScore.add(score);
                     }
                 } else {
                     try {
@@ -142,8 +150,17 @@ public class DoExamController {
             //Save ExamResult
             ExamResult examResult = new ExamResult();
             examResult.setExamRecord(examRecord);
-            examResult.setObjectiveScore(new BigDecimal(objectiveScore));
-            examResult.setStatus(queryStatusDomain.getPendingStatus());
+            examResult.setObjectiveScore(objectiveScore);
+
+            if(!haveSubjective){
+                examResult.setMarkedDate(DateUtil.getCurrentDateWithRemovedTime());
+                examResult.setStatus(queryStatusDomain.getMarkConfirmedStatus());
+                examResult.setSubjectiveScore(BigDecimal.ZERO);
+                examResult.setComment("ผลตรวจอัตโนมัติโดยระบบ");
+            }else {
+                examResult.setStatus(queryStatusDomain.getPendingStatus());
+            }
+
             queryExamResultDomain.saveExamResult(examResult);
 
             HibernateUtil.commitTransaction();

@@ -8,9 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-import com.springapp.mvc.pojo.exam.PaperQuestion;
-import org.hibernate.annotations.FetchMode;
-
 /**
  * Created by Phuthikorn_T on 6/30/2015.
  */
