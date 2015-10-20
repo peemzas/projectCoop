@@ -27,15 +27,33 @@ var itm = {};
 var paperId = 0;
 
 $(document).ready(function(){
-
-    if($.isNumeric(Number(getValueFromUrl()))){
-        paperId = Number(getValueFromUrl());
+    var value = getValueFromUrl();
+    var id = value.substring(0, value.indexOf("#"));
+    var paperStatus = value.substring(value.indexOf("#") + 1, value.length);
+    if($.isNumeric(Number(id)) && paperStatus == "edit"){
+        paperId = Number(id);
         onLoadPageEditPaper();
         showUpdatePaper(paperId);
+    }
+    else if($.isNumeric(Number(id)) && paperStatus == "info"){
+        paperId = Number(id);
+        showPaperInfo(paperId);
     }
     else{
         onLoadPageCreatePaper();
     }
+
+    $("#randResetBtn").unbind('click').click(function(){
+        resetRandomQuestion();
+    });
+
+    if($("#randomQuestionModal").is(':visible')){
+        resetRandomQuestion();
+    }
+
+    $("#randBtn").unbind('click').click(function(){
+        randomQuestion();
+    });
 
     $("#generalSearchButtonInModalSelectionQuestion").unbind('click').click(function(){
         btnSearchStatus = 0;
@@ -66,13 +84,16 @@ $(document).ready(function(){
     });
 
     $("#cancelCreatePaperBtn").unbind('click').click(function(){
-        if($.isNumeric(Number(getValueFromUrl()))){
-            if(!confirm('คุณต้องการยกเลิกการแก้ไขชุดข้อสอบหรือไม่')){
+        if($.isNumeric(Number(id)) && paperStatus == "edit"){
+            if(!confirm('ข้อมูลยังไม่ถูกบันทึก ต้องการยกเลิกหรือไม่')){
                 return false;
             }
         }
+        else if($.isNumeric(Number(id)) && paperStatus == "info"){
+            return true;
+        }
         else{
-            if(!confirm('คุณต้องการยกเลิกการสร้างชุดข้อสอบหรือไม่')){
+            if(!confirm('ข้อมูลยังไม่ถูกบันทึก ต้องการยกเลิกหรือไม่')){
                 return false;
             }
         }
@@ -201,13 +222,13 @@ function viewQuestions(){
                     $("#tbodySelectQuestion").append(
                         '<tr>'+
                         '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
-                        '<td><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
+                        '<td style="text-align: center;"><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
                         '<td style="text-align: left;"><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
                         '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
-                        '<td style="text-align: left;"><button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign"></span></span></button><label id="labelQuestionDesc'+value.id+'">'+qDescription+'</label></td>'+
+                        '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+qDescription+'</label></td>'+
                         '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
                         '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
-                        '<td><label id="labelScore'+value.id+'">'+value.score+'</td>'+
+                        '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
 
                         '<td><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
@@ -273,10 +294,10 @@ function viewQuestions(){
                             '<td><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
                             '<td style="text-align: left;"><label id="labelCategoryName'+valuez.idz+'">'+valuez.subCategoryz.category.name+'<label></td>'+
                             '<td style="text-align: left;"><label id="labelSubCategoryName'+valuez.idz+'">'+valuez.subCategoryz.name+'</label></td>'+
-                            '<td style="text-align: left;"><button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign"></span></span></button><label id="labelQuestionDesc'+valuez.idz+'">'+qDescriptionz+'</label></td>'+
+                            '<td style="text-align: left;"><label id="labelQuestionDesc'+valuez.idz+'">'+qDescriptionz+'</label></td>'+
                             '<td><label id="labelQuestionTypeDesc'+valuez.idz+'">'+valuez.questionTypez.description+'</td>'+
                             '<td><label id="labelDiffDesc'+valuez.idz+'">'+valuez.difficultyLevelz.description+'</td>'+
-                            '<td><label id="labelScore'+valuez.idz+'">'+valuez.score+'</td>'+
+                            '<td style="text-align: center;"><label id="labelScore'+valuez.idz+'">'+valuez.score+'</td>'+
 
                             '<td><label id="labelQuestionCreateBy'+valuez.idz+'">'+valuez.createByz.thFname+" "+valuez.createByz.thLname+'</td>'+
                             '<td style="display: none;"><label id="labelQuestionCreateDate'+valuez.idz+'">'+valuez.createDatez+'</td>'+
@@ -320,14 +341,14 @@ function addQuestionToPaper(qId){
     $("#tbodySelectedQuestionToPaper").append(
         '<tr>'+
             '<td style="display: none;">'+$("#labelQuestionId"+qId).text()+'</td>'+
-            '<td><input type="checkbox" class="selectedQuestion"/></td>'+
-            '<td>'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
+            '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
+            '<td style="text-align: center;">'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
             '<td>'+$("#labelCategoryName"+qId).text()+'</td>'+
             '<td>'+$("#labelSubCategoryName"+qId).text()+'</td>'+
-            '<td style="text-align: left;">'+$("#labelQuestionDesc"+qId).text()+'</td>'+
-            '<td>'+$("#labelDiffDesc"+qId).text()+'</td>'+
-            '<td><input id="newScore'+qId+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control innput-sm"  min="1" max="50" value="'+newScore+'"/></td>'+
-            '<td>'+$("#labelQuestionCreateBy"+qId).text()+'</td>'+
+            '<td>'+$("#labelQuestionDesc"+qId).text()+'</td>'+
+            '<td style="text-align: center;">'+$("#labelDiffDesc"+qId).text()+'</td>'+
+            '<td><input id="newScore'+qId+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+newScore+'"/></td>'+
+            '<td style="text-align: center;">'+$("#labelQuestionCreateBy"+qId).text()+'</td>'+
         '</tr>'
     );
     $("#questionNotFound").hide();
@@ -336,14 +357,82 @@ function addQuestionToPaper(qId){
     $("#score").val(sumPaperScore);
 }
 
-function createPaper(){
+function createPaperValidation(){
 
+    var paperTime = ((parseInt(hours) * 60) + parseInt(minutes));
+
+    if($("#newPaperId").val() != ""){
+        $("#newPaperId").css('border-color', 'green');
+    }
+    //if($("#newPaperName").val() != ""){
+    //    $("#newPaperName").css('border-color', 'green');
+    //}
+    if($("#newPaperScore").val() != "" && $.isNumeric($("#newPaperScore").val()) == true){
+        $("#newPaperScore").css('border-color', 'green');
+    }
+    if($("#newPaperForPosition").val() != "เลือกตำแหน่ง"){
+        $("#newPaperForPosition").css('border-color', 'green');
+    }
+    if(paperTime > 0){
+        $("#hours").css('border-color', 'green');
+        $("#minutes").css('border-color', 'green');
+    }
+
+    if($("#newPaperId").val() == ""){
+        $("#newPaperId").focus();
+        $("#newPaperId").css('border-color', 'red');
+        return false;
+    }
+    //if($("#newPaperName").val() == ""){
+    //    $("#newPaperName").focus();
+    //    $("#newPaperName").css('border-color', 'red');
+    //    return false;
+    //}
+    if($("#newPaperScore").val() == "" || $.isNumeric($("#newPaperScore").val()) == false){
+        $("#newPaperScore").focus();
+        $("#newPaperScore").css('border-color', 'red');
+        return false;
+    }
+    if($("#newPaperForPosition").val() == "เลือกตำแหน่ง"){
+        $("#newPaperForPosition").css('border-color', 'red');
+        return false;
+    }
+
+    if(paperTime == 0){
+        $("#hours").css('border-color', 'red');
+        $("#minutes").css('border-color', 'red');
+        return false;
+    }
+    if($("#questionNotFoundDesc").is(":visible")){
+        alert('โปรดเลือกข้อสอบ');
+        return false;
+    }
+}
+
+function validateScore(){
     if($("#score").val() > $("#maxScore").val()){
-        alert('Score out of range!!!');
+        alert('คะแนนมากกว่าที่กำหนด');
         $("#maxScore").focus();
         $("#score").css('border-color', 'red');
         return false;
     }
+    if($("#score").val() < $("#maxScore").val()){
+        alert('คะแนนน้อยกว่าที่กำหนด');
+        $("#maxScore").focus();
+        $("#score").css('border-color', 'red');
+        return false;
+    }
+}
+
+function createPaper(){
+
+    if(createPaperValidation() == false){
+        return false;
+    }
+    if(validateScore() == false){
+        return false;
+    }
+
     var paperId = $("#newPaperId").val();
     var paperName = $("#newPaperName").val();
     var paperScore = $("#newPaperScore").val();
@@ -373,7 +462,7 @@ function createPaper(){
             jsonObjQuestion : jsonObjQuestion
         },
         success: function(){
-            alert('เพิ่มชุดข้อสอบเรียบร้อยแล้ว');
+            alert('บันทึกข้อมูลสำเร็จ');
             window.location.href = "/TDCS/exam/managePapers";
         },
         error: function(){
@@ -401,6 +490,14 @@ function onLoadPageEditPaper(){
     $("#score").val(0);
     $("#maxScore").val(0);
     $("#hours").defaultValue = "0";
+}
+
+function onLoadPagePaperInfo(){
+    $("#tbSelectedQuestionToPaper").hide();
+    $(".btn:not(#cancelCreatePaperBtn)").hide();
+    $("#tbPaperInfo").show();
+    $("h3").text('ข้อมูลชุดข้อสอบ');
+    $("#cancelCreatePaperBtn").text('ย้อนกลับ');
 }
 
 function sumScore(score){
@@ -556,14 +653,14 @@ function generalSearchQuestion(btnSearchStatus) {
                         '<tr>'+
                         '<td style="display: none;"><label id="labelQuestionId'+i.ids+'">'+i.ids+'</td>'+
                         '<td><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
-                        '<td style="text-align: left;"><label id="labelCategoryName'+i.ids+'">'+i.subCategorys.category.name+'<label></td>'+
-                        '<td style="text-align: left;"><label id="labelSubCategoryName'+i.ids+'">'+i.subCategorys.name+'</label></td>'+
-                        '<td style="text-align: left;"><button class="btn btn-link btn-info btn-sm" type="button"><span class="glyphicon glyphicon-info-sign"></span></span></button><label id="labelQuestionDesc'+i.ids+'">'+qDescriptions+'</label></td>'+
-                        '<td><label id="labelQuestionTypeDesc'+i.ids+'">'+i.questionTypes.description+'</td>'+
-                        '<td><label id="labelDiffDesc'+i.ids+'">'+i.difficultyLevels.description+'</td>'+
-                        '<td><label id="labelScore'+i.ids+'">'+i.scores+'</td>'+
+                        '<td style="text-align: center;"><label id="labelCategoryName'+i.ids+'">'+i.subCategorys.category.name+'<label></td>'+
+                        '<td><label id="labelSubCategoryName'+i.ids+'">'+i.subCategorys.name+'</label></td>'+
+                        '<td><label id="labelQuestionDesc'+i.ids+'">'+qDescriptions+'</label></td>'+
+                        '<td style="text-align: center;"><label id="labelQuestionTypeDesc'+i.ids+'">'+i.questionTypes.description+'</td>'+
+                        '<td style="text-align: center;"><label id="labelDiffDesc'+i.ids+'">'+i.difficultyLevels.description+'</td>'+
+                        '<td style="text-align: center;"><label id="labelScore'+i.ids+'">'+i.scores+'</td>'+
 
-                        '<td><label id="labelQuestionCreateBy'+i.ids+'">'+i.createBys.thFname+" "+i.createBys.thLname+'</td>'+
+                        '<td style="text-align: center;"><label id="labelQuestionCreateBy'+i.ids+'">'+i.createBys.thFname+" "+i.createBys.thLname+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateDate'+i.ids+'">'+i.createDates+'</td>'+
 
                         '<td style="display: none; text-align: center"><button id="btnQuestionInfo'+i.ids+'" data-toggle="modal" data-target="#showQuestionInfoModal" class="btn btn-info" type="button" onclick="showInfo('+i.ids+')"><span class="glyphicon glyphicon-book"></span></button></td>'+
@@ -597,7 +694,7 @@ function dataFound(){
 }
 
 function toUrl(paperId){
-    window.location.href = "/TDCS/exam/createPaper?pId="+paperId;
+    window.location.href = "/TDCS/exam/createPaper?pId="+paperId+"#edit";
 }
 
 function getValueFromUrl(){
@@ -625,7 +722,7 @@ function showUpdatePaper(paperId){
                 $("#maxScore").val(j.examPaper.maxScore);
                 $("#newPaperForPosition").val(j.examPaper.position.posiId);
                 var paperTime = j.examPaper.timeLimit;
-                var hours = paperTime / 60;
+                var hours = Math.floor(paperTime / 60);
                 var minutes = paperTime % 60;
                 $("#hours").val(hours);
                 $("#minutes").val(minutes);
@@ -658,20 +755,79 @@ function showUpdatePaper(paperId){
     onLoadPageUpdatePaper();
 }
 
+function showPaperInfo(pId){
+    $("title").text('ข้อมูลชุดข้อสอบ');
+    $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/getPaper",
+        data : {
+            paperId : paperId
+        },
+        async: false,
+        success: function(data){
+            onLoadPagePaperInfo();
+            $("#tbPaperInfo tbody").empty();
+            data.forEach(function(j){
+                $("#newPaperId").val(j.examPaper.code).attr('disabled', 'disabled');
+                if($("#newPaperName").val(j.examPaper.name) == null? $("#newPaperName").val(''): $("#newPaperName").val(j.examPaper.name).attr('disabled', 'disabled'));
+                $("#newPaperScore").val(j.examPaper.maxScore).attr('disabled', 'disabled');
+                $("#maxScore").val(j.examPaper.maxScore);
+                $("#newPaperForPosition").val(j.examPaper.position.posiId).attr('disabled', 'disabled');
+                var paperTime = j.examPaper.timeLimit;
+                var hours = Math.floor(paperTime / 60);
+                var minutes = paperTime % 60;
+                $("#hours").val(hours).attr('disabled', 'disabled');
+                $("#minutes").val(minutes).attr('disabled', 'disabled');
+                var qdesc = j.question.description;
+                if(qdesc.length > 55){
+                    qdesc = qdesc.substring(0, 55)+' ---';
+                }
+                $("#tbPaperInfo tbody").append(
+                    '<tr>'+
+                    '<td style="display: none;">'+ j.question.id+'</td>'+
+                    //'<td><input type="checkbox" class="selectedQuestion"/></td>'+
+                    '<td style="text-align: center;">'+ j.question.questionType.description+'</td>'+
+                    '<td>'+ j.question.subCategory.category.name+'</td>'+
+                    '<td>'+ j.question.subCategory.name+'</td>'+
+                    '<td style="text-align: left;">'+ qdesc+'</td>'+
+                    '<td style="text-align: center;">'+ j.question.difficultyLevel.description+'</td>'+
+                    '<td style="text-align: center;">'+ j.score+'</td>'+
+                    '<td style="text-align: center;">'+ j.question.createBy.thFname+' '+j.question.createBy.thLname+'</td>'+
+                    '</tr>'
+                );
+                sumScore(j.score);
+                $("#score").val(sumPaperScore);
+            });
+        },
+        error: function(){
+            alert("เกิดข้อผิดพลาดขณะร้องขอข้อมูล...");
+        }
+    });
+    sumPaperScore = 0;
+    //onLoadPageUpdatePaper();
+}
+
 function onLoadPageUpdatePaper(){
-    $("h3").text('แก้ไขชุดข้อสอบ');
+    $("h3:not('#questionNotFoundDesc')").text('แก้ไขชุดข้อสอบ');
     $("#createPaperBtn").hide();
     $("#updatePaperBtn").show();
 }
 
+function resetRandomQuestion(){
+    $("#randEasy").val('');
+    $("#randNormal").val('');
+    $("#randHard").val('');
+}
+
 function updatePaper(){
 
-    if($("#score").val() > $("#maxScore").val()){
-        alert('Score out of range!!!');
-        $("#maxScore").focus();
-        $("#score").css('border-color', 'red');
+    if(createPaperValidation() == false){
         return false;
     }
+    if(validateScore() == false){
+        return false;
+    }
+
     var paperCodeUpdate = $("#newPaperId").val();
     var paperNameUpdate = $("#newPaperName").val();
     var paperScoreUpdate = $("#newPaperScore").val();
@@ -688,7 +844,6 @@ function updatePaper(){
         tempArrayQuestionUpdate.push(item);
     }
     jsonObjQuestionUpdate = JSON.stringify(tempArrayQuestionUpdate);
-    //alert(jsonObjQuestionUpdate);
     $.ajax({
         type: "POST",
         url: "/TDCS/exam/updatePaper",
@@ -707,6 +862,65 @@ function updatePaper(){
         },
         error: function(){
             alert('เกิดข้อผิดพลาด');
+        }
+    });
+}
+
+function randomQuestion(){
+
+    var randEasy = $("#randEasy").val();
+    var randNormal = $("#randNormal").val();
+    var randHard = $("#randHard").val();
+
+    if(randEasy == ""? randEasy = 0: randEasy =  $("#randEasy").val());
+    if(randNormal == ""? randNormal = 0: randNormal = $("#randNormal").val());
+    if(randHard == ""? randHard = 0: randHard = $("#randHard").val());
+
+    $.ajax({
+        url: "/TDCS/exam/randomQuestions",
+        type: "POST",
+        data: {
+            randEasy: randEasy,
+            randNormal: randNormal,
+            randHard: randHard
+        },
+        success: function(data){
+            if(data.length == 0){
+                dataNotFound();
+            }
+            else{
+                dataFound();
+                $("#questionNotFound").hide();
+                $("#checkQuestionAll").attr('checked', false);
+                $("#tbSelectedQuestionToPaper").show();
+                $("#tbodySelectedQuestionToPaper").empty();
+                data.forEach(function(value){
+                    var qDescriptionz = value.description;
+                    if(value.description.length > 60){
+                        qDescriptionz = (value.description).substring(0, 55)+' >>';
+                    }
+                    $("#tbodySelectedQuestionToPaper").append(
+                        '<tr>'+
+                        '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
+                        '<td><input class="selectedQuestion" name="selectQ" type="checkbox"/></td>'+
+                        '<td style="text-align: left;"><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
+                        '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
+                        '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+qDescriptionz+'</label></td>'+
+                        '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
+                        '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
+                        '<td><input id="newScore'+value.id+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control innput-sm"  min="1" max="50" value="'+value.score+'"/></td>'+
+
+                        '<td><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
+                        '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
+
+                        '<td style="display: none; text-align: center"><button id="btnQuestionInfo'+value.id+'" data-toggle="modal" data-target="#showQuestionInfoModal" class="btn btn-info" type="button" onclick="showInfo('+value.id+')"><span class="glyphicon glyphicon-book"></span></button></td>'+
+                        '</tr>'
+                    );
+                    sumScore(value.score);
+                    $("#score").val(sumPaperScore);
+                });
+            }
+            sumPaperScore = 0;
         }
     });
 }

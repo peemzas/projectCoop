@@ -29,7 +29,7 @@ public class ExamPaper implements Serializable {
     private Date createDate;
 
     @Column(name = "PAPER_MAX_SCORE")
-    private Integer maxScore;
+    private Float maxScore;
 
     @ManyToOne
     @JoinColumn(name = "PAPER_CREATE_BY")
@@ -127,11 +127,11 @@ public class ExamPaper implements Serializable {
         this.createDate = createDate;
     }
 
-    public Integer getMaxScore() {
+    public Float getMaxScore() {
         return maxScore;
     }
 
-    public void setMaxScore(Integer maxScore) {
+    public void setMaxScore(Float maxScore) {
         this.maxScore = maxScore;
     }
 

@@ -12,6 +12,9 @@
     td{
         font-size: 14px;
     }
+    #tblCategory{
+        margin-top: 5px;
+    }
 </style>
 
 <div class="container row">
@@ -23,7 +26,7 @@
     <div class="row">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h5 class="panel-title">ค้นหา</h5>
+                <h5>ค้นหา</h5>
             </div>
             <div class="panel-body ">
                 <div style="margin-bottom: 5px"></div>
@@ -45,8 +48,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-footer">
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <button id="searchCategory" class="btn btn-primary btn-sm" type="button">ค้นหา</button>

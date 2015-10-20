@@ -10,10 +10,15 @@ var scoreTo;
 var paperStatus;
 var btnSearchStatus;
 var tempArray = new Array();
+var paperIdArray = new Array();
 
 $(document).ready(function(){
 
     getAllPapers();
+
+    if($("#tbodyManagePaper tr").length == 0){
+        paperNotFound();
+    }
 
     $("#advPaperResetBtn").unbind('click').click(function(){
         resetAdvInput();
@@ -21,6 +26,15 @@ $(document).ready(function(){
 
     $("#resetSearchPaper").unbind('click').click(function(){
         resetInput();
+    });
+
+
+    $('#tbodyManagePaper').on('click','td:not(.pCheck):not(.pSelect):not(.pButton)',function(){
+        var paperId = $(this).parent().find("button").attr('id');
+        pId = $(this).parent().siblings().map(function(){
+            return $(this).text();
+        }).get(0);
+        window.location.href = "/TDCS/exam/createPaper?pId="+paperId+"#info";
     });
 
     $("#searchPaperStatus").on('change', function(){
@@ -60,22 +74,25 @@ $(document).ready(function(){
         });
     });
 
-    $("#tbodyManagePaper").on('change', 'select[name="paperStatus"]', function(){
-        //$("select[name='paperStatus']").on('change', function(){
-        var paperId = $(this).attr('id');
-        paperId = paperId.substr(10);
-        updatePaperStatus(paperId);
-        $(".checkPaper").each(function(){
-            this.checked = false;
-        });
-        $("#checkPaperAll").removeAttr('checked');
-    });
-
     $(".checkPaper").click(function(){
+        var paperId = $(this).parent().parent().find("button").attr('id');
         pId = $(this).parent().siblings().map(function(){
             return $(this).text();
         }).get(0);
-        if($("#dropdownId"+pId).val() == 1){
+
+        var check = $.ajax({
+            url: "/TDCS/exam/checkExamPaperInUse",
+            type: "POST",
+            data: {
+                paperId: paperId
+            },
+            async: false,
+            success: function(check){
+
+            }
+        }).responseText;
+
+        if(check == 'true' || $("#dropdownId"+pId).val() == 1){
             alert('ไม่สามารถลบชุดข้อสอบนี้ได้');
             this.checked = false;
         }
@@ -87,7 +104,20 @@ $(document).ready(function(){
                 pId = $(this).parent().siblings().map(function(){
                     return $(this).text();
                 }).get(0);
-                if($("#dropdownId"+pId).val() == 1){
+
+                var check = $.ajax({
+                    url: "/TDCS/exam/checkExamPaperInUse",
+                    type: "POST",
+                    data: {
+                        paperId: pId
+                    },
+                    async: false,
+                    success: function(check){
+
+                    }
+                }).responseText;
+
+                if($("#dropdownId"+pId).val() == 1 || check == 'true'){
                     this.checked = false;
                 }
                 else{
@@ -102,14 +132,28 @@ $(document).ready(function(){
         }
     });
 
+    $("#tbodyManagePaper").on('change', 'select[name="paperStatus"]', function(){
+        var paperId = $(this).attr('id');
+        paperId = paperId.substr(10);
+        updatePaperStatus(paperId);
+        $(".checkPaper").each(function(){
+            this.checked = false;
+        });
+        $("#checkPaperAll").removeAttr('checked');
+    });
+
     $("#deletePapers").on('click', function(){
+        if(!confirm('คุณต้องการลบชุดข้อสอบที่เลือกใช่หรือไม่?')){
+            return false;
+        }
         $("#tbodyManagePaper tr input[type='checkbox']:checked").each(function(){
             pId = $(this).parent().siblings().map(function(){
                 return $(this).text();
             }).get(0);
-            //alert(pId);
-            deletePapers(pId);
+            paperIdArray.push(pId);
+            //deletePapers(pId);
         });
+        deletePapers();
     });
 });
 
@@ -125,20 +169,20 @@ function getAllPapers(){
                 $("#tbodyManagePaper").append(
                     '<tr>'+
                     '<td style="display: none;"><label id="'+value.id+'">'+value.id+'</label></td>'+
-                    '<td><input class="checkPaper" type="checkbox"/></td>'+
+                    '<td class="pCheck"><input class="checkPaper" type="checkbox"/></td>'+
                     '<td><label id="lpaperCode'+value.code+'">'+value.code+'</label></td>'+
                     '<td style="text-align: left;"><label id="lpaperName'+value.name+'">'+value.name+'</label></td>'+
                     '<td><label id="lpaperCreateBy'+value.createBy.empId+'">'+value.createBy.thFname+' '+value.createBy.thLname+'</label></td>'+
                     '<td><label id="lpaperScore'+value.maxScore+'" class="label-control">'+value.maxScore+'</label></td>'+
                     '<td><label id="lpaperForPosition'+value.position.posiId+'" class="label-control">'+value.position.posiName+'</label></td>'+
-                    '<td>'+
+                    '<td class="pSelect">'+
                     '<select id="dropdownId'+value.id+'" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">'+
                     '<option value="3">ยังไม่เผยแพร่</option>'+
                     '<option value="1">เผยแพร่</option>'+
                     '<option value="2">ปิดการเผยแพร่</option>'+
                     '</select>'+
                     '</td>'+
-                    '<td><button id="'+value.id+'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '<td class="pButton"><button id="'+value.id+'" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
                     '</tr>'
                 );
                 presentStatus(value.id, value.paperStatus.id);
@@ -186,16 +230,21 @@ function setColorDropdown(paperId, paperStatus){
     }
 }
 
-function deletePapers(paperId){
-    if(!confirm('คุณต้องการลบชุดข้อสอบที่เลือกใช่หรือไม่?')){
-        return false;
+function deletePapers(){
+    var jsonObj = {};
+    var tmpArray = new Array();
+    for(var i = 0; i < paperIdArray.length; i++){
+        var item = {
+            "paperId": paperIdArray[i]
+        };
+        tmpArray.push(item);
     }
+    jsonObj = JSON.stringify(tmpArray);
     $.ajax({
         type: "POST",
         url: "/TDCS/exam/deletePaper",
-        data: {
-            paperId: paperId
-        },
+        contentType: "application/json",
+        data: jsonObj,
         success: function () {
             alert('ลบชุดข้อสอบเรียบร้อยแล้ว');
             window.location.reload();
@@ -204,6 +253,7 @@ function deletePapers(paperId){
             alert('ลบชุดข้อสอบผิดพลาด');
         }
     });
+    paperIdArray = [];
 }
 
 function generalSearchPaper(btnSearchStatus) {
@@ -325,7 +375,7 @@ function generalSearchPaper(btnSearchStatus) {
                         '<option value="2">ปิดการเผยแพร่</option>' +
                         '</select>' +
                         '</td>' +
-                        '<td><button id="' + value.id + '" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
+                        '<td><button id="' + value.id + '" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
                         '</tr>'
                     );
                     presentStatus(value.id, value.paperStatus.id);

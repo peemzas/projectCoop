@@ -30,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import java.sql.Date;
@@ -85,9 +86,14 @@ public class PaperController {
         JSONArray jsonArray = new JSONArray(jsonObjQuestion);
         List<Integer> qIds = new ArrayList();
         List<Float> qScores = new ArrayList();
-        Integer paperMaxScore = new Integer(paperScore);
+        Float paperMaxScore = new Float(paperScore);
         Integer pTime = new Integer(paperTime);
-        Integer pPosition = new Integer(paperForPosition);
+        Integer pPosition = 0;
+
+        if(paperForPosition != null){
+            pPosition = new Integer(paperForPosition);
+        }
+
         Position pForPosition = queryPositionDomain.getPositionById(pPosition);
         User createBy = queryUserDomain.getCurrentUser(request);
         Status paperStatus = queryPaperStatusDomain.getStatusById(3);
@@ -133,10 +139,14 @@ public class PaperController {
         JSONArray jsonArray = new JSONArray(jsonObjQuestion);
         List<Integer> qIds = new ArrayList();
         List<Float> qScores = new ArrayList();
-        Integer paperMaxScore = new Integer(paperScore);
+        Float paperMaxScore = new Float(paperScore);
         Integer pTime = new Integer(paperTime);
-        Integer pPosition = new Integer(paperForPosition);
-        Position pForPosition = queryPositionDomain.getPositionById(pPosition);
+        Position pForPosition = new Position();
+        if(!paperForPosition.equals("")){
+            Integer pPosition = new Integer(paperForPosition);
+            pForPosition = queryPositionDomain.getPositionById(pPosition);
+        }
+
         User updateBy = queryUserDomain.getCurrentUser(request);
         Status paperStatus = queryPaperStatusDomain.getStatusById(3);
 //        long time = System.currentTimeMillis();
@@ -188,10 +198,17 @@ public class PaperController {
 
     @RequestMapping(value = "/exam/deletePaper", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> deletePaper(@RequestParam(value = "paperId") int paperId){
+    public ResponseEntity<String> deletePaper(@RequestBody String jsoN) throws JSONException {
 
-        ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
-        queryPaperDomain.deletePaper(examPaper, paperId);
+        JSONArray jsonArray = new JSONArray(jsoN);
+        List paperIds = new ArrayList();
+
+        for(int i = 0; i < jsonArray.length(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            paperIds.add(jsonObject.getInt("paperId"));
+        }
+
+        queryPaperDomain.deletePaper(paperIds);
 
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -291,5 +308,79 @@ public class PaperController {
             String toJson = new JSONSerializer().include("choices").exclude("*.class").serialize(papers);
             return new ResponseEntity<String>(toJson, headers, HttpStatus.OK);
         }
+    }
+
+    @RequestMapping(value = "/exam/randomQuestions", method= RequestMethod.POST)
+    public ResponseEntity<String> randExamPaper(@RequestParam(value = "randEasy", required = false) Integer randEasy,
+                                                @RequestParam(value = "randNormal", required = false) Integer randNormal,
+                                                @RequestParam(value = "randHard", required = false) Integer randHard){
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Question> questions = new ArrayList<Question>();
+        String json = "";
+        int i = 0;
+        if(!randEasy.equals(0)){
+            List index = new ArrayList();
+            List<Question> questionsEasy = queryQuestionDomain.getQuestionsByLevel(1);
+            if(questionsEasy.size() < randEasy){
+                json = null;
+                return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+            }
+            else{
+                for(i = 0; i < questionsEasy.size(); i ++){
+                    index.add(i);
+                }
+                for(int j = 0; j < randEasy; j ++){
+                    Collections.shuffle(index);
+                    questions.add(questionsEasy.get((Integer) index.get(0)));
+                    index.remove(0);
+                }
+            }
+        }
+        if(!randNormal.equals(0)){
+            int count = 1;
+            List index2 = new ArrayList();
+            List<Question> questionsNormal = queryQuestionDomain.getQuestionsByLevel(2);
+            if(questionsNormal.size() < randNormal){
+                json = null;
+                return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+            }
+            else{
+                for(i = 0; i < questionsNormal.size(); i ++){
+                    index2.add(i);
+                }
+                for(int j = 0; j < randNormal; j ++){
+                    Collections.shuffle(index2);
+                    questions.add(questionsNormal.get((Integer) index2.get(0)));
+                    index2.remove(0);
+                }
+            }
+        }
+        if(!randHard.equals(0)){
+            int count = 1;
+            List index3 = new ArrayList();
+            List<Question> questionsHard = queryQuestionDomain.getQuestionsByLevel(3);
+            if(questionsHard.size() < randNormal){
+                json = null;
+                return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+            }
+            else{
+                for(i = 0; i < questionsHard.size(); i ++){
+                    index3.add(i);
+                }
+                for(int j = 0; j < randHard; j ++){
+                    Collections.shuffle(index3);
+                    questions.add(questionsHard.get((Integer) index3.get(0)));
+                    index3.remove(0);
+                }
+            }
+        }
+
+        json = new Gson().toJson(questions);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 }

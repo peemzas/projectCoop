@@ -26,11 +26,11 @@
         color: #00647f;
     }
 
-    td {
+    #tbSelectedQuestionToPaper td , #tbSelectedQuestionToPaper input, #tbPaperInfo td{
         font-size: 13px;
     }
 
-    #tbSelectedQuestionToPaper {
+    #tbSelectedQuestionToPaper , #tbPaperInfo{
         margin-top: 5px;
     }
 
@@ -82,7 +82,7 @@
                 <div class="col-sm-5">
                     <select id="newPaperForPosition" class="form-control input-sm">
                         <option active>เลือกตำแหน่ง</option>
-                        <option value="all">ทั้งหมด</option>
+                        <option value="null">ทั้งหมด</option>
                         <option value="1">Developer</option>
                         <option value="5">Business Analysis</option>
                     </select>
@@ -111,7 +111,7 @@
             <button id="selectionQuestionBtnInpagePaper" data-toggle="modal" data-target="#selectQuest"
                     class="btn btn-gray btn-sm">เลือกข้อสอบ
             </button>
-            <button data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray btn-sm">สุ่มข้อสอบ
+            <button id="randomQuestionBtn" data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray btn-sm">สุ่มข้อสอบ
             </button>
         </div>
     </div>
@@ -144,6 +144,22 @@
 
             </tbody>
         </table>
+        <table id="tbPaperInfo" class="table table-bordered table-hover" style="display:  none;">
+            <thead class="bg-primary small">
+                <tr>
+                    <th style="text-align: center ;">ประเภท</th>
+                    <th style="text-align: center ;">หมวดหมู่</th>
+                    <th style="text-align: center ;">หัวข้อเรื่อง</th>
+                    <th style="text-align: center ;">ข้อสอบ</th>
+                    <th style="text-align: center ;">ระดับ</th>
+                    <th style="text-align: center ;">คะแนน</th>
+                    <th style="text-align: center ;">ผู้สร้าง</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
         <div id="questionNotFound" width="100%">
             <h3 id="questionNotFoundDesc">ยังไม่มีข้อสอบในชุดข้อสอบ</h3>
         </div>
@@ -170,5 +186,6 @@
     <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>--%>
 
     <%@include file="modal/createQuestionModal.jsp" %>
-    <%@include file="modal/selectQuestionModal.jsp" %>
     <%@include file="modal/RandomQuestionModal.jsp" %>
+    <%@include file="modal/selectQuestionModal.jsp" %>
+
