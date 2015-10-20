@@ -384,4 +384,26 @@ public class QueryQuestionDomain extends HibernateUtil {
 
         return questions;
     }
+
+    public List<Question> getQuestionsByLevel(Integer level){
+
+        Criteria criteria = getSession().createCriteria(Question.class);
+        criteria.add(Restrictions.eq("difficultyLevel.level", level));
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("id"), "id")
+                .add(Projections.property("choices"), "choices")
+                .add(Projections.property("description"), "description")
+                .add(Projections.property("createDate"), "createDate")
+                .add(Projections.property("difficultyLevel"), "difficultyLevel")
+                .add(Projections.property("subCategory"), "subCategory")
+                .add(Projections.property("questionType"), "questionType")
+                .add(Projections.property("createBy"), "createBy")
+                .add(Projections.property("status"), "status")
+                .add(Projections.property("score"), "score"));
+        criteria.addOrder(Order.asc("id"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Question> question = criteria.list();
+
+        return question;
+    }
 }

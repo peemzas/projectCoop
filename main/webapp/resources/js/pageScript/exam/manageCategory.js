@@ -1,8 +1,6 @@
-
-
 $("#dropdownExamEmp").attr('class', 'dropdown-toggle active');
 
-$("document").ready(function(){
+$(document).ready(function(){
     viewCategory();
     $("#deleteCategory").on('click', function(){
         deleteCategory();
@@ -49,9 +47,6 @@ function deleteCategory(){
     var catId;
     $("#tblCategory input:checkbox:checked").each(function(){
         catId = $(this).parent().siblings(":first").text();
-        //if(!confirm("ลบรายวิชา "+$("#data"+catid).text())+"ใช่หรือไม่"){
-        //    return false;
-        //}
         $.ajax({
             type: "POST",
             url: "/TDCS/exam/deleteCategory",
@@ -59,39 +54,14 @@ function deleteCategory(){
                 catId : catId
             },
             success: function(){
-                alert("ลบวิชาสำเร็จ");
+                alert("ลบหมวดหมู่สำเร็จ");
                 window.location.reload();
             },
             error: function(){
-                alert("ลบวิชาไม่สำเร็จ");
+                alert("ไม่สามารถลบหมวดหมู่นี้ได้");
             }
         });
     });
-    //alert(categoryIds+" "+categoryIds.length);
-    //var jsonObj = {};
-    //var tempArray = new Array();
-    //for(var i = 0; i < categoryIds.length; i++){
-    //    var item = {
-    //        "categoryId" : categoryIds[i]
-    //    };
-    //    tempArray.push(item);
-    //}
-    //jsonObj = JSON.stringify(tempArray);
-    //$.ajax({
-    //    type: "POST",
-    //    url: "/TDCS/exam/deleteCategory",
-    //    dataType: "json",
-    //    contentType: 'application/json',
-    //    mimeType: 'application/json',
-    //    data: jsonObj,
-    //    success: function(){
-    //        alert("Success...");
-    //        window.location.reload();
-    //    },
-    //    error: function(){
-    //        alert("Error...");
-    //    }
-    //});
 }
 function editCategory(categoryId){
 
@@ -132,9 +102,6 @@ function updateCategory(categoryId){
 }
 
 function saveCategory(){
-
-    ///////////////////////////
-
     var countError = 0;
     var elementFirst;
     var element = [ $("#categoryIdText"), $("#categoryNameText")];

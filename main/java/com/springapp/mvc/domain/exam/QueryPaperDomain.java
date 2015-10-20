@@ -71,7 +71,7 @@ public class QueryPaperDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
     }
 
-    public void updatePaper(List<Integer> qIds, List<Float> newScores, Integer paperId, User updateBy, String paperCode, String paperName, Integer paperMaxScore, Date updateDate, Integer paperTime, Status paperStatus, Position paperForPosition){
+    public void updatePaper(List<Integer> qIds, List<Float> newScores, Integer paperId, User updateBy, String paperCode, String paperName, Float paperMaxScore, Date updateDate, Integer paperTime, Status paperStatus, Position paperForPosition){
 
         QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
         ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
@@ -116,12 +116,24 @@ public class QueryPaperDomain extends HibernateUtil {
         return papers;
     }
 
-    public void deletePaper(ExamPaper examPaper, int paperId){
+    public void deletePaper(List paperId){
+
+        QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
 
         HibernateUtil.beginTransaction();
-        getSession().delete(examPaper);
-        HibernateUtil.commitTransaction();
-        HibernateUtil.closeSession();
+        try{
+            for(int i = 0; i < paperId.size(); i++){
+                ExamPaper examPaper = queryPaperDomain.getPaperById((Integer) paperId.get(i));
+                getSession().delete(examPaper);
+            }
+            HibernateUtil.commitTransaction();
+
+        }catch(Exception e){
+            System.out.println("==========Error while delete papers==========");
+            e.printStackTrace();
+        }finally {
+            HibernateUtil.closeSession();
+        }
     }
 
     public void deletePaperQuestionByExamPaper(ExamPaper examPaper){
@@ -171,14 +183,14 @@ public class QueryPaperDomain extends HibernateUtil {
         if (!createDateTo.equals("")){
             dateTo = simpleDateFormat.parse(createDateTo);
         }
-        Integer sFrom = null;
-        Integer sTo = null;
+        Float sFrom = null;
+        Float sTo = null;
 
         if (!scoreFrom.equals("")) {
-            sFrom = new Integer(scoreFrom);
+            sFrom = new Float(scoreFrom);
         }
         if (!scoreTo.equals("")) {
-            sTo = new Integer(scoreTo);
+            sTo = new Float(scoreTo);
         }
 
         Criteria criteria = getSession().createCriteria(ExamPaper.class);

@@ -47,7 +47,7 @@
                                     <label>คำถาม</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input id="searchQuestionDescInput" type="text" class="form-control input-sm"/>
+                                    <input id="searchQuestionDescInput" type="text" class="form-control input-sm" placeholder="ค้นหาคำถาม"/>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy"/>
+                                        <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="สร้างชุดข้อสอบตั้งแต่วันที่"/>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy"/>
+                                        <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="ถึง"/>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input id="searchScoreFromInput" type="text" class="form-control input-sm"/>
+                                        <input id="searchScoreFromInput" type="text" class="form-control input-sm" placeholder="คะแนนตั้งแต่"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-1" align="right">
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input id="searchScoreToInput" type="text" class="form-control input-sm"/>
+                                        <input id="searchScoreToInput" type="text" class="form-control input-sm" placeholder="ถึง"/>
                                     </div>
                                 </div>
                             </div>

@@ -25,41 +25,42 @@
     #tbSelectQuestion{
         margin-top: 5px;
     }
+    #tbodySelectQuestion td{
+        font-size: 13px;
+    }
 </style>
 <div class="modal fade" id="selectQuest">
     <div class="modal-dialog modal-lg" style="width: 80%">
         <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-body">
-                    <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                    <div class="container row">
-                        <h4>เลือกข้อสอบ</h4>
-                        <hr>
-                    </div>
-                    <%@include file="../template/searchQuestionTemplateNew.jsp"%>
-                    <%--<button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>--%>
-                    <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
-                    <table id="tbSelectQuestion" class="table table-responsive table-hover table-bordered">
-                        <thead class="bg-primary small">
-                            <tr>
-                                <th><input id="checkQuestionAll" type="checkbox"></th>
-                                <th>หมวดหมู่</th>
-                                <th>หัวข้อเรื่อง</th>
-                                <th>คำถาม</th>
-                                <th>ข้อสอบ</th>
-                                <th>ระดับ</th>
-                                <th>คะแนน</th>
-                                <th>ผู้สร้าง</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbodySelectQuestion">
-
-                        </tbody>
-                        <div id="questionsAreEmpty" width="100%">
-                            <h3 id="questionsAreEmptyDesc">ไม่พบข้อสอบ</h3>
-                        </div>
-                    </table>
+            <div class="modal-body">
+                <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <div class="container row">
+                    <h4>เลือกข้อสอบ</h4>
+                    <hr>
                 </div>
+                <%@include file="../template/searchQuestionTemplateNew.jsp"%>
+                <%--<button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>--%>
+                <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
+                <table id="tbSelectQuestion" class="table table-responsive table-hover table-bordered">
+                    <thead class="bg-primary small">
+                        <tr>
+                            <th style="text-align: center ;"><input id="checkQuestionAll" type="checkbox"></th>
+                            <th style="text-align: center ;">หมวดหมู่</th>
+                            <th style="text-align: center ;">หัวข้อเรื่อง</th>
+                            <th style="text-align: center ;">คำถาม</th>
+                            <th style="text-align: center ;">ข้อสอบ</th>
+                            <th style="text-align: center ;">ระดับ</th>
+                            <th style="text-align: center ;">คะแนน</th>
+                            <th style="text-align: center ;">ผู้สร้าง</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodySelectQuestion">
+
+                    </tbody>
+                    <div id="questionsAreEmpty" width="100%">
+                        <h3 id="questionsAreEmptyDesc">ไม่พบข้อสอบ</h3>
+                    </div>
+                </table>
             </div>
         </div>
         <!-- /.modal-content -->
