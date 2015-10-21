@@ -4,6 +4,7 @@ import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.util.BeanUtils;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.*;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -139,19 +140,31 @@ public class QueryCategoryDomain extends HibernateUtil {
     }
 
 
-    public Category getCategoryByIdLOV(String id){
-        Criteria criteria = getSession().createCriteria(Category.class);
-        criteria.add(Restrictions.eq("id", id));
-        List<Category> categories = criteria.list();
+    public List<Category> getCategoryByIdLOV(String categoryId){
+        Criteria criteria = getSession().createCriteria(Category.class, "category");
+//        criteria.createAlias("category.category", "category");
+        criteria.addOrder(Order.asc("category.id"));
 
-        if (categories.isEmpty())
-        {
-            return null;
-        }else {
-            return categories.get(0);
-        }
-//        Category resultCategory = (Category)criteria.list().get(0);
-//        return resultCategory;
+//        if(categoryId != "") {
+//            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+
+            Criterion cri = Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase();
+            Criterion cri2 =Restrictions.like("category.name", "%" + categoryId + "%").ignoreCase();
+            criteria.add(Restrictions.or(cri,cri2));
+//        }
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Category> getCategoryByIdLOV = criteria.list();
+        closeSession();
+        return getCategoryByIdLOV;
     }
+
+
+        public List<Category> LOVCategory(){
+            Session session = getSession();
+            Criteria criteria = session.createCriteria(Category.class);
+            List<Category> list = criteria.list();
+            return list;
+
+        }
 }
 

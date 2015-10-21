@@ -114,7 +114,7 @@ public class SubCategoryController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
         List<SubCategory> subcategories = querySubCategoryDomain.searchSubCategory(subcategoryName, categoryId, categoryName);
         logger.info(String.valueOf("++++++++++++++++++++++++++++"));
-            System.out.println("AAA : " + subcategories);
+        System.out.println("AAA : " + subcategories);
 
         String json = new Gson().toJson(subcategories);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
@@ -130,7 +130,7 @@ public class SubCategoryController {
 
         List<SubCategory> subcategories = null;
 
-        if (catId.length()==0) {
+        if (catId.length() == 0) {
             return null;
 //            subcategories = querySubCategoryDomain.getAllSubCategory();
         } else {
@@ -154,7 +154,7 @@ public class SubCategoryController {
         if (searchSubCategory != null && searchSubCategory != "") {
             Category category = queryCategoryDomain.getCategoryById(searchSubCategory);
             subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
-        }else {
+        } else {
 //            subcategories = querySubCategoryDomain.getSubCategoryListByCategory(null);
         }
 
@@ -168,34 +168,39 @@ public class SubCategoryController {
 
     @RequestMapping(value = "/exam/getSubCategoryToDropDown", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> getSubCategoryToDropDown (@RequestParam(value = "categoryId", required = false) String categoryId,
-                                                            @RequestParam(value = "categoryName", required = false) String categoryName){
+
+    public ResponseEntity<String> getSubCategoryToDropDown(@RequestParam(value = "categoryId", required = false) String categoryId,
+                                                           @RequestParam(value = "categoryName", required = false) String categoryName) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         ///
 
-        List<SubCategory> subCategoriesToDropDown = querySubCategoryDomain.getSubCategoryToDropDown(categoryId ,categoryName);
+        List<SubCategory> subCategoriesToDropDown = querySubCategoryDomain.getSubCategoryToDropDown(categoryId, categoryName);
         logger.info(String.valueOf("++++++++++++++++++++++++++++"));
         System.out.println("AAA : " + subCategoriesToDropDown);
 
         String json = new Gson().toJson(subCategoriesToDropDown);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
 
-
-        ////// sssss
-
-//        logger.info("----------------------------------------"+categoryId);
-//        Category category = queryCategoryDomain.getCategoryById(categoryId);
-//        logger.info(String.valueOf(category));
-//        List<SubCategory> subCategories=querySubCategoryDomain.getSubCategoryByCategoryId(category);
-//
-//        logger.info(subCategories.toString());
-//
-//        String json = new Gson().toJson(subCategories);
-//        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
+
+//    @RequestMapping(value = "/exam/LOVSubCategory", method = RequestMethod.POST)
+//    @ResponseBody
+//
+//    public ResponseEntity<String> LOVSubCategory(@RequestParam(value = "categoryId", required = false) String categoryId) {
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Content-Type", "application/json;charset=UTF-8");
+//        List<SubCategory> LOVSubCategory = querySubCategoryDomain.LOVSubCategory(categoryId);
+//        logger.info(String.valueOf("++++++++++++++++++++++++++++"));
+//        System.out.println("AAA : " + LOVSubCategory);
+//
+//        String json = new Gson().toJson(LOVSubCategory);
+//        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//
+//    }
 }
 

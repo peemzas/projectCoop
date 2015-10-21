@@ -268,6 +268,7 @@ public class InPageController {
         
 //        model.addAttribute("LIST_OF_SUBCATEOGRIES", querySubCategoryDomain.getListSubCategories());
 
+        model.addAttribute("listLOVCat", queryCategoryDomain.LOVCategory());
         model.addAttribute("listCat", queryCategoryDomain.getListCategories());
         model.addAttribute("listSubCat", querySubCategoryDomain.getListSubCategories());
 

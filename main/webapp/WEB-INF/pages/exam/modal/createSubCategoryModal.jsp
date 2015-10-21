@@ -96,6 +96,21 @@
         <%--overflow-y: auto;--%>
     <%--}--%>
 <%--</style>--%>
+<script>
+    $("#hiddenBtn2").on('click',function(){
+        var sCat = $("#sCat").val();
+        var subcategoryName = $("#subcategoryNameadd").val();
+        if(sCat == "" && subcategoryName ==""){
+
+            $("#createSub").modal('hide');
+        }
+        else {
+            if(!confirm(" ข้อมูลยังไม่ถูกบันทึก ต้องการยกเลิกหรือไม่"))
+                return false;
+            $("#createSub").modal('hide');
+        }
+    })
+</script>
 
 
 

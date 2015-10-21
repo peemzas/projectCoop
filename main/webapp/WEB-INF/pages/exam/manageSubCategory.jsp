@@ -7,14 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<script>--%>
+<script>
     <%--if('${status}' == 'user' || '${status}' == ''){--%>
         <%--window.location.href = "/TDCS/index.html";--%>
     <%--}--%>
-    <%--if ('${status}' != 'staff') {--%>
-        <%--window.location.href = "/TDCS/index.html";--%>
-    <%--}--%>
-<%--</script>--%>
+    if ('${status}' != 'staff') {
+        window.location.href = "/TDCS/index.html";
+    }
+</script>
 
 <div class="container row">
     <h3>หัวข้อเรื่อง</h3>
@@ -35,7 +35,15 @@
                             <label style="margin-top: 4px;">หมวดหมู่ :</label>
                         </div>
                         <div class="col-md-6 input-group">
-                            <input  id="categoryId" class="form-control"  placeholder="ค้นหาหมวดหมู่" data-provide="typeahead" />
+                            <input  id="categoryId" class="form-control" autocomplete="off" placeholder="ค้นหาหมวดหมู่">
+
+                            <%--list="LOVCategory"--%>
+                        <%--<datalist id="LOVCategory">--%>
+                                <%--<c:forEach var="getLOVCat" items="${listLOVCat}">--%>
+                                    <%--<option value="${getLOVCat.id} : ${getLOVCat.name}"> ${getLOVCat.id} : ${getLOVCat.name} </option>--%>
+                                <%--</c:forEach>--%>
+                            <%--</datalist>--%>
+
                             <span class="input-group-addon">
                             <i class="glyphicon glyphicon-search" onclick="listsubcat()" style="cursor: pointer; height: 20px;"></i>
                              </span>
@@ -99,8 +107,6 @@
                         </div>
                     </div>
 
-
-
                 </div>
                 <div class="panel-footer">
                     <div class="row" id="btnSearch">
@@ -119,7 +125,7 @@
 
 
 
-        <button data-toggle="modal" data-target="#createSub" class="btn btn-success btn-sm" align="center"
+        <button id="addSubcategory" data-toggle="modal" data-target="#createSub" class="btn btn-success btn-sm" align="center"
                 ><span class="glyphicon glyphicon-plus"></span>
         </button>
         <button align="center"  class="btn btn-danger btn-sm" onclick="deleteSubCategory()">
@@ -136,12 +142,12 @@
             <%--<col width="10%"/>--%>
             <thead class="bg-primary label-primary small" >
             <tr>
-                <th style="text-align: center; color: white;"><input id="selectAllSubCategory" type="checkbox"/> เลือก
+                <th style="text-align: center; color: white;"><input id="selectAllSubCategory" type="checkbox"/>
                 </th>
                 <th style="text-align: center; color: white;">หมวดหมู่</th>
                 <%--<th style="text-align: center; color: white;">รหัสหัวข้อเริ่อง</th>--%>
                 <th style="text-align: center; color: white;">หัวข้อเริ่อง</th>
-                <th style="text-align: center; color: white">แก้ไข</th>
+                <th id="thEdit" style="text-align: center; color: white">แก้ไข</th>
                 <%--<th style="text-align: center; color: white">ลบ</th>--%>
             </tr>
             </thead>
@@ -172,49 +178,17 @@
 
 
 <style>
-    /*.ui-autocomplete {*/
-        /*position: absolute;*/
-        /*z-index: 1000;*/
-        /*cursor: default;*/
-        /*padding: 0;*/
-        /*margin-top: 2px;*/
-        /*list-style: none;*/
-        /*bac;kground-color: #ffffff;*/
-        /*border: 1px solid #ccc -webkit-border-radius : 5 px;*/
-        /*-moz-border-radius: 5px;*/
-        /*border-radius: 5px;*/
-        /*-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
-        /*-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
-        /*box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
-
-        /*max-height: 150px;*/
-        /*overflow-y: auto;*/
-    /*}*/
-
-    /*.ui-autocomplete > li {*/
-        /*padding: 3px 20px;*/
-    /*}*/
-
-    /*.ui-autocomplete > li.ui-state-focus {*/
-        /*background-color: #DDD;*/
-    /*}*/
-
-    /*.ui-helper-hidden-accessible {*/
-        /*display: none;*/
-    /*}*/
-
-    /**/
-    /*td{*/
-        /*font-size: 12px*/
-
-    /*}*/
-
     #categoryId + .dropdown-menu{
         /*font-size: 12px;*/
         max-width: 100%;
         max-height: 150px;
         overflow-y: auto;
     }
+    .typeahead {
+        width: 100%;
+    }
+
+
 
 
 </style>

@@ -8,6 +8,26 @@ $(document).ready(function(){
     $("#submitCreateCategoryBtn").on('click', function(){
         saveCategory();
     });
+
+    $("#selectAllCheckbox").on('click', function () {
+        if (this.checked) {
+            $(".selectselectCheckbox").each(function () {
+                this.checked = true;
+            })
+        }
+        else {
+            $(".selectselectCheckbox").each(function () {
+                this.checked = false;
+            })
+        }
+    });
+
+    $("#addCategory").on('click', function(){
+        $("#categoryIdText").val("");
+        $("#categoryNameText").val("");
+    })
+
+
 });
 function viewCategory(){
     $("#tbodyCategory").empty();
@@ -21,7 +41,7 @@ function viewCategory(){
             data.forEach(function(value){
                 $("#tbodyCategory").append(
                     '<tr>'+
-                    '<td class="col-sm-1" style="text-align: center;"><input type="checkbox" cateId="'+value.id+'"/></td>'+
+                    '<td class="col-sm-1" style="text-align: center;"><input class="selectselectCheckbox" type="checkbox" cateId="'+value.id+'"/></td>'+
                     '<td class="col-sm-2" style="text-align: center;"><label id="id'+value.id+'">'+value.id+'</label>'+
                     '<input id="editId'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
                     '<td><label id="data'+value.id+'">'+value.name+'</label>'+
@@ -41,7 +61,7 @@ function viewCategory(){
 }
 
 function deleteCategory(){
-    if(!confirm("คุณต้องการลบหมวดหมู่ที่เลือกใช่หรือไม่")){
+    if(!confirm(" ยืนยันการลบข้อมูล ")){
         return false;
     }
     var catId;
@@ -54,11 +74,13 @@ function deleteCategory(){
                 catId : catId
             },
             success: function(){
-                alert("ลบหมวดหมู่สำเร็จ");
+
+                alert("ลบข้อมูลสำเร็จ");
                 window.location.reload();
             },
             error: function(){
-                alert("ไม่สามารถลบหมวดหมู่นี้ได้");
+                alert("ลบข้อมูลไม่สำเร็จ");
+
             }
         });
     });
@@ -87,14 +109,15 @@ function updateCategory(categoryId){
             complete: function (xhr) {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        alert("แก้ไขหมวดหมู่เรียบร้อยแล้ว");
-                        viewCategory();
+                        alert("แก้ไขข้อมูลสำเร็จ");
+                        //viewCategory();
+                        window.location.reload();
                     }
                     else {
-                        alert("การอัพเดทข้อมูลผิดพลาด");
+                        alert("แก้ไขข้อมูลไม่สำเร็จ");
                     }
                 } else {
-                    alert("การอัพเดทข้อมูลผิดพลาด");
+                    alert("แก้ไขข้อมูลไม่สำเร็จ");
                 }
             }
         });
@@ -142,15 +165,22 @@ function saveCategory(){
         success: function (data) {
             data.forEach(function (value) {
                 if (Number($("#categoryIdText").val()) == Number(value.id) && $("#categoryNameText").val() == value.name) {
-                    alert("รหัสวิชา " + $("#categoryId").val() + ", รายวิชา " + $("#categoryNameText").val() + " มีอยู่แล้วในระบบ");
+                    alert("รหัสหมวดหมู่ " + $("#categoryId").val() + ", หมวดหมู่ " + $("#categoryNameText").val() + " มีอยู่แล้วในระบบ");
                 }
                 if (Number($("#categoryIdText").val()) == Number(value.id)) {
                     //alert("รหัสวิชา "+$("#categoryId").val()+" ซ่ำ");
-                    alert("รหัสวิชา " + $("#categoryId").val() + " มีอยู่แล้วในระบบ");
+                    alert("รหัสหมวดหมู่ " + $("#categoryId").val() + " มีอยู่แล้วในระบบ");
+                }
+                if(categoryId == value.id){
+                    alert("รหัสหมวดหมู่ " + $("#categoryIdText").val() + " มีอยู่ในระบบ");
                 }
                 if ($("#categoryNameText").val() == value.name) {
-                    alert("รายวิชา " + $("#categoryName").val() + " มีอยู่แล้วในระบบ");
+                    alert("หมวดหมู่ " + categoryName + " มีอยู่แล้วในระบบ");
                 }
+
+                //if (categoryName == value.name && categoryId == value.id) {
+                //    alert("เหมือนหมด");
+                //}
             });
 
             if($("#categoryIdText").val() == "" || $("#categoryNameText").val() == ""){
@@ -163,11 +193,12 @@ function saveCategory(){
                 url: "/TDCS/exam/addCategory",
                 data: 'id=' + categoryId + '&name=' + categoryName,
                 success: function () {
-                    alert('เพิ่มวิชา ' + categoryName + ' สำเร็จ ');
+                    //alert('เพิ่มวิชา ' + categoryName + ' สำเร็จ ');
+                    alert("บันทึกข้อมูลสำเร็จ");
                     window.location.reload();
                 },
                 error: function () {
-                    alert('เพิ่มวิชาไม่สำเร็จ');
+                    alert('บันทึกข้อมูลไม่สำเร็จ');
                 }
                 //}).responseText;
             });
@@ -177,45 +208,49 @@ function saveCategory(){
         }
     });
 
-    $("#categoryNameText").val("");
-    $("#categoryIdText").val("");
+    //$("#categoryNameText").val("");
+    //$("#categoryIdText").val("");
 }
 
 
 
 
 
-$("#categoryName").keyup(function(e) {
+$("#categoryName").keyup(function (e) {
     if (e.which > 0) {
         e.preventDefault();
         listcat();
     }
 });
 function listcat() {
+    //alert("LOV");
     var availableall = [];
+    var categoryId = $("#categoryName").val();
+
     var data = $.ajax({
         type: "POST",
-        contentType: "application/json",
         url: "/TDCS/exam/getAllCategory",
+
         async: false,
-        success: function(data){
-            data.forEach(function(value){
+
+        success: function (data) {
+            data.forEach(function (value) {
                 availableall.push(value.id + ' : ' + value.name);
             });
+            //alert("SUCC");
         },
-        error: function(data){
+        error: function (data) {
             alert('error while request...');
         }
     });
-    //$(".autocomplete2").autocomplete({
-//    //    source: availableTags2
-//    //});
 
     var search = $("#categoryName").val();
     $("#categoryName").typeahead('destroy').typeahead({
         source: availableall,
         minLength: 0,
-        items: 20
-    }).focus().val('').keyup().val(search);
+        items: 20,
+        maxLength: 2
+    }).focus().val("").keyup().val(search);
+
 };
 

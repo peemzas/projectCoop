@@ -103,14 +103,14 @@
                 <c:if test="${ status == 'staff'}">
                     <li id="dropdownExamEmp" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            เฮดข้อสอบ
+                            ข้อสอบ
 
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li class="dropdown-header">จัดการ</li>
                             <li>
                                 <a href="/TDCS/exam/manageCategory">
-                                    <c:if test="${status == 'staff'}">จัดการรายวิชา</c:if>
+                                    <c:if test="${status == 'staff'}">จัดการหมวดหมู่</c:if>
                                         <%--<c:if test="${status == 'user'}">ประเมินผล</c:if>--%>
                                 </a>
                             </li>
