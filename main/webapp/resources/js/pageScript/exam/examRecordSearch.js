@@ -62,33 +62,40 @@ function generalSearchQuestion(){
             if(data.size == null){
                 $("#searchNotFound").show();
             }
-            data.forEach(function(value){
+            //data.forEach(function(value){
+            var index = 0;
+            for(var i = 0; i < data.length; i ++){
                 $("#searchNotFound").hide();
-                var pretest = value[4];
-                var posttest = value[5];
-                if( pretest == null){
-                    pretest ="-";
+                var posttest;
+                var pretest;
+                var first = data[i].examRecord.user.thFname;
+                var paperId1 = data[i].examRecord.paper.code;
+                pretest =  Number(data[i].objectiveScore)+ Number (data[i].subjectiveScore);
+                if(i > 0){
+                    var secound = data[i-1].examRecord.user.thFname;
+                    var paperId2 = data[i-1].examRecord.paper.code
+                    posttest = Number (data[i].subjectiveScore)+Number(data[i].objectiveScore);
                 }
-                if( posttest== null){
-                    posttest= "-";
+                if((first == secound) && (paperId1 == paperId2)){
+                    $("#tbodyExamRecord").children('tr:eq('+(index++)+')').children('td:eq(5)').html(posttest);
                 }
-                var i = 1;
-                $("#tbodyExamRecord").append(
-                    '<tr id = "row'+i+'" value='+i+' onclick="markingPaper(this)">'+
-                    '<td><label >'+value[0]+'</label></td>'+
-                    '<td><label >'+value[1]+'</label></td>'+
-                    '<td><label >'+value[2]+'</label></td>'+
-                    '<td><label >'+value[3]+'</label></td>'+
-                    '<td><center><label >'+pretest+'</label></center></td>'+
-                    '<td><center><label >'+posttest+'</label></center></td>'+
-                    '<td><label >'+value[6]+'</label></td>'+
-                    '<td><label >'+value[7]+'</label></td>'+
-                    '<td><label >'+value[8]+'</label></td>'+
-                    '</tr>'
+                else{
+                    $("#tbodyExamRecord").append(
+                        '<tr onclick="markingPaper(this)">'+
+                        '<td class="text-center"><label >'+data[i].examRecord.paper.code+'</label></td>'+
+                        '<td><label >'+data[i].examRecord.paper.name+'</label></td>'+
+                        '<td><label >'+data[i].examRecord.user.thFname+'</label></td>'+
+                        '<td><label >'+data[i].examRecord.user.position.posiName+'</label></td>'+
+                        '<td class="text-center"><label >'+pretest+'</label></td>'+
+                        '<td class="text-center"><label ></label></td>'+
+                        '<td class="text-center"><label >'+data[i].examRecord.paper.maxScore+'</label></td>'+
+                        '<td><label >'+data[i].examRecord.paper.createBy.thFname+'</label></td>'+
+                        '<td><label >'+data[i].status.description+'</label></td>'+
+                        '</tr>'
 
-                )
-                i++;
-            });
+                    );
+                }
+            }
         },
         error: function(){
             alert("error");
@@ -104,11 +111,6 @@ function generalSearchQuestion(){
         }
     });
 }
-function markingPaper(e){
-    $("#modalMarkingPaper").modal('show');
-
-}
-
 function listSearchPaper() {
     var availableall = [];
 

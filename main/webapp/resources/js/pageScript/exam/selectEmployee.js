@@ -1,5 +1,4 @@
 function searchEmpName(){
-
     $('.modalSearchByEmployeeNameSubmitBtn').unbind('click').click(function(){
         $("#modalSearchByEmployeeName").modal("hide");
     });

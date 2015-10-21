@@ -2,7 +2,6 @@ package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.Position;
-import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.ExamRecord;
 import com.springapp.mvc.pojo.exam.ExamResult;
 import com.springapp.mvc.util.HibernateUtil;
@@ -10,14 +9,9 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -29,11 +23,12 @@ public class QueryExamResultDomain extends HibernateUtil {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
-    public void saveExamResult(ExamResult examResult) {
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(QueryExamResultDomain.class.getName());
+    public void saveExamResult(ExamResult examResult){
         getSession().save(examResult);
     }
 
-    public ExamResult getExamResultById(Integer id) {
+    public ExamResult getExamResultById(Integer id){
         Criteria criteria = getSession().createCriteria(ExamResult.class);
         criteria.add(Restrictions.eq("id", id));
         return (ExamResult) criteria.uniqueResult();
@@ -63,45 +58,40 @@ public class QueryExamResultDomain extends HibernateUtil {
      * Created by JobzPC on 7/10/2558.
      */
     public List<ExamResult> getAllExamResult(List<Integer> userId,String code,Position posiId) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(" select");
-        stringBuilder.append(" tep.code,tep.name,tu.thFname,tp.posiName,(preRES.objectiveScore + preRES.subjectiveScore) as Pretest, ");
-        stringBuilder.append(" (postRES.objectiveScore + postRES.subjectiveScore) as Postest,tep.maxScore,");
-        stringBuilder.append(" (select thFname from User where userId = tep.createBy) as createbyts ,ts.description  ");
-        stringBuilder.append(" from ExamRecord preREC,ExamResult preRES,ExamRecord postREC,ExamResult postRES,ExamPaper tep,User tu,Position tp,ExamResult ters,Status ts   ");
-        stringBuilder.append(" where preREC.id =preRES.examRecord and postREC.id =  postRES.examRecord and preREC.id = postREC.preTestRecord and tep.id=postREC.paper and    ");
-        stringBuilder.append(" tu.userId = preREC.user and tp.posiId=tep.position and ters.examRecord=preREC.id and ts.id = ters.status     ")  ;
-
-        if (!(code.equals(""))) {
-            stringBuilder.append(" and   tep.code =  '" + code + "' ");
-        }
-        if (posiId != null) {
-            stringBuilder.append(" and   tp.posiId =  '" + posiId.getPosiId() + "' ");
-        }
-
+        Criteria criteria = getSession().createCriteria(ExamResult.class, "er");
+        criteria.createAlias("er.examRecord", "examRecord");
+        criteria.createAlias("examRecord.paper", "paper");
+        criteria.createAlias("examRecord.user", "user");
+        criteria.createAlias("paper.createBy", "createBy");
         if (userId.size()!=0){
-            stringBuilder.append(" and tep.createBy in (");
-            for (int i =0 ; i< userId.size();i++){
-                stringBuilder.append(" '" + userId.get(i) + "' ");
-                if(i != userId.size()-1){
-                    stringBuilder.append(" , ");
-                }
 
-            }
-            stringBuilder.append(" )");
+            criteria.add(Restrictions.in("createBy.userId", userId));
         }
-//        Criteria criteria = getSession().createCriteria(ExamResult.class,"ex");
-//        criteria.add(Restrictions)
-        Session session = (Session) HibernateUtil.getSession();
-        Query query = session.createQuery(stringBuilder.toString());
+        if (!(code.equals(""))) {
+            criteria.add(Restrictions.like("paper.code", "%" + code + "%"));
+        }
+        if(posiId != null){
+            criteria.add(Restrictions.eq("user.position", posiId));
+        }
+        ProjectionList projList = Projections.projectionList()
+                .add(Projections.property("er.id"), "ids")
+                .add(Projections.property("er.examRecord"),"examRecord")
+                .add(Projections.property("er.objectiveScore"),"objectiveScore")
+                .add(Projections.property("er.subjectiveScore"), "subjectiveScore")
+                .add(Projections.property("er.status"), "status")
+                .add(Projections.property("paper.id"),"peperid")
+                .add(Projections.property("user.userId"),"userId")
+            .add(Projections.property("examRecord.postTestRecord"), "postTestRecord");
 
-
-        List<ExamResult> empList = query.list();
+        criteria.setProjection(Projections.distinct(projList));
+        criteria.addOrder(Order.desc("peperid"));
+        criteria.addOrder(Order.desc("userId"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<ExamResult> empList = criteria.list();
         return empList;
     }
 
     public void updateExamResult(ExamResult examResult) {
         getSession().merge(examResult);
     }
-
 }

@@ -1,12 +1,10 @@
 package com.springapp.mvc.controller.exam;
 
-import com.google.gson.Gson;
+
 import com.springapp.mvc.domain.QueryPositionDomain;
-import com.springapp.mvc.domain.exam.QueryExamRecordDomain;
+
 import com.springapp.mvc.domain.exam.QueryExamResultDomain;
 import com.springapp.mvc.pojo.Position;
-import com.springapp.mvc.pojo.exam.ExamPaper;
-import com.springapp.mvc.pojo.exam.ExamRecord;
 import com.springapp.mvc.pojo.exam.ExamResult;
 import flexjson.JSONSerializer;
 import org.json.JSONArray;
@@ -48,8 +46,8 @@ public class ExamRecordSearchController {
         List<Integer> userId = new ArrayList<Integer>();
         for (int i = 0 ; i < jsonArray.length()-1;i++){
             JSONObject jsonItems = jsonArray.getJSONObject(i);
-            String forUserId = (String) jsonItems.get("userId");
-            userId.add(Integer.parseInt(forUserId));
+            Integer forUserId = jsonItems.getInt("userId");
+            userId.add(forUserId);
         }
         JSONObject jsonItems = jsonArray.getJSONObject(jsonArray.length()-1);
         String codeId = (String) jsonItems.get("code");
@@ -60,23 +58,6 @@ public class ExamRecordSearchController {
             position =  queryPositionDomain.getPositionById(posiIdInt);
         }
         List<ExamResult> results = queryExamResualt.getAllExamResult(userId,codeId,position);
-
-//        List<Integer> items = new ArrayList<Integer>();
-//        System.out.println(jsonItems);
-//        String code= (String) jsonItems.get("userId");
-//        Integer positionId = jsonItems.getInt("position");
-//        for(int i = 0; i < jsonArray.length(); i++){
-//            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//            items.add(jsonObject.getInt("userId"));
-//        }
-//        Position position = null;
-//        if(positionId != 0){
-//            position =  queryPositionDomain.getPositionById(positionId);
-//        }
-
-//        List<ExamResult> results = queryExamResualt.getAllExamResult(code, position);
-
-
         String json = new JSONSerializer().exclude("*.class").serialize(results);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
