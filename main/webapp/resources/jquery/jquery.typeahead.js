@@ -139,23 +139,23 @@
         , process: function (items) {
             var that = this;
 
-            // items = $.grep(items, function (item) {
-            //     return that.matcher(item);
-            // });
+             items = $.grep(items, function (item) {
+                 return that.matcher(item);
+             });
 
-            // items = this.sorter(items);
+             items = this.sorter(items);
 
-            // if (!items.length) {
-            //     return this.shown ? this.hide() : this;
-            // }
+             if (!items.length) {
+                 return this.shown ? this.hide() : this;
+             }
 
-            // if (this.options.items == 'all') {
+             if (this.options.items == 'all') {
                 if(items.length > 0){
                     return this.render(items).show();
                 }
-            // } else {
-                // return this.render(items.slice(0, this.options.items)).show();
-            // }
+             } else {
+                 return this.render(items.slice(0, this.options.items)).show();
+             }
         }
 
         , matcher: function (item) {

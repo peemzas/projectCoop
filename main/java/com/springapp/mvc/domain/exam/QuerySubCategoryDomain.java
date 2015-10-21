@@ -14,12 +14,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import org.hibernate.criterion.*;
+
 
 /**
  * Created by Phuthikorn_T on 8/7/2015.
  */
 
 @Service
+
 public class QuerySubCategoryDomain extends HibernateUtil {
 
     private static final Logger logger = Logger.getLogger(QuerySubCategoryDomain.class.getName());
@@ -28,7 +31,7 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
         beginTransaction();
         getSession().save(subCategory);
-        getSession().flush();    //Flush
+//        getSession().flush();    //Flush
         commitTransaction();
         closeSession();
     }
@@ -184,24 +187,24 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(SubCategory.class, "SubCategory");
 
         criteria.createAlias("SubCategory.category", "category");
-////
 //                ProjectionList projectionList = Projections.projectionList();
 //                projectionList.add(Projections.property("category.id"),"catId");
 //                projectionList.add(Projections.property("category.name"),"catName");
 //                projectionList.add(Projections.property("sc.name"),"subName");
         criteria.addOrder(Order.asc("category.id"));
-
-
 //                criteria.add(Restrictions.like("name", "%" + subcategoryName + "%").ignoreCase());
 //                criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
 //                criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
-
 
         if (subcategoryName != "") {
             criteria.add(Restrictions.like("SubCategory.name", "%" + subcategoryName + "%").ignoreCase());
         }
         if (categoryId != "") {
-            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+//            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+
+            Criterion cri = Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase();
+            Criterion cri2 = Restrictions.like("category.name", "%" + categoryId + "%").ignoreCase();
+            criteria.add(Restrictions.or(cri,cri2));
         }
         if (categoryName != "") {
             criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
@@ -246,29 +249,38 @@ public class QuerySubCategoryDomain extends HibernateUtil {
 
         return subId;
     }
-
     public List<SubCategory> getSubCategoryToDropDown(String categoryId, String categoryName) {
         Criteria criteria = getSession().createCriteria(SubCategory.class, "SubCategory");
         criteria.createAlias("SubCategory.category", "category");
-//
         criteria.addOrder(Order.asc("category.id"));
 
+                if (!categoryId.equals("")) {
+            Criterion cri = Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase();
+            Criterion cri2 =Restrictions.like("category.name", "%" + categoryId + "%").ignoreCase();
 
-        if (!categoryId.equals("")) {
-            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+            criteria.add(Restrictions.or(cri,cri2));
         }
-        if (categoryName != "" && categoryId == "") {
-            criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
-        }
-        else{
-            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
-        }
-
         criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<SubCategory> subCategoriesToDropDown = criteria.list();
         closeSession();
         return subCategoriesToDropDown;
-
     }
+
+//    public List<SubCategory> LOVSubCategory(String categoryId) {
+//        Criteria criteria = getSession().createCriteria(Category.class, "Category");
+//        criteria.createAlias("SubCategory.category", "category");
+//        criteria.addOrder(Order.asc("category.id"));
+//
+//        if (!categoryId.equals("")) {
+//            Criterion cri = Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase();
+//            Criterion cri2 =Restrictions.like("category.name", "%" + categoryId + "%").ignoreCase();
+//
+//            criteria.add(Restrictions.or(cri,cri2));
+//        }
+//        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//        List<SubCategory> LOVSubCategory = criteria.list();
+//        closeSession();
+//        return LOVSubCategory;
+//    }
 }
 

@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <div class="col-md-12 text-center">
                             <input id="submitCreateCategoryBtn" class="btn btn-primary btn-sm" type="submit"  value="บันทึก"/>
-                            <button id="hiddenBtn2" class="btn btn-warning btn-sm"  data-dismiss="modal">ยกเลิก</button>
+                            <button id="hiddenBtn2" class="btn btn-warning btn-sm" >ยกเลิก</button>
                         </div>
                     </div>
                 </div>
@@ -49,4 +49,22 @@
     </div>
     <!-- /.modal -->
 </div>
+
+<script>
+//    data-dismiss="modal"
+
+    $("#hiddenBtn2").on('click',function(){
+        var catId = $("#categoryIdText").val();
+        var catName = $("#categoryNameText").val();
+        if(catId == "" && catName ==""){
+
+            $("#createCat").modal('hide');
+        }
+        else {
+            if(!confirm(" ข้อมูลยังไม่ถูกบันทึก ต้องการยกเลิกหรือไม่"))
+                return false;
+            $("#createCat").modal('hide');
+        }
+    })
+</script>
 

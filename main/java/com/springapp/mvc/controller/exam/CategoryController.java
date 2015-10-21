@@ -107,25 +107,18 @@ public class CategoryController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/exam/LOVcategory", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<String> LOVcategory(@RequestParam(value = "categoryId", required = true) String categoryId) {
-
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;charset=UTF-8");
-
-        Category category = queryCategoryDomain.getCategoryByIdLOV(categoryId);
-
-        String json = new Gson().toJson(category);
-
-        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
-
-
-    }
-
-
-
-
-
+//    @RequestMapping(value = "/exam/LOVcategory", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ResponseEntity<String> LOVcategory(@RequestParam(value = "categoryId", required = false) String categoryId) {
+//
+//        logger.info(String.valueOf(categoryId+"+++++"));
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Content-Type", "application/json;charset=UTF-8");
+//
+//        List<Category> getCategoryByIdLOV = queryCategoryDomain.getCategoryByIdLOV(categoryId);
+//
+//        String json = new Gson().toJson(getCategoryByIdLOV);
+//
+//        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+//    }
 }

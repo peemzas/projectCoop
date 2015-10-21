@@ -60,6 +60,8 @@ function saveSubCategory() {
             if ($("#subcategoryNameadd").val() == value.subName) {
                 alert(" หัวข้อเรื่อง " + $("#subcategoryNameadd").val() + " มีอยู่แล้วในระบบ");
             }
+
+
             //if ($("#subcategoryNameadd").val() == "" || $("#categoryId").val() == "") {
             //    alert(" กรุณากรอกข้อมูลให้ครบ ");
             //    //this.xhr.abort();
@@ -76,23 +78,21 @@ function saveSubCategory() {
                     subcategoryNameadd: subcategoryNameadd
                 },
                 success: function () {
-                    alert('เพิ่มหัวข้อเรื่อง ' + subcategoryNameadd);
+                    //alert('เพิ่มหัวข้อเรื่อง ' + subcategoryNameadd);
+                    alert("บันทึกข้อมูลสำเร็จ");
                     //$("#tbodySubCategory").empty();
                     //viewSubCategory();
                     window.location.reload();
 
                 },
                 error: function () {
-                    alert('เพิ่มหัวข้อเรื่องไม่สำเร็จ');
+                    alert('บันทึกข้อมูลไม่สำเร็จ');
                 }
-
-            }).responseText;
-        }
-        ,
+                    //.responseText;
+            });
+        },
         error: function (data) {
             alert('error while request...');
         }
-
-
     });
 }
