@@ -8,6 +8,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<script>
+    if ('${status}' == 'user' || '${status}' == '') {
+        window.location.href = "/TDCS/index.html";
+    }
+</script>
+
+
 <c:if test="${user != null}">
     <c:set var="questionNumber" value="${1}"/>
 

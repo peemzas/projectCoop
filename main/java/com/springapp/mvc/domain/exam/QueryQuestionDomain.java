@@ -41,7 +41,7 @@ public class QueryQuestionDomain extends HibernateUtil {
     @Autowired
 
 
-    
+
     private static final Logger logger = Logger.getLogger(QueryQuestionDomain.class.getName());
     public void insertQuestion(Question question, List<String> cDesc, Integer correctChoice) {
 
@@ -219,6 +219,8 @@ public class QueryQuestionDomain extends HibernateUtil {
         }
         if (statusId != null && statusId.trim().length()!=0){
             criteria.add(Restrictions.eq("status.id",statusId));
+        }else {
+            criteria.add(Restrictions.eq("status.id",3));
         }
 
         criteria.addOrder(Order.asc("q.id"));

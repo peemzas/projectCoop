@@ -38,13 +38,17 @@
                         </button>
                     </td>
 
-                    <td align="center"
-                        class="col-post-score">
-                        ${result.examRecord.postTestRecord.examResult.objectiveScore + result.examRecord.postTestRecord.examResult.subjectiveScore}
-                        <button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"
-                                data-target="#showScore" resultId="${result.examRecord.postTestRecord.examResult.id}">
-                            <span class="glyphicon glyphicon-info-sign" href="#"></span>
-                        </button>
+                    <td align="center" class="col-post-score">
+                        <c:if test="${result.examRecord.postTestRecord != null}">
+                            ${result.examRecord.postTestRecord.examResult.objectiveScore + result.examRecord.postTestRecord.examResult.subjectiveScore}
+                            <button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"
+                                    data-target="#showScore" resultId="${result.examRecord.postTestRecord.examResult.id}">
+                                <span class="glyphicon glyphicon-info-sign" href="#"></span>
+                            </button>
+                        </c:if>
+                        <c:if test="${result.examRecord.postTestRecord == null}">
+                            -
+                        </c:if>
                     </td>
 
                         <%--<td align="center" class="col-status">${result.status.description}</td>--%>

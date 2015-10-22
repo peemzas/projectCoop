@@ -26,12 +26,17 @@ var updateResultDetail = function(resultId){
             resultId:resultId
         },
         success:function(res){
-            $('#objectiveShowScore').text(res.objectiveScore);
-            $('#subjectiveShowScore').text(res.subjectiveScore);
-            $('#commentTextArea').val(res.comment);
-            $('#markedByShow').text(res.markedBy.thFname + " " + res.markedBy.thLname);
-            var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + "/" + res.examRecord.paper.maxScore
-            $('#sumScoreShow').text(sumScoreShowText);
+            if(res != null) {
+                $('#objectiveShowScore').text(res.objectiveScore);
+                $('#subjectiveShowScore').text(res.subjectiveScore);
+                $('#commentTextArea').val(res.comment);
+                $('#markedByShow').text(res.markedBy.thFname + " " + res.markedBy.thLname);
+                var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + "/" + res.examRecord.paper.maxScore
+                $('#sumScoreShow').text(sumScoreShowText);
+            }else{
+                $('#showScore').modal('hide')
+                alert('ไม่มีบันทึกการทำ Post Test')
+            }
         },
         error:function(){
             alert('error occur')

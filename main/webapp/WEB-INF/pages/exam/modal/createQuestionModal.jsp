@@ -7,7 +7,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" class="close" dat-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title" align="left" id="createQuestModalTitle">สร้างข้อสอบ</h3>
             </div>
@@ -81,7 +81,7 @@
                                 <h5><label style="font-weight: 100">คะแนน :</label></h5>
                             </div>
                             <div class="col-md-2" style="padding: 0;">
-                                <input class="form-control" id="questionScoreForCreateQuestion" style="width: 100%">
+                                <input class="form-control" type="number" id="questionScoreForCreateQuestion" style="width: 100%">
                             </div>
                         </div>
 
@@ -140,7 +140,7 @@
                                 <button class="btn btn-primary" id="submitCreateBtn" data-dismiss="modal">ตกลง</button>
                             </div>
                             <div class="col-md-1">
-                                <button class="btn btn-warning" data-dismiss="modal">ยกเลิก</button>
+                                <button class="btn btn-warning" dat-dismiss="modal">ยกเลิก</button>
                             </div>
                         </div>
 

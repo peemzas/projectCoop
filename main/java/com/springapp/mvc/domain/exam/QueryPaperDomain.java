@@ -2,10 +2,7 @@ package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
-import com.springapp.mvc.pojo.exam.ExamPaper;
-import com.springapp.mvc.pojo.exam.PaperQuestion;
-import com.springapp.mvc.pojo.exam.Question;
-import com.springapp.mvc.pojo.exam.Status;
+import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -15,6 +12,7 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sun.security.krb5.Config;
 
@@ -39,6 +37,9 @@ import java.util.Locale;
  */
 @Service
 public class QueryPaperDomain extends HibernateUtil {
+
+    @Autowired
+    QueryStatusDomain queryStatusDomain;
 
     public ExamPaper getPaperById(Integer paperId) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
@@ -225,5 +226,13 @@ public class QueryPaperDomain extends HibernateUtil {
         List<ExamPaper> papers = criteria.list();
 
         return papers;
+    }
+
+    public List<ExamPaper> getOpenedPaperForPosition(Position position){
+        Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        criteria.add(Restrictions.eq("paperStatus",queryStatusDomain.getOpenStatus()));
+        criteria.add(Restrictions.eq("position",position));
+
+        return criteria.list();
     }
 }

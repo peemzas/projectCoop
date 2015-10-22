@@ -8,10 +8,6 @@ $('#marking-body').on('focusout', '.scoreInput', function () {
         if ($(this).val() > maxScore) {
             alert('คะแนนที่ให้มากกว่าคะแนนเต็ม' + $(this).val());
             $(this).val('');
-            //setTimeout(function(){
-            //    $(this).click();
-            //}, 1);
-            //$(this).click();
             document.getSelection().removeAllRanges();
             jumpToElement($(this))
         }
@@ -24,7 +20,7 @@ $('#marking-body').on('focusout', '.scoreInput', function () {
     }
 })
 
-$('#confirmSubmitMarking').on('click',function(){
+$('#confirmSubmitMarking').on('click', function () {
     submitMarking();
 })
 
@@ -59,27 +55,27 @@ var submitMarking = function () {
 
     $.each(questions, function (index, value) {
         var answerRecordId = $(this).attr('answerRecordId')
-        console.log(answerRecordId)
         var score = parseFloat($(this).find('.scoreInput').val())
 
         if (!isNaN(score)) {
-            markingArray.push(new markingRecord(answerRecordId,score))
+            markingArray.push(new markingRecord(answerRecordId, score))
         }
     })
 
     $.ajax({
         type: "POST",
-        url:"/TDCS/exam/marking/submit",
-        data:{
-            markingRecord:JSON.stringify(markingArray),
-            resultId:$('#marking-body').attr('resultId'),
-            comment:$('#comment').val()
+        url: "/TDCS/exam/marking/submit",
+        data: {
+            markingRecord: JSON.stringify(markingArray),
+            resultId: $('#marking-body').attr('resultId'),
+            comment: $('#comment').val()
         },
-        success:function(){
-            alert('ส่งผลตรวจเรียบร้อย')
+        success: function () {
+            alert('[บันทึกข้อมูลสำเร็จ')
+            location.href = "/TDCS/home.html"
         },
-        error:function(){
-            alert('ส่งผลตรวจล้มเหลว')
+        error: function () {
+            alert('บันทึกข้อมูลล้มเหลว')
         }
     })
 

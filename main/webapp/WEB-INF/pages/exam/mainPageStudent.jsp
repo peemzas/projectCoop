@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: JOKIZZ
@@ -8,15 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
   <div class="row">
-    <h3 class="h3">เลือกชุดข้อสอบ</h3>
+    <h3 class="h3">เลือกทำข้อสอบ</h3>
   </div>
 </div>
 <hr/>
 
 <div class="container">
   <div class="row">
-    <table class="table table-bordered">
-      <thead style="background-color: #006dcc; color: white;">
+    <table class="table">
+      <thead class="label-primary small bg-primary">
       <tr>
         <th style="text-align: center">ชื่อชุดข้อสอบ</th>
         <th style="text-align: center">ชื่อผู้สร้าง</th>
@@ -27,63 +28,25 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>ทดสอบสร้างชุดข้อสอบ </td>
-        <td>EmployeeA</td>
-        <td>Developer Trainee</td>
-        <td align="center">50</td>
-        <td>60 นาที</td>
-        <td style="text-align: center;">
-         <a href="/TDCS/exam/doExam?paperId=123"> <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button> </a>
+      <c:forEach var="paper" items="${openPaperList}">
 
 
-        </td>
-      </tr>
-      <tr>
-        <td>แบบทดสอบก่อนหลังอบรม</td>
-        <td>EmployeeA</td>
-        <td>Developer Trainee</td>
-        <td align="center">50</td>
-        <td>60 นาที</td>
-        <td style="text-align: center;">
-          <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button>
-        </td>
-      </tr>
-      <tr>
-        <td>แบบทดสอบความรู้พื้นฐานภาษาอังกฤษ</td>
-        <td>EmployeeB</td>
-        <td>Developer Trainee</td>
-        <td align="center">50</td>
-        <td>45 นาที</td>
-        <td style="text-align: center;">
-          <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button>
-        </td>
-      </tr>
-      <tr>
-        <td>แบบทดสอบความรู้พื้นฐานภาษาทางธุรกิจ</td>
-        <td>EmployeeC</td>
-        <td>Developer Trainee</td>
-        <td align="center">60</td>
-        <td>30 นาที</td>
-        <td style="text-align: center;">
-          <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button>
-        </td>
-      </tr>
+
+        <tr>
+          <td>${paper.name}</td>
+          <td>${paper.createBy.thFname}&nbsp;${paper.createBy.thLname}</td>
+          <td>${paper.position.posiName}</td>
+          <td align="center">${paper.maxScore}</td>
+          <td align="center">${paper.timeLimit} นาที</td>
+          <td style="text-align: center;">
+            <a class="doExamBtn" location="/TDCS/exam/doExam?paperId=${paper.id}"> <button class = "btn btn-block" type = "button">เริ่มทำข้อสอบ</button> </a>
+          </td>
+        </tr>
+
+      </c:forEach>
       </tbody>
     </table>
   </div>
 </div>
 
-<div class = "row">
-  <div class = "col-md-12" align = "center">
-    <ul class = "pagination">
-      <li class = "disabled"><a href = "#">&laquo;</a></li>
-      <li class = "active"><a href = "#">1</a></li>
-      <li><a>2</a></li>
-      <li><a>3</a></li>
-      <li><a>4</a></li>
-      <li><a>5</a></li>
-      <li class = "disabled"><a href = "#">&raquo;</a></li>
-    </ul>
-  </div>
-</div>
+<script src="../../../resources/js/pageScript/exam/mainPageStudent.js"></script>
