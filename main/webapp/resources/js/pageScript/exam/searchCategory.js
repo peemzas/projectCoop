@@ -37,10 +37,10 @@ function search(){
         success: function(data){
             $("#tbodyCategory").empty();
             if(data.size == null){
-                $("#searchNotFound").show();
+                $("#searchCatNotFound").show();
             }
             data.forEach(function(value){
-                $("#searchNotFound").hide();
+                $("#searchCatNotFound").hide();
                 $("#tbodyCategory").append(
                     '<tr>'+
                     '<td class="col-sm-1" style="text-align: center;"><input type="checkbox" cateId="'+value.category.id+'"/></td>'+

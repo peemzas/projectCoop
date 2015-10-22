@@ -88,6 +88,7 @@ $('#selectCategoryToSelection').on('change', function () {
 
 var catAndSubcatSelectNothing = function () {
     $('#selectCategoryToSelection option:selected').removeAttr("selected");
+    $('#selectCategoryToSelection').val("");
     $('#selectCategoryToSelection option[value=""]').attr('selected', 'selected');
     updateSubCategoryList();
 

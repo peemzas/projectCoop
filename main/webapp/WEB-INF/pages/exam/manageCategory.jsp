@@ -51,6 +51,7 @@
                     </div>
 
                 </div>
+            <div style="margin-top: -10px"></div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-12 text-center">
@@ -102,16 +103,31 @@
                     <%--</c:forEach>--%>
                 </tbody>
             </table>
-            <div class="bg-info" id="searchNotFound">
-                <p class="bg-info">
-                    <h3 style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
-                </p>
+            <div class="bg-info" id="searchCatNotFound">
+                <%--<p class="bg-info">--%>
+                    <h3 id="searchCatDescNotFound" style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
+                <%--</p>--%>
             </div>
         </div>
     </div>
 </div>
 
 <style>
+    #searchCatNotFound{
+        background-color: #b2e0ff;
+        height: 100px;
+        display: none;
+        top: 40px;
+        vertical-align: middle;
+        border-radius: 5px;
+        margin-top: -15px;
+    }
+    #searchCatDescNotFound{
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100px;
+        color: #00647f;
+    }
     #categoryName + .dropdown-menu {
         /*font-size: 12px;*/
         max-width: 100%;
