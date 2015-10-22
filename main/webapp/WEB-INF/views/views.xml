@@ -143,7 +143,7 @@
         <put-attribute name="body" value="/WEB-INF/pages/exam/manageCategory.jsp" />
     </definition>
     <definition name = "manageSubCategory" extends="tempForUser">
-        <put-attribute name="title" value="จัดดการหัวข้อเรื่อง" />
+        <put-attribute name="title" value="จัดการหัวข้อเรื่อง" />
         <put-attribute name="body" value="/WEB-INF/pages/exam/manageSubCategory.jsp" />
     </definition>
 

@@ -26,7 +26,7 @@
     <div class="row">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h5>ค้นหา</h5>
+                <h5 class="panel-title">ค้นหา</h5>
             </div>
             <div class="panel-body ">
                 <div style="margin-bottom: 5px"></div>
@@ -49,24 +49,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <button id="searchCategory" class="btn btn-primary btn-sm" type="button">ค้นหา</button>
-                            <button id="resetBtnSearchCategory" type="button" class="btn btn-sm" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล</button>
-                        </div>
+
+                </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button id="searchCategory" class="btn btn-primary btn-sm" type="button">ค้นหา</button>
+                        <button id="resetBtnSearchCategory" type="button" class="btn btn-gray btn-sm" >ล้างข้อมูล</button>
+                        <%--style="background-color: rgba(193, 193, 198, 0.83); color: #000000;"--%>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-    <button id="addCategory" data-toggle="modal" data-target="#createCat" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
-    <button id="deleteCategory" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
+
+
+
+
+
     <div class="row">
-        <div class="col-md-12">
+
+        <div>
+
+            <button id="addCategory" data-toggle="modal" data-target="#createCat" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
+            <button id="deleteCategory" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
+            </div>
             <table class="table table-bordered table-hover" id="tblCategory">
                 <thead class="label-primary small">
                     <tr>
-                        <th style="text-align: center; color: white;"><input id="selectAllCheckbox" type="checkbox"/></th>
+                        <th style="text-align: center; color: white;"><input id="selectAllCheckbox" checked="" type="checkbox"/></th>
                         <th style="text-align: center; color: white;">รหัสหมวดหมู่</th>
                         <th style="text-align: center; color: white;">หมวดหมู่</th>
                         <th id="thEdit" style="text-align: center; color: white;">แก้ไข</th>
@@ -108,6 +120,10 @@
     }
     .typeahead {
         width: 100%;
+    }
+
+    #tbodyCategory td{
+        font-size: 13px;
     }
 
 </style>

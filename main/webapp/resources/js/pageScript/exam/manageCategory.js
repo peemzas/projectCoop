@@ -9,27 +9,44 @@ $(document).ready(function(){
         saveCategory();
     });
 
+
+    $(".selectCheckbox").on('click',function(){
+        $("#selectAllCheckbox").prop('checked',false);
+    });
+    $("#selectAllCheckbox").prop('checked',false);
     $("#selectAllCheckbox").on('click', function () {
         if (this.checked) {
-            $(".selectselectCheckbox").each(function () {
+            $(".selectCheckbox").each(function () {
                 this.checked = true;
             })
         }
         else {
-            $(".selectselectCheckbox").each(function () {
+            $(".selectCheckbox").each(function () {
                 this.checked = false;
             })
         }
     });
 
+    //$("#selectAllSubCategory").checked=false;
+
+
+    //$(".selectCheckbox").on('click',function(){
+    //    $("#selectAllCheckbox").checked =true;
+    //    alert("check");
+    //
+    //});
+
+
+
     $("#addCategory").on('click', function(){
         $("#categoryIdText").val("");
         $("#categoryNameText").val("");
-    })
+    });
 
 
 });
 function viewCategory(){
+
     $("#tbodyCategory").empty();
     $("#thEdit").text("แก้ไข");
     var data = $.ajax({
@@ -41,7 +58,7 @@ function viewCategory(){
             data.forEach(function(value){
                 $("#tbodyCategory").append(
                     '<tr>'+
-                    '<td class="col-sm-1" style="text-align: center;"><input class="selectselectCheckbox" type="checkbox" cateId="'+value.id+'"/></td>'+
+                    '<td class="col-sm-1" style="text-align: center;"><input class="selectCheckbox" type="checkbox" cateId="'+value.id+'"/></td>'+
                     '<td class="col-sm-2" style="text-align: center;"><label id="id'+value.id+'">'+value.id+'</label>'+
                     '<input id="editId'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
                     '<td><label id="data'+value.id+'">'+value.name+'</label>'+
@@ -147,7 +164,7 @@ function saveCategory(){
     if(countError>0){
 //        alert(elementFirst);
 //        $("#btnSubmit").click();
-        alert("คุณกรอกข้อมูลไม่ครบ");
+        alert("กรุณากรอกข้อมูล");
         return false;
     }
 

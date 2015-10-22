@@ -17,7 +17,7 @@
 </script>
 
 <div class="container row">
-    <h3>หัวข้อเรื่อง</h3>
+    <h3>จัดการหัวข้อเรื่อง</h3>
     <hr>
 </div>
 <div class="container">
@@ -112,9 +112,8 @@
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
                             <button id="searchSubCategory" class="btn btn-primary btn-sm" type="button">ค้นหา</button>
-                            <button id="clearsearchinput" class="btn btn-sm" type="button"
-                                    style="background-color: rgba(193, 193, 198, 0.83); color: #000000;">ล้างข้อมูล
-                            </button>
+                            <button id="clearsearchinput" class="btn btn-sm btn-gray    " type="button">ล้างข้อมูล</button>
+                            <%--style="background-color: rgba(193, 193, 198, 0.83); color: #000000;"--%>
                         </div>
                     </div>
                 </div>
@@ -124,13 +123,14 @@
 
 
 
-
+        <div style="margin-bottom: 5px;">
         <button id="addSubcategory" data-toggle="modal" data-target="#createSub" class="btn btn-success btn-sm" align="center"
                 ><span class="glyphicon glyphicon-plus"></span>
         </button>
         <button align="center"  class="btn btn-danger btn-sm" onclick="deleteSubCategory()">
             <span class="glyphicon glyphicon-trash"></span>
         </button>
+            </div>
 
 
 
@@ -186,6 +186,9 @@
     }
     .typeahead {
         width: 100%;
+    }
+    #tbodySubCategory td{
+        font-size: 13px;
     }
 
 

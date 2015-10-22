@@ -130,3 +130,6 @@ var clearAllSearchQuestionField = function () {
 $(".searchInputClearBtn").on('click',function(){
     clearAllSearchQuestionField();
 })
+
+
+

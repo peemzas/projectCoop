@@ -70,5 +70,8 @@
     th {
         border: solid 1px white;
     }
+    #tableBody td{
+        font-size: 13px;
+    }
 </style>
 

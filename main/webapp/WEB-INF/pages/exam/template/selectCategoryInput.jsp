@@ -33,25 +33,72 @@
     <%--</select>--%>
 <%--</div>--%>
 <%--Add By Mr.Wanchana--%>
-<div class="col-sm-5">
-    <div class="col-sm-4 col-sm-offset-2 text-right">
-        <h5>หมวดหมู่</h5>
+
+
+
+
+
+
+
+<div class="col-sm-6">
+    <div class="col-sm-4  text-right">
+        <h5>หมวดหมู่ :</h5>
     </div>
-    <div class="col-sm-6">
-        <select type="text" class="col-sm-11 btn btn-sm" id="selectCategoryToSelection" style="border: solid #a8a8a8 1px; text-align: left;">
-            <option active>เลือกหมวดหมู่</option>
+    <div class="col-sm-6 input-group">
+        <input type="text" class="form-control" name="cat" id="selectCategoryToSelection"  autocomplete="off"/>
+        <span class="input-group-addon" id="selectCat">
+        <i class="glyphicon glyphicon-search" onclick="listcatSelectInput()" style="cursor: pointer; height: 20px;"></i>
+        </span>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="col-sm-3 text-right">
+        <h5>หัวข้อเรื่อง :</h5>
+    </div>
+    <div class="col-sm-7">
+        <%--<select type="text" class="btn btn-sm col-sm-12"  id="selectSubCategoryToSelection" style="border: solid #a8a8a8 1px; text-align: left;">--%>
+            <%--<option value="" selected></option>--%>
+        <%--</select>--%>
+        <select  id="selectSubCategoryToSelection" class="form-control" data-width="100%">
         </select>
     </div>
 </div>
-<div class="col-sm-7">
-    <div class="col-sm-2 text-right">
-        <h5>หัวข้อเรื่อง</h5>
-    </div>
-    <div class="col-sm-6">
-        <select type="text" class="btn btn-sm col-sm-12"  id="selectSubCategoryToSelection" style="border: solid #a8a8a8 1px; text-align: left;">
-            <option value="" selected></option>
-        </select>
-    </div>
-</div>
+
+
+
+
+
+<%--<div class="row form-group">--%>
+    <%--<div class="col-md-3" align="right">--%>
+        <%--<h5><label style=" font-weight: 100">หมวดหมู่ :</label></h5>--%>
+    <%--</div>--%>
+    <%--<div class="input-group col-md-3">--%>
+        <%--<input type="text" class="form-control" name="cat" id="selectCategoryToSelection"  autocomplete="off"/>--%>
+                        <%--<span class="input-group-addon" id="selectCat">--%>
+                            <%--<i class="glyphicon glyphicon-search" onclick="listcat()" style="cursor: pointer; height: 20px;"></i>--%>
+                        <%--</span>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+
+<%--<div class="row form-group">--%>
+    <%--<div class="col-md-3" align="right">--%>
+        <%--<h5><label style="font-weight: 100">หัวข้อเรื่อง :</label></h5>--%>
+    <%--</div>--%>
+<%--<div class="input-group col-md-3">--%>
+    <%--<select  id="sSubCat" class="form-control" data-width="100%">--%>
+    <%--</select>--%>
+<%--</div>--%>
+
+<%--</div>--%>
+
+
+
+
+
+
+
+
+
 
 <script src="../../../resources/js/pageScript/exam/selectCategoryInput.js" charset="utf-8"></script>

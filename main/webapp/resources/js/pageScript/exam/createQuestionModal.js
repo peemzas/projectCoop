@@ -59,7 +59,12 @@ var editQuestion = function () {
 function saveQuestion() {
 
     var categoryName = $("#categoryInputForCreateQuestion").val();
-    var subCategoryName = $("#subCategoryInputForCreateQuestion").val();
+    //categoryName.substr(categoryName.indexOf(":"),categoryName.length).trim();
+    categoryName = categoryName.substr(8, categoryName.length);
+    //alert(categoryName);
+    console.log(categoryName);
+
+    var subCategoryName = $("#sSubCat").val();
     var questionTypeString = $("#select-QuestionType").val();
     var score = $("#questionScoreForCreateQuestion").val();
     var choiceDesc = null;
@@ -111,7 +116,9 @@ function saveQuestion() {
                 }
             },
             error: function () {
-                alert('บันทึกข้อมูลล้มเหลว');
+
+                alert('บันทึกข้อมูลไม่สำเร็จ');
+
             }
         })
     } else {
@@ -146,7 +153,9 @@ function saveQuestion() {
                 }
             },
             error: function () {
-                alert('บันทึกข้อมูลล้มเหลว');
+
+                alert('บันทึกข้อมูลไม่สำเร็จ');
+
             }
         })
     }
@@ -212,3 +221,139 @@ var updateCreateModalLayout = function () {
         createModalShowSubjevtive();
     }
 }
+
+
+// LOV By JoKizz
+$(document).ready(function(){
+    $("#categoryInputForCreateQuestion").on('click',function() {
+
+    })
+});
+
+
+$("#categoryInputForCreateQuestion").keyup(function (e) {
+    if (e.which > 0) {
+        e.preventDefault();
+        listcatCreateQues();
+
+    }
+});
+function listcatCreateQues() {
+    //alert("LOV");
+    var availableall = [];
+    var categoryId = $("#categoryInputForCreateQuestion").val();
+
+    var data = $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/getAllCategory",
+
+        async: false,
+
+        success: function (data) {
+            data.forEach(function (value) {
+                availableall.push(value.id + ' : ' + value.name);
+            });
+            //alert("SUCC");
+        },
+        error: function (data) {
+            alert('error while request...');
+        }
+    });
+    var search = $("#categoryInputForCreateQuestion").val();
+    $("#categoryInputForCreateQuestion").typeahead('destroy').typeahead({
+        source: availableall,
+        minLength: 0,
+        items: 20,
+        maxLength: 2
+    }).focus().val('').keyup().val(search);
+};
+
+
+
+
+///  get data to DropDownlist
+$("#categoryInputForCreateQuestion").on('change', function () {
+        $("#sSubCat").empty();
+        var categoryId = $("#categoryInputForCreateQuestion").val();
+        //var categoryName = $("#categoryId").val();
+        var subcategoryName = $("#sSubCat").val();
+        //categoryId += " ";
+        //var length = categoryId.length
+        //alert(length);
+
+        //categoryId = categoryId.substr(0, categoryId.indexOf(' '));
+        if(categoryId !=""){
+            if(categoryId.indexOf(':')!=-1){
+                categoryId.indexOf(':');
+                var categoryId2 =  categoryId.substr(0, categoryId.indexOf(' '));
+                categoryId = categoryId2;
+                var data = $.ajax({
+                    type: "POST",
+                    url: "/TDCS/exam/getSubCategoryToDropDown",
+                    data: {
+                        categoryId: categoryId
+                        //subcategoryName: subcategoryName
+                    },
+                    async: false,
+
+                    success: function (data) {
+                        data.forEach(function (value) {
+                            $("#sSubCat").append(
+                                '<option >' + value.SubCategory.name + '</option>'
+                            )
+                        });
+                    },
+                    error: function (data) {
+                        alert('error while request...');
+                    }
+                });
+                if (($("#sSubCat").val() == null)) {
+                    $("#sSubCat").append(
+                        '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+                    )
+                }
+                //else if (($("#sSubCat").val() != null)) {
+                //    $("#sSubCat").append(
+                //        '<option value="">' + "ทั้งหมด" + '</option>'
+                //    )
+                //}
+            }else{
+                //console.log(categoryId+" 1 part");
+
+                var data = $.ajax({
+                    type: "POST",
+                    url: "/TDCS/exam/getSubCategoryToDropDown",
+                    data: {
+                        categoryId: categoryId
+                        //subcategoryName: subcategoryName
+                    },
+                    async: false,
+
+                    success: function (data) {
+                        data.forEach(function (value) {
+                            $("#sSubCat").append(
+                                '<option >' + value.SubCategory.name + '</option>'
+                            )
+                        });
+
+                    },
+                    error: function (data) {
+                        alert('error while request...');
+                    }
+
+                });
+                if (($("#sSubCat").val() == null)) {
+                    $("#sSubCat").append(
+                        '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+                    )
+                }
+                //else if (($("#sSubCat").val() != null)) {
+                //    $("#sSubCat").append(
+                //        '<option value="">' + "ทั้งหมด" + '</option>'
+                //    )
+                //}
+            }
+
+        }
+    }
+)
