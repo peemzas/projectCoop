@@ -191,8 +191,9 @@ $(document).ready(function () {
 });
 
 function clearsearch() {
+    //window.location.reload();
     $("#categoryId").val("");
-    $("#sSubCat").val("");
+    $("#sSubCat").empty();
 }
 
 function search() {

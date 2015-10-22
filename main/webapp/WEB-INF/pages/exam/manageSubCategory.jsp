@@ -157,9 +157,9 @@
             </tbody>
         </table>
         <div class="bg-info" id="alertMess">
-            <p class="bg-info">
-            <h3 style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
-            </p>
+            <%--<p class="bg-info">--%>
+            <h3 id="alertMessDesc" style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
+            <%--</p>--%>
         </div>
     </div>
 
@@ -178,6 +178,21 @@
 
 
 <style>
+    #alertMess{
+        background-color: #b2e0ff;
+        height: 100px;
+        display: none;
+        top: 40px;
+        vertical-align: middle;
+        border-radius: 5px;
+        margin-top: -15px;
+    }
+    #alertMessDesc{
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100px;
+        color: #00647f;
+    }
     #categoryId + .dropdown-menu{
         /*font-size: 12px;*/
         max-width: 100%;
