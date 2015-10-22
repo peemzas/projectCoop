@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div class="container">
+
     <div class="row">
         <div class="panel-collapse" id="searchCollapse">
             <div class="panel panel-primary">
@@ -17,10 +17,10 @@
                 <div class="panel-body">
                     <%@include file="selectCategoryInput.jsp" %>
                     <%@include file="selectCreateByInput.jsp" %>
+
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-2">
                             <div id="showEmployeeSelected" width="100%;">
-
                             </div>
                         </div>
                     </div>
@@ -105,9 +105,10 @@
             </div>
         </div>
     </div>
-</div>
+
 <%--<input type="checkbox" class="hidden" id="searchCompleteTrigger"/>--%>
 <script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
+
 <%--<script>--%>
     <%--$(document).ready(function () {--%>
         <%--$("#selectAllEmployeeName").click(function (event) {--%>

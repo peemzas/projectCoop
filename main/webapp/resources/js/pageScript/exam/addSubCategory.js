@@ -28,7 +28,7 @@ function saveSubCategory() {
     if(countError>0){
 //        alert(elementFirst);
 //        $("#btnSubmit").click();
-        alert("คุณกรอกข้อมูลไม่ครบ");
+        alert("กรุณากรอกข้อมูล");
         return false;
     }
 

@@ -7,11 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%--Add By Mr.Wanchana--%>
-    <div class="col-sm-5">
-        <div class="col-sm-4 col-sm-offset-2" align="right">
-            <label for="addEmpCreateByBtn" class="label-control"><h5 style="margin-top: 5px">สร้างโดย</h5></label>
+    <div class="col-sm-6">
+        <div class="col-sm-4" align="right">
+            <label for="addEmpCreateByBtn" class="label-control"><h5 style="margin-top: 5px">สร้างโดย :</h5></label>
         </div>
-        <div class="col-sm-6">
+        <div  align="left" >
             <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-success btn-sm" id="addEmpCreateByBtn">เพิ่ม</button>
         </div>
     </div>

@@ -7,6 +7,9 @@ $("#dropdownExamEmp").attr('class', 'dropdown-toggle active');
 
 $(document).ready(function () {
     $("#alertMess").hide();
+
+    $("#selectAllSubCategory").prop('checked',false);
+
     $("#selectAllSubCategory").on('click', function () {
         if (this.checked) {
             $(".selectSubCategory").each(function () {
@@ -31,6 +34,11 @@ $(document).ready(function () {
 $("document").ready(function () {
     //alert('hi')
     viewSubCategory();
+    $(".selectSubCategory").on('click',function(){
+
+        $("#selectAllSubCategory").prop('checked',false);
+
+    });
 });
 function viewSubCategory() {
     $("#tbodySubCategory").empty();
@@ -311,21 +319,10 @@ $("#categoryId").on('change', function () {
         //alert(length);
 
         //categoryId = categoryId.substr(0, categoryId.indexOf(' '));
-
         if(categoryId !=""){
-
             if(categoryId.indexOf(':')!=-1){
-
             categoryId.indexOf(':');
                 var categoryId2 =  categoryId.substr(0, categoryId.indexOf(' '));
-            //console.log(categoryId2+" 2 part");
-
-                //console.log(categoryName);
-                // var categoryName =  categoryId.substr(8);
-                //var length = categoryName.length;
-                //console.log(length+" catNameLength ");
-                //console.log(categoryName+" catName");
-
                 categoryId = categoryId2;
                 var data = $.ajax({
                     type: "POST",
@@ -342,12 +339,10 @@ $("#categoryId").on('change', function () {
                                 '<option >' + value.SubCategory.name + '</option>'
                             )
                         });
-
                     },
                     error: function (data) {
                         alert('error while request...');
                     }
-
                 });
                 if (($("#sSubCat").val() == null)) {
                     $("#sSubCat").append(
@@ -359,8 +354,6 @@ $("#categoryId").on('change', function () {
                         '<option value="">' + "ทั้งหมด" + '</option>'
                     )
                 }
-
-
             }else{
                 //console.log(categoryId+" 1 part");
 
@@ -396,8 +389,6 @@ $("#categoryId").on('change', function () {
                         '<option value="">' + "ทั้งหมด" + '</option>'
                     )
                 }
-
-
             }
 
         }

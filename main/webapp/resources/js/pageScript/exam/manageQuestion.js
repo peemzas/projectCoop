@@ -233,3 +233,8 @@ var listSearchQuestion = function (btn) {
 $(".searchInputSubmitBtn").on('click', function () {
     listSearchQuestion()
 })
+
+
+
+
+

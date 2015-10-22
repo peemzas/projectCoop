@@ -18,19 +18,20 @@ $(document).ready(function(){
 
 function search(){
 
-    var categoryIdRequest = $("#categoryId").val();
-    var categoryNameRequest = $("#categoryName").val();
+    var categoryIdRequest = $("#categoryName").val();
+    //var categoryNameRequest = $("#categoryName").val();
+    categoryIdRequest +=' ';
+    categoryIdRequest =categoryIdRequest.substr(0,categoryIdRequest.indexOf(' '));
 
-    categoryIdRequest =categoryNameRequest.substr(0,categoryNameRequest.indexOf(' '));
-    categoryNameRequest = categoryNameRequest.substr(8);
-    alert(categoryIdRequest+'--'+categoryNameRequest);
+    //categoryNameRequest = categoryNameRequest.substr(8);
+    //alert(categoryIdRequest+'--'+categoryNameRequest);
+    //alert(categoryIdRequest);
 
-    var dataResponse = $.ajax({
+    var data = $.ajax({
         type: "POST",
         url: "/TDCS/exam/searchCategory",
         data: {
-            id: categoryIdRequest,
-            name: categoryNameRequest
+            id: categoryIdRequest
         },
         async: false,
         success: function(data){
@@ -42,14 +43,14 @@ function search(){
                 $("#searchNotFound").hide();
                 $("#tbodyCategory").append(
                     '<tr>'+
-                    '<td class="col-sm-1" style="text-align: center;"><input type="checkbox" cateId="'+value.id+'"/></td>'+
-                    '<td class="col-sm-2" style="text-align: center;"><label id="id'+value.id+'">'+value.id+'</label>'+
-                    '<input id="editId'+value.id+'" class="form-control" type="text" value="'+value.id+'" style="display: none;">'+
-                    '<td><label id="data'+value.id+'">'+value.name+'</label>'+
-                    '<input id="editData'+value.id+'" class="form-control" type="text" value="'+value.name+'" style="display: none;">'+
+                    '<td class="col-sm-1" style="text-align: center;"><input type="checkbox" cateId="'+value.category.id+'"/></td>'+
+                    '<td class="col-sm-2" style="text-align: center;"><label id="id'+value.category.id+'">'+value.category.id+'</label>'+
+                    '<input id="editId'+value.category.id+'" class="form-control" type="text" value="'+value.category.id+'" style="display: none;">'+
+                    '<td><label id="data'+value.category.id+'">'+value.category.name+'</label>'+
+                    '<input id="editData'+value.category.id+'" class="form-control" type="text" value="'+value.category.name+'" style="display: none;">'+
                     '</td>'+
-                    '<td class="col-sm-1" style="text-align: center;"><button id="editBtn'+value.id+'" class="btn btn-gray btn-sm" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
-                    '&nbsp;<button id="updateBtn'+value.id+'" class="btn btn-primary btn-sm" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
+                    '<td class="col-sm-1" style="text-align: center;"><button id="editBtn'+value.category.id+'" class="btn btn-gray btn-sm" onclick="editCategory(' + "'" + value.category.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>'+
+                    '&nbsp;<button id="updateBtn'+value.category.id+'" class="btn btn-primary btn-sm" style="display: none;" onclick="updateCategory(' + "'" + value.category.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
                     '</tr>'
                 )
             });

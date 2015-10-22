@@ -45,7 +45,6 @@ public class QueryCategoryDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(Category.class);
         criteria.add(Restrictions.eq("name", name));
         Category resultCategory = (Category)criteria.list().get(0);
-
         return resultCategory;
     }
 
@@ -106,37 +105,65 @@ public class QueryCategoryDomain extends HibernateUtil {
         HibernateUtil.closeSession();
     }
 
-    public List<Category> searchCategory(String  categoryId, String categoryName){
-        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + categoryId.toLowerCase() + " " + categoryName.toLowerCase());
-        if(categoryId == ""){
-// in case sensitive
-//            String queryStatement = "from Category where name like :categoryName";
-            String queryStatement = "from Category where lower(name) like :categoryName";
-            Query query = getSession().createQuery(queryStatement);
-            query.setParameter("categoryName", "%" + categoryName + "%");
-            List<Category> categories = query.list();
+    public List<Category> searchCategory(String  categoryId){
 
-            return categories;
+        Criteria criteria = getSession().createCriteria(Category.class, "category");
+//        criteria.createAlias("SubCategory.category", "category");
+        criteria.addOrder(Order.asc("category.id"));
+
+
+        if (categoryId != "") {
+//            criteria.add(Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase());
+
+            Criterion cri = Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase();
+            Criterion cri2 = Restrictions.like("category.name", "%" + categoryId + "%").ignoreCase();
+            criteria.add(Restrictions.or(cri,cri2));
         }
-        else if(categoryName == ""){
+//        if (categoryName != "") {
+//            criteria.add(Restrictions.like("category.name", "%" + categoryName + "%").ignoreCase());
+//        }
 
-            String queryStatement = "from Category where lower(id) like :categoryId";
-            Query query = getSession().createQuery(queryStatement);
-            query.setParameter("categoryId", "%" + categoryId + "%");
-            List<Category> categories = query.list();
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Category> categories = criteria.list();
+        closeSession();
+        return categories;
 
-            return categories;
-        }
-        else {
-            String queryStatement = "from Category where lower(id) like :categoryId and lower(name) like :categoryName order by id";
-            Query query = getSession().createQuery(queryStatement);
-            query.setParameter("categoryId", "%" + categoryId + "%");
-            query.setParameter("categoryName", "%" + categoryName + "%");
-            List<Category> categories = query.list();
 
-            return categories;
-        }
+
+
+
+
+//        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + categoryId.toLowerCase() + " " + categoryName.toLowerCase());
+//        if(categoryId == ""){
+//// in case sensitive
+////            String queryStatement = "from Category where name like :categoryName";
+//            String queryStatement = "from Category where lower(name) like :categoryName";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("categoryName", "%" + categoryName + "%");
+//            List<Category> categories = query.list();
+//
+//            return categories;
+//        }
+//        else if(categoryName == ""){
+//
+//            String queryStatement = "from Category where lower(id) like :categoryId";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("categoryId", "%" + categoryId + "%");
+//            List<Category> categories = query.list();
+//
+//            return categories;
+//        }
+//        else {
+//            String queryStatement = "from Category where lower(id) like :categoryId and lower(name) like :categoryName order by id";
+//            Query query = getSession().createQuery(queryStatement);
+//            query.setParameter("categoryId", "%" + categoryId + "%");
+//            query.setParameter("categoryName", "%" + categoryName + "%");
+//            List<Category> categories = query.list();
+//
+//            return categories;
+//        }
         //criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+
     }
 
 

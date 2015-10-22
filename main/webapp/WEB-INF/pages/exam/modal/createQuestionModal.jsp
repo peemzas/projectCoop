@@ -14,11 +14,13 @@
             <div class="modal-body" id="modalBody">
                 <div class="row form-group">
                     <div class="col-md-4" align="right">
-                        <h5><label style=" font-weight: 100">วิชา :</label></h5>
+                        <h5><label style=" font-weight: 100">หมวดหมู่ :</label></h5>
                     </div>
                     <div class="input-group col-md-5">
-                        <input type="text" class="form-control" name="cat" id="categoryInputForCreateQuestion"/>
-                        <span class="input-group-addon" id="selectCat"><i class="glyphicon glyphicon-search"></i></span>
+                        <input type="text" class="form-control" name="cat" id="categoryInputForCreateQuestion"  autocomplete="off"/>
+                        <span class="input-group-addon" id="selectCat">
+                            <i class="glyphicon glyphicon-search" onclick="listcatCreateQues()" style="cursor: pointer; height: 20px;"></i>
+                        </span>
                     </div>
                 </div>
 
@@ -27,9 +29,9 @@
                         <h5><label style="font-weight: 100">หัวข้อเรื่อง :</label></h5>
                     </div>
                     <div class="input-group col-md-5">
-                        <input type="text" class="form-control" name="subcat" id="subCategoryInputForCreateQuestion"/>
-                        <span class="input-group-addon" id="selectSubCat"><i
-                                class="glyphicon glyphicon-search"></i></span>
+
+                        <select  id="sSubCat" class="form-control" data-width="100%">
+                        </select>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -173,5 +175,9 @@
         color: rgb(255, 255, 255);
         background-color: rgb(240, 173, 78);
         border-color: rgb(238, 162, 54);
+    }
+
+    .typeahead {
+        width: 100%;
     }
 </style>
