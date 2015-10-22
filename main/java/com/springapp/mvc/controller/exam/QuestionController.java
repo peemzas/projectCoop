@@ -9,6 +9,7 @@ import com.springapp.mvc.pojo.exam.Choice;
 import com.springapp.mvc.pojo.exam.Question;
 
 import com.springapp.mvc.util.DateUtil;
+import com.springapp.mvc.util.HibernateUtil;
 import flexjson.JSONSerializer;
 
 import org.json.CDL;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
@@ -112,15 +114,15 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.POST, value = "/exam/editQuestion")
     @ResponseBody
     public ResponseEntity<String> editQuestion(ModelMap model,
-                             @RequestParam(value = "questionId", required = true) Integer questionId,
-                             @RequestParam(value = "categoryName", required = true) String catName,
-                             @RequestParam(value = "subCategoryName", required = true) String subCatName,
-                             @RequestParam(value = "questionDesc", required = true) String qDesc,
-                             @RequestParam(value = "choiceDescArray", required = false) List<String> cDescList,
-                             @RequestParam(value = "correctChoice", required = false) Integer correctChoice,
-                             @RequestParam(value = "questionType", required = true) Integer questionTypeId,
-                             @RequestParam(value = "difficulty", required = true) Integer difficultyLevel,
-                             @RequestParam(value = "score", required = true) Float score
+                                               @RequestParam(value = "questionId", required = true) Integer questionId,
+                                               @RequestParam(value = "categoryName", required = true) String catName,
+                                               @RequestParam(value = "subCategoryName", required = true) String subCatName,
+                                               @RequestParam(value = "questionDesc", required = true) String qDesc,
+                                               @RequestParam(value = "choiceDescArray", required = false) List<String> cDescList,
+                                               @RequestParam(value = "correctChoice", required = false) Integer correctChoice,
+                                               @RequestParam(value = "questionType", required = true) Integer questionTypeId,
+                                               @RequestParam(value = "difficulty", required = true) Integer difficultyLevel,
+                                               @RequestParam(value = "score", required = true) Float score
             , HttpServletRequest request, HttpServletResponse response) {
 
         Category category = queryCategoryDomain.getCategoryByName(catName);
@@ -133,44 +135,42 @@ public class QuestionController {
         List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(question.getId());
         Question newQuestion = null;
 
-        if (queryQuestionTypeDomain.isObjective(questionType)) {
-
-            for (int i = 0; i < choices.size(); i++) {
-
-                Choice c = choices.get(i);
-
-                Boo boo = null;
-                if (i + 1 == correctChoice) {
-                    boo = queryBooDomain.getTrue();
-                } else {
-                    boo = queryBooDomain.getFalse();
-                }
-                if (!(c.getDescription() == cDescList.get(i) && c.getCorrection() == boo)) { //if question is edited
-                    Choice newChoice = new Choice();
-                    newChoice.setDescription(cDescList.get(i));
-                    newChoice.setCorrection(boo);
-                    newChoice.setQuestion(question);
-                    newChoice.setStatus(queryStatusDomain.getReadyStatus());
-                }
-            }
-        }
-        if (!(question.getDescription().equals(qDesc) && question.getScore().equals(score) &&
+        if (!(question.getDescription().equals(qDesc) && question.getScore().equals(BigDecimal.valueOf(score)) &&
                 question.getQuestionType() == questionType && question.getDifficultyLevel() == difficulty &&
                 question.getSubCategory() == subCategory)) { //if question is edited
 
-            question.setStatus(queryStatusDomain.getDeletedStatus());
-            queryQuestionDomain.mergeQuestion(question);
+            if (question.getPapers().isEmpty()) { //if is not used
 
-            newQuestion = cloneQuestion(question, request);
-            newQuestion.setDescription(qDesc);
-            newQuestion.setScore(new BigDecimal(score));
-            newQuestion.setQuestionType(questionType);
-            newQuestion.setDifficultyLevel(difficulty);
-            newQuestion.setSubCategory(subCategory);
-            newQuestion.setUpdateBy(queryUserDomain.getCurrentUser(request));
-            newQuestion.setUpdateDate(DateUtil.getCurrentDateWithRemovedTime());
+                question.setSubCategory(subCategory);
+                question.setDescription(qDesc);
+                question.setQuestionType(questionType);
+                question.setDifficultyLevel(difficulty);
+                question.setScore(BigDecimal.valueOf(score));
 
-            queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
+                HibernateUtil.beginTransaction();
+
+                queryChoiceDomain.deleteChoiceFromQuestion(question);
+                queryChoiceDomain.insertAllChoice(question, cDescList, correctChoice);
+                queryQuestionDomain.mergeQuestion(question);
+
+                HibernateUtil.commitTransaction();
+
+            } else {
+
+                question.setStatus(queryStatusDomain.getDeletedStatus());
+                queryQuestionDomain.mergeQuestion(question);
+
+                newQuestion = cloneQuestion(question, request);
+                newQuestion.setDescription(qDesc);
+                newQuestion.setScore(new BigDecimal(score));
+                newQuestion.setQuestionType(questionType);
+                newQuestion.setDifficultyLevel(difficulty);
+                newQuestion.setSubCategory(subCategory);
+                newQuestion.setUpdateBy(queryUserDomain.getCurrentUser(request));
+                newQuestion.setUpdateDate(DateUtil.getCurrentDateWithRemovedTime());
+
+                queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
+            }
         }
 
         HttpHeaders headers = new HttpHeaders();
@@ -211,9 +211,9 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.POST, value = "/exam/deleteQuestion")
     @ResponseBody
     public void deleteQuestion(ModelMap model
-            , @RequestParam(value = "questionArray", required = true)JSONArray questionIds
+            , @RequestParam(value = "questionArray", required = true) JSONArray questionIds
             , HttpServletRequest request, HttpServletResponse response) {
-        for(int i = 0 ; i < questionIds.length() ; i++){
+        for (int i = 0; i < questionIds.length(); i++) {
             Integer questionId = questionIds.optInt(i);
             queryQuestionDomain.deleteQuestion(questionId);
         }
@@ -264,7 +264,7 @@ public class QuestionController {
         return questionNew;
     }
 
-//    Add By Mr.Wanchana
+    //    Add By Mr.Wanchana
     @RequestMapping(method = RequestMethod.POST, value = "/exam/generalQuestionSearch")
     @ResponseBody
     public ResponseEntity<String> generalQuestionSearch(@RequestBody String jsonObj) throws JSONException, ParseException {
@@ -287,7 +287,7 @@ public class QuestionController {
 
         String allQuestionIdOnTableCreatePaper = jObj.getString("allQuestionIdOnTableCreatePaper");
         JSONArray jsonArray2 = new JSONArray(allQuestionIdOnTableCreatePaper);
-        for(int idx = 0; idx < jsonArray2.length(); idx ++){
+        for (int idx = 0; idx < jsonArray2.length(); idx++) {
             JSONObject jObj2 = jsonArray2.getJSONObject(idx);
             qIdsNotSearch.add(jObj2.getInt("qId"));
         }
@@ -295,7 +295,7 @@ public class QuestionController {
         Integer check = new Integer(jObj.getString("thFname"));
         Integer btnStatus = 0;
 
-        if(check == 0){
+        if (check == 0) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             subCategorySearch = jsonObject.getString("subCategoryId");
             btnStatus = jsonObject.getInt("btnSearchStatus");
@@ -305,12 +305,11 @@ public class QuestionController {
             qCreateDateTo = jsonObject.getString("questionCreateDateToSearch");
             qScoreFrom = jsonObject.getString("questionScoreFromSearch");
             qScoreTo = jsonObject.getString("questionScoreToSearch");
-        }
-        else{
-            for(int i = 0; i < jsonArray.length(); i++){
+        } else {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 empNameSearch.add(new Integer(jsonObject.getString("thFname")));
-                if(i == 0){
+                if (i == 0) {
                     subCategorySearch = jsonObject.getString("subCategoryId");
 
                     qDesc = jsonObject.getString("questionDescriptionSearch");
@@ -324,20 +323,19 @@ public class QuestionController {
         }
 
         Integer subCategoryId = 0;
-        if(empNameSearch.size() == 0){
+        if (empNameSearch.size() == 0) {
             empNameSearch = null;
         }
 //        this condition maybe not working if dropdown from view not choose.
-        if(!subCategorySearch.equals("")){
+        if (!subCategorySearch.equals("")) {
             subCategoryId = querySubCategoryDomain.getSubCategoryIdByName(subCategorySearch);
         }
 //        Check Search
-        if(btnStatus == 0){
+        if (btnStatus == 0) {
             List<Question> questionsGeneralResult = queryQuestionDomain.generalSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch);
             String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questionsGeneralResult);
             return new ResponseEntity<String>(json, headers, HttpStatus.OK);
-        }
-        else{
+        } else {
             List<Question> questionsAdvanceResult = queryQuestionDomain.advanceSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch, qDesc, qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo);
             String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questionsAdvanceResult);
             return new ResponseEntity<String>(json, headers, HttpStatus.OK);
@@ -367,7 +365,7 @@ public class QuestionController {
 
         JSONArray jsonArray = new JSONArray(jsoN);
         List questionIds = new ArrayList();
-        for(int i = 0; i < jsonArray.length(); i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             questionIds.add(jsonObject.getInt("id"));
         }
@@ -375,7 +373,8 @@ public class QuestionController {
         String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questions);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
-// ---------------------------------------------------------------------------------------------------------
+
+    // ---------------------------------------------------------------------------------------------------------
     @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
     @ResponseBody
     public ResponseEntity<String> searchQuestion(

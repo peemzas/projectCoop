@@ -8,7 +8,7 @@ $(document).ready(function () {
 })
 
 
-$('tbody').on('click', 'td:not(.questionSelect)', function () {
+$('#tableBody').on('click', 'td:not(.questionSelect)', function () {
     var questionDetailModal = $('#questionDetailModal')
     questionDetailModal.modal('hide');
     questionDetailModal.modal('show');

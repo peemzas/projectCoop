@@ -33,11 +33,11 @@ public class QueryQuestionTypeDomain extends HibernateUtil{
     }
 
     public Boolean isObjective(QuestionType questionType){
-        QuestionType objective = getObjective();
-        return questionType == objective;
+//        QuestionType objective = getObjective();
+        return questionType.getId() == 1;
     }
     public Boolean isSubjective(QuestionType questionType){
-        QuestionType subjective = getSubjective();
-        return questionType == subjective;
+//        QuestionType subjective = getSubjective();
+        return questionType.getId() == 2;
     }
 }

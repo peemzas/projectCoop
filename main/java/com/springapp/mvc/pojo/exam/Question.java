@@ -2,6 +2,7 @@ package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
 import flexjson.JSONSerializer;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -69,6 +70,12 @@ public class Question implements Serializable, Cloneable {
         return new JSONSerializer().exclude("choices.question").exclude("").serialize(this);
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.question", cascade =
+            {CascadeType.PERSIST, CascadeType.MERGE})
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private List<PaperQuestion> papers;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -112,6 +119,14 @@ public class Question implements Serializable, Cloneable {
         result = 31 * result + (getUpdateDate() != null ? getUpdateDate().hashCode() : 0);
         result = 31 * result + (getUpdateBy() != null ? getUpdateBy().hashCode() : 0);
         return result;
+    }
+
+    public List<PaperQuestion> getPapers() {
+        return papers;
+    }
+
+    public void setPapers(List<PaperQuestion> papers) {
+        this.papers = papers;
     }
 
     public List<Choice> getChoices() {
