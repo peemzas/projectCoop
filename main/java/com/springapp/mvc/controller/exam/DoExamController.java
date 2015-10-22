@@ -2,6 +2,7 @@ package com.springapp.mvc.controller.exam;
 
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.domain.exam.*;
+import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.print.Paper;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.*;
 
 /**
@@ -73,6 +75,16 @@ public class DoExamController {
     QueryPaperQuestionDomain queryPaperQuestionDomain;
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/mainPageStudent")
+    public String mainPageStudent(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+
+        Position position = queryUserDomain.getCurrentUser(request).getPosition();
+        modelMap.addAttribute("openPaperList",queryPaperDomain.getOpenedPaperForPosition(position));
+
+        return "mainPageStudent";
+    }
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
     public String doExam(ModelMap modelMap, Model model, HttpServletRequest request, HttpServletResponse response,
                          @RequestParam(value = "paperId") Integer paperId) {
@@ -101,6 +113,7 @@ public class DoExamController {
         examRecord.setTimeTaken(timeTaken);
         examRecord.setExamDate(DateUtil.getCurrentDateWithRemovedTime());
         boolean haveSubjective = false;
+        MathContext mc = new MathContext(2);
         QuestionType subjective = queryQuestionTypeDomain.getSubjective();
 
         ExamRecord preTestRecord = queryExamRecordDomain.getPreTestRecord(examRecord);
@@ -135,7 +148,7 @@ public class DoExamController {
 
                         PaperQuestion pq = queryPaperQuestionDomain.getPaperQuestion(paper, currentQuestion);
                         BigDecimal score = pq.getScore();
-                        objectiveScore.add(score);
+                        objectiveScore = objectiveScore.add(score,mc);
                     }
                 } else {
                     try {

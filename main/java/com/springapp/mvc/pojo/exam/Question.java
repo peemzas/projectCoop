@@ -5,6 +5,7 @@ import flexjson.JSONSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Set;
 public class Question implements Serializable, Cloneable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO,generator = "question_id_generator")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "question_id_generator")
     @SequenceGenerator(name = "question_id_generator")
     @Column(name = "QUESTION_ID")
     private Integer id;
@@ -28,7 +29,7 @@ public class Question implements Serializable, Cloneable {
     private String description;
 
     @Column(name = "QUESTION_SCORE")
-    private Float score;
+    private BigDecimal score;
 
     @Column(name = "QUESTION_CREATE_DATE")
     private Date createDate;
@@ -63,7 +64,7 @@ public class Question implements Serializable, Cloneable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private List<Choice> choices;
 
-    public String toJson(){
+    public String toJson() {
 
         return new JSONSerializer().exclude("choices.question").exclude("").serialize(this);
     }
@@ -153,11 +154,11 @@ public class Question implements Serializable, Cloneable {
         this.description = description;
     }
 
-    public Float getScore() {
+    public BigDecimal getScore() {
         return score;
     }
 
-    public void setScore(Float score) {
+    public void setScore(BigDecimal score) {
         this.score = score;
     }
 

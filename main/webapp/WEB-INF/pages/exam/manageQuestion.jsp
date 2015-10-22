@@ -8,6 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="modal/createQuestionModal.jsp" %>
 <%@include file="modal/questionDetailModal.jsp" %>
+
+<script>
+    if ('${status}' == 'user' || '${status}' == '') {
+        window.location.href = "/TDCS/index.html";
+    }
+</script>
+
 <div class="container row">
     <h3 class="h3">จัดการข้อสอบ</h3>
 </div>
@@ -52,21 +59,6 @@
 
                 </tbody>
             </table>
-        </div>
-    </div>
-    <br/><br/>
-
-    <div class="row">
-        <div class="col-md-12" align="center">
-            <ul class="pagination">
-                <li class="disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a>2</a></li>
-                <li><a>3</a></li>
-                <li><a>4</a></li>
-                <li><a>5</a></li>
-                <li class="disabled"><a href="#">&raquo;</a></li>
-            </ul>
         </div>
     </div>
 </div>

@@ -26,6 +26,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.*;
 import java.util.logging.Logger;
@@ -94,7 +95,7 @@ public class QuestionController {
         question.setCreateDate(DateUtil.getCurrentDateWithRemovedTime());
         question.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
         question.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
-        question.setScore(score);
+        question.setScore(new BigDecimal(score));
 
         question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
 
@@ -110,7 +111,7 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/editQuestion")
     @ResponseBody
-    public void editQuestion(ModelMap model,
+    public ResponseEntity<String> editQuestion(ModelMap model,
                              @RequestParam(value = "questionId", required = true) Integer questionId,
                              @RequestParam(value = "categoryName", required = true) String catName,
                              @RequestParam(value = "subCategoryName", required = true) String subCatName,
@@ -130,6 +131,7 @@ public class QuestionController {
         Question question = queryQuestionDomain.getQuestionById(questionId);
 
         List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(question.getId());
+        Question newQuestion = null;
 
         if (queryQuestionTypeDomain.isObjective(questionType)) {
 
@@ -159,9 +161,9 @@ public class QuestionController {
             question.setStatus(queryStatusDomain.getDeletedStatus());
             queryQuestionDomain.mergeQuestion(question);
 
-            Question newQuestion = cloneQuestion(question, request);
+            newQuestion = cloneQuestion(question, request);
             newQuestion.setDescription(qDesc);
-            newQuestion.setScore(score);
+            newQuestion.setScore(new BigDecimal(score));
             newQuestion.setQuestionType(questionType);
             newQuestion.setDifficultyLevel(difficulty);
             newQuestion.setSubCategory(subCategory);
@@ -170,6 +172,12 @@ public class QuestionController {
 
             queryQuestionDomain.insertQuestion(newQuestion, cDescList, correctChoice);
         }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+        String json = new JSONSerializer().exclude("*.class").serialize(newQuestion);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/exam/getAllQuestion")

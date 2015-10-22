@@ -217,11 +217,11 @@ public class InPageController {
         return "mainPageEmp";
     }
 
-    //CREATE BY JOKIZZ
-    @RequestMapping(method = RequestMethod.GET, value = "/exam/mainPageStudent")
-    public String examStudent(HttpServletRequest request){
-        return "mainPageStudent";
-    }
+//    //CREATE BY JOKIZZ
+//    @RequestMapping(method = RequestMethod.GET, value = "/exam/mainPageStudent")
+//    public String examStudent(HttpServletRequest request){
+//        return "mainPageStudent";
+//    }
 
 //    @RequestMapping(method = RequestMethod.GET, value = "/exam/checkScore")
 //    public String checkScore(HttpServletRequest request){

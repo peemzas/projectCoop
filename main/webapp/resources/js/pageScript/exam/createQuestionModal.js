@@ -2,6 +2,10 @@
  * Created by Phuthikorn_T on 13/8/2558.
  */
 
+$(document).ready(function () {
+    createQuestionModalClearInput()
+})
+
 $(".choiceRadioAddon").on('click', function () {
     $(this).children().prop("checked", true);
     //$('.correctRadio:checked').hasClass();
@@ -15,6 +19,22 @@ $(".choiceRadioAddon").on('click', function () {
     correctRadioChecked.hide();
 })
 
+$('button[dat-dismiss="modal"]:not(#submitCreateBtn)').on('click',function(){
+    if ($("#categoryInputForCreateQuestion").val() != "" ||
+        $("#subCategoryInputForCreateQuestion").val() != "" ||
+        $("#questionScoreForCreateQuestion").val() != "" ||
+        $("#questionDescription").val() != "" ||
+        $(".choiceDesc").val() != ""
+    ) {
+        var confirmation = confirm('ข้อมูลยังไม่ถูกบันทึก ต้องการยกเลิกหรือไม่')
+        if (confirmation) {
+            $('#createQuest').modal('hide');
+        }
+    }else{
+        $('#createQuest').modal('hide');
+    }
+})
+
 $('#select-QuestionType').on('change', function () {
     updateCreateModalLayout()
 })
@@ -23,10 +43,11 @@ $('#select-QuestionType').on('change', function () {
 $('#submitCreateBtn').on('click', function () {
     if ($('#createQuestModalTitle').text() == 'สร้างข้อสอบ') {
         saveQuestion();
-
     } else if ($('#createQuestModalTitle').text() == 'แก้ไขข้อสอบ') {
-        alert('case แก้ไขข้อสอบ');
-        editQuestion();
+        var confirmation = confirm('ยืนยันการแก้ไขข้อมูล');
+        if(confirmation){
+            editQuestion();
+        }
     } else {
         alert('Fail to determine function please Check createQuestionModal.js')
     }
@@ -53,6 +74,8 @@ function saveQuestion() {
         questionType = 2;
     }
 
+    console.log(parseFloat(score))
+
     if (questionType == 1) {
         choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val()).toString();
 
@@ -71,12 +94,24 @@ function saveQuestion() {
             }
             ,
             success: function (question) {
-                alert('สร้างข้อสอบสำเร็จ รหัสข้อสอบ' + question.id);
-                $('#tableBody').empty();
-                listSearchQuestion();
+                alert('บันทึกข้อมูลสำเร็จ');
+                if ($('.h3').text() == "จัดการข้อสอบ") {
+                    var createDate = new Date(q.createDate);
+                    var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
+                    $("#tableBody").prepend('<tr questionId=' + q.id + '>' +
+                    '<td class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
+                    '<td class="questionType">' + q.questionType.description + '</td>' +
+                    '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
+                    '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
+                    '<td class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
+                    '<td class="questionScore">' + q.score + '</td>' +
+                    '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
+                    '<td class="questionCreateDate">' + formattedDate + '</td>' +
+                    "</tr>")
+                }
             },
             error: function () {
-                alert('Error');
+                alert('บันทึกข้อมูลล้มเหลว');
             }
         })
     } else {
@@ -90,12 +125,12 @@ function saveQuestion() {
                 questionDesc: questionDesc,
                 questionType: questionType,
                 difficulty: parseInt(difficulty),
-                score: parseInt(score)
+                score: parseFloat(score)
             }
             ,
             success: function (q) {
-                alert('สร้างข้อสอบสำเร็จ รหัสข้อสอบ' + q.id);
-                if($('.h3').text() == "จัดการข้อสอบ"){
+                alert('บันทึกข้อมูลสำเร็จ');
+                if ($('.h3').text() == "จัดการข้อสอบ") {
                     var createDate = new Date(q.createDate);
                     var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
                     $("#tableBody").prepend('<tr questionId=' + q.id + '>' +
@@ -104,7 +139,6 @@ function saveQuestion() {
                     '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
                     '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
                     '<td class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
-                    '<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
                     '<td class="questionScore">' + q.score + '</td>' +
                     '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
                     '<td class="questionCreateDate">' + formattedDate + '</td>' +
@@ -112,7 +146,7 @@ function saveQuestion() {
                 }
             },
             error: function () {
-                alert('Error');
+                alert('บันทึกข้อมูลล้มเหลว');
             }
         })
     }
@@ -168,7 +202,7 @@ var createModalShowSubjevtive = function () {
     $('#answerInput').hide();
     $('#submitBtnContainer').val('Subjective');
 }
-var updateCreateModalLayout = function(){
+var updateCreateModalLayout = function () {
     $('#submitBtnContainer').show();
 
     if ($('#select-QuestionType').val() == 'Objective') {

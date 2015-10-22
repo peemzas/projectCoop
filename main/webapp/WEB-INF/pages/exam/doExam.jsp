@@ -7,6 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script>
+    if ('${status}' == '') {
+        window.location.href = "/TDCS/index.html";
+    }
+</script>
+
+
 <c:if test="${user != null}">
     <div class="examHead" id="examHead" paperId="${paper.id}" timeLimit-minute="${paper.timeLimit}">
         <div class="container row">

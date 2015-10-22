@@ -14,6 +14,9 @@ $(document).ready(function () {
     $.timer(countdownTimer);
 })
 
+
+
+
 var goToUnfinishBtn = $('#goToUnfinish');
 var goToUnfinishBtnInitialText = goToUnfinishBtn.text();
 $("#SendPaper").on('click', function () {
@@ -99,6 +102,7 @@ var checkExamCompletion = function () {
 var examTimeOut = function () {
     alert('หมดเวลาทำข้อสอบ');
     submitExam;
+    location.href = "/TDCS/home.html";
 }
 
 var countdownTimer = new (function () {
@@ -243,7 +247,7 @@ var getExamPaperBody = function () {
 
             })
         }, error: function () {
-            alert('getExamPaperBody Ajax Fail');
+            console.log('doExam.js : getExamPaperBody Failed');
         }
     })
 }
@@ -268,10 +272,8 @@ var submitExam = function () {
             questionType = 1
         }
         if (questionType == 1) {
-            console.log('if')
             answerObj = $(this).find('input:checked').val()
         } else {
-            console.log('else')
             answerSubj = $(this).find('textarea').val()
         }
         answerArray.push(new answerRecord(questionId, answerObj, answerSubj))
@@ -287,11 +289,11 @@ var submitExam = function () {
             , timeTaken: parseInt(timeTakenMillisec / 60 / 100)
         }
         , success: function () {
-            alert('ส่งขอสอบเรียบร้อบ')
+            alert('บันทึกข้อมูลสำเร็จ')
             location.href = "/TDCS/home.html"
         }
         , error: function () {
-            alert('การส่งข้อสอบล้มเหลว')
+            alert('บันทึกข้อมูลล้มเหลว')
         }
     })
 }

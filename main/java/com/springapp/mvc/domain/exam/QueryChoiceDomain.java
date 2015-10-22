@@ -25,7 +25,7 @@ public class QueryChoiceDomain extends HibernateUtil {
     @Autowired
     QueryStatusDomain queryStatusDomain;
 
-    public void insertAllChoice(Question question,List<String> description, int correctChoice) {
+    public void insertAllChoice(Question question, List<String> description, int correctChoice) {
 
         List<Choice> choiceList = new ArrayList<Choice>();
         for (int i = 0; i < description.size(); i++) {
@@ -34,34 +34,27 @@ public class QueryChoiceDomain extends HibernateUtil {
             choice.setDescription(description.get(i));
             choice.setQuestion(question);
 
-            System.out.println(choice.getId());
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             choice.setStatus(queryStatusDomain.getReadyStatus());
 
-            if (i+1 == correctChoice) { // choice correction range 1~4
+            if (i + 1 == correctChoice) { // choice correction range 1~4
                 choice.setCorrection(queryBooDomain.getTrue());
-            }else{
+            } else {
                 choice.setCorrection(queryBooDomain.getFalse());
             }
 
             choiceList.add(choice);
         }
 
-        for (Choice c : choiceList){
+        for (Choice c : choiceList) {
             getSession().save(c);
         }
 
     }
 
-    public List<Choice> getChoiceListByQuestionId(Integer questionId){
-        Criteria criteria = getSession().createCriteria(Choice.class,"c");
+    public List<Choice> getChoiceListByQuestionId(Integer questionId) {
+        Criteria criteria = getSession().createCriteria(Choice.class, "c");
 
-        criteria.createAlias("question","quest");
-//        criteria.createAlias("correction", "correct");
-
-//        ProjectionList projectionList = Projections.projectionList();
-//        projectionList.add(Projections.property("correct.value"),"correctness");
-//        projectionList.add(Projections.property("c.description"),"description");
+        criteria.createAlias("question", "quest");
 
         criteria.addOrder(Order.asc("c.id"));
         criteria.add(Restrictions.eq("quest.id", questionId));
@@ -70,19 +63,21 @@ public class QueryChoiceDomain extends HibernateUtil {
         return (List<Choice>) criteria.list();
     }
 
-    public void insertChoice(Choice choice){
+    public void insertChoice(Choice choice) {
         beginTransaction();
         getSession().save(choice);
         commitTransaction();
     }
-    public void mergeUpdateChoice(Choice choice){
+
+    public void mergeUpdateChoice(Choice choice) {
         beginTransaction();
         getSession().merge(choice);
         commitTransaction();
     }
-    public Choice getChoiceById(Integer choiceId){
+
+    public Choice getChoiceById(Integer choiceId) {
         Criteria criteria = getSession().createCriteria(Choice.class);
-        criteria.add(Restrictions.eq("id",choiceId));
-        return (Choice)criteria.uniqueResult();
+        criteria.add(Restrictions.eq("id", choiceId));
+        return (Choice) criteria.uniqueResult();
     }
 }
