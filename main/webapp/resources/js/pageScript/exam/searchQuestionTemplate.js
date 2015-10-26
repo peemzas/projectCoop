@@ -80,7 +80,7 @@ var submitSearchQuestionAdv = function () {
     searchResultReady = false;
     var SI = { // SearchInput
         category: getSearchCategoryInputValue(),
-        subCategory: getSearchSubCategoryInputValue(),
+        n: getSearchSubCategoryInputValue(),
         createBy: getSearchCreateByInput(),
         //questionId: $('#searchQuestionIdInput').val(),
         questionDesc: $("#searchQuestionDescInput").val(),

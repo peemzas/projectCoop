@@ -7,7 +7,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">เพิ่มหมวดหมู่</h4>
             </div>
             <div class="modal-body" style="height: 120px">
@@ -51,9 +51,8 @@
 </div>
 
 <script>
-//    data-dismiss="modal"
-
-    $("#hiddenBtn2").on('click',function(){
+//    data-dismiss="modal
+    function closeModal(){
         var catId = $("#categoryIdText").val();
         var catName = $("#categoryNameText").val();
         if(catId == "" && catName ==""){
@@ -65,6 +64,13 @@
                 return false;
             $("#createCat").modal('hide');
         }
-    })
+    };
+
+    $("#hiddenBtn2").on('click',function(){
+        closeModal();
+    });
+    $(".close").on('click',function(){
+        closeModal();
+    });
 </script>
 

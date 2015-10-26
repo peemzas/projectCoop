@@ -44,7 +44,11 @@
                     <h4>เลือกข้อสอบ</h4>
                     <hr>
                 </div>
-                <%@include file="../template/searchQuestionTemplateNew.jsp" %>
+
+                <div class="container">
+                <%@include file="../template/searchQuestionTemplateNew.jsp"%>
+                </div>
+
                 <%--<button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>--%>
                 <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
                 <table id="tbSelectQuestion" class="table table-responsive table-hover table-bordered">
