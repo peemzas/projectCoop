@@ -33,6 +33,11 @@
     #tbodySelectQuestion td {
         font-size: 13px;
     }
+    /**/
+    /*#questionPaperDetail{*/
+        /*backdrop: static;*/
+        /*keyboard: false;*/
+    /*}*/
 </style>
 <div class="modal fade" id="selectQuest">
     <div class="modal-dialog modal-lg" style="width: 80%">
@@ -103,7 +108,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" modal-number="2" class="close"><span
                         aria-hidden="true">&times;</span></button>
                 <h3>ข้อมูลข้อสอบ</h3>
             </div>

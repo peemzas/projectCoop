@@ -88,7 +88,7 @@
                         <option active>เลือกตำแหน่ง</option>
                         <option value="0">ทั้งหมด</option>
                         <option value="1">Developer</option>
-                        <option value="5">Business Analysis</option>
+                        <option value="2">Assistant Business Analyst</option>
                     </select>
                 </div>
             </div>
@@ -112,7 +112,7 @@
 
     <div class="row">
         <div class="col-sm-12" style="text-align: center">
-            <button id="selectionQuestionBtnInpagePaper" data-toggle="modal" data-target="#selectQuest"
+            <button id="selectionQuestionBtnInpagePaper" data-toggle="modal"
                     class="btn btn-gray btn-sm">เลือกข้อสอบ
             </button>
             <button id="randomQuestionBtn" data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray btn-sm">สุ่มข้อสอบ
@@ -193,4 +193,15 @@
     <%@include file="modal/createQuestionModal.jsp" %>
     <%@include file="modal/RandomQuestionModal.jsp" %>
     <%@include file="modal/selectQuestionModal.jsp" %>
+
+    <script>
+        if ('${status}' != 'staff') {
+            window.location.href = "/TDCS/index.html";
+        }
+        $("#selectionQuestionBtnInpagePaper").on('click', function(){
+            $('#selectQuest').modal({
+                backdrop: 'static'
+            });
+        });
+    </script>
 

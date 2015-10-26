@@ -390,12 +390,12 @@ public class PaperController {
     }
 
     @RequestMapping(value = "/exam/getPaperCode", method= RequestMethod.POST)
-    public ResponseEntity<String> getPaperCode(){
+    public ResponseEntity<String> getPaperCode(@RequestParam(value = "pId", required = true) Integer paperId){
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
-        List codes = queryPaperDomain.getCode();
+        List codes = queryPaperDomain.getCode(paperId);
         String json = new JSONSerializer().exclude("*.class").serialize(codes);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
