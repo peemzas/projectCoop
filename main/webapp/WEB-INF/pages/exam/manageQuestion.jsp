@@ -59,6 +59,13 @@
 
                 </tbody>
             </table>
+
+            <div class="bg-info" id="searchCatNotFound" hidden>
+                <%--<p class="bg-info">--%>
+                <h3 id="searchCatDescNotFound" style="text-align: center;" >ไม่พบข้อมูลที่ค้นหา</h3>
+                <%--</p>--%>
+            </div>
+
         </div>
     </div>
 </div>
@@ -73,5 +80,22 @@
     #tableBody td{
         font-size: 13px;
     }
+
+    #searchCatNotFound{
+        background-color: #b2e0ff;
+        height: 100px;
+        display: none;
+        top: 40px;
+        vertical-align: middle;
+        border-radius: 5px;
+        margin-top: -15px;
+    }
+    #searchCatDescNotFound{
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100px;
+        color: #00647f;
+    }
+
 </style>
 
