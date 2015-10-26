@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%--Add By Mr.Wanchana--%>
-    <div class="col-sm-6">
-        <div class="col-sm-4" align="right">
+    <div class="row col-sm-6">
+        <div class="col-sm-4 " align="right">
             <label for="addEmpCreateByBtn" class="label-control"><h5 style="margin-top: 5px">สร้างโดย :</h5></label>
         </div>
         <div  align="left" >

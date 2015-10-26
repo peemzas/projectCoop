@@ -18,7 +18,7 @@
                     <%@include file="selectCategoryInput.jsp" %>
                     <%@include file="selectCreateByInput.jsp" %>
 
-                    <div class="col-sm-10 col-sm-offset-4">
+                    <div class="col-sm-10 ">
                         <div id="showEmployeeSelected">
                         </div>
                     </div>
