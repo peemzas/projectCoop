@@ -334,12 +334,12 @@ public class QuestionController {
 //        Check Search
         if(btnStatus == 0){
             List<Question> questionsGeneralResult = queryQuestionDomain.generalSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch);
-            String json = new Gson().toJson(questionsGeneralResult);
+            String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questionsGeneralResult);
             return new ResponseEntity<String>(json, headers, HttpStatus.OK);
         }
         else{
             List<Question> questionsAdvanceResult = queryQuestionDomain.advanceSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch, qDesc, qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo);
-            String json = new Gson().toJson(questionsAdvanceResult);
+            String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questionsAdvanceResult);
             return new ResponseEntity<String>(json, headers, HttpStatus.OK);
         }
     }
@@ -352,7 +352,7 @@ public class QuestionController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List<Question> questions = queryQuestionDomain.getAllQuestionDetail();
-        String json = new JSONSerializer().exclude("*.class").serialize(questions);
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questions);
         logger.info(questions.toString());
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
@@ -372,7 +372,7 @@ public class QuestionController {
             questionIds.add(jsonObject.getInt("id"));
         }
         List<Question> questions = queryQuestionDomain.getQuestionNotInSelected(questionIds);
-        String json = new JSONSerializer().exclude("*.class").serialize(questions);
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questions);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 // ---------------------------------------------------------------------------------------------------------

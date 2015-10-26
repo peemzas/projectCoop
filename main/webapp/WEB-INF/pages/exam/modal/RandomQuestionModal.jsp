@@ -19,35 +19,42 @@
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close"aria-label="Close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                <div class="container row">
-                    <h4>สุ่มข้อสอบ</h4>
-                    <hr>
-                </div>
-                <div class="row">
-                    <div class="form-group col-sm-4">
-                        <label class="col-sm-2 col-sm-offset-3 text-right control-label">ง่าย</label>
-                        <div class="col-sm-6">
-                            <input id="randEasy" class="form-control input-sm" type="text"/>
+                <div class="container">
+                    <div class="row">
+                        <h4>สุ่มข้อสอบ</h4>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <h4>ระดับ</h4>
+                        <div class="col-sm-2 col-sm-offset-3 text-right">
+                            <label>ยาก</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input id="randEasy" type="number" class="form-control input-sm"/>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-2 col-sm-offset-3 text-right">
+                            <label>ปานกลาง</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input id="randNormal" type="number" class="form-control input-sm"/>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-2 col-sm-offset-3 text-right">
+                            <label>ง่าย</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input id="randHard" type="number" class="form-control input-sm"/>
                         </div>
                     </div>
-                    <div class="form-group col-sm-4">
-                        <label class="col-sm-4 control-label">ปานกลาง&nbsp;&nbsp;&nbsp;</label>
-                        <div class="col-sm-6">
-                            <input id="randNormal" class="form-control input-sm" type="text"/>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <hr/>
+                            <button id="randBtn" class="btn btn-primary btn-sm" type="button" data-dismiss = "modal">สุ่มผลลัพธ์</button>
+                            <button id="randResetBtn" class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
                         </div>
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label class="col-sm-2 text-right control-label">ง่าย</label>
-                        <div class="col-sm-6">
-                            <input id="randHard" class="form-control input-sm" type="text"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <hr/>
-                        <button id="randBtn" class="btn btn-primary btn-sm" type="button" data-dismiss = "modal">สุ่มผลลัพธ์</button>
-                        <button id="randResetBtn" class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
                     </div>
                 </div>
             </div>
