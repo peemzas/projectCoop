@@ -44,7 +44,8 @@ function searchEmpName(){
                         $("#tbodySelectEmployeeName").append(
                             '<tr style="text-align: center;">'+
                             '<td><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
-                            '<td><label id="label1'+value.userId+'">'+value.userId+'<label></td>'+
+                            '<td style="display: none;"><label>'+value.userId+'<label></td>'+
+                            '<td><label id="label1'+value.userId+'">'+value.empId+'<label></td>'+
                             '<td><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
                             '<td><label id="label3'+value.userId+'">'+value.sectionPosition.position.posiName+'<label></td>'+
                             '<td><label id="label4'+value.userId+'">'+value.team.teamName+'<label></td>'+
@@ -103,7 +104,8 @@ function searchEmpName(){
                         $("#tbodySelectEmployeeName").append(
                             '<tr>'+
                             '<td><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
-                            '<td><label id="label1'+value.userId+'">'+value.userId+'<label></td>'+
+                            '<td style="display: none;"><label>'+value.userId+'<label></td>'+
+                            '<td><label id="label1'+value.userId+'">'+value.empId+'<label></td>'+
                             '<td><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
                             '<td><label id="label3'+value.userId+'">'+value.sectionPosition.position.posiName+'<label></td>'+
                             '<td><label id="label4'+value.userId+'">'+value.team.teamName+'<label></td>'+
@@ -134,7 +136,7 @@ function addEmployee(){
 
         $("#showEmployeeSelected").append(
 
-            '<button class="btn btn-sm" type="button" style="background-color: #cbff9e; border: 1px solid #f4ffdb;">'+arrayEmployeeName[1]+
+            '<button class="btn btn-sm" type="button" style="background-color: #cbff9e; border: 1px solid #f4ffdb;">'+arrayEmployeeName[2]+
                 '<label style="display: none;">'+"_"+uId+"z"+'</label>'+
             '<span class="glyphicon glyphicon-remove"/></button>&nbsp;'
         );

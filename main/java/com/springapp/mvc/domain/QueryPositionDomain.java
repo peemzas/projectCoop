@@ -26,7 +26,7 @@ public class QueryPositionDomain extends HibernateUtil {
     public Position getPositionById(Integer id){
         Criteria criteria = getSession().createCriteria(Position.class);
         criteria.add(Restrictions.eq("posiId", id));
-        Position position = (Position) criteria.list().get(0);
+        Position position = (Position) criteria.uniqueResult();
 
         return position;
     }

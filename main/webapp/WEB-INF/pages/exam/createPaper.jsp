@@ -34,6 +34,10 @@
         margin-top: 5px;
     }
 
+    #tbodySelectedQuestionToPaper input[type=number]{
+        width: 75px;;
+    }
+
     #tbSelectedQuestionToEditPaper {
         top: -50px;
     }
@@ -82,7 +86,7 @@
                 <div class="col-sm-5">
                     <select id="newPaperForPosition" class="form-control input-sm">
                         <option active>เลือกตำแหน่ง</option>
-                        <option value="null">ทั้งหมด</option>
+                        <option value="0">ทั้งหมด</option>
                         <option value="1">Developer</option>
                         <option value="5">Business Analysis</option>
                     </select>
@@ -121,7 +125,7 @@
         <button id="removeRowQuestionSelect" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span
                 class="glyphicon glyphicon-trash"></span></button>
         <button id="createPaperBtn" class="btn btn-success btn-sm" type="button">บันทึก</button>
-        <button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">แก้ไข</button>
+        <button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก</button>
         <a href="/TDCS/exam/managePapers">
             <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">
                 ยกเลิก
@@ -179,6 +183,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>

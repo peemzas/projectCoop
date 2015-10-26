@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +59,7 @@ public class MarkingController {
     @Autowired
     QueryPaperQuestionDomain queryPaperQuestionDomain;
 
-    @Transactional
+//    @Transactional
     @RequestMapping(method = RequestMethod.GET, value = "/exam/marking")
     public String marking(ModelMap modelMap, Model model, HttpServletRequest request, HttpServletResponse response
 //                         ,@RequestParam(value = "recordId") Integer recordId

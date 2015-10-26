@@ -22,14 +22,17 @@
                         <div class="col-sm-9 col-sm-offset-2">
                             <div id="showEmployeeSelected" width="100%;">
                             </div>
+
+                    <div class="col-sm-10 col-sm-offset-4">
+                        <div id="showEmployeeSelected">
                         </div>
                     </div>
                     <br/>
                     <div class="row" id="btnSearch">
                         <div class="col-md-12 text-center">
                             <%--<button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm searchInputSubmitBtn" type="button">ค้นหา</button>--%>
-                                <button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm searchSubmitBtn" type="button">ค้นหา</button>
-                            <button class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
+                            <button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm searchSubmitBtn" type="button">ค้นหา</button>
+                            <button id="resetInputSearchQuestion" class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +61,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="สร้างชุดข้อสอบตั้งแต่วันที่"/>
+                                        <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างชุดข้อสอบตั้งแต่วันที่"/>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                                     </div>
                                 </div>
@@ -67,7 +70,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="ถึง"/>
+                                        <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                                     </div>
                                 </div>
@@ -108,20 +111,11 @@
 
 <%--<input type="checkbox" class="hidden" id="searchCompleteTrigger"/>--%>
 <script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
-
-<%--<script>--%>
-    <%--$(document).ready(function () {--%>
-        <%--$("#selectAllEmployeeName").click(function (event) {--%>
-            <%--if (this.checked) {--%>
-                <%--$(".userSelectCheckbox").each(function () {--%>
-                    <%--this.checked = true;--%>
-                <%--});--%>
-            <%--}--%>
-            <%--else {--%>
-                <%--$(".userSelectCheckbox").each(function () {--%>
-                    <%--this.checked = false;--%>
-                <%--});--%>
-            <%--}--%>
-        <%--})--%>
-    <%--});--%>
-<%--</script>--%>
+<script>
+    $("#searchCreateDateFromInput").datepicker().on('changeDate', function(){
+        $("#searchCreateDateFromInput").datepicker('hide');
+    });
+    $("#searchCreateDateToInput").datepicker().on('changeDate', function(){
+        $("#searchCreateDateToInput").datepicker('hide');
+    });
+</script>

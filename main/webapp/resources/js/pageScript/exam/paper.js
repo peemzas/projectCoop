@@ -28,6 +28,9 @@ $(document).ready(function(){
         resetInput();
     });
 
+    $('#tbodyManagePaper tr').mouseover(function(){
+        $(this).css('cursor', 'pointer');
+    });
 
     $('#tbodyManagePaper').on('click','td:not(.pCheck):not(.pSelect):not(.pButton)',function(){
         var paperId = $(this).parent().find("button").attr('id');
@@ -166,15 +169,30 @@ function getAllPapers(){
         success : function(data){
             $("#tbodyManagePaper").empty();
             data.forEach(function(value){
+                var paperName = value.name;
+                if(paperName == undefined? paperName = "-": paperName = value.name);
+
+                var posiId;
+                var posiName;
+
+                if(value.position != null){
+                    posiId = value.position.posiId;
+                    posiName = value.position.posiName;
+                }
+                else{
+                    posiId = 0;
+                    posiName = "ทั้งหมด";
+                }
+
                 $("#tbodyManagePaper").append(
                     '<tr>'+
                     '<td style="display: none;"><label id="'+value.id+'">'+value.id+'</label></td>'+
                     '<td class="pCheck"><input class="checkPaper" type="checkbox"/></td>'+
                     '<td><label id="lpaperCode'+value.code+'">'+value.code+'</label></td>'+
-                    '<td style="text-align: left;"><label id="lpaperName'+value.name+'">'+value.name+'</label></td>'+
+                    '<td style="text-align: left;"><label id="lpaperName'+paperName+'">'+paperName+'</label></td>'+
                     '<td><label id="lpaperCreateBy'+value.createBy.empId+'">'+value.createBy.thFname+' '+value.createBy.thLname+'</label></td>'+
                     '<td><label id="lpaperScore'+value.maxScore+'" class="label-control">'+value.maxScore+'</label></td>'+
-                    '<td><label id="lpaperForPosition'+value.position.posiId+'" class="label-control">'+value.position.posiName+'</label></td>'+
+                    '<td><label id="lpaperForPosition'+posiId+'" class="label-control">'+posiName+'</label></td>'+
                     '<td class="pSelect">'+
                     '<select id="dropdownId'+value.id+'" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">'+
                     '<option value="3">ยังไม่เผยแพร่</option>'+

@@ -63,9 +63,7 @@
                 <br/>
                 <div class="row form-group">
                     <div class="col-sm-10">
-                        <div class="col-sm-2 col-sm-offset-1" align="right">
-                            <label>วันที่สร้าง</label>
-                        </div>
+                        <label class="col-sm-2 text-right">วันที่สร้าง:</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input id="searchCreateDateFromInput" type="text"
@@ -158,6 +156,14 @@
                 $("#resetSearchPaper").show();
             }
         });
+
         $(".datepicker").datepicker();
+
+        $("#searchCreateDateFromInput").datepicker().on('changeDate', function(){
+            $("#searchCreateDateFromInput").datepicker('hide');
+        });
+        $("#searchCreateDateToInput").datepicker().on('changeDate', function(){
+            $("#searchCreateDateToInput").datepicker('hide');
+        });
     });
 </script>

@@ -10,7 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +36,7 @@ public class ResultController {
     QueryExamResultDomain queryExamResultDomain;
 
 
-    @Transactional
+//    @Transactional
     @RequestMapping(method = RequestMethod.GET, value = "/exam/checkScore")
     public String checkScore(HttpServletRequest request,ModelMap modelMap){
 

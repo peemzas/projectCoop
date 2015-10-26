@@ -240,20 +240,8 @@ public class QueryQuestionDomain extends HibernateUtil {
     public List<Question> getAllQuestionDetail(){
 
         Criteria criteria = getSession().createCriteria(Question.class);
-//        criteria.add(Restrictions.eq("status",3));
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("id"), "id")
-                .add(Projections.property("choices"), "choices")
-                .add(Projections.property("description"), "description")
-                .add(Projections.property("createDate"), "createDate")
-                .add(Projections.property("difficultyLevel"), "difficultyLevel")
-                .add(Projections.property("subCategory"), "subCategory")
-                .add(Projections.property("questionType"), "questionType")
-                .add(Projections.property("createBy"), "createBy")
-                .add(Projections.property("status"), "status")
-                .add(Projections.property("score"), "score"));
-        criteria.addOrder(Order.asc("id"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        criteria.add(Restrictions.ne("status.id", 4));
+
         List<Question> questions = criteria.list();
         logger.info(questions.toString());
         return questions;
@@ -263,18 +251,8 @@ public class QueryQuestionDomain extends HibernateUtil {
 
         Criteria criteria = getSession().createCriteria(Question.class);
         criteria.add(Restrictions.not(Restrictions.in("id", qId)));
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("id"), "idz")
-                .add(Projections.property("choices"), "choicesz")
-                .add(Projections.property("description"), "descriptionz")
-                .add(Projections.property("createDate"), "createDatez")
-                .add(Projections.property("difficultyLevel"), "difficultyLevelz")
-                .add(Projections.property("subCategory"), "subCategoryz")
-                .add(Projections.property("questionType"), "questionTypez")
-                .add(Projections.property("createBy"), "createByz")
-                .add(Projections.property("status"), "statusz")
-                .add(Projections.property("score"), "score"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        criteria.add(Restrictions.ne("status.id", 4));
+
         List<Question> questions = criteria.list();
 
         return questions;
@@ -284,6 +262,8 @@ public class QueryQuestionDomain extends HibernateUtil {
 
         Criteria criteria = getSession().createCriteria(PaperQuestion.class);
         criteria.add(Restrictions.eq("pk.examPaper", ep));
+        criteria.add(Restrictions.ne("status.id", 4));
+
         List<PaperQuestion> paperQuestions = criteria.list();
         List<Question> questions = new ArrayList<Question>();
 
@@ -297,6 +277,8 @@ public class QueryQuestionDomain extends HibernateUtil {
     public List<Question> generalSearchQuestion(List users, Integer subId, List<Integer> qIds){
 
         Criteria criteria = getSession().createCriteria(Question.class);
+        criteria.add(Restrictions.ne("status.id",4));
+
         if(users != null){
             criteria.add(Restrictions.in("createBy.id", users));
         }
@@ -306,18 +288,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         if(qIds.size() != 0){
             criteria.add(Restrictions.not(Restrictions.in("id", qIds)));
         }
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("id"), "ids")
-                .add(Projections.property("choices"), "choicess")
-                .add(Projections.property("description"), "descriptions")
-                .add(Projections.property("createDate"), "createDates")
-                .add(Projections.property("difficultyLevel"), "difficultyLevels")
-                .add(Projections.property("subCategory"), "subCategorys")
-                .add(Projections.property("questionType"), "questionTypes")
-                .add(Projections.property("createBy"), "createBys")
-                .add(Projections.property("status"), "statuss")
-                .add(Projections.property("score"), "scores"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+
         List<Question> questions = criteria.list();
 
         return  questions;
@@ -345,6 +316,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         }
 
         Criteria criteria = getSession().createCriteria(Question.class);
+        criteria.add(Restrictions.ne("status.id",4));
 
         if (users != null) {
             criteria.add(Restrictions.in("createBy.id", users));
@@ -370,18 +342,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         if (!qScoreTo.equals("")) {
             criteria.add(Restrictions.le("score", scoreTo));
         }
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("id"), "ids")
-                .add(Projections.property("choices"), "choicess")
-                .add(Projections.property("description"), "descriptions")
-                .add(Projections.property("createDate"), "createDates")
-                .add(Projections.property("difficultyLevel"), "difficultyLevels")
-                .add(Projections.property("subCategory"), "subCategorys")
-                .add(Projections.property("questionType"), "questionTypes")
-                .add(Projections.property("createBy"), "createBys")
-                .add(Projections.property("status"), "statuss")
-                .add(Projections.property("score"), "scores"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+
         List<Question> questions = criteria.list();
 
         return questions;
@@ -391,19 +352,8 @@ public class QueryQuestionDomain extends HibernateUtil {
 
         Criteria criteria = getSession().createCriteria(Question.class);
         criteria.add(Restrictions.eq("difficultyLevel.level", level));
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("id"), "id")
-                .add(Projections.property("choices"), "choices")
-                .add(Projections.property("description"), "description")
-                .add(Projections.property("createDate"), "createDate")
-                .add(Projections.property("difficultyLevel"), "difficultyLevel")
-                .add(Projections.property("subCategory"), "subCategory")
-                .add(Projections.property("questionType"), "questionType")
-                .add(Projections.property("createBy"), "createBy")
-                .add(Projections.property("status"), "status")
-                .add(Projections.property("score"), "score"));
-        criteria.addOrder(Order.asc("id"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        criteria.add(Restrictions.ne("status.id", 4));
+
         List<Question> question = criteria.list();
 
         return question;
