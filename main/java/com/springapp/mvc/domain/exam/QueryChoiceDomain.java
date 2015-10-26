@@ -80,4 +80,10 @@ public class QueryChoiceDomain extends HibernateUtil {
         criteria.add(Restrictions.eq("id", choiceId));
         return (Choice) criteria.uniqueResult();
     }
+
+    public void deleteChoiceFromQuestion(Question q){
+        for(Choice c : q.getChoices()){
+            getSession().delete(c);
+        }
+    }
 }

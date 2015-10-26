@@ -61,7 +61,7 @@
                             <div class="col-md-4 text-right">
                                 <h5>ระดับความยาก :</h5>
                             </div>
-                            <div class="col-md-3" align="left">
+                            <div id = "diffRadioContainer" class="col-md-3" align="left">
                                 <div class="form-inline">
                                     <label><input class="form-control" type="radio" name="level" value="3"
                                                   style="box-shadow: none;"><h5 style="display: inline;">ยาก </h5>
@@ -83,12 +83,13 @@
                                 <h5><label style="font-weight: 100">คะแนน :</label></h5>
                             </div>
                             <div class="col-md-2" style="padding: 0;">
-                                <input class="form-control" type="number" id="questionScoreForCreateQuestion" style="width: 100%">
+                                <input class="form-control" type="number" id="questionScoreForCreateQuestion"
+                                       style="width: 100%">
                             </div>
                         </div>
 
                         <div class="row form-group" id="answerInput" style="display: none">
-                            <div class="col-md-4">
+                            <div class="col-md-4 choiceLabelContainer">
                                 <h5>ตัวเลือกคำตอบ</h5>
                             </div>
                             <div class="row">
@@ -139,7 +140,7 @@
 
                         <div class="col-md-12" id="submitBtnContainer" hidden align="center">
                             <div class="col-md-1 col-md-offset-5">
-                                <button class="btn btn-primary" id="submitCreateBtn" data-dismiss="modal">ตกลง</button>
+                                <button class="btn btn-primary" id="submitCreateBtn">ตกลง</button>
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-warning" dat-dismiss="modal">ยกเลิก</button>
@@ -180,4 +181,10 @@
     .typeahead {
         width: 100%;
     }
+
+    .validate-fail{
+        border:solid red 1px;
+        /*border-color: red;*/
+    }
+
 </style>

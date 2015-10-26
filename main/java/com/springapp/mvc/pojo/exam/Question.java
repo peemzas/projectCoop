@@ -2,14 +2,12 @@ package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
 import flexjson.JSONSerializer;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Phuthikorn_T on 6/30/2015.
@@ -29,7 +27,7 @@ public class Question implements Serializable, Cloneable {
     private String description;
 
     @Column(name = "QUESTION_SCORE")
-    private BigDecimal score;
+    private Float score;
 
     @Column(name = "QUESTION_CREATE_DATE")
     private Date createDate;
@@ -68,6 +66,12 @@ public class Question implements Serializable, Cloneable {
 
         return new JSONSerializer().exclude("choices.question").exclude("").serialize(this);
     }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.question", cascade =
+            {CascadeType.PERSIST, CascadeType.MERGE})
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private List<PaperQuestion> papers;
 
     @Override
     public boolean equals(Object o) {
@@ -114,6 +118,14 @@ public class Question implements Serializable, Cloneable {
         return result;
     }
 
+    public List<PaperQuestion> getPapers() {
+        return papers;
+    }
+
+    public void setPapers(List<PaperQuestion> papers) {
+        this.papers = papers;
+    }
+
     public List<Choice> getChoices() {
         return choices;
     }
@@ -154,11 +166,11 @@ public class Question implements Serializable, Cloneable {
         this.description = description;
     }
 
-    public BigDecimal getScore() {
+    public Float getScore() {
         return score;
     }
 
-    public void setScore(BigDecimal score) {
+    public void setScore(Float score) {
         this.score = score;
     }
 

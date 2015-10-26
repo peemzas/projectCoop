@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by PTang_000 on 30-Sep-15.
@@ -86,7 +84,7 @@ public class MarkingController {
         examResult.setComment(comment);
         examResult.setMarkedDate(DateUtil.getCurrentDateWithRemovedTime());
 
-        BigDecimal subjectiveScore = BigDecimal.ZERO;
+        Float subjectiveScore = 0f;
         List<ExamAnswerRecord> examAnswerRecords = examResult.getExamRecord().getExamAnswerRecords();
 
         try {
@@ -98,11 +96,11 @@ public class MarkingController {
                 examMarkingRecord.setMarkedBy(currentUser);
                 ExamAnswerRecord answerRecord = queryExamAnswerDomain.getExamAnswerRecordById(markingRecord.getJSONObject(i).optInt("answerRecord"));
                 examMarkingRecord.setAnswerRecord(answerRecord);
-                BigDecimal score = new BigDecimal(markingRecord.getJSONObject(i).optDouble("score"));
+                Float score = (float)markingRecord.getJSONObject(i).optDouble("score");
                 examMarkingRecord.setMarkingScore(score);
                 examMarkingRecord.setExamResult(examResult);
                 queryMarkingRecord.saveMarkingRecord(examMarkingRecord);
-                subjectiveScore = subjectiveScore.add(score);
+                subjectiveScore +=(score);
             }
             examResult.setSubjectiveScore(subjectiveScore);
             examResult.setStatus(queryStatusDomain.getMarkedStatus());

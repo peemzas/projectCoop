@@ -4,27 +4,26 @@ import com.springapp.mvc.pojo.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * Created by Phuthikorn_T on 7/15/2015.
  */
 @Entity
-@Table(name="TDCS_EXAM_MARKING_RECORD")
+@Table(name = "TDCS_EXAM_MARKING_RECORD")
 public class ExamMarkingRecord implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO ,generator = "markingRecord_id_generator")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "markingRecord_id_generator")
     @SequenceGenerator(name = "markingRecord_id_generator")
-    @Column(name="MARKING_RECORD_ID")
+    @Column(name = "MARKING_RECORD_ID")
     private Integer id;
 
     @Column(name = "MARKING_SCORE")
-    private BigDecimal markingScore;
+    private Float markingScore;
 
     @ManyToOne
     @JoinColumn(name = "ANSWER_RECORD_ID")
-    private  ExamAnswerRecord answerRecord;
+    private ExamAnswerRecord answerRecord;
 
     @ManyToOne
     @JoinColumn(name = "MARKED_BY")
@@ -42,11 +41,11 @@ public class ExamMarkingRecord implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getMarkingScore() {
+    public Float getMarkingScore() {
         return markingScore;
     }
 
-    public void setMarkingScore(BigDecimal markingScore) {
+    public void setMarkingScore(Float markingScore) {
         this.markingScore = markingScore;
     }
 

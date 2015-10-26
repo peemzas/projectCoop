@@ -2,8 +2,6 @@ package com.springapp.mvc.pojo.exam;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.*;
 
 /**
  * Created by Phuthikorn_T on 15-Sep-15.
@@ -20,7 +18,7 @@ public class PaperQuestion implements Serializable {
     private PaperQuestionPk pk = new PaperQuestionPk();
 
     @Column(name = "SCORE")
-    private BigDecimal score;
+    private Float score;
 
     public PaperQuestionPk getPk() {
         return pk;
@@ -46,11 +44,11 @@ public class PaperQuestion implements Serializable {
         pk.setQuestion(q);
     }
 
-    public BigDecimal getScore() {
+    public Float getScore() {
         return score;
     }
 
-    public void setScore(BigDecimal score) {
+    public void setScore(Float score) {
         this.score = score;
     }
 }
