@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<div class="row form-group col-sm-6">
+<div class="row col-sm-6">
 
     <div class="col-sm-4  text-right">
         <h5>หมวดหมู่ :</h5>
