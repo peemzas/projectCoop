@@ -27,6 +27,7 @@ var itm = {};
 var paperId = 0;
 
 $(document).ready(function(){
+
     var value = getValueFromUrl();
     var id = value.substring(0, value.indexOf("#"));
     var paperStatus = value.substring(value.indexOf("#") + 1, value.length);
@@ -43,6 +44,10 @@ $(document).ready(function(){
         onLoadPageCreatePaper();
     }
 
+    $("button[modal-number=2]").click(function(){
+        $("#questionPaperDetail").modal('hide');
+    });
+
     $("#randResetBtn").unbind('click').click(function(){
         resetRandomQuestion();
     });
@@ -56,7 +61,10 @@ $(document).ready(function(){
     });
 
     $("#tbodySelectQuestion").on('click', 'td:not(.xyz)', function(){
-        $("#questionPaperDetail").modal('show');
+        $('#questionPaperDetail').modal('show');
+        $('#questionPaperDetail').modal({
+            backdrop: 'static'
+        });
         var questionId = $(this).parent().find('label').attr('id');
         questionId = questionId.substring(questionId.indexOf('d')+1, questionId.length);
         showQuestionInfo(questionId);
@@ -229,7 +237,7 @@ function viewQuestions(){
 
                     //new
                     var createDate = new Date(value.createDate);
-                    var dateFormat = createDate.getDate() +" "+ getMonthFormat(createDate.getMonth()) +" "+ createDate.getFullYear() + 543;
+                    var dateFormat = createDate.getDate() +" "+ getMonthFormat(createDate.getMonth()) +" "+ (Number(createDate.getFullYear()) + 543);
                     var str = "";
                     if(value.choices != null){
                         var i = 1;
@@ -469,20 +477,29 @@ function validateScore(){
 
 function createPaper(){
 
-    var checkCode = $.ajax({
+    var check = true;
+    $.ajax({
         type: "POST",
         url: "/TDCS/exam/getPaperCode",
+        data: {
+            pId: paperId
+        },
+        async: false,
         success: function(codes){
             for(var i = 0; i < codes.length; i++){
                 if($("#newPaperId").val() == codes[i]){
                     alert('รหัสชุดข้อสอบซ้ำ');
                     $("#newPaperId").focus();
                     $("#newPaperId").css('border-color', 'red');
-                    return false;
+                    check = false;
                 }
             }
         }
     });
+
+    if(check == false){
+        return false;
+    }
 
     if(createPaperValidation() == false){
         return false;
@@ -838,7 +855,7 @@ function showUpdatePaper(paperId){
         }
     });
     //sumPaperScore = 0;
-    //onLoadPageUpdatePaper();
+    onLoadPageUpdatePaper();
 }
 
 function showPaperInfo(pId){
@@ -915,20 +932,29 @@ function resetRandomQuestion(){
 
 function updatePaper(){
 
-    var checkCode = $.ajax({
+    var check = true;
+    $.ajax({
         type: "POST",
         url: "/TDCS/exam/getPaperCode",
+        data: {
+            pId: paperId
+        },
+        async: false,
         success: function(codes){
             for(var i = 0; i < codes.length; i++){
                 if($("#newPaperId").val() == codes[i]){
                     alert('รหัสชุดข้อสอบซ้ำ');
                     $("#newPaperId").focus();
                     $("#newPaperId").css('border-color', 'red');
-                    return false;
+                    check = false;
                 }
             }
         }
     });
+
+    if(check == false){
+        return false;
+    }
 
     if(createPaperValidation() == false){
         return false;
@@ -1007,7 +1033,7 @@ function randomQuestion(){
                 data.forEach(function(value){
                     //new
                     var createDate = new Date(value.createDate);
-                    var dateFormat = createDate.getDate() +" "+ getMonthFormat(createDate.getMonth()) +" "+ (Number(createDate.getFullYear()) + 543);
+                    var dateFormat = createDate.getDate() +" "+ getMonthFormat(createDate.getMonth()) +" "+ createDate.getFullYear();
                     var str = "";
                     if(value.choices != null){
                         var i = 1;
@@ -1057,7 +1083,6 @@ function randomQuestion(){
 }
 
 function showQuestionInfo(qId){
-
     $("#categoryDetail").text($("#labelCategoryName"+qId).text());
     $("#subCategoryDetail").text($("#labelSubCategoryName"+qId).text());
     $("#createByDetail").text($("#labelQuestionCreateBy"+qId).text());
@@ -1083,7 +1108,6 @@ function showQuestionInfo(qId){
     else{
         $("#choiceDetailContainer").hide();
     }
-
 }
 
 function getMonthFormat(monthNumber) {

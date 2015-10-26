@@ -254,9 +254,10 @@ public class QueryPaperDomain extends HibernateUtil {
         return criteria.list();
     }
 
-    public List getCode(){
+    public List getCode(Integer paperId){
 
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        criteria.add(Restrictions.ne("id", paperId));
         criteria.setProjection(Projections.projectionList().add(Projections.property("code"), "code"));
 
         List codes = criteria.list();
