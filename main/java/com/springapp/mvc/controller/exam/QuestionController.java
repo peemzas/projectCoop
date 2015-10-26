@@ -22,13 +22,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.*;
 import java.util.logging.Logger;
@@ -97,7 +95,7 @@ public class QuestionController {
         question.setCreateDate(DateUtil.getCurrentDateWithRemovedTime());
         question.setQuestionType(queryQuestionTypeDomain.getQuestionTypeById(questionTypeId));
         question.setDifficultyLevel(queryDifficultyDomain.getDifficultyByInteger(difficultyLevel));
-        question.setScore(new BigDecimal(score));
+        question.setScore(score);
 
         question.setSubCategory(querySubCategoryDomain.getSubCategoryByNameAndCategory(subCat, queryCategoryDomain.getCategoryByName(cat)));
 
@@ -135,7 +133,7 @@ public class QuestionController {
         List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(question.getId());
         Question newQuestion = null;
 
-        if (!(question.getDescription().equals(qDesc) && question.getScore().equals(BigDecimal.valueOf(score)) &&
+        if (!(question.getDescription().equals(qDesc) && question.getScore().equals(score) &&
                 question.getQuestionType() == questionType && question.getDifficultyLevel() == difficulty &&
                 question.getSubCategory() == subCategory)) { //if question is edited
 
@@ -145,8 +143,7 @@ public class QuestionController {
                 question.setDescription(qDesc);
                 question.setQuestionType(questionType);
                 question.setDifficultyLevel(difficulty);
-                question.setScore(BigDecimal.valueOf(score));
-
+                question.setScore(score);
                 HibernateUtil.beginTransaction();
 
                 queryChoiceDomain.deleteChoiceFromQuestion(question);
@@ -162,7 +159,7 @@ public class QuestionController {
 
                 newQuestion = cloneQuestion(question, request);
                 newQuestion.setDescription(qDesc);
-                newQuestion.setScore(new BigDecimal(score));
+                newQuestion.setScore(score);
                 newQuestion.setQuestionType(questionType);
                 newQuestion.setDifficultyLevel(difficulty);
                 newQuestion.setSubCategory(subCategory);

@@ -3,12 +3,15 @@
  */
 
 $(document).ready(function () {
+    $('[data-toggle="popover"]').popover();
+});
+
+$(document).ready(function () {
     createQuestionModalClearInput()
 })
 
 $(".choiceRadioAddon").on('click', function () {
     $(this).children().prop("checked", true);
-    //$('.correctRadio:checked').hasClass();
     var correctRadioNotChecked = $('.correctRadio:not(:checked)')
     correctRadioNotChecked.parent().removeClass('success');
     correctRadioNotChecked.show();
@@ -19,7 +22,7 @@ $(".choiceRadioAddon").on('click', function () {
     correctRadioChecked.hide();
 })
 
-$('button[dat-dismiss="modal"]:not(#submitCreateBtn)').on('click',function(){
+$('button[dat-dismiss="modal"]:not(#submitCreateBtn)').on('click', function () {
     if ($("#categoryInputForCreateQuestion").val() != "" ||
         $("#subCategoryInputForCreateQuestion").val() != "" ||
         $("#questionScoreForCreateQuestion").val() != "" ||
@@ -30,7 +33,7 @@ $('button[dat-dismiss="modal"]:not(#submitCreateBtn)').on('click',function(){
         if (confirmation) {
             $('#createQuest').modal('hide');
         }
-    }else{
+    } else {
         $('#createQuest').modal('hide');
     }
 })
@@ -42,11 +45,17 @@ $('#select-QuestionType').on('change', function () {
 
 $('#submitCreateBtn').on('click', function () {
     if ($('#createQuestModalTitle').text() == 'สร้างข้อสอบ') {
-        saveQuestion();
+        if (checkCreateQuestionModalFieldComplete()) {
+            saveQuestion();
+            $('#createQuest').modal('hide')
+        }
     } else if ($('#createQuestModalTitle').text() == 'แก้ไขข้อสอบ') {
-        var confirmation = confirm('ยืนยันการแก้ไขข้อมูล');
-        if(confirmation){
-            editQuestion();
+        if (checkCreateQuestionModalFieldComplete()) {
+            var confirmation = confirm('ยืนยันการแก้ไขข้อมูล');
+            if (confirmation) {
+                editQuestion();
+                $('#createQuest').modal('hide')
+            }
         }
     } else {
         alert('Fail to determine function please Check createQuestionModal.js')
@@ -78,8 +87,6 @@ function saveQuestion() {
     } else if (questionTypeString == 'Subjective') {
         questionType = 2;
     }
-
-    console.log(parseFloat(score))
 
     if (questionType == 1) {
         choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val()).toString();
@@ -141,7 +148,7 @@ function saveQuestion() {
                     var createDate = new Date(q.createDate);
                     var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
                     $("#tableBody").prepend('<tr questionId=' + q.id + '>' +
-                    '<td class="questionSelect"><input type="checkbox" class="form-control questionSelectBox"/></td>' +
+                    '<td class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
                     '<td class="questionType">' + q.questionType.description + '</td>' +
                     '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
                     '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
@@ -160,6 +167,75 @@ function saveQuestion() {
         })
     }
     createQuestionModalClearInput();
+}
+
+var checkCreateQuestionModalFieldComplete = function () {
+
+    var complete = true;
+
+    var cat = $("#categoryInputForCreateQuestion")
+    if (cat.val() == "") {
+        cat.addClass("validate-fail")
+        complete = false
+    } else {
+        cat.removeClass("validate-fail")
+    }
+
+    var subcat = $("#subCategoryInputForCreateQuestion")
+    if (subcat.val() == "") {
+        subcat.addClass("validate-fail")
+        complete = false
+    } else {
+        subcat.removeClass("validate-fail")
+    }
+
+    var questType = $("#select-QuestionType")
+    if (questType.val() == "") {
+        questType.addClass("validate-fail")
+        complete = false
+    } else {
+        questType.removeClass("validate-fail")
+    }
+
+    var qScore = $("#questionScoreForCreateQuestion")
+    if (qScore.val() == "" || isNaN(qScore.val())) {
+        qScore.addClass("validate-fail")
+        complete = false
+    } else {
+        qScore.removeClass("validate-fail")
+    }
+
+    var qDescr = $("#questionDescription")
+    if (qDescr.val() == "") {
+        qDescr.addClass("validate-fail")
+        complete = false
+    } else {
+        qScore.removeClass("validate-fail")
+    }
+    if (!$("input[name='level']:checked").length) {
+        $('#diffRadioContainer').addClass("validate-fail")
+        complete = false
+    } else {
+        $('#diffRadioContainer').removeClass("validate-fail")
+    }
+
+    if (!$('.correctRadio:checked').length) {
+        $(".choiceRadioAddon").addClass("validate-fail")
+    } else {
+        $(".choiceRadioAddon").removeClass("validate-fail")
+    }
+    if (questType.val() == "Objective") {
+        $.each($(".choiceDesc"), function () {
+            if ($(this).val() == "") {
+                $(this).addClass("validate-fail")
+                complete = false;
+            } else {
+                $(this).removeClass("validate-fail")
+            }
+        })
+    }
+
+    return complete;
 }
 
 var createQuestionModalClearInput = function () {

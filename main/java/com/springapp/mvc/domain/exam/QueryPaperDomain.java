@@ -5,29 +5,13 @@ import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.security.krb5.Config;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-//import javax.persistence.criteria.CriteriaBuilder;
-//import javax.persistence.criteria.CriteriaDelete;
-import javax.security.auth.login.AppConfigurationEntry;
-import javax.security.auth.login.Configuration;
-import java.awt.print.Paper;
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -59,7 +43,7 @@ public class QueryPaperDomain extends HibernateUtil {
             PaperQuestion paperQuestion = new PaperQuestion();
             paperQuestion.setExamPaper(examPaper);
             paperQuestion.setQuestion(queryQuestionDomain.getQuestionById(qIds.get(i)));
-            paperQuestion.setScore(new BigDecimal(newScores.get(i)));
+            paperQuestion.setScore(newScores.get(i));
             getSession().save(paperQuestion);
         }
 
@@ -100,7 +84,7 @@ public class QueryPaperDomain extends HibernateUtil {
             PaperQuestion paperQuestion = new PaperQuestion();
             paperQuestion.setExamPaper(examPaper);
             paperQuestion.setQuestion(queryQuestionDomain.getQuestionById(qIds.get(i)));
-            paperQuestion.setScore(new BigDecimal(newScores.get(i)));
+            paperQuestion.setScore(newScores.get(i));
             getSession().save(paperQuestion);
         }
 
@@ -259,8 +243,13 @@ public class QueryPaperDomain extends HibernateUtil {
 
     public List<ExamPaper> getOpenedPaperForPosition(Position position) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
-        criteria.add(Restrictions.eq("paperStatus", queryStatusDomain.getOpenStatus()));
-        criteria.add(Restrictions.eq("position", position));
+
+        criteria.add(Restrictions.eq("paperStatus",queryStatusDomain.getOpenStatus()));
+
+        Criterion c1 = Restrictions.isNull("position");
+        Criterion c2 = Restrictions.eq("position", position);
+
+        criteria.add(Restrictions.or(c1,c2));
 
         return criteria.list();
     }

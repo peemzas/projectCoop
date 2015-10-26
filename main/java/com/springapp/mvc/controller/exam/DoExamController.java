@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.print.Paper;
-import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.*;
 
@@ -121,7 +119,7 @@ public class DoExamController {
             examRecord.setPreTestRecord(preTestRecord);
         }
 
-        BigDecimal objectiveScore = BigDecimal.ZERO;
+        Float objectiveScore = 0f;
         Choice currentChoice = null;
         Question currentQuestion = null;
         try {
@@ -147,8 +145,8 @@ public class DoExamController {
                     if (currentChoice.getCorrection().getBoolean()) {
 
                         PaperQuestion pq = queryPaperQuestionDomain.getPaperQuestion(paper, currentQuestion);
-                        BigDecimal score = pq.getScore();
-                        objectiveScore = objectiveScore.add(score,mc);
+                        Float score = pq.getScore();
+                        objectiveScore += score;
                     }
                 } else {
                     try {
@@ -168,7 +166,7 @@ public class DoExamController {
             if(!haveSubjective){
                 examResult.setMarkedDate(DateUtil.getCurrentDateWithRemovedTime());
                 examResult.setStatus(queryStatusDomain.getMarkConfirmedStatus());
-                examResult.setSubjectiveScore(BigDecimal.ZERO);
+                examResult.setSubjectiveScore(0f);
                 examResult.setComment("ผลตรวจอัตโนมัติโดยระบบ");
             }else {
                 examResult.setStatus(queryStatusDomain.getPendingStatus());
