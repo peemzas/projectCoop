@@ -18,11 +18,6 @@
                     <%@include file="selectCategoryInput.jsp" %>
                     <%@include file="selectCreateByInput.jsp" %>
 
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-2">
-                            <div id="showEmployeeSelected" width="100%;">
-                            </div>
-
                     <div class="col-sm-10 col-sm-offset-4">
                         <div id="showEmployeeSelected">
                         </div>
