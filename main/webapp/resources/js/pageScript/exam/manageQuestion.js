@@ -194,7 +194,7 @@ var deleteQuestions = function (questionIds) {
 }
 
 var listSearchQuestion = function (btn) {
-    var data;
+    var data = null;
 
     if (btn == undefined || btn.attr('id') != 'advSearchBtn') {
         data = getSearchQuestionResultListBasic();
@@ -204,27 +204,32 @@ var listSearchQuestion = function (btn) {
     }
 
     $("tbody").empty();
-    data.forEach(function (q) {
-        var createDate = new Date(q.createDate);
-        var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
-        $("#tableBody").append('<tr questionId=' + q.id + '>' +
-        '<td class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
-        '<td class="questionType">' + q.questionType.description + '</td>' +
-        '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
-        '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
-        '<td class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
-            //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
-        '<td class="questionScore">' + q.score + '</td>' +
-        '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
-        '<td class="questionCreateDate">' + formattedDate + '</td>' +
-        "</tr>")
-        if (q.description.length > 100) {
-            $('td[class="questionDescription"]:last').append("....")
-        }
-    })
+    console.log(data)
+    if (!(data.length > 0)) {
+        $("#searchCatNotFound").show()
+    } else {
+        data.forEach(function (q) {
+            var createDate = new Date(q.createDate);
+            var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
+            $("#tableBody").append('<tr questionId=' + q.id + '>' +
+            '<td class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
+            '<td class="questionType">' + q.questionType.description + '</td>' +
+            '<td class="questionCategory">' + q.subCategory.category.name + '</td>' +
+            '<td class="questionSubCategory">' + q.subCategory.name + '</td>' +
+            '<td class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
+                //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
+            '<td class="questionScore">' + q.score + '</td>' +
+            '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
+            '<td class="questionCreateDate">' + formattedDate + '</td>' +
+            "</tr>")
+            if (q.description.length > 100) {
+                $('td[class="questionDescription"]:last').append("....")
+            }
+        })
 
-    $('tbody tr td:not(.questionSelect)').css('cursor', 'pointer');
-    $('.questionSelectBox').css('cursor', 'pointer');
+        $('tbody tr td:not(.questionSelect)').css('cursor', 'pointer');
+        $('.questionSelectBox').css('cursor', 'pointer');
+    }
 }
 
 //===================================================================================EVENT TRIGGER=================================================================================================//

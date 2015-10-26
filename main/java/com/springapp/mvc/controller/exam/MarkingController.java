@@ -108,6 +108,7 @@ public class MarkingController {
             queryExamResultDomain.updateExamResult(examResult);
 
             HibernateUtil.commitTransaction();
+            HibernateUtil.getSession().close();
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

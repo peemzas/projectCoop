@@ -25,17 +25,17 @@ $(document).ready(function () {
 
 var searchQuestionResultList
 
-var getSearchQuestionResultListBasic = function(){
-    submitSearchQuestionBasic()
+var getSearchQuestionResultListBasic = function () {
+    submitSearchQuestion('basic')
     return searchQuestionResultList
 }
 
 var getSearchQuestionResultListAdv = function () {
-    submitSearchQuestionAdv()
+    submitSearchQuestion('adv')
     return searchQuestionResultList
 }
 
-var submitSearchQuestionBasic = function () {
+var submitSearchQuestion = function (mode) {
     searchResultReady = false;
     var SI = { // SearchInput
         category: getSearchCategoryInputValue(),
@@ -49,6 +49,15 @@ var submitSearchQuestionBasic = function () {
         scoreTo: null
         //status: null
     }
+
+    if (mode == 'adv') {
+        SI.questionDesc = $("#searchQuestionDescInput").val()
+        SI.createDateFrom = $('#searchCreateDateFromInput').val()
+        SI.createDateTo = $("#searchCreateDateToInput").val()
+        SI.scoreFrom = $("#searchScoreFromInput").val()
+        SI.scoreTo = $("#searchScoreToInput").val()
+    }
+
     var ajaxDat = $.ajax({
         type: "POST",
         url: "/TDCS/exam/searchQuestion",
@@ -75,12 +84,12 @@ var submitSearchQuestionBasic = function () {
 }
 
 
+var submitSearchQuestionAdv = function (mode) {
 
-var submitSearchQuestionAdv = function () {
     searchResultReady = false;
     var SI = { // SearchInput
         category: getSearchCategoryInputValue(),
-        n: getSearchSubCategoryInputValue(),
+        subCategory: getSearchSubCategoryInputValue(),
         createBy: getSearchCreateByInput(),
         //questionId: $('#searchQuestionIdInput').val(),
         questionDesc: $("#searchQuestionDescInput").val(),
@@ -127,7 +136,7 @@ var clearAllSearchQuestionField = function () {
     clearCreateByInput();
 }
 
-$(".searchInputClearBtn").on('click',function(){
+$(".searchInputClearBtn").on('click', function () {
     clearAllSearchQuestionField();
 })
 
