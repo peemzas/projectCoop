@@ -15,7 +15,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" class="close" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" align="center">เพิ่มหัวข้อเรื่อง</h4>
             </div>
@@ -97,19 +97,26 @@
     <%--}--%>
 <%--</style>--%>
 <script>
-    $("#hiddenBtn2").on('click',function(){
-        var sCat = $("#sCat").val();
-        var subcategoryName = $("#subcategoryNameadd").val();
-        if(sCat == "" && subcategoryName ==""){
+    function closeModal(){
+        var catId = $("#categoryIdText").val();
+        var catName = $("#categoryNameText").val();
+        if(catId == "" && catName ==""){
 
-            $("#createSub").modal('hide');
+            $("#createCat").modal('hide');
         }
         else {
             if(!confirm(" ข้อมูลยังไม่ถูกบันทึก ต้องการยกเลิกหรือไม่"))
                 return false;
-            $("#createSub").modal('hide');
+            $("#createCat").modal('hide');
         }
-    })
+    };
+    $("#hiddenBtn2").on('click',function(){
+        closeModal();
+    });
+    $(".close").on('click',function(){
+        closeModal();
+    });
+
 </script>
 
 

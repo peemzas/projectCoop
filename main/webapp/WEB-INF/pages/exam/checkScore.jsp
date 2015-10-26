@@ -2,15 +2,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
-    <div class="row">
         <h3 class="h3">ผลคะแนนการสอบ</h3>
-    </div>
 </div>
 <hr/>
 
 <div class="container">
     <div class="row">
-        <table class="table">
+        <table  class="table table-bordered table-hover">
             <thead class="bg-primary label-primary small">
             <tr>
                 <th style="text-align: center">ชื่อชุดข้อสอบ</th>

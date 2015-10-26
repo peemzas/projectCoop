@@ -8,15 +8,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container row">
-  <div class="row">
     <h3 class="h3">เลือกทำข้อสอบ</h3>
-  </div>
 </div>
 <hr/>
 
 <div class="container">
   <div class="row">
-    <table class="table">
+    <table class="table table-bordered table-hover">
       <thead class="label-primary small bg-primary">
       <tr>
         <th style="text-align: center">ชื่อชุดข้อสอบ</th>

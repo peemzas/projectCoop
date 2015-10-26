@@ -87,6 +87,7 @@
                     </tr>
                 </thead>
                 <tbody id="tbodyCategory">
+                <col width="10%"/>
                     <%--<c:forEach var="category" items="${LIST_OF_CATEOGRIES}">--%>
                         <%--<tr>--%>
                             <%--<td>${category.id}</td>--%>
