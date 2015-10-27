@@ -71,7 +71,7 @@ var submitMarking = function () {
             comment: $('#comment').val()
         },
         success: function () {
-            alert('[บันทึกข้อมูลสำเร็จ')
+            alert('บันทึกข้อมูลสำเร็จ')
             location.href = "/TDCS/home.html"
         },
         error: function () {

@@ -29,8 +29,9 @@ public class QueryExamResultDomain extends HibernateUtil {
     }
 
     public ExamResult getExamResultById(Integer id){
-        Criteria criteria = getSession().createCriteria(ExamResult.class);
-        criteria.add(Restrictions.eq("id", id));
+        Criteria criteria = getSession().createCriteria(ExamResult.class,"er");
+        criteria.createAlias("er.status","status");
+        criteria.add(Restrictions.eq("er.id", id));
         return (ExamResult) criteria.uniqueResult();
     }
 

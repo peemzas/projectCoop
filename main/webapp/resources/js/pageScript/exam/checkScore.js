@@ -26,25 +26,25 @@ var updateResultDetail = function(resultId){
             resultId:resultId
         },
         success:function(res){
-
+            clearDetailModal()
             if(res != null) {
                 $('#objectiveShowScore').text(res.objectiveScore);
                 $('#subjectiveShowScore').text(res.subjectiveScore);
                 $('#commentTextArea').val(res.comment);
                 $('#markedByShow').text(res.markedBy.thFname + " " + res.markedBy.thLname);
-                var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + "/" + res.examRecord.paper.maxScore
+                var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + " /  " + res.examRecord.paper.maxScore
                 $('#sumScoreShow').text(sumScoreShowText);
             }else{
                 $('#showScore').modal('hide')
-                alert('ไม่มีบันทึกการทำ Post Test')
+                alert('ไม่มีบันทึกการตรวจข้อสอบ')
             }
 
-            $('#objectiveShowScore').text(res.objectiveScore);
-            $('#subjectiveShowScore').text(res.subjectiveScore);
-            $('#commentTextArea').val(res.comment);
-            $('#markedByShow').text(res.markedBy.thFname + " " + res.markedBy.thLname);
-            var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + "/" + res.examRecord.paper.maxScore
-            $('#sumScoreShow').text(sumScoreShowText);
+            //$('#objectiveShowScore').text(res.objectiveScore);
+            //$('#subjectiveShowScore').text(res.subjectiveScore);
+            //$('#commentTextArea').val(res.comment);
+            //$('#markedByShow').text(res.markedBy.thFname + " " + res.markedBy.thLname);
+            //var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + "/" + res.examRecord.paper.maxScore
+            //$('#sumScoreShow').text(sumScoreShowText);
 
         },
         error:function(){
@@ -52,4 +52,12 @@ var updateResultDetail = function(resultId){
             $('#showScore').modal('hide')
         }
     })
+}
+
+var clearDetailModal = function(){
+    $('#objectiveShowScore').text("");
+    $('#subjectiveShowScore').text("");
+    $('#commentTextArea').val("");
+    $('#markedByShow').text("");
+    $('#sumScoreShow').text("");
 }
