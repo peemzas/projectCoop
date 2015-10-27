@@ -52,10 +52,13 @@ public class ResultController {
     public ResponseEntity<String> getResultDetail(@RequestParam(value = "resultId",required = true)Integer resultId){
 
         ExamResult examResult = queryExamResultDomain.getExamResultById(resultId);
+        if(examResult.getStatus().getId() != 6){
+            examResult = null;
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        String json = new JSONSerializer().serialize(examResult);
+        String json = new JSONSerializer().exclude("*.examPaper").exclude("*.examResult").exclude("*.class").serialize(examResult);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
 
