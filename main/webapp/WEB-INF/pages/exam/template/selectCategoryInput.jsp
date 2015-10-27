@@ -14,8 +14,10 @@
     <div class="col-sm-4  text-right">
         <h5>หมวดหมู่ :</h5>
     </div>
-    <div class="col-sm-6 input-group form-group" style="margin: 0;">
-        <input type="text" class="form-control" name="cat" id="selectCategoryToSelection" autocomplete="off"/>
+
+    <div class="col-sm-6 input-group">
+        <input type="text" class="form-control" name="cat" id="selectCategoryToSelection" placeholder="ค้นหาหมวดหมู่" autocomplete="off"/>
+
         <span class="input-group-addon" id="selectCat">
         <i class="glyphicon glyphicon-search" onclick="listcatSelectInput()" style="cursor: pointer; height: 20px;"></i>
         </span>
