@@ -27,26 +27,26 @@
                     <div class="row">
                         <h4>ระดับ</h4>
                         <div class="col-sm-2 col-sm-offset-3 text-right">
-                            <label>ยาก</label>
+                            <label>ยาก :</label>
                         </div>
-                        <div class="col-sm-3">
-                            <input id="randEasy" type="number" class="form-control input-sm"/>
-                        </div>
-                    </div><br/>
-                    <div class="row">
-                        <div class="col-sm-2 col-sm-offset-3 text-right">
-                            <label>ปานกลาง</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input id="randNormal" type="number" class="form-control input-sm"/>
+                        <div class="col-sm-3" style="padding: 0;">
+                            <input id="randHard" type="number" class="form-control input-sm" placeholder="จำนวนข้อ"/>
                         </div>
                     </div><br/>
                     <div class="row">
                         <div class="col-sm-2 col-sm-offset-3 text-right">
-                            <label>ง่าย</label>
+                            <label>ปานกลาง :</label>
                         </div>
-                        <div class="col-sm-3">
-                            <input id="randHard" type="number" class="form-control input-sm"/>
+                        <div class="col-sm-3" style="padding: 0;">
+                            <input id="randNormal" type="number" class="form-control input-sm" placeholder="จำนวนข้อ"/>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-2 col-sm-offset-3 text-right">
+                            <label>ง่าย :</label>
+                        </div>
+                        <div class="col-sm-3" style="padding: 0;">
+                            <input id="randEasy" type="number" class="form-control input-sm" placeholder="จำนวนข้อ"/>
                         </div>
                     </div>
                     <div class="row">

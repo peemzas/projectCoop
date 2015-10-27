@@ -96,7 +96,7 @@ public class QueryPaperDomain extends HibernateUtil {
         examPaper.setTimeLimit(paperTime);
         examPaper.setPaperStatus(paperStatus);
 
-        if(paperForPosition == null) {
+        if(paperForPosition != null) {
             examPaper.setPosition(paperForPosition);
         }
 
