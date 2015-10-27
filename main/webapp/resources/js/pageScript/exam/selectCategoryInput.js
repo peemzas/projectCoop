@@ -176,8 +176,8 @@ $("#selectCategoryToSelection").on('change', function () {
                         '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
                     )
                 }
-                else if (($("#sSubCat").val() != null)) {
-                    $("#sSubCat").append(
+                else if (($("#selectSubCategoryToSelection").val() != null)) {
+                    $("#selectSubCategoryToSelection").append(
                         '<option value="">' + "ทั้งหมด" + '</option>'
                     )
                 }
@@ -211,8 +211,8 @@ $("#selectCategoryToSelection").on('change', function () {
                         '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
                     )
                 }
-                else if (($("#sSubCat").val() != null)) {
-                    $("#sSubCat").append(
+                else if (($("#selectSubCategoryToSelection").val() != null)) {
+                    $("#selectSubCategoryToSelection").append(
                         '<option value="">' + "ทั้งหมด" + '</option>'
                     )
                 }
