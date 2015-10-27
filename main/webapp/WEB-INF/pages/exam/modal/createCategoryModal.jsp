@@ -51,6 +51,7 @@
 </div>
 
 <script>
+
 //    data-dismiss="modal
     function closeModal(){
         var catId = $("#categoryIdText").val();

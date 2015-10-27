@@ -1,6 +1,8 @@
 $("#dropdownExamEmp").attr('class', 'dropdown-toggle active');
 
 $(document).ready(function(){
+
+
     viewCategory();
     $("#deleteCategory").on('click', function(){
         deleteCategory();
@@ -41,6 +43,7 @@ $(document).ready(function(){
     $("#addCategory").on('click', function(){
         $("#categoryIdText").val("");
         $("#categoryNameText").val("");
+
     });
 
 
