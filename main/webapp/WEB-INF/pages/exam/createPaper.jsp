@@ -51,19 +51,19 @@
             <div class="col-sm-5">
                 <div class="col-sm-4 col-sm-offset-2" align="right">
                     <span style="color:red;">*</span><label for="newPaperId" class="label-control"><h5
-                        style="margin-top: 5px">รหัสชุดข้อสอบ</h5></label>
+                        style="margin-top: 5px">รหัสชุดข้อสอบ :</h5></label>
                 </div>
-                <div class="col-sm-6" align="right">
+                <div class="col-sm-6 form-group" align="right">
                     <input id="newPaperId" class="form-control input-sm" type="text" maxlength="5" placeholder="โปรดกรอกรหัสชุดข้อสอบ"
                            required/>
                 </div>
             </div>
             <div class="col-sm-7">
                 <div class="col-sm-3" align="right">
-                    <label for="newPaperName" class="label-control"><h5 style="margin-top: 5px">ชื่อชุดข้อสอบ</h5>
+                    <label for="newPaperName" class="label-control"><h5 style="margin-top: 5px">ชื่อชุดข้อสอบ :</h5>
                     </label>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8 form-group">
                     <input id="newPaperName" class="form-control input-sm" type="text" placeholder="โปรดกรอกชื่อชุดข้อสอบ"/>
                 </div>
             </div>
@@ -72,22 +72,22 @@
             <div class="col-sm-5">
                 <div class="col-sm-4 col-sm-offset-2" align="right">
                     <span style="color:red;">*</span><label for="newPaperScore" class="label-control"><h5
-                        style="margin-top: 5px">คะแนน</h5></label>
+                        style="margin-top: 5px">คะแนน :</h5></label>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 form-group">
                     <input id="newPaperScore" class="form-control input-sm" type="text" placeholder="โปรดกรอกคะแนน" required/>
                 </div>
             </div>
             <div class="col-sm-7">
                 <div class="col-sm-3" align="right">
                     <span style="color:red;">*</span><label for="newPaperForPosition" class="label-control"><h5
-                        style="margin-top: 5px">ตำแหน่ง</h5></label>
+                        style="margin-top: 5px">ตำแหน่ง :</h5></label>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-5 form-group">
                     <select id="newPaperForPosition" class="form-control input-sm">
                         <option active>เลือกตำแหน่ง</option>
                         <option value="0">ทั้งหมด</option>
-                        <option value="1">Developer</option>
+                        <option value="1">Software Developer Trainee</option>
                         <option value="2">Assistant Business Analyst</option>
                     </select>
                 </div>
@@ -96,15 +96,23 @@
         <div class="row">
             <div class="col-sm-5">
                 <div class="col-sm-4 col-sm-offset-2" align="right">
-                    <span style="color:red;">*</span><label class="label-control"><h5 style="margin-top: 5px">เวลา</h5>
+                    <span style="color:red;">*</span><label class="label-control"><h5 style="margin-top: 5px">เวลา :</h5>
                 </label>
                 </div>
-                <div class="col-sm-3">
-                    <input id="hours" class="form-control input-sm" type="number" max="60" min="0" value="0" required/>
+                <div class="col-sm-3 form-group">
+                    <input id="hours" class="form-control input-sm" type="number" max="60" min="0" placeholder="ชม." required/>
                 </div>
                 <div class="col-sm-3">
-                    <input id="minutes" class="form-control input-sm" type="number" max="60" min="0" value="0"
-                           required/>
+                    <input id="minutes" class="form-control input-sm" type="number" max="60" min="0" placeholder="น." required/>
+                </div>
+            </div>
+            <div id="divCreateDate" class="col-sm-7" style="display: none;">
+                <div class="col-sm-3" align="right">
+                    <span style="color:red;">*</span><label for="questionCreatedDate" class="label-control"><h5
+                        style="margin-top: 5px">วันที่สร้าง :</h5></label>
+                </div>
+                <div class="col-sm-5 form-group">
+                    <input id="questionCreatedDate" class="form-control input-sm" disabled/>
                 </div>
             </div>
         </div>

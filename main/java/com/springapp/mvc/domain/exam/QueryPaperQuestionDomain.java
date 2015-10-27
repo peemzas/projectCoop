@@ -28,8 +28,9 @@ public class QueryPaperQuestionDomain extends HibernateUtil{
     public List<PaperQuestion> getPaperQuestionByExamPaper(ExamPaper examPaper){
 
         Criteria criteria = getSession().createCriteria(PaperQuestion.class);
-        criteria.add(Restrictions.eq("pk.examPaper",examPaper));
+        criteria.add(Restrictions.eq("pk.examPaper", examPaper));
+        List<PaperQuestion> paperQuestions = criteria.list();
 
-        return criteria.list();
+        return paperQuestions;
     }
 }

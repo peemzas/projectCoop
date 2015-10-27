@@ -106,7 +106,7 @@ public class PaperController {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             Integer tempQId = new Integer(jsonObject.getString("qId"));
             tempQId.getClass().getName();
-            Float tempQScore = new Float(jsonObject.getInt("qScore"));
+            Float tempQScore = new Float(jsonObject.getDouble("qScore"));
             qIds.add(tempQId);
             qScores.add(tempQScore);
         }
@@ -131,7 +131,7 @@ public class PaperController {
                                               @RequestParam(value = "paperNameUpdate", required = false) String paperName,
                                               @RequestParam(value = "paperScoreUpdate", required = true) String paperScore,
                                               @RequestParam(value = "paperTimeUpdate", required = true) String paperTime,
-                                              @RequestParam(value = "paperForPositionUpdate", required = true) String paperForPosition,
+                                              @RequestParam(value = "paperForPositionUpdate", required = true) Integer paperForPosition,
                                               @RequestParam(value = "jsonObjQuestionUpdate", required = true) String jsonObjQuestion,
                                               @RequestParam(value = "paperIdUpdate", required = true) Integer pId,
                                               HttpServletRequest request,
@@ -142,14 +142,12 @@ public class PaperController {
         List<Float> qScores = new ArrayList();
         Float paperMaxScore = new Float(paperScore);
         Integer pTime = new Integer(paperTime);
-        Position pForPosition;
+        Integer pPosition = null;
+        Position pForPosition = null;
 
-        if(!paperForPosition.equals("")){
-            Integer pPosition = new Integer(paperForPosition);
+        if(paperForPosition != 0){
+            pPosition = new Integer(paperForPosition);
             pForPosition = queryPositionDomain.getPositionById(pPosition);
-        }
-        else{
-            pForPosition = null;
         }
 
         User updateBy = queryUserDomain.getCurrentUser(request);
@@ -240,11 +238,24 @@ public class PaperController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         ExamPaper paper = queryPaperDomain.getPaperById(paperId);
+        List<ExamPaper> paperList = new ArrayList<ExamPaper>();
+        paperList.add(paper);
+        String json = new JSONSerializer().exclude("*.class").serialize(paperList);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/getPaperQuestionByPaper", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> getPaperQuestionByPaper(@RequestParam(value = "paperId") int paperId){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        ExamPaper paper = queryPaperDomain.getPaperById(paperId);
         List<PaperQuestion> paperQuestion = queryPaperQuestionDomain.getPaperQuestionByExamPaper(paper);
-
         String json = new JSONSerializer().exclude("*.class").serialize(paperQuestion);
-
-        logger.info("..................................................."+json);
+        logger.info("................................."+json);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }

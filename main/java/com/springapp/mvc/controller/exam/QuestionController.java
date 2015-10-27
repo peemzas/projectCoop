@@ -323,8 +323,8 @@ public class QuestionController {
         if (empNameSearch.size() == 0) {
             empNameSearch = null;
         }
-//        this condition maybe not working if dropdown from view not choose.
-        if (!subCategorySearch.equals("")) {
+
+        if (!subCategorySearch.equals("") || !subCategorySearch.equals(null)) {
             subCategoryId = querySubCategoryDomain.getSubCategoryIdByName(subCategorySearch);
         }
 //        Check Search
