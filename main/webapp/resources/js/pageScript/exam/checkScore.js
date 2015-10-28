@@ -5,17 +5,6 @@
 $('.resultDetail').on('click',function(){
     var resultId = $(this).attr('resultId');
     updateResultDetail(resultId)
-
-
-    //$('#objectiveShowScore').text($(this).attr('objectiveScore'));
-    //$('#subjectiveShowScore').text($(this).attr('subjectiveScore'));
-    //$('#commentTextArea').val($(this).attr('comment'));
-    //
-    //$('#markedByShow').text($(this).parent().parent().find('.col-markedBy').text());
-    //
-    //var sumScoreShowText = "คะแนนที่ได้ = " + $(this).parent().parent().find('.col-sum-score').text() + "/" + $(this).parent().parent().find('.col-max-score').text()
-    //
-    //$('#sumScoreShow').text(sumScoreShowText);
 })
 
 var updateResultDetail = function(resultId){
@@ -32,19 +21,12 @@ var updateResultDetail = function(resultId){
                 $('#subjectiveShowScore').text(res.subjectiveScore);
                 $('#commentTextArea').val(res.comment);
                 $('#markedByShow').text(res.markedBy.thFname + " " + res.markedBy.thLname);
-                var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + " /  " + res.examRecord.paper.maxScore
+                var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + " / " + res.examRecord.paper.maxScore
                 $('#sumScoreShow').text(sumScoreShowText);
             }else{
                 $('#showScore').modal('hide')
                 alert('ไม่มีบันทึกการตรวจข้อสอบ')
             }
-
-            //$('#objectiveShowScore').text(res.objectiveScore);
-            //$('#subjectiveShowScore').text(res.subjectiveScore);
-            //$('#commentTextArea').val(res.comment);
-            //$('#markedByShow').text(res.markedBy.thFname + " " + res.markedBy.thLname);
-            //var sumScoreShowText = "คะแนนที่ได้ = " + (parseFloat(res.objectiveScore) + parseFloat(res.subjectiveScore)) + "/" + res.examRecord.paper.maxScore
-            //$('#sumScoreShow').text(sumScoreShowText);
 
         },
         error:function(){

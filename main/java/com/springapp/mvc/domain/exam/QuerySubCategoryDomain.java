@@ -73,8 +73,7 @@ public class QuerySubCategoryDomain extends HibernateUtil {
         criteria.add(Restrictions.eq("name", name));
         criteria.add(Restrictions.eq("category", category));
 
-        List<SubCategory> subCategories = criteria.list();
-        return (SubCategory) subCategories.get(0);
+        return (SubCategory)criteria.uniqueResult();
     }
 
     public SubCategory getSubCategoryById(Integer id) {

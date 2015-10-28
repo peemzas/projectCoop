@@ -5,12 +5,28 @@
 
 
 
-var getSearchCategoryInputValue = function () {
-    return $('#selectCategoryToSelection').children('.category:selected').attr('categoryId');
+var getSearchCategoryInputValueId = function () {
+
+    var text = $('#selectCategoryToSelection + ul li[class="active"] a').text();
+    var id = text.substr(0,text.indexOf(":")).trim();
+
+    if($('#selectCategoryToSelection').val() == ""){
+        return null
+    }
+    if(id != null) {
+        return id;
+    }else{
+        return null;
+    }
 }
 
 var getSearchSubCategoryInputValue = function () {
-    return $('#selectSubCategoryToSelection').children('.subCategory:selected').attr('subCategoryName');
+    var val = $('#selectSubCategoryToSelection').val();
+    if(val != null){
+        return $('#selectSubCategoryToSelection').val();
+    }else{
+        return null
+    }
 }
 
 var updateCategoryList = function () {

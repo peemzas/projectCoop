@@ -38,7 +38,7 @@ var getSearchQuestionResultListAdv = function () {
 var submitSearchQuestion = function (mode) {
     searchResultReady = false;
     var SI = { // SearchInput
-        category: getSearchCategoryInputValue(),
+        category: getSearchCategoryInputValueId(),
         subCategory: getSearchSubCategoryInputValue(),
         createBy: getSearchCreateByInput(),
         //questionId: null,
@@ -78,48 +78,7 @@ var submitSearchQuestion = function (mode) {
             searchQuestionResultList = dat
         },
         error: function () {
-            alert("ERROR in submitSearchQuestionAdv()")
-        }
-    })
-}
-
-
-var submitSearchQuestionAdv = function (mode) {
-
-    searchResultReady = false;
-    var SI = { // SearchInput
-        category: getSearchCategoryInputValue(),
-        subCategory: getSearchSubCategoryInputValue(),
-        createBy: getSearchCreateByInput(),
-        //questionId: $('#searchQuestionIdInput').val(),
-        questionDesc: $("#searchQuestionDescInput").val(),
-        createDateFrom: $('#searchCreateDateFromInput').val(),
-        createDateTo: $("#searchCreateDateToInput").val(),
-        scoreFrom: $("#searchScoreFromInput").val(),
-        scoreTo: $("#searchScoreToInput").val()
-        //status: $("#searchStatusInput").val()
-    }
-    var ajaxDat = $.ajax({
-        type: "POST",
-        url: "/TDCS/exam/searchQuestion",
-        async: false,
-        data: {
-            categoryId: SI.category,
-            subCatName: SI.subCategory,
-            createBy: SI.createBy,
-            //questionId: SI.questionId,
-            questionDesc: SI.questionDesc,
-            createDateFrom: SI.createDateFrom,
-            createDateTo: SI.createDateTo,
-            scoreFrom: SI.scoreFrom,
-            scoreTo: SI.scoreTo
-            //status: SI.status
-        },
-        success: function (dat) {
-            searchQuestionResultList = dat
-        },
-        error: function () {
-            alert("ERROR in submitSearchQuestionAdv()")
+            alert("ERROR in submitSearchQuestion()")
         }
     })
 }
