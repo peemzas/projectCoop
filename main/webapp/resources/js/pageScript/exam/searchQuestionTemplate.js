@@ -40,7 +40,7 @@ var submitSearchQuestion = function (mode) {
     var SI = { // SearchInput
         category: getSearchCategoryInputValueId(),
         subCategory: getSearchSubCategoryInputValue(),
-        createBy: getSearchCreateByInput(),
+        createBy: getUserIds(),
         //questionId: null,
         questionDesc: null,
         createDateFrom: null,
@@ -65,7 +65,7 @@ var submitSearchQuestion = function (mode) {
         data: {
             categoryId: SI.category,
             subCatName: SI.subCategory,
-            createBy: SI.createBy,
+            createBy: JSON.stringify(SI.createBy),
             //questionId: SI.questionId,
             questionDesc: SI.questionDesc,
             createDateFrom: SI.createDateFrom,

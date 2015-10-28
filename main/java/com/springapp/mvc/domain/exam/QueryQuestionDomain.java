@@ -9,6 +9,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -141,7 +143,7 @@ public class QueryQuestionDomain extends HibernateUtil {
     }
 
     public List<Question> searchQuestionQuery(String categoryId, String subCategoryName,
-                                              String createById, String questionId,
+                                              JSONArray createByJsonArray, String questionId,
                                               String questionDesc, String createDateFrom,
                                               String createDateTo, String scoreFrom,
                                               String scoreTo, String statusId) {
@@ -159,15 +161,22 @@ public class QueryQuestionDomain extends HibernateUtil {
                 criteria.add(Restrictions.eq("subCategory", querySubCategoryDomain.getSubCategoryByNameAndCategory(subCategoryName, category)));
             }
         }
-        if (createById != null && createById.trim().length() != 0) {
+        if (createByJsonArray != null && createByJsonArray.length() != 0) {
             try {
-                User user = queryUserDomain.getUserById(Integer.parseInt(createById));
-                Criterion createByCriterion = Restrictions.eq("q.createBy", user);
-                Criterion updateByCriterion = Restrictions.eq("q.createBy", user);
-                criteria.add(Restrictions.or(createByCriterion, updateByCriterion));
+                List<Integer> userIds = new ArrayList<Integer>();
+                for (int i = 0; i < createByJsonArray.length(); i++) {
+                    userIds.add(createByJsonArray.optInt(i));
+                }
+//                User user = queryUserDomain.getUserById(Integer.parseInt(createById));
+//                Criterion createByCriterion = Restrictions.eq("q.createBy", user);
+////                Criterion updateByCriterion = Restrictions.eq("q.createBy", user);
+//                criteria.add(createByCriterion);
+                criteria.add(Restrictions.in("createBy.userId",userIds));
 
             } catch (NumberFormatException ne) {
                 ne.printStackTrace();
+            } catch (Exception e){
+                e.printStackTrace();
             }
         }
         if (questionId != null && questionId.trim().length() != 0) {
@@ -275,23 +284,23 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
-    public List<Question> generalSearchQuestion(List users, String catId, Integer subId, List<Integer> qIds){
+    public List<Question> generalSearchQuestion(List users, String catId, Integer subId, List<Integer> qIds) {
 
         Criteria criteria = getSession().createCriteria(Question.class, "question");
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("question.createBy", "createBy");
         criteria.createAlias("subCategory.category", "category");
-        criteria.add(Restrictions.ne("status.id",4));
+        criteria.add(Restrictions.ne("status.id", 4));
 
         if (users != null) {
             criteria.add(Restrictions.in("createBy.id", users));
         }
-        if(catId != ""){
+        if (catId != "") {
             Criterion criterion1 = Restrictions.like("category.id", "%" + catId + "%").ignoreCase();
             Criterion criterion2 = Restrictions.like("category.name", "%" + catId + "%").ignoreCase();
             criteria.add(Restrictions.or(criterion1, criterion2));
         }
-        if(subId != 0){
+        if (subId != 0) {
             criteria.add(Restrictions.eq("subCategory.id", subId));
         }
         if (qIds.size() != 0) {
@@ -328,12 +337,12 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("question.createBy", "createBy");
         criteria.createAlias("subCategory.category", "category");
-        criteria.add(Restrictions.ne("status.id",4));
+        criteria.add(Restrictions.ne("status.id", 4));
 
         if (users != null) {
             criteria.add(Restrictions.in("createBy.id", users));
         }
-        if(catId != ""){
+        if (catId != "") {
             Criterion criterion1 = Restrictions.like("category.id", "%" + catId + "%").ignoreCase();
             Criterion criterion2 = Restrictions.like("category.name", "%" + catId + "%").ignoreCase();
             criteria.add(Restrictions.or(criterion1, criterion2));

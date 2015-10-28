@@ -379,7 +379,7 @@ public class QuestionController {
     public ResponseEntity<String> searchQuestion(
             @RequestParam(value = "categoryId", required = false) String catId,
             @RequestParam(value = "subCatName", required = false) String subCatName,
-            @RequestParam(value = "createBy", required = false) String createBy,
+            @RequestParam(value = "createBy", required = false) JSONArray createByJsonArray,
             @RequestParam(value = "questionDesc", required = false) String questionDesc,
             @RequestParam(value = "createDateFrom", required = false) String createDateFrom,
             @RequestParam(value = "createDateTo", required = false) String createDateTo,
@@ -388,7 +388,7 @@ public class QuestionController {
             HttpServletRequest request, HttpServletResponse response
     ) {
         List<Question> questions = queryQuestionDomain.searchQuestionQuery(
-                catId, subCatName, createBy, null,
+                catId, subCatName, createByJsonArray, null,
                 questionDesc, createDateFrom, createDateTo,
                 scoreFrom, scoreTo, null
         );
