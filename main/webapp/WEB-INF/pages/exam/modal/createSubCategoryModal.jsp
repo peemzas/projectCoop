@@ -98,16 +98,16 @@
 <%--</style>--%>
 <script>
     function closeModal(){
-        var catId = $("#categoryIdText").val();
-        var catName = $("#categoryNameText").val();
+        var catId = $("#sCat").val();
+        var catName = $("#subcategoryNameadd").val();
         if(catId == "" && catName ==""){
 
-            $("#createCat").modal('hide');
+            $("#createSub").modal('hide');
         }
         else {
             if(!confirm(" ข้อมูลยังไม่ถูกบันทึก ต้องการยกเลิกหรือไม่"))
                 return false;
-            $("#createCat").modal('hide');
+            $("#createSub").modal('hide');
         }
     };
     $("#hiddenBtn2").on('click',function(){
