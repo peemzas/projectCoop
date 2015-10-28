@@ -119,8 +119,7 @@
 
     <div class="row">
         <div class="col-sm-12" style="text-align: center">
-            <button id="selectionQuestionBtnInpagePaper" data-toggle="modal"
-                    class="btn btn-gray btn-sm">เลือกข้อสอบ
+            <button id="selectionQuestionBtnInpagePaper" data-toggle="modal" data-backdrop="static" class="btn btn-gray btn-sm">เลือกข้อสอบ
             </button>
             <button id="randomQuestionBtn" data-toggle="modal" data-target="#randomQuestionModal" class="btn btn-gray btn-sm">สุ่มข้อสอบ
             </button>
@@ -205,10 +204,11 @@
         if ('${status}' != 'staff') {
             window.location.href = "/TDCS/index.html";
         }
-        $("#selectionQuestionBtnInpagePaper").on('click', function(){
-            $('#selectQuest').modal({
-                backdrop: 'static'
-            });
-        });
+//        $("#selectionQuestionBtnInpagePaper").unbind('click').click(function(){
+//            alert('hi');
+//            $('#selectQuest').modal({
+//                backdrop: 'static'
+//            });
+//        });
     </script>
 

@@ -15,32 +15,25 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-sm-5">
-                    <div class="col-sm-4 col-sm-offset-2" align="right">
-                        <label for="paperCodeSearch" class="label-control"><h5 style="margin-top: 5px">
-                            รหัสชุดข้อสอบ</h5></label>
-                    </div>
-                    <div class="col-sm-6">
-                        <input id="paperCodeSearch" class="form-control input-sm" type="text" required/>
-                    </div>
+                <div class="col-sm-2" align="right">
+                    <label>รหัสชุดข้อสอบ :</label>
                 </div>
-                <div class="col-sm-7">
-                    <div class="col-sm-3 text-right">
-                        <label for="paperName" class="label-control text-left"><h5 style="margin-top: 5px">
-                            ชื่อชุดข้อสอบ</h5></label>
-                    </div>
-                    <div class="col-sm-6">
-                        <input id="paperName" class="form-control input-sm" type="text"/>
-                    </div>
+                <div class="col-md-3 form-group" style="padding: 0;">
+                    <input id="paperCodeSearch" type="text" class="form-control input-sm" placeholder="รหัสชุดข้อสอบ"/>
+                </div>
+                <div class="col-sm-2" align="right">
+                    <label for="searchScoreToInput">ชื่อชุดข้อสอบ :</label>
+                </div>
+                <div class="col-md-3 form-group" style="padding: 0;">
+                    <input id="paperName" type="text" class="form-control input-sm" placeholder="ชื่อชุดข้อสอบ"/>
                 </div>
             </div>
-            <div class="row">
-                <%@include file="selectCreateByInput.jsp" %>
-                <div class="row">
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div id="showEmployeeSelected" width="100%;">
 
-                        </div>
+            <%@include file="selectCreateByInput.jsp" %>
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-2">
+                    <div id="showEmployeeSelected" width="100%;">
+
                     </div>
                 </div>
             </div>
@@ -61,63 +54,51 @@
             </div>
             <div id="advanceBody" class="collapse">
                 <br/>
-                <div class="row form-group">
-                    <div class="col-sm-10">
-                        <label class="col-sm-2 text-right">วันที่สร้าง:</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input id="searchCreateDateFromInput" type="text"
-                                       class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างข้อสอบตั้งแต่วันที่"/>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"
-                                                                              href="#"></span></span>
-                            </div>
+                <div class="row">
+                    <div class="col-sm-2" align="right">
+                        <label for="searchCreateDateFromInput" class="control-label">วันที่สร้าง :</label>
+                    </div>
+                    <div class="col-md-3 form-group" style="padding: 0;">
+                        <div class="input-group">
+                            <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างชุดข้อสอบตั้งแต่วันที่"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                         </div>
-                        <div class="col-sm-1" align="right">
-                            <label>ถึง</label>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input id="searchCreateDateToInput" type="text"
-                                       class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"
-                                                                              href="#"></span></span>
-                            </div>
+                    </div>
+                    <div class="col-sm-1 col-sm-offset-1" align="right">
+                        <label for="searchCreateDateToInput">ถึง :</label>
+                    </div>
+                    <div class="col-md-3 form-group" style="padding: 0;">
+                        <div class="input-group">
+                            <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                         </div>
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col-sm-10">
-                        <div class="col-sm-2 col-sm-offset-1" align="right">
-                            <label>คะแนน</label>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input id="searchScoreFromInput" type="text" class="form-control input-sm" placeholder="คะแนนตั้งแต่"/>
-                            </div>
-                        </div>
-                        <div class="col-sm-1" align="right">
-                            <label>ถึง</label>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input id="searchScoreToInput" type="text" class="form-control input-sm" placeholder="ถึง"/>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-2" align="right">
+                        <label>คะแนน :</label>
+                    </div>
+                    <div class="col-md-3 form-group" style="padding: 0;">
+                        <input id="searchScoreFromInput" type="text" class="form-control input-sm" placeholder="คะแนนตั้งแต่"/>
+                    </div>
+                    <div class="col-sm-1 col-sm-offset-1" align="right">
+                        <label for="searchScoreToInput">ถึง :</label>
+                    </div>
+                    <div class="col-md-3 form-group" style="padding: 0;">
+                        <input id="searchScoreToInput" type="text" class="form-control input-sm" placeholder="ถึง"/>
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col-sm-10">
-                        <div class="col-sm-2 col-sm-offset-1" align="right">
-                            <label>สถานะ</label>
-                        </div>
-                        <div class="col-md-3">
-                            <select id="searchPaperStatus" class="form-control input-sm">
-                                <option value="0" selected>เลือกสถานะ</option>
-                                <option value="1" >เผยแพร่</option>
-                                <option value="2" >ปิดการเผยแพร่</option>
-                                <option value="3" >ยังไม่เผยแพร่</option>
-                            </select>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-2" align="right">
+                        <label>สถานะ :</label>
+                    </div>
+                    <div class="col-md-3 form-group" style="padding: 0;">
+                        <select id="searchPaperStatus" class="form-control input-sm">
+                            <option value="0" selected>เลือกสถานะ</option>
+                            <option value="1" >เผยแพร่</option>
+                            <option value="2" >ปิดการเผยแพร่</option>
+                            <option value="3" >ยังไม่เผยแพร่</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row form-group">

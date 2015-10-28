@@ -289,7 +289,7 @@ function generalSearchPaper(btnSearchStatus) {
     if (createDateTo == "" ? createDateTo = "" : createDateTo = $("#searchCreateDateToInput").val());
     scoreFrom = $("#searchScoreFromInput").val();
     if (scoreFrom == "" ? scoreFrom = "" : scoreFrom = $("#searchScoreFromInput").val());
-    $("#searchScoreToInput").val();
+    scoreTo = $("#searchScoreToInput").val();
     if (scoreTo == "" ? scoreTo = "" : scoreTo = $("#searchScoreToInput").val());
     if (paperStatus == 0 ? paperStatus = 0 : paperStatus = $("#searchPaperStatus").val());
     arrayEmployeeToSearch = [];
@@ -445,6 +445,7 @@ function paperFound(){
 function resetInput(){
     $("#paperCodeSearch").val('');
     $("#paperName").val('');
+    $("#showEmployeeSelected").empty();
 }
 
 function resetAdvInput(){
@@ -456,4 +457,5 @@ function resetAdvInput(){
     $("#searchScoreFromInput").val('');
     $("#searchScoreToInput").val('');
     $("#searchPaperStatus").val(0);
+    $("#showEmployeeSelected").empty();
 }

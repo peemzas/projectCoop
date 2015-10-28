@@ -18,13 +18,13 @@
                     <%@include file="selectCategoryInput.jsp" %>
                     <%@include file="selectCreateByInput.jsp" %>
 
-                    <div class="col-sm-10 ">
-                        <div id="showEmployeeSelected">
+                    <div class="col-sm-9">
+                        <div id="showEmployeeSelected" class="col-sm-12 col-sm-offset-2">
                         </div>
                     </div>
-                    <br/>
-                    <div class="row" id="btnSearch">
+                    <div id="btnSearch">
                         <div class="col-md-12 text-center">
+                            <br/>
                             <%--<button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm searchInputSubmitBtn" type="button">ค้นหา</button>--%>
                             <button id="generalSearchButtonInModalSelectionQuestion" class="btn btn-primary btn-sm searchSubmitBtn" type="button">ค้นหา</button>
                             <button id="resetInputSearchQuestion" class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-3 form-group" style="padding: 0;">
                                 <div class="input-group">
-                                    <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างชุดข้อสอบตั้งแต่วันที่"/>
+                                    <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างข้อสอบตั้งแต่วันที่"/>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                                 </div>
                             </div>

@@ -33,13 +33,8 @@
     #tbodySelectQuestion td {
         font-size: 13px;
     }
-    /**/
-    /*#questionPaperDetail{*/
-        /*backdrop: static;*/
-        /*keyboard: false;*/
-    /*}*/
 </style>
-<div class="modal fade" id="selectQuest">
+<div class="modal fade" id="selectQuest" data-backdrop="false">
     <div class="modal-dialog modal-lg" style="width: 80%">
         <div class="modal-content">
             <div class="modal-body">
@@ -87,7 +82,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
 <%--Add By Mr.Wanchana--%>
 <!-- Modal show Quertion Information -->
-<div id="showQuestionInfoModal" class="modal fade" role="dialog">
+<div id="showQuestionInfoModal" class="modal fade" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
