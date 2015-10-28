@@ -44,6 +44,7 @@ public class QueryExamResultDomain extends HibernateUtil {
     public List<ExamResult> getUserConfirmedResult(User user) {
         Criteria criteria = getSession().createCriteria(ExamResult.class, "result");
         criteria.createAlias("result.examRecord", "record");
+        criteria.createAlias("record.postTestRecord","postTestRecord");
 
         Criterion criterion1 = Restrictions.eq("result.status", queryStatusDomain.getMarkedStatus());
         Criterion criterion2 = Restrictions.eq("result.status", queryStatusDomain.getMarkConfirmedStatus());
@@ -51,6 +52,8 @@ public class QueryExamResultDomain extends HibernateUtil {
         criteria.add(Restrictions.or(criterion1, criterion2));
         criteria.add(Restrictions.eq("record.user", user));
         criteria.add(Restrictions.isNull("record.preTestRecord"));
+
+        criteria.addOrder(Order.desc("postTestRecord.id"));
 
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return criteria.list();
