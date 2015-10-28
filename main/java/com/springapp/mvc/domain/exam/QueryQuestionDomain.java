@@ -274,13 +274,21 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
-    public List<Question> generalSearchQuestion(List users, Integer subId, List<Integer> qIds){
+    public List<Question> generalSearchQuestion(List users, String catId, Integer subId, List<Integer> qIds){
 
-        Criteria criteria = getSession().createCriteria(Question.class);
+        Criteria criteria = getSession().createCriteria(Question.class, "question");
+        criteria.createAlias("question.subCategory", "subCategory");
+        criteria.createAlias("question.createBy", "createBy");
+        criteria.createAlias("subCategory.category", "category");
         criteria.add(Restrictions.ne("status.id",4));
 
         if(users != null){
             criteria.add(Restrictions.in("createBy.id", users));
+        }
+        if(catId != ""){
+            Criterion criterion1 = Restrictions.like("category.id", "%" + catId + "%").ignoreCase();
+            Criterion criterion2 = Restrictions.like("category.name", "%" + catId + "%").ignoreCase();
+            criteria.add(Restrictions.or(criterion1, criterion2));
         }
         if(subId != 0){
             criteria.add(Restrictions.eq("subCategory.id", subId));
@@ -294,7 +302,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         return  questions;
     }
 
-    public List<Question> advanceSearchQuestion(List users, Integer subId, List<Integer> qIds, String qDesc, String qCreateDateFrom, String qCreateDateTo, String qScoreFrom, String qScoreTo) throws ParseException {
+    public List<Question> advanceSearchQuestion(List users, String catId, Integer subId, List<Integer> qIds, String qDesc, String qCreateDateFrom, String qCreateDateTo, String qScoreFrom, String qScoreTo) throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy",Locale.US);
         Date dateFrom = null;
@@ -315,13 +323,21 @@ public class QueryQuestionDomain extends HibernateUtil {
             scoreTo = Float.parseFloat(qScoreTo);
         }
 
-        Criteria criteria = getSession().createCriteria(Question.class);
+        Criteria criteria = getSession().createCriteria(Question.class, "question");
+        criteria.createAlias("question.subCategory", "subCategory");
+        criteria.createAlias("question.createBy", "createBy");
+        criteria.createAlias("subCategory.category", "category");
         criteria.add(Restrictions.ne("status.id",4));
 
         if (users != null) {
             criteria.add(Restrictions.in("createBy.id", users));
         }
-        if (!subId.equals("")) {
+        if(catId != ""){
+            Criterion criterion1 = Restrictions.like("category.id", "%" + catId + "%").ignoreCase();
+            Criterion criterion2 = Restrictions.like("category.name", "%" + catId + "%").ignoreCase();
+            criteria.add(Restrictions.or(criterion1, criterion2));
+        }
+        if (subId != 0) {
             criteria.add(Restrictions.eq("subCategory.id", subId));
         }
         if (qIds.size() != 0) {

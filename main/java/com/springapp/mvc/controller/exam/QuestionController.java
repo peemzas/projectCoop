@@ -272,6 +272,7 @@ public class QuestionController {
         List<Integer> empNameSearch = new ArrayList<Integer>();
         List<Integer> qIdsNotSearch = new ArrayList<Integer>();
 
+        String categorySearch = "";
         String subCategorySearch = "";
         String qDesc = "";
         String qCreateDateFrom = "";
@@ -294,6 +295,7 @@ public class QuestionController {
 
         if (check == 0) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
+            categorySearch = jsonObject.getString("categoryId");
             subCategorySearch = jsonObject.getString("subCategoryId");
             btnStatus = jsonObject.getInt("btnSearchStatus");
 
@@ -307,6 +309,7 @@ public class QuestionController {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 empNameSearch.add(new Integer(jsonObject.getString("thFname")));
                 if (i == 0) {
+                    categorySearch = jsonObject.getString("categoryId");
                     subCategorySearch = jsonObject.getString("subCategoryId");
 
                     qDesc = jsonObject.getString("questionDescriptionSearch");
@@ -318,22 +321,21 @@ public class QuestionController {
                 btnStatus = jsonObject.getInt("btnSearchStatus");
             }
         }
-
         Integer subCategoryId = 0;
         if (empNameSearch.size() == 0) {
             empNameSearch = null;
         }
 
-        if (!subCategorySearch.equals("") || !subCategorySearch.equals(null)) {
+        if (!subCategorySearch.equals("")) {
             subCategoryId = querySubCategoryDomain.getSubCategoryIdByName(subCategorySearch);
         }
 //        Check Search
         if (btnStatus == 0) {
-            List<Question> questionsGeneralResult = queryQuestionDomain.generalSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch);
+            List<Question> questionsGeneralResult = queryQuestionDomain.generalSearchQuestion(empNameSearch, categorySearch, subCategoryId, qIdsNotSearch);
             String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questionsGeneralResult);
             return new ResponseEntity<String>(json, headers, HttpStatus.OK);
         } else {
-            List<Question> questionsAdvanceResult = queryQuestionDomain.advanceSearchQuestion(empNameSearch, subCategoryId, qIdsNotSearch, qDesc, qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo);
+            List<Question> questionsAdvanceResult = queryQuestionDomain.advanceSearchQuestion(empNameSearch, categorySearch, subCategoryId, qIdsNotSearch, qDesc, qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo);
             String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questionsAdvanceResult);
             return new ResponseEntity<String>(json, headers, HttpStatus.OK);
         }

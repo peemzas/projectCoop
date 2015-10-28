@@ -77,6 +77,14 @@ public class QueryCategoryDomain extends HibernateUtil {
 
         return categories;
     }
+    public Integer getCategoryIdByName(String catName) {
+
+        Criteria criteria = getSession().createCriteria(Category.class);
+        criteria.add(Restrictions.like("name", catName).ignoreCase());
+        Integer catId = (Integer) criteria.list().get(0);
+
+        return catId;
+    }
 
     public void deleteCategory(Category category){
 

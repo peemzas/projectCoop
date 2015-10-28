@@ -108,8 +108,7 @@
             </div>
             <div id="divCreateDate" class="col-sm-7" style="display: none;">
                 <div class="col-sm-3" align="right">
-                    <span style="color:red;">*</span><label for="questionCreatedDate" class="label-control"><h5
-                        style="margin-top: 5px">วันที่สร้าง :</h5></label>
+                    <label for="questionCreatedDate" class="label-control"><h5 style="margin-top: 5px">วันที่สร้าง :</h5></label>
                 </div>
                 <div class="col-sm-5 form-group">
                     <input id="questionCreatedDate" class="form-control input-sm" disabled/>

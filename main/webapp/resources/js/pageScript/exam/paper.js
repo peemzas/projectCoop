@@ -44,12 +44,15 @@ $(document).ready(function(){
         paperStatus = $("#searchPaperStatus").val();
     });
 
-    $(".panel-body").on('click', '#searchPaper', function(){
+    //$(".panel-body").on('click', '#searchPaper', function(){
+    $("#searchPaper").unbind('click').click(function(){
+        //alert('hi');
         btnSearchStatus = 0;
         generalSearchPaper(btnSearchStatus);
     });
 
-    $(".panel-footer").on('click', '#advPaperSearchBtn', function(){
+    //$(".panel-footer").on('click', '#advPaperSearchBtn', function(){
+    $("#advPaperSearchBtn").unbind('click').click(function(){
         btnSearchStatus = 1;
         generalSearchPaper(btnSearchStatus);
     });

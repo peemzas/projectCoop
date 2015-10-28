@@ -173,7 +173,7 @@ $("#selectCategoryToSelection").on('change', function () {
                 });
                 if (($("#selectSubCategoryToSelection").val() == null)) {
                     $("#selectSubCategoryToSelection").append(
-                        '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+                        '<option value="">' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
                     )
                 }
                 else if (($("#selectSubCategoryToSelection").val() != null)) {
@@ -208,7 +208,7 @@ $("#selectCategoryToSelection").on('change', function () {
                 });
                 if (($("#selectSubCategoryToSelection").val() == null)) {
                     $("#selectSubCategoryToSelection").append(
-                        '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+                        '<option value="">' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
                     )
                 }
                 else if (($("#selectSubCategoryToSelection").val() != null)) {

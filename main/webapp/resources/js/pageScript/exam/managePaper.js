@@ -8,7 +8,7 @@ var newQuestionScore = new Array();
 var sumPaperScore = 0;
 
 var btnSearchStatus;
-var categoryId;
+var categoryId = "";
 var subcategoryId = "";
 var arrayEmpNameToQuery = new Array();
 var jsonObj = {};
@@ -86,12 +86,14 @@ $(document).ready(function(){
 
     $("#selectCategoryToSelection").change(function(){
         subcategoryId = $("#selectSubCategoryToSelection").val();
-        if(subcategoryId == ""? subcategoryId = "": subcategoryId = $("#selectSubCategoryToSelection").val());
+        categoryId = $("#selectCategoryToSelection").val();
+        //if(subcategoryId == ""? subcategoryId = "": subcategoryId = $("#selectSubCategoryToSelection").val());
     });
 
     $("#selectSubCategoryToSelection").change(function(){
         subcategoryId = $("#selectSubCategoryToSelection").val();
-        if(subcategoryId == ""? subcategoryId = "": subcategoryId = $("#selectSubCategoryToSelection").val());
+        categoryId = $("#selectCategoryToSelection").val();
+        //if(subcategoryId == ""? subcategoryId = "": subcategoryId = $("#selectSubCategoryToSelection").val());
     });
 
     if($("#newPaperScore").val() == ""){
@@ -124,7 +126,9 @@ $(document).ready(function(){
         }
     });
 
-    $("#selectionQuestionBtnInpagePaper").on('click' ,function(){
+    //$("#selectionQuestionBtnInpagePaper").on('click' ,function(){
+    $("#selectionQuestionBtnInpagePaper").unbind('click').click(function(){
+        $("#selectQuest").modal('show');
         viewQuestions();
         if($("#tbSelectQuestion #tbodySelectQuestion tr").length == 0){
             $("#questionsAreEmpty").show();
@@ -272,10 +276,10 @@ function viewQuestions(){
                         '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
                         '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</label></td>'+
                         '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
-                        '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
+                        '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
                         '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
 
-                        '<td><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
+                        '<td style="text-align: center;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
 
                         '</tr>'
@@ -356,10 +360,10 @@ function viewQuestions(){
                             '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
                             '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</label></td>'+
                             '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
-                            '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
+                            '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
                             '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
 
-                            '<td><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
+                            '<td style="text-align: center;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
                             '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
 
                             '</tr>'
@@ -466,8 +470,6 @@ function validateScore(){
 }
 
 function createPaper(){
-
-    alert(newQuestionScore + " >>>" + questionsInPaper);
 
     var check = true;
     $.ajax({
@@ -581,9 +583,15 @@ function scoreOnChange(){
 }
 
 function generalSearchQuestion(btnSearchStatus) {
-    alert(subcategoryId);
+
     itemLenght = ($("#showEmployeeSelected").children("button")).length;
-    subcategoryId = subcategoryId;
+    if(categoryId.indexOf(':')!=-1){
+        categoryId = categoryId.substring(0, categoryId.indexOf(':') - 1);
+    }
+    else{
+        categoryId = categoryId;
+    }
+    if(subcategoryId == null? subcategoryId = "": subcategoryId = subcategoryId);
     questionDescriptionSearch = $("#searchQuestionDescInput").val();
     if(questionDescriptionSearch == ""? questionDescriptionSearch = "": questionDescriptionSearch = $("#searchQuestionDescInput").val());
     questionCreateDateFromSearch = $("#searchCreateDateFromInput").val();
@@ -618,6 +626,7 @@ function generalSearchQuestion(btnSearchStatus) {
                 var items = {
                     "thFname": arrayEmpNameToQuery[idx],
                     "subCategoryId": subcategoryId,
+                    "categoryId": categoryId,
                     "btnSearchStatus" : btnSearchStatus,
                     "allQuestionIdOnTableCreatePaper" : tmpQ,
                     "questionDescriptionSearch" : questionDescriptionSearch,
@@ -642,6 +651,7 @@ function generalSearchQuestion(btnSearchStatus) {
                 var items = {
                     "thFname": arrayEmpNameToQuery[idx],
                     "subCategoryId": subcategoryId,
+                    "categoryId": categoryId,
                     "btnSearchStatus" : btnSearchStatus,
                     "allQuestionIdOnTableCreatePaper" : tmpQ,
                     "questionDescriptionSearch" : questionDescriptionSearch,
@@ -665,6 +675,7 @@ function generalSearchQuestion(btnSearchStatus) {
             var item = {
                 "thFname": '0',
                 "subCategoryId": subcategoryId,
+                "categoryId": categoryId,
                 "btnSearchStatus" : btnSearchStatus,
                 "allQuestionIdOnTableCreatePaper" : tmpQ,
                 "questionDescriptionSearch" : questionDescriptionSearch,
@@ -685,6 +696,7 @@ function generalSearchQuestion(btnSearchStatus) {
             var item2 = {
                 "thFname": '0',
                 "subCategoryId": subcategoryId,
+                "categoryId": categoryId,
                 "btnSearchStatus" : btnSearchStatus,
                 "allQuestionIdOnTableCreatePaper" : tmpQ,
                 "questionDescriptionSearch" : questionDescriptionSearch,
@@ -740,11 +752,11 @@ function generalSearchQuestion(btnSearchStatus) {
                         '<td style="text-align: left;"><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
                         '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
                         '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</label></td>'+
-                        '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
-                        '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
+                        '<td style="text-align: center;"><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
+                        '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
                         '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
 
-                        '<td><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
+                        '<td style="text-align: center;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
 
                         '</tr>'
@@ -1033,7 +1045,6 @@ function randomQuestion(){
                     var createDate = new Date(value.createDate);
                     var dateFormat = createDate.getDate() +" "+ getMonthFormat(Number(createDate.getMonth()) + 1) +" "+ createDate.getFullYear();
 
-                    alert(createDate.getFullYear());
                     var str = "";
                     if(value.choices != null){
                         var i = 1;
@@ -1061,10 +1072,10 @@ function randomQuestion(){
                         '<td style="text-align: left;"><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
                         '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
                         '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</label></td>'+
-                        '<td><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
+                        '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
                         '<td><input id="newScore'+value.id+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control innput-sm"  min="1" max="50" value="'+value.score+'"/></td>'+
 
-                        '<td><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
+                        '<td style="text-align: center;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
                         '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
 
                         '</tr>'
