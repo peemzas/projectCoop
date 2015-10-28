@@ -33,7 +33,12 @@
         <tr>
           <td>${paper.name}</td>
           <td>${paper.createBy.thFname}&nbsp;${paper.createBy.thLname}</td>
-          <td>${paper.position.posiName}</td>
+          <c:if test="${paper.position.posiName != null}">
+            <td>${paper.position.posiName}</td>
+          </c:if>
+          <c:if test="${paper.position.posiName == null}">
+            <td>ทั้งหมด</td>
+          </c:if>
           <td align="center">${paper.maxScore}</td>
           <td align="center">${paper.timeLimit} นาที</td>
           <td style="text-align: center;">

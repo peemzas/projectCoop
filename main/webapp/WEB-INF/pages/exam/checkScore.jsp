@@ -16,23 +16,12 @@
                 <th style="text-align: center">คะแนนเต็ม</th>
                 <th style="text-align: center">คะแนนPreTest</th>
                 <th style="text-align: center">คะแนนPostTest</th>
-                <%--<th style="text-align: center">สถานะ</th>--%>
             </tr>
             </thead>
             <tbody>
 
-            <%--<fmt:formatNumber var="preScore"--%>
-            <%--value="${result.objectiveScore + result.subjectiveScore}"--%>
-            <%--maxFractionDigits="0" />--%>
-
-            <%--<fmt:formatNumber var="pPpPreScore" minIntegerDigits="2" value="${result.objectiveScore + result.subjectiveScore}"/>--%>
-
             <c:forEach items="${examResults}" var="result">
                 <c:if test="${result.status.id == 6}">
-
-                    <%--<fmt:formatNumber var="postScore"--%>
-                    <%--value="${result.examRecord.postTestRecord.examResult.objectiveScore + result.examRecord.postTestRecord.examResult.subjectiveScore}"--%>
-                    <%--maxFractionDigits="0" />--%>
 
                     <c:if test="${fn:indexOf(result.objectiveScore + result.subjectiveScore,',') != 0}">
                         <c:set var="preTestScore"
@@ -74,21 +63,15 @@
                                 -
                             </c:if>
                         </td>
-
-                            <%--<td align="center" class="col-status">${result.status.description}</td>--%>
                     </tr>
                 </c:if>
             </c:forEach>
-
-
             </tbody>
         </table>
 
         <c:if test="${fn:length(examResults) <= 0}">
             <div class="bg-info" id="b3rd">
-                    <%--<p class="bg-info">--%>
                 <h3 id="b4th" style="text-align: center;">ไม่พบข้อมูล</h3>
-                    <%--</p>--%>
             </div>
         </c:if>
     </div>
@@ -103,7 +86,6 @@
     #b3rd {
         background-color: #b2e0ff;
         height: 100px;
-        /*display: none;*/
         top: 40px;
         vertical-align: middle;
         border-radius: 5px;
