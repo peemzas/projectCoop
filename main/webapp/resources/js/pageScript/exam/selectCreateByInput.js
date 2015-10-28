@@ -9,3 +9,16 @@ var clearCreateByInput = function(){
 $("#addEmpCreateByBtn").on('click', function(){
     searchEmpName();
 });
+
+// Add by Mr.Wanchana
+function getUserIds(){
+    var itemLenght = ($("#showEmployeeSelected").children("button")).length;
+    var arrayEmpIdToQuery = new Array();
+    for (var i = 0; i < itemLenght; i++) {
+        var temp = $("#showEmployeeSelected").children("button")[i].innerHTML;
+        temp = temp.substring(temp.indexOf('_')+1, temp.indexOf('z'));
+        arrayEmpIdToQuery.push(temp);
+    }
+
+    return arrayEmpIdToQuery;
+}
