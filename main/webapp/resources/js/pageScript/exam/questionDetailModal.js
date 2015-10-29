@@ -34,12 +34,12 @@ var updateDetailModal = function (tr) {
         }, success: function (question) {
 
             var createDate = new Date(question.createDate);
-            var formattedCreateDate = createDate.getDate() + '/' + createDate.getMonth() + '/' + createDate.getFullYear();
+            var formattedCreateDate = createDate.getDate() + '/' + (parseInt(createDate.getMonth())+1) + '/' + createDate.getFullYear();
             var updateDate;
             var formattedUpdateDate;
             if (question.updateDate != null) {
                 updateDate = new Date(question.updateDate);
-                formattedUpdateDate = updateDate.getDate() + '/' + updateDate.getMonth() + '/' + createDate.getFullYear();
+                formattedUpdateDate = updateDate.getDate() + '/' + (parseInt(updateDate.getMonth())+1) + '/' + createDate.getFullYear();
                 var updateDetail = $('#updateDetail')
                 updateDetail.empty()
                 updateDetail.append(formattedUpdateDate + '&nbsp;' +

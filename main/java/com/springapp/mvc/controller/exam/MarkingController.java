@@ -57,7 +57,7 @@ public class MarkingController {
     @Autowired
     QueryPaperQuestionDomain queryPaperQuestionDomain;
 
-//    @Transactional
+    //    @Transactional
     @RequestMapping(method = RequestMethod.GET, value = "/exam/marking")
     public String marking(ModelMap modelMap, Model model, HttpServletRequest request, HttpServletResponse response
 //                         ,@RequestParam(value = "recordId") Integer recordId
@@ -76,7 +76,8 @@ public class MarkingController {
     public void submitMarking(HttpServletRequest request, HttpServletResponse response
             , @RequestParam(value = "resultId", required = true) Integer resultId
             , @RequestParam(value = "markingRecord", required = true) JSONArray markingRecord
-            , @RequestParam(value = "comment", required = false) String comment) throws Exception {
+            , @RequestParam(value = "comment", required = false) String comment
+            , @RequestParam(value = "confirmation", required = true) Boolean confirmation) throws Exception {
 
         ExamResult examResult = queryExamResultDomain.getExamResultById(resultId);
         User currentUser = queryUserDomain.getCurrentUser(request);
@@ -91,19 +92,35 @@ public class MarkingController {
             HibernateUtil.beginTransaction();
 
             for (int i = 0; i < markingRecord.length(); i++) {
-                ExamMarkingRecord examMarkingRecord = new ExamMarkingRecord();
+
+                ExamAnswerRecord answerRecord = queryExamAnswerDomain.getExamAnswerRecordById(markingRecord.getJSONObject(i).optInt("answerRecord"));
+                Boolean update = true;
+
+                ExamMarkingRecord examMarkingRecord = queryMarkingRecord.getMarkingRecordByAnswerRecord(answerRecord);
+
+                if (examMarkingRecord == null) {
+                    examMarkingRecord = new ExamMarkingRecord();
+                    update = false;
+                }
 
                 examMarkingRecord.setMarkedBy(currentUser);
-                ExamAnswerRecord answerRecord = queryExamAnswerDomain.getExamAnswerRecordById(markingRecord.getJSONObject(i).optInt("answerRecord"));
                 examMarkingRecord.setAnswerRecord(answerRecord);
-                Float score = (float)markingRecord.getJSONObject(i).optDouble("score");
+                Float score = (float) markingRecord.getJSONObject(i).optDouble("score");
                 examMarkingRecord.setMarkingScore(score);
                 examMarkingRecord.setExamResult(examResult);
-                queryMarkingRecord.saveMarkingRecord(examMarkingRecord);
-                subjectiveScore +=(score);
+                if (update) {
+                    queryMarkingRecord.mergeUpdateMarkingRecord(examMarkingRecord);
+                } else {
+                    queryMarkingRecord.saveMarkingRecord(examMarkingRecord);
+                }
+                subjectiveScore += (score);
             }
             examResult.setSubjectiveScore(subjectiveScore);
-            examResult.setStatus(queryStatusDomain.getMarkedStatus());
+            if(confirmation){
+                examResult.setStatus(queryStatusDomain.getMarkConfirmedStatus());
+            }else {
+                examResult.setStatus(queryStatusDomain.getMarkedStatus());
+            }
 
             queryExamResultDomain.updateExamResult(examResult);
 

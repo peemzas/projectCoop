@@ -1,7 +1,11 @@
 package com.springapp.mvc.domain.exam;
 
+import com.springapp.mvc.pojo.exam.ExamAnswerRecord;
 import com.springapp.mvc.pojo.exam.ExamMarkingRecord;
 import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+import org.junit.internal.RealSystem;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,5 +17,13 @@ public class QueryMarkingRecord extends HibernateUtil{
         getSession().save(markingRecord);
     }
 
+    public ExamMarkingRecord getMarkingRecordByAnswerRecord(ExamAnswerRecord ar){
+        Criteria criteria = getSession().createCriteria(ExamMarkingRecord.class);
+        criteria.add(Restrictions.eq("answerRecord", ar));
+        return (ExamMarkingRecord) criteria.uniqueResult();
+    }
 
+    public void mergeUpdateMarkingRecord(ExamMarkingRecord mr){
+        getSession().merge(mr);
+    }
 }

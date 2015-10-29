@@ -31,6 +31,17 @@ public class ExamAnswerRecord implements Serializable {
     @JoinColumn(name = "EXAM_RECORD_ID")
     private ExamRecord examRecord;
 
+    @OneToOne(mappedBy = "answerRecord")
+    private ExamMarkingRecord markingRecord;
+
+    public ExamMarkingRecord getMarkingRecord() {
+        return markingRecord;
+    }
+
+    public void setMarkingRecord(ExamMarkingRecord markingRecord) {
+        this.markingRecord = markingRecord;
+    }
+
     public ExamRecord getExamRecord() {
         return examRecord;
     }
