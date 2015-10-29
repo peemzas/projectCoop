@@ -56,7 +56,7 @@
             <table class = "table table-bordered">
               <thead>
                 <tr>
-                  <th style="text-align: center;"><input id="selectAllEmployeeName" type="checkbox" style="display: none;"/> เลือก</th>
+                  <th style="text-align: center;"><input id="selectAllEmployeeName" type="checkbox" style="display: none;"/></th>
                   <th style="text-align: center;">รหัสพนักงาน</th>
                   <th style="text-align: center;">ชื่อพนักงาน</th>
                   <th style="text-align: center;">ตำแหน่ง</th>

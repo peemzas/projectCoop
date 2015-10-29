@@ -43,6 +43,9 @@ $(document).ready(function(){
     else{
         onLoadPageCreatePaper();
     }
+    $("#randomQuestionBtn").on('click', function(){
+        resetRandomQuestion();
+    });
 
     $("button[modal-number=2]").click(function(){
         $("#questionPaperDetail").modal('hide');
@@ -63,7 +66,7 @@ $(document).ready(function(){
     $("#tbodySelectQuestion").on('click', 'td:not(.xyz)', function(){
         $('#questionPaperDetail').modal('show');
         var position = $(this).position().top + $(this).outerHeight(true);
-        $('#questionPaperDetail').css('top', position/1.5);
+        $('#questionPaperDetail').css('top', position/1.75);
         $('#questionPaperDetail').css('outline', 'none');
         var questionId = $(this).parent().find('label').attr('id');
         questionId = questionId.substring(questionId.indexOf('d')+1, questionId.length);
@@ -71,8 +74,9 @@ $(document).ready(function(){
     });
 
     $("#generalSearchButtonInModalSelectionQuestion").unbind('click').click(function(){
-        alert(getUserIds());
+        //alert(getUserIds());
         btnSearchStatus = 0;
+
         generalSearchQuestion(btnSearchStatus);
     });
 
@@ -133,13 +137,6 @@ $(document).ready(function(){
             $("#addQuestionBtn").attr('disabled', 'disabled');
             $("#tbSelectQuestion").hide();
         }
-        //if($("#selectQuest").modal('show')){
-        //    alert('Do this');
-        //    $("#selectQuest").modal({
-        //        backdrop: 'static',
-        //        keyboard: false
-        //    })
-        //}
     });
 
     $("#checkQuestionAll").click(function(event){
@@ -430,6 +427,8 @@ function createPaperValidation(){
     if($("#newPaperId").val() == ""){
         $("#newPaperId").focus();
         $("#newPaperId").css('border-color', 'red');
+        alert('กรุณากรอกรหัสชุดข้อสอบ');
+
         return false;
     }
     //if($("#newPaperName").val() == ""){
@@ -440,16 +439,22 @@ function createPaperValidation(){
     if($("#newPaperScore").val() == "" || $.isNumeric($("#newPaperScore").val()) == false){
         $("#newPaperScore").focus();
         $("#newPaperScore").css('border-color', 'red');
+        alert('กรุณากรอกคะแนนชุดข้อสอบ');
+
         return false;
     }
     if($("#newPaperForPosition").val() == "เลือกตำแหน่ง"){
         $("#newPaperForPosition").css('border-color', 'red');
+        alert('กรุณาเลือกตำแหน่ง');
+
         return false;
     }
 
     if(paperTime == 0){
         $("#hours").css('border-color', 'red');
         $("#minutes").css('border-color', 'red');
+        alert('กรุณาระบุเวลาการทำชุดข้อสอบ');
+
         return false;
     }
     if($("#questionNotFoundDesc").is(":visible")){
@@ -772,6 +777,8 @@ function generalSearchQuestion(btnSearchStatus) {
             alert('เกิดข้อผิดพลาด');
         }
     });
+    categoryId = "";
+    subcategoryId = "";
     arrayEmpNameToQuery = [];
     tempArray = [];
     tmpQ = [];
@@ -903,7 +910,7 @@ function showPaperInfo(pId){
                 $("#divCreateDate").show();
 
                 var createDate = new Date(j.examPaper.createDate);
-                var dateFormat = createDate.getDate() +" "+ getMonthFormat(Number(createDate.getMonth()) + 1) +" "+ (Number(createDate.getFullYear()) + 543);
+                var dateFormat = createDate.getDate() +" "+ getMonthFormat(createDate.getMonth() + 1) +" "+ createDate.getFullYear();
 
                 $("#questionCreatedDate").val(dateFormat);
 
