@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller.exam;
 
 
+import com.google.gson.Gson;
 import com.springapp.mvc.domain.QueryPositionDomain;
 
 import com.springapp.mvc.domain.exam.QueryExamResultDomain;
@@ -58,7 +59,22 @@ public class ExamRecordSearchController {
             position =  queryPositionDomain.getPositionById(posiIdInt);
         }
         List<ExamResult> results = queryExamResualt.getAllExamResult(userId,codeId,position);
-        String json = new JSONSerializer().exclude("*.class").serialize(results);
+//        System.out.println(results);
+
+        String json = new JSONSerializer()
+                .include("examRecord")
+//                .exclude("*.examRecord.timeTaken")
+//                .exclude("*.examRecord.paper.createBy")
+//                .exclude("*.examRecord.paper.position")
+//                .exclude("*.examRecord.paper.paperStatus")
+//                .exclude("*.examRecord.paper.updateBy")
+                .exclude("*.examRecord.examResult")
+//                .exclude("*.examRecord.preTestRecord")
+//                .exclude("*.examRecord.postTestRecord")
+                .exclude("*.questions")
+                .exclude("*.class")
+                .serialize(results);
+//        String json = new Gson().toJson(results);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 }

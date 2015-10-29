@@ -178,5 +178,9 @@
         <!--<put-attribute name="title" value="แก้ไขชุดข้อสอบ"/>-->
         <!--<put-attribute name="body" value="/WEB-INF/pages/exam/editPaper.jsp"/>-->
     <!--</definition>-->
-
+    <!--create by job-->
+    <definition name="examReportResultForEmployee" extends="tempForUser">
+        <put-attribute name="title" value="รายงานแสดงผลการสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/examReportResultForEmployee.jsp"/>
+    </definition>
 </tiles-definitions>
