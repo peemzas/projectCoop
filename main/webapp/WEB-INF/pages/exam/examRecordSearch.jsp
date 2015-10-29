@@ -31,7 +31,7 @@
 
 <div>
     <div class="panel panel-primary">
-        <div class="panel-heading"><h5 class="panel-title">ค้นหาข้อสอบที่</h5></div>
+        <div class="panel-heading"><h5 class="panel-title">ค้นหา</h5></div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-12">
@@ -49,20 +49,20 @@
                                 </div>
                                 <label class="control-label col-sm-offset-1">ตำแหน่ง :</label>
 
-                                <div class="col-md-2 input-group ">
-                                    <select id="forPosition" class="form-control">
-                                        <option value="0">All</option>
-                                        <option value="1">Dev</option>
-                                        <option value="5">BA</option>
+                                <div class="col-md-3 input-group ">
+                                    <select id="forPosition" class="form-control" style="width: 100%">
+                                        <option value="0">ทั้งหมด</option>
+                                        <option value="1">Software Developer Trainee</option>
+                                        <option value="2">Assistant Business Analyst</option>
                                     </select>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-left: 0px">
                             <%@include file="template/selectCreateByInput.jsp" %>
                         </div>
-                        <div id="showEmployeeSelected" width="100%;">
+                        <div class="col-md-offset-1" id="showEmployeeSelected" width="100%; ">
 
                         </div>
                     </div>
@@ -89,15 +89,15 @@
             <table class="table table-bordered table-responsive table-hover">
                 <thead class="bg-primary small">
                 <tr>
-                    <th align="center">รหัสชุดข้อสอบ</th>
-                    <th align="center">ชื่อชุดข้อสอบ</th>
-                    <th align="center">ชื่อผู้สอบ</th>
-                    <th align="center">ตำแหน่ง</th>
-                    <th align="center">คะแนนPre-Test</th>
-                    <th align="center">คะแนนPost-Test</th>
-                    <th align="center">คะเเนเต็ม</th>
-                    <th align="center">สร้างโดย</th>
-                    <th align="center">สถานะ</th>
+                    <th class="text-center">รหัสชุดข้อสอบ</th>
+                    <th class="text-center">ชื่อชุดข้อสอบ</th>
+                    <th class="text-center">ชื่อผู้สอบ</th>
+                    <th class="text-center">ตำแหน่ง</th>
+                    <th class="text-center">คะแนนPre-Test</th>
+                    <th class="text-center">คะแนนPost-Test</th>
+                    <th class="text-center">คะเเนนเต็ม</th>
+                    <th class="text-center">สร้างโดย</th>
+                    <th class="text-center">สถานะ</th>
                 </tr>
                 </thead>
 
@@ -111,6 +111,59 @@
 </div>
 </div>
 </div>
+<%-----------------------------------------------confirm modal------------------------------------------- --%>
+<!-- alertModal-->
+<div id="alertModalChangPage" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <label><h4>ตรวจข้อสอบ</h4></label>
+                </center>
+            </div>
+            <div class="modal-footer border">
+                <center>
+                    <button id="okBtnChangPage" class="btn btn-sm btn-primary" data-dismiss="modal">ตกลง
+                    </button>
+                    <button id="cancleBtnChangPage" class="btn btn-sm btn-danger"
+                            data-dismiss="modal">ยกเลิก
+                    </button>
+                </center>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<%-----------------------------------------------confirm modal------------------------------------------- --%>
+<!-- alertModal-->
+<div id="alertModalRemark" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <label><h4>ตรวจข้อสอบซ้ำ</h4></label>
+                </center>
+            </div>
+            <div class="modal-footer border">
+                <center>
+                    <button id="pretestBtn" class="btn btn-sm btn-primary" data-dismiss="modal" >Pre-test
+                    </button>
+                    <button id="posttestBtn" class="btn btn-sm btn-primary" data-dismiss="modal" >Post-test
+                    </button>
+                    <button id="cancleBtn" class="btn btn-sm btn-danger"
+                            data-dismiss="modal">ยกเลิก
+                    </button>
+                </center>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <%@include file="modal/addEmployeeToInputModal.jsp" %>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/examRecordSearch.js" />"></script>
 <%--end class row--%>

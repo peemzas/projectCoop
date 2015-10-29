@@ -77,20 +77,20 @@ public class QueryExamResultDomain extends HibernateUtil {
         if(posiId != null){
             criteria.add(Restrictions.eq("user.position", posiId));
         }
-        ProjectionList projList = Projections.projectionList()
-                .add(Projections.property("er.id"), "ids")
-                .add(Projections.property("er.examRecord"),"examRecord")
-                .add(Projections.property("er.objectiveScore"),"objectiveScore")
-                .add(Projections.property("er.subjectiveScore"), "subjectiveScore")
-                .add(Projections.property("er.status"), "status")
-                .add(Projections.property("paper.id"),"peperid")
-                .add(Projections.property("user.userId"),"userId")
-            .add(Projections.property("examRecord.postTestRecord"), "postTestRecord");
-
-        criteria.setProjection(Projections.distinct(projList));
-        criteria.addOrder(Order.desc("peperid"));
-        criteria.addOrder(Order.desc("userId"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//        ProjectionList projList = Projections.projectionList()
+//                .add(Projections.property("er.id"), "id")
+//                .add(Projections.property("er.examRecord"),"examRecord")
+//                .add(Projections.property("er.objectiveScore"),"objectiveScore")
+//                .add(Projections.property("er.subjectiveScore"), "subjectiveScore")
+//                .add(Projections.property("er.status"), "status")
+//                .add(Projections.property("paper.id"),"peperid")
+//                .add(Projections.property("user.userId"),"userId")
+//            .add(Projections.property("examRecord.postTestRecord"), "postTestRecord");
+//
+//        criteria.setProjection(Projections.distinct(projList));
+        criteria.addOrder(Order.desc("paper.id"));
+        criteria.addOrder(Order.desc("user.userId"));
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<ExamResult> empList = criteria.list();
         return empList;
     }

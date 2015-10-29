@@ -122,7 +122,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
 
             },
             error: function () {
-                alert('แก้ไขข้อมูลล้มเหลว');
+                alert('แก้ไขข้อมูลไม่สำเร็จ');
                 $('#createQuest').modal('show')
             }
         }
@@ -188,7 +188,7 @@ var deleteQuestions = function (questionIds) {
             alert("ลบข้อมูลสำเร็จ");
             listSearchQuestion($('#advSearchBtn'));
         }, error: function () {
-            alert("ลบข้อมูลล้มเหลว");
+            alert("ลบข้อมูลไม่สำเร็จ");
         }
     })
 

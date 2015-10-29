@@ -11,7 +11,7 @@
 <div class="panel-collapse" id="searchCollapse">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h5>ค้นหาชุดข้อสอบ</h5>
+            <h5 class="panel-title">ค้นหาชุดข้อสอบ</h5>
         </div>
         <div class="panel-body">
             <div class="row">

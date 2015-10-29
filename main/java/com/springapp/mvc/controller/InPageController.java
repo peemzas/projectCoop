@@ -260,7 +260,7 @@ public class InPageController {
     //Create Jokizz
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageSubCategory")
     public String editSubCategories(HttpServletRequest request, Model model){
-        
+
 //        model.addAttribute("LIST_OF_SUBCATEOGRIES", querySubCategoryDomain.getListSubCategories());
 
         model.addAttribute("listLOVCat", queryCategoryDomain.LOVCategory());
@@ -314,4 +314,7 @@ public class InPageController {
 //    @RequestMapping(method = RequestMethod.GET,value = "/exam/marking")
 //    public String marking(HttpServletRequest request){return "marking";}
 
+    //CREATE BY JOB
+    @RequestMapping(method = RequestMethod.GET,value = "/exam/examReportResultForEmployee")
+    public String examReportResultForEmployee(HttpServletRequest request) {return "examReportResultForEmployee";}
 }
