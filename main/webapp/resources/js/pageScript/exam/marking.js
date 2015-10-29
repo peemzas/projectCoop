@@ -2,6 +2,7 @@
  * Created by Phuthikorn_T on 1/10/2558.
  */
 
+
 $('#marking-body').on('focusout', '.scoreInput', function () {
     var maxScore = parseFloat($(this).parent().parent().children().children('h5').children('span').text());
     if (!isNaN(($(this).val()))) {
@@ -20,8 +21,15 @@ $('#marking-body').on('focusout', '.scoreInput', function () {
     }
 })
 
+$('#confirmSubmitMarkingCONFIRM').on('click',function(){
+    var confirmation = confirm('หากยืนยันการตรวจแล้วจะไม่สามารถแก้ไขได้อีก ต้องการยืนยันผมตรวขหรือไม่')
+    if(confirmation){
+        submitMarking(true)
+    }
+})
+
 $('#confirmSubmitMarking').on('click', function () {
-    submitMarking();
+    submitMarking(false);
 })
 
 var goToUnfinishBtn = $('#goToUnfinish');
@@ -49,7 +57,7 @@ function markingRecord(answerRecordId, score) {
     this.score = score;
 }
 
-var submitMarking = function () {
+var submitMarking = function (confirmation) {
     var questions = $('#marking-body .questionContainer');
     var markingArray = [];
 
@@ -68,7 +76,8 @@ var submitMarking = function () {
         data: {
             markingRecord: JSON.stringify(markingArray),
             resultId: $('#marking-body').attr('resultId'),
-            comment: $('#comment').val()
+            comment: $('#comment').val(),
+            confirmation: confirmation
         },
         success: function () {
             alert('บันทึกข้อมูลสำเร็จ')

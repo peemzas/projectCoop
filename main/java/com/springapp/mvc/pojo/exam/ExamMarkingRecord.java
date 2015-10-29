@@ -21,7 +21,7 @@ public class ExamMarkingRecord implements Serializable {
     @Column(name = "MARKING_SCORE")
     private Float markingScore;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "ANSWER_RECORD_ID")
     private ExamAnswerRecord answerRecord;
 

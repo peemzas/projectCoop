@@ -62,18 +62,6 @@
     </div>
     <br>
 
-    <%--<div class="row">--%>
-    <%--<div class="col-md-2 text-right">หมวดหมู่ :</div>--%>
-    <%--<div class="col-md-4">--%>
-    <%--<span id="category"></span>--%>
-    <%--</div>--%>
-    <%--<div class="col-md-2 text-right">หัวข้อเรื่อง :</div>--%>
-    <%--<div class="col-md-4">--%>
-    <%--<span id="sub-category"></span>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--<br>--%>
-
     <div class="row">
         <div class="col-md-2 text-right">คะแนนเต็ม :</div>
         <div class="col-md-4 paperMaxScore">${examResult.examRecord.paper.maxScore}</div>
@@ -94,7 +82,8 @@
         <c:forEach var="answerRecord" items="${examResult.examRecord.examAnswerRecords}">
             <c:if test="${answerRecord.question.questionType.id == 2}">
 
-                <div class="questionContainer" questionNo="${questionNumber}" questionId="${answerRecord.question.id}"
+                <div class="questionContainer" questionNo="${questionNumber}"
+                     questionId="${answerRecord.question.id}"
                      answerRecordId="${answerRecord.id}">
                     <div class="row question-row">
                         <div class="col-md-1 text-right">${questionNumber} :</div>
@@ -108,7 +97,8 @@
 
                     <div class="row answer-row">
                         <div class="col-md-10">
-                            <span class="col-md-2 text-right col-md-offset-1" style="font-weight:bold ">คำตอบ : </span>
+                                <span class="col-md-2 text-right col-md-offset-1"
+                                      style="font-weight:bold ">คำตอบ : </span>
                     <textarea class="col-md-8" rows="5" disabled
                               style="resize: none;">${answerRecord.answerSubjective}</textarea>
                         </div>
@@ -116,7 +106,8 @@
                     <div class="row ">
                         <div class="col-md-offset-8 col-md-2 text-right"><h5>คะแนน :</h5></div>
                         <div class="col-md-1">
-                            <input class="form-control scoreInput">
+                            <input class="form-control scoreInput"
+                                   value="${answerRecord.markingRecord.markingScore}">
                         </div>
                         <div class="col-md-1"><h5>/&nbsp;
                             <c:forEach var="paperQuestion" items="${examResult.examRecord.paper.questions}">
@@ -135,22 +126,13 @@
 
             </c:if>
         </c:forEach>
-
-            <%--<div class="col-md-2">--%>
-            <%--<div class="col-md-7">--%>
-            <%--<input class="form-control">--%>
-            <%--</div>--%>
-            <%--<div class="col-md-5">--%>
-            <%--<h5>/ <span>10</span></h5>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-        <!---------------------------------------------->
+        <!----------------------------------------------->
 
     </div>
     <div class="comment-body">
         <h4>แสดงความคิดเห็น</h4>
     <textarea class="form-control" rows="5" id="comment" style="resize: none"
-              placeholder="แสดงความคิดเห็น..."></textarea>
+              placeholder="แสดงความคิดเห็น...">${examResult.comment}</textarea>
     </div>
     <br>
 
@@ -165,7 +147,8 @@
             </h5>
         </div>
         <div class="col-md-offset-4 col-md-2">
-            <button class="btn btn-primary submitMarkingBtn" style="width: 100%;" data-toggle="modal"
+            <button class="btn btn-primary submitMarkingBtn <c:if test="${examResult.status.id == 7}">hidden</c:if>"
+                    style="width: 100%;" data-toggle="modal"
                     data-target="#submitMarkingModal">ส่งผลตรวจ
             </button>
         </div>
@@ -200,6 +183,10 @@
                         <button id="confirmSubmitMarking" class="btn btn-primary" data-dismiss="modal">ส่งผลตรวจ
                         </button>
                         &nbsp;
+                        <button id="confirmSubmitMarkingCONFIRM" class="btn btn-warning" data-dismiss="modal">
+                            ยืนยันผลตรวจ
+                        </button>
+                        &nbsp;
                         <button id="cancleSubmitMarking" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
 
 
@@ -220,7 +207,6 @@
             word-wrap: break-word;
         }
     </style>
-
 </c:if>
 
 <c:if test="${user == null}">

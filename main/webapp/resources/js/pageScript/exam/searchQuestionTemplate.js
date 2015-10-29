@@ -78,7 +78,7 @@ var submitSearchQuestion = function (mode) {
             searchQuestionResultList = dat
         },
         error: function () {
-            alert("ERROR in submitSearchQuestion()")
+            alert("เกิดข้อผิดพลาด")
         }
     })
 }
