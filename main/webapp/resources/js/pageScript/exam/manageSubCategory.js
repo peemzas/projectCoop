@@ -35,11 +35,11 @@ $(document).ready(function () {
             '<option value="">' + "เลือกหัวข้อเรื่อง" + '</option>'
         )
 
-    $("#categoryId").on('change',function(){
-        $("#sSubCat").append(
-            '<option value="">' + "เลือกหัวข้อเรื่อง" + '</option>'
-        )
-    });
+    //$("#categoryId").on('change',function(){
+    //    $("#sSubCat").append(
+    //        '<option value="">' + "เลือกหัวข้อเรื่อง" + '</option>'
+    //    )
+    //});
 });
 
 
@@ -363,8 +363,8 @@ $("#categoryId").on('change', function () {
                     )
                 }
                 else if (($("#sSubCat").val() != null)) {
-                    $("#sSubCat").append(
-                        '<option value="">' + "ทั้งหมด" + '</option>'
+                    $("#sSubCat").prepend(
+                        '<option value="" selected>' + "ทั้งหมด" + '</option>'
                     )
                 }
             }else{
@@ -398,8 +398,8 @@ $("#categoryId").on('change', function () {
                     )
                 }
                 else if (($("#sSubCat").val() != null)) {
-                    $("#sSubCat").append(
-                        '<option value="">' + "ทั้งหมด" + '</option>'
+                    $("#sSubCat").prepend(
+                        '<option value="" selected>' + "ทั้งหมด" + '</option>'
                     )
                 }
             }

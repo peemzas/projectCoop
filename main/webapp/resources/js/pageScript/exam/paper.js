@@ -291,7 +291,7 @@ function generalSearchPaper(btnSearchStatus) {
     if (scoreFrom == "" ? scoreFrom = "" : scoreFrom = $("#searchScoreFromInput").val());
     scoreTo = $("#searchScoreToInput").val();
     if (scoreTo == "" ? scoreTo = "" : scoreTo = $("#searchScoreToInput").val());
-    if (paperStatus == 0 ? paperStatus = 0 : paperStatus = $("#searchPaperStatus").val());
+    if (paperStatus == 0 ? paperStatus = "0" : paperStatus = $("#searchPaperStatus").val());
     arrayEmployeeToSearch = [];
 
     if (itemLenght > 0) {

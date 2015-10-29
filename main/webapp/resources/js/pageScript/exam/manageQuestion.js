@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function () {
+    $("#searchCatNotFound").hide();
     clearAllSearchQuestionField()
     listSearchQuestion();
 })
@@ -222,6 +223,7 @@ var listSearchQuestion = function (btn) {
             '<td class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
             '<td class="questionCreateDate">' + formattedDate + '</td>' +
             "</tr>")
+            $("#searchCatNotFound").hide();
             if (q.description.length > 100) {
                 $('td[class="questionDescription"]:last').append("....")
             }
