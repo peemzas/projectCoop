@@ -255,7 +255,7 @@ public class PaperController {
         ExamPaper paper = queryPaperDomain.getPaperById(paperId);
         List<PaperQuestion> paperQuestion = queryPaperQuestionDomain.getPaperQuestionByExamPaper(paper);
         String json = new JSONSerializer().exclude("*.class").serialize(paperQuestion);
-        logger.info("................................."+json);
+        logger.info("................................."+paper.getCreateDate());
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }

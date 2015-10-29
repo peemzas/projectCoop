@@ -6,9 +6,11 @@ var clearCreateByInput = function(){
     $('#selectCreateBySearchInput').val("");
 }
 
+// Add by Mr.Wanchana
 $("#addEmpCreateByBtn").on('click', function(){
     searchEmpName();
 });
+
 
 // Add by Mr.Wanchana
 var getUserIds = function (){

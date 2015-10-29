@@ -93,11 +93,16 @@ var clearAllSearchQuestionField = function () {
     scoreTo: $("#searchScoreToInput").val("");
     status: $("#searchStatusInput").val("");
     clearCreateByInput();
+    $("#showEmployeeSelected").empty();
 }
 
 $(".searchInputClearBtn").on('click', function () {
     clearAllSearchQuestionField();
 })
+
+$("#advBtnReset").unbind('click').click(function(){
+    alert('hi');
+});
 
 
 

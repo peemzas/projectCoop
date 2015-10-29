@@ -21,6 +21,7 @@ function searchEmpName(){
     var userNameRequest = $("#searchEmployeeNameText").val();
 
     if($("#modalSearchByEmployeeName").hasClass('in') && $("#showEmployeeSelected").children().length == 0){
+        //alert('1');
         var dataResponse = $.ajax({
             type: "POST",
             url: "/TDCS/exam/selectEmployee",
@@ -61,6 +62,7 @@ function searchEmpName(){
         });
     }
     if($("#modalSearchByEmployeeName").hasClass('in') && $("#showEmployeeSelected").children().length > 0){
+        //alert('2');
         var i;
         var arrayEmpNameToQuery = new Array();
         var itemLenght = ($("#showEmployeeSelected").children("button")).length;
@@ -103,12 +105,12 @@ function searchEmpName(){
                         //alert(value.userName);
                         $("#tbodySelectEmployeeName").append(
                             '<tr>'+
-                            '<td><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
+                            '<td style="text-align: center;"><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
                             '<td style="display: none;"><label>'+value.userId+'<label></td>'+
-                            '<td><label id="label1'+value.userId+'">'+value.empId+'<label></td>'+
-                            '<td><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
-                            '<td><label id="label3'+value.userId+'">'+value.sectionPosition.position.posiName+'<label></td>'+
-                            '<td><label id="label4'+value.userId+'">'+value.team.teamName+'<label></td>'+
+                            '<td style="text-align: center;"><label id="label1'+value.userId+'">'+value.empId+'<label></td>'+
+                            '<td style="text-align: center;"><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
+                            '<td style="text-align: center;"><label id="label3'+value.userId+'">'+value.sectionPosition.position.posiName+'<label></td>'+
+                            '<td style="text-align: center;"><label id="label4'+value.userId+'">'+value.team.teamName+'<label></td>'+
                             '</tr>'
                         )
                     });
@@ -146,6 +148,44 @@ function addEmployee(){
     $("#showEmployeeSelected button").on("click", function(){
         $(this).remove();
         $("#showEmployeeSelected").cleanWhitespace();
+    });
+}
+
+function getEmployee(){
+    var dataResponse = $.ajax({
+        type: "POST",
+        url: "/TDCS/exam/selectEmployee",
+        async: false,
+        success: function(data){
+            //alert(data.length);
+            if(data.length == 0){
+                $("#tbodySelectEmployeeName").empty();
+                $("#dataNotFound").show();
+            }
+            else{
+                $("#tbodySelectEmployeeName").empty();
+                $("#dataNotFound").hide();
+                $("#selectAllEmployeeName").show();
+                $("#selectAllEmployeeName").prop("checked", false);
+                data.forEach(function(value){
+                    //alert(value.userName);
+                    $("#tbodySelectEmployeeName").append(
+                        '<tr style="text-align: center;">'+
+                        '<td><input type="checkbox" class="userSelectCheckbox" checkId="'+value.userId+'"></td>'+
+                        '<td style="display: none;"><label>'+value.userId+'<label></td>'+
+                        '<td><label id="label1'+value.userId+'">'+value.empId+'<label></td>'+
+                        '<td><label id="label2'+value.userId+'">'+value.thFname+' '+value.thLname+'<label></td>'+
+                        '<td><label id="label3'+value.userId+'">'+value.sectionPosition.position.posiName+'<label></td>'+
+                        '<td><label id="label4'+value.userId+'">'+value.team.teamName+'<label></td>'+
+                        '</tr>'
+                    )
+
+                });
+            }
+        },
+        error: function(){
+            alert("เกิดข้อผิดพลาด");
+        }
     });
 }
 
