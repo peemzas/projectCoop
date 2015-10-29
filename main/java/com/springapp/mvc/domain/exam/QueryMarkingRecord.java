@@ -5,7 +5,7 @@ import com.springapp.mvc.pojo.exam.ExamMarkingRecord;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.junit.internal.RealSystem;
+
 import org.springframework.stereotype.Service;
 
 /**

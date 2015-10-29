@@ -910,7 +910,7 @@ function showPaperInfo(pId){
                 $("#divCreateDate").show();
 
                 var createDate = new Date(j.examPaper.createDate);
-                var dateFormat = createDate.getDate() +" "+ getMonthFormat(createDate.getMonth() + 1) +" "+ createDate.getFullYear();
+                var dateFormat = (createDate.getDate()+22) +" "+ getMonthFormat(Number(createDate.getMonth())) +" "+ (createDate.getFullYear()+543);
 
                 $("#questionCreatedDate").val(dateFormat);
 
