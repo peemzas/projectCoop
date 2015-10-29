@@ -6,6 +6,8 @@
 $("#dropdownExamEmp").attr('class', 'dropdown-toggle active');
 
 $(document).ready(function () {
+
+
     $("#alertMess").hide();
 
     $("#selectAllSubCategory").prop('checked',false);
@@ -28,6 +30,16 @@ $(document).ready(function () {
         $("#subcategoryNameadd").val("");
     })
 
+
+        $("#sSubCat").append(
+            '<option value="">' + "เลือกหัวข้อเรื่อง" + '</option>'
+        )
+
+    $("#categoryId").on('change',function(){
+        $("#sSubCat").append(
+            '<option value="">' + "เลือกหัวข้อเรื่อง" + '</option>'
+        )
+    });
 });
 
 

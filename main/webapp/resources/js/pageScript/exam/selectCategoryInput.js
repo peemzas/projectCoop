@@ -95,6 +95,7 @@ var clearCategoryList = function () {
 $(document).ready(function () {
     clearCategoryList()
     updateCategoryList()
+    $("#selectSubCategoryToSelection").prepend('<option value="">'+"เลือกหัวข้อเรื่อง"+'</option>');
 })
 $('#selectCategoryToSelection').on('change', function () {
     console.log("event on category change")
@@ -106,7 +107,7 @@ var catAndSubcatSelectNothing = function () {
     $('#selectCategoryToSelection option:selected').removeAttr("selected");
     $('#selectCategoryToSelection').val("");
     $('#selectCategoryToSelection option[value=""]').attr('selected', 'selected');
-    updateSubCategoryList();
+    //updateSubCategoryList();
 
 }
 
