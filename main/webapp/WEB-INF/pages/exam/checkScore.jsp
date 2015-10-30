@@ -18,58 +18,42 @@
             <thead class="bg-primary label-primary small">
             <tr>
                 <th style="text-align: center">ชื่อชุดข้อสอบ</th>
-                <th style="text-align: center">คะแนนเต็ม</th>
-                <th style="text-align: center">คะแนนPreTest</th>
-                <th style="text-align: center">คะแนนPostTest</th>
+                <th style="text-align: center" width="20%">คะแนนเต็ม</th>
+                <th style="text-align: center" width="20%">คะแนนที่ได้</th>
             </tr>
             </thead>
             <tbody>
 
             <c:forEach items="${examResults}" var="result">
-                <c:if test="${result.status.id == 6}">
-
                     <c:if test="${fn:indexOf(result.objectiveScore + result.subjectiveScore,',') != 0}">
-                        <c:set var="preTestScore"
+                        <c:set var="score"
                                value="${fn:substring(result.objectiveScore + result.subjectiveScore , 0 , (fn:indexOf(result.objectiveScore + result.subjectiveScore, '.')+3))}"/>
                     </c:if>
-
-
-                    <c:if test="${fn:indexOf(result.examRecord.postTestRecord.examResult.objectiveScore + result.examRecord.postTestRecord.examResult.subjectiveScore, '.') != 0}">
-                        <c:set var="postTestScore"
-                               value="${fn:substring(result.examRecord.postTestRecord.examResult.objectiveScore + result.examRecord.postTestRecord.examResult.subjectiveScore , 0 , (fn:indexOf(result.examRecord.postTestRecord.examResult.objectiveScore + result.examRecord.postTestRecord.examResult.subjectiveScore, '.')+3))}"/>
-                    </c:if>
-
 
                     <tr resultId="${result.id}">
                         <td>${result.examRecord.paper.name}</td>
                         <td align="center" class="col-max-score">
                                 ${result.examRecord.paper.maxScore}
                         </td>
+                        <c:choose>
+                            <c:when test="${result.status.id == 7}">
 
-                        <td align="center" class="col-pre-score">
-                                ${preTestScore}
-                            <button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"
-                                    data-target="#showScore" resultId="${result.id}">
-                                <span class="glyphicon glyphicon-info-sign" href="#"></span>
-                            </button>
-                        </td>
+                                <td align="center" class="col-score">
+                                        ${score}
+                                    <button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"
+                                            data-target="#showScore" resultId="${result.id}">
+                                        <span class="glyphicon glyphicon-info-sign" href="#"></span>
+                                    </button>
+                                </td>
 
-                        <td align="center" class="col-post-score">
-                            <c:if test="${result.examRecord.postTestRecord.examResult.markedBy != null}">
-                                ${postTestScore}
-                                <button class="btn btn-link btn-info btn-sm resultDetail" type="button"
-                                        data-toggle="modal"
-                                        data-target="#showScore"
-                                        resultId="${result.examRecord.postTestRecord.examResult.id}">
-                                    <span class="glyphicon glyphicon-info-sign" href="#"></span>
-                                </button>
-                            </c:if>
-                            <c:if test="${result.examRecord.postTestRecord == null}">
-                                -
-                            </c:if>
-                        </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td align="center" class="col-score">
+                                    ยังไม่ตรวจ
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
                     </tr>
-                </c:if>
             </c:forEach>
             </tbody>
         </table>

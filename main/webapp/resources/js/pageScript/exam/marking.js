@@ -22,7 +22,7 @@ $('#marking-body').on('focusout', '.scoreInput', function () {
 })
 
 $('#confirmSubmitMarkingCONFIRM').on('click',function(){
-    var confirmation = confirm('หากยืนยันการตรวจแล้วจะไม่สามารถแก้ไขได้อีก ต้องการยืนยันผมตรวขหรือไม่')
+    var confirmation = confirm('หากยืนยันการตรวจแล้วจะไม่สามารถแก้ไขได้อีก ต้องการยืนยันผมตรว0หรือไม่')
     if(confirmation){
         submitMarking(true)
     }
@@ -30,6 +30,10 @@ $('#confirmSubmitMarkingCONFIRM').on('click',function(){
 
 $('#confirmSubmitMarking').on('click', function () {
     submitMarking(false);
+})
+
+$("#cancleMarkingBtn").on('click',function(){
+    location.href = "/TDCS/exam/examRecordSearch"
 })
 
 var goToUnfinishBtn = $('#goToUnfinish');

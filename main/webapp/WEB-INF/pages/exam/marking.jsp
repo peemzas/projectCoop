@@ -156,7 +156,7 @@
             </button>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-default" style="width: 100%;">ยกเลิก</button>
+            <button class="btn btn-default cancleMarkingBtn" style="width: 100%;">ยกเลิก</button>
         </div>
     </div>
 
@@ -191,8 +191,6 @@
                         </button>
                         &nbsp;
                         <button id="cancleSubmitMarking" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-
-
                     </div>
                 </div>
             </div>
