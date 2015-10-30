@@ -10,6 +10,7 @@ import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Paper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,20 +52,6 @@ public class QueryPaperDomain extends HibernateUtil {
         HibernateUtil.closeSession();
     }
 
-//    public void createPaperQuestion(ExamPaper examPaper, List<Integer> qIds, List<Float> newScores){
-//
-//        HibernateUtil.beginTransaction();
-//        QueryQuestionDomain queryQuestionDomain = new QueryQuestionDomain();
-//        for(int i = 0; i < qIds.size(); i++){
-//            PaperQuestion paperQuestion = new PaperQuestion();
-//            paperQuestion.setExamPaper(examPaper);
-//            paperQuestion.setQuestion(queryQuestionDomain.getQuestionById(qIds.get(i)));
-//            paperQuestion.setScore(new BigDecimal(newScores.get(i)));
-//            getSession().save(paperQuestion);
-//        }
-//        HibernateUtil.commitTransaction();
-//    }
-
     public void updatePaper(List<Integer> qIds, List<Float> newScores, Integer paperId, User updateBy, String paperCode, String paperName, Float paperMaxScore, Date updateDate, Integer paperTime, Status paperStatus, Position paperForPosition){
 
         QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
@@ -78,7 +65,6 @@ public class QueryPaperDomain extends HibernateUtil {
             getSession().delete(paperQuestions.get(i));
         }
 
-//        createPaperQuestion(examPaper, qIds, newScores);
         QueryQuestionDomain queryQuestionDomain = new QueryQuestionDomain();
         for(int i = 0; i < qIds.size(); i++){
             PaperQuestion paperQuestion = new PaperQuestion();
@@ -146,19 +132,6 @@ public class QueryPaperDomain extends HibernateUtil {
             HibernateUtil.closeSession();
         }
     }
-
-//    public void deletePaperQuestionByExamPaper(ExamPaper examPaper){
-//
-//        HibernateUtil.beginTransaction();
-//        Criteria criteria = getSession().createCriteria(PaperQuestion.class);
-//        criteria.add(Restrictions.eq("pk.examPaper", examPaper));
-//        List<PaperQuestion> paperQuestions = criteria.list();
-//        for(int i = 0; i < paperQuestions.size(); i++){
-//            getSession().delete(paperQuestions.get(i));
-//        }
-//        HibernateUtil.commitTransaction();
-//        HibernateUtil.closeSession();
-//    }
 
     public void updatePaperStatus(ExamPaper examPaper){
 
@@ -263,5 +236,57 @@ public class QueryPaperDomain extends HibernateUtil {
         List codes = criteria.list();
 
         return codes;
+    }
+
+    public List getCodeCopy(){
+
+        Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        criteria.setProjection(Projections.projectionList().add(Projections.property("code"), "code"));
+
+        List codes = criteria.list();
+
+        return codes;
+    }
+
+    public Integer getId(String code){
+
+        Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        criteria.add(Restrictions.eq("code", code));
+        criteria.setProjection(Projections.projectionList().add(Projections.property("id"), "id"));
+
+        Integer paperId = (Integer)criteria.list().get(0);
+
+        return paperId;
+    }
+
+    public void copyPaper(ExamPaper examPaper, List<PaperQuestion> paperQuestions, String paperCode, String paperName){
+
+        ExamPaper copy = new ExamPaper();
+        copy.setCode(paperCode);
+        copy.setName(paperName);
+        copy.setCreateBy(examPaper.getCreateBy());
+        copy.setMaxScore(examPaper.getMaxScore());
+        copy.setCreateDate(examPaper.getCreateDate());
+        copy.setTimeLimit(examPaper.getTimeLimit());
+        copy.setPaperStatus(examPaper.getPaperStatus());
+        copy.setPosition(examPaper.getPosition());
+
+        try{
+            HibernateUtil.beginTransaction();
+            getSession().save(copy);
+            for(int i = 0; i < paperQuestions.size(); i++){
+                PaperQuestion paperQuestionCopy = new PaperQuestion();
+                paperQuestionCopy.setExamPaper(copy);
+                paperQuestionCopy.setQuestion(paperQuestions.get(i).getQuestion());
+                paperQuestionCopy.setScore(paperQuestions.get(i).getScore());
+                getSession().save(paperQuestionCopy);
+            }
+            HibernateUtil.commitTransaction();
+        } catch(Exception e){
+            System.out.println("=========ERROR While create copy paper========");
+            e.printStackTrace();
+        } finally {
+            HibernateUtil.closeSession();
+        }
     }
 }

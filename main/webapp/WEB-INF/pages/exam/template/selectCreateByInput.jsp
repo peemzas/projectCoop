@@ -11,8 +11,10 @@
         <div class="col-sm-4 " align="right">
             <label for="addEmpCreateByBtn" class="label-control"><h5 style="margin-top: 5px">สร้างโดย :</h5></label>
         </div>
-        <div  align="left" >
-            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-success btn-sm" id="addEmpCreateByBtn">เพิ่ม</button>
+        <div  align="left">
+            <button data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-success btn-sm" id="addEmpCreateByBtn">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
         </div>
     </div>
 

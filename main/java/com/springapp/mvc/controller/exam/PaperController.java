@@ -83,6 +83,9 @@ public class PaperController {
                             HttpServletRequest request,
                             HttpServletResponse response) throws JSONException {
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
         JSONArray jsonArray = new JSONArray(jsonObjQuestion);
         List<Integer> qIds = new ArrayList();
         List<Float> qScores = new ArrayList();
@@ -97,7 +100,7 @@ public class PaperController {
         }
 
         User createBy = queryUserDomain.getCurrentUser(request);
-        Status paperStatus = queryPaperStatusDomain.getStatusById(3);
+        Status paperStatus = queryPaperStatusDomain.getStatusById(2);
 //        long time = System.currentTimeMillis();
 //        Date curDate = new Date(time);
         java.util.Date curDate = DateUtil.getCurrentDateWithRemovedTime();
@@ -122,7 +125,10 @@ public class PaperController {
         examPaper.setPosition(pForPosition);
         queryPaperDomain.createPaper(examPaper, qIds, qScores);
 
-        return new ResponseEntity<String>(HttpStatus.CREATED);
+        Integer paperId = queryPaperDomain.getId(paperCode);
+        String json = new Gson().toJson(paperId);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/exam/updatePaper", method = RequestMethod.POST)
@@ -151,7 +157,7 @@ public class PaperController {
         }
 
         User updateBy = queryUserDomain.getCurrentUser(request);
-        Status paperStatus = queryPaperStatusDomain.getStatusById(3);
+        Status paperStatus = queryPaperStatusDomain.getStatusById(2);
 //        long time = System.currentTimeMillis();
 //        Date updateDate = new Date(time);
         java.util.Date updateDate = DateUtil.getCurrentDateWithRemovedTime();
@@ -168,6 +174,21 @@ public class PaperController {
         queryPaperDomain.updatePaper(qIds, qScores, pId, updateBy, paperCode, paperName, paperMaxScore, updateDate, pTime, paperStatus, pForPosition);
 
         return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/copyPaper", method = RequestMethod.POST)
+    public ResponseEntity<String> copyPaper(Model model,
+                                              @RequestParam(value = "paperCode", required = true) String paperCode,
+                                              @RequestParam(value = "paperName", required = false) String paperName,
+                                              @RequestParam(value = "paperId", required = true) Integer pId,
+                                              HttpServletRequest request,
+                                              HttpServletResponse response) throws JSONException {
+
+        ExamPaper examPaper = queryPaperDomain.getPaperById(pId);
+        List<PaperQuestion> paperQuestions = queryPaperQuestionDomain.getPaperQuestionByExamPaper(examPaper);
+        queryPaperDomain.copyPaper(examPaper, paperQuestions, paperCode, paperName);
+
+        return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/exam/getAllPapers", method = RequestMethod.POST)
@@ -407,6 +428,18 @@ public class PaperController {
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
         List codes = queryPaperDomain.getCode(paperId);
+        String json = new JSONSerializer().exclude("*.class").serialize(codes);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/getPaperCodeCopy", method= RequestMethod.POST)
+    public ResponseEntity<String> getPaperCodeCopy(){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List codes = queryPaperDomain.getCodeCopy();
         String json = new JSONSerializer().exclude("*.class").serialize(codes);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);

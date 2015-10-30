@@ -197,9 +197,9 @@ function getAllPapers(){
                     '<td><label id="lpaperForPosition'+posiId+'" class="label-control">'+posiName+'</label></td>'+
                     '<td class="pSelect">'+
                     '<select id="dropdownId'+value.id+'" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">'+
-                    '<option value="3">ยังไม่เผยแพร่</option>'+
-                    '<option value="1">เผยแพร่</option>'+
-                    '<option value="2">ปิดการเผยแพร่</option>'+
+                    //'<option value="3">ยังไม่เผยแพร่</option>'+
+                    '<option value="1">เปิดใช้งาน</option>'+
+                    '<option value="2">ปิดการใช้งาน</option>'+
                     '</select>'+
                     '</td>'+
                     '<td class="pButton"><button id="'+value.id+'" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
@@ -416,9 +416,9 @@ function generalSearchPaper(btnSearchStatus) {
                         '<td><label id="lpaperForPosition'+posiId+'" class="label-control">'+posiName+'</label></td>'+
                         '<td class="pSelect">'+
                         '<select id="dropdownId'+value.id+'" name="paperStatus" class="btn btn-success btn-sm" style="text-align: left;">'+
-                        '<option value="3">ยังไม่เผยแพร่</option>'+
-                        '<option value="1">เผยแพร่</option>'+
-                        '<option value="2">ปิดการเผยแพร่</option>'+
+                        //'<option value="3">ยังไม่เผยแพร่</option>'+
+                        '<option value="1">เปิดใช้งาน่</option>'+
+                        '<option value="2">ปิดใช้งาน</option>'+
                         '</select>'+
                         '</td>'+
                         '<td class="pButton"><button id="'+value.id+'" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+

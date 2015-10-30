@@ -95,9 +95,9 @@
                     <div class="col-md-3 form-group" style="padding: 0;">
                         <select id="searchPaperStatus" class="form-control input-sm">
                             <option value="0" selected>เลือกสถานะ</option>
-                            <option value="1" >เผยแพร่</option>
-                            <option value="2" >ปิดการเผยแพร่</option>
-                            <option value="3" >ยังไม่เผยแพร่</option>
+                            <option value="1" >เปิดใช้งาน</option>
+                            <option value="2" >ปิดใช้งาน</option>
+                            <%--<option value="3" >ยังไม่เผยแพร่</option>--%>
                         </select>
                     </div>
                 </div>
