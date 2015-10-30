@@ -46,6 +46,18 @@
 <div class="container">
     <h3>สร้างชุดข้อสอบ</h3>
     <hr>
+    <div class="row">
+        <button id="createPaperBtn" class="btn btn-success btn-sm" type="button">บันทึก</button>
+        <button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก</button>
+        <button id="saveCopyPaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก</button>
+        <button id="cancelBtn" class="btn btn-danger btn-sm" type="button" style="display: none;">ยกเลิก</button>
+        <button id="copyPaperBtn" class="btn btn-default btn-sm" type="button">คัดลอกชุดข้อสอบ</button>
+        <a href="/TDCS/exam/managePapers">
+            <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">
+                ย้อนกลับ
+            </button>
+        </a>
+    </div><br/><br/>
     <form class="form-horizontal" role="form">
         <div class="row">
             <div class="col-sm-5">
@@ -129,14 +141,14 @@
     <div class="row">
         <hr/>
         <button id="removeRowQuestionSelect" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span
-                class="glyphicon glyphicon-trash"></span></button>
-        <button id="createPaperBtn" class="btn btn-success btn-sm" type="button">บันทึก</button>
-        <button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก</button>
-        <a href="/TDCS/exam/managePapers">
-            <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">
-                ยกเลิก
-            </button>
-        </a>
+                class="glyphicon glyphicon-minus"></span></button>
+        <%--<button id="createPaperBtn" class="btn btn-success btn-sm" type="button">บันทึก</button>--%>
+        <%--<button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก</button>--%>
+        <%--<a href="/TDCS/exam/managePapers">--%>
+            <%--<button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">--%>
+                <%--ยกเลิก--%>
+            <%--</button>--%>
+        <%--</a>--%>
         <table id="tbSelectedQuestionToPaper" class="table table-bordered table-hover">
             <thead class="bg-primary small">
                 <tr>
@@ -194,6 +206,7 @@
     <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>--%>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paper.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/checkKeybord.js" />"></script>
     <%--<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/searchQuestion.js" />"></script>--%>
 
     <%@include file="modal/createQuestionModal.jsp" %>
