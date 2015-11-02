@@ -68,10 +68,7 @@ var editQuestion = function () {
 function saveQuestion() {
 
     var categoryName = $("#categoryInputForCreateQuestion").val();
-    //categoryName.substr(categoryName.indexOf(":"),categoryName.length).trim();
     categoryName = categoryName.substr(8, categoryName.length);
-    //alert(categoryName);
-    console.log(categoryName);
 
     var subCategoryName = $("#sSubCat").val();
     var questionTypeString = $("#select-QuestionType").val();
@@ -105,7 +102,7 @@ function saveQuestion() {
                 score: parseFloat(score)
             }
             ,
-            success: function (question) {
+            success: function (q) {
                 alert('บันทึกข้อมูลสำเร็จ');
                 if ($('.h3').text() == "จัดการข้อสอบ") {
                     var createDate = new Date(q.createDate);
@@ -181,8 +178,8 @@ var checkCreateQuestionModalFieldComplete = function () {
         cat.removeClass("validate-fail")
     }
 
-    var subcat = $("#subCategoryInputForCreateQuestion")
-    if (subcat.val() == "") {
+    var subcat = $("#sSubCat")
+    if (subcat.val() == "" || subcat.val() == null) {
         subcat.addClass("validate-fail")
         complete = false
     } else {
@@ -190,7 +187,7 @@ var checkCreateQuestionModalFieldComplete = function () {
     }
 
     var questType = $("#select-QuestionType")
-    if (questType.val() == "") {
+    if (questType.val() == "" || questType.val() == null) {
         questType.addClass("validate-fail")
         complete = false
     } else {
@@ -210,7 +207,7 @@ var checkCreateQuestionModalFieldComplete = function () {
         qDescr.addClass("validate-fail")
         complete = false
     } else {
-        qScore.removeClass("validate-fail")
+        qDescr.removeClass("validate-fail")
     }
     if (!$("input[name='level']:checked").length) {
         $('#diffRadioContainer').addClass("validate-fail")
@@ -224,7 +221,7 @@ var checkCreateQuestionModalFieldComplete = function () {
     } else {
         $(".choiceRadioAddon").removeClass("validate-fail")
     }
-    if (questType.val() == "Objective") {
+    if (questType.val() == "Objective" || questType == null || questType == "") {
         $.each($(".choiceDesc"), function () {
             if ($(this).val() == "") {
                 $(this).addClass("validate-fail")
@@ -240,13 +237,20 @@ var checkCreateQuestionModalFieldComplete = function () {
 
 var createQuestionModalClearInput = function () {
     $("#categoryInputForCreateQuestion").val("");
-    $("#subCategoryInputForCreateQuestion").val("");
+
+    $("#sSubCat").empty();
     $("#select-QuestionType").val("");
     $("#questionScoreForCreateQuestion").val("");
     $("#questionDescription").val("");
     $("input[name='level']").attr('checked', false);
     $(".correctRadio").attr('checked', false);
     $(".choiceDesc").val("");
+    $("#submitBtnContainer").hide();
+    $("#answerInput").hide()
+    //var correctRadioNotChecked = $('.correctRadio:not(:checked)')
+    //correctRadioNotChecked.parent().removeClass('success');
+    //correctRadioNotChecked.show();
+    //correctRadioNotChecked.parent().children('div').hide();
 }
 
 var setCreateModalCategory = function (category) {
@@ -298,10 +302,9 @@ var updateCreateModalLayout = function () {
     }
 }
 
-
 // LOV By JoKizz
-$(document).ready(function(){
-    $("#categoryInputForCreateQuestion").on('click',function() {
+$(document).ready(function () {
+    $("#categoryInputForCreateQuestion").on('click', function () {
 
     })
 });
@@ -311,11 +314,9 @@ $("#categoryInputForCreateQuestion").keyup(function (e) {
     if (e.which > 0) {
         e.preventDefault();
         listcatCreateQues();
-
     }
 });
 function listcatCreateQues() {
-    //alert("LOV");
     var availableall = [];
     var categoryId = $("#categoryInputForCreateQuestion").val();
 
@@ -329,7 +330,6 @@ function listcatCreateQues() {
             data.forEach(function (value) {
                 availableall.push(value.id + ' : ' + value.name);
             });
-            //alert("SUCC");
         },
         error: function (data) {
             alert('error while request...');
@@ -345,23 +345,15 @@ function listcatCreateQues() {
 };
 
 
-
-
 ///  get data to DropDownlist
 $("#categoryInputForCreateQuestion").on('change', function () {
         $("#sSubCat").empty();
         var categoryId = $("#categoryInputForCreateQuestion").val();
-        //var categoryName = $("#categoryId").val();
         var subcategoryName = $("#sSubCat").val();
-        //categoryId += " ";
-        //var length = categoryId.length
-        //alert(length);
-
-        //categoryId = categoryId.substr(0, categoryId.indexOf(' '));
-        if(categoryId !=""){
-            if(categoryId.indexOf(':')!=-1){
+        if (categoryId != "") {
+            if (categoryId.indexOf(':') != -1) {
                 categoryId.indexOf(':');
-                var categoryId2 =  categoryId.substr(0, categoryId.indexOf(' '));
+                var categoryId2 = categoryId.substr(0, categoryId.indexOf(' '));
                 categoryId = categoryId2;
                 var data = $.ajax({
                     type: "POST",
@@ -375,7 +367,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option >' + value.SubCategory.name + '</option>'
+                                '<option value="' + value.SubCategory.name + '">' + value.SubCategory.name + '</option>'
                             )
                         });
                     },
@@ -385,30 +377,21 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                 });
                 if (($("#sSubCat").val() == null)) {
                     $("#sSubCat").append(
-                        '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+                        '<option value="' + value.SubCategory.name + '">' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
                     )
                 }
-                //else if (($("#sSubCat").val() != null)) {
-                //    $("#sSubCat").append(
-                //        '<option value="">' + "ทั้งหมด" + '</option>'
-                //    )
-                //}
-            }else{
-                //console.log(categoryId+" 1 part");
-
+            } else {
                 var data = $.ajax({
                     type: "POST",
                     url: "/TDCS/exam/getSubCategoryToDropDown",
                     data: {
                         categoryId: categoryId
-                        //subcategoryName: subcategoryName
                     },
                     async: false,
-
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option >' + value.SubCategory.name + '</option>'
+                                '<option value="' + value.SubCategory.name + '">' + value.SubCategory.name + '</option>'
                             )
                         });
 
@@ -416,20 +399,13 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     error: function (data) {
                         alert('error while request...');
                     }
-
                 });
                 if (($("#sSubCat").val() == null)) {
                     $("#sSubCat").append(
-                        '<option >' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+                        '<option value="' + value.SubCategory.name + '">' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
                     )
                 }
-                //else if (($("#sSubCat").val() != null)) {
-                //    $("#sSubCat").append(
-                //        '<option value="">' + "ทั้งหมด" + '</option>'
-                //    )
-                //}
             }
-
         }
     }
 )

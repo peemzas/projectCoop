@@ -1,30 +1,21 @@
-
-
-
-
-
-
-
 var getSearchCategoryInputValueId = function () {
-
     var text = $('#selectCategoryToSelection + ul li[class="active"] a').text();
-    var id = text.substr(0,text.indexOf(":")).trim();
-
-    if($('#selectCategoryToSelection').val() == ""){
+    var id = text.substr(0, text.indexOf(":")).trim();
+    if ($('#selectCategoryToSelection').val() == "") {
         return null
     }
-    if(id != null) {
+    if (id != null) {
         return id;
-    }else{
+    } else {
         return null;
     }
 }
 
 var getSearchSubCategoryInputValue = function () {
     var val = $('#selectSubCategoryToSelection').val();
-    if(val != null){
+    if (val != null) {
         return $('#selectSubCategoryToSelection').val();
-    }else{
+    } else {
         return null
     }
 }
@@ -57,8 +48,6 @@ var updateSubCategoryList = function () {
     } else(
         data = ""
     )
-    console.log(data.length)
-
     var ajaxDat = $.ajax({
         type: "POST",
         url: "/TDCS/exam/getAllSubCategoryInCategory",
@@ -76,7 +65,7 @@ var updateSubCategoryList = function () {
                 item.forEach(function (item) {
                     subcatSelect.append('<option class="subCategory" subCategoryId="' + item.id + '"' +
                     ' subCategoryName="' + item.name + '" subCategoryId="' + item.id + '"' +
-                    'value="' + item.name + '""> ' + item.name+
+                    'value="' + item.name + '""> ' + item.name +
                     '</option>')
                 })
             }
@@ -95,7 +84,7 @@ var clearCategoryList = function () {
 $(document).ready(function () {
     clearCategoryList()
     updateCategoryList()
-    $("#selectSubCategoryToSelection").prepend('<option value="">'+"เลือกหัวข้อเรื่อง"+'</option>');
+    $("#selectSubCategoryToSelection").prepend('<option value="">' + "เลือกหัวข้อเรื่อง" + '</option>');
 })
 $('#selectCategoryToSelection').on('change', function () {
     console.log("event on category change")
@@ -107,10 +96,8 @@ var catAndSubcatSelectNothing = function () {
     $('#selectCategoryToSelection option:selected').removeAttr("selected");
     $('#selectCategoryToSelection').val("");
     $('#selectCategoryToSelection option[value=""]').attr('selected', 'selected');
-    //updateSubCategoryList();
-
+    listSubCategory();
 }
-
 
 
 $("#selectCategoryToSelection").keyup(function (e) {
@@ -121,9 +108,7 @@ $("#selectCategoryToSelection").keyup(function (e) {
     }
 });
 function listcatSelectInput() {
-    //alert("LOV");
     var availableall = [];
-    var categoryId = $("#selectCategoryToSelection").val();
 
     var data = $.ajax({
         type: "POST",
@@ -135,7 +120,6 @@ function listcatSelectInput() {
             data.forEach(function (value) {
                 availableall.push(value.id + ' : ' + value.name);
             });
-            //alert("SUCC");
         },
         error: function (data) {
             alert('error while request...');
@@ -154,90 +138,80 @@ function listcatSelectInput() {
 /////To Dropdown
 $("#selectCategoryToSelection").on('change', function () {
 
-        $("#selectSubCategoryToSelection").empty();
-        var categoryId = $("#selectCategoryToSelection").val();
-
-        var subcategoryName = $("#selectSubCategoryToSelection").val();
-        //categoryId += " ";
-        //var length = categoryId.length
-        //alert(length);
-
-        //categoryId = categoryId.substr(0, categoryId.indexOf(' '));
-        if(categoryId !=""){
-            if(categoryId.indexOf(':')!=-1){
-                categoryId.indexOf(':');
-                var categoryId2 =  categoryId.substr(0, categoryId.indexOf(' '));
-                categoryId = categoryId2;
-                var data = $.ajax({
-                    type: "POST",
-                    url: "/TDCS/exam/getSubCategoryToDropDown",
-                    data: {
-                        categoryId: categoryId
-                        //subcategoryName: subcategoryName
-                    },
-                    async: false,
-
-                    success: function (data) {
-                        data.forEach(function (value) {
-                            $("#selectSubCategoryToSelection").append(
-                                '<option >' + value.SubCategory.name + '</option>'
-                            )
-                        });
-                    },
-                    error: function (data) {
-                        alert('error while request...');
-                    }
-                });
-                if (($("#selectSubCategoryToSelection").val() == null)) {
-                    $("#selectSubCategoryToSelection").append(
-                        '<option>' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
-                    )
-                }
-                else if (($("#selectSubCategoryToSelection").val() != null)) {
-                    $("#selectSubCategoryToSelection").prepend(
-                        '<option value="" selected>' + "ทั้งหมด" + '</option>'
-                    )
-                }
-            }else{
-                //console.log(categoryId+" 1 part");
-
-                var data = $.ajax({
-                    type: "POST",
-                    url: "/TDCS/exam/getSubCategoryToDropDown",
-                    data: {
-                        categoryId: categoryId
-                        //subcategoryName: subcategoryName
-                    },
-                    async: false,
-
-                    success: function (data) {
-                        data.forEach(function (value) {
-                            $("#selectSubCategoryToSelection").append(
-                                '<option >' + value.SubCategory.name + '</option>'
-                            )
-                        });
-
-                    },
-                    error: function (data) {
-                        alert('error while request...');
-                    }
-
-                });
-                if (($("#selectSubCategoryToSelection").val() == null)) {
-                    $("#selectSubCategoryToSelection").append(
-                        '<option>' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
-                    )
-                }
-                else if (($("#selectSubCategoryToSelection").val() != null)) {
-                    $("#selectSubCategoryToSelection").prepend(
-                        '<option value="" selected>' + "ทั้งหมด" + '</option>'
-                    )
-                }
-            }
-
+        if ($("#selectCategoryToSelection").val() != "") {
+            listSubCategory();
         }
     }
 )
 
+var listSubCategory = function () {
 
+    $("#selectSubCategoryToSelection").empty();
+    var categoryId = $("#selectCategoryToSelection").val();
+    if (categoryId.indexOf(':') != -1) {
+        categoryId.indexOf(':');
+        var categoryId2 = categoryId.substr(0, categoryId.indexOf(' '));
+        categoryId = categoryId2;
+        var data = $.ajax({
+            type: "POST",
+            url: "/TDCS/exam/getSubCategoryToDropDown",
+            data: {
+                categoryId: categoryId
+            },
+            async: false,
+
+            success: function (data) {
+                data.forEach(function (value) {
+                    $("#selectSubCategoryToSelection").append(
+                        '<option >' + value.SubCategory.name + '</option>'
+                    )
+                });
+            },
+            error: function (data) {
+                alert('error while request...');
+            }
+        });
+        if (($("#selectSubCategoryToSelection").val() == null)) {
+            $("#selectSubCategoryToSelection").append(
+                '<option>' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+            )
+        }
+        else if (($("#selectSubCategoryToSelection").val() != null)) {
+            $("#selectSubCategoryToSelection").prepend(
+                '<option value="" selected>' + "ทั้งหมด" + '</option>'
+            )
+        }
+    } else {
+        var data = $.ajax({
+            type: "POST",
+            url: "/TDCS/exam/getSubCategoryToDropDown",
+            data: {
+                categoryId: categoryId
+            },
+            async: false,
+
+            success: function (data) {
+                data.forEach(function (value) {
+                    $("#selectSubCategoryToSelection").append(
+                        '<option >' + value.SubCategory.name + '</option>'
+                    )
+                });
+
+            },
+            error: function (data) {
+                alert('error while request...');
+            }
+        });
+        if (($("#selectSubCategoryToSelection").val() == null)) {
+            $("#selectSubCategoryToSelection").append(
+                '<option>' + "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้" + '</option>'
+            )
+        }
+        else if (($("#selectSubCategoryToSelection").val() != null)) {
+            $("#selectSubCategoryToSelection").prepend(
+                '<option value="" selected>' + "ทั้งหมด" + '</option>'
+            )
+        }
+    }
+}
 

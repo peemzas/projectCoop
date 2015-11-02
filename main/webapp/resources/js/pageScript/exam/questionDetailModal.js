@@ -64,10 +64,15 @@ var updateDetailModal = function (tr) {
 
             var i = 1;
             question.choices.forEach(function (choice) {
-
-                $('#choiceDetail' + i).text(choice.description);
+                var currentChoice = $('#choiceDetail' + i)
+                currentChoice.text(choice.description);
                 if (choice.correction.value == 1) {
-                    $('#correctDetail' + i).show();
+                    //$('#correctDetail' + i).show();
+                    //currentChoice.parent().addClass("bg-success")
+                    currentChoice.parent().find(".correction").removeClass("hidden");
+                }else{
+                    //currentChoice.parent().removeClass("bg-success")
+                    currentChoice.parent().find(".correction").addClass("hidden");
                 }
                 i++;
             })

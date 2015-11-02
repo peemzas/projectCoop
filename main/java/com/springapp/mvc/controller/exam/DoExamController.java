@@ -176,6 +176,7 @@ public class DoExamController {
             queryExamResultDomain.saveExamResult(examResult);
 
             HibernateUtil.commitTransaction();
+            HibernateUtil.closeSession();
 
         } catch (Exception e) {
             e.printStackTrace();

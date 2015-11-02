@@ -144,6 +144,7 @@ public class QuestionController {
                 question.setQuestionType(questionType);
                 question.setDifficultyLevel(difficulty);
                 question.setScore(score);
+
                 HibernateUtil.beginTransaction();
 
                 queryChoiceDomain.deleteChoiceFromQuestion(question);
@@ -151,6 +152,7 @@ public class QuestionController {
                 queryQuestionDomain.mergeQuestion(question);
 
                 HibernateUtil.commitTransaction();
+                HibernateUtil.closeSession();
 
             } else {
 
