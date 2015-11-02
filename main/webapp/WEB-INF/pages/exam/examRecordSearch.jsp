@@ -20,8 +20,20 @@
     });
 </script>
 <style>
-    #aa {
-        border-right: solid black 1px;
+    #paperNotFound {
+        background-color: #b2e0ff;
+        height: 100px;
+        display: none;
+        top: 40px;
+        vertical-align: middle;
+        border-radius: 5px;
+        margin-top: -15px;
+    }
+    #paperNotFoundDesc {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100px;
+        color: #00647f;
     }
 </style>
 
@@ -95,7 +107,7 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered table-responsive table-hover">
+            <table id="tbExamRecordSearch" class="table table-bordered table-responsive table-hover">
                 <thead class="bg-primary small">
                 <tr>
                     <th class="text-center">รหัสชุดข้อสอบ</th>
@@ -113,8 +125,10 @@
 
                 <!---------------------------------------------------- Generate Table --------------------------------------------------------------------------------->
                 <tbody id="tbodyExamRecord">
-
                 </tbody>
+                <div id="paperNotFound" width="100%">
+                    <h3 id="paperNotFoundDesc">ไม่พบชุดข้อสอบ</h3>
+                </div>
             </table>
         </div>
     </div>

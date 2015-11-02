@@ -2,10 +2,10 @@
  * Created by Jobz on 6/10/2558.
  */
 $(document).ready(function(){
-    generalSearchQuestion();
+    searchExampaper();
 });
 $("#btnExamRecordSearch").on('click',function() {
-    generalSearchQuestion();
+    searchExampaper();
 });
 $("#btnExamRecordSearchClearInput").on('click',function(){
     clearInput();
@@ -23,7 +23,7 @@ var traineeNameEmpId;
 var arrayItemToQuery = new Array();
 var tempArray = new Array();
 var jsonObj = {};
-function generalSearchQuestion(){
+function searchExampaper(){
     itemLenght = ($("#showEmployeeSelected").children("button")).length;
     code = $("#searchPaperInput").val();
     position = $("#forPosition").val();
@@ -66,13 +66,16 @@ function generalSearchQuestion(){
         data: jsonObj,
         success: function(data){
             $("#tbodyExamRecord").empty();
-            if(data.size == null){
-                $("#searchNotFound").show();
+            if(data.length == 0){
+                $("#paperNotFound").show();
+                $('#tbExamRecordSearch').hide();
+            //alert("ไม่พบข้อมูล");
             }
             //data.forEach(function(value){
             var indexTestResult = 0;
             for(var i = 0; i < data.length; i ++){
-                $("#searchNotFound").hide();
+                $("#paperNotFound").hide();
+                $('#tbExamRecordSearch').show();
                 var testResult;
                 testResult =  Number(data[i].objectiveScore)+ Number (data[i].subjectiveScore);
                     if (data[i].examRecord.user.position.posiName == "Software Developer Trainee") {
