@@ -61,7 +61,7 @@ public class QueryExamResultDomain extends HibernateUtil {
     /**
      * Created by JobzPC on 7/10/2558.
      */
-    public List<ExamResult> getAllExamResult(List<Integer> userId,String code,Position posiId) {
+    public List<ExamResult> getAllExamResult(List<Integer> userId,String code,Position posiId,String empId) {
         Criteria criteria = getSession().createCriteria(ExamResult.class, "er");
         criteria.createAlias("er.examRecord", "examRecord");
         criteria.createAlias("examRecord.paper", "paper");
@@ -76,6 +76,9 @@ public class QueryExamResultDomain extends HibernateUtil {
         }
         if(posiId != null){
             criteria.add(Restrictions.eq("user.position", posiId));
+        }
+        if (!(empId.equals(""))) {
+            criteria.add(Restrictions.like("user.empId", "%" + empId + "%"));
         }
 //        ProjectionList projList = Projections.projectionList()
 //                .add(Projections.property("er.id"), "id")

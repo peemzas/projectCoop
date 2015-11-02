@@ -6,10 +6,8 @@ import com.springapp.mvc.util.BeanUtils;
 import com.springapp.mvc.util.HibernateUtil;
 import com.springapp.mvc.util.LengthExpression;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +23,8 @@ import java.util.Locale;
  */
 @Service
 public class QueryUserDomain extends HibernateUtil {
+    private List<User> allUserTrainee;
+
     public List<User> getStudentData(String fName, String lName, String nickName, String staff, String position, String piority, Integer status) {
         Criteria criteria = getSession().createCriteria(User.class);
         if (BeanUtils.isNotEmpty(fName) && BeanUtils.isNotEmpty(lName)) {
@@ -447,5 +447,21 @@ public class QueryUserDomain extends HibernateUtil {
         if (!list.isEmpty()) {
             return list.get(0);
         } else return null;
+    }
+
+//Create by JOB
+    public List<User> getAllUserTrainee() {
+        Criteria criteria = getSession().createCriteria(User.class);
+        criteria.setProjection(Projections.projectionList()
+                .add(Projections.property("empId"), "empId")
+                .add(Projections.property("thFname"),"thFname")
+                .add(Projections.property("thLname"),"thLname"));
+        Criterion cri = Restrictions.eq("aptId", 1);
+        Criterion cri2 = Restrictions.eq("aptId", 2);
+        criteria.add(Restrictions.or(cri,cri2));
+
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<User> allUserTrainee = criteria.list();
+        return allUserTrainee;
     }
 }

@@ -14,10 +14,12 @@ function clearInput(){
     $("#searchPaperInput").val("");
     $("#forPosition").val(0);
     $("#showEmployeeSelected").empty();
+    $('#searchNameTrainee').val("");
 }
 var itemLenght;
 var code;
 var position;
+var traineeNameEmpId;
 var arrayItemToQuery = new Array();
 var tempArray = new Array();
 var jsonObj = {};
@@ -26,7 +28,8 @@ function generalSearchQuestion(){
     code = $("#searchPaperInput").val();
     position = $("#forPosition").val();
     code = code.substr(0, code.indexOf(' '));
-
+    traineeNameEmpId = $('#searchNameTrainee').val();
+    traineeNameEmpId = traineeNameEmpId.substr(0, traineeNameEmpId.indexOf(':'));
     if(itemLenght > 0) {
         for (i = 0; i < itemLenght; i++) {
             var temp = $("#showEmployeeSelected").children("button")[i].innerHTML;
@@ -43,7 +46,8 @@ function generalSearchQuestion(){
     }
     var a = {
         code: code,
-        position : position
+        position : position,
+        empId : traineeNameEmpId
     }
     tempArray.push(a);
     arrayItemToQuery= [];
@@ -66,34 +70,11 @@ function generalSearchQuestion(){
                 $("#searchNotFound").show();
             }
             //data.forEach(function(value){
-            var indexPostTest =0;
-            var indexPreTest = 0;
+            var indexTestResult = 0;
             for(var i = 0; i < data.length; i ++){
                 $("#searchNotFound").hide();
-                var posttest;
-                var pretest;
-                var first = data[i].examRecord.user.thFname;
-                var paperId1 = data[i].examRecord.paper.code;
-                pretest =  Number(data[i].objectiveScore)+ Number (data[i].subjectiveScore);
-                if(i > 0){
-                    var secound = data[i-1].examRecord.user.thFname;
-                    var paperId2 = data[i-1].examRecord.paper.code
-                    posttest = Number (data[i].subjectiveScore)+Number(data[i].objectiveScore);
-                }
-                if((first == secound) && (paperId1 == paperId2)){
-                    //if(data[i].status.id ==5){posttest=" ";}
-                    $('#tbodyExamRecord').children('tr:eq('+(indexPostTest-1)+')').children('td:eq(5)').attr('resultId',data[i].id);
-                    if (data[i].status.id != 6 && data[i].status.id != 7) {
-                        //alert(indexPostTest)
-                        $("#tbodyExamRecord").children('tr:eq(' + (indexPostTest-1) + ')').children('td:eq(5)').html('<button onclick="markBtn(this)" class="btn btn-warning btn btn-sm" type="button">ตรวจ</button>');
-                    } else {
-                        $("#tbodyExamRecord").children('tr:eq('+(indexPostTest-1)+')').children('td:eq(5)').html(posttest);
-                        $("#tbodyExamRecord").children('tr:eq('+(indexPostTest-1)+')').children('td:eq(8)').html('<button onclick="remarkBtn(this)" class="btn btn-success btn btn-sm" type="button">ตรวจแล้ว</button>');
-                    }
-                }
-                else {
-                    //alert("else"+" "+i)
-                    //indexPostTest++;
+                var testResult;
+                testResult =  Number(data[i].objectiveScore)+ Number (data[i].subjectiveScore);
                     if (data[i].examRecord.user.position.posiName == "Software Developer Trainee") {
                         data[i].examRecord.user.position.posiName = "Dev";
                     }
@@ -108,24 +89,20 @@ function generalSearchQuestion(){
                         '<td><label >' + data[i].examRecord.user.thFname + "    " + data[i].examRecord.user.thLname + '</label></td>' +
                         '<td class="text-center"><label >' + data[i].examRecord.user.position.posiName + '</label></td>' +
                         '<td class="text-center" resultId="' + data[i].id + '"><label ></label></td>' +
-                        '<td class="text-center" resultId=""><label ></label></td>' +
-                        '<td class="text-center"><label >' + data[i].examRecord.paper.maxScore + '</label></td>' +
+                        '<td class="text-center">' + data[i].examRecord.paper.maxScore + '</td>' +
                         '<td><label >' + data[i].examRecord.paper.createBy.thFname + '</label></td>' +
                         '<td class="text-center"><label >' + data[i].status.description + '</label></td>' +
+                        //'<td class="text-center"></td>' +
                         '</tr>'
                     );
-                    //alert(indexPreTest)
                     if (data[i].status.id != 6 && data[i].status.id != 7) {
-                        $("#tbodyExamRecord").children('tr:eq(' + (indexPreTest) + ')').children('td:eq(4)').html('<button onclick="markBtn(this)" class="btn btn-warning btn btn-sm" type="button">ตรวจ</button>');
-                        indexPreTest++;
-                        indexPostTest++;
+                        //$("#tbodyExamRecord").children('tr:eq(' + (indexTestResult) + ')').children('td:eq(7)').html('<button onclick="markBtn(this)" class="btn btn-warning btn btn-sm" type="button">รอตรวจ</button>');
+                        indexTestResult++;
                     } else {
-                        $("#tbodyExamRecord").children('tr:eq('+(indexPreTest)+')').children('td:eq(4)').html(pretest);
-                        $("#tbodyExamRecord").children('tr:eq('+(indexPreTest)+')').children('td:eq(8)').html('<button onclick="remarkBtn(this)" class="btn btn-success btn btn-sm" type="button">ตรวจแล้ว</button>');
-                        indexPreTest++;
-                        indexPostTest++;
+                        $("#tbodyExamRecord").children('tr:eq('+(indexTestResult)+')').children('td:eq(4)').html(testResult);
+                        //$("#tbodyExamRecord").children('tr:eq('+(indexTestResult)+')').children('td:eq(8)').html('<button onclick="remarkBtn(this)" class="btn btn-success btn btn-sm" type="button">click</button>');
+                        indexTestResult++;
                     }
-                }
             }
         },
         error: function(){
@@ -144,31 +121,35 @@ function generalSearchQuestion(){
 }
 
 var tbodytrResuiltId;
-function markBtn(element) {
-    $("#alertModalChangPage").modal("show");
-    tbodytrResuiltId=element.parentNode.getAttribute("resultId");
-    //alert(tbodytrResuiltId);
-}
+//function markBtn(element) {
+//    $("#alertModalChangPage").modal("show");
+//    tbodytrResuiltId=element.parentNode.parentNode.children[4].getAttribute('resultId');
+//}
+//$("#okBtnChangPage").on("click",function(){
+//    location.href = "/TDCS/exam/marking?resultId="+ tbodytrResuiltId;
+//});
+
+var testResultId;
+//function remarkBtn(element) {
+//
+//    $('#testResultBtn').prop( "disabled", true );
+//    $("#alertModalRemark").modal("show");
+//    testResultId=element.parentNode.parentNode.children[4].getAttribute('resultId');
+//    if(testResultId!="" ){
+//        $('#testResultBtn').prop( "disabled", false );
+//    }
+//}
+//$("#testResultBtn").on("click",function(){
+//    location.href = "/TDCS/exam/marking?resultId="+ testResultId;
+//});
+
+$('tbody').on('click','tr',function(){
+    $('#alertModalChangPage').modal('show');
+    tbodytrResuiltId = $(this).children('td:eq(4)').attr('resultId') ;
+});
 $("#okBtnChangPage").on("click",function(){
     location.href = "/TDCS/exam/marking?resultId="+ tbodytrResuiltId;
 });
-
-var pretestResultId;
-var posttestResultId;
-function remarkBtn(element) {
-    $('#pretestBtn').prop( "disabled", true );
-    $('#posttestBtn').prop( "disabled", true );
-    $("#alertModalRemark").modal("show");
-    pretestResultId=element.parentNode.parentNode.childNodes[4].getAttribute('resultId');
-    posttestResultId=element.parentNode.parentNode.childNodes[5].getAttribute('resultId');
-    //alert(pretestResultId+"  // "+posttestResultId)
-    if(pretestResultId!=""  ){
-        $('#pretestBtn').prop( "disabled", false );
-    }
-    if(posttestResultId!="" ){
-        $('#posttestBtn').prop( "disabled", false );
-    }
-}
 
 function listSearchPaper() {
     var availableall = [];
@@ -179,6 +160,7 @@ function listSearchPaper() {
         url: "/TDCS/exam/getAllPapers",
         async: false,
         success: function (data) {
+
             data.forEach(function (value) {
                 availableall.push(value.code + ' : ' + value.name);
             });
@@ -194,4 +176,33 @@ function listSearchPaper() {
         minLength: 0,
         items: 20
     }).focus().val('').keyup().val(search);
+}
+
+function listNameTrainee(){
+    var listAllNameTrainee = [];
+
+    var data = $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/TDCS/exam/getAllUserTrainee",
+        async: false,
+        success: function (data) {
+
+            data.forEach(function (value) {
+                listAllNameTrainee.push(value.empId+':'+value.thFname + '  ' + value.thLname);
+            });
+        },
+        error: function (data) {
+            alert('error while request...');
+        }
+
+    });
+
+    var search = $("#searchNameTrainee").val();
+    $("#searchNameTrainee").typeahead('destroy').typeahead({
+        source: listAllNameTrainee,
+        minLength: 0,
+        items: 20
+    }).focus().val('').keyup().val(search);
+
 }
