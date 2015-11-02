@@ -17,20 +17,12 @@
 
             </div>
             <div class="modal-body">
-                <%--<div class="row">--%>
-                <%--<div class="col-md-2 text-right">ID :</div>--%>
-                <%--<span class="col-md-6" id="idDetail"></span>--%>
-
-                <%--</div>--%>
-                <%--<br>--%>
-
                 <div class="row">
                     <div class="col-md-2 text-right">วิชา :</div>
                     <span class="col-md-2" id="categoryDetail"></span>
 
                     <div class="col-md-2 text-right">หัวข้อเรื่อง :</div>
                     <span class="col-md-4" id="subCategoryDetail"></span>
-
                 </div>
                 <br>
 
@@ -67,7 +59,7 @@
             <div class="modal-footer">
                 <div id="choiceDetailContainer">
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1">A :</div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
                         <div class="col-md-8 text-left" id="choiceDetail1"></div>
                         <div class="col-md-1 " id="correctDetail1"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
@@ -75,7 +67,7 @@
                     <br>
 
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1">B :</div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
                         <div class="col-md-8 text-left" id="choiceDetail2"></div>
                         <div class="col-md-1 " id="correctDetail2"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
@@ -83,7 +75,7 @@
                     <br>
 
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1">C :</div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
                         <div class="col-md-8 text-left" id="choiceDetail3"></div>
                         <div class="col-md-1 " id="correctDetail3"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
@@ -91,7 +83,7 @@
                     <br>
 
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1">D :</div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
                         <div class="col-md-8 text-left" id="choiceDetail4"></div>
                         <div class="col-md-1 " id="correctDetail4"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
@@ -100,10 +92,10 @@
                 <br>
                 <div class="row">
                     <div class="col-md-2 col-md-offset-4">
-                        <button class="btn btn-warning btn-block" id="detailEditBtn">แก้ไข</button>
+                        <button class="btn btn-gray btn-block" id="detailEditBtn">แก้ไข</button>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-default btn-block" data-dismiss="modal">ปิด</button>
+                        <button class="btn btn-warning btn-block" data-dismiss="modal">ปิด</button>
                     </div>
                 </div>
 

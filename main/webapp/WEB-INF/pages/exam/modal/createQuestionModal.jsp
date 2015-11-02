@@ -14,7 +14,7 @@
             <div class="modal-body" id="modalBody">
                 <div class="row form-group">
                     <div class="col-md-4" align="right">
-                        <h5><label style=" font-weight: 100">หมวดหมู่ :</label></h5>
+                        <h5><label style=" font-weight: 100"><span class="mandatory">*</span>หมวดหมู่ :</label></h5>
                     </div>
                     <div class="input-group col-md-5">
                         <input type="text" class="form-control" name="cat" id="categoryInputForCreateQuestion"  autocomplete="off"/>
@@ -26,7 +26,7 @@
 
                 <div class="row form-group">
                     <div class="col-md-4" align="right">
-                        <h5><label style="font-weight: 100">หัวข้อเรื่อง :</label></h5>
+                        <h5><label style="font-weight: 100"><span class="mandatory">*</span>หัวข้อเรื่อง :</label></h5>
                     </div>
                     <div class="input-group col-md-5">
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-md-4" align="right">
-                        <h5><label style="font-weight: 100">ประเภทข้อสอบ :</label></h5>
+                        <h5><label style="font-weight: 100"><span class="mandatory">*</span>ประเภทข้อสอบ :</label></h5>
                     </div>
                     <div class="input-group col-md-5">
                         <select class="form-control" id="select-QuestionType">
@@ -51,7 +51,7 @@
 
                         <div class="row form-group" id="questionContainer">
                             <div class="col-md-4">
-                                <h5><label style="font-weight: 100">คำถาม :</label></h5>
+                                <h5><label style="font-weight: 100"><span class="mandatory">*</span>คำถาม :</label></h5>
                             </div>
                             <div class="col-md-5" style="padding: 0px">
                                 <textarea id="questionDescription" class="form-control" style="resize: none"></textarea>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="row form-group form-inline text-left" id="difficultyContainer" style="padding: 0;">
                             <div class="col-md-4 text-right">
-                                <h5>ระดับความยาก :</h5>
+                                <h5><span class="mandatory">*</span>ระดับความยาก :</h5>
                             </div>
                             <div id = "diffRadioContainer" class="col-md-3" align="left">
                                 <div class="form-inline">
@@ -80,7 +80,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-4 text-right">
-                                <h5><label style="font-weight: 100">คะแนน :</label></h5>
+                                <h5><label style="font-weight: 100"><span class="mandatory">*</span>คะแนน :</label></h5>
                             </div>
                             <div class="col-md-2" style="padding: 0;">
                                 <input class="form-control" type="number" id="questionScoreForCreateQuestion"
@@ -90,7 +90,7 @@
 
                         <div class="row form-group" id="answerInput" style="display: none">
                             <div class="col-md-4 choiceLabelContainer">
-                                <h5>ตัวเลือกคำตอบ</h5>
+                                <h5><span class="mandatory">*</span>ตัวเลือกคำตอบ</h5>
                             </div>
                             <div class="row">
 
@@ -140,7 +140,7 @@
 
                         <div class="col-md-12" id="submitBtnContainer" hidden align="center">
                             <div class="col-md-1 col-md-offset-5">
-                                <button class="btn btn-primary" id="submitCreateBtn">ตกลง</button>
+                                <button class="btn btn-success" id="submitCreateBtn">บันทึก</button>
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-warning" dat-dismiss="modal">ยกเลิก</button>
@@ -185,6 +185,10 @@
     .validate-fail{
         border:solid red 1px;
         /*border-color: red;*/
+    }
+
+    .mandatory{
+        color:red;
     }
 
 </style>

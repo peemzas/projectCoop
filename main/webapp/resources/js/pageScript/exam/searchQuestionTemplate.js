@@ -23,6 +23,18 @@ $(document).ready(function () {
 
 })
 
+$("#calendarBtnFrom").on('click',function(){
+    var input = $("#searchCreateDateFromInput")
+    input.datepicker("show")
+    input.focus()
+})
+
+$("#calendarBtnTo").on('click',function(){
+    var input = $("#searchCreateDateToInput")
+    input.datepicker("show")
+    input.focus()
+})
+
 var searchQuestionResultList
 
 var getSearchQuestionResultListBasic = function () {
@@ -85,13 +97,13 @@ var submitSearchQuestion = function (mode) {
 
 var clearAllSearchQuestionField = function () {
     catAndSubcatSelectNothing();
-    questionId: $('#searchQuestionIdInput').val("");
-    questionDesc: $("#searchQuestionDescInput").val("");
-    createDateFrom: $('#searchCreateDateFromInput').val("");
-    createDateTo: $("#searchCreateDateToInput").val("");
-    scoreFrom: $("#searchScoreFromInput").val("");
-    scoreTo: $("#searchScoreToInput").val("");
-    status: $("#searchStatusInput").val("");
+    $('#searchQuestionIdInput').val("");
+    $("#searchQuestionDescInput").val("");
+    $('#searchCreateDateFromInput').val("");
+    $("#searchCreateDateToInput").val("");
+    $("#searchScoreFromInput").val("");
+    $("#searchScoreToInput").val("");
+    $("#searchStatusInput").val("");
     clearCreateByInput();
     $("#showEmployeeSelected").empty();
 }

@@ -35,25 +35,17 @@ public class QueryExamResultDomain extends HibernateUtil {
         return (ExamResult) criteria.uniqueResult();
     }
 
-    public ExamResult getExamResultByExamRecord(ExamRecord examRecord) {
-        Criteria criteria = getSession().createCriteria(ExamResult.class);
-        criteria.add(Restrictions.eq("examRecord", examRecord));
-        return (ExamResult) criteria.uniqueResult();
-    }
-
-    public List<ExamResult> getUserConfirmedResult(User user) {
+    public List<ExamResult> getUserResult(User user) {
         Criteria criteria = getSession().createCriteria(ExamResult.class, "result");
         criteria.createAlias("result.examRecord", "record");
-        criteria.createAlias("record.postTestRecord","postTestRecord");
+        criteria.createAlias("result.status","status");
 
-        Criterion criterion1 = Restrictions.eq("result.status", queryStatusDomain.getMarkedStatus());
-        Criterion criterion2 = Restrictions.eq("result.status", queryStatusDomain.getMarkConfirmedStatus());
+//        Criterion criterion1 = Restrictions.eq("result.status", queryStatusDomain.getMarkedStatus());
+//        Criterion criterion2 = Restrictions.eq("result.status", queryStatusDomain.getMarkConfirmedStatus());
 
-        criteria.add(Restrictions.or(criterion1, criterion2));
+//        criteria.add(criterion2);
         criteria.add(Restrictions.eq("record.user", user));
-        criteria.add(Restrictions.isNull("record.preTestRecord"));
-
-        criteria.addOrder(Order.desc("postTestRecord.id"));
+        criteria.addOrder(Order.desc("status.id"));
 
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return criteria.list();

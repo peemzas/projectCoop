@@ -18,7 +18,7 @@
     <div class="col-sm-6 input-group">
         <input type="text" class="form-control" name="cat" id="selectCategoryToSelection" placeholder="ค้นหาหมวดหมู่" autocomplete="off"/>
 
-        <span class="input-group-addon" id="selectCat">
+        <span class="input-group-addon btn" id="selectCat">
         <i class="glyphicon glyphicon-search" onclick="listcatSelectInput()" style="cursor: pointer; height: 20px;"></i>
         </span>
     </div>
@@ -28,9 +28,6 @@
         <h5>หัวข้อเรื่อง :</h5>
     </div>
     <div class="col-sm-6 form-group" style="padding: 0;">
-        <%--<select type="text" class="btn btn-sm col-sm-12"  id="selectSubCategoryToSelection" style="border: solid #a8a8a8 1px; text-align: left;">--%>
-        <%--<option value="" selected></option>--%>
-        <%--</select>--%>
         <select id="selectSubCategoryToSelection" class="form-control" data-width="100%">
         </select>
     </div>

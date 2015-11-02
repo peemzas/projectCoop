@@ -54,7 +54,7 @@
                             <div class="col-md-3 form-group" style="padding: 0;">
                                 <div class="input-group">
                                     <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างข้อสอบตั้งแต่วันที่"/>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
+                                    <span class="input-group-addon btn" id="calendarBtnFrom" ><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                                 </div>
                             </div>
                             <div class="col-sm-1 col-sm-offset-1" align="right">
@@ -63,35 +63,9 @@
                             <div class="col-md-3 form-group" style="padding: 0;">
                                 <div class="input-group">
                                     <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
+                                    <span class="input-group-addon btn" id="calendarBtnTo" ><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                                 </div>
                             </div>
-                                <%--<div class="col-sm-2 col-sm-offset-1" align="right">--%>
-                                    <%--<label for="searchCreateDateFromInput">วันที่สร้าง</label>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-md-3">--%>
-                                    <%--<div class="input-group">--%>
-                                        <%--<input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างชุดข้อสอบตั้งแต่วันที่"/>--%>
-                                        <%--<span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-
-                                <%--<div class="col-md-4">--%>
-                                    <%--<div class="input-group">--%>
-                                        <%--<input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  สร้างชุดข้อสอบตั้งแต่วันที่"/>--%>
-                                        <%--<span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-sm-1" align="right">--%>
-                                    <%--<label>ถึง</label>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-md-4">--%>
-                                    <%--<div class="input-group">--%>
-                                        <%--<input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>--%>
-                                        <%--<span class="input-group-addon"><span class="glyphicon glyphicon-calendar" href="#"></span></span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
                         </div>
                         <div class="row">
                             <div class="col-sm-2" align="right">
@@ -106,24 +80,6 @@
                             <div class="col-md-3 form-group" style="padding: 0;">
                                 <input id="searchScoreToInput" type="text" class="form-control input-sm" placeholder="ถึง"/>
                             </div>
-                            <%--<div class="col-sm-10">--%>
-                                <%--<div class="col-sm-2 col-sm-offset-1" align="right">--%>
-                                    <%--<label>คะแนน</label>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-md-4">--%>
-                                    <%--<div class="input-group">--%>
-                                        <%--<input id="searchScoreFromInput" type="text" class="form-control input-sm" placeholder="คะแนนตั้งแต่"/>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-sm-1" align="right">--%>
-                                    <%--<label>ถึง</label>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-md-4">--%>
-                                    <%--<div class="input-group">--%>
-                                        <%--<input id="searchScoreToInput" type="text" class="form-control input-sm" placeholder="ถึง"/>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
                         <div>
                         <div class="row" id="btnAdvanceSearch">
                             <div class="col-md-12 text-center">
@@ -138,7 +94,6 @@
         </div>
     </div>
 
-<%--<input type="checkbox" class="hidden" id="searchCompleteTrigger"/>--%>
 <script src="../../../resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
 <script>
     $("#searchCreateDateFromInput").datepicker().on('changeDate', function(){

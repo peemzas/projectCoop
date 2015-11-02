@@ -137,9 +137,18 @@ public class QueryQuestionDomain extends HibernateUtil {
 
     public void deleteQuestion(Integer id) {
         Question question = getQuestionById(id);
-        beginTransaction();
-        getSession().delete(question);
-        commitTransaction();
+        if (question.getPapers().isEmpty()) {
+            beginTransaction();
+            getSession().delete(question);
+            commitTransaction();
+            closeSession();
+        }else{
+            question.setStatus(queryStatusDomain.getDeletedStatus());
+            beginTransaction();
+            getSession().merge(question);
+            commitTransaction();
+            closeSession();
+        }
     }
 
     public List<Question> searchQuestionQuery(String categoryId, String subCategoryName,
@@ -167,15 +176,12 @@ public class QueryQuestionDomain extends HibernateUtil {
                 for (int i = 0; i < createByJsonArray.length(); i++) {
                     userIds.add(createByJsonArray.optInt(i));
                 }
-//                User user = queryUserDomain.getUserById(Integer.parseInt(createById));
-//                Criterion createByCriterion = Restrictions.eq("q.createBy", user);
-////                Criterion updateByCriterion = Restrictions.eq("q.createBy", user);
-//                criteria.add(createByCriterion);
-                criteria.add(Restrictions.in("createBy.userId",userIds));
+
+                criteria.add(Restrictions.in("createBy.userId", userIds));
 
             } catch (NumberFormatException ne) {
                 ne.printStackTrace();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -234,14 +240,17 @@ public class QueryQuestionDomain extends HibernateUtil {
         }
 
         criteria.addOrder(Order.asc("q.createDate")).addOrder(Order.desc("q.id"));
-        return criteria.list();
+
+        List<Question> resultList = criteria.list();
+        for(Question q : resultList){
+            getSession().refresh(q);
+        }
+
+        return resultList;
     }
 
     public void mergeQuestion(Question question) {
-        beginTransaction();
         getSession().merge(question);
-        commitTransaction();
-        closeSession();
     }
 
 
@@ -253,7 +262,6 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.add(Restrictions.ne("status.id", 4));
 
         List<Question> questions = criteria.list();
-        logger.info(questions.toString());
         return questions;
     }
 

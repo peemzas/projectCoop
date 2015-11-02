@@ -40,7 +40,7 @@ public class ResultController {
     @RequestMapping(method = RequestMethod.GET, value = "/exam/checkScore")
     public String checkScore(HttpServletRequest request,ModelMap modelMap){
 
-        List<ExamResult> examResults = queryExamResultDomain.getUserConfirmedResult(queryUserDomain.getCurrentUser(request));
+        List<ExamResult> examResults = queryExamResultDomain.getUserResult(queryUserDomain.getCurrentUser(request));
 
         modelMap.addAttribute("examResults",examResults);
 
@@ -68,9 +68,9 @@ public class ResultController {
 //
 //    @RequestMapping(method = RequestMethod.POST, value = "/exam/addQuestion")
 //    @ResponseBody
-//    public ResponseEntity<String> getUserConfirmedResult(ModelMap model,HttpServletResponse response,HttpServletRequest request){
+//    public ResponseEntity<String> getUserResult(ModelMap model,HttpServletResponse response,HttpServletRequest request){
 //
-//        List<ExamResult> examResults = queryExamResultDomain.getUserConfirmedResult(queryUserDomain.getCurrentUser(request));
+//        List<ExamResult> examResults = queryExamResultDomain.getUserResult(queryUserDomain.getCurrentUser(request));
 //
 //        HttpHeaders headers = new HttpHeaders();
 //        headers.add("Content-Type", "application/json;charset=UTF-8");

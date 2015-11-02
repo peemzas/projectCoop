@@ -38,7 +38,7 @@
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <button class="btn btn-danger btn-sm deleteSelectedBtn "><span
-                            class="glyphicon glyphicon-trash"></span>
+                            class="glyphicon glyphicon-minus"></span>
                     </button>
                 </div>
             </div>

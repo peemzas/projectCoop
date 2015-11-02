@@ -63,18 +63,6 @@ public class QueryChoiceDomain extends HibernateUtil {
         return (List<Choice>) criteria.list();
     }
 
-    public void insertChoice(Choice choice) {
-        beginTransaction();
-        getSession().save(choice);
-        commitTransaction();
-    }
-
-    public void mergeUpdateChoice(Choice choice) {
-        beginTransaction();
-        getSession().merge(choice);
-        commitTransaction();
-    }
-
     public Choice getChoiceById(Integer choiceId) {
         Criteria criteria = getSession().createCriteria(Choice.class);
         criteria.add(Restrictions.eq("id", choiceId));

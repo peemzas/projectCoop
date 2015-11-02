@@ -5,7 +5,7 @@
 $(document).ready(function () {
     $("#searchCatNotFound").hide();
     clearAllSearchQuestionField()
-    listSearchQuestion();
+    //listSearchQuestion();
 })
 
 
@@ -64,7 +64,7 @@ var setQuestionObj = function (tr) {
 editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/pages/exam/modal/createQuestionModal.jsp
     var questionId = questionObj.attr('questionId');
     var categoryName = $("#categoryInputForCreateQuestion").val();
-    var subCategoryName = $("#subCategoryInputForCreateQuestion").val();
+    var subCategoryName = $("#sSubCat").val();
     var questionTypeString = $("#select-QuestionType").val();
     var score = $("#questionScoreForCreateQuestion").val();
     var choiceDesc = null;
@@ -142,12 +142,13 @@ var setEditModalParameter = function () {
         success: function (question) {
             createQuestionModalClearInput();
             setCreateModalCategory(question.subCategory.category.name);
-            setCreateModalSubCategory(question.subCategory.name);
+            var categoryInput = $("#categoryInputForCreateQuestion");
+            categoryInput.change();
+            $('#sSubCat').find('option[value="'+question.subCategory.name+'"]').prop("selected",true)
             setCreateModalQuestionType(question.questionType.description);
             setCreateModalDufficulty(question.difficultyLevel.level);
             setCreateModalScore(question.score);
             setCreateModalQuestionDesc(question.description);
-
             updateCreateModalLayout();
         },
         error: function () {
@@ -205,7 +206,10 @@ var listSearchQuestion = function (btn) {
     }
 
     $("tbody").empty();
-    console.log(data)
+
+    if(data == undefined){
+        return null;
+    }
     if (!(data.length > 0)) {
         $("#searchCatNotFound").show()
     } else {

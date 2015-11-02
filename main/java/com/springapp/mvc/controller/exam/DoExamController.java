@@ -8,7 +8,6 @@ import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import flexjson.JSONSerializer;
-import org.hibernate.Hibernate;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -76,8 +75,10 @@ public class DoExamController {
     @RequestMapping(method = RequestMethod.GET, value = "/exam/mainPageStudent")
     public String mainPageStudent(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
 
-        Position position = queryUserDomain.getCurrentUser(request).getPosition();
-        modelMap.addAttribute("openPaperList",queryPaperDomain.getOpenedPaperForPosition(position));
+        User user = queryUserDomain.getCurrentUser(request);
+        modelMap.addAttribute("openPaperList",queryPaperDomain.getOpenedPaperForUser(user));
+        modelMap.addAttribute("donePaperList",queryPaperDomain.getDonePaperForUser(user));
+
 
         return "mainPageStudent";
     }
@@ -175,6 +176,7 @@ public class DoExamController {
             queryExamResultDomain.saveExamResult(examResult);
 
             HibernateUtil.commitTransaction();
+            HibernateUtil.closeSession();
 
         } catch (Exception e) {
             e.printStackTrace();
