@@ -64,7 +64,7 @@ $(document).ready(function(){
         }).get(0);
 
         $.ajax({
-            url: "/TDCS/exam/checkExamPaperInUse",
+            url: context+"/TDCS/exam/checkExamPaperInUse",
             type: "POST",
             data: {
                 paperId: paperId
@@ -87,7 +87,7 @@ $(document).ready(function(){
         }).get(0);
 
         var check = $.ajax({
-            url: "/TDCS/exam/checkExamPaperInUse",
+            url: context+"/TDCS/exam/checkExamPaperInUse",
             type: "POST",
             data: {
                 paperId: paperId
@@ -153,7 +153,7 @@ $(document).ready(function(){
 function getAllPapers(){
     $.ajax({
         type : "POST",
-        url : "/TDCS/exam/getAllPapers",
+        url : context+"/TDCS/exam/getAllPapers",
         contentType: "application/json",
         async: false,
         success : function(data){
@@ -175,7 +175,7 @@ function getAllPapers(){
                 }
 
                 var check = $.ajax({
-                    url: "/TDCS/exam/checkExamPaperInUse",
+                    url: context+"/TDCS/exam/checkExamPaperInUse",
                     type: "POST",
                     data: {
                         paperId: value.id
@@ -215,7 +215,7 @@ function updatePaperStatus(paperId) {
     var paperStatus = $("#dropdownId" + paperId).val();
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/updatePaperStatus",
+        url:context+"/TDCS/exam/updatePaperStatus",
         data: {
             paperId: paperId,
             paperStatus: paperStatus
@@ -262,7 +262,7 @@ function deletePapers(){
     jsonObj = JSON.stringify(tmpArray);
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/deletePaper",
+        url: context+"/TDCS/exam/deletePaper",
         contentType: "application/json",
         data: jsonObj,
         success: function () {
@@ -366,7 +366,7 @@ function generalSearchPaper(btnSearchStatus) {
     var jsonObjz = JSON.stringify(tempArray);
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/searchPaper",
+        url: context+"/TDCS/exam/searchPaper",
         dataType: "json",
         contentType: 'application/json',
         mimeType: 'application/json',
@@ -395,7 +395,7 @@ function generalSearchPaper(btnSearchStatus) {
                     }
 
                     var check = $.ajax({
-                        url: "/TDCS/exam/checkExamPaperInUse",
+                        url: context+"/TDCS/exam/checkExamPaperInUse",
                         type: "POST",
                         data: {
                             paperId: value.id

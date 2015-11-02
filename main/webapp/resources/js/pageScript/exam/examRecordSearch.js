@@ -56,7 +56,7 @@ function searchExampaper(){
     //alert(jsonObj);
     var dataResponse = $.ajax({
         type: "POST",
-        url: "/TDCS/exam/getQueryExamRecordSearch",
+        url: context+"/TDCS/exam/getQueryExamRecordSearch",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         headers: {
@@ -146,7 +146,7 @@ var testResultId;
 //    location.href = "/TDCS/exam/marking?resultId="+ testResultId;
 //});
 
-$('tbody').on('click','tr',function(){
+$('#tbodyExamRecord').on('click','tr',function(){
     $('#alertModalChangPage').modal('show');
     tbodytrResuiltId = $(this).children('td:eq(4)').attr('resultId') ;
 });
@@ -160,7 +160,7 @@ function listSearchPaper() {
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TDCS/exam/getAllPapers",
+        url: context+"/TDCS/exam/getAllPapers",
         async: false,
         success: function (data) {
 
@@ -187,7 +187,7 @@ function listNameTrainee(){
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TDCS/exam/getAllUserTrainee",
+        url: context+"/TDCS/exam/getAllUserTrainee",
         async: false,
         success: function (data) {
 

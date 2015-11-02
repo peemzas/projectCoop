@@ -29,7 +29,7 @@ function search(){
 
     var data = $.ajax({
         type: "POST",
-        url: "/TDCS/exam/searchCategory",
+        url: context+"/TDCS/exam/searchCategory",
         data: {
             id: categoryIdRequest
         },

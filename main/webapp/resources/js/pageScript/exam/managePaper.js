@@ -234,7 +234,7 @@ $(document).ready(function(){
         var check = true;
         $.ajax({
             type: "POST",
-            url: "/TDCS/exam/getPaperCodeCopy",
+            url: context+"/TDCS/exam/getPaperCodeCopy",
             async: false,
             success: function(codes){
                 for(var i = 0; i < codes.length; i++){
@@ -254,7 +254,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: "POST",
-            url: "/TDCS/exam/copyPaper",
+            url: context+"/TDCS/exam/copyPaper",
             async: true,
             data:{
                 paperId: paperId,
@@ -307,7 +307,7 @@ function viewQuestions(){
         var dataResponse = $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/TDCS/exam/getAllQuestionDetail",
+            url: context+"/TDCS/exam/getAllQuestionDetail",
             async: false,
             success: function(dataResponse){
                 dataFound();
@@ -384,7 +384,7 @@ function viewQuestions(){
         var dataResponse = $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/TDCS/exam/getQuestionNotInSelected",
+            url: context+"/TDCS/exam/getQuestionNotInSelected",
             data: toJsonObject,
             async: false,
             success: function(data){
@@ -543,7 +543,7 @@ function createPaper(){
     var check = true;
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/getPaperCode",
+        url: context+"/TDCS/exam/getPaperCode",
         data: {
             pId: paperId
         },
@@ -591,7 +591,7 @@ function createPaper(){
 
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/createPaper",
+        url:context+ "/TDCS/exam/createPaper",
         data: {
             paperCode : paperCode,
             paperName : paperName,
@@ -820,7 +820,7 @@ function generalSearchQuestion(btnSearchStatus) {
     //alert(jsonObj);
     var dataResponse = $.ajax({
         type: "POST",
-        url: "/TDCS/exam/generalQuestionSearch",
+        url: context+"/TDCS/exam/generalQuestionSearch",
         dataType: "json",
         contentType: 'application/json',
         mimeType: 'application/json',
@@ -915,7 +915,7 @@ function showUpdatePaper(paperId){
     onLoadPageUpdatePaper();
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/getPaperQuestionByPaper",
+        url: context+"/TDCS/exam/getPaperQuestionByPaper",
         data : {
             paperId : paperId
         },
@@ -976,7 +976,7 @@ function showPaperInfo(pId){
     $("title").text('ข้อมูลชุดข้อสอบ');
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/getPaperQuestionByPaper",
+        url: context+"/TDCS/exam/getPaperQuestionByPaper",
         data : {
             paperId : paperId
         },
@@ -1054,7 +1054,7 @@ function updatePaper(){
     var check = true;
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/getPaperCode",
+        url: context+"/TDCS/exam/getPaperCode",
         data: {
             pId: paperId
         },
@@ -1101,7 +1101,7 @@ function updatePaper(){
     jsonObjQuestionUpdate = JSON.stringify(tempArrayQuestionUpdate);
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/updatePaper",
+        url: context+"/TDCS/exam/updatePaper",
         data: {
             paperCodeUpdate  : paperCodeUpdate,
             paperNameUpdate  : paperNameUpdate ,
@@ -1132,7 +1132,7 @@ function randomQuestion(){
     if(randHard == ""? randHard = 0: randHard = $("#randHard").val());
 
     $.ajax({
-        url: "/TDCS/exam/randomQuestions",
+        url: context+"/TDCS/exam/randomQuestions",
         type: "POST",
         data: {
             randEasy: randEasy,

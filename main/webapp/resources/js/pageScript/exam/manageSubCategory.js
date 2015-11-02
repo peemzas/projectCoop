@@ -57,7 +57,7 @@ function viewSubCategory() {
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TDCS/exam/getAllSubCategory",
+        url: context+"/TDCS/exam/getAllSubCategory",
         async: false,
         success: function (data) {
             data.forEach(function (value) {
@@ -110,7 +110,7 @@ function deleteSubCategory(subCategoryId) {
         //alert (subCategoryId);
         $.ajax({
             type: "POST",
-            url: "/TDCS/exam/deleteSubCategory",
+            url: context+"/TDCS/exam/deleteSubCategory",
             data: {
                 id: subCategoryId
             },
@@ -171,7 +171,7 @@ function updateSubCategory(subcategoryId) {
 
     var dataResponse = $.ajax({
         type: "POST",
-        url: "/TDCS/exam/editSubCategory",
+        url: context+"/TDCS/exam/editSubCategory",
         data: {
             subcategoryId: subcategoryId,
             subcategoryName: subName
@@ -219,7 +219,7 @@ function search() {
 
     var dataResponse = $.ajax({
         type: "POST",
-        url: "/TDCS/exam/searchSubCategory",
+        url: context+"/TDCS/exam/searchSubCategory",
         data: {
             categoryId: categoryId,
             subcategoryName: subcategoryName
@@ -290,7 +290,7 @@ function listsubcat() {
 
     var data = $.ajax({
         type: "POST",
-        url: "/TDCS/exam/getAllCategory",
+        url: context+"/TDCS/exam/getAllCategory",
 
         async: false,
 
@@ -339,7 +339,7 @@ $("#categoryId").on('change', function () {
                 categoryId = categoryId2;
                 var data = $.ajax({
                     type: "POST",
-                    url: "/TDCS/exam/getSubCategoryToDropDown",
+                    url: context+"/TDCS/exam/getSubCategoryToDropDown",
                     data: {
                         categoryId: categoryId
                         //subcategoryName: subcategoryName
@@ -372,7 +372,7 @@ $("#categoryId").on('change', function () {
 
                 var data = $.ajax({
                     type: "POST",
-                    url: "/TDCS/exam/getSubCategoryToDropDown",
+                    url: context+"/TDCS/exam/getSubCategoryToDropDown",
                     data: {
                         categoryId: categoryId
                         //subcategoryName: subcategoryName

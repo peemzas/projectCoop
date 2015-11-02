@@ -171,7 +171,7 @@ var getExamPaperBody = function () {
     $('.examBody').empty();
     $.ajax({
         type: "POST"
-        , url: "/TDCS/exam/getExamBody"
+        , url: context+"/TDCS/exam/getExamBody"
         , async: false
         , data: {
             paperId: $('.examHead').attr('paperId')
@@ -282,7 +282,7 @@ var submitExam = function () {
     $.ajax({
         type: "POST"
         , async: false
-        , url: "/TDCS/exam/submitExam"
+        , url: context+"/TDCS/exam/submitExam"
         , data: {
             answerRecords: JSON.stringify(answerArray)
             , paperId: $('#examHead').attr('paperId')

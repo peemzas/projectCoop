@@ -10,7 +10,7 @@ $('.resultDetail').on('click',function(){
 var updateResultDetail = function(resultId){
     $.ajax({
         type:"POST",
-        url: '/TDCS/exam/checkScore/getResultDetail',
+        url:context+'/TDCS/exam/checkScore/getResultDetail',
         data:{
             resultId:resultId
         },

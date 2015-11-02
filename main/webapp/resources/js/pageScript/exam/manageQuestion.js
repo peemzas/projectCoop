@@ -88,7 +88,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
 
     var dat = $.ajax({
             type: 'POST',
-            url: '/TDCS/exam/editQuestion',
+            url: context+'/TDCS/exam/editQuestion',
             data: {
                 questionId: questionId,
                 categoryName: categoryName,
@@ -135,7 +135,7 @@ var setEditModalParameter = function () {
     var tr = questionObj;
     var ajaxDat1 = $.ajax({ //quesotion
         type: "POST",
-        url: "/TDCS/exam/getQuestionDetail",
+        url: context+"/TDCS/exam/getQuestionDetail",
         data: {
             questionId: tr.attr('questionId')
         },
@@ -158,7 +158,7 @@ var setEditModalParameter = function () {
     var ith = 1;
     var ajaxDat2 = $.ajax({ //choices
         type: "POST",
-        url: "/TDCS/exam/getChoiceDetail",
+        url: context+"/TDCS/exam/getChoiceDetail",
         data: {
             questionId: tr.attr('questionId')
         },
@@ -180,7 +180,7 @@ var setEditModalParameter = function () {
 var deleteQuestions = function (questionIds) {
     $.ajax({
         type: 'POST',
-        url: '/TDCS/exam/deleteQuestion',
+        url: context+'/TDCS/exam/deleteQuestion',
         data: {
             questionArray: JSON.stringify(questionIds)
         },

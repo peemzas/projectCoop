@@ -72,7 +72,7 @@ var submitMarking = function (confirmation) {
 
     $.ajax({
         type: "POST",
-        url: "/TDCS/exam/marking/submit",
+        url: context+"/TDCS/exam/marking/submit",
         data: {
             markingRecord: JSON.stringify(markingArray),
             resultId: $('#marking-body').attr('resultId'),

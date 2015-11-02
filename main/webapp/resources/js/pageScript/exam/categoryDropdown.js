@@ -3,7 +3,7 @@ $(document).ready(function(){
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TDCS/exam/getAllCategory",
+        url: context+"/TDCS/exam/getAllCategory",
         async: false,
         success: function(data){
             data.forEach(function(value){
@@ -19,7 +19,7 @@ $(document).ready(function(){
         var subCategory = $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/TDCS/exam/getSubCategoryByCategoryId",
+            url: context+"/TDCS/exam/getSubCategoryByCategoryId",
             data: searchSubCategory,
             async: false,
             success: function(data){

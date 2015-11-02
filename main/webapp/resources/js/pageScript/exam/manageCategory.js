@@ -55,7 +55,7 @@ function viewCategory(){
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TDCS/exam/getAllCategory",
+        url: context+"/TDCS/exam/getAllCategory",
         async: false,
         success: function(data){
             data.forEach(function(value){
@@ -89,7 +89,7 @@ function deleteCategory(){
         catId = $(this).parent().siblings(":first").text();
         $.ajax({
             type: "POST",
-            url: "/TDCS/exam/deleteCategory",
+            url: context+"/TDCS/exam/deleteCategory",
             data: {
                 catId : catId
             },
@@ -124,7 +124,7 @@ function updateCategory(categoryId){
         var name = $("#editData"+categoryId).val();
         var dataResponse = $.ajax({
             type: "POST",
-            url: "/TDCS/exam/editCategory",
+            url: context+"/TDCS/exam/editCategory",
             data: "id="+id+"&name="+name,
             complete: function (xhr) {
                 if (xhr.readyState == 4) {
@@ -180,7 +180,7 @@ function saveCategory(){
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/TDCS/exam/getAllCategory",
+        url: context+"/TDCS/exam/getAllCategory",
         async: false,
         success: function (data) {
             data.forEach(function (value) {
@@ -210,7 +210,7 @@ function saveCategory(){
 
             var dat = $.ajax({
                 type: "POST",
-                url: "/TDCS/exam/addCategory",
+                url: context+"/TDCS/exam/addCategory",
                 data: 'id=' + categoryId + '&name=' + categoryName,
                 success: function () {
                     //alert('เพิ่มวิชา ' + categoryName + ' สำเร็จ ');
@@ -249,7 +249,7 @@ function listcat() {
 
     var data = $.ajax({
         type: "POST",
-        url: "/TDCS/exam/getAllCategory",
+        url: context+"/TDCS/exam/getAllCategory",
 
         async: false,
 
