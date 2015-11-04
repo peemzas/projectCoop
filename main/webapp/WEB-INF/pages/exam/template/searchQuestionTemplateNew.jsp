@@ -80,7 +80,27 @@
                             <div class="col-md-3 form-group" style="padding: 0;">
                                 <input id="searchScoreToInput" type="text" class="form-control input-sm" placeholder="ถึง"/>
                             </div>
-                        <div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2" align="right">
+                                <label style="margin-top: 3px;">ยาก :</label>
+                            </div>
+                            <div class="col-sm-2" style="padding: 0;">
+                                <input id="rHard" type="number" class="form-control input-sm" placeholder="จำนวนข้อ"/>
+                            </div>
+                            <div class="col-sm-1 text-right">
+                                <label style="margin-top: 3px;">ปานกลาง</label>
+                            </div>
+                            <div class="col-sm-2" style="padding: 0;">
+                                <input id="rNormal" type="number" class="form-control input-sm" placeholder="จำนวนข้อ"/>
+                            </div>
+                            <div class="col-sm-1 text-right">
+                                <label style="margin-top: 3px;">ง่าย</label>
+                            </div>
+                            <div class="col-sm-2" style="padding: 0;">
+                                <input id="rEasy" type="number" class="form-control input-sm" placeholder="จำนวนข้อ"/>
+                            </div>
+                        </div>
                         <div class="row" id="btnAdvanceSearch">
                             <div class="col-md-12 text-center">
                                 <hr/>

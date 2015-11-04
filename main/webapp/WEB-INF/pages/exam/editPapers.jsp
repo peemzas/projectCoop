@@ -30,7 +30,8 @@
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </a>
-        <button id="deletePapers" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
+        <button id="deletePapers" class="btn btn-danger btn-sm"><span
+                class="glyphicon glyphicon-minus"></span></button>
     </div>
     <div class="row">
         <table id="tbManagePaper" class="table table-responsive table-hover">

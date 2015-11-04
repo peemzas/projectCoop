@@ -41,6 +41,7 @@ public class QueryQuestionDomain extends HibernateUtil {
     @Autowired
     QueryUserDomain queryUserDomain;
     @Autowired
+    QueryDifficultyDomain queryDifficultyDomain;
 
 
     private static final Logger logger = Logger.getLogger(QueryQuestionDomain.class.getName());
@@ -320,7 +321,9 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
-    public List<Question> advanceSearchQuestion(List users, String catId, Integer subId, List<Integer> qIds, String qDesc, String qCreateDateFrom, String qCreateDateTo, String qScoreFrom, String qScoreTo) throws ParseException {
+    public List<Question> advanceSearchQuestion(List users, String catId, Integer subId, List<Integer> qIds, String qDesc
+                                                , String qCreateDateFrom, String qCreateDateTo, String qScoreFrom
+                                                , String qScoreTo, Integer searchQEasy, Integer searchQNormal, Integer searchQHard) throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         Date dateFrom = null;
@@ -342,6 +345,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         }
 
         Criteria criteria = getSession().createCriteria(Question.class, "question");
+        criteria.createAlias("question.difficultyLevel", "difficulty");
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("question.createBy", "createBy");
         criteria.createAlias("subCategory.category", "category");
@@ -376,17 +380,76 @@ public class QueryQuestionDomain extends HibernateUtil {
         if (!qScoreTo.equals("")) {
             criteria.add(Restrictions.le("score", scoreTo));
         }
+        if (searchQEasy != 0){
+            criteria.add(Restrictions.eq("difficulty.level", 1));
+        }
+        if (searchQNormal != 0){
+            criteria.add(Restrictions.eq("difficulty.level", 2));
+        }
+        if (searchQHard != 0){
+            criteria.add(Restrictions.eq("difficulty.level", 3));
+        }
 
-        List<Question> questions = criteria.list();
+        List<Question> tmp = criteria.list();
+        List<Question> tmp1 = new ArrayList<Question>();
+        List<Question> tmp2 = new ArrayList<Question>();
+        List<Question> tmp3 = new ArrayList<Question>();
+        Difficulty difficulty1 = queryDifficultyDomain.getDifficultyByInteger(1);
+        Difficulty difficulty2 = queryDifficultyDomain.getDifficultyByInteger(2);
+        Difficulty difficulty3 = queryDifficultyDomain.getDifficultyByInteger(3);
+        List<Question> questions = new ArrayList();
 
-        return questions;
+        if(searchQEasy != 0 || searchQNormal != 0 || searchQHard != 0){
+            int i;
+            for(i = 0; i < tmp.size(); i++){
+                if(tmp.get(i).getDifficultyLevel().equals(difficulty1)){
+                    tmp1.add(tmp.get(i));
+                }
+                if(tmp.get(i).getDifficultyLevel().equals(difficulty2)){
+                    tmp2.add(tmp.get(i));
+                }
+                if(tmp.get(i).getDifficultyLevel().equals(difficulty3)){
+                    tmp3.add(tmp.get(i));
+                }
+            }
+        }
+        if (searchQEasy != 0){
+            return tmp1;
+        }
+        else if (searchQNormal != 0){
+            return tmp2;
+        }
+        else if (searchQHard != 0){
+            return tmp3;
+        }
+        else{
+            return tmp;
+        }
     }
 
-    public List<Question> getQuestionsByLevel(Integer level) {
+    public List<Question> getQuestionsByLevel(Integer level, List qIds, String categoryId, int subCategoryId) {
 
-        Criteria criteria = getSession().createCriteria(Question.class);
-        criteria.add(Restrictions.eq("difficultyLevel.level", level));
+        Criteria criteria = getSession().createCriteria(Question.class, "question");
+        criteria.createAlias("question.subCategory", "subCategory");
+        criteria.createAlias("subCategory.category", "category");
         criteria.add(Restrictions.ne("status.id", 4));
+
+        if (level != 0){
+            criteria.add(Restrictions.eq("difficultyLevel.level", level));
+        }
+
+        if (qIds != null){
+            criteria.add(Restrictions.not(Restrictions.in("question.id", qIds)));
+        }
+
+        if (categoryId != "") {
+            Criterion criterion1 = Restrictions.like("category.id", "%" + categoryId + "%").ignoreCase();
+            Criterion criterion2 = Restrictions.like("category.name", "%" + categoryId + "%").ignoreCase();
+            criteria.add(Restrictions.or(criterion1, criterion2));
+        }
+        if (subCategoryId != 0) {
+            criteria.add(Restrictions.eq("subCategory.id", subCategoryId));
+        }
 
         List<Question> question = criteria.list();
 
