@@ -14,7 +14,8 @@ var paperIdArray = new Array();
 
 $(document).ready(function(){
 
-    getAllPapers();
+    //getAllPapers();
+    paperNotFound();
 
     if($("#tbodyManagePaper tr").length == 0){
         paperNotFound();

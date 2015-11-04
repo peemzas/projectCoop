@@ -55,7 +55,7 @@
         <button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก</button>
         <button id="saveCopyPaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก</button>
         <button id="cancelBtn" class="btn btn-danger btn-sm" type="button" style="display: none;">ยกเลิก</button>
-        <button id="copyPaperBtn" class="btn btn-default btn-sm" type="button">คัดลอกชุดข้อสอบ</button>
+        <button id="copyPaperBtn" class="btn btn-default btn-sm" type="button" style="display: none;">คัดลอกชุดข้อสอบ</button>
         <a href="/TDCS/exam/managePapers">
             <button id="cancelCreatePaperBtn" class="btn btn-warning btn-sm" type="button">
                 ย้อนกลับ
@@ -153,7 +153,7 @@
                 <%--ยกเลิก--%>
             <%--</button>--%>
         <%--</a>--%>
-        <table id="tbSelectedQuestionToPaper" class="table table-bordered table-hover">
+        <table id="tbSelectedQuestionToPaper" class="table table-bordered table-hover" style="display: none;">
             <thead class="bg-primary small">
                 <tr>
                     <th style="text-align: center ;"><input class="checkAllQuestionFromCreatePaperPage" type="checkbox"></th>
